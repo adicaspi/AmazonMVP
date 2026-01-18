@@ -1,0 +1,62 @@
+[
+  {
+    "asin": "B0B672HBW9",
+    "title": "Adjustable Bamboo Drawer Organizer",
+    "price": 24.99,
+    "rating": 4.6,
+    "reviews": 3100,
+    "vertical": "home_kitchen",
+    "baseAmazonUrl": "https://www.amazon.com/dp/B0B672HBW9",
+    "trackingId": "yourtag-20",
+    "mainProblem": "utensils scatter in cluttered drawers",
+    "targetUser": "busy people who cook at home"
+  },
+  {
+    "asin": "B081YHX2YB",
+    "title": "Over-the-Cabinet Trash Bag Holder",
+    "price": 13.99,
+    "rating": 4.4,
+    "reviews": 820,
+    "vertical": "home_kitchen",
+    "baseAmazonUrl": "https://www.amazon.com/dp/B081YHX2YB",
+    "trackingId": "yourtag-20",
+    "mainProblem": "no easy way to hang trash bags while cooking",
+    "targetUser": "home cooks who want fast cleanup"
+  },
+  {
+    "asin": "B08TGF5XJW",
+    "title": "Portable Mini Bag Sealer",
+    "price": 19.99,
+    "rating": 4.3,
+    "reviews": 1200,
+    "vertical": "home_kitchen",
+    "baseAmazonUrl": "https://www.amazon.com/dp/B08TGF5XJW",
+    "trackingId": "yourtag-20",
+    "mainProblem": "open food bags get stale quickly",
+    "targetUser": "snack eaters and families with kids"
+  },
+  {
+    "asin": "B09GJ1C4NK",
+    "title": "Reusable Stretch Silicone Lids",
+    "price": 15.99,
+    "rating": 4.5,
+    "reviews": 5600,
+    "vertical": "home_kitchen",
+    "baseAmazonUrl": "https://www.amazon.com/dp/B09GJ1C4NK",
+    "trackingId": "yourtag-20",
+    "mainProblem": "plastic wrap wastes money and creates trash",
+    "targetUser": "eco-conscious households and meal preppers"
+  },
+  {
+    "asin": "B087H6S8CH",
+    "title": "Under Cabinet Jar Opener",
+    "price": 17.99,
+    "rating": 4.7,
+    "reviews": 9400,
+    "vertical": "home_kitchen",
+    "baseAmazonUrl": "https://www.amazon.com/dp/B087H6S8CH",
+    "trackingId": "yourtag-20",
+    "mainProblem": "tight jar lids are frustrating and painful",
+    "targetUser": "people with weak grip, arthritis sufferers"
+  }
+]

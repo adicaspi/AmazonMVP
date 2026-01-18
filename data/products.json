@@ -1,0 +1,115 @@
+[
+  {
+    "id": "drawer-org-001",
+    "slug": "organize-your-drawer",
+    "vertical": "home_kitchen",
+    "name": "Expandable Kitchen Drawer Organizer",
+    "shortDescription": "A simple way to keep kitchen drawers neat in minutes.",
+    "heroImage": "/images/drawer-organizer.jpg",
+    "priceNote": "Prices can change—check Amazon for the most up to date price.",
+    "amazon": {
+      "url": "https://www.amazon.com/dp/ASINPLACEHOLDER",
+      "trackingId": "drawerorg-20"
+    },
+    "content": {
+      "headline": "Your kitchen drawer doesn’t have to look like this.",
+      "subheadline": "If utensils keep getting tangled every time you open the drawer, this organizer can help restore order quickly.",
+      "painBullets": [
+        "Utensils slide around every time you open the drawer",
+        "You waste time digging for the right tool",
+        "The drawer never stays organized for more than a day"
+      ],
+      "howItWorks": [
+        "Place the organizer into your drawer",
+        "Expand it until it fits snugly",
+        "Sort utensils into separate sections so they stay put"
+      ],
+      "whoItsFor": [
+        "Home cooks",
+        "Parents with busy kitchens",
+        "Renters who can’t remodel"
+      ],
+      "whoItsNotFor": [
+        "Extra-deep commercial drawers",
+        "People looking for permanent built-in cabinetry"
+      ],
+      "ctaText": "Check current price on Amazon",
+      "faq": [
+        {
+          "q": "Will it fit my drawer?",
+          "a": "It’s designed to adjust, but it’s still best to measure your drawer width and depth before ordering."
+        },
+        {
+          "q": "Does it require tools?",
+          "a": "No tools needed—just place it in the drawer and adjust."
+        }
+      ]
+    },
+    "disclosures": {
+      "affiliate": "As an Amazon Associate, we earn from qualifying purchases."
+    },
+    "status": "testing"
+  },
+  {
+    "id": "drawer-org-002",
+    "slug": "organize-your-cutlery-drawer",
+    "vertical": "home_kitchen",
+    "name": "Adjustable Kitchen Drawer Organizer",
+    "shortDescription": "Transform cluttered kitchen drawers into neatly organized spaces with a customizable organizer designed to keep utensils and tools secure and easy to find.",
+    "heroImage": "/images/drawer-organizer.jpg",
+    "priceNote": "Affordable organizational solutions designed to last and simplify your kitchen routine.",
+    "amazon": {
+      "url": "https://www.amazon.com/dp/B0B672HBW9",
+      "trackingId": "yourtag-20"
+    },
+    "content": {
+      "headline": "Say Goodbye to Messy Kitchen Drawers",
+      "subheadline": "Adjustable organizer that keeps your utensils in place and your drawers tidy, no matter the size or shape.",
+      "painBullets": [
+        "Utensils sliding and shifting every time you open a drawer.",
+        "Wasting time searching for the right kitchen tools while cooking.",
+        "Drawer space underutilized due to fixed compartments or lack of dividers.",
+        "Frustration from constantly cleaning and reorganizing cluttered drawers."
+      ],
+      "howItWorks": [
+        "Adjust the dividers to fit any drawer size or utensil layout for a custom fit.",
+        "Separate spaces for forks, spoons, knives, and larger tools keep everything accessible.",
+        "Non-slip base prevents the organizer and utensils from moving around.",
+        "Easy to remove and clean, maintaining hygiene and drawer maintenance."
+      ],
+      "whoItsFor": [
+        "Busy home cooks wanting a streamlined cooking experience.",
+        "Parents needing quick access to utensils amidst the chaos of daily life.",
+        "Anyone living in apartments or houses with limited kitchen space.",
+        "People seeking a practical solution to ongoing kitchen drawer clutter."
+      ],
+      "whoItsNotFor": [
+        "Those who prefer minimalist kitchens with very few utensils.",
+        "Individuals with unusually shaped or extra large kitchen drawers needing custom solutions beyond adjustability."
+      ],
+      "ctaText": "Organize Your Kitchen Drawer Today",
+      "faq": [
+        {
+          "q": "Will this organizer fit my kitchen drawer?",
+          "a": "The organizer is adjustable to fit most standard kitchen drawer widths and depths, allowing you to customize it to your exact space."
+        },
+        {
+          "q": "Is it easy to clean?",
+          "a": "Yes, the organizer can be easily removed and wiped down with a damp cloth or mild soap for regular cleaning."
+        },
+        {
+          "q": "Can it hold larger utensils like spatulas or ladles?",
+          "a": "Absolutely. The adjustable dividers create compartments of various sizes designed to accommodate large and small utensils alike."
+        },
+        {
+          "q": "Will it stay in place when I open and close the drawer?",
+          "a": "The non-slip base helps keep the organizer securely positioned, preventing it from shifting or sliding."
+        }
+      ]
+    },
+    "disclosures": {
+      "affiliate": "As an Amazon Associate, we earn from qualifying purchases."
+    },
+    "status": "testing"
+  }
+]
