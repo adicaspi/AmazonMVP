@@ -17,7 +17,47 @@ type CandidateProduct = {
   trackingId: string;
   targetUser: string;
   keyProblem: string;
+  angle?: string; // NEW
 };
+
+type CandidateItemV1 = {
+  candidate: CandidateProduct;
+  selection?: {
+    score: number;
+    tier?: "A" | "B" | "C" | "D";
+    decision?: "approve" | "hold" | "reject";
+    reasons?: string[];
+    risks?: string[];
+    selectedAt?: string;
+    selectedBy?: string;
+  };
+  testPlan?: {
+    priority?: number;
+    angles?: string[];
+    variantsToGenerate?: number;
+  };
+  lifecycle?: {
+    status?: "queued" | "generated" | "skipped";
+    createdAt?: string;
+    expiresAt?: string;
+  };
+};
+
+type CandidatesFileV1 = {
+  schemaVersion: "1.0";
+  generatedAt?: string;
+  runId?: string;
+  defaults?: {
+    trackingId?: string;
+    market?: string;
+    currency?: string;
+  };
+  items: CandidateItemV1[];
+};
+
+type CandidatesInput = CandidateProduct[] | CandidatesFileV1;
+
+
 
 type LandingCopy = {
   shortDescription: string;
@@ -37,6 +77,7 @@ type Product = {
   slug: string;
   vertical: string;
   name: string;
+  angle?: string;
   shortDescription: string;
   heroImage?: string;
   priceNote?: string;
@@ -105,6 +146,8 @@ async function generateLandingPageContent(
 Write landing page copy for a Meta Ad → Landing Page → Amazon funnel.
 Be problem-first. Avoid hype. Provide useful, concrete details.
 Tone: helpful, practical, neutral.
+Use the provided ANGLE as the primary framing.
+Make the headline + first 2 pain bullets strongly reflect the angle.
 DO NOT mention reviews, star ratings, or Amazon directly.
 Output VALID JSON ONLY in this format:
 {
@@ -121,11 +164,13 @@ Output VALID JSON ONLY in this format:
 }
 `;
 
-  const userPrompt = `
+ const userPrompt = `
 Product: ${product.name}
 Problem: ${product.keyProblem}
 Audience: ${product.targetUser}
+ANGLE: ${product.angle ?? "general problem/solution framing"}
 `;
+
 
   const completion = await openai.chat.completions.create({
     model: "gpt-4.1-mini",
@@ -150,13 +195,28 @@ Audience: ${product.targetUser}
   return parsed;
 }
 
+function normalizeCandidates(input: CandidatesInput): CandidateProduct[] {
+  if (Array.isArray(input)) return input;
+
+  if (input && typeof input === "object" && Array.isArray(input.items)) {
+    return input.items
+      .map((it) => it?.candidate)
+      .filter((c): c is CandidateProduct => !!c && typeof c.id === "string");
+  }
+
+  return [];
+}
+
+
 // ---------- Main pipeline ----------
 
 async function main() {
-  const candidates = await readJsonFile<CandidateProduct[]>(
-    "ai/candidates.json",
-    []
-  );
+  const candidatesRaw = await readJsonFile<CandidatesInput>(
+  "ai/candidates.json",
+  []
+);
+
+const candidates = normalizeCandidates(candidatesRaw);
 
   if (!Array.isArray(candidates) || candidates.length === 0) {
     console.log("No candidates found in ai/candidates.json");
@@ -182,6 +242,7 @@ async function main() {
       slug: c.slug,
       vertical: c.vertical,
       name: c.name,
+      angle: c.angle,
       shortDescription: copy.shortDescription,
       heroImage: "/images/drawer-organizer.jpg",
       priceNote: copy.priceNote,

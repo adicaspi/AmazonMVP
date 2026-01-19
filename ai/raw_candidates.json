@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0",
+  "defaults": {
+    "trackingId": "yourtag-20",
+    "market": "US"
+  },
+  "items": [
+    {
+      "asin": "B0B672HBW9",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B0B672HBW9",
+      "vertical": "home_kitchen",
+      "name": "Adjustable Kitchen Drawer Organizer",
+      "targetUser": "busy home cooks and parents",
+      "keyProblem": "messy, cluttered kitchen drawers",
+      "hints": {
+        "estimatedPrice": 24.99,
+        "primeEligible": true,
+        "ratingBucket": "4.3-4.7",
+        "reviewsBucket": "100-1000"
+      },
+      "source": {
+        "origin": "manual_seed",
+        "notes": "Seems like a strong before/after product"
+      }
+    }
+  ]
+}

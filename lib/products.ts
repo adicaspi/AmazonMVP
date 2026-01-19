@@ -6,6 +6,7 @@ export type Product = {
   slug: string;
   vertical: string;
   name: string;
+  angle?: string;
   shortDescription: string;
   heroImage?: string;
   priceNote?: string;

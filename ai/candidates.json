@@ -1,12 +1,146 @@
-[
-  {
-    "id": "drawer-org-002",
-    "slug": "organize-your-cutlery-drawer",
-    "vertical": "home_kitchen",
-    "name": "Adjustable Kitchen Drawer Organizer",
-    "baseAmazonUrl": "https://www.amazon.com/dp/B0B672HBW9",
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-01-19T07:46:20.894Z",
+  "runId": "select-2026-01-19-07-46",
+  "defaults": {
     "trackingId": "yourtag-20",
-    "targetUser": "busy home cooks and parents living in apartments or houses",
-    "keyProblem": "messy, cluttered kitchen drawers where utensils slide everywhere"
-  }
-]
+    "market": "US"
+  },
+  "items": [
+    {
+      "candidate": {
+        "id": "asin-b0b672hbw9-v1",
+        "slug": "adjustable-kitchen-drawer-organizer-v1",
+        "vertical": "home_kitchen",
+        "name": "Adjustable Kitchen Drawer Organizer",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B0B672HBW9",
+        "trackingId": "yourtag-20",
+        "targetUser": "busy home cooks and parents",
+        "keyProblem": "messy, cluttered kitchen drawers",
+        "angle": "Transform your cluttered kitchen drawers into neat, accessible storage in minutes"
+      },
+      "selection": {
+        "score": 78,
+        "tier": "B",
+        "decision": "approve",
+        "reasons": [
+          "Clear problem-solution dynamic (messy drawers to organized space)",
+          "High visual impact with before/after shots of kitchen drawers",
+          "Appeals to a broad audience including busy home cooks and parents",
+          "Impulse buy potential due to low price and practical utility",
+          "Messaging is straightforward and benefits are easy to communicate"
+        ],
+        "risks": [
+          "Might face competition from similar drawer organizers",
+          "Limited repeat purchase potential since it's a one-time organization item"
+        ],
+        "selectedAt": "2026-01-19T07:46:20.894Z",
+        "selectedBy": "agent:product-selection-v1"
+      },
+      "testPlan": {
+        "priority": 1,
+        "angles": [
+          "Transform your cluttered kitchen drawers into neat, accessible storage in minutes",
+          "Save time cooking and cleaning with an organized kitchen drawer setup",
+          "Perfect for busy parents juggling meal prep—keep everything in its place"
+        ],
+        "variantsToGenerate": 3
+      },
+      "lifecycle": {
+        "status": "queued",
+        "createdAt": "2026-01-19T07:46:20.894Z",
+        "expiresAt": "2026-02-02T07:46:20.894Z"
+      }
+    },
+    {
+      "candidate": {
+        "id": "asin-b0b672hbw9-v2",
+        "slug": "adjustable-kitchen-drawer-organizer-v2",
+        "vertical": "home_kitchen",
+        "name": "Adjustable Kitchen Drawer Organizer",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B0B672HBW9",
+        "trackingId": "yourtag-20",
+        "targetUser": "busy home cooks and parents",
+        "keyProblem": "messy, cluttered kitchen drawers",
+        "angle": "Save time cooking and cleaning with an organized kitchen drawer setup"
+      },
+      "selection": {
+        "score": 78,
+        "tier": "B",
+        "decision": "approve",
+        "reasons": [
+          "Clear problem-solution dynamic (messy drawers to organized space)",
+          "High visual impact with before/after shots of kitchen drawers",
+          "Appeals to a broad audience including busy home cooks and parents",
+          "Impulse buy potential due to low price and practical utility",
+          "Messaging is straightforward and benefits are easy to communicate"
+        ],
+        "risks": [
+          "Might face competition from similar drawer organizers",
+          "Limited repeat purchase potential since it's a one-time organization item"
+        ],
+        "selectedAt": "2026-01-19T07:46:20.894Z",
+        "selectedBy": "agent:product-selection-v1"
+      },
+      "testPlan": {
+        "priority": 1,
+        "angles": [
+          "Transform your cluttered kitchen drawers into neat, accessible storage in minutes",
+          "Save time cooking and cleaning with an organized kitchen drawer setup",
+          "Perfect for busy parents juggling meal prep—keep everything in its place"
+        ],
+        "variantsToGenerate": 3
+      },
+      "lifecycle": {
+        "status": "queued",
+        "createdAt": "2026-01-19T07:46:20.894Z",
+        "expiresAt": "2026-02-02T07:46:20.894Z"
+      }
+    },
+    {
+      "candidate": {
+        "id": "asin-b0b672hbw9-v3",
+        "slug": "adjustable-kitchen-drawer-organizer-v3",
+        "vertical": "home_kitchen",
+        "name": "Adjustable Kitchen Drawer Organizer",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B0B672HBW9",
+        "trackingId": "yourtag-20",
+        "targetUser": "busy home cooks and parents",
+        "keyProblem": "messy, cluttered kitchen drawers",
+        "angle": "Perfect for busy parents juggling meal prep—keep everything in its place"
+      },
+      "selection": {
+        "score": 78,
+        "tier": "B",
+        "decision": "approve",
+        "reasons": [
+          "Clear problem-solution dynamic (messy drawers to organized space)",
+          "High visual impact with before/after shots of kitchen drawers",
+          "Appeals to a broad audience including busy home cooks and parents",
+          "Impulse buy potential due to low price and practical utility",
+          "Messaging is straightforward and benefits are easy to communicate"
+        ],
+        "risks": [
+          "Might face competition from similar drawer organizers",
+          "Limited repeat purchase potential since it's a one-time organization item"
+        ],
+        "selectedAt": "2026-01-19T07:46:20.894Z",
+        "selectedBy": "agent:product-selection-v1"
+      },
+      "testPlan": {
+        "priority": 1,
+        "angles": [
+          "Transform your cluttered kitchen drawers into neat, accessible storage in minutes",
+          "Save time cooking and cleaning with an organized kitchen drawer setup",
+          "Perfect for busy parents juggling meal prep—keep everything in its place"
+        ],
+        "variantsToGenerate": 3
+      },
+      "lifecycle": {
+        "status": "queued",
+        "createdAt": "2026-01-19T07:46:20.894Z",
+        "expiresAt": "2026-02-02T07:46:20.894Z"
+      }
+    }
+  ]
+}
