@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1768825215363-rjw62mwh4",
+    "timestamp": "2026-01-19T12:20:15.363Z",
+    "type": "view",
+    "productId": "drawer-org-001",
+    "slug": "organize-your-drawer",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15",
+    "ip": "::1",
+    "referer": "http://localhost:3000/p/organize-your-drawer"
+  },
+  {
+    "id": "1768825226725-utk73amyk",
+    "timestamp": "2026-01-19T12:20:26.725Z",
+    "type": "view",
+    "productId": "drawer-org-001",
+    "slug": "organize-your-drawer",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cursor/2.3.35 Chrome/138.0.7204.251 Electron/37.7.0 Safari/537.36",
+    "ip": "::1",
+    "referer": "http://localhost:3000/p/organize-your-drawer"
+  },
+  {
+    "id": "1768825234651-71h1mfq20",
+    "timestamp": "2026-01-19T12:20:34.651Z",
+    "type": "view",
+    "productId": "drawer-org-002",
+    "slug": "organize-your-cutlery-drawer",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cursor/2.3.35 Chrome/138.0.7204.251 Electron/37.7.0 Safari/537.36",
+    "ip": "::1",
+    "referer": "http://localhost:3000/p/organize-your-cutlery-drawer"
+  },
+  {
+    "id": "1768826722098-xswnh99mk",
+    "timestamp": "2026-01-19T12:45:22.098Z",
+    "type": "click",
+    "productId": "drawer-org-002",
+    "slug": "organize-your-cutlery-drawer",
+    "offerId": "drawer-org-002",
+    "userAgent": "node",
+    "ip": "::1"
+  },
+  {
+    "id": "1768826722222-dm6lquj7k",
+    "timestamp": "2026-01-19T12:45:22.222Z",
+    "type": "click",
+    "productId": "drawer-org-002",
+    "slug": "organize-your-cutlery-drawer",
+    "offerId": "drawer-org-002",
+    "userAgent": "node",
+    "ip": "::1"
+  },
+  {
+    "id": "1768826722998-j8cv99whw",
+    "timestamp": "2026-01-19T12:45:22.998Z",
+    "type": "click",
+    "productId": "drawer-org-002",
+    "slug": "organize-your-cutlery-drawer",
+    "offerId": "drawer-org-002",
+    "userAgent": "node",
+    "ip": "::1"
+  },
+  {
+    "id": "1768826723680-h9qhq1zpx",
+    "timestamp": "2026-01-19T12:45:23.680Z",
+    "type": "click",
+    "productId": "drawer-org-002",
+    "slug": "organize-your-cutlery-drawer",
+    "offerId": "drawer-org-002",
+    "userAgent": "node",
+    "ip": "::1"
+  },
+  {
+    "id": "1768826746605-gn67os4o3",
+    "timestamp": "2026-01-19T12:45:46.605Z",
+    "type": "view",
+    "productId": "drawer-org-001",
+    "slug": "organize-your-drawer",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cursor/2.3.35 Chrome/138.0.7204.251 Electron/37.7.0 Safari/537.36",
+    "ip": "::1",
+    "referer": "http://localhost:3000/p/organize-your-drawer"
+  },
+  {
+    "id": "1768826748257-t4dcu2j0l",
+    "timestamp": "2026-01-19T12:45:48.257Z",
+    "type": "view",
+    "productId": "drawer-org-002",
+    "slug": "organize-your-cutlery-drawer",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cursor/2.3.35 Chrome/138.0.7204.251 Electron/37.7.0 Safari/537.36",
+    "ip": "::1",
+    "referer": "http://localhost:3000/p/organize-your-cutlery-drawer"
+  },
+  {
+    "id": "1768826755307-zo20703y0",
+    "timestamp": "2026-01-19T12:45:55.307Z",
+    "type": "view",
+    "productId": "drawer-org-001",
+    "slug": "organize-your-drawer",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cursor/2.3.35 Chrome/138.0.7204.251 Electron/37.7.0 Safari/537.36",
+    "ip": "::1",
+    "referer": "http://localhost:3000/p/organize-your-drawer"
+  }
+]

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "ai:select": "tsx ai/runSelection.ts",
-    "ai:pipeline": "tsx ai/runPipeline.ts"
+    "ai:pipeline": "tsx ai/runPipeline.ts",
+    "ai:creatives": "tsx ai/runCreativeGenerator.ts"
   },
   "dependencies": {
     "next": "16.1.1",
