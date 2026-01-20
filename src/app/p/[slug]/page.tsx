@@ -59,11 +59,11 @@ export default async function ProductPage({ params }: Props) {
   // Use tracking redirect URL instead of direct Amazon link
   const trackingUrl = `/out/${product.id}`;
 
-  return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-50">
-      <ProductViewTracker productId={product.id} slug={product.slug} />
-      
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-16">
+        return (
+          <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+            <ProductViewTracker productId={product.id} slug={product.slug} />
+
+            <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-16">
         {/* Back link */}
         <Link
           href="/"
@@ -73,51 +73,51 @@ export default async function ProductPage({ params }: Props) {
           <span>Back to all products</span>
         </Link>
 
-        {/* Hero Section */}
-        <section className="space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700/50 text-xs uppercase tracking-wide text-slate-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
-            {product.vertical.replace("_", " ")} • {product.status}
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
-            {product.content.headline}
-          </h1>
-          <p className="text-lg sm:text-xl text-slate-300 max-w-3xl leading-relaxed">
-            {product.content.subheadline}
-          </p>
-        </section>
+              {/* Hero Section */}
+              <section className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-400 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500"></span>
+                  {product.vertical.replace("_", " ")} • {product.status}
+                </div>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight bg-gradient-to-r from-slate-900 to-slate-700 dark:from-slate-50 dark:to-slate-300 bg-clip-text text-transparent">
+                  {product.content.headline}
+                </h1>
+                <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 max-w-3xl leading-relaxed">
+                  {product.content.subheadline}
+                </p>
+              </section>
 
-        {/* Hero Image */}
-        {product.heroImage && (
-          <div className="relative w-full aspect-video rounded-3xl overflow-hidden border border-slate-800/50 shadow-2xl shadow-black/20">
-            <Image
-              src={product.heroImage}
-              alt={product.name}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 to-transparent"></div>
-          </div>
-        )}
+              {/* Hero Image */}
+              {product.heroImage && (
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800/50 shadow-xl shadow-slate-200/50 dark:shadow-black/20">
+                  <Image
+                    src={product.heroImage}
+                    alt={product.name}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
+                </div>
+              )}
 
-        {/* Pain Points */}
-        <section className="space-y-6">
-          <h2 className="text-3xl font-bold">The Problem</h2>
-          <ul className="space-y-4">
-            {product.content.painBullets.map((bullet, idx) => (
-              <li
-                key={idx}
-                className="flex items-start gap-4 p-4 rounded-xl bg-red-950/20 border border-red-900/30 text-slate-200 group hover:bg-red-950/30 transition-all duration-200"
-              >
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform duration-200">
-                  <span className="text-red-400 text-sm">•</span>
-                </span>
-                <span className="text-base leading-relaxed">{bullet}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+              {/* Pain Points */}
+              <section className="space-y-6">
+                <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-50">The Problem</h2>
+                <ul className="space-y-4">
+                  {product.content.painBullets.map((bullet, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-4 p-5 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/30 text-slate-800 dark:text-slate-200 group hover:bg-red-100 dark:hover:bg-red-950/30 hover:shadow-md transition-all duration-200"
+                    >
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 dark:bg-red-500/20 border border-red-300 dark:border-red-500/30 flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform duration-200">
+                        <span className="text-red-600 dark:text-red-400 text-sm font-bold">•</span>
+                      </span>
+                      <span className="text-base leading-relaxed font-medium">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
 
         {/* How It Works */}
         <section className="space-y-6">
@@ -180,13 +180,13 @@ export default async function ProductPage({ params }: Props) {
           </section>
         </div>
 
-        {/* Price Note */}
-        {product.priceNote && (
-          <div className="p-5 rounded-xl bg-amber-950/20 border border-amber-900/30 text-sm text-amber-200">
-            <span className="font-semibold">💡 </span>
-            {product.priceNote}
-          </div>
-        )}
+              {/* Price Note */}
+              {product.priceNote && (
+                <div className="p-5 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/30 text-sm text-amber-800 dark:text-amber-200 shadow-sm">
+                  <span className="font-semibold">💡 </span>
+                  {product.priceNote}
+                </div>
+              )}
 
         {/* CTA Section - Sticky on mobile */}
         <section className="sticky bottom-0 z-10 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-4 bg-slate-950/95 backdrop-blur-sm border-t border-slate-800 sm:static sm:bg-transparent sm:border-t-0 sm:py-8 space-y-3">
@@ -204,23 +204,23 @@ export default async function ProductPage({ params }: Props) {
           </p>
         </section>
 
-        {/* FAQ */}
-        {product.content.faq.length > 0 && (
-          <section className="space-y-6 pt-8 border-t border-slate-800">
-            <h2 className="text-3xl font-bold">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              {product.content.faq.map((faq, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 rounded-xl bg-slate-900/40 border border-slate-800/50 space-y-2 hover:bg-slate-900/60 transition-all duration-200"
-                >
-                  <h3 className="font-bold text-slate-100 text-lg">{faq.q}</h3>
-                  <p className="text-slate-300 leading-relaxed">{faq.a}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+              {/* FAQ */}
+              {product.content.faq.length > 0 && (
+                <section className="space-y-6 pt-8 border-t border-slate-200 dark:border-slate-800">
+                  <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-50">Frequently Asked Questions</h2>
+                  <div className="space-y-4">
+                    {product.content.faq.map((faq, idx) => (
+                      <div
+                        key={idx}
+                        className="p-5 rounded-xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/50 space-y-2 hover:bg-slate-50 dark:hover:bg-slate-900/60 hover:shadow-md transition-all duration-200"
+                      >
+                        <h3 className="font-bold text-slate-900 dark:text-slate-100 text-lg">{faq.q}</h3>
+                        <p className="text-slate-700 dark:text-slate-300 leading-relaxed">{faq.a}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
       </div>
     </main>
   );
