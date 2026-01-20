@@ -14,7 +14,8 @@
     "ai:optimize": "tsx ai/runOptimization.ts",
     "ai:compliance": "tsx ai/runCompliance.ts",
     "ai:orchestrate": "tsx ai/runOrchestrator.ts",
-    "migrate:json-to-db": "tsx scripts/migrate-json-to-db.ts"
+    "migrate:json-to-db": "tsx scripts/migrate-json-to-db.ts",
+    "update:products": "tsx scripts/update-products-images-links.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.90.1",
