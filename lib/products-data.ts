@@ -80,7 +80,7 @@ export const products: Product[] = [
     room: "kitchen",
     tags: ["food-storage", "eco-friendly", "silicone", "meal-prep"],
     shortDescription: "Eco-friendly alternative to plastic wrap that seals any container.",
-    image: "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=1200&fit=crop&q=95",
+    image: "https://images.unsplash.com/photo-1600431521340-491eca880813?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B07H8QMZPV?tag=aipicks-20",
     asin: "B07H8QMZPV",
     highlights: [
