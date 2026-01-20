@@ -254,6 +254,38 @@ const candidates = normalizeCandidates(candidatesRaw);
 
     const copy = await generateLandingPageContent(c);
 
+    // Extract ASIN from baseAmazonUrl or ID
+    const asinMatch = c.baseAmazonUrl.match(/\/dp\/([A-Z0-9]{10})/i) || c.id.match(/asin-([a-z0-9]{10})/i);
+    const asin = asinMatch ? asinMatch[1].toUpperCase() : null;
+    
+    // Build Amazon product image URL
+    // Amazon Product Images: We'll use a high-quality approach
+    // Since direct ASIN-to-image mapping requires API access, we'll use:
+    // 1. High-quality Unsplash images for product categories (better than static placeholders)
+    // 2. These are professional, high-resolution images that match the product category
+    const getHeroImage = (vertical: string, asin: string | null) => {
+      if (vertical === "home_kitchen") {
+        // High-quality kitchen/product images from Unsplash
+        const kitchenImages = [
+          "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90", // Kitchen organization
+          "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90", // Kitchen tools
+          "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90", // Kitchen accessories
+        ];
+        // Use ASIN to deterministically pick an image (so same product gets same image)
+        const index = asin ? parseInt(asin.slice(-1), 16) % kitchenImages.length : 0;
+        return kitchenImages[index];
+      }
+      // Fallback for other categories
+      return "/images/drawer-organizer.jpg";
+    };
+    
+    const heroImage = getHeroImage(c.vertical, asin);
+    
+    // Build clean Amazon URL with ASIN (remove any existing params)
+    const cleanAmazonUrl = asin 
+      ? `https://www.amazon.com/dp/${asin}`
+      : c.baseAmazonUrl.split('?')[0]; // Remove query params if any
+
     const fullProduct: Product = {
       id: c.id,
       slug: c.slug,
@@ -261,10 +293,10 @@ const candidates = normalizeCandidates(candidatesRaw);
       name: c.name,
       angle: c.angle,
       shortDescription: copy.shortDescription,
-      heroImage: "/images/drawer-organizer.jpg",
+      heroImage: heroImage,
       priceNote: copy.priceNote,
       amazon: {
-        url: c.baseAmazonUrl,
+        url: cleanAmazonUrl,
         trackingId: c.trackingId,
       },
       content: {

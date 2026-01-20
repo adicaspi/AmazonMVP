@@ -96,6 +96,9 @@ export default async function ProductPage({ params }: Props) {
                     fill
                     className="object-cover"
                     priority
+                    quality={95}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                    unoptimized={product.heroImage.startsWith("https://")} // Allow external images
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                 </div>

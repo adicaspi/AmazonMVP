@@ -17,7 +17,11 @@ export async function GET(
   }
 
   // Build Amazon URL with tracking ID
-  const amazonUrl = new URL(product.amazon.url);
+  // Clean the URL first (remove any existing query params)
+  const baseUrl = product.amazon.url.split('?')[0];
+  const amazonUrl = new URL(baseUrl);
+  
+  // Add tracking ID as 'tag' parameter
   amazonUrl.searchParams.set("tag", product.amazon.trackingId);
 
   // Track click event
