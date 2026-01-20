@@ -54,15 +54,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 border-t border-slate-200 bg-slate-50">
+      <section className="py-16 md:py-20 border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8">
-            Featured Guides
-          </h2>
+          <div className="mb-12">
+            <div className="inline-block mb-3 px-3 py-1 bg-blue-50 border border-blue-100 rounded-full">
+              <span className="text-xs font-semibold text-blue-700 uppercase tracking-wide">Coming Soon</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              Featured Guides
+            </h2>
+            <p className="text-slate-600">Practical, actionable guides to help you organize and upgrade your home.</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Placeholder for guides - will be replaced with actual guide data */}
-            <div className="border border-slate-200 bg-white p-6">
-              <div className="text-sm text-slate-500 mb-2">Coming soon</div>
+            <div className="border-2 border-dashed border-slate-200 bg-white/50 p-8 rounded-xl text-center">
+              <div className="text-4xl mb-4">📚</div>
+              <div className="text-sm text-slate-500 mb-2 font-semibold">Coming soon</div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">
                 Guide content will appear here
               </h3>
@@ -74,28 +81,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 border-t border-slate-200">
+      <section className="py-16 md:py-20 border-t border-slate-200 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
             About AI Picks
           </h2>
-          <p className="text-lg text-slate-600 leading-relaxed mb-6">
+          <p className="text-lg md:text-xl text-slate-300 leading-relaxed mb-10">
             We curate the best home accessories and provide practical guides to help you 
             create a more organized, comfortable, and beautiful living space. Our recommendations 
             are based on thorough research and real-world testing.
           </p>
-          <div className="flex items-center justify-center gap-8 text-sm text-slate-500">
-            <div>
-              <div className="font-semibold text-slate-900">Trusted</div>
-              <div>Editorial reviews</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10">
+              <div className="text-3xl mb-3">✓</div>
+              <div className="font-bold text-lg mb-2">Trusted</div>
+              <div className="text-slate-300 text-sm">Editorial reviews</div>
             </div>
-            <div>
-              <div className="font-semibold text-slate-900">Updated</div>
-              <div>Regularly refreshed</div>
+            <div className="p-6 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10">
+              <div className="text-3xl mb-3">🔄</div>
+              <div className="font-bold text-lg mb-2">Updated</div>
+              <div className="text-slate-300 text-sm">Regularly refreshed</div>
             </div>
-            <div>
-              <div className="font-semibold text-slate-900">Independent</div>
-              <div>No brand bias</div>
+            <div className="p-6 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10">
+              <div className="text-3xl mb-3">🎯</div>
+              <div className="font-bold text-lg mb-2">Independent</div>
+              <div className="text-slate-300 text-sm">No brand bias</div>
             </div>
           </div>
         </div>
