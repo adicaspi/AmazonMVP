@@ -3,10 +3,50 @@ import { getProductBySlug } from "@/lib/products";
 import Image from "next/image";
 import Link from "next/link";
 import { ProductViewTracker } from "./ProductViewTracker";
+import type { Metadata } from "next";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+
+  if (!product) {
+    return {
+      title: "Product Not Found",
+    };
+  }
+
+  return {
+    title: `${product.name} - AI Picks`,
+    description: product.content.subheadline || product.shortDescription,
+    openGraph: {
+      title: product.content.headline || product.name,
+      description: product.content.subheadline || product.shortDescription,
+      url: `https://www.aipicks.co/p/${slug}`,
+      siteName: "AI Picks",
+      type: "website",
+      images: product.heroImage
+        ? [
+            {
+              url: product.heroImage,
+              width: 1200,
+              height: 630,
+              alt: product.name,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.content.headline || product.name,
+      description: product.content.subheadline || product.shortDescription,
+      images: product.heroImage ? [product.heroImage] : [],
+    },
+  };
+}
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;

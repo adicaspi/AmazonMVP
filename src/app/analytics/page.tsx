@@ -1,5 +1,18 @@
 import { getAllProducts } from "@/lib/products";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Analytics Dashboard - AI Picks",
+  description: "Track performance across all product variants. Views, clicks, CTR, and conversion metrics.",
+  openGraph: {
+    title: "Analytics Dashboard - AI Picks",
+    description: "Track performance across all product variants. Views, clicks, CTR, and conversion metrics.",
+    url: "https://www.aipicks.co/analytics",
+    siteName: "AI Picks",
+    type: "website",
+  },
+};
 
 type Event = {
   id: string;
