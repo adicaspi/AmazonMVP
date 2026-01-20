@@ -1,0 +1,29 @@
+[
+  {
+    "timestamp": "2026-01-20T11:30:10.950Z",
+    "steps": {
+      "complianceCheck": {
+        "success": true,
+        "message": "Compliance check completed: 3 passed, 2 failed",
+        "passed": 3,
+        "failed": 2
+      },
+      "optimization": {
+        "success": true,
+        "message": "Optimization completed: 0 suggestions generated",
+        "suggestionsGenerated": 0
+      },
+      "decisionEngine": {
+        "success": true,
+        "message": "Decision engine completed: 0 winners, 0 killed",
+        "winners": 0,
+        "killed": 0
+      }
+    },
+    "summary": {
+      "totalSteps": 3,
+      "successfulSteps": 3,
+      "failedSteps": 0
+    }
+  }
+]

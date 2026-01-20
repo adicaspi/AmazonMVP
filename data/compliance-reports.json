@@ -1,0 +1,165 @@
+[
+  {
+    "productId": "drawer-org-001",
+    "productName": "Expandable Kitchen Drawer Organizer",
+    "checks": {
+      "medicalClaims": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "affiliateDisclosure": {
+        "passed": false,
+        "issues": [
+          "Affiliate disclosure is present but not clearly visible or prominent."
+        ],
+        "riskLevel": "medium"
+      },
+      "amazonTos": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "generalCompliance": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      }
+    },
+    "overallRisk": "medium",
+    "canPublish": false,
+    "recommendations": [
+      "Make the affiliate disclosure more clear and visible, preferably at the top of the page or near the 'Buy' button.",
+      "Ensure the disclosure uses the required language such as 'As an Amazon Associate, I earn from qualifying purchases.' or similar, with formatting that draws attention."
+    ]
+  },
+  {
+    "productId": "drawer-org-002",
+    "productName": "Adjustable Kitchen Drawer Organizer",
+    "checks": {
+      "medicalClaims": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "affiliateDisclosure": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "amazonTos": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "generalCompliance": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      }
+    },
+    "overallRisk": "low",
+    "canPublish": true,
+    "recommendations": [
+      "Consider placing the affiliate disclosure more prominently near the purchase links for better visibility.",
+      "Ensure that all images and claims remain consistent with the product description and do not make exaggerated promises."
+    ]
+  },
+  {
+    "productId": "asin-b0b672hbw9-v1",
+    "productName": "Adjustable Kitchen Drawer Organizer",
+    "checks": {
+      "medicalClaims": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "affiliateDisclosure": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "amazonTos": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "generalCompliance": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      }
+    },
+    "overallRisk": "low",
+    "canPublish": true,
+    "recommendations": [
+      "Consider making the affiliate disclosure more prominent on the landing page for increased transparency and compliance with FTC guidelines."
+    ]
+  },
+  {
+    "productId": "asin-b0b672hbw9-v2",
+    "productName": "Adjustable Kitchen Drawer Organizer",
+    "checks": {
+      "medicalClaims": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "affiliateDisclosure": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "amazonTos": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "generalCompliance": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      }
+    },
+    "overallRisk": "low",
+    "canPublish": true,
+    "recommendations": [
+      "Ensure the affiliate disclosure remains prominently visible on the landing page.",
+      "Maintain accuracy in product descriptions to avoid any unsubstantiated claims in future updates."
+    ]
+  },
+  {
+    "productId": "asin-b0b672hbw9-v3",
+    "productName": "Adjustable Kitchen Drawer Organizer",
+    "checks": {
+      "medicalClaims": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "affiliateDisclosure": {
+        "passed": false,
+        "issues": [
+          "Affiliate disclosure is present but not clear and visible enough; it should be placed prominently and clearly state the affiliate relationship."
+        ],
+        "riskLevel": "medium"
+      },
+      "amazonTos": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      },
+      "generalCompliance": {
+        "passed": true,
+        "issues": [],
+        "riskLevel": "low"
+      }
+    },
+    "overallRisk": "medium",
+    "canPublish": false,
+    "recommendations": [
+      "Improve the affiliate disclosure by placing it prominently on the page, making it clear and easily noticeable to users according to Amazon Associates Program policies.",
+      "Ensure affiliate disclosure wording complies with FTC guidelines by explicitly stating the affiliate relationship, such as 'As an Amazon Associate, I earn from qualifying purchases.' placed in a visible location."
+    ]
+  }
+]

@@ -10,6 +10,10 @@
     "ai:select": "tsx ai/runSelection.ts",
     "ai:pipeline": "tsx ai/runPipeline.ts",
     "ai:creatives": "tsx ai/runCreativeGenerator.ts",
+    "ai:decide": "tsx ai/runDecisionEngine.ts",
+    "ai:optimize": "tsx ai/runOptimization.ts",
+    "ai:compliance": "tsx ai/runCompliance.ts",
+    "ai:orchestrate": "tsx ai/runOrchestrator.ts",
     "migrate:json-to-db": "tsx scripts/migrate-json-to-db.ts"
   },
   "dependencies": {
