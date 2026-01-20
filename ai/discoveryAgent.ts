@@ -2,6 +2,7 @@
 // Automatic Product Discovery Agent - Finds products from Amazon automatically
 import OpenAI from "openai";
 import { openai } from "./client";
+import { isPAAPIAvailable, searchAmazonProducts, getProductByASIN } from "./amazonPAAPI";
 
 type DiscoveryQuery = {
   vertical: string;
@@ -159,31 +160,33 @@ Generate products that fit these criteria.
 }
 
 /**
- * Search for real products on Amazon using web search
- * Extracts real ASINs from Amazon search results
+ * Search for real products on Amazon using PA-API
+ * Returns real ASIN if found, null otherwise
  */
 async function findRealASIN(productName: string, keywords: string[]): Promise<string | null> {
+  // Check if PA-API is available
+  if (!isPAAPIAvailable()) {
+    console.warn(`⚠️  PA-API not configured. Skipping real ASIN lookup for: ${productName}`);
+    console.warn(`   💡 Set up PA-API credentials in .env.local (see SETUP_AUTOMATIC_DISCOVERY.md)`);
+    return null;
+  }
+
   try {
-    // Construct Amazon search URL
-    const searchQuery = encodeURIComponent(`${productName} ${keywords.join(" ")}`);
-    const amazonSearchUrl = `https://www.amazon.com/s?k=${searchQuery}&ref=sr_pg_1`;
+    // Search Amazon using PA-API
+    const searchQuery = `${productName} ${keywords.join(" ")}`;
+    const results = await searchAmazonProducts(searchQuery, 5);
     
-    // Note: In production, you would:
-    // 1. Use Amazon Product Advertising API (PA-API) with credentials
-    // 2. Or use a web scraping service (like ScraperAPI, Bright Data)
-    // 3. Or use SerpAPI for Amazon search results
-    
-    // For now, we'll use a web search to find Amazon product pages
-    // and extract ASINs from the URLs
-    
-    // This is a placeholder - in production, integrate with PA-API or scraping service
-    console.warn(`⚠️  Need to find real ASIN for: ${productName}`);
-    console.warn(`   Search URL: ${amazonSearchUrl}`);
-    console.warn(`   💡 To get real ASINs, integrate Amazon PA-API or use a scraping service`);
-    
-    return null; // Return null to indicate we need manual ASIN lookup
+    if (results.length === 0) {
+      console.warn(`⚠️  No products found for: ${productName}`);
+      return null;
+    }
+
+    // Return the first result's ASIN
+    const firstResult = results[0];
+    console.log(`✅ Found real ASIN: ${firstResult.asin} for ${productName}`);
+    return firstResult.asin;
   } catch (error) {
-    console.error(`Error finding ASIN for ${productName}:`, error);
+    console.error(`❌ Error finding ASIN for ${productName}:`, error);
     return null;
   }
 }
