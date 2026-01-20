@@ -44,43 +44,29 @@ async function main() {
       }
 
       // Build high-quality image URL - UNIQUE image for each product variant
-      // Map each ASIN to 3 different images, then select by variant number
-      const asinImageSets: Record<string, string[]> = {
-        "B0B672HBW9": [
-          "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90",
-          "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90",
-          "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90",
-        ],
-        "B08TGF5XJW": [
-          "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90",
-          "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90",
-          "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90",
-        ],
-        "B09GJ1C4NK": [
-          "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90",
-          "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90",
-          "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90",
-        ],
-        "B087H6S8CH": [
-          "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90",
-          "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90",
-          "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90",
-        ],
-      };
+      // Use comprehensive image sets for all ASINs, with variant-specific selection
+      const allKitchenImages = [
+        "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90",
+        "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90",
+        "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90",
+        "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90",
+        "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90",
+        "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90",
+      ];
       
       // Extract variant number (v1, v2, v3) from product ID
       const variantMatch = product.id.match(/v(\d+)$/i);
       const variantNum = variantMatch ? parseInt(variantMatch[1]) : 1;
-      const variantIndex = (variantNum - 1) % 3; // 0, 1, or 2
       
-      // Get image set for this ASIN, or use fallback
-      const imageSet = asinImageSets[asin] || [
-        "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90",
-        "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90",
-        "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90",
-      ];
-      
-      const heroImage = imageSet[variantIndex] || imageSet[0];
+      // Create unique hash from ASIN + variant number to ensure different images
+      let hash = 0;
+      const hashString = `${asin}-${variantNum}`;
+      for (let i = 0; i < hashString.length; i++) {
+        hash = ((hash << 5) - hash) + hashString.charCodeAt(i);
+        hash = hash & hash; // Convert to 32bit integer
+      }
+      const imageIndex = Math.abs(hash) % allKitchenImages.length;
+      const heroImage = allKitchenImages[imageIndex];
 
       // Build clean Amazon URL (remove any existing query params)
       const cleanAmazonUrl = `https://www.amazon.com/dp/${asin}`;

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-01-20T18:35:54.494Z",
-  "runId": "select-2026-01-20-18-35",
+  "generatedAt": "2026-01-20T18:40:51.372Z",
+  "runId": "select-2026-01-20-18-40",
   "defaults": {
     "trackingId": "yourtag-20",
     "market": "US"
@@ -9,554 +9,551 @@
   "items": [
     {
       "candidate": {
-        "id": "asin-b0b672hbw9-v1",
-        "slug": "adjustable-kitchen-drawer-organizer-v1",
+        "id": "asin-b08yz5yf7m-v1",
+        "slug": "bamboo-drawer-organizer-v1",
         "vertical": "home_kitchen",
-        "name": "Adjustable Kitchen Drawer Organizer",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B0B672HBW9",
+        "name": "Bamboo Drawer Organizer",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B08YZ5YF7M",
         "trackingId": "yourtag-20",
         "targetUser": "busy home cooks and parents",
         "keyProblem": "messy, cluttered kitchen drawers where utensils get tangled and lost",
-        "angle": "Tired of tangled utensils wasting your time? Discover a quick drawer upgrade."
+        "angle": "Say goodbye to messy utensil drawers in just minutes"
       },
       "selection": {
         "score": 82,
         "tier": "A",
         "decision": "approve",
         "reasons": [
-          "High impulse-buy potential due to common kitchen clutter problem",
-          "Strong before/after visual appeal ideal for Meta ads",
-          "Clear problem-solution angle with immediate kitchen organization benefits",
-          "Broad audience of busy home cooks and parents",
+          "High impulse-buy likelihood due to low price and practical value",
+          "Strong before/after visual potential appeals to viewers' desire for order",
+          "Clear problem-solution dynamic related to common kitchen frustration",
+          "Broad audience including busy home cooks and parents",
           "Messaging is straightforward and easy to communicate"
         ],
         "risks": [
-          "Product price might deter very low-budget buyers",
-          "Some users may be satisfied with DIY organizers, reducing conversion",
-          "Delivery delays or stock issues could affect user satisfaction"
+          "Market saturation with similar organizer products",
+          "Potential to be seen as a non-essential or low-priority purchase",
+          "Less appeal to those already satisfied with drawer organization"
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 1,
         "angles": [
-          "Tired of tangled utensils wasting your time? Discover a quick drawer upgrade.",
-          "Transform chaotic kitchen drawers into neat, accessible spaces instantly.",
-          "Save time cooking with organized utensils always within reach."
+          "Say goodbye to messy utensil drawers in just minutes",
+          "Transform your cluttered kitchen drawers into organized spaces effortlessly",
+          "Never lose track of your kitchen tools again – stay efficient while cooking"
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b0b672hbw9-v2",
-        "slug": "adjustable-kitchen-drawer-organizer-v2",
+        "id": "asin-b08yz5yf7m-v2",
+        "slug": "bamboo-drawer-organizer-v2",
         "vertical": "home_kitchen",
-        "name": "Adjustable Kitchen Drawer Organizer",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B0B672HBW9",
+        "name": "Bamboo Drawer Organizer",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B08YZ5YF7M",
         "trackingId": "yourtag-20",
         "targetUser": "busy home cooks and parents",
         "keyProblem": "messy, cluttered kitchen drawers where utensils get tangled and lost",
-        "angle": "Transform chaotic kitchen drawers into neat, accessible spaces instantly."
+        "angle": "Transform your cluttered kitchen drawers into organized spaces effortlessly"
       },
       "selection": {
         "score": 82,
         "tier": "A",
         "decision": "approve",
         "reasons": [
-          "High impulse-buy potential due to common kitchen clutter problem",
-          "Strong before/after visual appeal ideal for Meta ads",
-          "Clear problem-solution angle with immediate kitchen organization benefits",
-          "Broad audience of busy home cooks and parents",
+          "High impulse-buy likelihood due to low price and practical value",
+          "Strong before/after visual potential appeals to viewers' desire for order",
+          "Clear problem-solution dynamic related to common kitchen frustration",
+          "Broad audience including busy home cooks and parents",
           "Messaging is straightforward and easy to communicate"
         ],
         "risks": [
-          "Product price might deter very low-budget buyers",
-          "Some users may be satisfied with DIY organizers, reducing conversion",
-          "Delivery delays or stock issues could affect user satisfaction"
+          "Market saturation with similar organizer products",
+          "Potential to be seen as a non-essential or low-priority purchase",
+          "Less appeal to those already satisfied with drawer organization"
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 1,
         "angles": [
-          "Tired of tangled utensils wasting your time? Discover a quick drawer upgrade.",
-          "Transform chaotic kitchen drawers into neat, accessible spaces instantly.",
-          "Save time cooking with organized utensils always within reach."
+          "Say goodbye to messy utensil drawers in just minutes",
+          "Transform your cluttered kitchen drawers into organized spaces effortlessly",
+          "Never lose track of your kitchen tools again – stay efficient while cooking"
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b0b672hbw9-v3",
-        "slug": "adjustable-kitchen-drawer-organizer-v3",
+        "id": "asin-b08yz5yf7m-v3",
+        "slug": "bamboo-drawer-organizer-v3",
         "vertical": "home_kitchen",
-        "name": "Adjustable Kitchen Drawer Organizer",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B0B672HBW9",
+        "name": "Bamboo Drawer Organizer",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B08YZ5YF7M",
         "trackingId": "yourtag-20",
         "targetUser": "busy home cooks and parents",
         "keyProblem": "messy, cluttered kitchen drawers where utensils get tangled and lost",
-        "angle": "Save time cooking with organized utensils always within reach."
+        "angle": "Never lose track of your kitchen tools again – stay efficient while cooking"
       },
       "selection": {
         "score": 82,
         "tier": "A",
         "decision": "approve",
         "reasons": [
-          "High impulse-buy potential due to common kitchen clutter problem",
-          "Strong before/after visual appeal ideal for Meta ads",
-          "Clear problem-solution angle with immediate kitchen organization benefits",
-          "Broad audience of busy home cooks and parents",
+          "High impulse-buy likelihood due to low price and practical value",
+          "Strong before/after visual potential appeals to viewers' desire for order",
+          "Clear problem-solution dynamic related to common kitchen frustration",
+          "Broad audience including busy home cooks and parents",
           "Messaging is straightforward and easy to communicate"
         ],
         "risks": [
-          "Product price might deter very low-budget buyers",
-          "Some users may be satisfied with DIY organizers, reducing conversion",
-          "Delivery delays or stock issues could affect user satisfaction"
+          "Market saturation with similar organizer products",
+          "Potential to be seen as a non-essential or low-priority purchase",
+          "Less appeal to those already satisfied with drawer organization"
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 1,
         "angles": [
-          "Tired of tangled utensils wasting your time? Discover a quick drawer upgrade.",
-          "Transform chaotic kitchen drawers into neat, accessible spaces instantly.",
-          "Save time cooking with organized utensils always within reach."
+          "Say goodbye to messy utensil drawers in just minutes",
+          "Transform your cluttered kitchen drawers into organized spaces effortlessly",
+          "Never lose track of your kitchen tools again – stay efficient while cooking"
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b08tgf5xjw-v1",
-        "slug": "portable-mini-bag-sealer-v1",
+        "id": "asin-b07h8qmzpv-v1",
+        "slug": "reusable-silicone-food-storage-lids-v1",
         "vertical": "home_kitchen",
-        "name": "Portable Mini Bag Sealer",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B08TGF5XJW",
+        "name": "Reusable Silicone Food Storage Lids",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B07H8QMZPV",
         "trackingId": "yourtag-20",
-        "targetUser": "snack eaters and families with kids",
-        "keyProblem": "open food bags get stale quickly, wasting food and money",
-        "angle": "Stop wasting snacks: Keep your chips and cookies fresh for longer with a quick seal"
+        "targetUser": "eco-conscious households and meal preppers",
+        "keyProblem": "plastic wrap wastes money and creates trash, doesn't seal well",
+        "angle": "Stop wasting money and plastic wrap – seal your leftovers sustainably"
       },
       "selection": {
         "score": 78,
         "tier": "B",
         "decision": "approve",
         "reasons": [
-          "Clear and common problem: keeping snack and food bags fresh to prevent staleness and waste",
-          "Broad audience including snack eaters and families with kids",
-          "Product benefits easily demonstrated visually (before/after freshness)",
-          "Affordable price point encourages impulse purchase",
-          "Simple messaging around food waste prevention and freshness retention"
+          "Addresses a clear problem of plastic waste and poor sealing, which resonates with eco-conscious users",
+          "Wide appeal to both eco-conscious households and meal preppers",
+          "Strong visual potential with before/after shots of storing food with and without lids",
+          "Impulse buy potential aided by relatively low price point and convenience factor",
+          "Messaging can be straightforward focusing on sustainability and food freshness"
         ],
         "risks": [
-          "Competition with other bag sealing or freshness preservation options",
-          "Some users might not see it essential if they use clips or storage containers",
-          "New users may need demonstration to understand the product mechanism clearly"
+          "Product category is somewhat competitive with many similar products",
+          "Visuals and messaging need to clearly differentiate from regular plastic lids or wraps",
+          "Some users may be hesitant to switch from traditional wraps despite benefits"
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 2,
         "angles": [
-          "Stop wasting snacks: Keep your chips and cookies fresh for longer with a quick seal",
-          "Save money by preventing food spoilage—easy sealing for every bag",
-          "Perfect for busy families: Seal open snack bags fast and keep kids’ favorites fresh"
+          "Stop wasting money and plastic wrap – seal your leftovers sustainably",
+          "Keep your food fresh without single-use plastics",
+          "Perfect for meal preppers who want eco-friendly, airtight storage"
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b08tgf5xjw-v2",
-        "slug": "portable-mini-bag-sealer-v2",
+        "id": "asin-b07h8qmzpv-v2",
+        "slug": "reusable-silicone-food-storage-lids-v2",
         "vertical": "home_kitchen",
-        "name": "Portable Mini Bag Sealer",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B08TGF5XJW",
+        "name": "Reusable Silicone Food Storage Lids",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B07H8QMZPV",
         "trackingId": "yourtag-20",
-        "targetUser": "snack eaters and families with kids",
-        "keyProblem": "open food bags get stale quickly, wasting food and money",
-        "angle": "Save money by preventing food spoilage—easy sealing for every bag"
+        "targetUser": "eco-conscious households and meal preppers",
+        "keyProblem": "plastic wrap wastes money and creates trash, doesn't seal well",
+        "angle": "Keep your food fresh without single-use plastics"
       },
       "selection": {
         "score": 78,
         "tier": "B",
         "decision": "approve",
         "reasons": [
-          "Clear and common problem: keeping snack and food bags fresh to prevent staleness and waste",
-          "Broad audience including snack eaters and families with kids",
-          "Product benefits easily demonstrated visually (before/after freshness)",
-          "Affordable price point encourages impulse purchase",
-          "Simple messaging around food waste prevention and freshness retention"
+          "Addresses a clear problem of plastic waste and poor sealing, which resonates with eco-conscious users",
+          "Wide appeal to both eco-conscious households and meal preppers",
+          "Strong visual potential with before/after shots of storing food with and without lids",
+          "Impulse buy potential aided by relatively low price point and convenience factor",
+          "Messaging can be straightforward focusing on sustainability and food freshness"
         ],
         "risks": [
-          "Competition with other bag sealing or freshness preservation options",
-          "Some users might not see it essential if they use clips or storage containers",
-          "New users may need demonstration to understand the product mechanism clearly"
+          "Product category is somewhat competitive with many similar products",
+          "Visuals and messaging need to clearly differentiate from regular plastic lids or wraps",
+          "Some users may be hesitant to switch from traditional wraps despite benefits"
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 2,
         "angles": [
-          "Stop wasting snacks: Keep your chips and cookies fresh for longer with a quick seal",
-          "Save money by preventing food spoilage—easy sealing for every bag",
-          "Perfect for busy families: Seal open snack bags fast and keep kids’ favorites fresh"
+          "Stop wasting money and plastic wrap – seal your leftovers sustainably",
+          "Keep your food fresh without single-use plastics",
+          "Perfect for meal preppers who want eco-friendly, airtight storage"
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b08tgf5xjw-v3",
-        "slug": "portable-mini-bag-sealer-v3",
+        "id": "asin-b07h8qmzpv-v3",
+        "slug": "reusable-silicone-food-storage-lids-v3",
         "vertical": "home_kitchen",
-        "name": "Portable Mini Bag Sealer",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B08TGF5XJW",
+        "name": "Reusable Silicone Food Storage Lids",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B07H8QMZPV",
         "trackingId": "yourtag-20",
-        "targetUser": "snack eaters and families with kids",
-        "keyProblem": "open food bags get stale quickly, wasting food and money",
-        "angle": "Perfect for busy families: Seal open snack bags fast and keep kids’ favorites fresh"
+        "targetUser": "eco-conscious households and meal preppers",
+        "keyProblem": "plastic wrap wastes money and creates trash, doesn't seal well",
+        "angle": "Perfect for meal preppers who want eco-friendly, airtight storage"
       },
       "selection": {
         "score": 78,
         "tier": "B",
         "decision": "approve",
         "reasons": [
-          "Clear and common problem: keeping snack and food bags fresh to prevent staleness and waste",
-          "Broad audience including snack eaters and families with kids",
-          "Product benefits easily demonstrated visually (before/after freshness)",
-          "Affordable price point encourages impulse purchase",
-          "Simple messaging around food waste prevention and freshness retention"
+          "Addresses a clear problem of plastic waste and poor sealing, which resonates with eco-conscious users",
+          "Wide appeal to both eco-conscious households and meal preppers",
+          "Strong visual potential with before/after shots of storing food with and without lids",
+          "Impulse buy potential aided by relatively low price point and convenience factor",
+          "Messaging can be straightforward focusing on sustainability and food freshness"
         ],
         "risks": [
-          "Competition with other bag sealing or freshness preservation options",
-          "Some users might not see it essential if they use clips or storage containers",
-          "New users may need demonstration to understand the product mechanism clearly"
+          "Product category is somewhat competitive with many similar products",
+          "Visuals and messaging need to clearly differentiate from regular plastic lids or wraps",
+          "Some users may be hesitant to switch from traditional wraps despite benefits"
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 2,
         "angles": [
-          "Stop wasting snacks: Keep your chips and cookies fresh for longer with a quick seal",
-          "Save money by preventing food spoilage—easy sealing for every bag",
-          "Perfect for busy families: Seal open snack bags fast and keep kids’ favorites fresh"
+          "Stop wasting money and plastic wrap – seal your leftovers sustainably",
+          "Keep your food fresh without single-use plastics",
+          "Perfect for meal preppers who want eco-friendly, airtight storage"
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b09gj1c4nk-v1",
-        "slug": "reusable-stretch-silicone-lids-v1",
+        "id": "asin-b07gjx5qyr-v1",
+        "slug": "jar-opener-tool-v1",
         "vertical": "home_kitchen",
-        "name": "Reusable Stretch Silicone Lids",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B09GJ1C4NK",
+        "name": "Jar Opener Tool",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B07GJX5QYR",
         "trackingId": "yourtag-20",
-        "targetUser": "eco-conscious households and meal preppers",
-        "keyProblem": "plastic wrap wastes money and creates trash, doesn't seal well",
-        "angle": "Stop throwing away money on plastic wrap: switch to reusable, stretchy silicone lids that seal perfectly."
+        "targetUser": "people with weak grip, arthritis sufferers, seniors",
+        "keyProblem": "tight jar lids are frustrating and painful to open, can cause injury",
+        "angle": "Say goodbye to painful jar lids and protect your hands from injury."
       },
       "selection": {
         "score": 78,
         "tier": "B",
         "decision": "approve",
         "reasons": [
-          "Strong problem-solution clarity: replaces single-use plastic wrap with reusable, eco-friendly lids.",
-          "Good impulse-buy potential given low price point and broad use in households.",
-          "Visual before/after potential: show messy plastic wrap vs neat, sealed containers with silicone lids.",
-          "Appeals to a broad audience including eco-conscious consumers and regular meal preppers.",
-          "Messaging is simple and easy to communicate: save money, reduce waste, keep food fresh."
+          "Strong problem-solution clarity addressing a common and specific pain point.",
+          "Large potential audience including seniors, arthritis sufferers, and people with weak grip.",
+          "Visual 'before and after' scenario is easy to illustrate showing ease of opening jars.",
+          "Product encourages impulse buying due to low price and instant relief from frustration.",
+          "Messaging is straightforward and benefits can be clearly communicated."
         ],
         "risks": [
-          "Competition is high in reusable kitchen products, so standing out may be challenging.",
-          "Users may question the sealing reliability or versatility on different container sizes.",
-          "May require demonstration to prove ease of use and effectiveness."
+          "Market may already have many similar products, raising competition.",
+          "Some users may doubt product effectiveness without tactile experience.",
+          "Less appeal to younger audiences without grip issues."
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 3,
         "angles": [
-          "Stop throwing away money on plastic wrap: switch to reusable, stretchy silicone lids that seal perfectly.",
-          "Tired of flimsy wraps that don’t keep food fresh? See how silicone lids lock in freshness while saving the planet.",
-          "Make meal prep seamless and sustainable with eco-friendly lids that fit any container."
+          "Say goodbye to painful jar lids and protect your hands from injury.",
+          "Make opening any jar effortless, even with weak grip or arthritis.",
+          "Enjoy independence in the kitchen without relying on others."
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b09gj1c4nk-v2",
-        "slug": "reusable-stretch-silicone-lids-v2",
+        "id": "asin-b07gjx5qyr-v2",
+        "slug": "jar-opener-tool-v2",
         "vertical": "home_kitchen",
-        "name": "Reusable Stretch Silicone Lids",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B09GJ1C4NK",
+        "name": "Jar Opener Tool",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B07GJX5QYR",
         "trackingId": "yourtag-20",
-        "targetUser": "eco-conscious households and meal preppers",
-        "keyProblem": "plastic wrap wastes money and creates trash, doesn't seal well",
-        "angle": "Tired of flimsy wraps that don’t keep food fresh? See how silicone lids lock in freshness while saving the planet."
+        "targetUser": "people with weak grip, arthritis sufferers, seniors",
+        "keyProblem": "tight jar lids are frustrating and painful to open, can cause injury",
+        "angle": "Make opening any jar effortless, even with weak grip or arthritis."
       },
       "selection": {
         "score": 78,
         "tier": "B",
         "decision": "approve",
         "reasons": [
-          "Strong problem-solution clarity: replaces single-use plastic wrap with reusable, eco-friendly lids.",
-          "Good impulse-buy potential given low price point and broad use in households.",
-          "Visual before/after potential: show messy plastic wrap vs neat, sealed containers with silicone lids.",
-          "Appeals to a broad audience including eco-conscious consumers and regular meal preppers.",
-          "Messaging is simple and easy to communicate: save money, reduce waste, keep food fresh."
+          "Strong problem-solution clarity addressing a common and specific pain point.",
+          "Large potential audience including seniors, arthritis sufferers, and people with weak grip.",
+          "Visual 'before and after' scenario is easy to illustrate showing ease of opening jars.",
+          "Product encourages impulse buying due to low price and instant relief from frustration.",
+          "Messaging is straightforward and benefits can be clearly communicated."
         ],
         "risks": [
-          "Competition is high in reusable kitchen products, so standing out may be challenging.",
-          "Users may question the sealing reliability or versatility on different container sizes.",
-          "May require demonstration to prove ease of use and effectiveness."
+          "Market may already have many similar products, raising competition.",
+          "Some users may doubt product effectiveness without tactile experience.",
+          "Less appeal to younger audiences without grip issues."
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 3,
         "angles": [
-          "Stop throwing away money on plastic wrap: switch to reusable, stretchy silicone lids that seal perfectly.",
-          "Tired of flimsy wraps that don’t keep food fresh? See how silicone lids lock in freshness while saving the planet.",
-          "Make meal prep seamless and sustainable with eco-friendly lids that fit any container."
+          "Say goodbye to painful jar lids and protect your hands from injury.",
+          "Make opening any jar effortless, even with weak grip or arthritis.",
+          "Enjoy independence in the kitchen without relying on others."
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b09gj1c4nk-v3",
-        "slug": "reusable-stretch-silicone-lids-v3",
+        "id": "asin-b07gjx5qyr-v3",
+        "slug": "jar-opener-tool-v3",
         "vertical": "home_kitchen",
-        "name": "Reusable Stretch Silicone Lids",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B09GJ1C4NK",
+        "name": "Jar Opener Tool",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B07GJX5QYR",
         "trackingId": "yourtag-20",
-        "targetUser": "eco-conscious households and meal preppers",
-        "keyProblem": "plastic wrap wastes money and creates trash, doesn't seal well",
-        "angle": "Make meal prep seamless and sustainable with eco-friendly lids that fit any container."
+        "targetUser": "people with weak grip, arthritis sufferers, seniors",
+        "keyProblem": "tight jar lids are frustrating and painful to open, can cause injury",
+        "angle": "Enjoy independence in the kitchen without relying on others."
       },
       "selection": {
         "score": 78,
         "tier": "B",
         "decision": "approve",
         "reasons": [
-          "Strong problem-solution clarity: replaces single-use plastic wrap with reusable, eco-friendly lids.",
-          "Good impulse-buy potential given low price point and broad use in households.",
-          "Visual before/after potential: show messy plastic wrap vs neat, sealed containers with silicone lids.",
-          "Appeals to a broad audience including eco-conscious consumers and regular meal preppers.",
-          "Messaging is simple and easy to communicate: save money, reduce waste, keep food fresh."
+          "Strong problem-solution clarity addressing a common and specific pain point.",
+          "Large potential audience including seniors, arthritis sufferers, and people with weak grip.",
+          "Visual 'before and after' scenario is easy to illustrate showing ease of opening jars.",
+          "Product encourages impulse buying due to low price and instant relief from frustration.",
+          "Messaging is straightforward and benefits can be clearly communicated."
         ],
         "risks": [
-          "Competition is high in reusable kitchen products, so standing out may be challenging.",
-          "Users may question the sealing reliability or versatility on different container sizes.",
-          "May require demonstration to prove ease of use and effectiveness."
+          "Market may already have many similar products, raising competition.",
+          "Some users may doubt product effectiveness without tactile experience.",
+          "Less appeal to younger audiences without grip issues."
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 3,
         "angles": [
-          "Stop throwing away money on plastic wrap: switch to reusable, stretchy silicone lids that seal perfectly.",
-          "Tired of flimsy wraps that don’t keep food fresh? See how silicone lids lock in freshness while saving the planet.",
-          "Make meal prep seamless and sustainable with eco-friendly lids that fit any container."
+          "Say goodbye to painful jar lids and protect your hands from injury.",
+          "Make opening any jar effortless, even with weak grip or arthritis.",
+          "Enjoy independence in the kitchen without relying on others."
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b087h6s8ch-v1",
-        "slug": "under-cabinet-jar-opener-v1",
+        "id": "asin-b08n5wrwnw-v1",
+        "slug": "food-storage-bags-sealer-v1",
         "vertical": "home_kitchen",
-        "name": "Under Cabinet Jar Opener",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B087H6S8CH",
+        "name": "Food Storage Bags Sealer",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B08N5WRWNW",
         "trackingId": "yourtag-20",
-        "targetUser": "people with weak grip, arthritis sufferers, seniors",
-        "keyProblem": "tight jar lids are frustrating and painful to open, can cause injury",
-        "angle": "Struggling with tight jar lids? Effortlessly open them without pain or injury."
+        "targetUser": "snack eaters and families with kids",
+        "keyProblem": "open food bags get stale quickly, wasting food and money",
+        "angle": "Stop wasting snacks to stale air—keep your chips and treats fresh longer with an easy sealer"
       },
       "selection": {
-        "score": 78,
+        "score": 75,
         "tier": "B",
         "decision": "approve",
         "reasons": [
-          "Addresses a clear and common pain point of opening tight jar lids, which can be frustrating and painful, especially for seniors and people with weak grip.",
-          "Strong potential for impulse buys due to its relatively low price and immediate usefulness in everyday kitchen tasks.",
-          "Wide audience reach including seniors, arthritis sufferers, and anyone with grip challenges.",
-          "Visual before/after comparisons (effort before using the tool vs effortless opening) can be easily demonstrated and resonate well in ads.",
-          "Clear and simple messaging focusing on ease, safety, and pain relief."
+          "Strong clarity of problem and solution: prevents food waste from stale snacks",
+          "High impulse-buy likelihood as snacks and fresh food storage are common pain points",
+          "Visual before/after potential with sealed vs open bags is easy to demonstrate",
+          "Broad audience appeal including snack eaters and families with kids",
+          "Messaging is straightforward and focuses on saving money by keeping food fresh"
         ],
         "risks": [
-          "Potential buyers may underestimate the difficulty of their problem or overestimate their own strength, leading to lower conversion.",
-          "Some might perceive it as a niche or specialized product rather than an everyday necessity.",
-          "Competing solutions (other jar openers, DIY methods) might reduce urgency to buy."
+          "May face competition from lower-cost alternatives like clips or manual sealing methods",
+          "Some users might not see it as essential if they regularly consume snacks quickly"
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 4,
         "angles": [
-          "Struggling with tight jar lids? Effortlessly open them without pain or injury.",
-          "Reduce pain and frustration in the kitchen—ideal for weak hands and arthritis sufferers.",
-          "Make your kitchen safer and easier to use with a simple tool that opens any jar."
+          "Stop wasting snacks to stale air—keep your chips and treats fresh longer with an easy sealer",
+          "Save money and reduce food waste by sealing your open snacks in seconds",
+          "Perfect for busy families: seal opened bags to maintain freshness and avoid waste"
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b087h6s8ch-v2",
-        "slug": "under-cabinet-jar-opener-v2",
+        "id": "asin-b08n5wrwnw-v2",
+        "slug": "food-storage-bags-sealer-v2",
         "vertical": "home_kitchen",
-        "name": "Under Cabinet Jar Opener",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B087H6S8CH",
+        "name": "Food Storage Bags Sealer",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B08N5WRWNW",
         "trackingId": "yourtag-20",
-        "targetUser": "people with weak grip, arthritis sufferers, seniors",
-        "keyProblem": "tight jar lids are frustrating and painful to open, can cause injury",
-        "angle": "Reduce pain and frustration in the kitchen—ideal for weak hands and arthritis sufferers."
+        "targetUser": "snack eaters and families with kids",
+        "keyProblem": "open food bags get stale quickly, wasting food and money",
+        "angle": "Save money and reduce food waste by sealing your open snacks in seconds"
       },
       "selection": {
-        "score": 78,
+        "score": 75,
         "tier": "B",
         "decision": "approve",
         "reasons": [
-          "Addresses a clear and common pain point of opening tight jar lids, which can be frustrating and painful, especially for seniors and people with weak grip.",
-          "Strong potential for impulse buys due to its relatively low price and immediate usefulness in everyday kitchen tasks.",
-          "Wide audience reach including seniors, arthritis sufferers, and anyone with grip challenges.",
-          "Visual before/after comparisons (effort before using the tool vs effortless opening) can be easily demonstrated and resonate well in ads.",
-          "Clear and simple messaging focusing on ease, safety, and pain relief."
+          "Strong clarity of problem and solution: prevents food waste from stale snacks",
+          "High impulse-buy likelihood as snacks and fresh food storage are common pain points",
+          "Visual before/after potential with sealed vs open bags is easy to demonstrate",
+          "Broad audience appeal including snack eaters and families with kids",
+          "Messaging is straightforward and focuses on saving money by keeping food fresh"
         ],
         "risks": [
-          "Potential buyers may underestimate the difficulty of their problem or overestimate their own strength, leading to lower conversion.",
-          "Some might perceive it as a niche or specialized product rather than an everyday necessity.",
-          "Competing solutions (other jar openers, DIY methods) might reduce urgency to buy."
+          "May face competition from lower-cost alternatives like clips or manual sealing methods",
+          "Some users might not see it as essential if they regularly consume snacks quickly"
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 4,
         "angles": [
-          "Struggling with tight jar lids? Effortlessly open them without pain or injury.",
-          "Reduce pain and frustration in the kitchen—ideal for weak hands and arthritis sufferers.",
-          "Make your kitchen safer and easier to use with a simple tool that opens any jar."
+          "Stop wasting snacks to stale air—keep your chips and treats fresh longer with an easy sealer",
+          "Save money and reduce food waste by sealing your open snacks in seconds",
+          "Perfect for busy families: seal opened bags to maintain freshness and avoid waste"
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     },
     {
       "candidate": {
-        "id": "asin-b087h6s8ch-v3",
-        "slug": "under-cabinet-jar-opener-v3",
+        "id": "asin-b08n5wrwnw-v3",
+        "slug": "food-storage-bags-sealer-v3",
         "vertical": "home_kitchen",
-        "name": "Under Cabinet Jar Opener",
-        "baseAmazonUrl": "https://www.amazon.com/dp/B087H6S8CH",
+        "name": "Food Storage Bags Sealer",
+        "baseAmazonUrl": "https://www.amazon.com/dp/B08N5WRWNW",
         "trackingId": "yourtag-20",
-        "targetUser": "people with weak grip, arthritis sufferers, seniors",
-        "keyProblem": "tight jar lids are frustrating and painful to open, can cause injury",
-        "angle": "Make your kitchen safer and easier to use with a simple tool that opens any jar."
+        "targetUser": "snack eaters and families with kids",
+        "keyProblem": "open food bags get stale quickly, wasting food and money",
+        "angle": "Perfect for busy families: seal opened bags to maintain freshness and avoid waste"
       },
       "selection": {
-        "score": 78,
+        "score": 75,
         "tier": "B",
         "decision": "approve",
         "reasons": [
-          "Addresses a clear and common pain point of opening tight jar lids, which can be frustrating and painful, especially for seniors and people with weak grip.",
-          "Strong potential for impulse buys due to its relatively low price and immediate usefulness in everyday kitchen tasks.",
-          "Wide audience reach including seniors, arthritis sufferers, and anyone with grip challenges.",
-          "Visual before/after comparisons (effort before using the tool vs effortless opening) can be easily demonstrated and resonate well in ads.",
-          "Clear and simple messaging focusing on ease, safety, and pain relief."
+          "Strong clarity of problem and solution: prevents food waste from stale snacks",
+          "High impulse-buy likelihood as snacks and fresh food storage are common pain points",
+          "Visual before/after potential with sealed vs open bags is easy to demonstrate",
+          "Broad audience appeal including snack eaters and families with kids",
+          "Messaging is straightforward and focuses on saving money by keeping food fresh"
         ],
         "risks": [
-          "Potential buyers may underestimate the difficulty of their problem or overestimate their own strength, leading to lower conversion.",
-          "Some might perceive it as a niche or specialized product rather than an everyday necessity.",
-          "Competing solutions (other jar openers, DIY methods) might reduce urgency to buy."
+          "May face competition from lower-cost alternatives like clips or manual sealing methods",
+          "Some users might not see it as essential if they regularly consume snacks quickly"
         ],
-        "selectedAt": "2026-01-20T18:35:54.494Z",
+        "selectedAt": "2026-01-20T18:40:51.372Z",
         "selectedBy": "agent:product-selection-v1"
       },
       "testPlan": {
         "priority": 4,
         "angles": [
-          "Struggling with tight jar lids? Effortlessly open them without pain or injury.",
-          "Reduce pain and frustration in the kitchen—ideal for weak hands and arthritis sufferers.",
-          "Make your kitchen safer and easier to use with a simple tool that opens any jar."
+          "Stop wasting snacks to stale air—keep your chips and treats fresh longer with an easy sealer",
+          "Save money and reduce food waste by sealing your open snacks in seconds",
+          "Perfect for busy families: seal opened bags to maintain freshness and avoid waste"
         ],
         "variantsToGenerate": 3
       },
       "lifecycle": {
         "status": "queued",
-        "createdAt": "2026-01-20T18:35:54.494Z",
-        "expiresAt": "2026-02-03T18:35:54.494Z"
+        "createdAt": "2026-01-20T18:40:51.372Z",
+        "expiresAt": "2026-02-03T18:40:51.372Z"
       }
     }
   ]

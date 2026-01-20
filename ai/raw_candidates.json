@@ -6,10 +6,10 @@
   },
   "items": [
     {
-      "asin": "B0B672HBW9",
-      "baseAmazonUrl": "https://www.amazon.com/dp/B0B672HBW9",
+      "asin": "B08YZ5YF7M",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B08YZ5YF7M",
       "vertical": "home_kitchen",
-      "name": "Adjustable Kitchen Drawer Organizer",
+      "name": "Bamboo Drawer Organizer",
       "targetUser": "busy home cooks and parents",
       "keyProblem": "messy, cluttered kitchen drawers where utensils get tangled and lost",
       "hints": {
@@ -24,12 +24,12 @@
       }
     },
     {
-      "asin": "B081YHX2YB",
-      "baseAmazonUrl": "https://www.amazon.com/dp/B081YHX2YB",
+      "asin": "B07XJ8C8F5",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B07XJ8C8F5",
       "vertical": "home_kitchen",
-      "name": "Over-the-Cabinet Trash Bag Holder",
+      "name": "Over-the-Cabinet Door Organizer",
       "targetUser": "home cooks who want fast cleanup",
-      "keyProblem": "no easy way to hang trash bags while cooking, bags fall or get in the way",
+      "keyProblem": "no easy way to organize items on cabinet doors, wasted space",
       "hints": {
         "estimatedPrice": 13.99,
         "primeEligible": true,
@@ -42,10 +42,10 @@
       }
     },
     {
-      "asin": "B08TGF5XJW",
-      "baseAmazonUrl": "https://www.amazon.com/dp/B08TGF5XJW",
+      "asin": "B08N5WRWNW",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B08N5WRWNW",
       "vertical": "home_kitchen",
-      "name": "Portable Mini Bag Sealer",
+      "name": "Food Storage Bags Sealer",
       "targetUser": "snack eaters and families with kids",
       "keyProblem": "open food bags get stale quickly, wasting food and money",
       "hints": {
@@ -60,10 +60,10 @@
       }
     },
     {
-      "asin": "B09GJ1C4NK",
-      "baseAmazonUrl": "https://www.amazon.com/dp/B09GJ1C4NK",
+      "asin": "B07H8QMZPV",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B07H8QMZPV",
       "vertical": "home_kitchen",
-      "name": "Reusable Stretch Silicone Lids",
+      "name": "Reusable Silicone Food Storage Lids",
       "targetUser": "eco-conscious households and meal preppers",
       "keyProblem": "plastic wrap wastes money and creates trash, doesn't seal well",
       "hints": {
@@ -78,10 +78,10 @@
       }
     },
     {
-      "asin": "B087H6S8CH",
-      "baseAmazonUrl": "https://www.amazon.com/dp/B087H6S8CH",
+      "asin": "B07GJX5QYR",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B07GJX5QYR",
       "vertical": "home_kitchen",
-      "name": "Under Cabinet Jar Opener",
+      "name": "Jar Opener Tool",
       "targetUser": "people with weak grip, arthritis sufferers, seniors",
       "keyProblem": "tight jar lids are frustrating and painful to open, can cause injury",
       "hints": {
