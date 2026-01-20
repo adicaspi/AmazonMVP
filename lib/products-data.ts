@@ -24,20 +24,6 @@ export interface Product {
   dateAdded?: string;
 }
 
-// Unique high-quality images for each product
-const productImages = {
-  "bamboo-drawer-organizer": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95",
-  "silicone-food-storage-lids": "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=1200&fit=crop&q=95",
-  "jar-opener-tool": "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95",
-  "table-lamp-modern": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=1200&h=1200&fit=crop&q=95",
-  "storage-baskets-set": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95",
-  "throw-pillow-set": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95",
-  "wall-shelf-floating": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=1200&h=1200&fit=crop&q=95",
-  "bedside-organizer": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95",
-  "desk-organizer-set": "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=1200&fit=crop&q=95",
-  "bathroom-storage-caddy": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95",
-};
-
 export const products: Product[] = [
   {
     id: "1",
@@ -313,7 +299,7 @@ export const products: Product[] = [
     room: "office",
     tags: ["organization", "office", "desk-accessories", "storage"],
     shortDescription: "Keep your workspace tidy with this comprehensive organizer set.",
-    image: "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=1200&fit=crop&q=95",
+    image: "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08PQR1234?tag=aipicks-20",
     highlights: [
       "Multiple compartments",
