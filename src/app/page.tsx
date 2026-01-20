@@ -1,8 +1,8 @@
 import { getAllProducts } from "@/lib/products";
 import Link from "next/link";
 
-export default function HomePage() {
-  const products = getAllProducts();
+export default async function HomePage() {
+  const products = await getAllProducts();
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-50">

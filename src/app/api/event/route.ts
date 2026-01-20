@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { supabase, isDatabaseAvailable } from "@/lib/db";
 import fs from "fs/promises";
 import path from "path";
 
@@ -22,7 +23,44 @@ type Event = {
 
 const EVENTS_FILE = path.join(process.cwd(), "data", "events.json");
 
+// Transform database row to Event type
+function transformDbRow(row: any): Event {
+  return {
+    id: row.id,
+    timestamp: row.timestamp,
+    type: row.type,
+    productId: row.product_id || undefined,
+    slug: row.slug || undefined,
+    offerId: row.offer_id || undefined,
+    utm_source: row.utm_source || undefined,
+    utm_medium: row.utm_medium || undefined,
+    utm_campaign: row.utm_campaign || undefined,
+    utm_content: row.utm_content || undefined,
+    userAgent: row.user_agent || undefined,
+    ip: row.ip || undefined,
+    referer: row.referer || undefined,
+  };
+}
+
 async function readEvents(): Promise<Event[]> {
+  // Try database first
+  if (supabase && (await isDatabaseAvailable())) {
+    try {
+      const { data, error } = await supabase
+        .from("events")
+        .select("*")
+        .order("timestamp", { ascending: false })
+        .limit(10000);
+
+      if (!error && data) {
+        return data.map(transformDbRow);
+      }
+    } catch (error) {
+      console.warn("Failed to read events from database, using JSON fallback:", error);
+    }
+  }
+
+  // Fallback to JSON
   try {
     const content = await fs.readFile(EVENTS_FILE, "utf8");
     return JSON.parse(content);
@@ -32,6 +70,34 @@ async function readEvents(): Promise<Event[]> {
 }
 
 async function writeEvent(event: Event): Promise<void> {
+  // Try database first
+  if (supabase && (await isDatabaseAvailable())) {
+    try {
+      const { error } = await supabase.from("events").insert({
+        id: event.id,
+        timestamp: event.timestamp,
+        type: event.type,
+        product_id: event.productId || null,
+        slug: event.slug || null,
+        offer_id: event.offerId || null,
+        utm_source: event.utm_source || null,
+        utm_medium: event.utm_medium || null,
+        utm_campaign: event.utm_campaign || null,
+        utm_content: event.utm_content || null,
+        user_agent: event.userAgent || null,
+        ip: event.ip || null,
+        referer: event.referer || null,
+      });
+
+      if (!error) {
+        return; // Successfully written to database
+      }
+    } catch (error) {
+      console.warn("Failed to write event to database, using JSON fallback:", error);
+    }
+  }
+
+  // Fallback to JSON
   const events = await readEvents();
   events.push(event);
   
@@ -107,11 +173,11 @@ export async function GET(request: NextRequest) {
     }
 
     // Filter by type if provided
-    if (type) {
+    if (type && ["view", "click", "conversion"].includes(type)) {
       events = events.filter((e) => e.type === type);
     }
 
-    // Return most recent events
+    // Return most recent events (already sorted by readEvents if from database)
     const sorted = events.sort(
       (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
     );

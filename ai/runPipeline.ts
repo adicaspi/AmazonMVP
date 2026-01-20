@@ -5,6 +5,7 @@ dotenv.config({ path: ".env.local" });
 import OpenAI from "openai";
 import fs from "fs/promises";
 import path from "path";
+import { supabase, isDatabaseAvailable } from "../lib/db";
 
 // ---------- Types ----------
 
@@ -223,13 +224,29 @@ const candidates = normalizeCandidates(candidatesRaw);
     return;
   }
 
-  const products = await readJsonFile<Product[]>("data/products.json", []);
+  // Check existing products (from database or JSON)
+  let existingProducts: Product[] = [];
+  if (supabase && (await isDatabaseAvailable())) {
+    try {
+      const { data, error } = await supabase.from("products").select("id");
+      if (!error && data) {
+        existingProducts = data.map((row) => ({ id: row.id } as Product));
+      }
+    } catch (error) {
+      console.warn("Failed to check database, using JSON fallback:", error);
+      existingProducts = await readJsonFile<Product[]>("data/products.json", []);
+    }
+  } else {
+    existingProducts = await readJsonFile<Product[]>("data/products.json", []);
+  }
+
+  const newProducts: Product[] = [];
 
   for (const c of candidates) {
     if (!c || !c.id) continue;
 
-    if (products.some((p) => p.id === c.id)) {
-      console.log(`Skipping ${c.id} (already exists in data/products.json)`);
+    if (existingProducts.some((p) => p.id === c.id)) {
+      console.log(`Skipping ${c.id} (already exists)`);
       continue;
     }
 
@@ -266,12 +283,51 @@ const candidates = normalizeCandidates(candidatesRaw);
       status: "testing",
     };
 
-    products.push(fullProduct);
+    newProducts.push(fullProduct);
     console.log(`Added product: ${c.slug}`);
   }
 
-  await writeJsonFile("data/products.json", products);
-  console.log(`\nUpdated data/products.json with ${products.length} product(s).`);
+  // Write to database or JSON
+  if (supabase && (await isDatabaseAvailable()) && newProducts.length > 0) {
+    try {
+      const dbRows = newProducts.map((p) => ({
+        id: p.id,
+        slug: p.slug,
+        vertical: p.vertical,
+        name: p.name,
+        angle: p.angle || null,
+        short_description: p.shortDescription,
+        hero_image: p.heroImage || null,
+        price_note: p.priceNote || null,
+        amazon_url: p.amazon.url,
+        amazon_tracking_id: p.amazon.trackingId,
+        headline: p.content.headline,
+        subheadline: p.content.subheadline,
+        pain_bullets: p.content.painBullets,
+        how_it_works: p.content.howItWorks,
+        who_its_for: p.content.whoItsFor,
+        who_its_not_for: p.content.whoItsNotFor,
+        cta_text: p.content.ctaText,
+        faq: p.content.faq,
+        affiliate_disclosure: p.disclosures.affiliate,
+        status: p.status,
+      }));
+
+      const { error } = await supabase.from("products").insert(dbRows);
+      if (error) throw error;
+
+      console.log(`\n✅ Saved ${newProducts.length} product(s) to database.`);
+    } catch (error) {
+      console.error("Failed to save to database, using JSON fallback:", error);
+      const allProducts = [...existingProducts, ...newProducts];
+      await writeJsonFile("data/products.json", allProducts);
+      console.log(`\nUpdated data/products.json with ${allProducts.length} product(s).`);
+    }
+  } else {
+    const allProducts = [...existingProducts, ...newProducts];
+    await writeJsonFile("data/products.json", allProducts);
+    console.log(`\nUpdated data/products.json with ${allProducts.length} product(s).`);
+  }
 }
 
 main().catch((err) => {

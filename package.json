@@ -9,9 +9,11 @@
     "lint": "next lint",
     "ai:select": "tsx ai/runSelection.ts",
     "ai:pipeline": "tsx ai/runPipeline.ts",
-    "ai:creatives": "tsx ai/runCreativeGenerator.ts"
+    "ai:creatives": "tsx ai/runCreativeGenerator.ts",
+    "migrate:json-to-db": "tsx scripts/migrate-json-to-db.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.90.1",
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"

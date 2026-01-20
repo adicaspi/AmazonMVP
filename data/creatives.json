@@ -1,1 +1,457 @@
-[]
+[
+  {
+    "productId": "drawer-org-001",
+    "productName": "Expandable Kitchen Drawer Organizer",
+    "angles": [
+      {
+        "angle": "Before/After",
+        "hook": "Your kitchen drawer doesn't have to be a mess every time.",
+        "primaryText": "Stop digging through sliding utensils. Our expandable organizer keeps everything neatly in place, saving you time and frustration.",
+        "shotList": [
+          "Close-up of messy drawer with utensils sliding",
+          "Hand installing the expandable organizer",
+          "Wide shot of tidy drawer with utensils perfectly separated"
+        ],
+        "targetAudience": "Home cooks tired of cluttered drawers",
+        "emotionalTrigger": "Relief from daily annoyance"
+      },
+      {
+        "angle": "Problem → Relief",
+        "hook": "Tired of noisy utensil drawers swinging open and causing chaos?",
+        "primaryText": "Prevent your kitchen utensils from sliding and clanking around. The expandable organizer secures every item for a quieter, cleaner kitchen moment.",
+        "shotList": [
+          "Drawer opening with utensils clattering loudly",
+          "Close-up of hands placing organizer into drawer",
+          "Quiet, smooth drawer opening with organized utensils inside"
+        ],
+        "targetAudience": "Home cooks wanting a quieter kitchen experience",
+        "emotionalTrigger": "Calm and order"
+      },
+      {
+        "angle": "\"Didn't Know This Existed\"",
+        "hook": "Say goodbye to utensil chaos — This simple organizer will change your kitchen game.",
+        "primaryText": "Expandable to fit any drawer size, it holds your utensils tightly so you always grab what you need without the mess.",
+        "shotList": [
+          "Drawer jammed with utensils sliding around",
+          "Unboxing the expandable kitchen drawer organizer",
+          "Hands expanding the organizer to fit the drawer perfectly"
+        ],
+        "targetAudience": "Home cooks unfamiliar with drawer organization tools",
+        "emotionalTrigger": "Surprise and curiosity"
+      },
+      {
+        "angle": "Time-saving",
+        "hook": "How many minutes do you waste digging for the right utensil?",
+        "primaryText": "Our expandable organizer sorts your utensils instantly — every tool has its place, so you cook faster, stress-free.",
+        "shotList": [
+          "Frustrated cook searching through disorganized utensil drawer",
+          "Organizing utensils into the expandable organizer",
+          "Quickly grabbing desired utensil from an organized drawer"
+        ],
+        "targetAudience": "Busy home cooks needing to save time",
+        "emotionalTrigger": "Efficiency and relief"
+      },
+      {
+        "angle": "Visual transformation",
+        "hook": "Watch this drawer transform from chaos to calm in seconds.",
+        "primaryText": "Slide out your utensil drawer and see the difference our expandable organizer makes — no more clutter, just clean order.",
+        "shotList": [
+          "Top-down shot of a cluttered utensil drawer",
+          "Hands placing and adjusting the expandable organizer inside",
+          "Smooth pan over perfectly arranged utensils in the drawer"
+        ],
+        "targetAudience": "Visual thinkers and organized home cooks",
+        "emotionalTrigger": "Satisfaction from neatness"
+      },
+      {
+        "angle": "Pain point focus",
+        "hook": "Frustrated with utensils slipping and mixing every single time?",
+        "primaryText": "This expandable organizer stops utensils from sliding around. Finally, a drawer that stays organized no matter how often you open it.",
+        "shotList": [
+          "Close-up of utensils sliding as drawer opens",
+          "Hands installing the expandable divider system",
+          "Close-up of stable, neatly sectioned utensils in the drawer"
+        ],
+        "targetAudience": "Home cooks annoyed by utensil clutter",
+        "emotionalTrigger": "Comfort and relief"
+      },
+      {
+        "angle": "Minimal effort, maximum order",
+        "hook": "Organize your drawer in under a minute — no tools needed.",
+        "primaryText": "Simply expand and place. Our organizer fits any drawer size and keeps utensils separated effortlessly.",
+        "shotList": [
+          "Hand pulling out messy utensil drawer",
+          "Expanding and placing the organizer inside the drawer",
+          "Close-up of utensils neatly sorted without any additional tools"
+        ],
+        "targetAudience": "Home cooks wanting quick, easy organization solutions",
+        "emotionalTrigger": "Simplicity and accomplishment"
+      }
+    ],
+    "generatedAt": "2026-01-20T08:36:00.353Z"
+  },
+  {
+    "productId": "drawer-org-002",
+    "productName": "Adjustable Kitchen Drawer Organizer",
+    "angles": [
+      {
+        "angle": "Before/After",
+        "hook": "Tired of fishing for spoons in a messy drawer?",
+        "primaryText": "Say goodbye to sliding utensils and hello to quick access with this adjustable kitchen drawer organizer. Everything stays neatly in place, so your cooking flow never stops.",
+        "shotList": [
+          "Close-up of a drawer opened to reveal scattered utensils",
+          "Hand inserting adjustable dividers into the drawer",
+          "Wide shot of neatly organized utensils aligned perfectly"
+        ],
+        "targetAudience": "Busy home cooks frustrated by cluttered utensil drawers",
+        "emotionalTrigger": "Satisfaction of order and ease"
+      },
+      {
+        "angle": "Problem → Relief",
+        "hook": "Does your utensil drawer look like an avalanche every time you open it?",
+        "primaryText": "This adjustable organizer keeps utensils from sliding and shifting, so you can grab what you need without the mess or hassle.",
+        "shotList": [
+          "Drawer opening with utensils shifting out of place",
+          "Close-up of hand adjusting the organizer's segments",
+          "Smooth opening of drawer with all utensils perfectly in place"
+        ],
+        "targetAudience": "Home cooks annoyed by disorganized kitchen drawers",
+        "emotionalTrigger": "Calm and control in the kitchen"
+      },
+      {
+        "angle": "Didn't know this existed",
+        "hook": "Imagine a drawer where every spoon, fork, and knife has its own spot.",
+        "primaryText": "Adjustable to fit any drawer size, this kitchen organizer transforms cluttered chaos into streamlined order. Once you try it, you'll wonder how you lived without it.",
+        "shotList": [
+          "Hand holding messy utensils over empty drawer",
+          "Installing adjustable organizer sliders",
+          "Perfectly arranged utensils occupying every slot"
+        ],
+        "targetAudience": "Home cooks open to kitchen organization upgrades",
+        "emotionalTrigger": "Surprise and curiosity"
+      },
+      {
+        "angle": "Time-saving",
+        "hook": "Stop wasting time digging through jumbled utensils.",
+        "primaryText": "Find what you need instantly. This adjustable organizer keeps your kitchen tools perfectly separated and within easy reach, so your meal prep moves faster.",
+        "shotList": [
+          "Frustrated cook searching disorganized drawer",
+          "Quick snap of adjustable organizer being inserted",
+          "Fast, confident retrieval of desired utensil from neat drawer"
+        ],
+        "targetAudience": "Busy cooks needing efficient kitchen tools",
+        "emotionalTrigger": "Efficiency and accomplishment"
+      },
+      {
+        "angle": "Visual transformation",
+        "hook": "Watch this chaotic drawer turn spotless in seconds.",
+        "primaryText": "With adjustable sections designed to fit your utensils, this organizer instantly converts clutter into calm, simplifying every cooking task.",
+        "shotList": [
+          "Overhead shot of a cluttered utensil drawer",
+          "Fast-motion footage installing the adjustable divider",
+          "Overhead shot of an impeccably tidy drawer"
+        ],
+        "targetAudience": "Visual learners and organizers",
+        "emotionalTrigger": "Pleasure from visual order"
+      },
+      {
+        "angle": "Pain point focus",
+        "hook": "Utensils sliding and crashing every time the drawer opens?",
+        "primaryText": "Stop the mess and noise. This adjustable organizer absorbs movement and keeps every item secured so you can focus on cooking instead of cleanup.",
+        "shotList": [
+          "Drawer opening with noisy utensil clatter",
+          "Close-up of organizer locking utensils in place",
+          "Quiet drawer opening with stable utensils"
+        ],
+        "targetAudience": "Cooks frustrated by utensil noise and mess",
+        "emotionalTrigger": "Peace and stability"
+      }
+    ],
+    "generatedAt": "2026-01-20T08:36:20.216Z"
+  },
+  {
+    "productId": "asin-b0b672hbw9-v1",
+    "productName": "Adjustable Kitchen Drawer Organizer",
+    "angles": [
+      {
+        "angle": "Before/After",
+        "hook": "Tired of digging through a utensil jungle?",
+        "primaryText": "Stop wasting time searching for the right tool. Our adjustable kitchen drawer organizer keeps everything neatly in place so you can focus on cooking.",
+        "shotList": [
+          "Close-up of messy drawer with utensils tangled",
+          "Hand installing adjustable organizer",
+          "Wide shot of neat drawer where each utensil has its own section"
+        ],
+        "targetAudience": "Busy home cooks frustrated with disorganized drawers",
+        "emotionalTrigger": "Relief and calm from chaos"
+      },
+      {
+        "angle": "Problem → Relief",
+        "hook": "Can't find the right knife or spoon in a flash?",
+        "primaryText": "When cooking gets hectic, every second counts. Use our adjustable drawer organizer to instantly locate your tools and keep your flow.",
+        "shotList": [
+          "Frustrated cook rummaging through drawer",
+          "Quick adjustment of organizer dividers",
+          "Cook smoothly grabbing correct utensil with a smile"
+        ],
+        "targetAudience": "Multitasking home cooks needing quick access",
+        "emotionalTrigger": "Efficiency and confidence"
+      },
+      {
+        "angle": "Didn’t know this existed",
+        "hook": "This simple organizer will change how you use your kitchen drawer.",
+        "primaryText": "Discover a customizable drawer organizer that adapts to your utensils and kitchen tools, finally ending the mess.",
+        "shotList": [
+          "Drawer opened with cluttered utensils",
+          "Close-up on adjustable divider mechanism",
+          "Organized drawer with easy access to tools"
+        ],
+        "targetAudience": "Home cooks open to organizing solutions",
+        "emotionalTrigger": "Curiosity and excitement"
+      },
+      {
+        "angle": "Time-saving",
+        "hook": "Stop wasting minutes looking for kitchen tools.",
+        "primaryText": "Our adjustable organizer streamlines your drawer so you spend less time digging and more time cooking delicious meals.",
+        "shotList": [
+          "Clock showing time passing as person searches drawer",
+          "Installation of organizer in seconds",
+          "Cook grabbing utensils immediately and cooking with ease"
+        ],
+        "targetAudience": "Busy cooks juggling multiple meal prep tasks",
+        "emotionalTrigger": "Time saved and reduced stress"
+      },
+      {
+        "angle": "Visual Transformation",
+        "hook": "From chaos to calm in your kitchen drawer.",
+        "primaryText": "Watch your drawers transform from cluttered messes into beautifully organized spaces you’ll enjoy opening.",
+        "shotList": [
+          "Overhead shot of disorganized drawer",
+          "Slow-motion shot of organizer being adjusted inside",
+          "Brightly-lit shot of perfectly tidy drawer with utensils aligned"
+        ],
+        "targetAudience": "Visual thinkers who appreciate order",
+        "emotionalTrigger": "Satisfaction and inspiration"
+      },
+      {
+        "angle": "Pain Point Focus",
+        "hook": "Utensils sliding and clanking every time you open the drawer?",
+        "primaryText": "Avoid frustrating noise and constant shifting — our adjustable organizer secures everything tightly so your tools stay where they belong.",
+        "shotList": [
+          "Drawer opening with noisy sliding utensils",
+          "Person adjusting dividers snugly around utensils",
+          "Drawer opening silently with utensils perfectly in place"
+        ],
+        "targetAudience": "Home cooks annoyed by messy drawers and noise",
+        "emotionalTrigger": "Peace and control"
+      },
+      {
+        "angle": "Multi-tasking Helper",
+        "hook": "Juggling several dishes and losing your tools?",
+        "primaryText": "Stay focused and organized with an adjustable drawer organizer that keeps all your cooking tools ready and easy to find.",
+        "shotList": [
+          "Cook handling multiple pots on stove looking stressed",
+          "Hand quickly grabbing utensil from organized drawer",
+          "Cook relieved and smiling, effortlessly continuing cooking"
+        ],
+        "targetAudience": "Busy cooks managing complex meal prep",
+        "emotionalTrigger": "Calm and empowerment"
+      }
+    ],
+    "generatedAt": "2026-01-20T08:36:33.427Z"
+  },
+  {
+    "productId": "asin-b0b672hbw9-v2",
+    "productName": "Adjustable Kitchen Drawer Organizer",
+    "angles": [
+      {
+        "angle": "Before/After",
+        "hook": "This is what your kitchen drawer looks like right now.",
+        "primaryText": "Stop wasting time digging through cluttered drawers. Our adjustable organizer transforms chaos into order, making meal prep quicker and stress-free.",
+        "shotList": [
+          "Close-up of a cluttered, messy kitchen drawer with utensils scattered",
+          "Hand sliding the adjustable organizer into the drawer",
+          "Wide shot of perfectly organized drawer with utensils neatly separated"
+        ],
+        "targetAudience": "Busy home cooks tired of clutter slowing them down",
+        "emotionalTrigger": "Satisfaction and efficiency"
+      },
+      {
+        "angle": "Problem → Relief",
+        "hook": "Frustrated by tools hiding in your drawer when you need them most?",
+        "primaryText": "Our adjustable organizer gives every utensil a home. No more flipping through piles—just grab and go to speed up your cooking.",
+        "shotList": [
+          "Tired cook searching through a messy drawer, looking frustrated",
+          "Hand adjusting organizer compartments easily",
+          "Cook happily grabbing the right utensil instantly from neat compartments"
+        ],
+        "targetAudience": "Home cooks aiming to simplify meal prep",
+        "emotionalTrigger": "Calm and control"
+      },
+      {
+        "angle": "Didn't Know This Existed",
+        "hook": "Wish your drawer could actually fit all your utensils perfectly?",
+        "primaryText": "Discover the organizer that adjusts to your needs—custom compartments mean no more wasted space or clutter.",
+        "shotList": [
+          "Zoom on overflowing drawer with mismatched utensils",
+          "Demonstration of extending and adjusting the organizer's compartments",
+          "A fully utilized drawer showing every spoon, fork, and knife in place"
+        ],
+        "targetAudience": "Kitchen enthusiasts looking for smarter storage",
+        "emotionalTrigger": "Surprise and satisfaction"
+      },
+      {
+        "angle": "Time-saving",
+        "hook": "How much time do you waste searching for the right utensil?",
+        "primaryText": "Save minutes every meal by organizing your drawer with adjustable sections, so everything is exactly where it should be.",
+        "shotList": [
+          "Stopwatch overlay with a frustrated cook searching frantically",
+          "Someone adjusting drawer organizer compartments",
+          "Cook smoothly pulling out the exact utensil without hesitation"
+        ],
+        "targetAudience": "Busy home cooks pressed for time",
+        "emotionalTrigger": "Efficiency and relief"
+      },
+      {
+        "angle": "Visual Transformation",
+        "hook": "Transform your cluttered kitchen drawer with just one simple change.",
+        "primaryText": "Watch dull, chaotic utensils turn into a neat, easy-to-navigate system with our adjustable organizer.",
+        "shotList": [
+          "Fast-motion video of disorganized drawer",
+          "Hands fitting and adjusting compartments in slow-motion",
+          "Final shot of bright, clean, organized drawer in well-lit kitchen"
+        ],
+        "targetAudience": "Visual learners and organization lovers",
+        "emotionalTrigger": "Inspiration and motivation"
+      },
+      {
+        "angle": "Pain Point Focus",
+        "hook": "Sick of your drawer turning into a utensil graveyard?",
+        "primaryText": "Avoid scratched spoons, bent knives, and lost gadgets with an organizer tailored to fit every shape and size.",
+        "shotList": [
+          "Close-up of scratched and mismatched utensils piled on top of each other",
+          "Hands sliding adjustable dividers to custom fit the drawer",
+          "Close-up of carefully separated utensils in the organizer"
+        ],
+        "targetAudience": "Cooks frustrated with utensil damage and clutter",
+        "emotionalTrigger": "Protection and care"
+      },
+      {
+        "angle": "Multi-use Flexibility",
+        "hook": "One organizer, endless possibilities—customized to your kitchen needs.",
+        "primaryText": "Whether forks, knives, or odd-shaped utensils, this adjustable organizer flexes to fit your unique collection and change anytime.",
+        "shotList": [
+          "Wide shot of various unusual kitchen tools scattered in a drawer",
+          "Hand adjusting compartments to different sizes",
+          "Close-up of neatly arranged tools, including odd shapes, in organizer"
+        ],
+        "targetAudience": "Home cooks with diverse and growing utensil collections",
+        "emotionalTrigger": "Adaptability and ease"
+      },
+      {
+        "angle": "Gift for Yourself",
+        "hook": "Give your kitchen a little TLC with an organizer that works for you.",
+        "primaryText": "Invest in yourself and your cooking flow by keeping every utensil easily accessible and perfectly stored.",
+        "shotList": [
+          "Person smiling while opening their tidy kitchen drawer",
+          "Close-up of hand sliding open adjustable compartments",
+          "Cook immediately grabbing a utensil and starting to prepare a meal"
+        ],
+        "targetAudience": "Home cooks who appreciate smart kitchen upgrades",
+        "emotionalTrigger": "Self-care and empowerment"
+      }
+    ],
+    "generatedAt": "2026-01-20T08:36:48.542Z"
+  },
+  {
+    "productId": "asin-b0b672hbw9-v3",
+    "productName": "Adjustable Kitchen Drawer Organizer",
+    "angles": [
+      {
+        "angle": "Before/After",
+        "hook": "This was my kitchen drawer before.",
+        "primaryText": "Tired of hunting for utensils during dinner rush? See how an adjustable organizer turns chaos into calm in seconds.",
+        "shotList": [
+          "Close-up of messy drawer with jumbled utensils",
+          "Hand installing adjustable organizer",
+          "Wide shot of neat, compartmentalized drawer with utensils sorted"
+        ],
+        "targetAudience": "Busy parents overwhelmed by hectic kitchen moments",
+        "emotionalTrigger": "Satisfaction seeing order restored quickly"
+      },
+      {
+        "angle": "Problem → Relief",
+        "hook": "Stop wasting precious meal prep time digging for tools.",
+        "primaryText": "Designed for parents balancing busy schedules, this organizer keeps your utensils visible and reachable, so you can finish meals faster and stress-free.",
+        "shotList": [
+          "Frustrated parent searching in a cluttered drawer",
+          "Hand smoothly sliding out organizer with everything in place",
+          "Parent smiling while cooking efficiently"
+        ],
+        "targetAudience": "Parents pressed for time who need efficiency in the kitchen",
+        "emotionalTrigger": "Relief from mealtime stress"
+      },
+      {
+        "angle": "Didn't know this existed",
+        "hook": "You’ve never seen a drawer organizer like this before.",
+        "primaryText": "Adjustable compartments mean no utensil is too big or small. Finally, a solution that adapts to your kitchen’s unique needs.",
+        "shotList": [
+          "Close-up showing adjustable sections being reconfigured",
+          "Utensils of various sizes fitting perfectly in compartments",
+          "Hand closing drawer smoothly with a satisfied nod"
+        ],
+        "targetAudience": "Parents looking for smart, practical kitchen solutions",
+        "emotionalTrigger": "Curiosity and delight discovering a new, useful tool"
+      },
+      {
+        "angle": "Time-saving",
+        "hook": "Save minutes on every meal prep with one simple change.",
+        "primaryText": "Maximize your kitchen’s workflow with an organizer that quickly shows you where everything is. Perfect for busy parents juggling multiple tasks.",
+        "shotList": [
+          "Busy parent checking watch as they search drawer hastily",
+          "Timer graphic illustrating time saved when using the organizer",
+          "Parent effortlessly grabbing the right utensil from the organized drawer"
+        ],
+        "targetAudience": "Parents seeking time-efficient kitchen hacks",
+        "emotionalTrigger": "Empowerment through time saved"
+      },
+      {
+        "angle": "Visual transformation",
+        "hook": "From disaster zone to drawer zen in under 30 seconds.",
+        "primaryText": "Transform your kitchen chaos into organized calm with fully adjustable compartments that fit every utensil perfectly.",
+        "shotList": [
+          "Wide shot of cluttered kitchen drawer",
+          "Fast motion montage of removing items and installing organizer",
+          "Slow reveal of perfectly ordered drawer with matching utensils"
+        ],
+        "targetAudience": "Parents wanting an easy visual upgrade for their kitchens",
+        "emotionalTrigger": "Awe and satisfaction from a stunning before & after"
+      },
+      {
+        "angle": "Pain point focus",
+        "hook": "Still struggling to find a kid’s spoon during dinner?",
+        "primaryText": "This adjustable organizer gives every utensil its own spot, cutting mealtime tension and making life easier for busy families.",
+        "shotList": [
+          "Parent frustrated searching drawer with restless child nearby",
+          "Close-up on child’s spoon neatly placed in smaller organizer section",
+          "Parent handing the spoon to child with a smile"
+        ],
+        "targetAudience": "Parents dealing with mealtime stress and clutter",
+        "emotionalTrigger": "Relief and ease from reducing family chaos"
+      },
+      {
+        "angle": "Multi-use flexibility",
+        "hook": "One organizer, endless possibilities.",
+        "primaryText": "Customize the layout to fit every utensil, gadget, or tool. It’s more than just a drawer organizer—it’s your kitchen’s new best friend.",
+        "shotList": [
+          "Hands rearranging compartments to fit different utensils",
+          "Drawer showcasing kitchen tools, gadgets, and utensils organized differently",
+          "Parent happily using the drawer for various cooking tasks"
+        ],
+        "targetAudience": "Parents wanting versatile kitchen solutions that evolve",
+        "emotionalTrigger": "Confidence in a product that adapts to changing needs"
+      }
+    ],
+    "generatedAt": "2026-01-20T08:37:04.817Z"
+  }
+]

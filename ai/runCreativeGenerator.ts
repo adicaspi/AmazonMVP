@@ -5,6 +5,7 @@ dotenv.config({ path: ".env.local" });
 import fs from "fs/promises";
 import path from "path";
 import { generateCreativeAngles, type CreativeAngles } from "./creativeAngleAgent";
+import { supabase, isDatabaseAvailable } from "../lib/db";
 
 type Product = {
   id: string;
@@ -20,6 +21,24 @@ type Product = {
 const CREATIVES_FILE = path.join(process.cwd(), "data", "creatives.json");
 
 async function readCreatives(): Promise<CreativeAngles[]> {
+  // Try database first
+  if (supabase && (await isDatabaseAvailable())) {
+    try {
+      const { data, error } = await supabase.from("creatives").select("*");
+      if (!error && data) {
+        return data.map((row) => ({
+          productId: row.product_id,
+          productName: row.product_name,
+          angles: row.angles || [],
+          generatedAt: row.generated_at,
+        }));
+      }
+    } catch (error) {
+      console.warn("Failed to read creatives from database, using JSON fallback:", error);
+    }
+  }
+
+  // Fallback to JSON
   try {
     const content = await fs.readFile(CREATIVES_FILE, "utf8");
     return JSON.parse(content);
@@ -29,14 +48,73 @@ async function readCreatives(): Promise<CreativeAngles[]> {
 }
 
 async function writeCreatives(creatives: CreativeAngles[]): Promise<void> {
+  // Try database first
+  if (supabase && (await isDatabaseAvailable()) && creatives.length > 0) {
+    try {
+      const dbRows = creatives.map((c) => ({
+        product_id: c.productId,
+        product_name: c.productName,
+        angles: c.angles,
+        generated_at: c.generatedAt,
+      }));
+
+      // Use upsert to handle existing records
+      const { error } = await supabase.from("creatives").upsert(dbRows, {
+        onConflict: "product_id",
+      });
+
+      if (!error) {
+        return; // Successfully written to database
+      }
+    } catch (error) {
+      console.warn("Failed to write creatives to database, using JSON fallback:", error);
+    }
+  }
+
+  // Fallback to JSON
   await fs.writeFile(CREATIVES_FILE, JSON.stringify(creatives, null, 2), "utf8");
 }
 
 async function readProducts(): Promise<Product[]> {
+  // Try database first
+  if (supabase && (await isDatabaseAvailable())) {
+    try {
+      const { data, error } = await supabase
+        .from("products")
+        .select("id, slug, name, angle, pain_bullets, who_its_for");
+
+      if (!error && data) {
+        return data.map((row) => ({
+          id: row.id,
+          slug: row.slug,
+          name: row.name,
+          angle: row.angle || undefined,
+          content: {
+            painBullets: row.pain_bullets || [],
+            whoItsFor: row.who_its_for || [],
+          },
+        }));
+      }
+    } catch (error) {
+      console.warn("Failed to read products from database, using JSON fallback:", error);
+    }
+  }
+
+  // Fallback to JSON
   try {
     const productsFile = path.join(process.cwd(), "data", "products.json");
     const content = await fs.readFile(productsFile, "utf8");
-    return JSON.parse(content);
+    const products = JSON.parse(content);
+    return products.map((p: any) => ({
+      id: p.id,
+      slug: p.slug,
+      name: p.name,
+      angle: p.angle,
+      content: {
+        painBullets: p.content?.painBullets || [],
+        whoItsFor: p.content?.whoItsFor || [],
+      },
+    }));
   } catch {
     return [];
   }

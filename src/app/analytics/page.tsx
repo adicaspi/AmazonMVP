@@ -39,7 +39,7 @@ async function getEvents(): Promise<Event[]> {
   }
 }
 
-function calculateMetrics(events: Event[], products: ReturnType<typeof getAllProducts>): ProductMetrics[] {
+function calculateMetrics(events: Event[], products: Awaited<ReturnType<typeof getAllProducts>>): ProductMetrics[] {
   const metricsMap = new Map<string, ProductMetrics>();
 
   // Initialize metrics for all products
@@ -97,7 +97,7 @@ function groupByBaseProduct(metrics: ProductMetrics[]): Map<string, ProductMetri
 
 export default async function AnalyticsPage() {
   const events = await getEvents();
-  const products = getAllProducts();
+  const products = await getAllProducts();
   const metrics = calculateMetrics(events, products);
   const grouped = groupByBaseProduct(metrics);
 

@@ -10,7 +10,7 @@ export async function GET(
   const { offerId } = await params;
   
   // Get product by ID
-  const product = getOfferById(offerId);
+  const product = await getOfferById(offerId);
 
   if (!product) {
     return NextResponse.redirect(new URL("/", request.url));
