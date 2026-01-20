@@ -67,7 +67,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Back link */}
         <Link
           href="/"
-          className="group inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-all duration-200"
+          className="group inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all duration-200 font-medium"
         >
           <span className="group-hover:-translate-x-1 transition-transform duration-200">←</span>
           <span>Back to all products</span>
@@ -121,17 +121,17 @@ export default async function ProductPage({ params }: Props) {
 
         {/* How It Works */}
         <section className="space-y-6">
-          <h2 className="text-3xl font-bold">How It Works</h2>
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-50">How It Works</h2>
           <ol className="space-y-4">
             {product.content.howItWorks.map((step, idx) => (
               <li
                 key={idx}
-                className="flex items-start gap-6 p-5 rounded-xl bg-slate-900/40 border border-slate-800/50 hover:bg-slate-900/60 transition-all duration-200 group"
+                className="flex items-start gap-6 p-5 rounded-xl bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-900/60 hover:shadow-md transition-all duration-200 group"
               >
-                <span className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 border border-blue-400/30 flex items-center justify-center text-sm font-bold text-white shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-200">
+                <span className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-slate-700 to-slate-800 dark:from-slate-600 dark:to-slate-700 border border-slate-300 dark:border-slate-600 flex items-center justify-center text-sm font-bold text-white shadow-md group-hover:scale-110 transition-transform duration-200">
                   {idx + 1}
                 </span>
-                <span className="text-base text-slate-200 leading-relaxed pt-1.5">{step}</span>
+                <span className="text-base text-slate-700 dark:text-slate-200 leading-relaxed pt-1.5 font-medium">{step}</span>
               </li>
             ))}
           </ol>
@@ -139,39 +139,39 @@ export default async function ProductPage({ params }: Props) {
 
         {/* Who It's For / Not For */}
         <div className="grid md:grid-cols-2 gap-6">
-          <section className="space-y-4 p-6 rounded-2xl bg-green-950/10 border border-green-900/20">
-            <h2 className="text-2xl font-bold flex items-center gap-2">
-              <span className="text-green-400">✓</span>
+          <section className="space-y-4 p-6 rounded-xl bg-green-50 dark:bg-green-950/10 border border-green-200 dark:border-green-900/20 shadow-sm">
+            <h2 className="text-2xl font-bold flex items-center gap-2 text-slate-900 dark:text-slate-50">
+              <span className="text-green-600 dark:text-green-400">✓</span>
               Who It's For
             </h2>
             <ul className="space-y-3">
               {product.content.whoItsFor.map((item, idx) => (
                 <li
                   key={idx}
-                  className="flex items-start gap-3 text-slate-200"
+                  className="flex items-start gap-3 text-slate-700 dark:text-slate-200"
                 >
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center mt-0.5">
-                    <span className="text-green-400 text-xs">✓</span>
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 dark:bg-green-500/20 border border-green-300 dark:border-green-500/30 flex items-center justify-center mt-0.5">
+                    <span className="text-green-600 dark:text-green-400 text-xs font-bold">✓</span>
                   </span>
-                  <span className="text-sm leading-relaxed">{item}</span>
+                  <span className="text-sm leading-relaxed font-medium">{item}</span>
                 </li>
               ))}
             </ul>
           </section>
 
-          <section className="space-y-4 p-6 rounded-2xl bg-slate-900/40 border border-slate-800/50">
-            <h2 className="text-2xl font-bold flex items-center gap-2">
-              <span className="text-slate-500">✗</span>
+          <section className="space-y-4 p-6 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/50 shadow-sm">
+            <h2 className="text-2xl font-bold flex items-center gap-2 text-slate-900 dark:text-slate-50">
+              <span className="text-slate-500 dark:text-slate-400">✗</span>
               Who It's Not For
             </h2>
             <ul className="space-y-3">
               {product.content.whoItsNotFor.map((item, idx) => (
                 <li
                   key={idx}
-                  className="flex items-start gap-3 text-slate-400"
+                  className="flex items-start gap-3 text-slate-600 dark:text-slate-400"
                 >
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-slate-700/30 border border-slate-600/30 flex items-center justify-center mt-0.5">
-                    <span className="text-slate-500 text-xs">✗</span>
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-700/30 border border-slate-300 dark:border-slate-600/30 flex items-center justify-center mt-0.5">
+                    <span className="text-slate-500 dark:text-slate-500 text-xs">✗</span>
                   </span>
                   <span className="text-sm leading-relaxed">{item}</span>
                 </li>
@@ -189,17 +189,17 @@ export default async function ProductPage({ params }: Props) {
               )}
 
         {/* CTA Section - Sticky on mobile */}
-        <section className="sticky bottom-0 z-10 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-4 bg-slate-950/95 backdrop-blur-sm border-t border-slate-800 sm:static sm:bg-transparent sm:border-t-0 sm:py-8 space-y-3">
+        <section className="sticky bottom-0 z-10 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-4 bg-white/95 dark:bg-slate-950/95 backdrop-blur-sm border-t border-slate-200 dark:border-slate-800 sm:static sm:bg-transparent sm:border-t-0 sm:py-8 space-y-3">
           <a
             href={trackingUrl}
-            className="group block w-full py-5 px-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold rounded-xl text-center transition-all duration-200 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98]"
+            className="group block w-full py-5 px-6 bg-gradient-to-r from-slate-900 to-slate-800 dark:from-slate-700 dark:to-slate-600 hover:from-slate-800 hover:to-slate-700 dark:hover:from-slate-600 dark:hover:to-slate-500 text-white font-bold rounded-xl text-center transition-all duration-200 shadow-lg shadow-slate-900/20 hover:shadow-slate-900/30 hover:scale-[1.02] active:scale-[0.98]"
           >
             <span className="flex items-center justify-center gap-2">
               {product.content.ctaText}
               <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
             </span>
           </a>
-          <p className="text-xs text-slate-500 text-center">
+          <p className="text-xs text-slate-600 dark:text-slate-500 text-center">
             {product.disclosures.affiliate}
           </p>
         </section>
