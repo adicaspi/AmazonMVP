@@ -45,7 +45,7 @@ export function HeroSection() {
         </div>
         <div className="flex items-center justify-center gap-4">
           <a 
-            href="#products" 
+            href="/products" 
             className="px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
           >
             Explore Products

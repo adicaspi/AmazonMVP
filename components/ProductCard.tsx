@@ -23,11 +23,6 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           quality={95}
           loading="lazy"
-          onError={(e) => {
-            // Fallback to a placeholder if image fails to load
-            const target = e.target as HTMLImageElement;
-            target.src = `https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=800&fit=crop&q=80&auto=format`;
-          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
