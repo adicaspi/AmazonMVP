@@ -26,15 +26,15 @@ export async function GET(
     return NextResponse.redirect(new URL("/", request.url));
   }
   
-  // Build clean Amazon URL with ASIN
+  // Build clean Amazon URL with ASIN (always use /dp/ format)
   const amazonUrl = new URL(`https://www.amazon.com/dp/${asin}`);
   
   // Add tracking ID as 'tag' parameter (required for affiliate links)
-  if (product.amazon.trackingId) {
-    amazonUrl.searchParams.set("tag", product.amazon.trackingId);
-  }
+  // Use the tracking ID from product, or fallback to default
+  const trackingId = product.amazon.trackingId || "yourtag-20";
+  amazonUrl.searchParams.set("tag", trackingId);
   
-  console.log(`🔗 Redirecting to Amazon: ${amazonUrl.toString()}`);
+  console.log(`🔗 Redirecting to Amazon: ${amazonUrl.toString()} for product ${product.name} (ASIN: ${asin})`);
 
   // Track click event
   try {
