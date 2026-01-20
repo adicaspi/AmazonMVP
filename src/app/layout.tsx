@@ -1,40 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AI Picks - Live Product Tests",
-  description: "Meta ads → landing page → Amazon affiliate links. Discover products currently in testing.",
+  title: "AI Picks - Curated Home Accessories & Guides",
+  description: "Minimal, well-designed home accessories that upgrade your space. Curated recommendations and practical guides.",
   openGraph: {
-    title: "AI Picks - Live Product Tests",
-    description: "Meta ads → landing page → Amazon affiliate links. Discover products currently in testing.",
+    title: "AI Picks - Curated Home Accessories & Guides",
+    description: "Minimal, well-designed home accessories that upgrade your space.",
     url: "https://www.aipicks.co",
     siteName: "AI Picks",
     type: "website",
-    images: [
-      {
-        url: "https://www.aipicks.co/og-image.png", // You can add an image later
-        width: 1200,
-        height: 630,
-        alt: "AI Picks - Live Product Tests",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "AI Picks - Live Product Tests",
-    description: "Meta ads → landing page → Amazon affiliate links. Discover products currently in testing.",
-    images: ["https://www.aipicks.co/og-image.png"],
   },
 };
 
@@ -45,10 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={inter.className}>
+        <Header />
+        <main className="min-h-screen bg-white">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

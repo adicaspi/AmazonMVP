@@ -2,7 +2,8 @@
 // Amazon Product Advertising API 5.0 integration
 // This file will be used once PA-API credentials are set up
 
-import { DefaultApiClient } from "@amzn/paapi5-nodejs-sdk";
+// Note: @amzn/paapi5-nodejs-sdk will be installed when PA-API is set up
+// import { DefaultApiClient } from "@amzn/paapi5-nodejs-sdk";
 
 type PAAPIConfig = {
   accessKey: string;
