@@ -29,20 +29,20 @@ export function HeroSection() {
           Curated recommendations and practical guides to help you create a more organized, 
           comfortable, and beautiful home.
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-8 text-base text-slate-600 mb-12">
-          <div className="flex items-center gap-3 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-slate-200 shadow-sm">
-            <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse" />
-            <span className="font-semibold">Trusted Reviews</span>
+          <div className="flex flex-wrap items-center justify-center gap-8 text-base text-slate-600 mb-12">
+            <div className="flex items-center gap-3 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-slate-200 shadow-sm">
+              <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse" />
+              <span className="font-semibold">Trusted Reviews</span>
+            </div>
+            <div className="flex items-center gap-3 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-slate-200 shadow-sm">
+              <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse [animation-delay:500ms]" />
+              <span className="font-semibold">Regularly Updated</span>
+            </div>
+            <div className="flex items-center gap-3 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-slate-200 shadow-sm">
+              <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse [animation-delay:1000ms]" />
+              <span className="font-semibold">Editorial Independence</span>
+            </div>
           </div>
-          <div className="flex items-center gap-3 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-slate-200 shadow-sm">
-            <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-            <span className="font-semibold">Regularly Updated</span>
-          </div>
-          <div className="flex items-center gap-3 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-slate-200 shadow-sm">
-            <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-            <span className="font-semibold">Editorial Independence</span>
-          </div>
-        </div>
         <div className="flex items-center justify-center gap-4">
           <a 
             href="/products" 
