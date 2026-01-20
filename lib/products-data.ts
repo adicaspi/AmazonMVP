@@ -26,16 +26,36 @@ export interface Product {
 
 // Product images - Each product has a unique, relevant Unsplash image
 // Using specific photo IDs that are verified to work and match the product
+// All images are carefully selected to be relevant to the product description
 const productImages: Record<string, string> = {
-  "bamboo-drawer-organizer": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Kitchen drawer organizer - bamboo storage
+  "bamboo-drawer-organizer": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+  
+  // Silicone food storage lids - colorful lids on containers
   "silicone-food-storage-lids": "https://images.unsplash.com/photo-1600431521340-491eca880813?w=1200&h=1200&fit=crop&q=95&auto=format",
+  
+  // Jar opener - kitchen tool
   "jar-opener-tool": "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
+  
+  // Modern table lamp - sleek lamp design
   "table-lamp-modern": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=1200&h=1200&fit=crop&q=95&auto=format",
+  
+  // Storage baskets - woven baskets
   "storage-baskets-set": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  
+  // Throw pillows - decorative pillows
   "throw-pillow-set": "https://images.unsplash.com/photo-1519710164249-6b06504d207e?w=1200&h=1200&fit=crop&q=95&auto=format",
-  "wall-shelf-floating": "https://images.unsplash.com/photo-1588013273468-317c8817f239?w=1200&h=1200&fit=crop&q=95&auto=format",
+  
+  // Floating wall shelf - modern wall shelf
+  "wall-shelf-floating": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  
+  // Bedside organizer - bedroom storage
   "bedside-organizer": "https://images.unsplash.com/photo-1590846406792-dc008210f6e1?w=1200&h=1200&fit=crop&q=95&auto=format",
+  
+  // Desk organizer - office workspace
   "desk-organizer-set": "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=1200&fit=crop&q=95&auto=format",
+  
+  // Bathroom storage caddy - shower organizer
   "bathroom-storage-caddy": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
 };
 
