@@ -16,7 +16,8 @@
     "ai:orchestrate": "tsx ai/runOrchestrator.ts",
     "migrate:json-to-db": "tsx scripts/migrate-json-to-db.ts",
     "update:products": "tsx scripts/update-products-images-links.ts",
-    "verify:links": "tsx scripts/verify-amazon-links.ts"
+    "verify:links": "tsx scripts/verify-amazon-links.ts",
+    "fix:products": "tsx scripts/fix-products-completely.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.90.1",

@@ -17,12 +17,24 @@ export async function GET(
   }
 
   // Build Amazon URL with tracking ID
-  // Clean the URL first (remove any existing query params)
-  const baseUrl = product.amazon.url.split('?')[0];
-  const amazonUrl = new URL(baseUrl);
+  // Extract ASIN from the URL to ensure we have the correct one
+  const asinMatch = product.amazon.url.match(/\/dp\/([A-Z0-9]{10})/i);
+  const asin = asinMatch ? asinMatch[1].toUpperCase() : null;
   
-  // Add tracking ID as 'tag' parameter
-  amazonUrl.searchParams.set("tag", product.amazon.trackingId);
+  if (!asin) {
+    console.error(`❌ Could not extract ASIN from URL: ${product.amazon.url}`);
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+  
+  // Build clean Amazon URL with ASIN
+  const amazonUrl = new URL(`https://www.amazon.com/dp/${asin}`);
+  
+  // Add tracking ID as 'tag' parameter (required for affiliate links)
+  if (product.amazon.trackingId) {
+    amazonUrl.searchParams.set("tag", product.amazon.trackingId);
+  }
+  
+  console.log(`🔗 Redirecting to Amazon: ${amazonUrl.toString()}`);
 
   // Track click event
   try {
