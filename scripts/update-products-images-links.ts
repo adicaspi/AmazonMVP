@@ -50,9 +50,10 @@ async function main() {
         "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90",
       ];
       
-      // Use ASIN to deterministically pick an image
+      // Use ASIN to deterministically pick an image (use charCodeAt to handle letters)
       const lastChar = asin.slice(-1);
-      const index = parseInt(lastChar, 16) % kitchenImages.length;
+      const charCode = lastChar.charCodeAt(0);
+      const index = charCode % kitchenImages.length;
       const heroImage = kitchenImages[index];
 
       // Build clean Amazon URL (remove any existing query params)
