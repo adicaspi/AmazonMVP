@@ -11,16 +11,88 @@
       "vertical": "home_kitchen",
       "name": "Adjustable Kitchen Drawer Organizer",
       "targetUser": "busy home cooks and parents",
-      "keyProblem": "messy, cluttered kitchen drawers",
+      "keyProblem": "messy, cluttered kitchen drawers where utensils get tangled and lost",
       "hints": {
         "estimatedPrice": 24.99,
         "primeEligible": true,
         "ratingBucket": "4.3-4.7",
-        "reviewsBucket": "100-1000"
+        "reviewsBucket": "1000-5000"
       },
       "source": {
         "origin": "manual_seed",
-        "notes": "Seems like a strong before/after product"
+        "notes": "Strong before/after visual potential, solves daily frustration"
+      }
+    },
+    {
+      "asin": "B081YHX2YB",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B081YHX2YB",
+      "vertical": "home_kitchen",
+      "name": "Over-the-Cabinet Trash Bag Holder",
+      "targetUser": "home cooks who want fast cleanup",
+      "keyProblem": "no easy way to hang trash bags while cooking, bags fall or get in the way",
+      "hints": {
+        "estimatedPrice": 13.99,
+        "primeEligible": true,
+        "ratingBucket": "4.2-4.6",
+        "reviewsBucket": "500-2000"
+      },
+      "source": {
+        "origin": "manual_seed",
+        "notes": "Simple solution to common kitchen problem"
+      }
+    },
+    {
+      "asin": "B08TGF5XJW",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B08TGF5XJW",
+      "vertical": "home_kitchen",
+      "name": "Portable Mini Bag Sealer",
+      "targetUser": "snack eaters and families with kids",
+      "keyProblem": "open food bags get stale quickly, wasting food and money",
+      "hints": {
+        "estimatedPrice": 19.99,
+        "primeEligible": true,
+        "ratingBucket": "4.2-4.6",
+        "reviewsBucket": "1000-3000"
+      },
+      "source": {
+        "origin": "manual_seed",
+        "notes": "Prevents food waste, clear value proposition"
+      }
+    },
+    {
+      "asin": "B09GJ1C4NK",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B09GJ1C4NK",
+      "vertical": "home_kitchen",
+      "name": "Reusable Stretch Silicone Lids",
+      "targetUser": "eco-conscious households and meal preppers",
+      "keyProblem": "plastic wrap wastes money and creates trash, doesn't seal well",
+      "hints": {
+        "estimatedPrice": 15.99,
+        "primeEligible": true,
+        "ratingBucket": "4.4-4.8",
+        "reviewsBucket": "5000-10000"
+      },
+      "source": {
+        "origin": "manual_seed",
+        "notes": "Eco-friendly angle, high review count"
+      }
+    },
+    {
+      "asin": "B087H6S8CH",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B087H6S8CH",
+      "vertical": "home_kitchen",
+      "name": "Under Cabinet Jar Opener",
+      "targetUser": "people with weak grip, arthritis sufferers, seniors",
+      "keyProblem": "tight jar lids are frustrating and painful to open, can cause injury",
+      "hints": {
+        "estimatedPrice": 17.99,
+        "primeEligible": true,
+        "ratingBucket": "4.6-4.9",
+        "reviewsBucket": "8000-15000"
+      },
+      "source": {
+        "origin": "manual_seed",
+        "notes": "Solves real pain point, excellent reviews"
       }
     }
   ]
