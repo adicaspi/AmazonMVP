@@ -17,6 +17,8 @@
     "migrate:json-to-db": "tsx scripts/migrate-json-to-db.ts",
     "update:products": "tsx scripts/update-products-images-links.ts",
     "verify:links": "tsx scripts/verify-amazon-links.ts",
+    "check:system": "tsx scripts/full-system-check.ts",
+    "fix:all": "tsx scripts/fix-all-products.ts",
     "fix:products": "tsx scripts/fix-products-completely.ts"
   },
   "dependencies": {
