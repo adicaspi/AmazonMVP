@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "ai:discover": "tsx ai/runDiscovery.ts",
     "ai:select": "tsx ai/runSelection.ts",
     "ai:pipeline": "tsx ai/runPipeline.ts",
     "ai:creatives": "tsx ai/runCreativeGenerator.ts",

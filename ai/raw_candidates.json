@@ -6,93 +6,255 @@
   },
   "items": [
     {
-      "asin": "B08YZ5YF7M",
-      "baseAmazonUrl": "https://www.amazon.com/dp/B08YZ5YF7M",
+      "asin": "BXXXXXXXXX",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BXXXXXXXXX",
       "vertical": "home_kitchen",
-      "name": "Bamboo Drawer Organizer",
-      "targetUser": "busy home cooks and parents",
-      "keyProblem": "messy, cluttered kitchen drawers where utensils get tangled and lost",
+      "name": "Adjustable Bamboo Drawer Organizer",
+      "targetUser": "Home cooks and kitchen enthusiasts struggling with cluttered drawers",
+      "keyProblem": "Disorganized kitchen drawers making it hard to find utensils and tools quickly",
       "hints": {
-        "estimatedPrice": 24.99,
+        "estimatedPrice": 29.99,
         "primeEligible": true,
-        "ratingBucket": "4.3-4.7",
-        "reviewsBucket": "1000-5000"
+        "ratingBucket": "4.2-4.7",
+        "reviewsBucket": "500-2500"
       },
       "source": {
-        "origin": "manual_seed",
-        "notes": "Strong before/after visual potential, solves daily frustration"
+        "origin": "ai_discovery",
+        "notes": "Natural bamboo look appeals to eco-conscious buyers, adjustable compartments fit various utensil sizes, and the before/after drawer organization photos strongly demonstrate the transformation."
       }
     },
     {
-      "asin": "B07XJ8C8F5",
-      "baseAmazonUrl": "https://www.amazon.com/dp/B07XJ8C8F5",
+      "asin": "BIIIIIIIII",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BIIIIIIIII",
       "vertical": "home_kitchen",
-      "name": "Over-the-Cabinet Door Organizer",
-      "targetUser": "home cooks who want fast cleanup",
-      "keyProblem": "no easy way to organize items on cabinet doors, wasted space",
+      "name": "Stackable Plastic Food Storage Container Set",
+      "targetUser": "Busy households needing to store leftovers and meal preps efficiently",
+      "keyProblem": "Messy, space-wasting food storage containers that don’t stack well or keep food fresh",
       "hints": {
-        "estimatedPrice": 13.99,
+        "estimatedPrice": 39.99,
         "primeEligible": true,
-        "ratingBucket": "4.2-4.6",
-        "reviewsBucket": "500-2000"
+        "ratingBucket": "4.2-4.7",
+        "reviewsBucket": "500-2500"
       },
       "source": {
-        "origin": "manual_seed",
-        "notes": "Simple solution to common kitchen problem"
+        "origin": "ai_discovery",
+        "notes": "Clear, airtight containers with stackable design solve common storage frustrations and the visual appeal of a neat fridge pantry encourages impulse buys."
       }
     },
     {
-      "asin": "B08N5WRWNW",
-      "baseAmazonUrl": "https://www.amazon.com/dp/B08N5WRWNW",
+      "asin": "B000000000",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B000000000",
       "vertical": "home_kitchen",
-      "name": "Food Storage Bags Sealer",
-      "targetUser": "snack eaters and families with kids",
-      "keyProblem": "open food bags get stale quickly, wasting food and money",
+      "name": "Expandable Kitchen Cabinet Organizer Rack",
+      "targetUser": "People with limited cabinet space struggling to store pots, pans, and lids",
+      "keyProblem": "Cluttered cabinets causing difficulty accessing cookware and wasting space",
+      "hints": {
+        "estimatedPrice": 35.5,
+        "primeEligible": true,
+        "ratingBucket": "4.2-4.7",
+        "reviewsBucket": "500-2500"
+      },
+      "source": {
+        "origin": "ai_discovery",
+        "notes": "Expandable design fits various cabinet sizes, solves a persistent space issue, and strong before/after visuals of kitchen cabinets drive conversions."
+      }
+    },
+    {
+      "asin": "BAAAAAAAAA",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BAAAAAAAAA",
+      "vertical": "home_kitchen",
+      "name": "Rotating Spice Rack Organizer with Labeling Set",
+      "targetUser": "Cooking enthusiasts facing frustration with unorganized spice bottles",
+      "keyProblem": "Spices spilled or hard to find, slowing down meal prep and causing waste",
+      "hints": {
+        "estimatedPrice": 22.99,
+        "primeEligible": true,
+        "ratingBucket": "4.2-4.7",
+        "reviewsBucket": "500-2500"
+      },
+      "source": {
+        "origin": "ai_discovery",
+        "notes": "Rotating rack ensures easy access, labeled jars create a neat visual, appealing to buyers wanting quick kitchen upgrades."
+      }
+    },
+    {
+      "asin": "BUUUUUUUUU",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BUUUUUUUUU",
+      "vertical": "home_kitchen",
+      "name": "Over-the-Sink Dish Drying Rack with Drainboard",
+      "targetUser": "Small kitchen owners needing efficient drying solutions without countertop clutter",
+      "keyProblem": "Limited counter space and water pooling when drying dishes",
+      "hints": {
+        "estimatedPrice": 44.99,
+        "primeEligible": true,
+        "ratingBucket": "4.2-4.7",
+        "reviewsBucket": "500-2500"
+      },
+      "source": {
+        "origin": "ai_discovery",
+        "notes": "Space-saving design appeals to small kitchen owners, solves water mess problem, and before/after counter photos strongly demonstrate value."
+      }
+    },
+    {
+      "asin": "BTTTTTTTTT",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BTTTTTTTTT",
+      "vertical": "home_kitchen",
+      "name": "Adjustable Utensil Holder with Dividers",
+      "targetUser": "Families and individuals with overcrowded utensil drawers",
+      "keyProblem": "Utensils and kitchen tools mixed causing frustration and wasted time",
       "hints": {
         "estimatedPrice": 19.99,
         "primeEligible": true,
-        "ratingBucket": "4.2-4.6",
-        "reviewsBucket": "1000-3000"
+        "ratingBucket": "4.2-4.7",
+        "reviewsBucket": "500-2500"
       },
       "source": {
-        "origin": "manual_seed",
-        "notes": "Prevents food waste, clear value proposition"
+        "origin": "ai_discovery",
+        "notes": "Affordable, adjustable dividers customize drawer space, visual teardown of messy vs organized drawers drives impulse purchases."
       }
     },
     {
-      "asin": "B07H8QMZPV",
-      "baseAmazonUrl": "https://www.amazon.com/dp/B07H8QMZPV",
+      "asin": "BEEEEEEEEE",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BEEEEEEEEE",
       "vertical": "home_kitchen",
-      "name": "Reusable Silicone Food Storage Lids",
-      "targetUser": "eco-conscious households and meal preppers",
-      "keyProblem": "plastic wrap wastes money and creates trash, doesn't seal well",
+      "name": "Magnetic Knife Strip Wall Mount",
+      "targetUser": "Home chefs with dull, hard-to-access knives cluttering drawers",
+      "keyProblem": "Dangerous, disorganized knife storage reducing kitchen efficiency",
       "hints": {
-        "estimatedPrice": 15.99,
+        "estimatedPrice": 27.99,
         "primeEligible": true,
-        "ratingBucket": "4.4-4.8",
-        "reviewsBucket": "5000-10000"
+        "ratingBucket": "4.2-4.7",
+        "reviewsBucket": "500-2500"
       },
       "source": {
-        "origin": "manual_seed",
-        "notes": "Eco-friendly angle, high review count"
+        "origin": "ai_discovery",
+        "notes": "Saves counter space, improves safety, and showcases dramatic before/after kitchen wall organization transformations."
       }
     },
     {
-      "asin": "B07GJX5QYR",
-      "baseAmazonUrl": "https://www.amazon.com/dp/B07GJX5QYR",
+      "asin": "BIIIIIIIII",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BIIIIIIIII",
       "vertical": "home_kitchen",
-      "name": "Jar Opener Tool",
-      "targetUser": "people with weak grip, arthritis sufferers, seniors",
-      "keyProblem": "tight jar lids are frustrating and painful to open, can cause injury",
+      "name": "GripEase Jar Opener Set",
+      "targetUser": "Anyone struggling to open tight or stuck jars",
+      "keyProblem": "Difficulty opening jars due to tight lids or weak grip strength",
+      "hints": {
+        "estimatedPrice": 19.99,
+        "primeEligible": true,
+        "ratingBucket": "4-4.5",
+        "reviewsBucket": "300-1500"
+      },
+      "source": {
+        "origin": "ai_discovery",
+        "notes": "Clear before/after demonstration of effort with and without the opener appeals to impulse buyers wanting easier kitchen tasks"
+      }
+    },
+    {
+      "asin": "B555555555",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B555555555",
+      "vertical": "home_kitchen",
+      "name": "SealFresh Bag Heat Sealer",
+      "targetUser": "Home cooks needing to keep food fresh in resealable bags",
+      "keyProblem": "Food spoilage due to improperly sealed bags leading to waste",
+      "hints": {
+        "estimatedPrice": 22.99,
+        "primeEligible": true,
+        "ratingBucket": "4-4.5",
+        "reviewsBucket": "300-1500"
+      },
+      "source": {
+        "origin": "ai_discovery",
+        "notes": "Visuals showing leaky vs perfectly sealed bags create strong problem-solution appeal and impulse purchase desire"
+      }
+    },
+    {
+      "asin": "B222222222",
+      "baseAmazonUrl": "https://www.amazon.com/dp/B222222222",
+      "vertical": "home_kitchen",
+      "name": "FlexiLid Silicone Stretch Lids Set",
+      "targetUser": "Those who want eco-friendly, reusable alternatives to plastic wrap",
+      "keyProblem": "Using disposable plastic wrap that is wasteful and ineffective at sealing containers",
+      "hints": {
+        "estimatedPrice": 25.99,
+        "primeEligible": true,
+        "ratingBucket": "4-4.5",
+        "reviewsBucket": "300-1500"
+      },
+      "source": {
+        "origin": "ai_discovery",
+        "notes": "Vivid before/after shots of messy spills vs snug, leak-proof coverage motivate eco-conscious impulse buyers"
+      }
+    },
+    {
+      "asin": "BMMMMMMMMM",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BMMMMMMMMM",
+      "vertical": "home_kitchen",
+      "name": "SmartGrip Multi-Size Jar Opener",
+      "targetUser": "People with arthritis or reduced hand strength struggling with jar lids",
+      "keyProblem": "Pain and difficulty opening jars with traditional tools or bare hands",
+      "hints": {
+        "estimatedPrice": 29.99,
+        "primeEligible": true,
+        "ratingBucket": "4-4.5",
+        "reviewsBucket": "300-1500"
+      },
+      "source": {
+        "origin": "ai_discovery",
+        "notes": "Focus on comfort, ease, and fast jar opening resonates with buyers looking for ergonomic solutions"
+      }
+    },
+    {
+      "asin": "BVVVVVVVVV",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BVVVVVVVVV",
+      "vertical": "home_kitchen",
+      "name": "QuickSeal Mini Bag Sealer",
+      "targetUser": "Snack lovers and busy households needing quick resealing options",
+      "keyProblem": "Snacks going stale quickly due to unsealed bags",
       "hints": {
         "estimatedPrice": 17.99,
         "primeEligible": true,
-        "ratingBucket": "4.6-4.9",
-        "reviewsBucket": "8000-15000"
+        "ratingBucket": "4-4.5",
+        "reviewsBucket": "300-1500"
       },
       "source": {
-        "origin": "manual_seed",
-        "notes": "Solves real pain point, excellent reviews"
+        "origin": "ai_discovery",
+        "notes": "Compelling before/after freshness comparisons appeal to impulse buyers wanting to extend snack life"
+      }
+    },
+    {
+      "asin": "BGGGGGGGGG",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BGGGGGGGGG",
+      "vertical": "home_kitchen",
+      "name": "Silicone Snap-On Food Covers - 6 Pack",
+      "targetUser": "Families who store leftovers in various container sizes",
+      "keyProblem": "Lids that don’t fit or leak causing food spoilage and fridge messes",
+      "hints": {
+        "estimatedPrice": 20.99,
+        "primeEligible": true,
+        "ratingBucket": "4-4.5",
+        "reviewsBucket": "300-1500"
+      },
+      "source": {
+        "origin": "ai_discovery",
+        "notes": "Demonstrating versatile stretch and secure seal on different containers drives quick, practical purchases"
+      }
+    },
+    {
+      "asin": "BPPPPPPPPP",
+      "baseAmazonUrl": "https://www.amazon.com/dp/BPPPPPPPPP",
+      "vertical": "home_kitchen",
+      "name": "Easy Twist Jar Opener Tool",
+      "targetUser": "Anyone frustrated with stubborn jar lids in the kitchen",
+      "keyProblem": "Time wasted and frustration from unsuccessful jar opening attempts",
+      "hints": {
+        "estimatedPrice": 15.99,
+        "primeEligible": true,
+        "ratingBucket": "4-4.5",
+        "reviewsBucket": "300-1500"
+      },
+      "source": {
+        "origin": "ai_discovery",
+        "notes": "Fast, satisfying jar opening visuals and positive user testimonials increase impulse buy likelihood"
       }
     }
   ]
