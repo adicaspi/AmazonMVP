@@ -9,13 +9,17 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AI Picks - Curated Home Accessories & Guides",
-  description: "Minimal, well-designed home accessories that upgrade your space. Curated recommendations and practical guides.",
+  description: "Minimal, well-designed home accessories that upgrade your space. Curated recommendations and practical guides. As an Amazon Associate I earn from qualifying purchases.",
   openGraph: {
     title: "AI Picks - Curated Home Accessories & Guides",
-    description: "Minimal, well-designed home accessories that upgrade your space.",
+    description: "Minimal, well-designed home accessories that upgrade your space. Curated recommendations and practical guides.",
     url: "https://www.aipicks.co",
     siteName: "AI Picks",
     type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -31,6 +35,7 @@ export default function RootLayout({
         <main className="min-h-screen bg-white">
           {children}
         </main>
+        <AffiliateDisclosure />
         <Footer />
       </body>
     </html>
