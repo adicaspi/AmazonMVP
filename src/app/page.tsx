@@ -42,7 +42,7 @@ export default function HomePage() {
               <span className="text-xl">→</span>
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
             {topPicks.map((product, idx) => {
               const delayClass = idx === 0 ? 'animate-fade-in' : 
                                  idx === 1 ? 'animate-fade-in-delay-1' :
@@ -60,12 +60,13 @@ export default function HomePage() {
               );
             })}
           </div>
-          <div className="mt-8 text-center md:hidden">
+          <div className="mt-6 sm:mt-8 text-center sm:hidden">
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto justify-center"
             >
-              View all products →
+              <span>View all products</span>
+              <span className="text-lg">→</span>
             </Link>
           </div>
         </div>

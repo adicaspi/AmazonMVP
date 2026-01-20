@@ -13,8 +13,8 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
   const affiliateLink = buildAmazonAffiliateLink(product.amazonUrl);
 
   return (
-    <article className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xl transition-all duration-300 rounded-lg overflow-hidden">
-      <div className="aspect-square relative bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 overflow-hidden rounded-t-lg">
+    <article className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xl transition-all duration-300 rounded-lg sm:rounded-xl overflow-hidden">
+      <div className="aspect-square relative bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 overflow-hidden rounded-t-lg sm:rounded-t-xl">
         <Image
           src={product.image}
           alt={product.title}
@@ -31,13 +31,13 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           </div>
         </div>
       </div>
-      <div className="p-6 space-y-4">
+      <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
         <div>
-          <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-slate-700 transition-colors">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5 sm:mb-2 group-hover:text-slate-700 transition-colors">
             {product.title}
           </h3>
           {showDescription && (
-            <p className="text-sm text-slate-600 leading-relaxed line-clamp-2">
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-2">
               {product.shortDescription}
             </p>
           )}
@@ -69,12 +69,12 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           href={affiliateLink}
           target="_blank"
           rel="sponsored nofollow noopener"
-          className="block w-full py-3.5 px-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-sm font-semibold text-center hover:from-slate-800 hover:to-slate-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+          className="block w-full py-3 sm:py-3.5 px-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-xs sm:text-sm font-semibold text-center hover:from-slate-800 hover:to-slate-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           aria-label={`Check price on Amazon for ${product.title}`}
         >
           Check price on Amazon →
         </a>
-        <p className="text-xs text-slate-500 text-center mt-2">
+        <p className="text-[10px] sm:text-xs text-slate-500 text-center mt-1.5 sm:mt-2 leading-tight">
           As an Amazon Associate I earn from qualifying purchases.
         </p>
       </div>

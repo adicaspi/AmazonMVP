@@ -2,7 +2,7 @@
 
 export function HeroSection() {
   return (
-    <section className="relative py-24 md:py-40 border-b border-slate-200 overflow-hidden">
+    <section className="relative py-16 sm:py-20 md:py-32 lg:py-40 border-b border-slate-200 overflow-hidden">
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white via-emerald-50/40 to-blue-50/30" />
       
@@ -12,20 +12,20 @@ export function HeroSection() {
       <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-purple-100/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse [animation-delay:2000ms]" />
       
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-block mb-8 px-5 py-3 bg-gradient-to-r from-emerald-50 via-teal-50 to-blue-50 border-2 border-emerald-200/50 rounded-full shadow-lg backdrop-blur-sm">
-          <span className="text-sm font-bold text-emerald-700 flex items-center gap-2">
-            <span className="text-lg">✨</span>
+        <div className="inline-block mb-6 sm:mb-8 px-4 sm:px-5 py-2 sm:py-3 bg-gradient-to-r from-emerald-50 via-teal-50 to-blue-50 border-2 border-emerald-200/50 rounded-full shadow-lg backdrop-blur-sm">
+          <span className="text-xs sm:text-sm font-bold text-emerald-700 flex items-center justify-center gap-2">
+            <span className="text-base sm:text-lg">✨</span>
             <span>Curated Home Accessories</span>
           </span>
         </div>
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold text-slate-900 mb-8 leading-[1.1] tracking-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-slate-900 mb-6 sm:mb-8 leading-[1.1] tracking-tight px-2">
           Minimal, well-designed{" "}
           <span className="bg-gradient-to-r from-slate-900 via-emerald-700 to-slate-600 bg-clip-text text-transparent animate-gradient">
             home accessories
           </span>{" "}
           that upgrade your space.
         </h1>
-        <p className="text-2xl md:text-3xl text-slate-600 max-w-4xl mx-auto leading-relaxed mb-12 font-light">
+        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-slate-600 max-w-4xl mx-auto leading-relaxed mb-8 sm:mb-12 font-light px-4">
           Curated recommendations and practical guides to help you create a more organized, 
           comfortable, and beautiful home.
         </p>

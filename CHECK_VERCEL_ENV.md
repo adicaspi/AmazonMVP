@@ -12,7 +12,8 @@
 
 2. **ודא שיש את ה-Variables הבאים:**
    - `NEXT_PUBLIC_SUPABASE_URL` = `https://uoydxjnbqbifcaigeexg.supabase.co`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = `sb_publishable_8jhHrDRVtby9oLoNwq9EIg_P7TWXWkh`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = `;  
+   1;; םגהיבנ שיעעעעעעעעעעעעעעעעעעעזעשעס`
    - `SUPABASE_SERVICE_ROLE_KEY` = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` (ה-service role key המלא)
 
 3. **ודא שהם מוגדרים ל:**
