@@ -1,7 +1,7 @@
 // lib/products-data.ts
 // Product data structure for the editorial site
 
-export type Room = "living_room" | "kitchen" | "storage" | "lighting" | "bedroom" | "bathroom" | "office";
+export type Room = "living_room" | "kitchen" | "storage" | "lighting" | "bedroom" | "bathroom" | "office" | "dining" | "outdoor" | "entryway" | "laundry" | "kids_room";
 
 export type ProductStatus = "draft" | "published";
 

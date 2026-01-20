@@ -10,6 +10,11 @@ const roomLabels: Record<Room, string> = {
   bedroom: "Bedroom",
   bathroom: "Bathroom",
   office: "Office",
+  dining: "Dining",
+  outdoor: "Outdoor",
+  entryway: "Entryway",
+  laundry: "Laundry",
+  kids_room: "Kids Room",
 };
 
 const roomIcons: Record<Room, string> = {
@@ -20,6 +25,11 @@ const roomIcons: Record<Room, string> = {
   bedroom: "🛏️",
   bathroom: "🚿",
   office: "💼",
+  dining: "🍽️",
+  outdoor: "🌳",
+  entryway: "🚪",
+  laundry: "🧺",
+  kids_room: "🧸",
 };
 
 const roomColors: Record<Room, string> = {
@@ -30,30 +40,51 @@ const roomColors: Record<Room, string> = {
   bedroom: "from-purple-50 to-pink-50 border-purple-200 hover:border-purple-300",
   bathroom: "from-cyan-50 to-blue-50 border-cyan-200 hover:border-cyan-300",
   office: "from-slate-50 to-gray-50 border-slate-200 hover:border-slate-300",
+  dining: "from-rose-50 to-pink-50 border-rose-200 hover:border-rose-300",
+  outdoor: "from-green-50 to-emerald-50 border-green-200 hover:border-green-300",
+  entryway: "from-stone-50 to-neutral-50 border-stone-200 hover:border-stone-300",
+  laundry: "from-sky-50 to-blue-50 border-sky-200 hover:border-sky-300",
+  kids_room: "from-fuchsia-50 to-pink-50 border-fuchsia-200 hover:border-fuchsia-300",
 };
 
 export function CategoryCards() {
   const rooms = getAllRooms();
 
   return (
-    <section className="py-8 sm:py-12 md:py-16">
+    <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-b from-white via-slate-50/30 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-6 sm:mb-8 text-center sm:text-left">
-          Shop by Room
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
+        <div className="text-center sm:text-left mb-6 sm:mb-8">
+          <div className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-full shadow-sm">
+            <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-2">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+              <span className="hidden sm:inline">Browse by Category</span>
+              <span className="sm:hidden">Categories</span>
+            </span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900">
+            Shop by Room
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600 mt-2 max-w-2xl">
+            Find the perfect accessories for every space in your home
+          </p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-3 sm:gap-4">
           {rooms.map((room) => (
             <Link
               key={room}
               href={`/products?room=${room}`}
-              className={`group relative border-2 bg-gradient-to-br ${roomColors[room]} p-4 sm:p-6 text-center rounded-lg sm:rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 overflow-hidden`}
+              className={`group relative border-2 bg-gradient-to-br ${roomColors[room]} p-4 sm:p-5 md:p-6 text-center rounded-lg sm:rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 hover:scale-105 overflow-hidden`}
             >
-              <div className="absolute inset-0 bg-white/0 group-hover:bg-white/50 transition-colors duration-300" />
+              <div className="absolute inset-0 bg-white/0 group-hover:bg-white/60 transition-colors duration-300" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-2 right-2 w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
+                <div className="absolute top-2 right-2 w-2 h-2 bg-emerald-500 rounded-full" />
+              </div>
               <div className="relative z-10">
-                <div className="text-3xl sm:text-4xl mb-2 sm:mb-3 transform group-hover:scale-110 transition-transform duration-300">
+                <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                   {roomIcons[room]}
                 </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-slate-800">
+                <div className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-slate-800 transition-colors">
                   {roomLabels[room]}
                 </div>
               </div>

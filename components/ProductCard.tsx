@@ -13,7 +13,7 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
   const affiliateLink = buildAmazonAffiliateLink(product.amazonUrl);
 
   return (
-    <article className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xl transition-all duration-300 rounded-lg sm:rounded-xl overflow-hidden">
+    <article className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-2xl transition-all duration-300 rounded-lg sm:rounded-xl overflow-hidden transform hover:-translate-y-1">
       <div className="aspect-square relative bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 overflow-hidden rounded-t-lg sm:rounded-t-xl">
         <Image
           src={product.image}
@@ -55,11 +55,11 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
         )}
 
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-xs px-3 py-1.5 bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 rounded-full font-medium border border-emerald-100">
+          <span className="text-xs px-3 py-1.5 bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 rounded-full font-medium border border-emerald-100 hover:from-emerald-100 hover:to-teal-100 transition-colors">
             {product.room.replace("_", " ")}
           </span>
           {product.tags.slice(0, 2).map((tag) => (
-            <span key={tag} className="text-xs px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full">
+            <span key={tag} className="text-xs px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition-colors">
               {tag}
             </span>
           ))}

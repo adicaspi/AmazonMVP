@@ -2,7 +2,7 @@
 
 export function HeroSection() {
   return (
-    <section className="relative py-16 sm:py-20 md:py-32 lg:py-40 border-b border-slate-200 overflow-hidden">
+    <section className="relative py-12 sm:py-16 md:py-24 lg:py-32 xl:py-40 border-b border-slate-200 overflow-hidden">
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white via-emerald-50/40 to-blue-50/30" />
       

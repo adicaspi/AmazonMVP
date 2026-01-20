@@ -42,7 +42,7 @@ export default function HomePage() {
               <span className="text-xl">→</span>
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 lg:gap-10">
             {topPicks.map((product, idx) => {
               const delayClass = idx === 0 ? 'animate-fade-in' : 
                                  idx === 1 ? 'animate-fade-in-delay-1' :
