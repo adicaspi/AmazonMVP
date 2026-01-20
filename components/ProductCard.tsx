@@ -14,16 +14,27 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
 
   return (
     <article className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xl transition-all duration-300 rounded-lg overflow-hidden">
-      <div className="aspect-square relative bg-gradient-to-br from-slate-50 to-slate-100 overflow-hidden">
+      <div className="aspect-square relative bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 overflow-hidden rounded-t-lg">
         <Image
           src={product.image}
           alt={product.title}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-500"
+          className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          quality={90}
+          quality={95}
+          loading="lazy"
+          onError={(e) => {
+            // Fallback to a placeholder if image fails to load
+            const target = e.target as HTMLImageElement;
+            target.src = `https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=800&fit=crop&q=80&auto=format`;
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-slate-900 shadow-lg">
+            View Details
+          </div>
+        </div>
       </div>
       <div className="p-6 space-y-4">
         <div>

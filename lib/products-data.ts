@@ -46,7 +46,7 @@ export const products: Product[] = [
     room: "kitchen",
     tags: ["organization", "storage", "bamboo", "kitchen-essentials"],
     shortDescription: "Keep your kitchen drawers tidy with this adjustable bamboo organizer.",
-    image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95",
+    image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08YZ5YF7M?tag=aipicks-20",
     asin: "B08YZ5YF7M",
     highlights: [
@@ -114,7 +114,7 @@ export const products: Product[] = [
     room: "kitchen",
     tags: ["kitchen-tools", "accessibility", "grip-assist"],
     shortDescription: "Effortlessly open tight jar lids with this ergonomic tool.",
-    image: "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95",
+    image: "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B07GJX5QYR?tag=aipicks-20",
     asin: "B07GJX5QYR",
     highlights: [
@@ -148,7 +148,7 @@ export const products: Product[] = [
     room: "living_room",
     tags: ["lighting", "modern", "decorative", "bedroom"],
     shortDescription: "Sleek, minimalist lamp that adds ambient lighting to any room.",
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=1200&h=1200&fit=crop&q=95",
+    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08ABC1234?tag=aipicks-20",
     highlights: [
       "Touch dimmer control",
@@ -181,7 +181,7 @@ export const products: Product[] = [
     room: "storage",
     tags: ["storage", "organization", "baskets", "multi-room"],
     shortDescription: "Versatile woven baskets perfect for organizing any space.",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08DEF5678?tag=aipicks-20",
     highlights: [
       "Set of 3 different sizes",
@@ -214,7 +214,7 @@ export const products: Product[] = [
     room: "living_room",
     tags: ["decorative", "comfort", "textiles", "bedroom"],
     shortDescription: "Soft, decorative pillows that add comfort and style.",
-    image: "https://images.unsplash.com/photo-1519710164249-6b06504d207e?w=1200&h=1200&fit=crop&q=95",
+    image: "https://images.unsplash.com/photo-1519710164249-6b06504d207e?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08GHI9012?tag=aipicks-20",
     highlights: [
       "Set of 2 pillows",
@@ -247,7 +247,7 @@ export const products: Product[] = [
     room: "living_room",
     tags: ["storage", "wall-mounted", "modern", "decorative"],
     shortDescription: "Sleek floating shelf that adds storage without taking up floor space.",
-    image: "https://images.unsplash.com/photo-1588013273468-317c8817f239?w=1200&h=1200&fit=crop&q=95",
+    image: "https://images.unsplash.com/photo-1588013273468-317c8817f239?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08JKL3456?tag=aipicks-20",
     highlights: [
       "Hidden mounting hardware",
@@ -280,7 +280,7 @@ export const products: Product[] = [
     room: "bedroom",
     tags: ["organization", "bedroom", "storage", "nightstand"],
     shortDescription: "Keep your bedside essentials organized and within reach.",
-    image: "https://images.unsplash.com/photo-1590846406792-dc008210f6e1?w=1200&h=1200&fit=crop&q=95",
+    image: "https://images.unsplash.com/photo-1590846406792-dc008210f6e1?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08MNO7890?tag=aipicks-20",
     highlights: [
       "Multiple pockets and compartments",
@@ -346,7 +346,7 @@ export const products: Product[] = [
     room: "bathroom",
     tags: ["storage", "bathroom", "shower", "organization"],
     shortDescription: "Waterproof caddy that keeps bathroom essentials organized.",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08STU5678?tag=aipicks-20",
     highlights: [
       "Waterproof construction",

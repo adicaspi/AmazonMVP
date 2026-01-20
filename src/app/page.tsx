@@ -18,27 +18,37 @@ export default function HomePage() {
       <CategoryCards />
 
       <section className="py-16 md:py-20 border-t border-slate-200 bg-gradient-to-b from-white to-slate-50/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-12">
-            <div>
-              <div className="inline-block mb-3 px-3 py-1 bg-emerald-50 border border-emerald-100 rounded-full">
-                <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wide">Featured</span>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-16">
+            <div className="relative">
+              <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-full shadow-sm">
+                <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                  Featured Collection
+                </span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 leading-tight">
                 Top Picks This Week
               </h2>
-              <p className="text-slate-600 mt-2">Handpicked favorites from our editors</p>
+              <p className="text-lg md:text-xl text-slate-600 mt-3 max-w-2xl leading-relaxed">
+                Handpicked favorites from our editors — carefully curated to help you create a more beautiful home
+              </p>
             </div>
             <Link
               href="/products"
-              className="hidden md:flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors shadow-md hover:shadow-lg"
+              className="hidden md:flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
             >
-              View all →
+              <span>View all products</span>
+              <span className="text-xl">→</span>
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {topPicks.map((product, idx) => (
-              <div key={product.id} className="animate-fade-in" style={{ animationDelay: `${idx * 100}ms` }}>
+              <div 
+                key={product.id} 
+                className="animate-fade-in transform hover:scale-105 transition-transform duration-300" 
+                style={{ animationDelay: `${idx * 100}ms` }}
+              >
                 <ProductCard product={product} />
               </div>
             ))}
