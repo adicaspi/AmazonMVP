@@ -32,7 +32,7 @@ export const products: Product[] = [
     room: "kitchen",
     tags: ["organization", "storage", "bamboo", "kitchen-essentials"],
     shortDescription: "Keep your kitchen drawers tidy with this adjustable bamboo organizer.",
-    image: "/images/drawer-organizer.jpg",
+    image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=800&fit=crop&q=90",
     amazonUrl: "https://www.amazon.com/dp/B08YZ5YF7M?tag=aipicks-20",
     asin: "B08YZ5YF7M",
     highlights: [
@@ -66,7 +66,7 @@ export const products: Product[] = [
     room: "kitchen",
     tags: ["food-storage", "eco-friendly", "silicone", "meal-prep"],
     shortDescription: "Eco-friendly alternative to plastic wrap that seals any container.",
-    image: "/images/silicone-lids.jpg",
+    image: "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=800&h=800&fit=crop&q=90",
     amazonUrl: "https://www.amazon.com/dp/B07H8QMZPV?tag=aipicks-20",
     asin: "B07H8QMZPV",
     highlights: [
@@ -100,7 +100,7 @@ export const products: Product[] = [
     room: "kitchen",
     tags: ["kitchen-tools", "accessibility", "grip-assist"],
     shortDescription: "Effortlessly open tight jar lids with this ergonomic tool.",
-    image: "/images/jar-opener.jpg",
+    image: "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=800&h=800&fit=crop&q=90",
     amazonUrl: "https://www.amazon.com/dp/B07GJX5QYR?tag=aipicks-20",
     asin: "B07GJX5QYR",
     highlights: [
@@ -134,7 +134,7 @@ export const products: Product[] = [
     room: "living_room",
     tags: ["lighting", "modern", "decorative", "bedroom"],
     shortDescription: "Sleek, minimalist lamp that adds ambient lighting to any room.",
-    image: "/images/table-lamp.jpg",
+    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&h=800&fit=crop&q=90",
     amazonUrl: "https://www.amazon.com/dp/B08ABC1234?tag=aipicks-20",
     highlights: [
       "Touch dimmer control",
@@ -167,7 +167,7 @@ export const products: Product[] = [
     room: "storage",
     tags: ["storage", "organization", "baskets", "multi-room"],
     shortDescription: "Versatile woven baskets perfect for organizing any space.",
-    image: "/images/storage-baskets.jpg",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=800&fit=crop&q=90",
     amazonUrl: "https://www.amazon.com/dp/B08DEF5678?tag=aipicks-20",
     highlights: [
       "Set of 3 different sizes",
@@ -200,7 +200,7 @@ export const products: Product[] = [
     room: "living_room",
     tags: ["decorative", "comfort", "textiles", "bedroom"],
     shortDescription: "Soft, decorative pillows that add comfort and style.",
-    image: "/images/throw-pillows.jpg",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=800&fit=crop&q=90",
     amazonUrl: "https://www.amazon.com/dp/B08GHI9012?tag=aipicks-20",
     highlights: [
       "Set of 2 pillows",
@@ -233,7 +233,7 @@ export const products: Product[] = [
     room: "living_room",
     tags: ["storage", "wall-mounted", "modern", "decorative"],
     shortDescription: "Sleek floating shelf that adds storage without taking up floor space.",
-    image: "/images/floating-shelf.jpg",
+    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&h=800&fit=crop&q=90",
     amazonUrl: "https://www.amazon.com/dp/B08JKL3456?tag=aipicks-20",
     highlights: [
       "Hidden mounting hardware",
@@ -266,7 +266,7 @@ export const products: Product[] = [
     room: "bedroom",
     tags: ["organization", "bedroom", "storage", "nightstand"],
     shortDescription: "Keep your bedside essentials organized and within reach.",
-    image: "/images/bedside-organizer.jpg",
+    image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=800&fit=crop&q=90",
     amazonUrl: "https://www.amazon.com/dp/B08MNO7890?tag=aipicks-20",
     highlights: [
       "Multiple pockets and compartments",
@@ -299,7 +299,7 @@ export const products: Product[] = [
     room: "office",
     tags: ["organization", "office", "desk-accessories", "storage"],
     shortDescription: "Keep your workspace tidy with this comprehensive organizer set.",
-    image: "/images/desk-organizer.jpg",
+    image: "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=800&h=800&fit=crop&q=90",
     amazonUrl: "https://www.amazon.com/dp/B08PQR1234?tag=aipicks-20",
     highlights: [
       "Multiple compartments",
@@ -332,7 +332,7 @@ export const products: Product[] = [
     room: "bathroom",
     tags: ["storage", "bathroom", "shower", "organization"],
     shortDescription: "Waterproof caddy that keeps bathroom essentials organized.",
-    image: "/images/bathroom-caddy.jpg",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=800&fit=crop&q=90",
     amazonUrl: "https://www.amazon.com/dp/B08STU5678?tag=aipicks-20",
     highlights: [
       "Waterproof construction",

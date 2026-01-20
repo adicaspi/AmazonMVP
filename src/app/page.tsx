@@ -17,23 +17,39 @@ export default function HomePage() {
       
       <CategoryCards />
 
-      <section className="py-12 md:py-16 border-t border-slate-200">
+      <section className="py-16 md:py-20 border-t border-slate-200 bg-gradient-to-b from-white to-slate-50/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
-              Top Picks This Week
-            </h2>
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <div className="inline-block mb-3 px-3 py-1 bg-emerald-50 border border-emerald-100 rounded-full">
+                <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wide">Featured</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+                Top Picks This Week
+              </h2>
+              <p className="text-slate-600 mt-2">Handpicked favorites from our editors</p>
+            </div>
             <Link
               href="/products"
-              className="text-sm text-slate-600 hover:text-slate-900 font-medium"
+              className="hidden md:flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors shadow-md hover:shadow-lg"
             >
               View all →
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {topPicks.map((product) => (
-              <ProductCard key={product.id} product={product} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {topPicks.map((product, idx) => (
+              <div key={product.id} className="animate-fade-in" style={{ animationDelay: `${idx * 100}ms` }}>
+                <ProductCard product={product} />
+              </div>
             ))}
+          </div>
+          <div className="mt-8 text-center md:hidden">
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors"
+            >
+              View all products →
+            </Link>
           </div>
         </div>
       </section>
