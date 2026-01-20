@@ -64,9 +64,13 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           target="_blank"
           rel="sponsored nofollow noopener"
           className="block w-full py-3.5 px-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-sm font-semibold text-center hover:from-slate-800 hover:to-slate-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+          aria-label={`Check price on Amazon for ${product.title}`}
         >
           Check price on Amazon →
         </a>
+        <p className="text-xs text-slate-500 text-center mt-2">
+          As an Amazon Associate I earn from qualifying purchases.
+        </p>
       </div>
     </article>
   );

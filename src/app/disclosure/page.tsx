@@ -13,9 +13,12 @@ export default function DisclosurePage() {
       </h1>
       
       <div className="prose prose-slate max-w-none space-y-6">
-        <div className="border-l-4 border-slate-900 pl-6 py-4 bg-slate-50 mb-8">
-          <p className="text-lg font-semibold text-slate-900">
+        <div className="border-l-4 border-slate-900 pl-6 py-4 bg-slate-50 mb-8 rounded-r-lg">
+          <p className="text-lg font-semibold text-slate-900 mb-2">
             As an Amazon Associate I earn from qualifying purchases.
+          </p>
+          <p className="text-sm text-slate-600">
+            This disclosure is required by Amazon Associates Program Operating Agreement.
           </p>
         </div>
 
