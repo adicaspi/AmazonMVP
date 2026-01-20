@@ -8,8 +8,8 @@ export function HeroSection() {
       
       {/* Animated decorative elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-200/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-200/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-purple-100/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse" style={{ animationDelay: '2s' }} />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-200/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse [animation-delay:1000ms]" />
+      <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-purple-100/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse [animation-delay:2000ms]" />
       
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="inline-block mb-8 px-5 py-3 bg-gradient-to-r from-emerald-50 via-teal-50 to-blue-50 border-2 border-emerald-200/50 rounded-full shadow-lg backdrop-blur-sm">

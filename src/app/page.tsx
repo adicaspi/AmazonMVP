@@ -43,15 +43,22 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-            {topPicks.map((product, idx) => (
-              <div 
-                key={product.id} 
-                className="animate-fade-in transform hover:scale-105 transition-transform duration-300" 
-                style={{ animationDelay: `${idx * 100}ms` }}
-              >
-                <ProductCard product={product} />
-              </div>
-            ))}
+            {topPicks.map((product, idx) => {
+              const delayClass = idx === 0 ? 'animate-fade-in' : 
+                                 idx === 1 ? 'animate-fade-in-delay-1' :
+                                 idx === 2 ? 'animate-fade-in-delay-2' :
+                                 idx === 3 ? 'animate-fade-in-delay-3' :
+                                 idx === 4 ? 'animate-fade-in-delay-4' :
+                                 'animate-fade-in-delay-5';
+              return (
+                <div 
+                  key={product.id} 
+                  className={`${delayClass} transform hover:scale-105 transition-transform duration-300`}
+                >
+                  <ProductCard product={product} />
+                </div>
+              );
+            })}
           </div>
           <div className="mt-8 text-center md:hidden">
             <Link
