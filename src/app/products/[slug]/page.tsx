@@ -49,30 +49,35 @@ export default async function ProductPage({ params }: Props) {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <article>
-        <div className="mb-8">
-          <div className="aspect-video relative bg-slate-50 mb-6">
+        <div className="mb-12">
+          <div className="aspect-video relative bg-gradient-to-br from-slate-50 to-slate-100 mb-8 rounded-2xl overflow-hidden shadow-xl">
             <Image
               src={product.image}
               alt={product.title}
               fill
               className="object-cover"
               priority
+              quality={95}
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <div className="inline-block mb-4 px-4 py-2 bg-emerald-50 border border-emerald-100 rounded-full">
+            <span className="text-sm font-semibold text-emerald-700">Featured Product</span>
+          </div>
+          <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
             {product.title}
           </h1>
-          <p className="text-xl text-slate-600 mb-6">
+          <p className="text-xl md:text-2xl text-slate-600 mb-8 leading-relaxed">
             {product.shortDescription}
           </p>
 
-          <div className="flex items-center gap-4 mb-8">
-            <span className="text-sm px-3 py-1 bg-slate-100 text-slate-700 rounded">
+          <div className="flex items-center gap-3 mb-8 flex-wrap">
+            <span className="text-sm px-4 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 rounded-full font-semibold border border-emerald-100">
               {product.room.replace("_", " ")}
             </span>
             {product.tags.slice(0, 3).map((tag) => (
-              <span key={tag} className="text-sm px-3 py-1 bg-slate-50 text-slate-600 rounded">
+              <span key={tag} className="text-sm px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-medium">
                 {tag}
               </span>
             ))}
@@ -105,16 +110,16 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </div>
 
-        <div className="border-t border-slate-200 pt-8 mb-12">
+        <div className="border-t border-slate-200 pt-12 mb-12 bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8">
           <a
             href={affiliateLink}
             target="_blank"
             rel="sponsored nofollow noopener"
-            className="block w-full md:w-auto md:inline-block py-4 px-8 bg-slate-900 text-white text-center font-medium hover:bg-slate-800 transition-colors"
+            className="block w-full md:w-auto md:inline-block py-5 px-10 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-center font-bold text-lg rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
-            Check price on Amazon
+            Check price on Amazon →
           </a>
-          <p className="text-xs text-slate-500 mt-4">
+          <p className="text-xs text-slate-500 mt-6 text-center">
             As an Amazon Associate I earn from qualifying purchases.
           </p>
         </div>
