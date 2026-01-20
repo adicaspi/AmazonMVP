@@ -43,18 +43,26 @@ async function main() {
         continue;
       }
 
-      // Build high-quality image URL - always return an image
-      const kitchenImages = [
-        "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90",
-        "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90",
-        "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90",
+      // Build high-quality image URL - different image for each product variant
+      // Use product ID (which includes variant) to ensure each variant gets a different image
+      const allKitchenImages = [
+        "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90", // Kitchen drawer
+        "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90", // Kitchen tools
+        "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=800&fit=crop&q=90", // Kitchen organization
+        "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90", // Food storage
+        "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=800&fit=crop&q=90", // Kitchen accessories
+        "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=800&fit=crop&q=90", // Cooking tools
       ];
       
-      // Use ASIN to deterministically pick an image (use charCodeAt to handle letters)
-      const lastChar = asin.slice(-1);
-      const charCode = lastChar.charCodeAt(0);
-      const index = charCode % kitchenImages.length;
-      const heroImage = kitchenImages[index];
+      // Use product ID (includes variant) to create a hash for unique image per variant
+      let hash = 0;
+      const productId = product.id.toLowerCase();
+      for (let i = 0; i < productId.length; i++) {
+        hash = ((hash << 5) - hash) + productId.charCodeAt(i);
+        hash = hash & hash; // Convert to 32bit integer
+      }
+      const index = Math.abs(hash) % allKitchenImages.length;
+      const heroImage = allKitchenImages[index];
 
       // Build clean Amazon URL (remove any existing query params)
       const cleanAmazonUrl = `https://www.amazon.com/dp/${asin}`;
