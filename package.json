@@ -20,6 +20,7 @@
     "verify:links": "tsx scripts/verify-amazon-links.ts",
     "check:system": "tsx scripts/full-system-check.ts",
     "fix:all": "tsx scripts/fix-all-products.ts",
+    "update:asin": "tsx scripts/update-product-asin.ts",
     "fix:products": "tsx scripts/fix-products-completely.ts"
   },
   "dependencies": {
