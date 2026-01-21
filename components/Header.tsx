@@ -16,26 +16,27 @@ export function Header() {
             AI Picks
           </Link>
           
-          {/* Search Bar - Desktop (Icon only, expands on click) */}
-          <div className="hidden md:flex items-center justify-center mx-4">
-            <SearchBar variant="icon" />
+          {/* Desktop Navigation + Search */}
+          <div className="hidden md:flex items-center gap-4 flex-shrink-0">
+            <nav className="flex items-center gap-6">
+              <Link href="/products" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative group">
+                Products
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-900 group-hover:w-full transition-all duration-300" />
+              </Link>
+              <Link href="/guides" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative group">
+                Guides
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-900 group-hover:w-full transition-all duration-300" />
+              </Link>
+              <Link href="/about" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative group">
+                About
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-900 group-hover:w-full transition-all duration-300" />
+              </Link>
+            </nav>
+            {/* Search Bar - Desktop (Icon only, expands on click) */}
+            <div className="flex items-center">
+              <SearchBar variant="icon" />
+            </div>
           </div>
-          
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6 flex-shrink-0">
-            <Link href="/products" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative group">
-              Products
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-900 group-hover:w-full transition-all duration-300" />
-            </Link>
-            <Link href="/guides" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative group">
-              Guides
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-900 group-hover:w-full transition-all duration-300" />
-            </Link>
-            <Link href="/about" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative group">
-              About
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-900 group-hover:w-full transition-all duration-300" />
-            </Link>
-          </nav>
 
           {/* Mobile Menu Button */}
           <button
