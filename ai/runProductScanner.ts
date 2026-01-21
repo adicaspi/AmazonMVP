@@ -3,7 +3,7 @@
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 
-import { scanAndRecommendProducts, filterTopRecommendations, generateRecommendationReport } from "./productRecommender";
+import { scanAndRecommendProducts, filterTopRecommendations } from "./productRecommender";
 import { generateBestSellersInstructions } from "./amazonBestSellers";
 import fs from "fs/promises";
 import path from "path";
@@ -20,10 +20,8 @@ type CategoryScan = {
 async function main() {
   console.log("🤖 Amazon Product Scanner & Recommender");
   console.log("========================================\n");
-  console.log("This system will:");
-  console.log("1. Scan multiple Amazon categories");
-  console.log("2. Analyze hundreds of products");
-  console.log("3. Recommend the best products for affiliate marketing\n");
+  console.log("⚠️  IMPORTANT: This system provides PRODUCT TYPES and search strategies.");
+  console.log("It does NOT provide real ASINs - you must find them on Amazon yourself.\n");
 
   // Define categories to scan
   const categories: CategoryScan[] = [
@@ -69,34 +67,39 @@ async function main() {
     },
   ];
 
-  console.log(`📋 Scanning ${categories.length} categories...\n`);
+  console.log(`📋 Generating search strategies for ${categories.length} categories...\n`);
 
   // Scan all categories
   const allRecommendations = await scanAndRecommendProducts(categories, 20);
 
   if (allRecommendations.length === 0) {
-    console.log("❌ No products found. Try adjusting your search criteria.");
+    console.log("❌ No recommendations generated. Try adjusting your search criteria.");
     return;
   }
 
-  console.log(`\n✅ Found ${allRecommendations.length} products total`);
+  console.log(`\n✅ Generated ${allRecommendations.length} product recommendations!`);
+
+  // Show Best Sellers instructions FIRST (most reliable)
+  console.log(generateBestSellersInstructions());
 
   // Filter top recommendations
   const topRecommendations = filterTopRecommendations(allRecommendations, 75, 50);
 
-  console.log(`\n⭐ Top ${topRecommendations.length} recommendations (score 75+):`);
+  console.log(`\n⭐ Top ${topRecommendations.length} product types to search for (score 75+):`);
 
-  // Generate report
-  const report = generateRecommendationReport(topRecommendations);
-  console.log(report);
-
-  // Save to file
-  const outputFile = path.join(process.cwd(), "ai/recommended-products.json");
-  await fs.writeFile(
-    outputFile,
-    JSON.stringify(topRecommendations, null, 2),
-    "utf8"
-  );
+  // Generate report (modified to show search URLs instead of ASINs)
+  console.log(`\n📋 Product Types to Search:\n`);
+  topRecommendations.slice(0, 20).forEach((r, i) => {
+    const searchUrl = r.reasons.find(reason => reason.startsWith("Search:"));
+    console.log(`${i + 1}. ${r.title}`);
+    console.log(`   Score: ${r.recommendationScore}/100`);
+    console.log(`   Price: $${r.estimatedPrice}`);
+    console.log(`   Rating: ${r.estimatedRating} ⭐`);
+    if (searchUrl) {
+      console.log(`   ${searchUrl}`);
+    }
+    console.log("");
+  });
 
   // Save recommendations (but note they don't have real ASINs)
   const outputFile = path.join(process.cwd(), "ai/recommended-products.json");
