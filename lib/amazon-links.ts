@@ -14,7 +14,7 @@ export function buildAmazonAffiliateLink(
   try {
     const url = new URL(baseUrl);
     
-    // Add tracking tag
+    // Always set/replace the tracking tag with the correct one
     url.searchParams.set("tag", trackingId);
     
     // Add any additional params
@@ -26,10 +26,26 @@ export function buildAmazonAffiliateLink(
     
     return url.toString();
   } catch (error) {
-    // If URL parsing fails, return original URL with tag appended
-    const separator = baseUrl.includes("?") ? "&" : "?";
-    return `${baseUrl}${separator}tag=${trackingId}`;
+    // If URL parsing fails, try to extract ASIN and build clean URL
+    const asin = extractASIN(baseUrl);
+    if (asin) {
+      return `https://www.amazon.com/dp/${asin}?tag=${trackingId}`;
+    }
+    // Fallback: append tag to original URL
+    // Remove existing tag if present
+    const cleanUrl = baseUrl.replace(/[?&]tag=[^&]*/g, "");
+    const newSeparator = cleanUrl.includes("?") ? "&" : "?";
+    return `${cleanUrl}${newSeparator}tag=${trackingId}`;
   }
+}
+
+/**
+ * Validate if an Amazon URL/ASIN is likely valid
+ * Note: This doesn't check if the product actually exists, just format validation
+ */
+export function isValidASIN(asin: string): boolean {
+  // ASIN format: 10 alphanumeric characters
+  return /^[A-Z0-9]{10}$/i.test(asin);
 }
 
 /**
