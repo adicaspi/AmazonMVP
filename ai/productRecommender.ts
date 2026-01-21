@@ -41,29 +41,23 @@ export async function scanAndRecommendProducts(
     console.log(`\n🔍 Scanning ${category.category} for recommended products...`);
 
     const systemPrompt = `
-You are an expert Amazon affiliate marketing analyst. Your job is to identify products that would convert well for affiliate marketing.
+You are an expert Amazon affiliate marketing analyst. Your job is to identify PRODUCT TYPES and SEARCH STRATEGIES, NOT to invent ASINs.
 
-Analyze products in this category and recommend the BEST ones based on:
-1. **Conversion Potential** - Products that solve real problems, have clear before/after value
-2. **Market Demand** - High ratings (4.0+), good review counts (500+)
-3. **Price Range** - $15-$60 is ideal for impulse purchases
-4. **Problem-Solution Fit** - Products that solve daily, relatable problems
-5. **Visual Appeal** - Products with clear visual benefits
+DO NOT provide ASINs - you cannot verify they are real without Amazon PA-API access.
 
-For each recommended product, provide:
-- A REAL ASIN (10 alphanumeric characters) - use real ASINs you know exist
-- Realistic product data (price, rating, reviews)
-- Why it would convert well
-- Target user and main problem it solves
-- Recommendation score (0-100)
+Instead, provide:
+- Product types and names (generic, not specific ASINs)
+- Search keywords to find these products on Amazon
+- What to look for in products
+- Criteria for good affiliate products
 
 Return VALID JSON ONLY in this format:
 {
   "products": [
     {
-      "asin": "B08YZ5YF7M",
-      "title": "Real Product Name",
+      "productType": "Bamboo Drawer Organizer",
       "category": "${category.category}",
+      "searchKeywords": ["bamboo drawer organizer", "kitchen drawer organizer"],
       "estimatedPrice": 24.99,
       "estimatedRating": 4.5,
       "estimatedReviews": 8500,
@@ -72,13 +66,14 @@ Return VALID JSON ONLY in this format:
       "reasons": ["solves common problem", "high reviews", "good price point"],
       "targetUser": "who needs this",
       "mainProblem": "what problem it solves",
-      "whyGoodForAffiliate": "why this would convert well"
+      "whyGoodForAffiliate": "why this would convert well",
+      "amazonSearchUrl": "https://www.amazon.com/s?k=bamboo+drawer+organizer"
     }
   ]
 }
 
-Generate ${maxProductsPerCategory} products per category. Use REAL ASINs only.
-Focus on products that would actually convert well for affiliate marketing.
+DO NOT include "asin" field. Only provide product types and search strategies.
+Generate ${maxProductsPerCategory} product types per category.
 `.trim();
 
     const userPrompt = `
@@ -124,15 +119,20 @@ Return the top ${maxProductsPerCategory} products with highest conversion potent
 
       // Convert to ProductAnalysis format
       for (const p of parsed.products) {
-        // Validate ASIN format
-        if (!p.asin || !/^[A-Z0-9]{10}$/i.test(p.asin)) {
-          console.warn(`⚠️  Invalid ASIN format: ${p.asin}`);
+        // Skip if has ASIN (old format) - we don't want fake ASINs
+        if (p.asin) {
+          console.warn(`⚠️  Skipping product with ASIN (${p.asin}) - ASINs cannot be verified without PA-API`);
           continue;
         }
 
+        // Use productType instead of title, and generate search URL
+        const productType = p.productType || p.title || "Unknown Product";
+        const searchKeywords = p.searchKeywords || [productType.toLowerCase()];
+        const searchUrl = p.amazonSearchUrl || `https://www.amazon.com/s?k=${encodeURIComponent(searchKeywords[0])}`;
+
         const analysis: ProductAnalysis = {
-          asin: p.asin.toUpperCase(),
-          title: p.title || "Unknown Product",
+          asin: "NEEDS_VERIFICATION", // Placeholder - user must find real ASIN
+          title: productType,
           category: p.category || category.category,
           estimatedPrice: p.estimatedPrice || 24.99,
           estimatedRating: p.estimatedRating || 4.5,
@@ -145,8 +145,12 @@ Return the top ${maxProductsPerCategory} products with highest conversion potent
           whyGoodForAffiliate: p.whyGoodForAffiliate || "good conversion potential",
         };
 
+        // Add search info to reasons
+        analysis.reasons.push(`Search: ${searchUrl}`);
+
         allRecommendations.push(analysis);
-        console.log(`  ✅ ${analysis.title} (${analysis.asin}) - Score: ${analysis.recommendationScore}/100`);
+        console.log(`  ✅ ${analysis.title} - Score: ${analysis.recommendationScore}/100`);
+        console.log(`     🔍 Search: ${searchUrl}`);
       }
     } catch (error) {
       console.error(`❌ Error scanning ${category.category}:`, error);

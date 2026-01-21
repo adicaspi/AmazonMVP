@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 
 import { scanAndRecommendProducts, filterTopRecommendations, generateRecommendationReport } from "./productRecommender";
+import { generateBestSellersInstructions } from "./amazonBestSellers";
 import fs from "fs/promises";
 import path from "path";
 
@@ -97,12 +98,30 @@ async function main() {
     "utf8"
   );
 
-  console.log(`\n📝 Saved recommendations to: ai/recommended-products.json`);
+  // Save recommendations (but note they don't have real ASINs)
+  const outputFile = path.join(process.cwd(), "ai/recommended-products.json");
+  const recommendationsToSave = topRecommendations.map(r => ({
+    ...r,
+    note: "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    instructions: "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json",
+  }));
+  
+  await fs.writeFile(
+    outputFile,
+    JSON.stringify(recommendationsToSave, null, 2),
+    "utf8"
+  );
+
+  console.log(`\n📝 Saved product types to: ai/recommended-products.json`);
+  console.log(`\n⚠️  IMPORTANT: These are PRODUCT TYPES, not real ASINs!`);
   console.log(`\n💡 Next steps:`);
-  console.log(`   1. Review the recommendations in ai/recommended-products.json`);
-  console.log(`   2. Verify ASINs on Amazon`);
-  console.log(`   3. Add selected products to discoveryInput.json`);
-  console.log(`   4. Run: npm run import:discovery`);
+  console.log(`   1. Use the Amazon Best Sellers links above (most reliable)`);
+  console.log(`   2. OR use the search URLs for each product type`);
+  console.log(`   3. Find real products on Amazon`);
+  console.log(`   4. Copy ASINs from product URLs`);
+  console.log(`   5. Verify products are real`);
+  console.log(`   6. Add verified products to discoveryInput.json`);
+  console.log(`   7. Run: npm run import:discovery`);
 }
 
 main().catch(console.error);
