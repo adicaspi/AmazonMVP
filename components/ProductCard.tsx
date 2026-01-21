@@ -70,11 +70,18 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           ))}
         </div>
 
-        {/* Benefit sentence above CTA */}
+        {/* Why we picked it - Short version above CTA (4-6 words) */}
         {product.whyWePickedIt && (
-          <p className="text-xs text-slate-700 italic leading-relaxed mb-3 line-clamp-2">
-            {product.whyWePickedIt.split('.')[0]}.
-          </p>
+          <div className="mb-3">
+            <p className="text-xs text-slate-600 font-medium mb-1">Why we picked it:</p>
+            <p className="text-xs text-slate-700 leading-relaxed">
+              {(() => {
+                const firstSentence = product.whyWePickedIt.split('.')[0];
+                const words = firstSentence.split(' ').slice(0, 6);
+                return words.join(' ') + (words.length < firstSentence.split(' ').length ? '...' : '');
+              })()}
+            </p>
+          </div>
         )}
 
         {/* Ratings placeholder */}
@@ -94,9 +101,9 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           target="_blank"
           rel="sponsored nofollow noopener"
           className="block w-full py-3.5 sm:py-4 px-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-sm sm:text-base font-bold text-center hover:from-slate-800 hover:to-slate-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-          aria-label={`Check price on Amazon for ${product.title}`}
+          aria-label={`Find Better Home Picks for ${product.title}`}
         >
-          Check Price on Amazon →
+          Find Better Home Picks
         </a>
         <p className="text-[10px] sm:text-xs text-slate-500 text-center mt-2 leading-tight">
           <span className="font-semibold">Affiliate:</span> As an Amazon Associate I earn from qualifying purchases.

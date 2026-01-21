@@ -124,11 +124,11 @@ export default async function ProductPage({ params }: Props) {
           {product.whyWePickedIt && (
             <div className="bg-slate-50 border-l-4 border-slate-900 p-6 sm:p-8 rounded-r-lg mb-8 sm:mb-10">
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4">Why AI Picks Recommends This</h2>
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                {product.whyWePickedIt}
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-3">
+                {product.whyWePickedIt.split('.')[0]}. We selected this product after analyzing user reviews, comparing design quality, and evaluating value for money.
               </p>
-              <p className="text-sm text-slate-600 mt-4 italic">
-                Based on reviews, value, and design quality.
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+                It meets our standards for functionality, durability, and overall user satisfaction. This isn't just a recommendation—it's a product we'd use in our own homes.
               </p>
             </div>
           )}
@@ -163,7 +163,7 @@ export default async function ProductPage({ params }: Props) {
               rel="sponsored nofollow noopener"
               className="block w-full py-4 sm:py-5 px-6 sm:px-10 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-center font-bold text-base sm:text-lg rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
-              Check Price on Amazon →
+              Find Better Home Picks
             </a>
             <p className="text-xs text-slate-500 mt-3 text-center">
               <span className="font-semibold">Affiliate Disclosure:</span> As an Amazon Associate I earn from qualifying purchases.

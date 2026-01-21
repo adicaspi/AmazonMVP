@@ -40,12 +40,15 @@ export default function HomePage() {
               <p className="text-lg md:text-xl text-slate-600 mt-3 max-w-2xl leading-relaxed">
                 Handpicked favorites from our editors — carefully curated to help you create a more beautiful home
               </p>
+              <p className="text-sm text-slate-500 mt-2">
+                Curated from hundreds of options • Updated regularly • Only products we'd recommend ourselves
+              </p>
             </div>
             <Link
               href="/products"
               className="hidden md:flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
             >
-              <span>View all products</span>
+              <span>Find Better Home Picks</span>
               <span className="text-xl">→</span>
             </Link>
           </div>
@@ -72,7 +75,7 @@ export default function HomePage() {
               href="/products"
               className="inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto justify-center"
             >
-              <span>View all products</span>
+              <span>Find Better Home Picks</span>
               <span className="text-lg">→</span>
             </Link>
           </div>

@@ -49,7 +49,7 @@ export function HowItWorks() {
               You Choose
             </h3>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-              Browse our curated picks, read honest reviews, and buy directly from Amazon with confidence.
+              Find better home picks, read honest reviews, and buy directly from Amazon with confidence.
             </p>
           </div>
         </div>

@@ -60,9 +60,20 @@ export default function ChoosingKitchenLightingGuide() {
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4">
                 Ambient lighting provides overall illumination for the entire kitchen. This is your "base layer" of light that makes the room feel bright and welcoming.
               </p>
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4">
                 <strong>Options include:</strong> Recessed ceiling lights, chandeliers, track lighting systems, and large pendant lights.
               </p>
+              <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-6 my-6">
+                <p className="text-base sm:text-lg text-slate-700 mb-4">
+                  <strong>Recommended Product:</strong> Our <Link href="/products/table-lamp-modern" className="text-emerald-600 hover:text-emerald-700 underline font-semibold">Modern Table Lamp</Link> provides excellent ambient lighting for kitchen islands and dining areas. It combines modern design with practical functionality.
+                </p>
+                <a
+                  href="/products/table-lamp-modern"
+                  className="inline-block px-6 py-3 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-lg hover:from-slate-800 hover:to-slate-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                >
+                  Find Better Home Picks
+                </a>
+              </div>
             </div>
 
             <div>
@@ -123,7 +134,7 @@ export default function ChoosingKitchenLightingGuide() {
         </section>
 
         <section className="mb-10 sm:mb-12 bg-slate-50 border-l-4 border-slate-900 p-6 sm:p-8 rounded-r-lg">
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">Our Top Kitchen Lighting Recommendations</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">Recommended Products</h2>
           <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-6">
             Based on our research and user feedback, here are lighting solutions we consistently recommend:
           </p>

@@ -121,12 +121,12 @@ export default function KitchenStorageSolutionsGuide() {
         </section>
 
         <section className="mb-10 sm:mb-12 bg-slate-50 border-l-4 border-slate-900 p-6 sm:p-8 rounded-r-lg">
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">Our Top Recommendations</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">Recommended Products</h2>
           
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">For Drawers</h3>
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4">
                 <Link href="/products/bamboo-drawer-organizer" className="text-emerald-600 hover:text-emerald-700 underline font-semibold">Bamboo Drawer Organizer</Link> - Adjustable, durable, and effective.
               </p>
             </div>

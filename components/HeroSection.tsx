@@ -18,13 +18,16 @@ export function HeroSection() {
             <span>Curated Home Accessories</span>
           </span>
         </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-slate-900 mb-6 sm:mb-8 leading-[1.1] tracking-tight px-2">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-slate-900 mb-4 sm:mb-6 leading-[1.1] tracking-tight px-2">
           Minimal, well-designed{" "}
           <span className="bg-gradient-to-r from-slate-900 via-emerald-700 to-slate-600 bg-clip-text text-transparent animate-gradient">
             home accessories
           </span>{" "}
           that upgrade your space.
         </h1>
+        <p className="text-base sm:text-lg md:text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8 font-normal px-4">
+          For people who want a better-looking home without endless searching.
+        </p>
         <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-slate-600 max-w-4xl mx-auto leading-relaxed mb-8 sm:mb-12 font-light px-4">
           Curated recommendations and practical guides to help you create a more organized, 
           comfortable, and beautiful home.
@@ -32,15 +35,15 @@ export function HeroSection() {
           <div className="flex flex-wrap items-center justify-center gap-8 text-base text-slate-600 mb-12">
             <div className="flex items-center gap-3 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-slate-200 shadow-sm">
               <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="font-semibold">Trusted Reviews</span>
+              <span className="font-semibold">Curated from hundreds of options</span>
             </div>
             <div className="flex items-center gap-3 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-slate-200 shadow-sm">
               <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse [animation-delay:500ms]" />
-              <span className="font-semibold">Regularly Updated</span>
+              <span className="font-semibold">Updated regularly</span>
             </div>
             <div className="flex items-center gap-3 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-slate-200 shadow-sm">
               <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse [animation-delay:1000ms]" />
-              <span className="font-semibold">Editorial Independence</span>
+              <span className="font-semibold">Only products we'd recommend ourselves</span>
             </div>
           </div>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -48,13 +51,13 @@ export function HeroSection() {
             href="/products" 
             className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 text-center"
           >
-            Browse Top Picks
+            Find Better Home Picks
           </a>
           <a 
             href="/guides" 
             className="w-full sm:w-auto px-8 py-4 bg-white text-slate-900 font-bold rounded-xl border-2 border-slate-300 hover:border-slate-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
           >
-            Explore Guides
+            Find Better Home Picks
           </a>
         </div>
       </div>

@@ -14,29 +14,33 @@ export default function AboutPage() {
         </h1>
         
         <div className="space-y-8 sm:space-y-12">
-          {/* Why We Exist */}
+          {/* User-First Opening */}
           <section>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">
-              Why We Exist
-            </h2>
+            <p className="text-lg sm:text-xl text-slate-700 leading-relaxed mb-6 font-medium">
+              If you're tired of scrolling endless reviews and still feeling unsure, this site is for you.
+            </p>
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4">
-              Shopping for home products on Amazon can be overwhelming. With millions of options, 
-              fake reviews, and inconsistent quality, finding the right product takes hours of research.
+              We created AI Picks because shopping for home products shouldn't require hours of research. 
+              With millions of options, fake reviews, and inconsistent quality on Amazon, finding the right 
+              product feels impossible. We do the research so you don't have to.
             </p>
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-              AI Picks exists to solve this problem. We do the research so you don't have to. 
-              Our team analyzes thousands of products, reads real reviews, and tests items when possible 
-              to bring you only the best options for your home.
+              Our team analyzes hundreds of products, reads real reviews, and evaluates design quality 
+              to bring you only the best options for your home. We select products based on value, 
+              usability, and genuine user satisfaction—not marketing hype.
             </p>
           </section>
 
-          {/* How We Select Products */}
+          {/* Why We Exist */}
           <section>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">
               How We Select Products
             </h2>
+
+          {/* How We Select Products - Already moved above */}
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4">
-              Our curation process is thorough and transparent:
+              We curate from hundreds of options, selecting only products that meet our standards for quality, 
+              value, and user satisfaction. Our process is thorough and transparent:
             </p>
             <ol className="list-decimal list-inside space-y-3 sm:space-y-4 text-base sm:text-lg text-slate-700">
               <li>

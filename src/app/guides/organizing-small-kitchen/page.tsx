@@ -121,12 +121,21 @@ export default function OrganizingSmallKitchenGuide() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div className="p-6 bg-white border border-slate-200 rounded-xl">
               <h3 className="text-lg font-bold text-slate-900 mb-3">Zone 1: Prep Area</h3>
-              <ul className="list-disc list-inside space-y-1 text-slate-700">
+              <ul className="list-disc list-inside space-y-1 text-slate-700 mb-4">
                 <li>Cutting boards</li>
                 <li>Knives</li>
                 <li>Measuring tools</li>
                 <li>Mixing bowls</li>
               </ul>
+              <div className="mt-4 pt-4 border-t border-slate-200">
+                <p className="text-sm text-slate-600 mb-2">Recommended product:</p>
+                <a
+                  href="/products/bamboo-drawer-organizer"
+                  className="inline-block px-4 py-2 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-sm font-bold rounded-lg hover:from-slate-800 hover:to-slate-700 transition-all"
+                >
+                  Find Better Home Picks
+                </a>
+              </div>
             </div>
             <div className="p-6 bg-white border border-slate-200 rounded-xl">
               <h3 className="text-lg font-bold text-slate-900 mb-3">Zone 2: Cooking Area</h3>
@@ -224,7 +233,7 @@ export default function OrganizingSmallKitchenGuide() {
         </section>
 
         <div className="border-t border-slate-200 pt-8 sm:pt-12 mt-12">
-          <h3 className="text-xl font-bold text-slate-900 mb-4">Recommended Products</h3>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">Recommended Products</h2>
           <ul className="space-y-3 text-base sm:text-lg text-slate-700">
             <li>
               <Link href="/products/bamboo-drawer-organizer" className="text-emerald-600 hover:text-emerald-700 underline font-semibold">

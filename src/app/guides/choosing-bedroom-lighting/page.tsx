@@ -114,7 +114,7 @@ export default function ChoosingBedroomLightingGuide() {
         </section>
 
         <section className="mb-10 sm:mb-12 bg-slate-50 border-l-4 border-slate-900 p-6 sm:p-8 rounded-r-lg">
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">Our Top Bedroom Lighting Recommendations</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">Recommended Products</h2>
           
           <div className="space-y-6">
             <div>
@@ -128,6 +128,12 @@ export default function ChoosingBedroomLightingGuide() {
                 <li>Modern, minimalist design</li>
                 <li>Easy to use from bed</li>
               </ul>
+              <a
+                href="/products/table-lamp-modern"
+                className="inline-block mt-4 px-6 py-3 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-lg hover:from-slate-800 hover:to-slate-700 transition-all duration-200 shadow-md hover:shadow-lg"
+              >
+                Find Better Home Picks
+              </a>
             </div>
           </div>
         </section>
