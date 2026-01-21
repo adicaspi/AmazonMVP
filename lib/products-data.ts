@@ -590,6 +590,474 @@ export const products: Product[] = [
     status: "published",
     featured: false,
     dateAdded: "2026-01-21"
+  },
+  {
+    id: "B000EOEAW6",
+    slug: "melissa-doug-pets-wooden-chunky-puzzle",
+    title: "Melissa & Doug Pets Wooden Chunky Puzzle - 8 Pieces",
+    benefitTitle: "Educational wooden puzzle for toddlers",
+    room: "kids_room",
+    tags: ["toys", "kids", "melissa-doug", "educational", "puzzle", "wooden"],
+    shortDescription: "8-piece wooden chunky puzzle featuring adorable pet animals. Perfect for developing motor skills and hand-eye coordination in toddlers ages 2+.",
+    whyWePickedIt: "Melissa & Doug's chunky puzzles are beloved by parents for their durability and educational value. The thick wooden pieces are easy for little hands to grasp, and each piece can stand upright for pretend play. FSC-certified wood ensures quality and sustainability.",
+    image: "https://m.media-amazon.com/images/I/71EgKAe11PL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Melissa-Doug-Wooden-Chunky-Puzzle/dp/B000EOEAW6?tag=aipicks20-20",
+    asin: "B000EOEAW6",
+    price: 8.99,
+    highlights: [
+      "8 chunky wooden puzzle pieces",
+      "FSC-certified sustainable wood",
+      "Ages 2+ years",
+      "Pieces stand upright for pretend play",
+      "Full-color matching pictures underneath"
+    ],
+    pros: [
+      "Extremely durable - lasts for years",
+      "Perfect size for toddler hands",
+      "Educational and entertaining",
+      "Pieces double as play figures",
+      "High-quality Melissa & Doug construction"
+    ],
+    cons: [
+      "Only 8 pieces - may be too simple for older kids",
+      "Paint may chip with very rough play"
+    ],
+    specs: {
+      "Brand": "Melissa & Doug",
+      "Age Range": "2+ years",
+      "Pieces": "8 wooden pieces",
+      "Material": "FSC-certified wood",
+      "Dimensions": "11.75\" x 8.75\" x 1.25\"",
+      "Target User": "Toddlers and preschoolers learning motor skills and animal recognition"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B00CPHX6YI",
+    slug: "melissa-doug-stainless-steel-pots-pans",
+    title: "Melissa & Doug Stainless Steel Pots & Pans Pretend Play Kitchen Set",
+    benefitTitle: "Realistic pretend play cookware for kids",
+    room: "kids_room",
+    tags: ["toys", "kids", "melissa-doug", "pretend-play", "kitchen", "cookware"],
+    shortDescription: "8-piece stainless steel play cookware set including pots, pans, and lids. Realistic kitchen play for children ages 3+.",
+    whyWePickedIt: "Unlike plastic play sets, this stainless steel cookware looks and feels realistic, making pretend play more engaging. The durable metal construction means it can withstand years of play and even be passed down to siblings. Perfect for encouraging imagination and role-play.",
+    image: "https://m.media-amazon.com/images/I/61NN1xU+ZML._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Melissa-Doug-Stainless-Pretend-Kitchen/dp/B00CPHX6YI?tag=aipicks20-20",
+    asin: "B00CPHX6YI",
+    price: 24.99,
+    highlights: [
+      "8-piece stainless steel set",
+      "Realistic metal construction",
+      "Ages 3+ years",
+      "Includes pots, pans, and lids",
+      "Encourages imaginative play"
+    ],
+    pros: [
+      "Real stainless steel - very durable",
+      "Looks and feels authentic",
+      "Great for teaching kitchen skills",
+      "Compatible with other play kitchen sets",
+      "Easy to clean"
+    ],
+    cons: [
+      "Can be noisy during play",
+      "Metal may have sharp edges (supervision recommended)"
+    ],
+    specs: {
+      "Brand": "Melissa & Doug",
+      "Age Range": "3+ years",
+      "Pieces": "8 pieces (pots, pans, lids)",
+      "Material": "Stainless steel",
+      "Set Includes": "2 pots with lids, 1 colander, 1 pan, 1 lid",
+      "Target User": "Children who enjoy pretend cooking and kitchen play"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B00MYL7L9G",
+    slug: "melissa-doug-slice-serve-wooden-kitchen-set",
+    title: "Melissa & Doug Slice & Serve Wooden Play Food & Kitchen Accessories Set",
+    benefitTitle: "Complete wooden food and utensils play set",
+    room: "kids_room",
+    tags: ["toys", "kids", "melissa-doug", "pretend-play", "kitchen", "wooden", "food"],
+    shortDescription: "Deluxe wooden play food set with sliceable items and kitchen utensils. Includes 61 pieces for endless pretend cooking fun.",
+    whyWePickedIt: "This comprehensive set provides everything kids need for realistic kitchen play. The wooden food pieces have self-stick tabs that make a satisfying 'crunch' when sliced, teaching cause-and-effect while developing fine motor skills. The included storage crate keeps everything organized.",
+    image: "https://m.media-amazon.com/images/I/61DJztu5EzL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Melissa-Doug-Serve-Cooking-Utensils/dp/B00MYL7L9G?tag=aipicks20-20",
+    asin: "B00MYL7L9G",
+    price: 29.99,
+    highlights: [
+      "61-piece wooden play food set",
+      "Self-stick tabs for slicing action",
+      "Wooden storage crate included",
+      "Ages 3+ years",
+      "Food, utensils, and serving pieces"
+    ],
+    pros: [
+      "Huge variety - 61 pieces total",
+      "Satisfying slicing action",
+      "Storage crate for organization",
+      "Durable wooden construction",
+      "Great for social play and sharing"
+    ],
+    cons: [
+      "Self-stick tabs may wear out over time",
+      "Small pieces - not suitable for children under 3"
+    ],
+    specs: {
+      "Brand": "Melissa & Doug",
+      "Age Range": "3+ years",
+      "Pieces": "61 total pieces",
+      "Material": "Wood",
+      "Includes": "Play food, wooden knife, tongs, plates, cups, utensils, storage crate",
+      "Target User": "Children who love pretend cooking and serving food"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B011PZUPYO",
+    slug: "melissa-doug-condiments-set",
+    title: "Melissa & Doug Wooden Condiments Set - Play Food Kitchen Accessories",
+    benefitTitle: "Add realistic condiments to play kitchen",
+    room: "kids_room",
+    tags: ["toys", "kids", "melissa-doug", "pretend-play", "kitchen", "food"],
+    shortDescription: "Wooden condiment set including ketchup, mustard, salt, pepper, and more. Perfect addition to any play kitchen or restaurant setup.",
+    whyWePickedIt: "This condiment set adds authentic details to pretend play meals. Kids love the realistic squeeze bottles and shaker tops that actually work. Great for teaching table manners and meal preparation while encouraging imaginative play.",
+    image: "https://m.media-amazon.com/images/I/81RH59GYNdL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Melissa-Doug-Condiments-Set-pcs/dp/B011PZUPYO?tag=aipicks20-20",
+    asin: "B011PZUPYO",
+    price: 14.99,
+    highlights: [
+      "Wooden condiment bottles and shakers",
+      "Realistic details and colors",
+      "Ages 3+ years",
+      "Complements other play food sets",
+      "Durable wooden construction"
+    ],
+    pros: [
+      "Adds realism to pretend meals",
+      "Well-crafted wooden pieces",
+      "Compatible with all play kitchens",
+      "Great for restaurant role-play",
+      "Encourages creative storytelling"
+    ],
+    cons: [
+      "Small set - may want additional play food",
+      "Pieces can't actually dispense (decorative only)"
+    ],
+    specs: {
+      "Brand": "Melissa & Doug",
+      "Age Range": "3+ years",
+      "Material": "Wood",
+      "Includes": "Ketchup, mustard, salt, pepper, and condiment holders",
+      "Target User": "Children with play kitchens who want to add realistic details"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B072M2PGX9",
+    slug: "melissa-doug-favorite-condiments-play-set",
+    title: "Melissa & Doug Favorite Condiments Wooden Play Food Set",
+    benefitTitle: "Favorite condiments for pretend play meals",
+    room: "kids_room",
+    tags: ["toys", "kids", "melissa-doug", "pretend-play", "kitchen", "food", "wooden"],
+    shortDescription: "Wooden play food set featuring favorite condiments and toppings. Perfect for adding detail to pretend restaurant and kitchen play.",
+    whyWePickedIt: "This set brings pretend meals to life with recognizable condiments kids see at home and in restaurants. The wooden construction ensures durability, and the realistic details help children learn about meal preparation and serving.",
+    image: "https://m.media-amazon.com/images/I/61M1NFAceNL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Melissa-Doug-Favorite-Condiments-Play/dp/B072M2PGX9?tag=aipicks20-20",
+    asin: "B072M2PGX9",
+    price: 16.99,
+    highlights: [
+      "Wooden condiment play set",
+      "Realistic painted details",
+      "Ages 3+ years",
+      "Enhances pretend play scenarios",
+      "Quality Melissa & Doug construction"
+    ],
+    pros: [
+      "Realistic and recognizable items",
+      "Solid wooden pieces",
+      "Great for teaching meal concepts",
+      "Works with other play food sets",
+      "Encourages imaginative play"
+    ],
+    cons: [
+      "Items don't open or pour",
+      "May need other food items for complete play"
+    ],
+    specs: {
+      "Brand": "Melissa & Doug",
+      "Age Range": "3+ years",
+      "Material": "Wood with painted details",
+      "Target User": "Children who enjoy detailed pretend play cooking and serving"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B07HM95PP1",
+    slug: "melissa-doug-taco-tortilla-sliceable-set",
+    title: "Melissa & Doug Taco & Tortilla Sliceable Wooden Play Food Set",
+    benefitTitle: "Make pretend tacos with sliceable ingredients",
+    room: "kids_room",
+    tags: ["toys", "kids", "melissa-doug", "pretend-play", "kitchen", "food", "wooden", "sliceable"],
+    shortDescription: "Wooden taco and tortilla play food set with sliceable ingredients. Includes everything needed to make pretend tacos and burritos.",
+    whyWePickedIt: "This interactive food set lets kids 'prepare' tacos with sliceable toppings that stick together and come apart. It's perfect for teaching sequencing, following recipes, and developing fine motor skills. The tortillas and shells look amazingly realistic.",
+    image: "https://m.media-amazon.com/images/I/61Z61ZcNvdL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Melissa-Doug-Tortilla-Sliceable-Multicolor/dp/B07HM95PP1?tag=aipicks20-20",
+    asin: "B07HM95PP1",
+    price: 19.99,
+    highlights: [
+      "Sliceable wooden play food",
+      "Includes tacos, tortillas, and toppings",
+      "Self-stick tabs for assembly",
+      "Ages 3+ years",
+      "Wooden cutting tool included"
+    ],
+    pros: [
+      "Interactive slicing and assembly",
+      "Very realistic food items",
+      "Teaches food preparation",
+      "Satisfying cutting action",
+      "Great for pretend restaurant play"
+    ],
+    cons: [
+      "Self-stick tabs may weaken over time",
+      "Smaller pieces require supervision for young children"
+    ],
+    specs: {
+      "Brand": "Melissa & Doug",
+      "Age Range": "3+ years",
+      "Material": "Wood",
+      "Includes": "Tortillas, taco shells, toppings, wooden knife",
+      "Features": "Sliceable pieces with self-stick tabs",
+      "Target User": "Children who love interactive pretend cooking and food play"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B01M0DQQHQ",
+    slug: "melissa-doug-frozen-treats-ice-cream-set",
+    title: "Melissa & Doug Wooden Frozen Treats Ice Cream Play Set - 24 Pieces",
+    benefitTitle: "Mix-and-match ice cream play set with 24 pieces",
+    room: "kids_room",
+    tags: ["toys", "kids", "melissa-doug", "pretend-play", "food", "wooden", "ice-cream"],
+    shortDescription: "24-piece wooden ice cream play set with cookies, ice cream fillings, popsicles, and Italian ice cups. Perfect for imaginative play and learning colors and flavors.",
+    whyWePickedIt: "This beautiful wooden set inspires creative play with multiple mix-and-match combinations. Kids can create ice cream sandwiches, popsicles, and Italian ice treats while learning about colors, flavors, and customer service. The storage tray keeps everything organized.",
+    image: "https://m.media-amazon.com/images/I/61i7kSAB+AL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Melissa-Doug-Pretend-Durable-Construction/dp/B01M0DQQHQ?tag=aipicks20-20",
+    asin: "B01M0DQQHQ",
+    price: 19.99,
+    highlights: [
+      "24-piece wooden play set",
+      "Mix-and-match ice cream creations",
+      "Includes storage tray",
+      "Ages 3+ years",
+      "Reusable menu card included"
+    ],
+    pros: [
+      "Beautiful, durable wooden pieces",
+      "Encourages imaginative role-play",
+      "Multiple play combinations",
+      "Teaches colors and flavors",
+      "Storage tray for organization"
+    ],
+    cons: [
+      "Small pieces - requires supervision for young children",
+      "Some pieces may be lost over time"
+    ],
+    specs: {
+      "Brand": "Melissa & Doug",
+      "Age Range": "3+ years",
+      "Pieces": "24 pieces total",
+      "Material": "Wood",
+      "Includes": "6 cookies, 3 ice cream fillings, 6 ice pop halves, 2 Italian ice cups, spoons, menu card, storage tray",
+      "Target User": "Children who love pretend play and ice cream"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B06WP15J5R",
+    slug: "melissa-doug-slice-bake-cookie-set",
+    title: "Melissa & Doug Slice & Bake Wooden Cookie Play Food Set",
+    benefitTitle: "Realistic cookie baking play set",
+    room: "kids_room",
+    tags: ["toys", "kids", "melissa-doug", "pretend-play", "kitchen", "wooden", "sliceable", "cookies"],
+    shortDescription: "Wooden cookie play set with sliceable cookie dough, toppings, and baking accessories. Perfect for pretend baking and creative play.",
+    whyWePickedIt: "This interactive set lets kids 'slice' wooden cookie dough and decorate cookies with toppings. The self-stick tabs create satisfying pretend baking experiences while teaching sequencing and following recipes. Great for developing fine motor skills.",
+    image: "https://m.media-amazon.com/images/I/81Ei9XuHNrL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Melissa-Doug-Slice-Wooden-Pieces/dp/B06WP15J5R?tag=aipicks20-20",
+    asin: "B06WP15J5R",
+    price: 16.99,
+    highlights: [
+      "Sliceable wooden cookie dough",
+      "Multiple toppings and decorations",
+      "Self-stick tabs for assembly",
+      "Ages 3+ years",
+      "Wooden knife included"
+    ],
+    pros: [
+      "Interactive slicing action",
+      "Teaches baking concepts",
+      "Develops fine motor skills",
+      "Quality wooden construction",
+      "Great for pretend bakery play"
+    ],
+    cons: [
+      "Self-stick tabs may weaken with heavy use",
+      "Small pieces require supervision"
+    ],
+    specs: {
+      "Brand": "Melissa & Doug",
+      "Age Range": "3+ years",
+      "Material": "Wood",
+      "Features": "Sliceable pieces with self-stick tabs",
+      "Includes": "Cookie dough, toppings, wooden knife, baking accessories",
+      "Target User": "Children who enjoy pretend baking and cooking"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B0DCZ8S2X5",
+    slug: "sielevin-colorful-pretend-jewelry-bracelets",
+    title: "SIELEVIN Colorful Pretend Play Jewelry Bracelets Set for Girls",
+    benefitTitle: "Sparkly dress-up jewelry for imaginative play",
+    room: "kids_room",
+    tags: ["toys", "kids", "dress-up", "jewelry", "pretend-play", "girls", "accessories"],
+    shortDescription: "Colorful pretend jewelry set with bracelets, rings, and accessories perfect for dress-up, birthday parties, and imaginative play.",
+    whyWePickedIt: "This sparkly jewelry set is perfect for dress-up play and princess pretend games. The colorful variety keeps kids engaged, and it's great for birthday party favors or Christmas stockings. Safe for children and encourages creative role-play.",
+    image: "https://m.media-amazon.com/images/I/81lZk2wW7XL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/SIELEVIN-Colorful-Bracelets-Birthday-Christmas/dp/B0DCZ8S2X5?tag=aipicks20-20",
+    asin: "B0DCZ8S2X5",
+    price: 12.99,
+    highlights: [
+      "Colorful pretend jewelry set",
+      "Multiple bracelets and accessories",
+      "Perfect for dress-up play",
+      "Great for birthday parties",
+      "Safe for children"
+    ],
+    pros: [
+      "Bright, appealing colors",
+      "Variety of jewelry pieces",
+      "Encourages imaginative play",
+      "Great value for money",
+      "Perfect party favors"
+    ],
+    cons: [
+      "Plastic construction may not be as durable",
+      "Small pieces - supervision recommended"
+    ],
+    specs: {
+      "Brand": "SIELEVIN",
+      "Age Range": "3+ years",
+      "Material": "Plastic",
+      "Use": "Dress-up, pretend play, party favors",
+      "Target User": "Girls who love dress-up and princess play"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B0811B2GF5",
+    slug: "relibeauty-girls-princess-dress-costume",
+    title: "ReliBeauty Girls Princess Dress Up Costume with Elastic Bodice",
+    benefitTitle: "Comfortable princess dress for dress-up play",
+    room: "kids_room",
+    tags: ["toys", "kids", "dress-up", "costume", "princess", "girls", "pretend-play"],
+    shortDescription: "Princess dress-up costume with elastic backless design and beautiful accessories. Perfect for birthday parties, Halloween, and everyday pretend play.",
+    whyWePickedIt: "This princess dress features a comfortable elastic bodice that fits various sizes and allows for easy on-and-off. The beautiful design inspires imaginative play, and it's perfect for costume parties, photo shoots, or daily dress-up fun.",
+    image: "https://m.media-amazon.com/images/I/7197AaQCT7L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/ReliBeauty-Elastic-Backless-Princess-Accessories/dp/B0811B2GF5?tag=aipicks20-20",
+    asin: "B0811B2GF5",
+    price: 18.99,
+    highlights: [
+      "Elastic bodice for comfortable fit",
+      "Beautiful princess design",
+      "Includes accessories",
+      "Perfect for parties and dress-up",
+      "Easy to put on and take off"
+    ],
+    pros: [
+      "Comfortable elastic design",
+      "Fits various sizes",
+      "Beautiful, eye-catching design",
+      "Great for multiple occasions",
+      "Encourages imaginative play"
+    ],
+    cons: [
+      "May require hand washing",
+      "Sizing may vary - check measurements"
+    ],
+    specs: {
+      "Brand": "ReliBeauty",
+      "Age Range": "3-10 years",
+      "Material": "Polyester",
+      "Design": "Elastic backless bodice",
+      "Use": "Dress-up, parties, Halloween, photo shoots",
+      "Target User": "Girls who love princess play and costumes"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B09KXYLWG4",
+    slug: "princess-jewelry-boutique-dress-up-set",
+    title: "Princess Jewelry Boutique - Dress Up Costumes & Accessories Set",
+    benefitTitle: "Complete princess boutique with jewelry and costumes",
+    room: "kids_room",
+    tags: ["toys", "kids", "dress-up", "princess", "jewelry", "boutique", "pretend-play", "accessories"],
+    shortDescription: "Complete princess boutique play set with dress-up costumes, jewelry, and accessories for imaginative role-play and fashion fun.",
+    whyWePickedIt: "This all-in-one boutique set provides everything kids need for princess pretend play. The variety of jewelry and accessories encourages creativity and social play. Perfect for dress-up parties, playdates, or creating a princess boutique at home.",
+    image: "https://m.media-amazon.com/images/I/91H57JMpcyL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Princess-Jewelry-Boutique-Costumes-Accessories/dp/B09KXYLWG4?tag=aipicks20-20",
+    asin: "B09KXYLWG4",
+    price: 24.99,
+    highlights: [
+      "Complete boutique play set",
+      "Multiple jewelry pieces",
+      "Dress-up accessories included",
+      "Great for social play",
+      "Encourages creative role-play"
+    ],
+    pros: [
+      "Comprehensive set with many pieces",
+      "Encourages imaginative play",
+      "Great for playdates",
+      "Variety keeps kids engaged",
+      "Perfect gift for princess lovers"
+    ],
+    cons: [
+      "Many small pieces to keep track of",
+      "May need storage solution"
+    ],
+    specs: {
+      "Brand": "Princess Jewelry Boutique",
+      "Age Range": "3+ years",
+      "Includes": "Jewelry, accessories, dress-up items",
+      "Use": "Pretend play, dress-up, boutique role-play",
+      "Target User": "Children who love princess play and fashion"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
   }
 ];
 
