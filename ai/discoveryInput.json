@@ -190,5 +190,17 @@
     "trackingId": "aipicks20-20",
     "mainProblem": "Organizes multiple items in a compact design",
     "targetUser": "Anyone needing a versatile storage solution for various items"
+  },
+  {
+    "asin": "B09V5G395G",
+    "title": "Product B09V5G395G",
+    "price": 24.99,
+    "rating": 4.5,
+    "reviews": 1000,
+    "vertical": "home_living",
+    "baseAmazonUrl": "https://www.amazon.com/dp/B09V5G395G",
+    "trackingId": "aipicks20-20",
+    "mainProblem": "a common home organization problem",
+    "targetUser": "people looking to organize their home"
   }
 ]

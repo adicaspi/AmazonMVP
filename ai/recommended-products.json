@@ -1,902 +1,1052 @@
 [
   {
-    "asin": "B08D8DZZ5B",
-    "title": "mDesign Food Storage Container Set",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 42.99,
-    "estimatedRating": 4.8,
-    "estimatedReviews": 1200,
-    "conversionPotential": "high",
-    "recommendationScore": 95,
-    "reasons": [
-      "great for food organization",
-      "high user satisfaction",
-      "solid price"
-    ],
-    "targetUser": "health-conscious individuals and families",
-    "mainProblem": "food storage confusion and waste",
-    "whyGoodForAffiliate": "high demand for food organization solutions with visual appeal"
-  },
-  {
-    "asin": "B01M0P6F1Z",
-    "title": "Chef's Path Airtight Food Storage Containers",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 35.99,
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Multi-Compartment Storage Cubes",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 29.99,
     "estimatedRating": 4.7,
-    "estimatedReviews": 5800,
-    "conversionPotential": "high",
-    "recommendationScore": 92,
-    "reasons": [
-      "prevents food spoilage",
-      "excellent reviews",
-      "well-priced"
-    ],
-    "targetUser": "cooks and meal preppers",
-    "mainProblem": "keeping food fresh and organized",
-    "whyGoodForAffiliate": "high conversion potential due to clear benefits and strong social proof"
-  },
-  {
-    "asin": "B01M0P6F1Z",
-    "title": "Chef's Path Airtight Food Storage Containers",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 35.99,
-    "estimatedRating": 4.7,
-    "estimatedReviews": 5800,
-    "conversionPotential": "high",
-    "recommendationScore": 92,
-    "reasons": [
-      "prevents food spoilage",
-      "excellent reviews",
-      "well-priced"
-    ],
-    "targetUser": "cooks and meal preppers",
-    "mainProblem": "keeping food fresh and organized",
-    "whyGoodForAffiliate": "high conversion potential due to clear benefits and strong social proof"
-  },
-  {
-    "asin": "B07Y5F4MZ6",
-    "title": "Prep Naturals Glass Meal Prep Containers",
-    "category": "Food Storage",
-    "estimatedPrice": 39.99,
-    "estimatedRating": 4.7,
-    "estimatedReviews": 2000,
-    "conversionPotential": "high",
-    "recommendationScore": 92,
-    "reasons": [
-      "oven/microwave safe",
-      "durable glass",
-      "portion control"
-    ],
-    "targetUser": "health-conscious individuals",
-    "mainProblem": "healthy meal prep and storage",
-    "whyGoodForAffiliate": "excellent for fitness enthusiasts looking to maintain diet"
-  },
-  {
-    "asin": "B08F5KJ8QN",
-    "title": "Glass Food Storage Containers with Lids",
-    "category": "Food Storage",
-    "estimatedPrice": 49.99,
-    "estimatedRating": 4.8,
-    "estimatedReviews": 800,
+    "estimatedReviews": 650,
     "conversionPotential": "high",
     "recommendationScore": 91,
     "reasons": [
-      "microwave and dishwasher safe",
-      "great for meal prep",
-      "durable"
+      "versatile",
+      "colorful",
+      "high utility",
+      "Search: https://www.amazon.com/s?k=storage+cubes"
     ],
-    "targetUser": "meal preppers and health enthusiasts",
-    "mainProblem": "finding safe and durable meal prep containers",
-    "whyGoodForAffiliate": "high ratings and excellent functionality make it very appealing"
+    "targetUser": "families, students",
+    "mainProblem": "organizing toys and clothes",
+    "whyGoodForAffiliate": "attractive and functional",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B07C7D6H8F",
-    "title": "mDesign Plastic Kitchen Drawer Organizer",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 19.99,
-    "estimatedRating": 4.7,
-    "estimatedReviews": 3100,
-    "conversionPotential": "high",
-    "recommendationScore": 90,
-    "reasons": [
-      "solves clutter issues",
-      "high ratings",
-      "affordable price"
-    ],
-    "targetUser": "homeowners and renters looking for organization",
-    "mainProblem": "disorganized kitchen drawers",
-    "whyGoodForAffiliate": "great visual appeal and functionality, leading to high conversions"
-  },
-  {
-    "asin": "B08P2X8Z5K",
-    "title": "StorageWorks Cotton Rope Basket",
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Woven Storage Baskets",
     "category": "Home Storage",
-    "estimatedPrice": 29.99,
-    "estimatedRating": 4.8,
-    "estimatedReviews": 1200,
-    "conversionPotential": "high",
-    "recommendationScore": 90,
-    "reasons": [
-      "stylish design",
-      "high reviews",
-      "versatile use"
-    ],
-    "targetUser": "families looking for stylish storage solutions",
-    "mainProblem": "clutter in living spaces",
-    "whyGoodForAffiliate": "visually appealing and functional, encourages impulse buys"
-  },
-  {
-    "asin": "B07H4B8LP8",
-    "title": "KitchenAid Classic Multifunction Can Opener",
-    "category": "Kitchen Tools",
-    "estimatedPrice": 19.99,
-    "estimatedRating": 4.8,
-    "estimatedReviews": 1200,
-    "conversionPotential": "high",
-    "recommendationScore": 90,
-    "reasons": [
-      "solves common problem of opening jars",
-      "high ratings",
-      "affordable price"
-    ],
-    "targetUser": "home cooks and individuals with limited grip strength",
-    "mainProblem": "Difficulty in opening cans and jars",
-    "whyGoodForAffiliate": "Highly rated, practical tool that everyone needs in the kitchen"
-  },
-  {
-    "asin": "B07FZGN6H7",
-    "title": "Rubbermaid Brilliance Food Storage Container",
-    "category": "Food Storage",
-    "estimatedPrice": 22.99,
+    "estimatedPrice": 25.99,
     "estimatedRating": 4.6,
-    "estimatedReviews": 6000,
+    "estimatedReviews": 1200,
     "conversionPotential": "high",
     "recommendationScore": 90,
     "reasons": [
-      "airtight design",
-      "high durability",
-      "clear visibility"
+      "aesthetic appeal",
+      "versatile use",
+      "high ratings",
+      "Search: https://www.amazon.com/s?k=woven+storage+baskets"
     ],
-    "targetUser": "meal preppers and families",
-    "mainProblem": "keeping food fresh and organized",
-    "whyGoodForAffiliate": "high ratings and versatile use make it appealing for all kitchens"
+    "targetUser": "home decorators and organizers",
+    "mainProblem": "clutter management and organization",
+    "whyGoodForAffiliate": "attractive and practical for home decor enthusiasts",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B01MZV2JY2",
-    "title": "Glass Meal Prep Containers by Ecolution",
-    "category": "Food Storage",
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Drawer Organizers",
+    "category": "Home Storage",
+    "estimatedPrice": 24.99,
+    "estimatedRating": 4.6,
+    "estimatedReviews": 750,
+    "conversionPotential": "high",
+    "recommendationScore": 90,
+    "reasons": [
+      "customizable",
+      "improves efficiency",
+      "high ratings",
+      "Search: https://www.amazon.com/s?k=drawer+organizers"
+    ],
+    "targetUser": "cooks and home organizers",
+    "mainProblem": "disorganized drawers",
+    "whyGoodForAffiliate": "increases kitchen organization appeal",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Jar Opener",
+    "category": "Kitchen Tools",
+    "estimatedPrice": 15.99,
+    "estimatedRating": 4.6,
+    "estimatedReviews": 1200,
+    "conversionPotential": "high",
+    "recommendationScore": 90,
+    "reasons": [
+      "solves common problem",
+      "high reviews",
+      "good price point",
+      "Search: https://www.amazon.com/s?k=jar+opener"
+    ],
+    "targetUser": "home cooks, elderly individuals",
+    "mainProblem": "difficulty opening jars",
+    "whyGoodForAffiliate": "essential tool for many households, easy to market",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Non-Stick Cookware Set",
+    "category": "Kitchen Tools",
     "estimatedPrice": 39.99,
     "estimatedRating": 4.7,
-    "estimatedReviews": 1500,
+    "estimatedReviews": 2500,
     "conversionPotential": "high",
     "recommendationScore": 90,
     "reasons": [
-      "healthy material",
-      "oven-safe",
-      "variety of sizes"
+      "easy cooking, easy clean",
+      "high reviews",
+      "durable",
+      "Search: https://www.amazon.com/s?k=non-stick+cookware+set"
     ],
-    "targetUser": "health-conscious cooks",
-    "mainProblem": "finding safe, healthy meal prep containers",
-    "whyGoodForAffiliate": "excellent quality and health-oriented buyers are likely to purchase"
+    "targetUser": "new cooks, families",
+    "mainProblem": "sticking food",
+    "whyGoodForAffiliate": "high demand item, essential for kitchens",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B07Y5VK7W8",
-    "title": "Glass Meal Prep Containers with Lids by Prep Naturals",
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Airtight Food Storage Containers",
     "category": "Food Storage",
-    "estimatedPrice": 39.99,
-    "estimatedRating": 4.8,
+    "estimatedPrice": 29.99,
+    "estimatedRating": 4.7,
+    "estimatedReviews": 12000,
+    "conversionPotential": "high",
+    "recommendationScore": 90,
+    "reasons": [
+      "prevents food spoilage",
+      "high reviews",
+      "effective design",
+      "Search: https://www.amazon.com/s?k=airtight+food+storage+containers"
+    ],
+    "targetUser": "home cooks, meal preppers",
+    "mainProblem": "keeps food fresh for longer",
+    "whyGoodForAffiliate": "popular choice for organization",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Floating Wall Shelves",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 29.99,
+    "estimatedRating": 4.7,
     "estimatedReviews": 1200,
     "conversionPotential": "high",
     "recommendationScore": 90,
     "reasons": [
-      "durable",
-      "multi-use",
-      "health friendly"
-    ],
-    "targetUser": "fitness and health-minded individuals",
-    "mainProblem": "finding durable meal prep solutions",
-    "whyGoodForAffiliate": "great for those who care about food quality and health"
-  },
-  {
-    "asin": "B08L3N3Z7W",
-    "title": "Wallniture Floating Shelves Set of 3",
-    "category": "Home Decor & Organization",
-    "estimatedPrice": 29.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 1250,
-    "conversionPotential": "high",
-    "recommendationScore": 90,
-    "reasons": [
-      "solves space issues",
+      "space-saving",
+      "stylish",
       "high reviews",
-      "stylish design"
+      "Search: https://www.amazon.com/s?k=floating+wall+shelves"
     ],
-    "targetUser": "homeowners and renters looking for space-saving solutions",
-    "mainProblem": "lack of storage and display space in small rooms",
-    "whyGoodForAffiliate": "visually appealing and functional, great for home decor"
+    "targetUser": "homeowners, renters",
+    "mainProblem": "lack of storage space",
+    "whyGoodForAffiliate": "appealing design, easy to install",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B07DPP9T4D",
-    "title": "Kamenstein 16-Jar Spice Rack",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 39.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 650,
-    "conversionPotential": "high",
-    "recommendationScore": 89,
-    "reasons": [
-      "efficient spice organization",
-      "high ratings",
-      "mid-range price"
-    ],
-    "targetUser": "home chefs and cooking enthusiasts",
-    "mainProblem": "spice clutter and confusion",
-    "whyGoodForAffiliate": "visually appealing and solves common cooking issue"
-  },
-  {
-    "asin": "B07DPP9T4D",
-    "title": "Kamenstein 16-Jar Spice Rack",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 39.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 650,
-    "conversionPotential": "high",
-    "recommendationScore": 89,
-    "reasons": [
-      "efficient spice organization",
-      "high ratings",
-      "mid-range price"
-    ],
-    "targetUser": "home chefs and cooking enthusiasts",
-    "mainProblem": "spice clutter and confusion",
-    "whyGoodForAffiliate": "visually appealing and solves common cooking issue"
-  },
-  {
-    "asin": "B07T38T8CJ",
-    "title": "Rubbermaid Brilliance Food Storage Containers",
-    "category": "Kitchen Tools",
-    "estimatedPrice": 34.99,
-    "estimatedRating": 4.8,
-    "estimatedReviews": 850,
-    "conversionPotential": "high",
-    "recommendationScore": 89,
-    "reasons": [
-      "durable and versatile",
-      "highly rated",
-      "great for meal prep"
-    ],
-    "targetUser": "busy families and meal preppers",
-    "mainProblem": "Food storage and organization",
-    "whyGoodForAffiliate": "Practical appeal with a clear need for organization in kitchens"
-  },
-  {
-    "asin": "B07KXHZW3D",
-    "title": "Glass Food Storage Containers with Airtight Lids",
-    "category": "Food Storage",
-    "estimatedPrice": 42.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 1100,
-    "conversionPotential": "high",
-    "recommendationScore": 89,
-    "reasons": [
-      "no toxic chemicals",
-      "safe for microwave",
-      "high durability"
-    ],
-    "targetUser": "health-conscious individuals and families",
-    "mainProblem": "toxic materials in food storage",
-    "whyGoodForAffiliate": "high ratings and strong health appeal make it attractive"
-  },
-  {
-    "asin": "B07D2XVH4Q",
-    "title": "KARLLA Wall Shelf with Drawer",
-    "category": "Home Decor & Organization",
-    "estimatedPrice": 35.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 700,
-    "conversionPotential": "high",
-    "recommendationScore": 89,
-    "reasons": [
-      "stylish storage",
-      "great reviews",
-      "functional"
-    ],
-    "targetUser": "homeowners looking for stylish organization",
-    "mainProblem": "need for attractive storage solutions",
-    "whyGoodForAffiliate": "combines style and function, encourages purchases"
-  },
-  {
-    "asin": "B07YF9NT7G",
-    "title": "mDesign Wooden Wall Shelf",
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Drawer Organizers",
     "category": "Home Decor & Organization",
     "estimatedPrice": 24.99,
     "estimatedRating": 4.8,
+    "estimatedReviews": 1000,
+    "conversionPotential": "high",
+    "recommendationScore": 90,
+    "reasons": [
+      "enhances organization",
+      "easy to use",
+      "high ratings",
+      "Search: https://www.amazon.com/s?k=drawer+organizers"
+    ],
+    "targetUser": "cooks, organizers",
+    "mainProblem": "messy drawers",
+    "whyGoodForAffiliate": "solves everyday problems",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Stackable Storage Containers",
+    "category": "Home Storage",
+    "estimatedPrice": 22.99,
+    "estimatedRating": 4.7,
+    "estimatedReviews": 900,
+    "conversionPotential": "high",
+    "recommendationScore": 89,
+    "reasons": [
+      "durable",
+      "space-efficient",
+      "easy to clean",
+      "Search: https://www.amazon.com/s?k=stackable+storage+containers"
+    ],
+    "targetUser": "homeowners and renters",
+    "mainProblem": "efficient use of vertical space",
+    "whyGoodForAffiliate": "ideal for organizing seasonal items",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Kitchen Cabinet Organizers",
+    "category": "Home Storage",
+    "estimatedPrice": 29.99,
+    "estimatedRating": 4.5,
     "estimatedReviews": 500,
     "conversionPotential": "high",
     "recommendationScore": 89,
     "reasons": [
-      "stylish",
-      "great reviews",
-      "affordable"
+      "improves accessibility",
+      "saves space",
+      "high ratings",
+      "Search: https://www.amazon.com/s?k=kitchen+cabinet+organizers"
     ],
-    "targetUser": "those wanting attractive wall decor",
-    "mainProblem": "lack of stylish wall decor solutions",
-    "whyGoodForAffiliate": "high ratings and low price encourage purchases"
+    "targetUser": "cooks and home organizers",
+    "mainProblem": "disorganized kitchen cabinets",
+    "whyGoodForAffiliate": "practical for improving kitchen storage",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B07CKM9YQZ",
-    "title": "SimpleHouseware Kitchen Drawer Organizer Trays",
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Kitchen Scale",
+    "category": "Kitchen Tools",
+    "estimatedPrice": 25.99,
+    "estimatedRating": 4.7,
+    "estimatedReviews": 750,
+    "conversionPotential": "high",
+    "recommendationScore": 89,
+    "reasons": [
+      "precise measurements",
+      "high reviews",
+      "versatile",
+      "Search: https://www.amazon.com/s?k=kitchen+scale"
+    ],
+    "targetUser": "bakers, diet-conscious individuals",
+    "mainProblem": "inaccurate portioning",
+    "whyGoodForAffiliate": "important for cooking and baking, appeals to serious cooks",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Vacuum Sealer Machine",
+    "category": "Food Storage",
+    "estimatedPrice": 49.99,
+    "estimatedRating": 4.6,
+    "estimatedReviews": 7000,
+    "conversionPotential": "high",
+    "recommendationScore": 89,
+    "reasons": [
+      "extends food shelf life",
+      "reduces waste",
+      "easy to use",
+      "Search: https://www.amazon.com/s?k=vacuum+sealer+machine"
+    ],
+    "targetUser": "cooks, meal preppers, hunters",
+    "mainProblem": "prevents freezer burn",
+    "whyGoodForAffiliate": "great for saving money and food",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Magnetic Spice Racks",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 22.99,
+    "estimatedRating": 4.8,
+    "estimatedReviews": 600,
+    "conversionPotential": "high",
+    "recommendationScore": 89,
+    "reasons": [
+      "saves counter space",
+      "unique design",
+      "high ratings",
+      "Search: https://www.amazon.com/s?k=magnetic+spice+rack"
+    ],
+    "targetUser": "cooking enthusiasts",
+    "mainProblem": "disorganized spices",
+    "whyGoodForAffiliate": "innovative and practical",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Stackable Storage Bins",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 22.99,
+    "estimatedRating": 4.8,
+    "estimatedReviews": 700,
+    "conversionPotential": "high",
+    "recommendationScore": 89,
+    "reasons": [
+      "space-efficient",
+      "easy to use",
+      "high ratings",
+      "Search: https://www.amazon.com/s?k=stackable+storage+bins"
+    ],
+    "targetUser": "families, students",
+    "mainProblem": "disorganized spaces",
+    "whyGoodForAffiliate": "versatile and practical",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Stackable Food Storage Containers",
     "category": "Kitchen Organization",
     "estimatedPrice": 29.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 1500,
-    "conversionPotential": "high",
-    "recommendationScore": 88,
-    "reasons": [
-      "effective organization",
-      "positive reviews",
-      "good price"
-    ],
-    "targetUser": "busy individuals needing organization solutions",
-    "mainProblem": "messy kitchen utensils and tools",
-    "whyGoodForAffiliate": "practical solution with high demand and strong social proof"
-  },
-  {
-    "asin": "B07GJQ2T2M",
-    "title": "BINO Clear Storage Bins with Lids",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 24.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 700,
-    "conversionPotential": "high",
-    "recommendationScore": 88,
-    "reasons": [
-      "maximizes space",
-      "high user satisfaction",
-      "good price range"
-    ],
-    "targetUser": "anyone looking to declutter",
-    "mainProblem": "unorganized kitchen items",
-    "whyGoodForAffiliate": "visual appeal and practical benefits drive conversions"
-  },
-  {
-    "asin": "B07GJQ2T2M",
-    "title": "BINO Clear Storage Bins with Lids",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 24.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 700,
-    "conversionPotential": "high",
-    "recommendationScore": 88,
-    "reasons": [
-      "maximizes space",
-      "high user satisfaction",
-      "good price range"
-    ],
-    "targetUser": "anyone looking to declutter",
-    "mainProblem": "unorganized kitchen items",
-    "whyGoodForAffiliate": "visual appeal and practical benefits drive conversions"
-  },
-  {
-    "asin": "B07GJQ2T2M",
-    "title": "BINO Clear Storage Bins with Lids",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 24.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 700,
-    "conversionPotential": "high",
-    "recommendationScore": 88,
-    "reasons": [
-      "maximizes space",
-      "high user satisfaction",
-      "good price range"
-    ],
-    "targetUser": "anyone looking to declutter",
-    "mainProblem": "unorganized kitchen items",
-    "whyGoodForAffiliate": "visual appeal and practical benefits drive conversions"
-  },
-  {
-    "asin": "B07Y5PWB5S",
-    "title": "mDesign Soft Fabric Closet Storage Bins",
-    "category": "Home Storage",
-    "estimatedPrice": 22.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 950,
+    "estimatedRating": 4.7,
+    "estimatedReviews": 6000,
     "conversionPotential": "high",
     "recommendationScore": 88,
     "reasons": [
       "space-saving",
-      "great reviews",
-      "affordable"
+      "high reviews",
+      "practical design",
+      "Search: https://www.amazon.com/s?k=stackable+food+storage+containers"
     ],
-    "targetUser": "homeowners needing closet organization",
-    "mainProblem": "disorganized closets",
-    "whyGoodForAffiliate": "affordable and solves a common issue effectively"
+    "targetUser": "meal preppers and families",
+    "mainProblem": "food spoilage and space issues",
+    "whyGoodForAffiliate": "popular among health-conscious consumers",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B07ZK4V4YV",
-    "title": "Hamilton Beach Food Sealer",
-    "category": "Kitchen Tools",
-    "estimatedPrice": 39.99,
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Fabric Storage Bins",
+    "category": "Home Storage",
+    "estimatedPrice": 19.99,
+    "estimatedRating": 4.4,
+    "estimatedReviews": 800,
+    "conversionPotential": "high",
+    "recommendationScore": 88,
+    "reasons": [
+      "lightweight",
+      "foldable",
+      "various colors",
+      "Search: https://www.amazon.com/s?k=fabric+storage+bins"
+    ],
+    "targetUser": "families and students",
+    "mainProblem": "organizing toys, clothes, and supplies",
+    "whyGoodForAffiliate": "affordable and practical for all ages",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Wall-Mounted Shelves",
+    "category": "Home Storage",
+    "estimatedPrice": 34.99,
     "estimatedRating": 4.5,
-    "estimatedReviews": 650,
+    "estimatedReviews": 700,
+    "conversionPotential": "high",
+    "recommendationScore": 88,
+    "reasons": [
+      "saves floor space",
+      "decorative",
+      "easy installation",
+      "Search: https://www.amazon.com/s?k=wall-mounted+shelves"
+    ],
+    "targetUser": "home decorators and organizers",
+    "mainProblem": "limited shelf space",
+    "whyGoodForAffiliate": "attractive solution for storage and decor",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Hanging Closet Organizers",
+    "category": "Home Storage",
+    "estimatedPrice": 29.99,
+    "estimatedRating": 4.7,
+    "estimatedReviews": 600,
+    "conversionPotential": "high",
+    "recommendationScore": 88,
+    "reasons": [
+      "maximizes closet space",
+      "easy access",
+      "versatile",
+      "Search: https://www.amazon.com/s?k=hanging+closet+organizers"
+    ],
+    "targetUser": "fashion enthusiasts",
+    "mainProblem": "cluttered closets",
+    "whyGoodForAffiliate": "practical for maximizing closet efficiency",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Bag Sealer",
+    "category": "Kitchen Tools",
+    "estimatedPrice": 12.99,
+    "estimatedRating": 4.5,
+    "estimatedReviews": 800,
     "conversionPotential": "high",
     "recommendationScore": 88,
     "reasons": [
       "prevents food waste",
-      "high user satisfaction",
-      "good price point"
+      "high reviews",
+      "affordable",
+      "Search: https://www.amazon.com/s?k=bag+sealer"
     ],
-    "targetUser": "families looking to save on groceries",
-    "mainProblem": "Food spoilage and waste",
-    "whyGoodForAffiliate": "Practical solution for food preservation that appeals to many"
+    "targetUser": "food savers, families",
+    "mainProblem": "keeping food fresh",
+    "whyGoodForAffiliate": "high utility, appeals to eco-conscious consumers",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B07P6YT7WL",
-    "title": "Vtopmart Airtight Food Storage Containers",
-    "category": "Food Storage",
-    "estimatedPrice": 29.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 4000,
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Food Chopper",
+    "category": "Kitchen Tools",
+    "estimatedPrice": 19.99,
+    "estimatedRating": 4.8,
+    "estimatedReviews": 1100,
     "conversionPotential": "high",
     "recommendationScore": 88,
     "reasons": [
-      "multiple sizes",
-      "stackable design",
-      "easy to clean"
+      "saves time",
+      "high reviews",
+      "easy to use",
+      "Search: https://www.amazon.com/s?k=food+chopper"
     ],
-    "targetUser": "home cooks and organizers",
-    "mainProblem": "cluttered pantry and stale food",
-    "whyGoodForAffiliate": "high demand for organization and freshness solutions"
+    "targetUser": "busy parents, home cooks",
+    "mainProblem": "time-consuming food prep",
+    "whyGoodForAffiliate": "high utility, essential kitchen tool",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B07V5VQ4VY",
-    "title": "OXO Good Grips 3-Piece Airtight Food Storage Container Set",
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Silicone Food Storage Lids",
     "category": "Food Storage",
-    "estimatedPrice": 29.99,
+    "estimatedPrice": 15.99,
     "estimatedRating": 4.5,
     "estimatedReviews": 3000,
     "conversionPotential": "high",
     "recommendationScore": 88,
     "reasons": [
-      "easy access",
-      "modular stacking",
-      "durable"
+      "eco-friendly",
+      "fits various sizes",
+      "easy to use",
+      "Search: https://www.amazon.com/s?k=silicone+food+storage+lids"
     ],
-    "targetUser": "organized home cooks",
-    "mainProblem": "keeping a tidy kitchen and food freshness",
-    "whyGoodForAffiliate": "popular brand with strong customer loyalty and high demand"
+    "targetUser": "eco-conscious consumers",
+    "mainProblem": "replaces single-use plastic wrap",
+    "whyGoodForAffiliate": "trendy and in demand",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B08KHL8LDQ",
-    "title": "Bento Box Lunch Box with Utensil",
-    "category": "Food Storage",
-    "estimatedPrice": 34.99,
-    "estimatedRating": 4.7,
-    "estimatedReviews": 1100,
-    "conversionPotential": "high",
-    "recommendationScore": 88,
-    "reasons": [
-      "great for meal prep",
-      "easy to carry",
-      "durable materials"
-    ],
-    "targetUser": "students and professionals",
-    "mainProblem": "need for convenient meal packing",
-    "whyGoodForAffiliate": "high demand for portable meal solutions, especially in work/school settings"
-  },
-  {
-    "asin": "B07R6M8X5P",
-    "title": "Greenco Corner Shelf Set",
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Over-the-Door Organizers",
     "category": "Home Decor & Organization",
-    "estimatedPrice": 25.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 800,
+    "estimatedPrice": 24.99,
+    "estimatedRating": 4.6,
+    "estimatedReviews": 750,
     "conversionPotential": "high",
     "recommendationScore": 88,
     "reasons": [
-      "unique design",
-      "high ratings",
-      "good price"
-    ],
-    "targetUser": "individuals wanting to utilize corner spaces",
-    "mainProblem": "underutilized corner space in rooms",
-    "whyGoodForAffiliate": "appealing design with practical use, encourages impulse buying"
-  },
-  {
-    "asin": "B07ZQG9XZ7",
-    "title": "HOMFA Floating Shelf with Metal Brackets",
-    "category": "Home Decor & Organization",
-    "estimatedPrice": 34.99,
-    "estimatedRating": 4.7,
-    "estimatedReviews": 800,
-    "conversionPotential": "high",
-    "recommendationScore": 88,
-    "reasons": [
-      "sturdy construction",
-      "stylish",
-      "high ratings"
-    ],
-    "targetUser": "those needing durable shelving",
-    "mainProblem": "fragile shelves that can't hold items",
-    "whyGoodForAffiliate": "durability and style create strong appeal"
-  },
-  {
-    "asin": "B08C1Y4B6J",
-    "title": "SONGMICS 5-Tier Bookshelf",
-    "category": "Home Decor & Organization",
-    "estimatedPrice": 55.99,
-    "estimatedRating": 4.7,
-    "estimatedReviews": 450,
-    "conversionPotential": "high",
-    "recommendationScore": 88,
-    "reasons": [
+      "maximizes space",
       "multi-functional",
+      "easy access",
+      "Search: https://www.amazon.com/s?k=over+the+door+organizer"
+    ],
+    "targetUser": "small apartment dwellers",
+    "mainProblem": "limited closet space",
+    "whyGoodForAffiliate": "solves storage issues effectively",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Under-Bed Storage Bins",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 34.99,
+    "estimatedRating": 4.6,
+    "estimatedReviews": 900,
+    "conversionPotential": "high",
+    "recommendationScore": 88,
+    "reasons": [
+      "maximizes unused space",
+      "functional",
       "high ratings",
-      "great storage"
+      "Search: https://www.amazon.com/s?k=under+bed+storage+bins"
     ],
-    "targetUser": "book lovers and home organizers",
-    "mainProblem": "need for organized book storage",
-    "whyGoodForAffiliate": "appeals to a niche market with strong demand"
+    "targetUser": "people with limited space",
+    "mainProblem": "storage for seasonal items",
+    "whyGoodForAffiliate": "effective use of space",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B08L5GZ4Y2",
-    "title": "Genuine Joe 8 Compartment Condiment Organizer",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 25.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 800,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "keeps condiments organized",
-      "excellent ratings",
-      "impulse buy price"
-    ],
-    "targetUser": "those who host gatherings or have kids",
-    "mainProblem": "chaotic condiment storage",
-    "whyGoodForAffiliate": "visual benefits and functionality appeal to customers"
-  },
-  {
-    "asin": "B08FBKX7DJ",
-    "title": "Home Basics Stackable Food Storage Container Set",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 22.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 800,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "space-saving design",
-      "excellent ratings",
-      "affordable"
-    ],
-    "targetUser": "small kitchen dwellers",
-    "mainProblem": "limited storage space",
-    "whyGoodForAffiliate": "appealing design and solution for common issue"
-  },
-  {
-    "asin": "B08L5GZ4Y2",
-    "title": "Genuine Joe 8 Compartment Condiment Organizer",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 25.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 800,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "keeps condiments organized",
-      "excellent ratings",
-      "impulse buy price"
-    ],
-    "targetUser": "those who host gatherings or have kids",
-    "mainProblem": "chaotic condiment storage",
-    "whyGoodForAffiliate": "visual benefits and functionality appeal to customers"
-  },
-  {
-    "asin": "B08FBKX7DJ",
-    "title": "Home Basics Stackable Food Storage Container Set",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 22.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 800,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "space-saving design",
-      "excellent ratings",
-      "affordable"
-    ],
-    "targetUser": "small kitchen dwellers",
-    "mainProblem": "limited storage space",
-    "whyGoodForAffiliate": "appealing design and solution for common issue"
-  },
-  {
-    "asin": "B08XYG2D83",
-    "title": "BINO Woven Storage Basket",
-    "category": "Home Storage",
-    "estimatedPrice": 25.99,
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Wall-Mounted Planters",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 39.99,
     "estimatedRating": 4.7,
+    "estimatedReviews": 600,
+    "conversionPotential": "high",
+    "recommendationScore": 88,
+    "reasons": [
+      "adds greenery",
+      "space-saving",
+      "high reviews",
+      "Search: https://www.amazon.com/s?k=wall+mounted+planters"
+    ],
+    "targetUser": "plant lovers",
+    "mainProblem": "limited gardening space",
+    "whyGoodForAffiliate": "aesthetic and functional",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Silicone Baking Mat",
+    "category": "Kitchen Organization",
+    "estimatedPrice": 15.99,
+    "estimatedRating": 4.8,
+    "estimatedReviews": 6000,
+    "conversionPotential": "high",
+    "recommendationScore": 87,
+    "reasons": [
+      "eco-friendly",
+      "highly rated",
+      "durable",
+      "Search: https://www.amazon.com/s?k=silicone+baking+mat"
+    ],
+    "targetUser": "bakers and home cooks",
+    "mainProblem": "disposable baking sheets waste",
+    "whyGoodForAffiliate": "growing trend towards reusable products",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Over-the-Door Storage Rack",
+    "category": "Home Storage",
+    "estimatedPrice": 29.99,
+    "estimatedRating": 4.5,
+    "estimatedReviews": 650,
+    "conversionPotential": "high",
+    "recommendationScore": 87,
+    "reasons": [
+      "space-saving",
+      "easy installation",
+      "functional design",
+      "Search: https://www.amazon.com/s?k=over-the-door+storage+rack"
+    ],
+    "targetUser": "small apartment dwellers",
+    "mainProblem": "limited space for organization",
+    "whyGoodForAffiliate": "great for maximizing storage in tight areas",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Laundry Hamper with Lid",
+    "category": "Home Storage",
+    "estimatedPrice": 27.99,
+    "estimatedRating": 4.6,
+    "estimatedReviews": 550,
+    "conversionPotential": "high",
+    "recommendationScore": 87,
+    "reasons": [
+      "keeps laundry hidden",
+      "space-saving",
+      "stylish design",
+      "Search: https://www.amazon.com/s?k=laundry+hamper+with+lid"
+    ],
+    "targetUser": "families and individuals",
+    "mainProblem": "unsightly laundry clutter",
+    "whyGoodForAffiliate": "practical and stylish option for laundry",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Magnetic Knife Holder",
+    "category": "Kitchen Tools",
+    "estimatedPrice": 24.99,
+    "estimatedRating": 4.8,
     "estimatedReviews": 1300,
     "conversionPotential": "high",
     "recommendationScore": 87,
     "reasons": [
-      "stylish woven design",
-      "positive feedback",
-      "multifunctional"
-    ],
-    "targetUser": "individuals wanting aesthetic home organization",
-    "mainProblem": "lack of decorative storage options",
-    "whyGoodForAffiliate": "visually appealing and highly rated, perfect for impulse buys"
-  },
-  {
-    "asin": "B07V3H4S36",
-    "title": "Yamazaki Home Tower Storage Basket",
-    "category": "Home Storage",
-    "estimatedPrice": 39.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 600,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "modern design",
-      "positive reviews",
-      "functional"
-    ],
-    "targetUser": "design-conscious consumers",
-    "mainProblem": "need for stylish storage solutions",
-    "whyGoodForAffiliate": "its unique design and great reviews make it attractive to buyers"
-  },
-  {
-    "asin": "B08JQ8W3D1",
-    "title": "Ozeri Pronto Digital Kitchen Scale",
-    "category": "Kitchen Tools",
-    "estimatedPrice": 24.95,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 700,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "helps with meal prep",
-      "good user feedback",
-      "affordable"
-    ],
-    "targetUser": "health-conscious individuals",
-    "mainProblem": "Measuring ingredients accurately",
-    "whyGoodForAffiliate": "Visual appeal and practical use for cooking and dieting"
-  },
-  {
-    "asin": "B07Q6H3KV5",
-    "title": "Silicone Stretch Lids (Set of 6)",
-    "category": "Food Storage",
-    "estimatedPrice": 19.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 2500,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "reusable",
-      "fits various container sizes",
-      "reduces plastic waste"
-    ],
-    "targetUser": "eco-conscious families",
-    "mainProblem": "waste from single-use plastic wraps",
-    "whyGoodForAffiliate": "growing trend towards reusable products appeals to many consumers"
-  },
-  {
-    "asin": "B073P7F6R8",
-    "title": "Chef's Path Airtight Food Storage Containers",
-    "category": "Food Storage",
-    "estimatedPrice": 34.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 2500,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "stackable",
-      "variety of sizes",
-      "clear containers"
-    ],
-    "targetUser": "those looking to organize pantries",
-    "mainProblem": "cluttered and unorganized kitchen space",
-    "whyGoodForAffiliate": "focus on organization and aesthetics makes it appealing for many"
-  },
-  {
-    "asin": "B07W3H1N7G",
-    "title": "Bamboo Floating Shelves Set of 3",
-    "category": "Home Decor & Organization",
-    "estimatedPrice": 39.99,
-    "estimatedRating": 4.7,
-    "estimatedReviews": 600,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "eco-friendly material",
-      "highly rated",
-      "stylish"
-    ],
-    "targetUser": "eco-conscious consumers and home decorators",
-    "mainProblem": "need for sustainable and attractive shelving",
-    "whyGoodForAffiliate": "unique selling proposition with eco-friendliness"
-  },
-  {
-    "asin": "B07B6T8P2G",
-    "title": "SRIWATANA Wall Shelf with Hooks",
-    "category": "Home Decor & Organization",
-    "estimatedPrice": 27.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 950,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "functionality",
+      "saves space",
       "high reviews",
-      "great price"
-    ],
-    "targetUser": "families needing organization solutions",
-    "mainProblem": "messy entryways or kitchens",
-    "whyGoodForAffiliate": "solves a common problem with high demand"
-  },
-  {
-    "asin": "B07Z5ZTFXJ",
-    "title": "Easthills Floating Shelves Set of 2",
-    "category": "Home Decor & Organization",
-    "estimatedPrice": 32.99,
-    "estimatedRating": 4.5,
-    "estimatedReviews": 620,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "affordable",
-      "easy to install",
-      "good reviews"
-    ],
-    "targetUser": "homeowners and renters looking for affordable decor",
-    "mainProblem": "need for affordable and stylish decor solutions",
-    "whyGoodForAffiliate": "great price point for impulse buys with solid reviews"
-  },
-  {
-    "asin": "B07H9WZQH2",
-    "title": "SRIWATANA 3-Tier Bookshelf",
-    "category": "Home Decor & Organization",
-    "estimatedPrice": 49.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 600,
-    "conversionPotential": "high",
-    "recommendationScore": 87,
-    "reasons": [
-      "good for small spaces",
       "stylish",
-      "high ratings"
+      "Search: https://www.amazon.com/s?k=magnetic+knife+holder"
     ],
-    "targetUser": "students and small apartment dwellers",
-    "mainProblem": "limited storage space",
-    "whyGoodForAffiliate": "great for urban living solutions"
+    "targetUser": "kitchen enthusiasts, space savers",
+    "mainProblem": "cluttered countertops",
+    "whyGoodForAffiliate": "high design appeal, practical use",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B072C9N6G6",
-    "title": "mDesign Expandable Kitchen Drawer Organizer",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 32.99,
-    "estimatedRating": 4.4,
-    "estimatedReviews": 900,
-    "conversionPotential": "high",
-    "recommendationScore": 86,
-    "reasons": [
-      "customizable layout",
-      "positive user feedback",
-      "affordable price"
-    ],
-    "targetUser": "those with varying kitchen drawer sizes",
-    "mainProblem": "inflexible organizers that don't fit well",
-    "whyGoodForAffiliate": "appeals to a wide audience with its flexibility and utility"
-  },
-  {
-    "asin": "B072C9N6G6",
-    "title": "mDesign Expandable Kitchen Drawer Organizer",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 32.99,
-    "estimatedRating": 4.4,
-    "estimatedReviews": 900,
-    "conversionPotential": "high",
-    "recommendationScore": 86,
-    "reasons": [
-      "customizable layout",
-      "positive user feedback",
-      "affordable price"
-    ],
-    "targetUser": "those with varying kitchen drawer sizes",
-    "mainProblem": "inflexible organizers that don't fit well",
-    "whyGoodForAffiliate": "appeals to a wide audience with its flexibility and utility"
-  },
-  {
-    "asin": "B072C9N6G6",
-    "title": "mDesign Expandable Kitchen Drawer Organizer",
-    "category": "Kitchen Organization",
-    "estimatedPrice": 32.99,
-    "estimatedRating": 4.4,
-    "estimatedReviews": 900,
-    "conversionPotential": "high",
-    "recommendationScore": 86,
-    "reasons": [
-      "customizable layout",
-      "positive user feedback",
-      "affordable price"
-    ],
-    "targetUser": "those with varying kitchen drawer sizes",
-    "mainProblem": "inflexible organizers that don't fit well",
-    "whyGoodForAffiliate": "appeals to a wide audience with its flexibility and utility"
-  },
-  {
-    "asin": "B08KWXG9D2",
-    "title": "mDesign Stackable Storage Bins",
-    "category": "Home Storage",
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Pasta Maker",
+    "category": "Kitchen Tools",
     "estimatedPrice": 35.99,
+    "estimatedRating": 4.7,
+    "estimatedReviews": 800,
+    "conversionPotential": "high",
+    "recommendationScore": 87,
+    "reasons": [
+      "makes homemade pasta easy",
+      "high reviews",
+      "fun to use",
+      "Search: https://www.amazon.com/s?k=pasta+maker"
+    ],
+    "targetUser": "cooking enthusiasts, families",
+    "mainProblem": "store-bought pasta options",
+    "whyGoodForAffiliate": "appeals to cooking trends, unique product",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Glass Meal Prep Containers",
+    "category": "Food Storage",
+    "estimatedPrice": 39.99,
+    "estimatedRating": 4.6,
+    "estimatedReviews": 4500,
+    "conversionPotential": "high",
+    "recommendationScore": 87,
+    "reasons": [
+      "durable material",
+      "great for meal prepping",
+      "microwave safe",
+      "Search: https://www.amazon.com/s?k=glass+meal+prep+containers"
+    ],
+    "targetUser": "fitness enthusiasts, meal preppers",
+    "mainProblem": "makes meal prep easy and organized",
+    "whyGoodForAffiliate": "growing trend in healthy eating",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Food Storage Jars with Airtight Lids",
+    "category": "Food Storage",
+    "estimatedPrice": 25.99,
+    "estimatedRating": 4.6,
+    "estimatedReviews": 4000,
+    "conversionPotential": "high",
+    "recommendationScore": 87,
+    "reasons": [
+      "preserves food quality",
+      "great for spices and dry goods",
+      "versatile",
+      "Search: https://www.amazon.com/s?k=food+storage+jars+with+airtight+lids"
+    ],
+    "targetUser": "home cooks, bakers",
+    "mainProblem": "keeps ingredients fresh",
+    "whyGoodForAffiliate": "great for kitchen organization",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Storage Baskets",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 19.99,
+    "estimatedRating": 4.5,
+    "estimatedReviews": 1000,
+    "conversionPotential": "high",
+    "recommendationScore": 87,
+    "reasons": [
+      "aesthetic appeal",
+      "functional",
+      "versatile usage",
+      "Search: https://www.amazon.com/s?k=storage+baskets"
+    ],
+    "targetUser": "decor enthusiasts",
+    "mainProblem": "clutter management",
+    "whyGoodForAffiliate": "beautiful and practical solution",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Wall-Mounted Bookshelves",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 39.99,
     "estimatedRating": 4.6,
     "estimatedReviews": 500,
     "conversionPotential": "high",
-    "recommendationScore": 86,
+    "recommendationScore": 87,
     "reasons": [
-      "stackable design",
-      "high rating",
-      "functional"
+      "great for decor",
+      "saves space",
+      "high utility",
+      "Search: https://www.amazon.com/s?k=wall+mounted+bookshelves"
     ],
-    "targetUser": "everyone needing efficient space utilization",
-    "mainProblem": "wasted vertical space in storage",
-    "whyGoodForAffiliate": "great functionality and high ratings make it appealing for buyers"
+    "targetUser": "book lovers",
+    "mainProblem": "limited shelf space",
+    "whyGoodForAffiliate": "aesthetic and functional",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B08R5V9M6G",
-    "title": "Amazon Basics Fabric Storage Bins",
-    "category": "Home Storage",
-    "estimatedPrice": 19.99,
-    "estimatedRating": 4.6,
-    "estimatedReviews": 1500,
-    "conversionPotential": "high",
-    "recommendationScore": 86,
-    "reasons": [
-      "trusted brand",
-      "high ratings",
-      "good price"
-    ],
-    "targetUser": "anyone wanting reliable storage solutions",
-    "mainProblem": "need for organized storage",
-    "whyGoodForAffiliate": "well-known brand and solid reviews encourage trust and sales"
-  },
-  {
-    "asin": "B08FFYB86G",
-    "title": "mDesign Plastic Storage Bins",
-    "category": "Home Storage",
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Wall-Mounted Jewelry Organizers",
+    "category": "Home Decor & Organization",
     "estimatedPrice": 32.99,
-    "estimatedRating": 4.8,
+    "estimatedRating": 4.5,
+    "estimatedReviews": 600,
+    "conversionPotential": "high",
+    "recommendationScore": 87,
+    "reasons": [
+      "prevents tangling",
+      "decorative",
+      "high reviews",
+      "Search: https://www.amazon.com/s?k=wall+mounted+jewelry+organizer"
+    ],
+    "targetUser": "jewelry enthusiasts",
+    "mainProblem": "disorganized jewelry",
+    "whyGoodForAffiliate": "functional and stylish",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Shoe Storage Bench",
+    "category": "Home Storage",
+    "estimatedPrice": 49.99,
+    "estimatedRating": 4.5,
     "estimatedReviews": 400,
     "conversionPotential": "high",
     "recommendationScore": 86,
     "reasons": [
-      "high quality",
-      "excellent reviews",
-      "functional design"
+      "dual function",
+      "space-saving",
+      "stylish",
+      "Search: https://www.amazon.com/s?k=shoe+storage+bench"
     ],
-    "targetUser": "individuals looking for durable storage options",
-    "mainProblem": "need for long-lasting storage solutions",
-    "whyGoodForAffiliate": "high-quality product with great reviews, very appealing for buyers"
+    "targetUser": "homeowners with entryways",
+    "mainProblem": "shoes cluttering entryway",
+    "whyGoodForAffiliate": "appealing to those looking for multi-functional furniture",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   },
   {
-    "asin": "B09L3T6MHW",
-    "title": "MONTEM Lightweight Collapsible Storage Bin",
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Under-Bed Storage Bags",
     "category": "Home Storage",
+    "estimatedPrice": 22.99,
+    "estimatedRating": 4.4,
+    "estimatedReviews": 400,
+    "conversionPotential": "high",
+    "recommendationScore": 86,
+    "reasons": [
+      "maximizes unused space",
+      "protects contents",
+      "affordable",
+      "Search: https://www.amazon.com/s?k=under-bed+storage+bags"
+    ],
+    "targetUser": "apartment dwellers and families",
+    "mainProblem": "unused space under the bed",
+    "whyGoodForAffiliate": "efficient for storage and organization",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Pet Storage Bin",
+    "category": "Home Storage",
+    "estimatedPrice": 27.99,
+    "estimatedRating": 4.4,
+    "estimatedReviews": 450,
+    "conversionPotential": "high",
+    "recommendationScore": 86,
+    "reasons": [
+      "keeps pet items organized",
+      "cute designs",
+      "practical",
+      "Search: https://www.amazon.com/s?k=pet+storage+bin"
+    ],
+    "targetUser": "pet owners",
+    "mainProblem": "clutter from pet toys and supplies",
+    "whyGoodForAffiliate": "appealing to pet lovers looking for organization",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Instant Read Meat Thermometer",
+    "category": "Kitchen Tools",
     "estimatedPrice": 29.99,
     "estimatedRating": 4.6,
+    "estimatedReviews": 900,
+    "conversionPotential": "high",
+    "recommendationScore": 86,
+    "reasons": [
+      "ensures food safety",
+      "high reviews",
+      "user-friendly",
+      "Search: https://www.amazon.com/s?k=instant+read+meat+thermometer"
+    ],
+    "targetUser": "home cooks, grillers",
+    "mainProblem": "overcooked or undercooked meat",
+    "whyGoodForAffiliate": "critical for cooking accuracy, easy to promote",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Multi-Compartment Lunch Boxes",
+    "category": "Food Storage",
+    "estimatedPrice": 22.99,
+    "estimatedRating": 4.3,
+    "estimatedReviews": 2000,
+    "conversionPotential": "high",
+    "recommendationScore": 86,
+    "reasons": [
+      "perfect for portion control",
+      "various compartments",
+      "easy to carry",
+      "Search: https://www.amazon.com/s?k=multi-compartment+lunch+boxes"
+    ],
+    "targetUser": "students, professionals, parents",
+    "mainProblem": "keeps meals organized on-the-go",
+    "whyGoodForAffiliate": "popular among busy lifestyles",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Insulated Food Storage Containers",
+    "category": "Food Storage",
+    "estimatedPrice": 39.99,
+    "estimatedRating": 4.5,
+    "estimatedReviews": 2000,
+    "conversionPotential": "high",
+    "recommendationScore": 86,
+    "reasons": [
+      "keeps food hot or cold",
+      "great for travel",
+      "durable",
+      "Search: https://www.amazon.com/s?k=insulated+food+storage+containers"
+    ],
+    "targetUser": "travelers, students, outdoor enthusiasts",
+    "mainProblem": "maintains food temperature",
+    "whyGoodForAffiliate": "popular for meal prepping",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Wall-Mounted Coat Racks",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 39.99,
+    "estimatedRating": 4.5,
+    "estimatedReviews": 800,
+    "conversionPotential": "high",
+    "recommendationScore": 86,
+    "reasons": [
+      "functional",
+      "space-saving",
+      "stylish",
+      "Search: https://www.amazon.com/s?k=wall+mounted+coat+rack"
+    ],
+    "targetUser": "families, professionals",
+    "mainProblem": "messy entryways",
+    "whyGoodForAffiliate": "practical and attractive",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Foldable Storage Ottomans",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 49.99,
+    "estimatedRating": 4.5,
     "estimatedReviews": 700,
     "conversionPotential": "high",
     "recommendationScore": 86,
     "reasons": [
-      "collapsible",
-      "high ratings",
-      "portable"
+      "dual purpose",
+      "space-saving",
+      "stylish",
+      "Search: https://www.amazon.com/s?k=foldable+storage+ottoman"
     ],
-    "targetUser": "travelers or outdoor enthusiasts",
-    "mainProblem": "need for portable storage",
-    "whyGoodForAffiliate": "functionality and portability appeal to many consumers"
+    "targetUser": "families, small apartments",
+    "mainProblem": "lack of seating and storage",
+    "whyGoodForAffiliate": "practical and attractive",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Shoe Racks",
+    "category": "Home Decor & Organization",
+    "estimatedPrice": 39.99,
+    "estimatedRating": 4.5,
+    "estimatedReviews": 800,
+    "conversionPotential": "high",
+    "recommendationScore": 86,
+    "reasons": [
+      "organizes footwear",
+      "space-saving",
+      "stylish",
+      "Search: https://www.amazon.com/s?k=shoe+rack"
+    ],
+    "targetUser": "shoe enthusiasts, families",
+    "mainProblem": "cluttered shoe spaces",
+    "whyGoodForAffiliate": "practical with high utility",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Bamboo Drawer Organizer",
+    "category": "Kitchen Organization",
+    "estimatedPrice": 24.99,
+    "estimatedRating": 4.5,
+    "estimatedReviews": 8500,
+    "conversionPotential": "high",
+    "recommendationScore": 85,
+    "reasons": [
+      "solves common problem",
+      "high reviews",
+      "good price point",
+      "Search: https://www.amazon.com/s?k=bamboo+drawer+organizer"
+    ],
+    "targetUser": "homeowners and cooks",
+    "mainProblem": "disorganized kitchen drawers",
+    "whyGoodForAffiliate": "appeals to a broad audience looking to declutter",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Dish Rack with Draining Board",
+    "category": "Kitchen Organization",
+    "estimatedPrice": 34.99,
+    "estimatedRating": 4.5,
+    "estimatedReviews": 5500,
+    "conversionPotential": "high",
+    "recommendationScore": 85,
+    "reasons": [
+      "essential kitchen item",
+      "highly rated",
+      "functional",
+      "Search: https://www.amazon.com/s?k=dish+rack+with+draining+board"
+    ],
+    "targetUser": "every home chef",
+    "mainProblem": "messy dishes",
+    "whyGoodForAffiliate": "necessary for every kitchen",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Clear Plastic Storage Bins",
+    "category": "Home Storage",
+    "estimatedPrice": 17.99,
+    "estimatedRating": 4.3,
+    "estimatedReviews": 500,
+    "conversionPotential": "high",
+    "recommendationScore": 85,
+    "reasons": [
+      "visibility of contents",
+      "versatile use",
+      "affordable",
+      "Search: https://www.amazon.com/s?k=clear+plastic+storage+bins"
+    ],
+    "targetUser": "organizers and minimalists",
+    "mainProblem": "finding items quickly",
+    "whyGoodForAffiliate": "practical for any storage need",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Multi-Purpose Storage Ottoman",
+    "category": "Home Storage",
+    "estimatedPrice": 49.99,
+    "estimatedRating": 4.5,
+    "estimatedReviews": 300,
+    "conversionPotential": "high",
+    "recommendationScore": 85,
+    "reasons": [
+      "dual function",
+      "stylish",
+      "space-saving",
+      "Search: https://www.amazon.com/s?k=multi-purpose+storage+ottoman"
+    ],
+    "targetUser": "homeowners and renters",
+    "mainProblem": "lack of seating and storage",
+    "whyGoodForAffiliate": "appealing and functional for living spaces",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Cordless Vacuum Cleaner Storage Dock",
+    "category": "Home Storage",
+    "estimatedPrice": 34.99,
+    "estimatedRating": 4.6,
+    "estimatedReviews": 350,
+    "conversionPotential": "high",
+    "recommendationScore": 85,
+    "reasons": [
+      "keeps vacuum organized",
+      "easy access",
+      "space-saving",
+      "Search: https://www.amazon.com/s?k=cordless+vacuum+cleaner+storage+dock"
+    ],
+    "targetUser": "homeowners",
+    "mainProblem": "clutter from vacuum storage",
+    "whyGoodForAffiliate": "promotes organization in cleaning supplies",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Silicone Baking Mats",
+    "category": "Kitchen Tools",
+    "estimatedPrice": 18.99,
+    "estimatedRating": 4.7,
+    "estimatedReviews": 1500,
+    "conversionPotential": "high",
+    "recommendationScore": 85,
+    "reasons": [
+      "eco-friendly",
+      "high reviews",
+      "long-lasting",
+      "Search: https://www.amazon.com/s?k=silicone+baking+mats"
+    ],
+    "targetUser": "bakers, health-conscious cooks",
+    "mainProblem": "disposable parchment waste",
+    "whyGoodForAffiliate": "appealing to eco-friendly audience, durable product",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
+  },
+  {
+    "asin": "NEEDS_VERIFICATION",
+    "title": "Electric Can Opener",
+    "category": "Kitchen Tools",
+    "estimatedPrice": 29.99,
+    "estimatedRating": 4.4,
+    "estimatedReviews": 600,
+    "conversionPotential": "high",
+    "recommendationScore": 85,
+    "reasons": [
+      "easy to use",
+      "high reviews",
+      "safety features",
+      "Search: https://www.amazon.com/s?k=electric+can+opener"
+    ],
+    "targetUser": "elderly, those with hand issues",
+    "mainProblem": "struggling with manual can openers",
+    "whyGoodForAffiliate": "solves a common pain point, high usability",
+    "note": "⚠️  This is a product TYPE, not a real ASIN. You must search Amazon and find a real product.",
+    "instructions": "1. Use the search URL above to find products on Amazon. 2. Click on a product. 3. Copy the ASIN from the URL. 4. Verify the product is real. 5. Add to discoveryInput.json"
   }
 ]
