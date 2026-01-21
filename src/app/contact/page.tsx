@@ -22,8 +22,8 @@ export default function ContactPage() {
           <h2 className="text-xl font-semibold text-slate-900 mb-4">Email</h2>
           <p className="text-slate-700">
             For general inquiries, please email us at:{" "}
-            <a href="mailto:hello@aipicks.co" className="text-slate-900 underline">
-              hello@aipicks.co
+            <a href="mailto:info@aipicks.co" className="text-slate-900 underline">
+              info@aipicks.co
             </a>
           </p>
         </div>
