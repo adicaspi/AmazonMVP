@@ -31,7 +31,8 @@
     "verify:all": "tsx scripts/verify-multiple-products.ts",
     "find:real": "tsx ai/runFindRealProducts.ts",
     "add:url": "tsx scripts/add-product-from-url.ts",
-    "add:batch": "tsx scripts/add-products-batch.ts"
+    "add:batch": "tsx scripts/add-products-batch.ts",
+    "replace:all": "tsx scripts/replace-all-products-from-urls.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
