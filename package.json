@@ -32,7 +32,9 @@
     "find:real": "tsx ai/runFindRealProducts.ts",
     "add:url": "tsx scripts/add-product-from-url.ts",
     "add:batch": "tsx scripts/add-products-batch.ts",
-    "replace:all": "tsx scripts/replace-all-products-from-urls.ts"
+    "replace:all": "tsx scripts/replace-all-products-from-urls.ts",
+    "replace:asins": "tsx scripts/replace-products-with-asins.ts",
+    "process:urls": "tsx scripts/process-short-urls.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

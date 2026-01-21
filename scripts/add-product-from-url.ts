@@ -94,10 +94,10 @@ async function addProductFromUrl(url: string, additionalInfo?: {
   // Generate product entry
   const newProduct = {
     asin: asin,
-    title: additionalInfo?.title || `Product ${asin}`,
-    price: additionalInfo?.price || 24.99,
-    rating: additionalInfo?.rating || 4.5,
-    reviews: additionalInfo?.reviews || 1000,
+    title: `Product ${asin}`,
+    price: 24.99,
+    rating: 4.5,
+    reviews: 1000,
     vertical: additionalInfo?.room === "kitchen" ? "home_kitchen" : "home_living",
     baseAmazonUrl: `https://www.amazon.com/dp/${asin}`,
     trackingId: trackingId,

@@ -186,7 +186,7 @@ async function replaceAllProducts(urls: string[]) {
     title: "${p.title.replace(/"/g, '\\"')}",
     benefitTitle: "${p.benefitTitle.replace(/"/g, '\\"')}",
     room: "${p.room}",
-    tags: [${p.tags.map(t => `"${t}"`).join(", ")}],
+    tags: [${p.tags.map((t: string) => `"${t}"`).join(", ")}],
     shortDescription: "${p.shortDescription.replace(/"/g, '\\"')}",
     whyWePickedIt: "${p.whyWePickedIt.replace(/"/g, '\\"')}",
     image: "${p.image}",
