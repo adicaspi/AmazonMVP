@@ -42,7 +42,9 @@ export default function ProductsPage() {
         const matchesTitle = product.title.toLowerCase().includes(query);
         const matchesDescription = product.shortDescription.toLowerCase().includes(query);
         const matchesTags = product.tags.some(tag => tag.toLowerCase().includes(query));
-        if (!matchesTitle && !matchesDescription && !matchesTags) {
+        const matchesRoom = product.room.toLowerCase().includes(query);
+        const matchesBenefitTitle = product.benefitTitle?.toLowerCase().includes(query);
+        if (!matchesTitle && !matchesDescription && !matchesTags && !matchesRoom && !matchesBenefitTitle) {
           return false;
         }
       }
@@ -64,7 +66,7 @@ export default function ProductsPage() {
           All Products
         </h1>
         <p className="text-lg sm:text-xl text-slate-600 max-w-3xl">
-          Browse our curated selection of home accessories. Each product is carefully selected for quality, value, and design.
+          Browse our curated selection of home accessories, kids' toys, and family products. Each product is carefully selected for quality, value, and design.
         </p>
       </div>
 
@@ -76,7 +78,7 @@ export default function ProductsPage() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search products..."
+            placeholder="Search products, toys, kids items, home accessories..."
             className="w-full px-4 py-3 pl-10 pr-4 text-sm sm:text-base border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
           />
           <svg
@@ -114,7 +116,7 @@ export default function ProductsPage() {
               <option value="all">All Rooms</option>
               {rooms.map(room => (
                 <option key={room} value={room}>
-                  {room.replace("_", " ").replace(/\b\w/g, l => l.toUpperCase())}
+                  {room.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
                 </option>
               ))}
             </select>
@@ -133,7 +135,7 @@ export default function ProductsPage() {
               <option value="all">All Categories</option>
               {allTags.map(tag => (
                 <option key={tag} value={tag}>
-                  {tag.replace("-", " ").replace(/\b\w/g, l => l.toUpperCase())}
+                  {tag.replace(/-/g, " ").replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
                 </option>
               ))}
             </select>
@@ -178,8 +180,8 @@ export default function ProductsPage() {
         {/* Results Count */}
         <div className="text-sm text-slate-600">
           Showing {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
-          {selectedRoom !== "all" && ` in ${selectedRoom.replace("_", " ")}`}
-          {selectedCategory !== "all" && ` in ${selectedCategory}`}
+          {selectedRoom !== "all" && ` in ${selectedRoom.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}`}
+          {selectedCategory !== "all" && ` in ${selectedCategory.replace(/-/g, " ").replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}`}
           {selectedPriceRange !== "all" && ` ${selectedPriceRange === "under-20" ? "under $20" : selectedPriceRange === "20-40" ? "$20-$40" : selectedPriceRange === "40-60" ? "$40-$60" : "over $60"}`}
           {searchQuery && ` matching "${searchQuery}"`}
         </div>
