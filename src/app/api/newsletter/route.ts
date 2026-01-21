@@ -21,7 +21,8 @@ export async function POST(request: NextRequest) {
         await resend.emails.send({
         from: "AI Picks <newsletter@aipicks.co>",
         to: email,
-        subject: "Welcome to AI Picks Newsletter! 🎉",
+        subject: "Welcome to AI Picks Newsletter",
+        replyTo: "info@aipicks.co",
         html: `
           <!DOCTYPE html>
           <html>
@@ -36,7 +37,7 @@ export async function POST(request: NextRequest) {
               
               <div style="background: white; padding: 40px 20px; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 12px 12px;">
                 <p style="font-size: 16px; margin-bottom: 20px;">
-                  Thank you for subscribing to our newsletter! 🎉
+                  Thank you for subscribing to our newsletter.
                 </p>
                 
                 <p style="font-size: 16px; margin-bottom: 20px;">
