@@ -34,94 +34,57 @@ const productImages: Record<string, string> = {
   // Kitchen drawer organizer - bamboo storage
   "bamboo-drawer-organizer": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Silicone food storage lids - colorful lids on containers
-  "silicone-food-storage-lids": "https://images.unsplash.com/photo-1600431521340-491eca880813?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Portable bag sealer - food storage
+  "portable-mini-bag-sealer": "https://images.unsplash.com/photo-1600431521340-491eca880813?w=1200&h=1200&fit=crop&q=95&auto=format",
+  
+  // Silicone lids - food storage containers
+  "reusable-stretch-silicone-lids": "https://images.unsplash.com/photo-1600431521340-491eca880813?w=1200&h=1200&fit=crop&q=95&auto=format",
   
   // Jar opener - kitchen tool
-  "jar-opener-tool": "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
+  "under-cabinet-jar-opener": "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Modern table lamp - sleek lamp design
-  "table-lamp-modern": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Drawer organizer bins - kitchen storage
+  "idesign-kitchen-drawer-organizer-bins": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Storage baskets - woven baskets
-  "storage-baskets-set": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Airtight food storage containers
+  "vtopmart-airtight-food-storage-containers": "https://images.unsplash.com/photo-1600431521340-491eca880813?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Throw pillows - decorative pillows
-  "throw-pillow-set": "https://images.unsplash.com/photo-1519710164249-6b06504d207e?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Can rack organizer - pantry storage
+  "simplehouseware-stackable-can-rack-organizer": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Floating wall shelf - modern wall shelf
-  "wall-shelf-floating": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Cotton storage basket - decorative storage
+  "dii-cotton-storage-basket": "https://images.unsplash.com/photo-1519710164249-6b06504d207e?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Bedside organizer - bedroom storage
-  "bedside-organizer": "https://images.unsplash.com/photo-1590846406792-dc008210f6e1?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Rolling cart - mobile storage
+  "homestar-3-tier-rolling-cart": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Desk organizer - office workspace
-  "desk-organizer-set": "https://images.unsplash.com/photo-1556910103-4d0c8c8c8c8c?w=1200&h=1200&fit=crop&q=95&auto=format",
-  
-  // Bathroom storage caddy - shower organizer
-  "bathroom-storage-caddy": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Cube storage organizer - furniture storage
+  "songmics-8-cube-storage-organizer": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
 };
 
 export const products: Product[] = [
   {
-    id: "B01MRF46U5",
-    slug: "mdesign-plastic-kitchen-drawer-organizer",
-    title: "mDesign Plastic Kitchen Drawer Organizer",
-    benefitTitle: "Transform messy drawers into organized spaces",
+    id: "B08YZ5YF7M",
+    slug: "bamboo-drawer-organizer",
+    title: "Bamboo Drawer Organizer",
+    benefitTitle: "Bamboo Drawer Organizer",
     room: "kitchen",
-    tags: ["organization", "kitchen-essentials", "drawer-organization"],
-    shortDescription: "Transform messy kitchen drawers into organized spaces with this versatile plastic organizer that fits various drawer sizes.",
-    whyWePickedIt: "We selected this because it solves the problem of cluttered kitchen drawers for home cooks and anyone wanting better organization. With 4.7 stars and 2,500+ reviews, it's a proven solution that delivers real value.",
-    image: productImages["mdesign-plastic-kitchen-drawer-organizer"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
-    amazonUrl: "https://www.amazon.com/dp/B01MRF46U5?tag=aipicks20-20",
-    asin: "B01MRF46U5",
-    price: 27.99,
-    highlights: [
-      "High customer satisfaction (4.7 stars)",
-      "2,500+ verified reviews",
-      "Solves keeps kitchen drawers organized and clutter-free"
-    ],
-    pros: [
-      "Proven solution with 2,500+ reviews",
-      "High rating (4.7 stars)",
-      "Addresses keeps kitchen drawers organized and clutter-free"
-    ],
-    cons: [
-      "May not fit all use cases",
-      "Check dimensions before purchasing"
-    ],
-    specs: {
-      "Rating": "4.7 stars",
-      "Reviews": "2,500+",
-      "Price": "$27.99",
-      "Target User": "Home cooks and anyone wanting to organize their kitchen"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2026-01-21"
-  },
-  {
-    id: "B07H3J6X2D",
-    slug: "rubbermaid-easy-find-lids-food-storage-containers",
-    title: "Rubbermaid Easy Find Lids Food Storage Containers",
-    benefitTitle: "Rubbermaid Easy Find Lids Food Storage Containers",
-    room: "kitchen",
-    tags: ["storage", "food-storage"],
-    shortDescription: "Never lose a lid again with these food storage containers featuring easy-to-find matching lids that keep food fresh longer.",
-    whyWePickedIt: "We selected this because it solves the frustrating problem of lost lids and keeps food fresh and organized for individuals and families. With 4.5 stars and 1,500+ reviews, it's a practical solution.",
-    image: productImages["rubbermaid-easy-find-lids-food-storage-containers"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
-    amazonUrl: "https://www.amazon.com/dp/B07H3J6X2D?tag=aipicks20-20",
-    asin: "B07H3J6X2D",
-    price: 19.99,
+    tags: ["organization", "storage", "bamboo", "kitchen-essentials"],
+    shortDescription: "Bamboo Drawer Organizer solves the problem of messy kitchen drawers with utensils scattered everywhere.",
+    whyWePickedIt: "We selected this because it solves messy kitchen drawers with utensils scattered everywhere for busy people who cook at home. With 4.5 stars and 8,500+ reviews, it's a proven solution that delivers real value.",
+    image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    amazonUrl: "https://www.amazon.com/dp/B08YZ5YF7M?tag=aipicks20-20",
+    asin: "B08YZ5YF7M",
+    price: 24.99,
     highlights: [
       "High customer satisfaction (4.5 stars)",
-      "1,500+ verified reviews",
-      "Solves helps keep food fresh and organized with matching lids"
+      "8,500+ verified reviews",
+      "Solves messy kitchen drawers with utensils scattered everywhere"
     ],
     pros: [
-      "Proven solution with 1,500+ reviews",
+      "Proven solution with 8,500+ reviews",
       "High rating (4.5 stars)",
-      "Addresses helps keep food fresh and organized with matching lids"
+      "Addresses messy kitchen drawers with utensils scattered everywhere"
     ],
     cons: [
       "May not fit all use cases",
@@ -129,83 +92,120 @@ export const products: Product[] = [
     ],
     specs: {
       "Rating": "4.5 stars",
-      "Reviews": "1,500+",
-      "Price": "$19.99",
-      "Target User": "Individuals and families looking for reliable food storage solutions"
+      "Reviews": "8,500+",
+      "Price": "$24.99",
+      "Target User": "busy people who cook at home"
     },
     status: "published",
-    featured: false,
+    featured: true,
     dateAdded: "2026-01-21"
   },
   {
-    id: "B08GVT8Y7D",
-    slug: "simple-houseware-kitchen-drawer-divider-organizer",
-    title: "Simple Houseware Kitchen Drawer Divider Organizer",
-    benefitTitle: "Simple Houseware Kitchen Drawer Divider Organizer",
+    id: "B08TGF5XJW",
+    slug: "portable-mini-bag-sealer",
+    title: "Portable Mini Bag Sealer",
+    benefitTitle: "Portable Mini Bag Sealer",
     room: "kitchen",
-    tags: ["organization", "kitchen-essentials", "drawer-organization"],
-    shortDescription: "Divides kitchen drawers into organized sections. Simple Houseware Kitchen Drawer Divider Organizer.",
-    whyWePickedIt: "We selected this product because it solves divides kitchen drawers into organized sections for anyone wanting to declutter their kitchen space. With 4.6 stars and 600 reviews, it's a proven solution.",
-    image: productImages["simple-houseware-kitchen-drawer-divider-organizer"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
-    amazonUrl: "https://www.amazon.com/dp/B08GVT8Y7D?tag=aipicks20-20",
-    asin: "B08GVT8Y7D",
-    price: 18.99,
+    tags: ["food-storage", "kitchen-essentials", "eco-friendly"],
+    shortDescription: "Portable Mini Bag Sealer solves the problem of open food bags get stale quickly.",
+    whyWePickedIt: "We selected this because it solves open food bags get stale quickly for snack eaters and families with kids. With 4.3 stars and 1,200+ reviews, it's a proven solution that delivers real value.",
+    image: "https://images.unsplash.com/photo-1600431521340-491eca880813?w=1200&h=1200&fit=crop&q=95&auto=format",
+    amazonUrl: "https://www.amazon.com/dp/B08TGF5XJW?tag=aipicks20-20",
+    asin: "B08TGF5XJW",
+    price: 19.99,
     highlights: [
-      "High customer satisfaction (4.6 stars)",
-      "600+ verified reviews",
-      "Solves divides kitchen drawers into organized sections"
-    ],
-    pros: [
-      "Proven solution with 600+ reviews",
-      "High rating (4.6 stars)",
-      "Addresses divides kitchen drawers into organized sections"
-    ],
-    cons: [
-      "May not fit all use cases",
-      "Check dimensions before purchasing"
-    ],
-    specs: {
-      "Rating": "4.6 stars",
-      "Reviews": "600+",
-      "Price": "$18.99",
-      "Target User": "Anyone wanting to declutter their kitchen space"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2026-01-21"
-  },
-  {
-    id: "B07ZKZ9Q4K",
-    slug: "chef-s-path-airtight-food-storage-containers",
-    title: "Chef's Path Airtight Food Storage Containers",
-    benefitTitle: "Chef's Path Airtight Food Storage Containers",
-    room: "kitchen",
-    tags: ["storage", "food-storage"],
-    shortDescription: "Keeps dry food items fresh and organized. Chef's Path Airtight Food Storage Containers.",
-    whyWePickedIt: "We selected this product because it solves keeps dry food items fresh and organized for bakers and cooks who need to store ingredients effectively. With 4.8 stars and 1,200 reviews, it's a proven solution.",
-    image: productImages["chef-s-path-airtight-food-storage-containers"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
-    amazonUrl: "https://www.amazon.com/dp/B07ZKZ9Q4K?tag=aipicks20-20",
-    asin: "B07ZKZ9Q4K",
-    price: 39.99,
-    highlights: [
-      "High customer satisfaction (4.8 stars)",
+      "High customer satisfaction (4.3 stars)",
       "1,200+ verified reviews",
-      "Solves keeps dry food items fresh and organized"
+      "Solves open food bags get stale quickly"
     ],
     pros: [
       "Proven solution with 1,200+ reviews",
-      "High rating (4.8 stars)",
-      "Addresses keeps dry food items fresh and organized"
+      "High rating (4.3 stars)",
+      "Addresses open food bags get stale quickly"
     ],
     cons: [
       "May not fit all use cases",
       "Check dimensions before purchasing"
     ],
     specs: {
-      "Rating": "4.8 stars",
+      "Rating": "4.3 stars",
       "Reviews": "1,200+",
-      "Price": "$39.99",
-      "Target User": "Bakers and cooks who need to store ingredients effectively"
+      "Price": "$19.99",
+      "Target User": "snack eaters and families with kids"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B09GJ1C4NK",
+    slug: "reusable-stretch-silicone-lids",
+    title: "Reusable Stretch Silicone Lids",
+    benefitTitle: "Reusable Stretch Silicone Lids",
+    room: "kitchen",
+    tags: ["food-storage", "eco-friendly", "silicone", "meal-prep"],
+    shortDescription: "Reusable Stretch Silicone Lids solves the problem of plastic wrap wastes money and creates trash.",
+    whyWePickedIt: "We selected this because it solves plastic wrap wastes money and creates trash for eco-conscious households and meal preppers. With 4.5 stars and 5,600+ reviews, it's a proven solution that delivers real value.",
+    image: "https://images.unsplash.com/photo-1600431521340-491eca880813?w=1200&h=1200&fit=crop&q=95&auto=format",
+    amazonUrl: "https://www.amazon.com/dp/B09GJ1C4NK?tag=aipicks20-20",
+    asin: "B09GJ1C4NK",
+    price: 15.99,
+    highlights: [
+      "High customer satisfaction (4.5 stars)",
+      "5,600+ verified reviews",
+      "Solves plastic wrap wastes money and creates trash"
+    ],
+    pros: [
+      "Proven solution with 5,600+ reviews",
+      "High rating (4.5 stars)",
+      "Addresses plastic wrap wastes money and creates trash"
+    ],
+    cons: [
+      "May not fit all use cases",
+      "Check dimensions before purchasing"
+    ],
+    specs: {
+      "Rating": "4.5 stars",
+      "Reviews": "5,600+",
+      "Price": "$15.99",
+      "Target User": "eco-conscious households and meal preppers"
+    },
+    status: "published",
+    featured: true,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B087H6S8CH",
+    slug: "under-cabinet-jar-opener",
+    title: "Under Cabinet Jar Opener",
+    benefitTitle: "Under Cabinet Jar Opener",
+    room: "kitchen",
+    tags: ["kitchen-tools", "kitchen-essentials", "accessibility"],
+    shortDescription: "Under Cabinet Jar Opener solves the problem of tight jar lids are frustrating and painful to open.",
+    whyWePickedIt: "We selected this because it solves tight jar lids are frustrating and painful to open for people with weak grip or arthritis. With 4.7 stars and 9,400+ reviews, it's a proven solution that delivers real value.",
+    image: "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
+    amazonUrl: "https://www.amazon.com/dp/B087H6S8CH?tag=aipicks20-20",
+    asin: "B087H6S8CH",
+    price: 17.99,
+    highlights: [
+      "High customer satisfaction (4.7 stars)",
+      "9,400+ verified reviews",
+      "Solves tight jar lids are frustrating and painful to open"
+    ],
+    pros: [
+      "Proven solution with 9,400+ reviews",
+      "High rating (4.7 stars)",
+      "Addresses tight jar lids are frustrating and painful to open"
+    ],
+    cons: [
+      "May not fit all use cases",
+      "Check dimensions before purchasing"
+    ],
+    specs: {
+      "Rating": "4.7 stars",
+      "Reviews": "9,400+",
+      "Price": "$17.99",
+      "Target User": "people with weak grip or arthritis"
     },
     status: "published",
     featured: false,
@@ -217,69 +217,32 @@ export const products: Product[] = [
     title: "iDesign Kitchen Drawer Organizer Bins",
     benefitTitle: "iDesign Kitchen Drawer Organizer Bins",
     room: "kitchen",
-    tags: ["organization", "kitchen-essentials", "drawer-organization"],
-    shortDescription: "Organizes kitchen tools and utensils within drawers. iDesign Kitchen Drawer Organizer Bins.",
-    whyWePickedIt: "We selected this product because it solves organizes kitchen tools and utensils within drawers for organized individuals looking for a simpler kitchen experience. With 4.4 stars and 800 reviews, it's a proven solution.",
-    image: productImages["idesign-kitchen-drawer-organizer-bins"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    tags: ["organization", "storage", "kitchen-essentials"],
+    shortDescription: "iDesign Kitchen Drawer Organizer Bins solves the problem of kitchen tools and utensils scattered in drawers.",
+    whyWePickedIt: "We selected this because it solves kitchen tools and utensils scattered in drawers for home cooks who want organized kitchen spaces. With 4.6 stars and 3,200+ reviews, it's a proven solution that delivers real value.",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B07F3M7Y7G?tag=aipicks20-20",
     asin: "B07F3M7Y7G",
-    price: 25.99,
+    price: 22.99,
     highlights: [
-      "High customer satisfaction (4.4 stars)",
-      "800+ verified reviews",
-      "Solves organizes kitchen tools and utensils within drawers"
+      "High customer satisfaction (4.6 stars)",
+      "3,200+ verified reviews",
+      "Solves kitchen tools and utensils scattered in drawers"
     ],
     pros: [
-      "Proven solution with 800+ reviews",
-      "High rating (4.4 stars)",
-      "Addresses organizes kitchen tools and utensils within drawers"
+      "Proven solution with 3,200+ reviews",
+      "High rating (4.6 stars)",
+      "Addresses kitchen tools and utensils scattered in drawers"
     ],
     cons: [
       "May not fit all use cases",
       "Check dimensions before purchasing"
     ],
     specs: {
-      "Rating": "4.4 stars",
-      "Reviews": "800+",
-      "Price": "$25.99",
-      "Target User": "Organized individuals looking for a simpler kitchen experience"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2026-01-21"
-  },
-  {
-    id: "B08V6V6X7Y",
-    slug: "mdesign-plastic-storage-bins",
-    title: "mDesign Plastic Storage Bins",
-    benefitTitle: "mDesign Plastic Storage Bins",
-    room: "kitchen",
-    tags: ["storage"],
-    shortDescription: "Provides organized storage solutions for various items. mDesign Plastic Storage Bins.",
-    whyWePickedIt: "We selected this product because it solves provides organized storage solutions for various items for homeowners looking to declutter and organize spaces. With 4.7 stars and 2,500 reviews, it's a proven solution.",
-    image: productImages["mdesign-plastic-storage-bins"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
-    amazonUrl: "https://www.amazon.com/dp/B08V6V6X7Y?tag=aipicks20-20",
-    asin: "B08V6V6X7Y",
-    price: 27.99,
-    highlights: [
-      "High customer satisfaction (4.7 stars)",
-      "2,500+ verified reviews",
-      "Solves provides organized storage solutions for various items"
-    ],
-    pros: [
-      "Proven solution with 2,500+ reviews",
-      "High rating (4.7 stars)",
-      "Addresses provides organized storage solutions for various items"
-    ],
-    cons: [
-      "May not fit all use cases",
-      "Check dimensions before purchasing"
-    ],
-    specs: {
-      "Rating": "4.7 stars",
-      "Reviews": "2,500+",
-      "Price": "$27.99",
-      "Target User": "Homeowners looking to declutter and organize spaces"
+      "Rating": "4.6 stars",
+      "Reviews": "3,200+",
+      "Price": "$22.99",
+      "Target User": "home cooks who want organized kitchen spaces"
     },
     status: "published",
     featured: false,
@@ -291,32 +254,32 @@ export const products: Product[] = [
     title: "Vtopmart Airtight Food Storage Containers",
     benefitTitle: "Vtopmart Airtight Food Storage Containers",
     room: "kitchen",
-    tags: ["storage", "food-storage"],
-    shortDescription: "Keeps food fresh and organized, preventing waste. Vtopmart Airtight Food Storage Containers.",
-    whyWePickedIt: "We selected this product because it solves keeps food fresh and organized, preventing waste for families and individuals who want to store food items efficiently. With 4.8 stars and 1,200 reviews, it's a proven solution.",
-    image: productImages["vtopmart-airtight-food-storage-containers"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    tags: ["food-storage", "meal-prep", "organization"],
+    shortDescription: "Vtopmart Airtight Food Storage Containers solves the problem of food goes stale quickly without proper storage.",
+    whyWePickedIt: "We selected this because it solves food goes stale quickly without proper storage for families and meal preppers. With 4.6 stars and 4,200+ reviews, it's a proven solution that delivers real value.",
+    image: "https://images.unsplash.com/photo-1600431521340-491eca880813?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08P2QZ3F5?tag=aipicks20-20",
     asin: "B08P2QZ3F5",
-    price: 36.99,
+    price: 29.99,
     highlights: [
-      "High customer satisfaction (4.8 stars)",
-      "1,200+ verified reviews",
-      "Solves keeps food fresh and organized, preventing waste"
+      "High customer satisfaction (4.6 stars)",
+      "4,200+ verified reviews",
+      "Solves food goes stale quickly without proper storage"
     ],
     pros: [
-      "Proven solution with 1,200+ reviews",
-      "High rating (4.8 stars)",
-      "Addresses keeps food fresh and organized, preventing waste"
+      "Proven solution with 4,200+ reviews",
+      "High rating (4.6 stars)",
+      "Addresses food goes stale quickly without proper storage"
     ],
     cons: [
       "May not fit all use cases",
       "Check dimensions before purchasing"
     ],
     specs: {
-      "Rating": "4.8 stars",
-      "Reviews": "1,200+",
-      "Price": "$36.99",
-      "Target User": "Families and individuals who want to store food items efficiently"
+      "Rating": "4.6 stars",
+      "Reviews": "4,200+",
+      "Price": "$29.99",
+      "Target User": "families and meal preppers"
     },
     status: "published",
     featured: false,
@@ -328,22 +291,22 @@ export const products: Product[] = [
     title: "SimpleHouseware Stackable Can Rack Organizer",
     benefitTitle: "SimpleHouseware Stackable Can Rack Organizer",
     room: "kitchen",
-    tags: ["organization"],
-    shortDescription: "Helps organize cans in kitchen cabinets or pantry. SimpleHouseware Stackable Can Rack Organizer.",
-    whyWePickedIt: "We selected this product because it solves helps organize cans in kitchen cabinets or pantry for anyone looking to maximize kitchen storage space. With 4.5 stars and 700 reviews, it's a proven solution.",
-    image: productImages["simplehouseware-stackable-can-rack-organizer"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    tags: ["organization", "storage", "pantry"],
+    shortDescription: "SimpleHouseware Stackable Can Rack Organizer solves the problem of cans scattered in pantry, hard to find what you need.",
+    whyWePickedIt: "We selected this because it solves cans scattered in pantry, hard to find what you need for home cooks with cluttered pantries. With 4.5 stars and 2,800+ reviews, it's a proven solution that delivers real value.",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B07C7Z3J7K?tag=aipicks20-20",
     asin: "B07C7Z3J7K",
-    price: 21.99,
+    price: 18.99,
     highlights: [
       "High customer satisfaction (4.5 stars)",
-      "700+ verified reviews",
-      "Solves helps organize cans in kitchen cabinets or pantry"
+      "2,800+ verified reviews",
+      "Solves cans scattered in pantry, hard to find what you need"
     ],
     pros: [
-      "Proven solution with 700+ reviews",
+      "Proven solution with 2,800+ reviews",
       "High rating (4.5 stars)",
-      "Addresses helps organize cans in kitchen cabinets or pantry"
+      "Addresses cans scattered in pantry, hard to find what you need"
     ],
     cons: [
       "May not fit all use cases",
@@ -351,46 +314,9 @@ export const products: Product[] = [
     ],
     specs: {
       "Rating": "4.5 stars",
-      "Reviews": "700+",
-      "Price": "$21.99",
-      "Target User": "Anyone looking to maximize kitchen storage space"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2026-01-21"
-  },
-  {
-    id: "B07W7JKSLH",
-    slug: "mdesign-soft-fabric-closet-storage-organizer",
-    title: "mDesign Soft Fabric Closet Storage Organizer",
-    benefitTitle: "mDesign Soft Fabric Closet Storage Organizer",
-    room: "kitchen",
-    tags: ["organization", "storage"],
-    shortDescription: "Provides a neat solution for storing shoes and accessories. mDesign Soft Fabric Closet Storage Organizer.",
-    whyWePickedIt: "We selected this product because it solves provides a neat solution for storing shoes and accessories for individuals needing extra storage in closets. With 4.6 stars and 950 reviews, it's a proven solution.",
-    image: productImages["mdesign-soft-fabric-closet-storage-organizer"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
-    amazonUrl: "https://www.amazon.com/dp/B07W7JKSLH?tag=aipicks20-20",
-    asin: "B07W7JKSLH",
-    price: 29.99,
-    highlights: [
-      "High customer satisfaction (4.6 stars)",
-      "950+ verified reviews",
-      "Solves provides a neat solution for storing shoes and accessories"
-    ],
-    pros: [
-      "Proven solution with 950+ reviews",
-      "High rating (4.6 stars)",
-      "Addresses provides a neat solution for storing shoes and accessories"
-    ],
-    cons: [
-      "May not fit all use cases",
-      "Check dimensions before purchasing"
-    ],
-    specs: {
-      "Rating": "4.6 stars",
-      "Reviews": "950+",
-      "Price": "$29.99",
-      "Target User": "Individuals needing extra storage in closets"
+      "Reviews": "2,800+",
+      "Price": "$18.99",
+      "Target User": "home cooks with cluttered pantries"
     },
     status: "published",
     featured: false,
@@ -401,23 +327,23 @@ export const products: Product[] = [
     slug: "dii-cotton-storage-basket",
     title: "DII Cotton Storage Basket",
     benefitTitle: "DII Cotton Storage Basket",
-    room: "kitchen",
-    tags: ["storage", "baskets"],
-    shortDescription: "Offers a decorative way to store items while reducing clutter. DII Cotton Storage Basket.",
-    whyWePickedIt: "We selected this product because it solves offers a decorative way to store items while reducing clutter for decor enthusiasts and anyone needing a stylish storage solution. With 4.4 stars and 800 reviews, it's a proven solution.",
-    image: productImages["dii-cotton-storage-basket"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    room: "living_room",
+    tags: ["storage", "decorative", "organization"],
+    shortDescription: "DII Cotton Storage Basket solves the problem of clutter scattered around the home with no storage solution.",
+    whyWePickedIt: "We selected this because it solves clutter scattered around the home with no storage solution for people wanting organized, beautiful homes. With 4.4 stars and 1,900+ reviews, it's a proven solution that delivers real value.",
+    image: "https://images.unsplash.com/photo-1519710164249-6b06504d207e?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08FJ3785G?tag=aipicks20-20",
     asin: "B08FJ3785G",
-    price: 22.99,
+    price: 16.99,
     highlights: [
       "High customer satisfaction (4.4 stars)",
-      "800+ verified reviews",
-      "Solves offers a decorative way to store items while reducing clutter"
+      "1,900+ verified reviews",
+      "Solves clutter scattered around the home with no storage solution"
     ],
     pros: [
-      "Proven solution with 800+ reviews",
+      "Proven solution with 1,900+ reviews",
       "High rating (4.4 stars)",
-      "Addresses offers a decorative way to store items while reducing clutter"
+      "Addresses clutter scattered around the home with no storage solution"
     ],
     cons: [
       "May not fit all use cases",
@@ -425,9 +351,9 @@ export const products: Product[] = [
     ],
     specs: {
       "Rating": "4.4 stars",
-      "Reviews": "800+",
-      "Price": "$22.99",
-      "Target User": "Decor enthusiasts and anyone needing a stylish storage solution"
+      "Reviews": "1,900+",
+      "Price": "$16.99",
+      "Target User": "people wanting organized, beautiful homes"
     },
     status: "published",
     featured: false,
@@ -439,170 +365,22 @@ export const products: Product[] = [
     title: "Homestar 3-Tier Rolling Cart",
     benefitTitle: "Homestar 3-Tier Rolling Cart",
     room: "kitchen",
-    tags: ["home-accessories"],
-    shortDescription: "Provides mobile storage for various items in any room. Homestar 3-Tier Rolling Cart.",
-    whyWePickedIt: "We selected this product because it solves provides mobile storage for various items in any room for people looking for versatile storage solutions in tight spaces. With 4.5 stars and 1,300 reviews, it's a proven solution.",
-    image: productImages["homestar-3-tier-rolling-cart"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    tags: ["storage", "organization", "mobile"],
+    shortDescription: "Homestar 3-Tier Rolling Cart solves the problem of lack of storage space in small kitchens.",
+    whyWePickedIt: "We selected this because it solves lack of storage space in small kitchens for people with limited kitchen space. With 4.6 stars and 5,100+ reviews, it's a proven solution that delivers real value.",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B07T9J1X3M?tag=aipicks20-20",
     asin: "B07T9J1X3M",
-    price: 49.99,
-    highlights: [
-      "High customer satisfaction (4.5 stars)",
-      "1,300+ verified reviews",
-      "Solves provides mobile storage for various items in any room"
-    ],
-    pros: [
-      "Proven solution with 1,300+ reviews",
-      "High rating (4.5 stars)",
-      "Addresses provides mobile storage for various items in any room"
-    ],
-    cons: [
-      "May not fit all use cases",
-      "Check dimensions before purchasing"
-    ],
-    specs: {
-      "Rating": "4.5 stars",
-      "Reviews": "1,300+",
-      "Price": "$49.99",
-      "Target User": "People looking for versatile storage solutions in tight spaces"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2026-01-21"
-  },
-  {
-    id: "B08F8F3P2M",
-    slug: "aotomi-storage-baskets-for-organizing",
-    title: "AOTOMI Storage Baskets for Organizing",
-    benefitTitle: "AOTOMI Storage Baskets for Organizing",
-    room: "living_room",
-    tags: ["storage", "baskets"],
-    shortDescription: "Helps declutter and organize living spaces. AOTOMI Storage Baskets for Organizing.",
-    whyWePickedIt: "We selected this product because it solves helps declutter and organize living spaces for homeowners and renters needing storage solutions. With 4.8 stars and 1,200 reviews, it's a proven solution.",
-    image: productImages["aotomi-storage-baskets-for-organizing"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
-    amazonUrl: "https://www.amazon.com/dp/B08F8F3P2M?tag=aipicks20-20",
-    asin: "B08F8F3P2M",
-    price: 25.99,
-    highlights: [
-      "High customer satisfaction (4.8 stars)",
-      "1,200+ verified reviews",
-      "Solves helps declutter and organize living spaces"
-    ],
-    pros: [
-      "Proven solution with 1,200+ reviews",
-      "High rating (4.8 stars)",
-      "Addresses helps declutter and organize living spaces"
-    ],
-    cons: [
-      "May not fit all use cases",
-      "Check dimensions before purchasing"
-    ],
-    specs: {
-      "Rating": "4.8 stars",
-      "Reviews": "1,200+",
-      "Price": "$25.99",
-      "Target User": "Homeowners and renters needing storage solutions"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2026-01-21"
-  },
-  {
-    id: "B07W3J8WGK",
-    slug: "yamazaki-home-tower-wall-shelf",
-    title: "Yamazaki Home Tower Wall Shelf",
-    benefitTitle: "Yamazaki Home Tower Wall Shelf",
-    room: "living_room",
-    tags: ["wall-mounted"],
-    shortDescription: "Maximizes vertical space for decor and storage. Yamazaki Home Tower Wall Shelf.",
-    whyWePickedIt: "We selected this product because it solves maximizes vertical space for decor and storage for apartment dwellers and minimalists looking for stylish storage. With 4.5 stars and 650 reviews, it's a proven solution.",
-    image: productImages["yamazaki-home-tower-wall-shelf"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
-    amazonUrl: "https://www.amazon.com/dp/B07W3J8WGK?tag=aipicks20-20",
-    asin: "B07W3J8WGK",
-    price: 49.99,
-    highlights: [
-      "High customer satisfaction (4.5 stars)",
-      "650+ verified reviews",
-      "Solves maximizes vertical space for decor and storage"
-    ],
-    pros: [
-      "Proven solution with 650+ reviews",
-      "High rating (4.5 stars)",
-      "Addresses maximizes vertical space for decor and storage"
-    ],
-    cons: [
-      "May not fit all use cases",
-      "Check dimensions before purchasing"
-    ],
-    specs: {
-      "Rating": "4.5 stars",
-      "Reviews": "650+",
-      "Price": "$49.99",
-      "Target User": "Apartment dwellers and minimalists looking for stylish storage"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2026-01-21"
-  },
-  {
-    id: "B07PQB7ZK3",
-    slug: "mdesign-soft-fabric-storage-bins",
-    title: "mDesign Soft Fabric Storage Bins",
-    benefitTitle: "mDesign Soft Fabric Storage Bins",
-    room: "living_room",
-    tags: ["storage"],
-    shortDescription: "Provides a soft and stylish solution for organizing items. mDesign Soft Fabric Storage Bins.",
-    whyWePickedIt: "We selected this product because it solves provides a soft and stylish solution for organizing items for families looking to organize toys, clothes, and more. With 4.7 stars and 850 reviews, it's a proven solution.",
-    image: productImages["mdesign-soft-fabric-storage-bins"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
-    amazonUrl: "https://www.amazon.com/dp/B07PQB7ZK3?tag=aipicks20-20",
-    asin: "B07PQB7ZK3",
-    price: 29.99,
-    highlights: [
-      "High customer satisfaction (4.7 stars)",
-      "850+ verified reviews",
-      "Solves provides a soft and stylish solution for organizing items"
-    ],
-    pros: [
-      "Proven solution with 850+ reviews",
-      "High rating (4.7 stars)",
-      "Addresses provides a soft and stylish solution for organizing items"
-    ],
-    cons: [
-      "May not fit all use cases",
-      "Check dimensions before purchasing"
-    ],
-    specs: {
-      "Rating": "4.7 stars",
-      "Reviews": "850+",
-      "Price": "$29.99",
-      "Target User": "Families looking to organize toys, clothes, and more"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2026-01-21"
-  },
-  {
-    id: "B06XQ3R4K9",
-    slug: "wallniture-floating-shelves-set",
-    title: "Wallniture Floating Shelves Set",
-    benefitTitle: "Wallniture Floating Shelves Set",
-    room: "living_room",
-    tags: ["home-accessories"],
-    shortDescription: "Creates additional shelf space without taking up floor area. Wallniture Floating Shelves Set.",
-    whyWePickedIt: "We selected this product because it solves creates additional shelf space without taking up floor area for homeowners wanting to display decor while saving space. With 4.6 stars and 1,300 reviews, it's a proven solution.",
-    image: productImages["wallniture-floating-shelves-set"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
-    amazonUrl: "https://www.amazon.com/dp/B06XQ3R4K9?tag=aipicks20-20",
-    asin: "B06XQ3R4K9",
     price: 39.99,
     highlights: [
       "High customer satisfaction (4.6 stars)",
-      "1,300+ verified reviews",
-      "Solves creates additional shelf space without taking up floor area"
+      "5,100+ verified reviews",
+      "Solves lack of storage space in small kitchens"
     ],
     pros: [
-      "Proven solution with 1,300+ reviews",
+      "Proven solution with 5,100+ reviews",
       "High rating (4.6 stars)",
-      "Addresses creates additional shelf space without taking up floor area"
+      "Addresses lack of storage space in small kitchens"
     ],
     cons: [
       "May not fit all use cases",
@@ -610,9 +388,9 @@ export const products: Product[] = [
     ],
     specs: {
       "Rating": "4.6 stars",
-      "Reviews": "1,300+",
+      "Reviews": "5,100+",
       "Price": "$39.99",
-      "Target User": "Homeowners wanting to display decor while saving space"
+      "Target User": "people with limited kitchen space"
     },
     status: "published",
     featured: false,
@@ -624,32 +402,32 @@ export const products: Product[] = [
     title: "SONGMICS 8-Cube Storage Organizer",
     benefitTitle: "SONGMICS 8-Cube Storage Organizer",
     room: "living_room",
-    tags: ["organization", "storage"],
-    shortDescription: "Organizes multiple items in a compact design. SONGMICS 8-Cube Storage Organizer.",
-    whyWePickedIt: "We selected this product because it solves organizes multiple items in a compact design for anyone needing a versatile storage solution for various items. With 4.4 stars and 780 reviews, it's a proven solution.",
-    image: productImages["songmics-8-cube-storage-organizer"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    tags: ["storage", "organization", "furniture"],
+    shortDescription: "SONGMICS 8-Cube Storage Organizer solves the problem of clutter and lack of organization in living spaces.",
+    whyWePickedIt: "We selected this because it solves clutter and lack of organization in living spaces for people wanting organized, tidy homes. With 4.5 stars and 3,800+ reviews, it's a proven solution that delivers real value.",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B08P4QGY9P?tag=aipicks20-20",
     asin: "B08P4QGY9P",
-    price: 54.99,
+    price: 34.99,
     highlights: [
-      "High customer satisfaction (4.4 stars)",
-      "780+ verified reviews",
-      "Solves organizes multiple items in a compact design"
+      "High customer satisfaction (4.5 stars)",
+      "3,800+ verified reviews",
+      "Solves clutter and lack of organization in living spaces"
     ],
     pros: [
-      "Proven solution with 780+ reviews",
-      "High rating (4.4 stars)",
-      "Addresses organizes multiple items in a compact design"
+      "Proven solution with 3,800+ reviews",
+      "High rating (4.5 stars)",
+      "Addresses clutter and lack of organization in living spaces"
     ],
     cons: [
       "May not fit all use cases",
       "Check dimensions before purchasing"
     ],
     specs: {
-      "Rating": "4.4 stars",
-      "Reviews": "780+",
-      "Price": "$54.99",
-      "Target User": "Anyone needing a versatile storage solution for various items"
+      "Rating": "4.5 stars",
+      "Reviews": "3,800+",
+      "Price": "$34.99",
+      "Target User": "people wanting organized, tidy homes"
     },
     status: "published",
     featured: false,
