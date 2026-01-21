@@ -16,9 +16,9 @@ export function Header() {
             AI Picks
           </Link>
           
-          {/* Search Bar - Desktop */}
-          <div className="hidden md:flex flex-1 max-w-lg mx-4">
-            <SearchBar />
+          {/* Search Bar - Desktop (Icon only, expands on click) */}
+          <div className="hidden md:flex items-center justify-center mx-4">
+            <SearchBar variant="icon" />
           </div>
           
           {/* Desktop Navigation */}
@@ -60,7 +60,7 @@ export function Header() {
           <div className="md:hidden border-t border-slate-200 bg-white">
             {/* Search Bar - Mobile */}
             <div className="px-4 py-4 border-b border-slate-200">
-              <SearchBar />
+              <SearchBar variant="full" />
             </div>
             <nav className="flex flex-col py-4 space-y-3">
               <Link
