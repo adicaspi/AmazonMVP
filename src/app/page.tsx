@@ -41,7 +41,7 @@ export default function HomePage() {
                 Handpicked favorites from our editors — carefully curated to help you create a more beautiful home
               </p>
               <p className="text-sm text-slate-500 mt-2">
-                Curated from hundreds of options • Updated regularly • Only products we'd recommend ourselves
+                Updated regularly • Curated from hundreds of options • Only products we'd recommend ourselves
               </p>
             </div>
             <Link
