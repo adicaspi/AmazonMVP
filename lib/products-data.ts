@@ -15,6 +15,7 @@ export interface Product {
   image: string; // URL or local path
   amazonUrl: string; // Full Amazon URL with tracking tag
   asin?: string;
+  price?: number; // Product price in USD
   highlights: string[];
   pros: string[];
   cons: string[];
@@ -22,6 +23,8 @@ export interface Product {
   status: ProductStatus;
   featured?: boolean;
   dateAdded?: string;
+  whyWePickedIt?: string; // Why AI Picks recommends this product
+  benefitTitle?: string; // Benefit-oriented title for cards
 }
 
 // Product images - Each product has a unique, relevant Unsplash image
@@ -64,12 +67,15 @@ export const products: Product[] = [
     id: "1",
     slug: "bamboo-drawer-organizer",
     title: "Bamboo Drawer Organizer",
+    benefitTitle: "Transform messy drawers into organized spaces",
     room: "kitchen",
     tags: ["organization", "storage", "bamboo", "kitchen-essentials"],
     shortDescription: "Keep your kitchen drawers tidy with this adjustable bamboo organizer.",
+    whyWePickedIt: "We chose this because it's eco-friendly, adjustable to fit any drawer size, and made from sustainable bamboo that's both durable and beautiful.",
     image: productImages["bamboo-drawer-organizer"],
     amazonUrl: "https://www.amazon.com/dp/B08YZ5YF7M?tag=aipicks-20",
     asin: "B08YZ5YF7M",
+    price: 24.99,
     highlights: [
       "Adjustable dividers for custom organization",
       "Made from sustainable bamboo",
@@ -98,12 +104,15 @@ export const products: Product[] = [
     id: "2",
     slug: "silicone-food-storage-lids",
     title: "Reusable Silicone Food Storage Lids",
+    benefitTitle: "Eliminate plastic wrap and keep food fresh longer",
     room: "kitchen",
     tags: ["food-storage", "eco-friendly", "silicone", "meal-prep"],
     shortDescription: "Eco-friendly alternative to plastic wrap that seals any container.",
+    whyWePickedIt: "This set stands out for its versatility—one lid fits multiple container sizes, reducing waste while keeping food fresher than plastic wrap.",
     image: productImages["silicone-food-storage-lids"],
     amazonUrl: "https://www.amazon.com/dp/B07H8QMZPV?tag=aipicks-20",
     asin: "B07H8QMZPV",
+    price: 15.99,
     highlights: [
       "Fits multiple container sizes",
       "Dishwasher safe",
@@ -132,12 +141,15 @@ export const products: Product[] = [
     id: "3",
     slug: "jar-opener-tool",
     title: "Jar Opener Tool",
+    benefitTitle: "Open stubborn jars without the struggle",
     room: "kitchen",
     tags: ["kitchen-tools", "accessibility", "grip-assist"],
     shortDescription: "Effortlessly open tight jar lids with this ergonomic tool.",
+    whyWePickedIt: "We recommend this because it's simple, affordable, and genuinely solves a common frustration—no more asking for help with tight lids.",
     image: productImages["jar-opener-tool"],
     amazonUrl: "https://www.amazon.com/dp/B07GJX5QYR?tag=aipicks-20",
     asin: "B07GJX5QYR",
+    price: 12.99,
     highlights: [
       "Works on jars of all sizes",
       "Ergonomic grip design",
@@ -166,11 +178,14 @@ export const products: Product[] = [
     id: "4",
     slug: "table-lamp-modern",
     title: "Modern Table Lamp",
+    benefitTitle: "Add warm, adjustable lighting to any space",
     room: "living_room",
     tags: ["lighting", "modern", "decorative", "bedroom"],
     shortDescription: "Sleek, minimalist lamp that adds ambient lighting to any room.",
+    whyWePickedIt: "This lamp combines modern design with practical features like touch dimming and included LED bulb, making it both beautiful and functional.",
     image: productImages["table-lamp-modern"],
     amazonUrl: "https://www.amazon.com/dp/B08ABC1234?tag=aipicks-20",
+    price: 45.99,
     highlights: [
       "Touch dimmer control",
       "LED bulb included",
@@ -199,11 +214,14 @@ export const products: Product[] = [
     id: "5",
     slug: "storage-baskets-set",
     title: "Storage Baskets Set",
+    benefitTitle: "Organize any room with beautiful, stackable baskets",
     room: "storage",
     tags: ["storage", "organization", "baskets", "multi-room"],
     shortDescription: "Versatile woven baskets perfect for organizing any space.",
+    whyWePickedIt: "This set offers excellent value with three sizes that work together, natural materials that look great, and stackable design for efficient storage.",
     image: productImages["storage-baskets-set"],
     amazonUrl: "https://www.amazon.com/dp/B08DEF5678?tag=aipicks-20",
+    price: 29.99,
     highlights: [
       "Set of 3 different sizes",
       "Natural woven material",
@@ -232,11 +250,14 @@ export const products: Product[] = [
     id: "6",
     slug: "throw-pillow-set",
     title: "Throw Pillow Set",
+    benefitTitle: "Instantly upgrade your sofa or bed with comfort and style",
     room: "living_room",
     tags: ["decorative", "comfort", "textiles", "bedroom"],
     shortDescription: "Soft, decorative pillows that add comfort and style.",
+    whyWePickedIt: "These pillows offer great comfort-to-price ratio with removable, washable covers and quality filling that maintains its shape.",
     image: productImages["throw-pillow-set"],
     amazonUrl: "https://www.amazon.com/dp/B08GHI9012?tag=aipicks-20",
+    price: 34.99,
     highlights: [
       "Set of 2 pillows",
       "Removable covers",
@@ -265,11 +286,14 @@ export const products: Product[] = [
     id: "7",
     slug: "wall-shelf-floating",
     title: "Floating Wall Shelf",
+    benefitTitle: "Add storage and style without losing floor space",
     room: "living_room",
     tags: ["storage", "wall-mounted", "modern", "decorative"],
     shortDescription: "Sleek floating shelf that adds storage without taking up floor space.",
+    whyWePickedIt: "This shelf combines modern aesthetics with practical storage, featuring hidden mounting for a clean look and sturdy construction for everyday use.",
     image: productImages["wall-shelf-floating"],
     amazonUrl: "https://www.amazon.com/dp/B08JKL3456?tag=aipicks-20",
+    price: 39.99,
     highlights: [
       "Hidden mounting hardware",
       "Sturdy construction",
@@ -298,11 +322,14 @@ export const products: Product[] = [
     id: "8",
     slug: "bedside-organizer",
     title: "Bedside Organizer",
+    benefitTitle: "Keep essentials organized without cluttering your nightstand",
     room: "bedroom",
     tags: ["organization", "bedroom", "storage", "nightstand"],
     shortDescription: "Keep your bedside essentials organized and within reach.",
+    whyWePickedIt: "This organizer solves the nightstand clutter problem by hanging from the bed frame, keeping items accessible without taking up surface space.",
     image: productImages["bedside-organizer"],
     amazonUrl: "https://www.amazon.com/dp/B08MNO7890?tag=aipicks-20",
+    price: 19.99,
     highlights: [
       "Multiple pockets and compartments",
       "Hangs from bed frame",
@@ -331,11 +358,14 @@ export const products: Product[] = [
     id: "9",
     slug: "desk-organizer-set",
     title: "Desk Organizer Set",
+    benefitTitle: "Transform a cluttered desk into a productive workspace",
     room: "office",
     tags: ["organization", "office", "desk-accessories", "storage"],
     shortDescription: "Keep your workspace tidy with this comprehensive organizer set.",
+    whyWePickedIt: "This set provides comprehensive organization with multiple compartments, pen holders, and cable management—all at an affordable price point.",
     image: productImages["desk-organizer-set"],
     amazonUrl: "https://www.amazon.com/dp/B08PQR1234?tag=aipicks-20",
+    price: 22.99,
     highlights: [
       "Multiple compartments",
       "Pen holders included",
@@ -364,11 +394,14 @@ export const products: Product[] = [
     id: "10",
     slug: "bathroom-storage-caddy",
     title: "Bathroom Storage Caddy",
+    benefitTitle: "Organize your shower essentials without drilling holes",
     room: "bathroom",
     tags: ["storage", "bathroom", "shower", "organization"],
     shortDescription: "Waterproof caddy that keeps bathroom essentials organized.",
+    whyWePickedIt: "This caddy offers easy installation with suction cups, waterproof construction, and multiple compartments—perfect for renters or anyone avoiding permanent fixtures.",
     image: productImages["bathroom-storage-caddy"],
     amazonUrl: "https://www.amazon.com/dp/B08STU5678?tag=aipicks-20",
+    price: 16.99,
     highlights: [
       "Waterproof construction",
       "Suction cup mounting",

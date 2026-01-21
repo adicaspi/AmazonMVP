@@ -43,18 +43,18 @@ export function HeroSection() {
               <span className="font-semibold">Editorial Independence</span>
             </div>
           </div>
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a 
             href="/products" 
-            className="px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
+            className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 text-center"
           >
-            Explore Products
+            Browse Top Picks
           </a>
           <a 
             href="/guides" 
-            className="px-8 py-4 bg-white text-slate-900 font-bold rounded-xl border-2 border-slate-300 hover:border-slate-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            className="w-full sm:w-auto px-8 py-4 bg-white text-slate-900 font-bold rounded-xl border-2 border-slate-300 hover:border-slate-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
           >
-            Read Guides
+            Explore Guides
           </a>
         </div>
       </div>

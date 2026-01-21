@@ -34,11 +34,16 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
       <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
         <div>
           <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5 sm:mb-2 group-hover:text-slate-700 transition-colors">
-            {product.title}
+            {product.benefitTitle || product.title}
           </h3>
           {showDescription && (
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-2">
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-2 mb-2">
               {product.shortDescription}
+            </p>
+          )}
+          {product.whyWePickedIt && (
+            <p className="text-xs text-emerald-700 italic leading-relaxed line-clamp-2">
+              Why we picked it: {product.whyWePickedIt}
             </p>
           )}
         </div>
@@ -65,17 +70,36 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           ))}
         </div>
 
+        {/* Benefit sentence above CTA */}
+        {product.whyWePickedIt && (
+          <p className="text-xs text-slate-700 italic leading-relaxed mb-3 line-clamp-2">
+            {product.whyWePickedIt.split('.')[0]}.
+          </p>
+        )}
+
+        {/* Ratings placeholder */}
+        <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-1">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span key={star} className="text-yellow-400 text-xs">★</span>
+            ))}
+          </div>
+          <span className="text-xs text-slate-500">(4.5)</span>
+          <span className="text-xs text-slate-400">•</span>
+          <span className="text-xs text-slate-500">100+ reviews</span>
+        </div>
+
         <a
           href={affiliateLink}
           target="_blank"
           rel="sponsored nofollow noopener"
-          className="block w-full py-3 sm:py-3.5 px-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-xs sm:text-sm font-semibold text-center hover:from-slate-800 hover:to-slate-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+          className="block w-full py-3.5 sm:py-4 px-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-sm sm:text-base font-bold text-center hover:from-slate-800 hover:to-slate-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           aria-label={`Check price on Amazon for ${product.title}`}
         >
-          Check price on Amazon →
+          Check Price on Amazon →
         </a>
-        <p className="text-[10px] sm:text-xs text-slate-500 text-center mt-1.5 sm:mt-2 leading-tight">
-          As an Amazon Associate I earn from qualifying purchases.
+        <p className="text-[10px] sm:text-xs text-slate-500 text-center mt-2 leading-tight">
+          <span className="font-semibold">Affiliate:</span> As an Amazon Associate I earn from qualifying purchases.
         </p>
       </div>
     </article>

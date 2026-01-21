@@ -1,4 +1,7 @@
 import { HeroSection } from "@/components/HeroSection";
+import { HowItWorks } from "@/components/HowItWorks";
+import { SocialProof } from "@/components/SocialProof";
+import { EmailCapture } from "@/components/EmailCapture";
 import { CategoryCards } from "@/components/CategoryCards";
 import { ProductCard } from "@/components/ProductCard";
 import { getFeaturedProducts } from "@/lib/products-data";
@@ -14,6 +17,10 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      
+      <SocialProof />
+      
+      <HowItWorks />
       
       <CategoryCards />
 
@@ -75,29 +82,112 @@ export default function HomePage() {
       <section className="py-16 md:py-20 border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
-            <div className="inline-block mb-3 px-3 py-1 bg-blue-50 border border-blue-100 rounded-full">
-              <span className="text-xs font-semibold text-blue-700 uppercase tracking-wide">Coming Soon</span>
+            <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-full shadow-sm">
+              <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-2">
+                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                Featured Guides
+              </span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Featured Guides
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+              Practical Guides for Your Home
             </h2>
-            <p className="text-slate-600">Practical, actionable guides to help you organize and upgrade your home.</p>
+            <p className="text-lg text-slate-600 max-w-2xl">Practical, actionable guides to help you organize and upgrade your home. Each guide includes product recommendations and real-world solutions.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Placeholder for guides - will be replaced with actual guide data */}
-            <div className="border-2 border-dashed border-slate-200 bg-white/50 p-8 rounded-xl text-center">
-              <div className="text-4xl mb-4">📚</div>
-              <div className="text-sm text-slate-500 mb-2 font-semibold">Coming soon</div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                Guide content will appear here
+            <Link
+              href="/guides/choosing-kitchen-lighting"
+              className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden transform hover:-translate-y-1 p-6"
+            >
+              <div className="text-4xl mb-3">💡</div>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">Lighting</span>
+                <span className="text-xs text-slate-500">8 min read</span>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">
+                How to Choose the Perfect Kitchen Lighting
               </h3>
-              <p className="text-sm text-slate-600">
-                MDX guides are being set up...
+              <p className="text-sm text-slate-600 line-clamp-2">
+                A complete guide to selecting kitchen lighting that combines functionality with style.
               </p>
-            </div>
+            </Link>
+            <Link
+              href="/guides/organizing-small-kitchen"
+              className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden transform hover:-translate-y-1 p-6"
+            >
+              <div className="text-4xl mb-3">🗂️</div>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">Organization</span>
+                <span className="text-xs text-slate-500">10 min read</span>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">
+                How to Organize a Small Kitchen
+              </h3>
+              <p className="text-sm text-slate-600 line-clamp-2">
+                Practical strategies for organizing a small kitchen with drawer organizers and storage solutions.
+              </p>
+            </Link>
+            <Link
+              href="/guides/kitchen-storage-solutions"
+              className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden transform hover:-translate-y-1 p-6"
+            >
+              <div className="text-4xl mb-3">📦</div>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">Storage</span>
+                <span className="text-xs text-slate-500">9 min read</span>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">
+                Kitchen Storage Solutions: Organize Every Corner
+              </h3>
+              <p className="text-sm text-slate-600 line-clamp-2">
+                Comprehensive guide to kitchen storage with drawer organizers and cabinet solutions.
+              </p>
+            </Link>
+            <Link
+              href="/guides/choosing-bedroom-lighting"
+              className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden transform hover:-translate-y-1 p-6"
+            >
+              <div className="text-4xl mb-3">🌙</div>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">Lighting</span>
+                <span className="text-xs text-slate-500">7 min read</span>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">
+                How to Choose Bedroom Lighting for Better Sleep
+              </h3>
+              <p className="text-sm text-slate-600 line-clamp-2">
+                Complete guide to bedroom lighting for creating a relaxing atmosphere that promotes better sleep.
+              </p>
+            </Link>
+            <Link
+              href="/guides/creating-cozy-living-room"
+              className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden transform hover:-translate-y-1 p-6"
+            >
+              <div className="text-4xl mb-3">🛋️</div>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">Decor</span>
+                <span className="text-xs text-slate-500">8 min read</span>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">
+                How to Create a Cozy Living Room
+              </h3>
+              <p className="text-sm text-slate-600 line-clamp-2">
+                Transform your living room into a cozy, inviting space with lighting, textiles, and organization.
+              </p>
+            </Link>
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/guides"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              <span>View all guides</span>
+              <span className="text-lg">→</span>
+            </Link>
           </div>
         </div>
       </section>
+
+      <EmailCapture />
 
       <section className="py-16 md:py-20 border-t border-slate-200 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

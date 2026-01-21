@@ -3,6 +3,7 @@
 // components/Header.tsx
 import Link from "next/link";
 import { useState } from "react";
+import { SearchBar } from "./SearchBar";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -10,19 +11,24 @@ export function Header() {
   return (
     <header className="border-b border-slate-200 bg-white/95 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent hover:from-slate-700 hover:to-slate-500 transition-all">
+        <div className="flex items-center justify-between h-16 gap-4">
+          <Link href="/" className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent hover:from-slate-700 hover:to-slate-500 transition-all flex-shrink-0">
             AI Picks
           </Link>
           
+          {/* Search Bar - Desktop */}
+          <div className="hidden md:flex flex-1 max-w-lg mx-4">
+            <SearchBar />
+          </div>
+          
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="/guides" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative group">
-              Guides
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-900 group-hover:w-full transition-all duration-300" />
-            </Link>
+          <nav className="hidden md:flex items-center gap-6 flex-shrink-0">
             <Link href="/products" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative group">
               Products
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-900 group-hover:w-full transition-all duration-300" />
+            </Link>
+            <Link href="/guides" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative group">
+              Guides
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-900 group-hover:w-full transition-all duration-300" />
             </Link>
             <Link href="/about" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative group">
@@ -34,7 +40,7 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+            className="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors flex-shrink-0"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
@@ -52,20 +58,24 @@ export function Header() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-slate-200 bg-white">
+            {/* Search Bar - Mobile */}
+            <div className="px-4 py-4 border-b border-slate-200">
+              <SearchBar />
+            </div>
             <nav className="flex flex-col py-4 space-y-3">
-              <Link
-                href="/guides"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2 text-base font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors"
-              >
-                Guides
-              </Link>
               <Link
                 href="/products"
                 onClick={() => setMobileMenuOpen(false)}
                 className="px-4 py-2 text-base font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors"
               >
                 Products
+              </Link>
+              <Link
+                href="/guides"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-2 text-base font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors"
+              >
+                Guides
               </Link>
               <Link
                 href="/about"
