@@ -845,6 +845,219 @@ export const products: Product[] = [
     status: "published",
     featured: false,
     dateAdded: "2026-01-21"
+  },
+  {
+    id: "B01M0DQQHQ",
+    slug: "melissa-doug-frozen-treats-ice-cream-set",
+    title: "Melissa & Doug Wooden Frozen Treats Ice Cream Play Set - 24 Pieces",
+    benefitTitle: "Mix-and-match ice cream play set with 24 pieces",
+    room: "kids_room",
+    tags: ["toys", "kids", "melissa-doug", "pretend-play", "food", "wooden", "ice-cream"],
+    shortDescription: "24-piece wooden ice cream play set with cookies, ice cream fillings, popsicles, and Italian ice cups. Perfect for imaginative play and learning colors and flavors.",
+    whyWePickedIt: "This beautiful wooden set inspires creative play with multiple mix-and-match combinations. Kids can create ice cream sandwiches, popsicles, and Italian ice treats while learning about colors, flavors, and customer service. The storage tray keeps everything organized.",
+    image: "https://m.media-amazon.com/images/I/61i7kSAB+AL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Melissa-Doug-Pretend-Durable-Construction/dp/B01M0DQQHQ?tag=aipicks20-20",
+    asin: "B01M0DQQHQ",
+    price: 19.99,
+    highlights: [
+      "24-piece wooden play set",
+      "Mix-and-match ice cream creations",
+      "Includes storage tray",
+      "Ages 3+ years",
+      "Reusable menu card included"
+    ],
+    pros: [
+      "Beautiful, durable wooden pieces",
+      "Encourages imaginative role-play",
+      "Multiple play combinations",
+      "Teaches colors and flavors",
+      "Storage tray for organization"
+    ],
+    cons: [
+      "Small pieces - requires supervision for young children",
+      "Some pieces may be lost over time"
+    ],
+    specs: {
+      "Brand": "Melissa & Doug",
+      "Age Range": "3+ years",
+      "Pieces": "24 pieces total",
+      "Material": "Wood",
+      "Includes": "6 cookies, 3 ice cream fillings, 6 ice pop halves, 2 Italian ice cups, spoons, menu card, storage tray",
+      "Target User": "Children who love pretend play and ice cream"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B06WP15J5R",
+    slug: "melissa-doug-slice-bake-cookie-set",
+    title: "Melissa & Doug Slice & Bake Wooden Cookie Play Food Set",
+    benefitTitle: "Realistic cookie baking play set",
+    room: "kids_room",
+    tags: ["toys", "kids", "melissa-doug", "pretend-play", "kitchen", "wooden", "sliceable", "cookies"],
+    shortDescription: "Wooden cookie play set with sliceable cookie dough, toppings, and baking accessories. Perfect for pretend baking and creative play.",
+    whyWePickedIt: "This interactive set lets kids 'slice' wooden cookie dough and decorate cookies with toppings. The self-stick tabs create satisfying pretend baking experiences while teaching sequencing and following recipes. Great for developing fine motor skills.",
+    image: "https://m.media-amazon.com/images/I/81Ei9XuHNrL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Melissa-Doug-Slice-Wooden-Pieces/dp/B06WP15J5R?tag=aipicks20-20",
+    asin: "B06WP15J5R",
+    price: 16.99,
+    highlights: [
+      "Sliceable wooden cookie dough",
+      "Multiple toppings and decorations",
+      "Self-stick tabs for assembly",
+      "Ages 3+ years",
+      "Wooden knife included"
+    ],
+    pros: [
+      "Interactive slicing action",
+      "Teaches baking concepts",
+      "Develops fine motor skills",
+      "Quality wooden construction",
+      "Great for pretend bakery play"
+    ],
+    cons: [
+      "Self-stick tabs may weaken with heavy use",
+      "Small pieces require supervision"
+    ],
+    specs: {
+      "Brand": "Melissa & Doug",
+      "Age Range": "3+ years",
+      "Material": "Wood",
+      "Features": "Sliceable pieces with self-stick tabs",
+      "Includes": "Cookie dough, toppings, wooden knife, baking accessories",
+      "Target User": "Children who enjoy pretend baking and cooking"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B0DCZ8S2X5",
+    slug: "sielevin-colorful-pretend-jewelry-bracelets",
+    title: "SIELEVIN Colorful Pretend Play Jewelry Bracelets Set for Girls",
+    benefitTitle: "Sparkly dress-up jewelry for imaginative play",
+    room: "kids_room",
+    tags: ["toys", "kids", "dress-up", "jewelry", "pretend-play", "girls", "accessories"],
+    shortDescription: "Colorful pretend jewelry set with bracelets, rings, and accessories perfect for dress-up, birthday parties, and imaginative play.",
+    whyWePickedIt: "This sparkly jewelry set is perfect for dress-up play and princess pretend games. The colorful variety keeps kids engaged, and it's great for birthday party favors or Christmas stockings. Safe for children and encourages creative role-play.",
+    image: "https://m.media-amazon.com/images/I/81lZk2wW7XL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/SIELEVIN-Colorful-Bracelets-Birthday-Christmas/dp/B0DCZ8S2X5?tag=aipicks20-20",
+    asin: "B0DCZ8S2X5",
+    price: 12.99,
+    highlights: [
+      "Colorful pretend jewelry set",
+      "Multiple bracelets and accessories",
+      "Perfect for dress-up play",
+      "Great for birthday parties",
+      "Safe for children"
+    ],
+    pros: [
+      "Bright, appealing colors",
+      "Variety of jewelry pieces",
+      "Encourages imaginative play",
+      "Great value for money",
+      "Perfect party favors"
+    ],
+    cons: [
+      "Plastic construction may not be as durable",
+      "Small pieces - supervision recommended"
+    ],
+    specs: {
+      "Brand": "SIELEVIN",
+      "Age Range": "3+ years",
+      "Material": "Plastic",
+      "Use": "Dress-up, pretend play, party favors",
+      "Target User": "Girls who love dress-up and princess play"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B0811B2GF5",
+    slug: "relibeauty-girls-princess-dress-costume",
+    title: "ReliBeauty Girls Princess Dress Up Costume with Elastic Bodice",
+    benefitTitle: "Comfortable princess dress for dress-up play",
+    room: "kids_room",
+    tags: ["toys", "kids", "dress-up", "costume", "princess", "girls", "pretend-play"],
+    shortDescription: "Princess dress-up costume with elastic backless design and beautiful accessories. Perfect for birthday parties, Halloween, and everyday pretend play.",
+    whyWePickedIt: "This princess dress features a comfortable elastic bodice that fits various sizes and allows for easy on-and-off. The beautiful design inspires imaginative play, and it's perfect for costume parties, photo shoots, or daily dress-up fun.",
+    image: "https://m.media-amazon.com/images/I/7197AaQCT7L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/ReliBeauty-Elastic-Backless-Princess-Accessories/dp/B0811B2GF5?tag=aipicks20-20",
+    asin: "B0811B2GF5",
+    price: 18.99,
+    highlights: [
+      "Elastic bodice for comfortable fit",
+      "Beautiful princess design",
+      "Includes accessories",
+      "Perfect for parties and dress-up",
+      "Easy to put on and take off"
+    ],
+    pros: [
+      "Comfortable elastic design",
+      "Fits various sizes",
+      "Beautiful, eye-catching design",
+      "Great for multiple occasions",
+      "Encourages imaginative play"
+    ],
+    cons: [
+      "May require hand washing",
+      "Sizing may vary - check measurements"
+    ],
+    specs: {
+      "Brand": "ReliBeauty",
+      "Age Range": "3-10 years",
+      "Material": "Polyester",
+      "Design": "Elastic backless bodice",
+      "Use": "Dress-up, parties, Halloween, photo shoots",
+      "Target User": "Girls who love princess play and costumes"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B09KXYLWG4",
+    slug: "princess-jewelry-boutique-dress-up-set",
+    title: "Princess Jewelry Boutique - Dress Up Costumes & Accessories Set",
+    benefitTitle: "Complete princess boutique with jewelry and costumes",
+    room: "kids_room",
+    tags: ["toys", "kids", "dress-up", "princess", "jewelry", "boutique", "pretend-play", "accessories"],
+    shortDescription: "Complete princess boutique play set with dress-up costumes, jewelry, and accessories for imaginative role-play and fashion fun.",
+    whyWePickedIt: "This all-in-one boutique set provides everything kids need for princess pretend play. The variety of jewelry and accessories encourages creativity and social play. Perfect for dress-up parties, playdates, or creating a princess boutique at home.",
+    image: "https://m.media-amazon.com/images/I/91H57JMpcyL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Princess-Jewelry-Boutique-Costumes-Accessories/dp/B09KXYLWG4?tag=aipicks20-20",
+    asin: "B09KXYLWG4",
+    price: 24.99,
+    highlights: [
+      "Complete boutique play set",
+      "Multiple jewelry pieces",
+      "Dress-up accessories included",
+      "Great for social play",
+      "Encourages creative role-play"
+    ],
+    pros: [
+      "Comprehensive set with many pieces",
+      "Encourages imaginative play",
+      "Great for playdates",
+      "Variety keeps kids engaged",
+      "Perfect gift for princess lovers"
+    ],
+    cons: [
+      "Many small pieces to keep track of",
+      "May need storage solution"
+    ],
+    specs: {
+      "Brand": "Princess Jewelry Boutique",
+      "Age Range": "3+ years",
+      "Includes": "Jewelry, accessories, dress-up items",
+      "Use": "Pretend play, dress-up, boutique role-play",
+      "Target User": "Children who love princess play and fashion"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
   }
 ];
 
