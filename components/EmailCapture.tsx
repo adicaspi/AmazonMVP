@@ -11,13 +11,30 @@ export function EmailCapture() {
     e.preventDefault();
     setStatus("loading");
     
-    // TODO: Integrate with email service (e.g., Mailchimp, ConvertKit, etc.)
-    // For now, just simulate success
-    setTimeout(() => {
-      setStatus("success");
-      setEmail("");
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setEmail("");
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 3000);
+      }
+    } catch (error) {
+      console.error("Subscription error:", error);
+      setStatus("error");
       setTimeout(() => setStatus("idle"), 3000);
-    }, 1000);
+    }
   };
 
   return (
@@ -32,7 +49,11 @@ export function EmailCapture() {
         
         {status === "success" ? (
           <div className="bg-emerald-500 text-white px-6 py-4 rounded-xl inline-block">
-            <p className="font-semibold">✓ Successfully subscribed! Check your email.</p>
+            <p className="font-semibold">✓ Successfully subscribed! Check your email for confirmation.</p>
+          </div>
+        ) : status === "error" ? (
+          <div className="bg-red-500 text-white px-6 py-4 rounded-xl inline-block">
+            <p className="font-semibold">Something went wrong. Please try again later.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
