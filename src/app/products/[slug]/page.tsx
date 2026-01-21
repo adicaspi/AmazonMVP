@@ -154,23 +154,6 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </div>
 
-        {/* CTA Above the fold - visible on scroll */}
-        <div className="sticky top-16 z-40 bg-white border-t border-b border-slate-200 py-4 mb-8 sm:mb-12 shadow-sm">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <a
-              href={affiliateLink}
-              target="_blank"
-              rel="sponsored nofollow noopener"
-              className="block w-full py-4 sm:py-5 px-6 sm:px-10 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-center font-bold text-base sm:text-lg rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            >
-              Find Better Home Picks
-            </a>
-            <p className="text-xs text-slate-500 mt-3 text-center">
-              <span className="font-semibold">Affiliate Disclosure:</span> As an Amazon Associate I earn from qualifying purchases.
-            </p>
-          </div>
-        </div>
-        
         {/* CTA Below content */}
         <div className="border-t border-slate-200 pt-8 sm:pt-12 mb-12 bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 sm:p-8">
           <a
