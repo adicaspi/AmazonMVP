@@ -31,41 +31,41 @@ export interface Product {
 // Using specific photo IDs that are verified to work and match the product
 // All images are carefully selected to be relevant to the product description
 const productImages: Record<string, string> = {
-  // Collapsible organizer - storage
-  "amazon-basics-collapsible-organizer": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Amazon Basics Cube Organizer Storage Bins - fabric storage cubes/baskets
+  "amazon-basics-cube-organizer-storage-bins": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Home organization essentials
-  "home-organization-essentials": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // OIAHOMY Storage Basket - woven bathroom basket
+  "oiahomy-storage-basket-bathroom": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Drawer organizers - bathroom/kitchen
+  // Vtopmart Drawer Organizers - clear plastic drawer organizers
   "vtopmart-drawer-organizers-25-pcs": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Jar opener - kitchen tool
+  // Jar Opener - kitchen tool for opening jars
   "jar-opener-weak-hands-seniors": "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Home organization product
-  "home-organization-product": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Amazon Basics Non-Stick Cookware Set - pots and pans
+  "amazon-basics-non-stick-cookware-set": "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Food storage containers
+  // Rubbermaid EasyStore Containers - food storage containers
   "rubbermaid-easystore-containers-18-piece": "https://images.unsplash.com/photo-1600431521340-491eca880813?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Floating shelves - bathroom/bedroom
+  // BAYKA Floating Shelves - wall-mounted floating shelves
   "bayka-floating-shelves-rustic-brown": "https://images.unsplash.com/photo-1519710164249-6b06504d207e?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Silverware drawer organizer
+  // Lifewit Silverware Drawer Organizer - utensil organizer
   "lifewit-silverware-drawer-organizer": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Home organization essentials 2
-  "home-organization-essentials-2": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Vtopmart Stackable Organizer - stackable office organizer
+  "vtopmart-stackable-organizer": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Stackable kitchen shelves
-  "amazon-basics-stackable-kitchen-shelves": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Amazon Basics Stackable Kitchen Shelves - metal kitchen shelves
+  "amazon-basics-stackable-kitchen-shelves": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Digital kitchen scale
-  "amazon-basics-digital-kitchen-scale": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Amazon Basics Digital Kitchen Scale - kitchen scale
+  "amazon-basics-digital-kitchen-scale": "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
   
-  // Nicewell food scale
-  "nicewell-food-scale-22lb": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+  // Nicewell Food Scale - digital food scale
+  "nicewell-food-scale-22lb": "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
 };
 
 export const products: Product[] = [
@@ -78,7 +78,7 @@ export const products: Product[] = [
     tags: ["storage", "organization", "collapsible", "cubes", "baskets"],
     shortDescription: "Pack of 6 collapsible fabric storage cubes with handles, perfect for cube organizers, closets, shelves, and any storage need. 13\"x13\"x13\" each.",
     whyWePickedIt: "With 116,129 reviews and a 4.7-star rating, this is Amazon's #1 Best Seller in Open Home Storage Bins. The collapsible design saves space when not in use, and the fabric handles make them easy to carry. Perfect for organizing toys, clothes, accessories, or any items in cube storage systems.",
-    image: productImages["amazon-basics-collapsible-organizer"] || "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+    image: productImages["amazon-basics-cube-organizer-storage-bins"] || "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B09V5G395G?tag=aipicks20-20",
     asin: "B09V5G395G",
     price: 15.56,
@@ -123,7 +123,7 @@ export const products: Product[] = [
     tags: ["bathroom", "storage", "baskets", "organization", "woven"],
     shortDescription: "Woven storage baskets perfect for bathroom organization, keeping toiletries, towels, and essentials neatly organized.",
     whyWePickedIt: "These woven storage baskets offer a stylish and practical solution for bathroom organization. The natural woven design adds warmth to any space while keeping essentials organized and easily accessible.",
-    image: productImages["home-organization-essentials"] || "https://images.unsplash.com/photo-1519710164249-6b06504d207e?w=1200&h=1200&fit=crop&q=95&auto=format",
+    image: productImages["oiahomy-storage-basket-bathroom"] || "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B0B31C4XRM?tag=aipicks20-20",
     asin: "B0B31C4XRM",
     price: 24.99,
@@ -248,7 +248,7 @@ export const products: Product[] = [
     tags: ["kitchen", "cookware", "non-stick", "pots", "pans"],
     shortDescription: "8-piece non-stick cookware set including pots and pans, perfect for everyday cooking needs.",
     whyWePickedIt: "This comprehensive cookware set provides everything you need for daily cooking. The non-stick coating makes cooking and cleaning easier, and the set includes essential pieces for a complete kitchen.",
-    image: productImages["home-organization-product"] || "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
+    image: productImages["amazon-basics-non-stick-cookware-set"] || "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B074817DK1?tag=aipicks20-20",
     asin: "B074817DK1",
     price: 24.99,
@@ -421,7 +421,7 @@ export const products: Product[] = [
     tags: ["office", "storage", "stackable", "organization", "supplies"],
     shortDescription: "Stackable organizer perfect for organizing office supplies, craft materials, and home essentials with multiple compartments.",
     whyWePickedIt: "This stackable organizer offers versatile storage for various items. The stackable design maximizes vertical space, making it perfect for desks, shelves, or any area where you need organized storage.",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+    image: productImages["vtopmart-stackable-organizer"] || "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B0CXLK9PJ9?tag=aipicks20-20",
     asin: "B0CXLK9PJ9",
     price: 24.99,
@@ -460,7 +460,7 @@ export const products: Product[] = [
     tags: ["kitchen", "storage", "shelves", "cabinet-organizer"],
     shortDescription: "Set of 2 stackable metal wire racks for kitchen and cabinet organization. Perfect for dishes, coffee cups, small cans, and seasonings.",
     whyWePickedIt: "With 11,969 reviews and a 4.4-star rating, these shelves effectively double your cabinet space. The tool-free assembly makes setup instant, and they can be used side-by-side or stacked. The plastic-coated wire prevents damage to delicate items.",
-    image: productImages["amazon-basics-collapsible-organizer"] || "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+    image: productImages["amazon-basics-stackable-kitchen-shelves"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B07XM8Y26Y?tag=aipicks20-20",
     asin: "B07XM8Y26Y",
     price: 19.09,
@@ -505,7 +505,7 @@ export const products: Product[] = [
     tags: ["kitchen", "baking", "cooking", "scale", "measuring"],
     shortDescription: "Digital kitchen scale with stainless steel platform and LCD display. Weighs up to 11 pounds with tare function. Batteries included.",
     whyWePickedIt: "With 111,028 reviews and a 4.7-star rating, this is Amazon's #1 best-selling digital kitchen scale. It's accurate to the gram, easy to use, and comes with batteries ready to go. Perfect for baking, meal prep, and portion control.",
-    image: productImages["amazon-basics-digital-kitchen-scale"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    image: productImages["amazon-basics-digital-kitchen-scale"] || "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B06X9NQ8GX?tag=aipicks20-20",
     asin: "B06X9NQ8GX",
     price: 6.81,
@@ -551,7 +551,7 @@ export const products: Product[] = [
     tags: ["kitchen", "baking", "cooking", "scale", "measuring"],
     shortDescription: "22lb digital kitchen scale with tempered glass and stainless steel platform. Large 9\"x6.3\" platform with backlit LCD display. Measures in 5 units.",
     whyWePickedIt: "With 63,208 reviews and a 4.7-star rating, this scale offers a sleek, iPad-like design with excellent accuracy. The large platform accommodates bowls easily, and the tempered glass surface is easy to clean. Perfect for serious bakers and home cooks.",
-    image: productImages["nicewell-food-scale-22lb"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    image: productImages["nicewell-food-scale-22lb"] || "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B07S6F6LHQ?tag=aipicks20-20",
     asin: "B07S6F6LHQ",
     price: 23.99,
