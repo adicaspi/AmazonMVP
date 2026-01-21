@@ -1,7 +1,7 @@
 // lib/amazon-links.ts
 // Helper functions for building Amazon affiliate links
 
-const DEFAULT_TRACKING_ID = process.env.NEXT_PUBLIC_AMAZON_TRACKING_ID || "aipicks-20";
+const DEFAULT_TRACKING_ID = process.env.NEXT_PUBLIC_AMAZON_TRACKING_ID || "aipicks20-20";
 
 /**
  * Build an Amazon affiliate link with tracking tag

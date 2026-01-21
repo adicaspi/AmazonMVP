@@ -73,7 +73,7 @@ export const products: Product[] = [
     shortDescription: "Keep your kitchen drawers tidy with this adjustable bamboo organizer.",
     whyWePickedIt: "We chose this because it's eco-friendly, adjustable to fit any drawer size, and made from sustainable bamboo that's both durable and beautiful.",
     image: productImages["bamboo-drawer-organizer"],
-    amazonUrl: "https://www.amazon.com/dp/B08YZ5YF7M?tag=aipicks-20",
+    amazonUrl: "https://www.amazon.com/dp/B08YZ5YF7M?tag=aipicks20-20",
     asin: "B08YZ5YF7M",
     price: 24.99,
     highlights: [
@@ -110,7 +110,7 @@ export const products: Product[] = [
     shortDescription: "Eco-friendly alternative to plastic wrap that seals any container.",
     whyWePickedIt: "This set stands out for its versatility—one lid fits multiple container sizes, reducing waste while keeping food fresher than plastic wrap.",
     image: productImages["silicone-food-storage-lids"],
-    amazonUrl: "https://www.amazon.com/dp/B07H8QMZPV?tag=aipicks-20",
+    amazonUrl: "https://www.amazon.com/dp/B07H8QMZPV?tag=aipicks20-20",
     asin: "B07H8QMZPV",
     price: 15.99,
     highlights: [
@@ -147,7 +147,7 @@ export const products: Product[] = [
     shortDescription: "Effortlessly open tight jar lids with this ergonomic tool.",
     whyWePickedIt: "We recommend this because it's simple, affordable, and genuinely solves a common frustration—no more asking for help with tight lids.",
     image: productImages["jar-opener-tool"],
-    amazonUrl: "https://www.amazon.com/dp/B07GJX5QYR?tag=aipicks-20",
+    amazonUrl: "https://www.amazon.com/dp/B07GJX5QYR?tag=aipicks20-20",
     asin: "B07GJX5QYR",
     price: 12.99,
     highlights: [
@@ -184,7 +184,7 @@ export const products: Product[] = [
     shortDescription: "Sleek, minimalist lamp that adds ambient lighting to any room.",
     whyWePickedIt: "This lamp combines modern design with practical features like touch dimming and included LED bulb, making it both beautiful and functional.",
     image: productImages["table-lamp-modern"],
-    amazonUrl: "https://www.amazon.com/dp/B08ABC1234?tag=aipicks-20",
+    amazonUrl: "https://www.amazon.com/dp/B08ABC1234?tag=aipicks20-20",
     price: 45.99,
     highlights: [
       "Touch dimmer control",
@@ -220,7 +220,7 @@ export const products: Product[] = [
     shortDescription: "Versatile woven baskets perfect for organizing any space.",
     whyWePickedIt: "This set offers excellent value with three sizes that work together, natural materials that look great, and stackable design for efficient storage.",
     image: productImages["storage-baskets-set"],
-    amazonUrl: "https://www.amazon.com/dp/B08DEF5678?tag=aipicks-20",
+    amazonUrl: "https://www.amazon.com/dp/B08DEF5678?tag=aipicks20-20",
     price: 29.99,
     highlights: [
       "Set of 3 different sizes",
@@ -256,7 +256,7 @@ export const products: Product[] = [
     shortDescription: "Soft, decorative pillows that add comfort and style.",
     whyWePickedIt: "These pillows offer great comfort-to-price ratio with removable, washable covers and quality filling that maintains its shape.",
     image: productImages["throw-pillow-set"],
-    amazonUrl: "https://www.amazon.com/dp/B08GHI9012?tag=aipicks-20",
+    amazonUrl: "https://www.amazon.com/dp/B08GHI9012?tag=aipicks20-20",
     price: 34.99,
     highlights: [
       "Set of 2 pillows",
@@ -292,7 +292,7 @@ export const products: Product[] = [
     shortDescription: "Sleek floating shelf that adds storage without taking up floor space.",
     whyWePickedIt: "This shelf combines modern aesthetics with practical storage, featuring hidden mounting for a clean look and sturdy construction for everyday use.",
     image: productImages["wall-shelf-floating"],
-    amazonUrl: "https://www.amazon.com/dp/B08JKL3456?tag=aipicks-20",
+    amazonUrl: "https://www.amazon.com/dp/B08JKL3456?tag=aipicks20-20",
     price: 39.99,
     highlights: [
       "Hidden mounting hardware",
@@ -328,7 +328,7 @@ export const products: Product[] = [
     shortDescription: "Keep your bedside essentials organized and within reach.",
     whyWePickedIt: "This organizer solves the nightstand clutter problem by hanging from the bed frame, keeping items accessible without taking up surface space.",
     image: productImages["bedside-organizer"],
-    amazonUrl: "https://www.amazon.com/dp/B08MNO7890?tag=aipicks-20",
+    amazonUrl: "https://www.amazon.com/dp/B08MNO7890?tag=aipicks20-20",
     price: 19.99,
     highlights: [
       "Multiple pockets and compartments",
@@ -364,7 +364,7 @@ export const products: Product[] = [
     shortDescription: "Keep your workspace tidy with this comprehensive organizer set.",
     whyWePickedIt: "This set provides comprehensive organization with multiple compartments, pen holders, and cable management—all at an affordable price point.",
     image: productImages["desk-organizer-set"],
-    amazonUrl: "https://www.amazon.com/dp/B08PQR1234?tag=aipicks-20",
+    amazonUrl: "https://www.amazon.com/dp/B08PQR1234?tag=aipicks20-20",
     price: 22.99,
     highlights: [
       "Multiple compartments",
@@ -400,7 +400,7 @@ export const products: Product[] = [
     shortDescription: "Waterproof caddy that keeps bathroom essentials organized.",
     whyWePickedIt: "This caddy offers easy installation with suction cups, waterproof construction, and multiple compartments—perfect for renters or anyone avoiding permanent fixtures.",
     image: productImages["bathroom-storage-caddy"],
-    amazonUrl: "https://www.amazon.com/dp/B08STU5678?tag=aipicks-20",
+    amazonUrl: "https://www.amazon.com/dp/B08STU5678?tag=aipicks20-20",
     price: 16.99,
     highlights: [
       "Waterproof construction",
