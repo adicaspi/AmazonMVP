@@ -27,6 +27,8 @@
     "fix:products": "tsx scripts/fix-all-products.ts",
     "scan:products": "tsx ai/runProductScanner.ts",
     "add:product": "tsx scripts/add-product-manual.ts",
+    "verify:product": "tsx scripts/verify-product.ts",
+    "verify:all": "tsx scripts/verify-multiple-products.ts",
     "fix:products": "tsx scripts/fix-products-completely.ts"
   },
   "dependencies": {
