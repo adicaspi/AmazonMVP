@@ -657,26 +657,26 @@ export const products: Product[] = [
   },
   {
     id: "B09V5G395G",
-    slug: "product-b09v5g395g",
-    title: "Product B09V5G395G",
-    benefitTitle: "Product B09V5G395G",
+    slug: "amazon-basics-cube-organizer-storage-bins-handles-collapsible-fabric-pack-of-6-13-x13-x13-brown",
+    title: "Amazon Basics Cube Organizer Storage Bins Handles, Collapsible Fabric, Pack of 6, 13"x13"x13", Brown",
+    benefitTitle: "Amazon Basics Cube Organizer Storage Bins Handles, Collapsible Fabric, Pack of 6, 13"x13"x13", Brown",
     room: "living_room",
-    tags: ["home-accessories"],
-    shortDescription: "a common home organization problem. Product B09V5G395G.",
-    whyWePickedIt: "We selected this product because it solves a common home organization problem for people looking to organize their home. With 4.5 stars and 1,000 reviews, it's a proven solution.",
-    image: productImages["product-b09v5g395g"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    tags: ["organization", "storage"],
+    shortDescription: "clutter and lack of organization in living spaces. Amazon Basics Cube Organizer Storage Bins Handles, Collapsible Fabric, Pack of 6, 13"x13"x13", Brown.",
+    whyWePickedIt: "We selected this product because it solves clutter and lack of organization in living spaces for people wanting organized, tidy homes. With 4.5 stars and 5,000 reviews, it's a proven solution.",
+    image: productImages["amazon-basics-cube-organizer-storage-bins-handles-collapsible-fabric-pack-of-6-13-x13-x13-brown"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
     amazonUrl: "https://www.amazon.com/dp/B09V5G395G?tag=aipicks20-20",
     asin: "B09V5G395G",
     price: 24.99,
     highlights: [
       "High customer satisfaction (4.5 stars)",
-      "1,000+ verified reviews",
-      "Solves a common home organization problem"
+      "5,000+ verified reviews",
+      "Solves clutter and lack of organization in living spaces"
     ],
     pros: [
-      "Proven solution with 1,000+ reviews",
+      "Proven solution with 5,000+ reviews",
       "High rating (4.5 stars)",
-      "Addresses a common home organization problem"
+      "Addresses clutter and lack of organization in living spaces"
     ],
     cons: [
       "May not fit all use cases",
@@ -684,9 +684,9 @@ export const products: Product[] = [
     ],
     specs: {
       "Rating": "4.5 stars",
-      "Reviews": "1,000+",
+      "Reviews": "5,000+",
       "Price": "$24.99",
-      "Target User": "people looking to organize their home"
+      "Target User": "people wanting organized, tidy homes"
     },
     status: "published",
     featured: false,
