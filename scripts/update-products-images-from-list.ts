@@ -59,11 +59,20 @@ async function main() {
 
     console.log(`🔄 Updating ${productsToUpdate.length} products...\n`);
 
-    // Update each product
+    // Show what we're about to update
+    console.log("📋 Products to update:");
+    productsToUpdate.forEach((p, i) => {
+      console.log(`   Product ${i + 2}: ${p.name} (${p.id})`);
+    });
+    console.log("");
+
+    // Update each product with the correct image in order
     for (let i = 0; i < productsToUpdate.length && i < images.length; i++) {
       const product = productsToUpdate[i];
       const imageUrl = images[i];
       const productNumber = i + 2; // Product 2, 3, 4, etc.
+
+      console.log(`🔄 Updating product ${productNumber} (${product.id})...`);
 
       const { error: updateError } = await supabase
         .from("products")
@@ -75,9 +84,27 @@ async function main() {
       if (updateError) {
         console.error(`❌ Error updating product ${productNumber} (${product.id}):`, updateError);
       } else {
-        console.log(`✅ Updated product ${productNumber}: ${product.name}`);
-        console.log(`   Image: ${imageUrl}`);
+        // Verify the update
+        const { data: updated, error: verifyError } = await supabase
+          .from("products")
+          .select("hero_image")
+          .eq("id", product.id)
+          .single();
+
+        if (verifyError) {
+          console.error(`⚠️  Could not verify update for ${product.id}:`, verifyError);
+        } else {
+          const isCorrect = updated.hero_image === imageUrl;
+          if (isCorrect) {
+            console.log(`✅ Updated product ${productNumber}: ${product.name}`);
+            console.log(`   Image: ${imageUrl}`);
+          } else {
+            console.error(`❌ Update failed! Expected: ${imageUrl}`);
+            console.error(`   Got: ${updated.hero_image}`);
+          }
+        }
       }
+      console.log("");
     }
 
     console.log("\n✅ All products updated successfully!");
