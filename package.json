@@ -25,6 +25,8 @@
     "auto:discover": "tsx ai/runAutoDiscovery.ts",
     "auto:full": "tsx ai/runFullyAutomatic.ts",
     "fix:products": "tsx scripts/fix-all-products.ts",
+    "scan:products": "tsx ai/runProductScanner.ts",
+    "add:product": "tsx scripts/add-product-manual.ts",
     "fix:products": "tsx scripts/fix-products-completely.ts"
   },
   "dependencies": {
