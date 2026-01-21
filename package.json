@@ -21,6 +21,8 @@
     "check:system": "tsx scripts/full-system-check.ts",
     "fix:all": "tsx scripts/fix-all-products.ts",
     "update:asin": "tsx scripts/update-product-asin.ts",
+    "import:discovery": "tsx scripts/import-products-from-discovery.ts",
+    "auto:discover": "tsx ai/runAutoDiscovery.ts",
     "fix:products": "tsx scripts/fix-products-completely.ts"
   },
   "dependencies": {

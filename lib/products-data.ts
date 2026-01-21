@@ -64,367 +64,189 @@ const productImages: Record<string, string> = {
 
 export const products: Product[] = [
   {
-    id: "1",
-    slug: "bamboo-drawer-organizer",
-    title: "Bamboo Drawer Organizer",
+    id: "B0B672HBW9",
+    slug: "adjustable-bamboo-drawer-organizer",
+    title: "Adjustable Bamboo Drawer Organizer",
     benefitTitle: "Transform messy drawers into organized spaces",
     room: "kitchen",
     tags: ["organization", "storage", "bamboo", "kitchen-essentials"],
-    shortDescription: "Keep your kitchen drawers tidy with this adjustable bamboo organizer.",
-    whyWePickedIt: "We chose this because it's eco-friendly, adjustable to fit any drawer size, and made from sustainable bamboo that's both durable and beautiful.",
-    image: productImages["bamboo-drawer-organizer"],
-    amazonUrl: "https://www.amazon.com/dp/B08YZ5YF7M?tag=aipicks20-20",
-    asin: "B08YZ5YF7M",
+    shortDescription: "Keep your kitchen drawers tidy with this adjustable bamboo organizer that prevents utensils from scattering.",
+    whyWePickedIt: "We selected this because it solves the problem of utensils scattering in cluttered drawers for busy people who cook at home. With 4.6 stars and 3,100+ reviews, it's a proven solution that delivers real value.",
+    image: productImages["adjustable-bamboo-drawer-organizer"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    amazonUrl: "https://www.amazon.com/dp/B0B672HBW9?tag=aipicks20-20",
+    asin: "B0B672HBW9",
     price: 24.99,
     highlights: [
-      "Adjustable dividers for custom organization",
-      "Made from sustainable bamboo",
-      "Easy to clean and maintain"
+      "High customer satisfaction (4.6 stars)",
+      "3,100+ verified reviews",
+      "Solves utensils scatter in cluttered drawers"
     ],
     pros: [
-      "Eco-friendly material",
-      "Customizable layout",
-      "Durable construction"
+      "Proven solution with 3,100+ reviews",
+      "High rating (4.6 stars)",
+      "Addresses utensils scatter in cluttered drawers"
     ],
     cons: [
-      "May not fit all drawer sizes",
-      "Requires some assembly"
+      "May not fit all use cases",
+      "Check dimensions before purchasing"
     ],
     specs: {
-      "Material": "Bamboo",
-      "Dimensions": "12 x 8 x 2 inches",
-      "Weight": "1.2 lbs",
-      "Warranty": "1 year"
+      "Rating": "4.6 stars",
+      "Reviews": "3,100+",
+      "Price": "$24.99",
+      "Target User": "busy people who cook at home"
     },
     status: "published",
     featured: true,
-    dateAdded: "2025-01-20"
+    dateAdded: "2026-01-21"
   },
   {
-    id: "2",
-    slug: "silicone-food-storage-lids",
-    title: "Reusable Silicone Food Storage Lids",
+    id: "B081YHX2YB",
+    slug: "over-the-cabinet-trash-bag-holder",
+    title: "Over-the-Cabinet Trash Bag Holder",
+    benefitTitle: "Keep trash bags within reach while cooking",
+    room: "kitchen",
+    tags: ["kitchen-essentials", "organization", "storage"],
+    shortDescription: "Keep trash bags accessible while cooking with this convenient over-the-cabinet holder.",
+    whyWePickedIt: "We selected this because it solves the problem of having no easy way to hang trash bags while cooking for home cooks who want fast cleanup. With 4.4 stars and 820+ reviews, it's a practical solution.",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=1200&fit=crop&q=95&auto=format",
+    amazonUrl: "https://www.amazon.com/dp/B081YHX2YB?tag=aipicks20-20",
+    asin: "B081YHX2YB",
+    price: 13.99,
+    highlights: [
+      "High customer satisfaction (4.4 stars)",
+      "820+ verified reviews",
+      "Solves no easy way to hang trash bags while cooking"
+    ],
+    pros: [
+      "Proven solution with 820+ reviews",
+      "High rating (4.4 stars)",
+      "Addresses no easy way to hang trash bags while cooking"
+    ],
+    cons: [
+      "May not fit all use cases",
+      "Check dimensions before purchasing"
+    ],
+    specs: {
+      "Rating": "4.4 stars",
+      "Reviews": "820+",
+      "Price": "$13.99",
+      "Target User": "home cooks who want fast cleanup"
+    },
+    status: "published",
+    featured: true,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B08TGF5XJW",
+    slug: "portable-mini-bag-sealer",
+    title: "Portable Mini Bag Sealer",
+    benefitTitle: "Keep food fresh and prevent waste",
+    room: "kitchen",
+    tags: ["kitchen-essentials", "organization", "storage"],
+    shortDescription: "Keep food fresh longer with this portable bag sealer that prevents bags from getting stale.",
+    whyWePickedIt: "We selected this because it solves the problem of open food bags getting stale quickly for snack eaters and families with kids. With 4.3 stars and 1,200+ reviews, it's a practical solution.",
+    image: productImages["portable-mini-bag-sealer"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    amazonUrl: "https://www.amazon.com/dp/B08TGF5XJW?tag=aipicks20-20",
+    asin: "B08TGF5XJW",
+    price: 19.99,
+    highlights: [
+      "High customer satisfaction (4.3 stars)",
+      "1,200+ verified reviews",
+      "Solves open food bags get stale quickly"
+    ],
+    pros: [
+      "Proven solution with 1,200+ reviews",
+      "High rating (4.3 stars)",
+      "Addresses open food bags get stale quickly"
+    ],
+    cons: [
+      "May not fit all use cases",
+      "Check dimensions before purchasing"
+    ],
+    specs: {
+      "Rating": "4.3 stars",
+      "Reviews": "1,200+",
+      "Price": "$19.99",
+      "Target User": "snack eaters and families with kids"
+    },
+    status: "published",
+    featured: true,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B09GJ1C4NK",
+    slug: "reusable-stretch-silicone-lids",
+    title: "Reusable Stretch Silicone Lids",
     benefitTitle: "Eliminate plastic wrap and keep food fresh longer",
     room: "kitchen",
     tags: ["food-storage", "eco-friendly", "silicone", "meal-prep"],
-    shortDescription: "Eco-friendly alternative to plastic wrap that seals any container.",
-    whyWePickedIt: "This set stands out for its versatility—one lid fits multiple container sizes, reducing waste while keeping food fresher than plastic wrap.",
-    image: productImages["silicone-food-storage-lids"],
-    amazonUrl: "https://www.amazon.com/dp/B07H8QMZPV?tag=aipicks20-20",
-    asin: "B07H8QMZPV",
+    shortDescription: "Eco-friendly alternative to plastic wrap that seals any container and keeps food fresh longer.",
+    whyWePickedIt: "We selected this because it solves the problem of plastic wrap wasting money and creating trash for eco-conscious households and meal preppers. With 4.5 stars and 5,600+ reviews, it's a proven solution.",
+    image: productImages["reusable-stretch-silicone-lids"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    amazonUrl: "https://www.amazon.com/dp/B09GJ1C4NK?tag=aipicks20-20",
+    asin: "B09GJ1C4NK",
     price: 15.99,
     highlights: [
-      "Fits multiple container sizes",
-      "Dishwasher safe",
-      "BPA-free silicone"
+      "High customer satisfaction (4.5 stars)",
+      "5,600+ verified reviews",
+      "Solves plastic wrap wastes money and creates trash"
     ],
     pros: [
-      "Reduces plastic waste",
-      "Versatile sizing",
-      "Easy to clean"
+      "Proven solution with 5,600+ reviews",
+      "High rating (4.5 stars)",
+      "Addresses plastic wrap wastes money and creates trash"
     ],
     cons: [
-      "May not seal perfectly on all containers",
-      "Can stretch over time"
+      "May not fit all use cases",
+      "Check dimensions before purchasing"
     ],
     specs: {
-      "Material": "Food-grade silicone",
-      "Set includes": "6 lids",
-      "Size range": "3-10 inches",
-      "Dishwasher safe": "Yes"
+      "Rating": "4.5 stars",
+      "Reviews": "5,600+",
+      "Price": "$15.99",
+      "Target User": "eco-conscious households and meal preppers"
     },
     status: "published",
     featured: true,
-    dateAdded: "2025-01-20"
+    dateAdded: "2026-01-21"
   },
   {
-    id: "3",
-    slug: "jar-opener-tool",
-    title: "Jar Opener Tool",
+    id: "B087H6S8CH",
+    slug: "under-cabinet-jar-opener",
+    title: "Under Cabinet Jar Opener",
     benefitTitle: "Open stubborn jars without the struggle",
     room: "kitchen",
-    tags: ["kitchen-tools", "accessibility", "grip-assist"],
-    shortDescription: "Effortlessly open tight jar lids with this ergonomic tool.",
-    whyWePickedIt: "We recommend this because it's simple, affordable, and genuinely solves a common frustration—no more asking for help with tight lids.",
-    image: productImages["jar-opener-tool"],
-    amazonUrl: "https://www.amazon.com/dp/B07GJX5QYR?tag=aipicks20-20",
-    asin: "B07GJX5QYR",
-    price: 12.99,
+    tags: ["kitchen-essentials", "organization", "storage"],
+    shortDescription: "Effortlessly open tight jar lids with this ergonomic tool that eliminates frustration and pain.",
+    whyWePickedIt: "We selected this because it solves the problem of tight jar lids being frustrating and painful for people with weak grip or arthritis. With 4.7 stars and 9,400+ reviews, it's a proven solution.",
+    image: productImages["under-cabinet-jar-opener"] || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1200&h=1200&fit=crop&q=95&auto=format",
+    amazonUrl: "https://www.amazon.com/dp/B087H6S8CH?tag=aipicks20-20",
+    asin: "B087H6S8CH",
+    price: 17.99,
     highlights: [
-      "Works on jars of all sizes",
-      "Ergonomic grip design",
-      "No batteries required"
+      "High customer satisfaction (4.7 stars)",
+      "9,400+ verified reviews",
+      "Solves tight jar lids are frustrating and painful"
     ],
     pros: [
-      "Easy to use",
-      "Compact storage",
-      "Affordable"
+      "Proven solution with 9,400+ reviews",
+      "High rating (4.7 stars)",
+      "Addresses tight jar lids are frustrating and painful"
     ],
     cons: [
-      "May not work on very large jars",
-      "Requires some hand strength"
+      "May not fit all use cases",
+      "Check dimensions before purchasing"
     ],
     specs: {
-      "Material": "Plastic and rubber",
-      "Weight": "0.3 lbs",
-      "Jar size range": "2-4 inches",
-      "Warranty": "90 days"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2025-01-20"
-  },
-  {
-    id: "4",
-    slug: "table-lamp-modern",
-    title: "Modern Table Lamp",
-    benefitTitle: "Add warm, adjustable lighting to any space",
-    room: "living_room",
-    tags: ["lighting", "modern", "decorative", "bedroom"],
-    shortDescription: "Sleek, minimalist lamp that adds ambient lighting to any room.",
-    whyWePickedIt: "This lamp combines modern design with practical features like touch dimming and included LED bulb, making it both beautiful and functional.",
-    image: productImages["table-lamp-modern"],
-    amazonUrl: "https://www.amazon.com/dp/B08ABC1234?tag=aipicks20-20",
-    price: 45.99,
-    highlights: [
-      "Touch dimmer control",
-      "LED bulb included",
-      "Modern design"
-    ],
-    pros: [
-      "Energy efficient",
-      "Easy to use",
-      "Stylish appearance"
-    ],
-    cons: [
-      "Bulb not replaceable",
-      "Limited color options"
-    ],
-    specs: {
-      "Height": "18 inches",
-      "Base diameter": "6 inches",
-      "Bulb type": "LED",
-      "Wattage": "9W"
+      "Rating": "4.7 stars",
+      "Reviews": "9,400+",
+      "Price": "$17.99",
+      "Target User": "people with weak grip, arthritis sufferers"
     },
     status: "published",
     featured: true,
-    dateAdded: "2025-01-20"
-  },
-  {
-    id: "5",
-    slug: "storage-baskets-set",
-    title: "Storage Baskets Set",
-    benefitTitle: "Organize any room with beautiful, stackable baskets",
-    room: "storage",
-    tags: ["storage", "organization", "baskets", "multi-room"],
-    shortDescription: "Versatile woven baskets perfect for organizing any space.",
-    whyWePickedIt: "This set offers excellent value with three sizes that work together, natural materials that look great, and stackable design for efficient storage.",
-    image: productImages["storage-baskets-set"],
-    amazonUrl: "https://www.amazon.com/dp/B08DEF5678?tag=aipicks20-20",
-    price: 29.99,
-    highlights: [
-      "Set of 3 different sizes",
-      "Natural woven material",
-      "Stackable design"
-    ],
-    pros: [
-      "Affordable set",
-      "Multiple sizes",
-      "Attractive design"
-    ],
-    cons: [
-      "Not waterproof",
-      "May collect dust"
-    ],
-    specs: {
-      "Set includes": "3 baskets",
-      "Sizes": "Small, Medium, Large",
-      "Material": "Woven seagrass",
-      "Care": "Wipe clean"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2025-01-20"
-  },
-  {
-    id: "6",
-    slug: "throw-pillow-set",
-    title: "Throw Pillow Set",
-    benefitTitle: "Instantly upgrade your sofa or bed with comfort and style",
-    room: "living_room",
-    tags: ["decorative", "comfort", "textiles", "bedroom"],
-    shortDescription: "Soft, decorative pillows that add comfort and style.",
-    whyWePickedIt: "These pillows offer great comfort-to-price ratio with removable, washable covers and quality filling that maintains its shape.",
-    image: productImages["throw-pillow-set"],
-    amazonUrl: "https://www.amazon.com/dp/B08GHI9012?tag=aipicks20-20",
-    price: 34.99,
-    highlights: [
-      "Set of 2 pillows",
-      "Removable covers",
-      "Machine washable"
-    ],
-    pros: [
-      "Comfortable filling",
-      "Easy to clean",
-      "Affordable"
-    ],
-    cons: [
-      "Covers may fade over time",
-      "Pillows may flatten"
-    ],
-    specs: {
-      "Set includes": "2 pillows",
-      "Size": "18 x 18 inches",
-      "Fill": "Polyester",
-      "Cover material": "Cotton blend"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2025-01-20"
-  },
-  {
-    id: "7",
-    slug: "wall-shelf-floating",
-    title: "Floating Wall Shelf",
-    benefitTitle: "Add storage and style without losing floor space",
-    room: "living_room",
-    tags: ["storage", "wall-mounted", "modern", "decorative"],
-    shortDescription: "Sleek floating shelf that adds storage without taking up floor space.",
-    whyWePickedIt: "This shelf combines modern aesthetics with practical storage, featuring hidden mounting for a clean look and sturdy construction for everyday use.",
-    image: productImages["wall-shelf-floating"],
-    amazonUrl: "https://www.amazon.com/dp/B08JKL3456?tag=aipicks20-20",
-    price: 39.99,
-    highlights: [
-      "Hidden mounting hardware",
-      "Sturdy construction",
-      "Easy installation"
-    ],
-    pros: [
-      "Space-saving",
-      "Modern look",
-      "Easy to install"
-    ],
-    cons: [
-      "Weight limit restrictions",
-      "Requires wall mounting"
-    ],
-    specs: {
-      "Length": "24 inches",
-      "Depth": "6 inches",
-      "Weight capacity": "25 lbs",
-      "Material": "Engineered wood"
-    },
-    status: "published",
-    featured: true,
-    dateAdded: "2025-01-20"
-  },
-  {
-    id: "8",
-    slug: "bedside-organizer",
-    title: "Bedside Organizer",
-    benefitTitle: "Keep essentials organized without cluttering your nightstand",
-    room: "bedroom",
-    tags: ["organization", "bedroom", "storage", "nightstand"],
-    shortDescription: "Keep your bedside essentials organized and within reach.",
-    whyWePickedIt: "This organizer solves the nightstand clutter problem by hanging from the bed frame, keeping items accessible without taking up surface space.",
-    image: productImages["bedside-organizer"],
-    amazonUrl: "https://www.amazon.com/dp/B08MNO7890?tag=aipicks20-20",
-    price: 19.99,
-    highlights: [
-      "Multiple pockets and compartments",
-      "Hangs from bed frame",
-      "Fits most bed sizes"
-    ],
-    pros: [
-      "Saves nightstand space",
-      "Easy access",
-      "Affordable"
-    ],
-    cons: [
-      "May not fit all bed frames",
-      "Limited weight capacity"
-    ],
-    specs: {
-      "Material": "Polyester",
-      "Pockets": "6 compartments",
-      "Weight capacity": "5 lbs",
-      "Care": "Machine washable"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2025-01-20"
-  },
-  {
-    id: "9",
-    slug: "desk-organizer-set",
-    title: "Desk Organizer Set",
-    benefitTitle: "Transform a cluttered desk into a productive workspace",
-    room: "office",
-    tags: ["organization", "office", "desk-accessories", "storage"],
-    shortDescription: "Keep your workspace tidy with this comprehensive organizer set.",
-    whyWePickedIt: "This set provides comprehensive organization with multiple compartments, pen holders, and cable management—all at an affordable price point.",
-    image: productImages["desk-organizer-set"],
-    amazonUrl: "https://www.amazon.com/dp/B08PQR1234?tag=aipicks20-20",
-    price: 22.99,
-    highlights: [
-      "Multiple compartments",
-      "Pen holders included",
-      "Cable management"
-    ],
-    pros: [
-      "Comprehensive organization",
-      "Affordable",
-      "Easy to assemble"
-    ],
-    cons: [
-      "May not fit all desk sizes",
-      "Plastic construction"
-    ],
-    specs: {
-      "Set includes": "Main organizer + pen holder",
-      "Material": "Plastic",
-      "Dimensions": "12 x 8 x 4 inches",
-      "Color options": "Black, White"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2025-01-20"
-  },
-  {
-    id: "10",
-    slug: "bathroom-storage-caddy",
-    title: "Bathroom Storage Caddy",
-    benefitTitle: "Organize your shower essentials without drilling holes",
-    room: "bathroom",
-    tags: ["storage", "bathroom", "shower", "organization"],
-    shortDescription: "Waterproof caddy that keeps bathroom essentials organized.",
-    whyWePickedIt: "This caddy offers easy installation with suction cups, waterproof construction, and multiple compartments—perfect for renters or anyone avoiding permanent fixtures.",
-    image: productImages["bathroom-storage-caddy"],
-    amazonUrl: "https://www.amazon.com/dp/B08STU5678?tag=aipicks20-20",
-    price: 16.99,
-    highlights: [
-      "Waterproof construction",
-      "Suction cup mounting",
-      "Multiple compartments"
-    ],
-    pros: [
-      "Waterproof",
-      "Easy to install",
-      "Affordable"
-    ],
-    cons: [
-      "Suction may weaken over time",
-      "Limited capacity"
-    ],
-    specs: {
-      "Material": "Plastic",
-      "Compartments": "4 sections",
-      "Mounting": "Suction cups",
-      "Waterproof": "Yes"
-    },
-    status: "published",
-    featured: false,
-    dateAdded: "2025-01-20"
+    dateAdded: "2026-01-21"
   }
 ];
 
