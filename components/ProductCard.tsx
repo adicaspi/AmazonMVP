@@ -101,7 +101,7 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           className="block w-full py-3.5 sm:py-4 px-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-sm sm:text-base font-bold text-center hover:from-slate-800 hover:to-slate-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           aria-label={`View details for ${product.title}`}
         >
-          Find Better Home Picks
+          View Details & Reviews
         </Link>
         <p className="text-[10px] sm:text-xs text-slate-500 text-center mt-2 leading-tight">
           <span className="font-semibold">Affiliate:</span> As an Amazon Associate I earn from qualifying purchases.
