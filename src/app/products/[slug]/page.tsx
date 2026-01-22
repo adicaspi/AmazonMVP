@@ -312,7 +312,7 @@ export default async function ProductPage({ params }: Props) {
         {relatedProducts.length > 0 && (
           <div className="border-t border-slate-200 pt-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Related Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch">
               {relatedProducts.map((related) => (
                 <ProductCard key={related.id} product={related} showDescription={false} />
               ))}

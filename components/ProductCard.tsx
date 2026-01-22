@@ -49,7 +49,7 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
   })();
 
   return (
-    <article className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-2xl transition-all duration-300 rounded-lg sm:rounded-xl overflow-hidden transform hover:-translate-y-1">
+    <article className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-2xl transition-all duration-300 rounded-lg sm:rounded-xl overflow-hidden transform hover:-translate-y-1 flex flex-col h-full">
       <div className="aspect-square relative bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 overflow-hidden rounded-t-lg sm:rounded-t-xl">
         <Image
           src={product.image}
@@ -67,7 +67,7 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           </div>
         </div>
       </div>
-      <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+      <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 flex flex-col flex-grow">
         <div>
           <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5 sm:mb-2 group-hover:text-slate-700 transition-colors">
             {product.benefitTitle || product.title}
@@ -147,9 +147,12 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           <span className="text-xs text-slate-500">100+ reviews</span>
         </div>
 
+        {/* Spacer to push button to bottom */}
+        <div className="flex-grow"></div>
+
         <Link
           href={`/products/${product.slug}`}
-          className="block w-full py-3.5 sm:py-4 px-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-sm sm:text-base font-bold text-center hover:from-slate-800 hover:to-slate-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+          className="block w-full py-3.5 sm:py-4 px-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-sm sm:text-base font-bold text-center hover:from-slate-800 hover:to-slate-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 mt-auto"
           aria-label={`View details for ${product.title}`}
         >
           View Details & Reviews
