@@ -25,6 +25,7 @@ export interface Product {
   dateAdded?: string;
   whyWePickedIt?: string; // Why AI Picks recommends this product
   benefitTitle?: string; // Benefit-oriented title for cards
+  painPoint?: string; // Pain-based headline that hooks visitors
 }
 
 // Product images - Each product has a unique, relevant Unsplash image
@@ -74,6 +75,7 @@ export const products: Product[] = [
     slug: "ukeetap-multi-purpose-pull-out-sink-organizer",
     title: "Ukeetap Multi-Purpose Pull-Out Organizers for Sink and Bathroom",
     benefitTitle: "Pull-out organizer maximizes under-sink space",
+    painPoint: "Tired of Crawling Under Your Sink to Find Things?",
     room: "bathroom",
     tags: ["bathroom", "kitchen", "organization", "pull-out", "drawer-organizer", "sink", "storage"],
     shortDescription: "Multi-purpose pull-out organizer designed for under-sink and bathroom storage. Features smooth sliding mechanism and durable construction to maximize cabinet space.",

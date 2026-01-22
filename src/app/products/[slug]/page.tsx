@@ -68,12 +68,36 @@ export default async function ProductPage({ params }: Props) {
               Featured Product
             </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-4 sm:mb-6 leading-tight">
+
+          {/* Pain-Based Headline */}
+          {product.painPoint && (
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-3 sm:mb-4 leading-tight">
+              {product.painPoint}
+            </h1>
+          )}
+
+          <h2 className={`${product.painPoint ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-4xl sm:text-5xl md:text-6xl'} font-bold text-emerald-700 mb-4 sm:mb-6 leading-tight`}>
             {product.benefitTitle || product.title}
-          </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-slate-600 mb-6 sm:mb-8 leading-relaxed">
+          </h2>
+          <p className="text-lg sm:text-xl text-slate-600 mb-6 sm:mb-8 leading-relaxed">
             {product.shortDescription}
           </p>
+
+          {/* Key Benefits - 3 Quick Bullets */}
+          <div className="mb-8 sm:mb-10 p-6 sm:p-8 bg-gradient-to-br from-white to-emerald-50/30 border-2 border-emerald-200 rounded-2xl shadow-lg">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="text-2xl">⚡</span>
+              Why You'll Love It
+            </h3>
+            <ul className="space-y-3">
+              {product.highlights.slice(0, 3).map((highlight, idx) => (
+                <li key={idx} className="text-base sm:text-lg text-slate-700 flex items-start gap-3">
+                  <span className="text-emerald-500 mt-1 font-bold text-xl flex-shrink-0">✔</span>
+                  <span className="font-medium">{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
           
           {/* Who this product is for */}
           <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 border-l-4 border-emerald-500 p-6 sm:p-8 rounded-r-2xl mb-6 sm:mb-8 shadow-lg">
@@ -110,6 +134,19 @@ export default async function ProductPage({ params }: Props) {
               </span>
             ))}
           </div>
+
+          {/* Why AI Picks Recommends This - Moved Up for Trust */}
+          {product.whyWePickedIt && (
+            <div className="mb-8 sm:mb-10 p-6 sm:p-8 bg-gradient-to-br from-slate-900 to-slate-800 border-l-4 border-emerald-500 rounded-2xl shadow-xl">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">🎯</span>
+                <h3 className="text-xl sm:text-2xl font-bold text-white">Why AI Picks Recommends This</h3>
+              </div>
+              <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
+                {product.whyWePickedIt}
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="prose prose-slate max-w-none mb-12">
@@ -123,31 +160,19 @@ export default async function ProductPage({ params }: Props) {
             </p>
           </div>
 
-          {/* Key Benefits */}
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">Key Benefits</h2>
-          <ul className="space-y-3 sm:space-y-4 mb-8 sm:mb-10">
-            {product.highlights.map((highlight, idx) => (
-              <li key={idx} className="text-base sm:text-lg text-slate-700 flex items-start gap-3">
-                <span className="text-emerald-500 mt-1 font-bold text-xl">✓</span>
-                <span>{highlight}</span>
-              </li>
-            ))}
-          </ul>
-          
-          {/* Why AI Picks Recommends This */}
-          {product.whyWePickedIt && (
-            <div className="bg-gradient-to-br from-slate-900 to-slate-800 border-l-4 border-emerald-500 p-6 sm:p-8 rounded-2xl mb-8 sm:mb-10 shadow-xl">
-              <div className="flex items-center gap-3 mb-4 sm:mb-5">
-                <span className="text-3xl">🎯</span>
-                <h2 className="text-xl sm:text-2xl font-bold text-white">Why AI Picks Recommends This</h2>
-              </div>
-              <p className="text-base sm:text-lg text-slate-200 leading-relaxed mb-4">
-                {product.whyWePickedIt.split('.')[0]}. We selected this product after analyzing user reviews, comparing design quality, and evaluating value for money.
-              </p>
-              <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
-                It meets our standards for functionality, durability, and overall user satisfaction. This isn't just a recommendation—it's a product we'd use in our own homes.
-              </p>
-            </div>
+          {/* All Benefits */}
+          {product.highlights.length > 3 && (
+            <>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">Complete Feature List</h2>
+              <ul className="space-y-3 sm:space-y-4 mb-8 sm:mb-10">
+                {product.highlights.map((highlight, idx) => (
+                  <li key={idx} className="text-base sm:text-lg text-slate-700 flex items-start gap-3">
+                    <span className="text-emerald-500 mt-1 font-bold text-xl">✓</span>
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
 
           <ProsCons pros={product.pros} cons={product.cons} />
@@ -180,7 +205,7 @@ export default async function ProductPage({ params }: Props) {
         <div className="border-t-4 border-emerald-500 pt-10 sm:pt-12 mb-12 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-3xl p-8 sm:p-10 shadow-xl">
           <div className="text-center mb-6">
             <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Ready to Get This Product?</h3>
-            <p className="text-base sm:text-lg text-slate-600">Click below to check the latest price on Amazon</p>
+            <p className="text-base sm:text-lg text-slate-600">Check current price and availability on Amazon</p>
           </div>
           <div className="text-center">
             <a
@@ -189,11 +214,11 @@ export default async function ProductPage({ params }: Props) {
               rel="sponsored nofollow noopener"
               className="inline-block w-full md:w-auto py-5 sm:py-6 px-10 sm:px-12 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center font-bold text-lg sm:text-xl rounded-2xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
             >
-              Check Price on Amazon →
+              See it on Amazon (Free Returns) →
             </a>
           </div>
           <p className="text-xs sm:text-sm text-slate-500 mt-6 sm:mt-8 text-center">
-            <span className="font-semibold">Affiliate Disclosure:</span> As an Amazon Associate I earn from qualifying purchases.
+            <span className="font-semibold">Affiliate Disclosure:</span> As an Amazon Associate, we earn from qualifying purchases.
           </p>
         </div>
 
