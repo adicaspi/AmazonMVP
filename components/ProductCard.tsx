@@ -13,10 +13,17 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
   const affiliateLink = buildAmazonAffiliateLink(product.amazonUrl);
 
   // Clean and deduplicate tags - case-insensitive, handle multi-word duplicates
+  // Also exclude tags that match the room (case-insensitive) to avoid duplicates
   const cleanTags = (() => {
     const tags = product.tags || [];
+    const roomLower = (product.room || '').replace(/_/g, ' ').toLowerCase().trim();
     const seen = new Set<string>();
     const unique: string[] = [];
+    
+    // Add room to seen set so tags matching room are excluded
+    if (roomLower) {
+      seen.add(roomLower);
+    }
     
     // First, flatten and split any tags that might contain multiple words
     const allTags: string[] = [];
@@ -30,6 +37,7 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
       const trimmed = tag.trim();
       if (!trimmed) continue;
       const lower = trimmed.toLowerCase();
+      // Skip if already seen (case-insensitive) or matches room
       if (!seen.has(lower)) {
         seen.add(lower);
         // Title case: first letter uppercase, rest lowercase
