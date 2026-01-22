@@ -182,14 +182,16 @@ export default async function ProductPage({ params }: Props) {
             <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Ready to Get This Product?</h3>
             <p className="text-base sm:text-lg text-slate-600">Click below to check the latest price on Amazon</p>
           </div>
-          <a
-            href={affiliateLink}
-            target="_blank"
-            rel="sponsored nofollow noopener"
-            className="block w-full md:w-auto md:inline-block py-5 sm:py-6 px-10 sm:px-12 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center font-bold text-lg sm:text-xl rounded-2xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
-          >
-            Check Price on Amazon →
-          </a>
+          <div className="text-center">
+            <a
+              href={affiliateLink}
+              target="_blank"
+              rel="sponsored nofollow noopener"
+              className="inline-block w-full md:w-auto py-5 sm:py-6 px-10 sm:px-12 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center font-bold text-lg sm:text-xl rounded-2xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
+            >
+              Check Price on Amazon →
+            </a>
+          </div>
           <p className="text-xs sm:text-sm text-slate-500 mt-6 sm:mt-8 text-center">
             <span className="font-semibold">Affiliate Disclosure:</span> As an Amazon Associate I earn from qualifying purchases.
           </p>
