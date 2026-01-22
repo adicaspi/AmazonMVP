@@ -83,7 +83,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/811uMdiQm7L._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Ukeetap-Multi-Purpose-Pull-Out-Organizers-Bathroom/dp/B0DNTQ2YNT?tag=aipicks20-20",
     asin: "B0DNTQ2YNT",
-    price: 29.99,
+    price: 16.99,
     highlights: [
       "Pull-out sliding mechanism for easy access",
       "Multi-purpose design for sink or bathroom",
@@ -103,7 +103,7 @@ export const products: Product[] = [
       "May need adjustment for proper fit"
     ],
     specs: {
-      "Price": "$29.99",
+      "Price": "$16.99",
       "Type": "Pull-out organizer",
       "Use": "Under-sink storage, bathroom cabinets",
       "Features": "Sliding mechanism, durable construction",

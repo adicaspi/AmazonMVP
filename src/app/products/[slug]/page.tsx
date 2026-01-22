@@ -6,7 +6,6 @@ import { SpecsTable } from "@/components/SpecsTable";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductCTA } from "@/components/ProductCTA";
 import { WhyAIPicksRecommends } from "@/components/WhyAIPicksRecommends";
-import { AmazonReviews } from "@/components/AmazonReviews";
 import { products } from "@/lib/products-data";
 import type { Metadata } from "next";
 
@@ -287,13 +286,6 @@ export default async function ProductPage({ params }: Props) {
           <h2 className="text-2xl font-bold text-slate-900 mb-4">Specifications</h2>
           <SpecsTable specs={product.specs} />
         </div>
-
-        {/* Amazon Reviews Section */}
-        <AmazonReviews
-          amazonUrl={amazonUrl}
-          asin={product.asin}
-          productTitle={product.title}
-        />
 
         {/* CTA #3: Bottom CTA */}
         <div className="border-t-4 border-emerald-500 pt-10 sm:pt-12 mb-12 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-3xl p-8 sm:p-10 shadow-xl">

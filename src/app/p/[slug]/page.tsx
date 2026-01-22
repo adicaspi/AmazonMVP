@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ProductViewTracker } from "./ProductViewTracker";
 import { ProductCTA } from "@/components/ProductCTA";
 import { WhyAIPicksRecommends } from "@/components/WhyAIPicksRecommends";
-import { AmazonReviews } from "@/components/AmazonReviews";
 import type { Metadata } from "next";
 
 type Props = {
@@ -425,12 +424,6 @@ export default async function ProductPage({ params }: Props) {
                   {product.priceNote}
                 </div>
               )}
-
-        {/* Amazon Reviews Section */}
-        <AmazonReviews
-          amazonUrl={amazonUrl}
-          productTitle={product.name}
-        />
 
         {/* CTA #3: Bottom CTA - Sticky on mobile */}
         <section className="sticky bottom-0 z-10 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-4 bg-white/95 dark:bg-slate-950/95 backdrop-blur-sm border-t border-slate-200 dark:border-slate-800 sm:static sm:bg-transparent sm:border-t-0 sm:py-8 space-y-3">
