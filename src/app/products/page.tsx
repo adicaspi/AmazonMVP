@@ -71,18 +71,18 @@ export default function ProductsPage() {
       </div>
 
       {/* Filters */}
-      <div className="mb-8 sm:mb-12 space-y-4">
+      <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
         {/* Search */}
-        <div className="relative">
+        <div className="relative group">
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search products, toys, kids items, home accessories..."
-            className="w-full px-4 py-3 pl-10 pr-4 text-sm sm:text-base border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+            className="w-full px-4 py-3.5 sm:py-4 pl-12 pr-4 text-sm sm:text-base border-2 border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white shadow-sm hover:shadow-md transition-all duration-300"
           />
           <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ export default function ProductsPage() {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full p-1 transition-all"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -102,16 +102,17 @@ export default function ProductsPage() {
         </div>
 
         {/* Filter Row */}
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 sm:gap-6">
           {/* Room Filter */}
           <div className="flex-1 min-w-[200px]">
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block text-sm font-bold text-slate-700 mb-2.5 flex items-center gap-2">
+              <span className="text-emerald-600">🏠</span>
               Room
             </label>
             <select
               value={selectedRoom}
               onChange={(e) => setSelectedRoom(e.target.value as Room | "all")}
-              className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+              className="w-full px-4 py-3 text-sm border-2 border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
             >
               <option value="all">All Rooms</option>
               {rooms.map(room => (
@@ -124,13 +125,14 @@ export default function ProductsPage() {
 
           {/* Category Filter */}
           <div className="flex-1 min-w-[200px]">
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block text-sm font-bold text-slate-700 mb-2.5 flex items-center gap-2">
+              <span className="text-blue-600">🏷️</span>
               Category
             </label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+              className="w-full px-4 py-3 text-sm border-2 border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
             >
               <option value="all">All Categories</option>
               {allTags.map(tag => (
@@ -143,13 +145,14 @@ export default function ProductsPage() {
 
           {/* Price Filter */}
           <div className="flex-1 min-w-[200px]">
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block text-sm font-bold text-slate-700 mb-2.5 flex items-center gap-2">
+              <span className="text-purple-600">💰</span>
               Price Range
             </label>
             <select
               value={selectedPriceRange}
               onChange={(e) => setSelectedPriceRange(e.target.value)}
-              className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+              className="w-full px-4 py-3 text-sm border-2 border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
             >
               <option value="all">All Prices</option>
               <option value="under-20">Under $20</option>
@@ -169,7 +172,7 @@ export default function ProductsPage() {
                   setSelectedPriceRange("all");
                   setSearchQuery("");
                 }}
-                className="px-4 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors"
+                className="px-6 py-3 text-sm font-bold text-white bg-gradient-to-r from-slate-700 to-slate-600 border-2 border-slate-700 rounded-xl hover:from-slate-600 hover:to-slate-500 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
               >
                 Clear Filters
               </button>
@@ -195,10 +198,12 @@ export default function ProductsPage() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-12 sm:py-16">
-          <div className="text-6xl mb-4">🔍</div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">No products found</h2>
-          <p className="text-slate-600 mb-6">Try adjusting your filters or search query.</p>
+        <div className="text-center py-16 sm:py-24 bg-gradient-to-br from-slate-50 to-emerald-50/30 rounded-3xl border-2 border-slate-200">
+          <div className="text-7xl sm:text-8xl mb-6 animate-pulse">🔍</div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">No products found</h2>
+          <p className="text-lg sm:text-xl text-slate-600 mb-8 max-w-md mx-auto">
+            Try adjusting your filters or search query to discover more amazing products.
+          </p>
           <button
             onClick={() => {
               setSelectedRoom("all");
@@ -206,7 +211,7 @@ export default function ProductsPage() {
               setSelectedPriceRange("all");
               setSearchQuery("");
             }}
-            className="px-6 py-3 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all"
+            className="px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             Clear All Filters
           </button>

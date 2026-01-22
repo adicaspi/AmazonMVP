@@ -62,8 +62,11 @@ export default async function ProductPage({ params }: Props) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
           </div>
           
-          <div className="inline-block mb-4 px-4 py-2 bg-emerald-50 border border-emerald-100 rounded-full">
-            <span className="text-sm font-semibold text-emerald-700">Featured Product</span>
+          <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-full shadow-sm">
+            <span className="text-sm font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-2">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+              Featured Product
+            </span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-4 sm:mb-6 leading-tight">
             {product.benefitTitle || product.title}
@@ -73,25 +76,36 @@ export default async function ProductPage({ params }: Props) {
           </p>
           
           {/* Who this product is for */}
-          <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border-l-4 border-emerald-500 p-4 sm:p-6 rounded-r-lg mb-6 sm:mb-8">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Who This Is For</h2>
-            <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+          <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 border-l-4 border-emerald-500 p-6 sm:p-8 rounded-r-2xl mb-6 sm:mb-8 shadow-lg">
+            <div className="flex items-center gap-3 mb-3 sm:mb-4">
+              <span className="text-2xl">✨</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Who This Is For</h2>
+            </div>
+            <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
               {product.room === "kitchen" && "Perfect for anyone looking to organize their kitchen drawers and reduce clutter."}
               {product.room === "living_room" && "Ideal for those wanting to add style and functionality to their living space."}
               {product.room === "bedroom" && "Great for anyone seeking better organization and comfort in their bedroom."}
               {product.room === "bathroom" && "Perfect for keeping bathroom essentials organized and accessible."}
               {product.room === "office" && "Ideal for creating a more productive and organized workspace."}
-              {!["kitchen", "living_room", "bedroom", "bathroom", "office"].includes(product.room) && 
+              {product.room === "kids_room" && "Perfect for parents looking to inspire creativity and learning through quality play experiences."}
+              {!["kitchen", "living_room", "bedroom", "bathroom", "office", "kids_room"].includes(product.room) &&
                 `Perfect for anyone looking to improve their ${product.room.replace("_", " ")} organization and functionality.`}
             </p>
           </div>
 
           <div className="flex items-center gap-3 mb-8 flex-wrap">
-            <span className="text-sm px-4 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 rounded-full font-semibold border border-emerald-100">
+            <span className="text-sm px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full font-bold shadow-md hover:shadow-lg transition-all">
               {product.room.replace("_", " ")}
             </span>
-            {product.tags.slice(0, 3).map((tag) => (
-              <span key={tag} className="text-sm px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-medium">
+            {product.tags.slice(0, 3).map((tag, idx) => (
+              <span
+                key={tag}
+                className={`text-sm px-4 py-2 rounded-full font-semibold border-2 transition-all hover:shadow-md ${
+                  idx === 0 ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                  idx === 1 ? 'bg-purple-50 text-purple-700 border-purple-200' :
+                  'bg-orange-50 text-orange-700 border-orange-200'
+                }`}
+              >
                 {tag}
               </span>
             ))}
@@ -122,12 +136,15 @@ export default async function ProductPage({ params }: Props) {
           
           {/* Why AI Picks Recommends This */}
           {product.whyWePickedIt && (
-            <div className="bg-slate-50 border-l-4 border-slate-900 p-6 sm:p-8 rounded-r-lg mb-8 sm:mb-10">
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4">Why AI Picks Recommends This</h2>
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-3">
+            <div className="bg-gradient-to-br from-slate-900 to-slate-800 border-l-4 border-emerald-500 p-6 sm:p-8 rounded-2xl mb-8 sm:mb-10 shadow-xl">
+              <div className="flex items-center gap-3 mb-4 sm:mb-5">
+                <span className="text-3xl">🎯</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-white">Why AI Picks Recommends This</h2>
+              </div>
+              <p className="text-base sm:text-lg text-slate-200 leading-relaxed mb-4">
                 {product.whyWePickedIt.split('.')[0]}. We selected this product after analyzing user reviews, comparing design quality, and evaluating value for money.
               </p>
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
                 It meets our standards for functionality, durability, and overall user satisfaction. This isn't just a recommendation—it's a product we'd use in our own homes.
               </p>
             </div>
@@ -138,33 +155,42 @@ export default async function ProductPage({ params }: Props) {
           <h2 className="text-2xl font-bold text-slate-900 mb-4">Specifications</h2>
           <SpecsTable specs={product.specs} />
 
-          <div className="my-12 p-6 sm:p-8 bg-gradient-to-br from-slate-50 to-emerald-50/30 border-l-4 border-emerald-500 rounded-r-lg">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">Who It's For</h2>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4">
-              This product is ideal for anyone looking to {product.shortDescription.toLowerCase()}.
-              It's particularly well-suited for {product.room.replace("_", " ")} spaces and 
-              those interested in {product.tags.slice(0, 2).join(" and ")}.
-            </p>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4">
-              Whether you're a first-time homeowner setting up your space, someone looking to declutter and organize, or a design enthusiast seeking functional yet beautiful solutions, this product offers practical benefits that make daily life easier and more enjoyable.
-            </p>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-              It's especially valuable for those who appreciate thoughtful design, sustainable materials, and products that solve real problems without adding unnecessary complexity to your routine.
-            </p>
+          <div className="my-12 p-8 sm:p-10 bg-gradient-to-br from-purple-50 via-blue-50 to-emerald-50 border-2 border-purple-200 rounded-3xl shadow-lg">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-3xl">👥</span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Who It's For</h2>
+            </div>
+            <div className="space-y-4">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+                This product is ideal for anyone looking to {product.shortDescription.toLowerCase()}.
+                It's particularly well-suited for {product.room.replace("_", " ")} spaces and
+                those interested in {product.tags.slice(0, 2).join(" and ")}.
+              </p>
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+                Whether you're a first-time homeowner setting up your space, someone looking to declutter and organize, or a design enthusiast seeking functional yet beautiful solutions, this product offers practical benefits that make daily life easier and more enjoyable.
+              </p>
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+                It's especially valuable for those who appreciate thoughtful design, sustainable materials, and products that solve real problems without adding unnecessary complexity to your routine.
+              </p>
+            </div>
           </div>
         </div>
 
         {/* CTA Below content */}
-        <div className="border-t border-slate-200 pt-8 sm:pt-12 mb-12 bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 sm:p-8">
+        <div className="border-t-4 border-emerald-500 pt-10 sm:pt-12 mb-12 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-3xl p-8 sm:p-10 shadow-xl">
+          <div className="text-center mb-6">
+            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Ready to Get This Product?</h3>
+            <p className="text-base sm:text-lg text-slate-600">Click below to check the latest price on Amazon</p>
+          </div>
           <a
             href={affiliateLink}
             target="_blank"
             rel="sponsored nofollow noopener"
-            className="block w-full md:w-auto md:inline-block py-4 sm:py-5 px-8 sm:px-10 bg-gradient-to-r from-slate-900 to-slate-800 text-white text-center font-bold text-base sm:text-lg rounded-xl hover:from-slate-800 hover:to-slate-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            className="block w-full md:w-auto md:inline-block py-5 sm:py-6 px-10 sm:px-12 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center font-bold text-lg sm:text-xl rounded-2xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
           >
             Check Price on Amazon →
           </a>
-          <p className="text-xs text-slate-500 mt-4 sm:mt-6 text-center">
+          <p className="text-xs sm:text-sm text-slate-500 mt-6 sm:mt-8 text-center">
             <span className="font-semibold">Affiliate Disclosure:</span> As an Amazon Associate I earn from qualifying purchases.
           </p>
         </div>
