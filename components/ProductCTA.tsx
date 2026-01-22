@@ -16,11 +16,8 @@ export function ProductCTA({ href, text, variant = "primary", className = "" }: 
     secondary: "py-4 sm:py-5 px-8 sm:px-10 bg-gradient-to-r from-slate-700 to-slate-600 text-white text-base sm:text-lg hover:from-slate-600 hover:to-slate-500"
   };
 
-  // Determine if it's an internal URL (starts with /) or external
-  const isInternal = href.startsWith("/");
-  const relAttributes = isInternal 
-    ? "nofollow noopener noreferrer"
-    : "nofollow sponsored noopener noreferrer";
+  // All product CTAs link to Amazon (direct or via tracking), so always use sponsored
+  const relAttributes = "nofollow sponsored noopener noreferrer";
 
   return (
     <a

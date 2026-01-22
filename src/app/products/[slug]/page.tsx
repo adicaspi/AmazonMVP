@@ -48,9 +48,9 @@ export default async function ProductPage({ params }: Props) {
     .filter(p => p.room === product.room && p.id !== product.id && p.status === "published")
     .slice(0, 3);
 
-  // Generate standardized "Why AI Picks Recommends This" content
+  // Generate standardized "Why AI Picks Recommends This" content - 2-3 practical sentences
   const whyWePickedItContent = product.whyWePickedIt || 
-    `This product offers practical benefits that solve real problems. We selected it based on quality, functionality, and value. It's a solid choice for anyone looking to improve their ${product.room.replace("_", " ")}.`;
+    `This product offers practical benefits that solve real problems. We selected it based on quality, functionality, and value.`;
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
@@ -119,21 +119,21 @@ export default async function ProductPage({ params }: Props) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
           </div>
           
-          {/* Who this product is for */}
+          {/* Who this product is for - Clean, concise */}
           <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 border-l-4 border-emerald-500 p-6 sm:p-8 rounded-r-2xl mb-6 sm:mb-8 shadow-lg">
             <div className="flex items-center gap-3 mb-3 sm:mb-4">
               <span className="text-2xl">✨</span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Who This Is For</h2>
             </div>
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-              {product.room === "kitchen" && "Perfect for anyone looking to organize their kitchen drawers and reduce clutter."}
-              {product.room === "living_room" && "Ideal for those wanting to add style and functionality to their living space."}
-              {product.room === "bedroom" && "Great for anyone seeking better organization and comfort in their bedroom."}
-              {product.room === "bathroom" && "Perfect for keeping bathroom essentials organized and accessible."}
-              {product.room === "office" && "Ideal for creating a more productive and organized workspace."}
-              {product.room === "kids_room" && "Perfect for parents looking to inspire creativity and learning through quality play experiences."}
+              {product.room === "kitchen" && "Anyone looking to organize kitchen drawers and reduce clutter."}
+              {product.room === "living_room" && "Those wanting to add style and functionality to their living space."}
+              {product.room === "bedroom" && "Anyone seeking better organization and comfort in their bedroom."}
+              {product.room === "bathroom" && "People looking to keep bathroom essentials organized and accessible."}
+              {product.room === "office" && "Those creating a more productive and organized workspace."}
+              {product.room === "kids_room" && "Parents looking to inspire creativity and learning through quality play experiences."}
               {!["kitchen", "living_room", "bedroom", "bathroom", "office", "kids_room"].includes(product.room) &&
-                `Perfect for anyone looking to improve their ${product.room.replace("_", " ")} organization and functionality.`}
+                `Anyone looking to improve their ${product.room.replace("_", " ")} organization and functionality.`}
             </p>
           </div>
 
@@ -141,7 +141,7 @@ export default async function ProductPage({ params }: Props) {
             <span className="text-sm px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full font-bold shadow-md hover:shadow-lg transition-all">
               {product.room.replace("_", " ")}
             </span>
-            {product.tags.slice(0, 3).map((tag, idx) => (
+            {Array.from(new Set(product.tags)).slice(0, 3).map((tag, idx) => (
               <span
                 key={tag}
                 className={`text-sm px-4 py-2 rounded-full font-semibold border-2 transition-all hover:shadow-md ${
@@ -169,16 +169,6 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         <div className="prose prose-slate max-w-none mb-12">
-          {/* Introduction Paragraph */}
-          <div className="mb-8 sm:mb-10">
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4">
-              {product.shortDescription} This product has been carefully selected for its combination of quality, functionality, and value. Whether you're looking to organize your space, improve efficiency, or simply enhance your home's aesthetic, this product delivers on its promises.
-            </p>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-              After extensive research and consideration of user reviews, design quality, and practical benefits, we've identified this as a standout option in its category. It offers a thoughtful solution to common home organization and improvement challenges.
-            </p>
-          </div>
-
           {/* All Benefits */}
           {product.highlights.length > 3 && (
             <>
@@ -198,26 +188,6 @@ export default async function ProductPage({ params }: Props) {
 
           <h2 className="text-2xl font-bold text-slate-900 mb-4">Specifications</h2>
           <SpecsTable specs={product.specs} />
-
-          <div className="my-12 p-8 sm:p-10 bg-gradient-to-br from-purple-50 via-blue-50 to-emerald-50 border-2 border-purple-200 rounded-3xl shadow-lg">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl">👥</span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Who It's For</h2>
-            </div>
-            <div className="space-y-4">
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                This product is ideal for anyone looking to {product.shortDescription.toLowerCase()}.
-                It's particularly well-suited for {product.room.replace("_", " ")} spaces and
-                those interested in {product.tags.slice(0, 2).join(" and ")}.
-              </p>
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                Whether you're a first-time homeowner setting up your space, someone looking to declutter and organize, or a design enthusiast seeking functional yet beautiful solutions, this product offers practical benefits that make daily life easier and more enjoyable.
-              </p>
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                It's especially valuable for those who appreciate thoughtful design, sustainable materials, and products that solve real problems without adding unnecessary complexity to your routine.
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* CTA #3: Bottom CTA */}
@@ -234,7 +204,7 @@ export default async function ProductPage({ params }: Props) {
             />
           </div>
           <p className="text-xs sm:text-sm text-slate-500 mt-6 sm:mt-8 text-center">
-            <span className="font-semibold">Affiliate Disclosure:</span> As an Amazon Associate, we earn from qualifying purchases.
+            As an Amazon Associate, we earn from qualifying purchases.
           </p>
         </div>
 

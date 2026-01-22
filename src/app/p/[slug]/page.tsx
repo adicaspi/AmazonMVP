@@ -70,10 +70,10 @@ export default async function ProductPage({ params }: Props) {
         "Offers good value for the quality provided"
       ];
 
-  // Generate standardized "Why AI Picks Recommends This" content
+  // Generate standardized "Why AI Picks Recommends This" content - 2-3 practical sentences
   const whyWePickedItContent = product.shortDescription 
-    ? `${product.shortDescription} We selected this product because it addresses real needs effectively. It combines quality construction with practical functionality, making it a reliable choice for everyday use.`
-    : `This product offers practical benefits that solve real problems. We selected it based on quality, functionality, and value. It's a solid choice for anyone looking to improve their ${product.vertical.replace("_", " ")}.`;
+    ? `We selected this product because it addresses real needs effectively. It combines quality construction with practical functionality.`
+    : `This product offers practical benefits that solve real problems. We selected it based on quality, functionality, and value.`;
 
         return (
           <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
@@ -258,7 +258,7 @@ export default async function ProductPage({ params }: Props) {
             />
           </div>
           <p className="text-xs text-slate-600 dark:text-slate-500 text-center">
-            {product.disclosures.affiliate || "As an Amazon Associate, we earn from qualifying purchases."}
+            As an Amazon Associate, we earn from qualifying purchases.
           </p>
         </section>
 
