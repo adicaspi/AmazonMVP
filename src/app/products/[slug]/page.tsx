@@ -6,6 +6,7 @@ import { ProsCons } from "@/components/ProsCons";
 import { SpecsTable } from "@/components/SpecsTable";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductCTA } from "@/components/ProductCTA";
+import { WhyAIPicksRecommends } from "@/components/WhyAIPicksRecommends";
 import { products } from "@/lib/products-data";
 import type { Metadata } from "next";
 
@@ -47,10 +48,65 @@ export default async function ProductPage({ params }: Props) {
     .filter(p => p.room === product.room && p.id !== product.id && p.status === "published")
     .slice(0, 3);
 
+  // Generate standardized "Why AI Picks Recommends This" content
+  const whyWePickedItContent = product.whyWePickedIt || 
+    `This product offers practical benefits that solve real problems. We selected it based on quality, functionality, and value. It's a solid choice for anyone looking to improve their ${product.room.replace("_", " ")}.`;
+
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
       <article>
-        <div className="mb-12">
+        {/* Above the Fold Section - Optimized for visibility, no image */}
+        <div className="mb-8 sm:mb-12">
+          <div className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-full shadow-sm">
+            <span className="text-xs sm:text-sm font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-2">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+              Featured Product
+            </span>
+          </div>
+
+          {/* Pain-Based Headline */}
+          {product.painPoint && (
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-2 sm:mb-3 leading-tight">
+              {product.painPoint}
+            </h1>
+          )}
+
+          {/* Benefit Title / Main Headline */}
+          <h2 className={`${product.painPoint ? 'text-xl sm:text-2xl md:text-3xl lg:text-4xl' : 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl'} font-bold text-emerald-700 mb-2 sm:mb-3 leading-tight`}>
+            {product.benefitTitle || product.title}
+          </h2>
+          
+          {/* Subheadline */}
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 mb-3 sm:mb-4 leading-relaxed">
+            {product.shortDescription}
+          </p>
+
+          {/* Key Benefits - 3 Quick Bullets */}
+          <div className="mb-4 sm:mb-6 p-4 sm:p-5 md:p-6 bg-gradient-to-br from-white to-emerald-50/30 border-2 border-emerald-200 rounded-xl sm:rounded-2xl shadow-lg">
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2">
+              <span className="text-xl sm:text-2xl">⚡</span>
+              Why You'll Love It
+            </h3>
+            <ul className="space-y-1.5 sm:space-y-2 md:space-y-3">
+              {product.highlights.slice(0, 3).map((highlight, idx) => (
+                <li key={idx} className="text-sm sm:text-base md:text-lg text-slate-700 flex items-start gap-2 sm:gap-3">
+                  <span className="text-emerald-500 mt-0.5 sm:mt-1 font-bold text-lg sm:text-xl flex-shrink-0">✔</span>
+                  <span className="font-medium">{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* CTA #1: Above the fold - Primary CTA */}
+          <div className="mb-6 sm:mb-8 text-center">
+            <ProductCTA
+              href={affiliateLink}
+              text="Check Price on Amazon"
+              variant="primary"
+            />
+          </div>
+
+          {/* Product Image - Below above-the-fold content */}
           <div className="aspect-video relative bg-gradient-to-br from-slate-50 to-slate-100 mb-8 rounded-2xl overflow-hidden shadow-xl">
             <Image
               src={product.image}
@@ -61,52 +117,6 @@ export default async function ProductPage({ params }: Props) {
               quality={95}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
-          </div>
-          
-          <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-full shadow-sm">
-            <span className="text-sm font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-2">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-              Featured Product
-            </span>
-          </div>
-
-          {/* Pain-Based Headline */}
-          {product.painPoint && (
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-3 sm:mb-4 leading-tight">
-              {product.painPoint}
-            </h1>
-          )}
-
-          <h2 className={`${product.painPoint ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-4xl sm:text-5xl md:text-6xl'} font-bold text-emerald-700 mb-4 sm:mb-6 leading-tight`}>
-            {product.benefitTitle || product.title}
-          </h2>
-          <p className="text-lg sm:text-xl text-slate-600 mb-6 sm:mb-8 leading-relaxed">
-            {product.shortDescription}
-          </p>
-
-          {/* Key Benefits - 3 Quick Bullets */}
-          <div className="mb-8 sm:mb-10 p-6 sm:p-8 bg-gradient-to-br from-white to-emerald-50/30 border-2 border-emerald-200 rounded-2xl shadow-lg">
-            <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="text-2xl">⚡</span>
-              Why You'll Love It
-            </h3>
-            <ul className="space-y-3">
-              {product.highlights.slice(0, 3).map((highlight, idx) => (
-                <li key={idx} className="text-base sm:text-lg text-slate-700 flex items-start gap-3">
-                  <span className="text-emerald-500 mt-1 font-bold text-xl flex-shrink-0">✔</span>
-                  <span className="font-medium">{highlight}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* CTA #1: Above the fold - After benefits */}
-          <div className="mb-8 sm:mb-10 text-center">
-            <ProductCTA
-              href={affiliateLink}
-              text="Check Price on Amazon"
-              variant="primary"
-            />
           </div>
           
           {/* Who this product is for */}
@@ -145,29 +155,17 @@ export default async function ProductPage({ params }: Props) {
             ))}
           </div>
 
-          {/* Why AI Picks Recommends This - Moved Up for Trust */}
-          {product.whyWePickedIt && (
-            <>
-              <div className="mb-8 sm:mb-10 p-6 sm:p-8 bg-gradient-to-br from-slate-900 to-slate-800 border-l-4 border-emerald-500 rounded-2xl shadow-xl">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">🎯</span>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white">Why AI Picks Recommends This</h3>
-                </div>
-                <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
-                  {product.whyWePickedIt}
-                </p>
-              </div>
+          {/* Why AI Picks Recommends This - Always present, standardized */}
+          <WhyAIPicksRecommends content={whyWePickedItContent} />
 
-              {/* CTA #2: After "Why AI Picks Recommends This" */}
-              <div className="mb-8 sm:mb-10 text-center">
-                <ProductCTA
-                  href={affiliateLink}
-                  text="See it on Amazon"
-                  variant="secondary"
-                />
-              </div>
-            </>
-          )}
+          {/* CTA #2: After "Why AI Picks Recommends This" */}
+          <div className="mb-8 sm:mb-10 text-center">
+            <ProductCTA
+              href={affiliateLink}
+              text="See it on Amazon"
+              variant="secondary"
+            />
+          </div>
         </div>
 
         <div className="prose prose-slate max-w-none mb-12">
@@ -180,17 +178,6 @@ export default async function ProductPage({ params }: Props) {
               After extensive research and consideration of user reviews, design quality, and practical benefits, we've identified this as a standout option in its category. It offers a thoughtful solution to common home organization and improvement challenges.
             </p>
           </div>
-
-          {/* CTA #2: After main description (if "Why AI Picks Recommends This" doesn't exist) */}
-          {!product.whyWePickedIt && (
-            <div className="mb-8 sm:mb-10 text-center">
-              <ProductCTA
-                href={affiliateLink}
-                text="See it on Amazon"
-                variant="secondary"
-              />
-            </div>
-          )}
 
           {/* All Benefits */}
           {product.highlights.length > 3 && (
