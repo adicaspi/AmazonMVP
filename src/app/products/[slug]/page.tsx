@@ -48,12 +48,21 @@ export default async function ProductPage({ params }: Props) {
     .filter(p => p.room === product.room && p.id !== product.id && p.status === "published")
     .slice(0, 3);
 
-  // Clean and deduplicate tags - case-insensitive, trim whitespace
+  // Clean and deduplicate tags - case-insensitive, trim whitespace, handle multi-word duplicates
   const cleanTags = (() => {
     const tags = product.tags || [];
     const seen = new Set<string>();
     const unique: string[] = [];
+    
+    // First, flatten and split any tags that might contain multiple words
+    const allTags: string[] = [];
     for (const tag of tags) {
+      // Split by common delimiters and spaces, then filter empty
+      const splitTags = tag.split(/[\s,;]+/).filter(t => t.trim().length > 0);
+      allTags.push(...splitTags);
+    }
+    
+    for (const tag of allTags) {
       const trimmed = tag.trim();
       if (!trimmed) continue;
       const lower = trimmed.toLowerCase();

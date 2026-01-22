@@ -12,6 +12,34 @@ interface ProductCardProps {
 export function ProductCard({ product, showDescription = true }: ProductCardProps) {
   const affiliateLink = buildAmazonAffiliateLink(product.amazonUrl);
 
+  // Clean and deduplicate tags - case-insensitive, handle multi-word duplicates
+  const cleanTags = (() => {
+    const tags = product.tags || [];
+    const seen = new Set<string>();
+    const unique: string[] = [];
+    
+    // First, flatten and split any tags that might contain multiple words
+    const allTags: string[] = [];
+    for (const tag of tags) {
+      // Split by common delimiters and spaces, then filter empty
+      const splitTags = tag.split(/[\s,;]+/).filter(t => t.trim().length > 0);
+      allTags.push(...splitTags);
+    }
+    
+    for (const tag of allTags) {
+      const trimmed = tag.trim();
+      if (!trimmed) continue;
+      const lower = trimmed.toLowerCase();
+      if (!seen.has(lower)) {
+        seen.add(lower);
+        // Title case: first letter uppercase, rest lowercase
+        const titleCased = trimmed.charAt(0).toUpperCase() + trimmed.slice(1).toLowerCase();
+        unique.push(titleCased);
+      }
+    }
+    return unique;
+  })();
+
   return (
     <article className="group border border-slate-200 bg-white hover:border-slate-300 hover:shadow-2xl transition-all duration-300 rounded-lg sm:rounded-xl overflow-hidden transform hover:-translate-y-1">
       <div className="aspect-square relative bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 overflow-hidden rounded-t-lg sm:rounded-t-xl">
@@ -41,11 +69,6 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
               {product.shortDescription}
             </p>
           )}
-          {product.whyWePickedIt && (
-            <p className="text-xs text-emerald-700 italic leading-relaxed line-clamp-2">
-              Why we picked it: {product.whyWePickedIt}
-            </p>
-          )}
         </div>
         
         {product.highlights.length > 0 && (
@@ -63,22 +86,42 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
           <span className="text-xs px-3 py-1.5 bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 rounded-full font-medium border border-emerald-100 hover:from-emerald-100 hover:to-teal-100 transition-colors">
             {product.room.replace("_", " ")}
           </span>
-          {product.tags.slice(0, 2).map((tag) => (
+          {cleanTags.slice(0, 2).map((tag) => (
             <span key={tag} className="text-xs px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition-colors">
               {tag}
             </span>
           ))}
         </div>
 
-        {/* Why we picked it - Short version above CTA (4-6 words) */}
+        {/* Why we picked it - Clean 1-2 sentence excerpt with proper CSS ellipsis */}
         {product.whyWePickedIt && (
           <div className="mb-3">
             <p className="text-xs text-slate-600 font-medium mb-1">Why we picked it:</p>
-            <p className="text-xs text-slate-700 leading-relaxed">
+            <p className="text-xs text-slate-700 leading-relaxed line-clamp-2" style={{
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}>
               {(() => {
-                const firstSentence = product.whyWePickedIt.split('.')[0];
-                const words = firstSentence.split(' ').slice(0, 6);
-                return words.join(' ') + (words.length < firstSentence.split(' ').length ? '...' : '');
+                // Get first 1-2 complete sentences
+                const sentences = product.whyWePickedIt.split(/[.!?]+/).filter(s => s.trim().length > 0);
+                if (sentences.length === 0) return product.whyWePickedIt;
+                
+                // Take first 1-2 sentences, preferring 2 if total length is reasonable
+                let excerpt = sentences[0].trim();
+                if (sentences.length > 1 && excerpt.length < 100) {
+                  excerpt += '. ' + sentences[1].trim();
+                }
+                
+                // If still too long, truncate at word boundary
+                if (excerpt.length > 150) {
+                  const words = excerpt.split(' ');
+                  excerpt = words.slice(0, Math.floor(words.length * 0.8)).join(' ');
+                }
+                
+                return excerpt + (excerpt.length < product.whyWePickedIt.length ? '' : '');
               })()}
             </p>
           </div>

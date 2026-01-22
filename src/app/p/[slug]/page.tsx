@@ -70,11 +70,12 @@ export default async function ProductPage({ params }: Props) {
     const unique: string[] = [];
     for (const word of words) {
       const trimmed = word.trim();
+      if (!trimmed) continue;
       const lower = trimmed.toLowerCase();
       // Skip if already seen (case-insensitive)
       if (!seen.has(lower)) {
         seen.add(lower);
-        // Capitalize first letter, lowercase rest
+        // Title case: first letter uppercase, rest lowercase
         const capitalized = trimmed.charAt(0).toUpperCase() + trimmed.slice(1).toLowerCase();
         unique.push(capitalized);
       }
