@@ -82,6 +82,11 @@ body {
   opacity: 0;
 }
 
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+  opacity: 0;
+}
+
 @keyframes gradient {
   0%, 100% {
     background-position: 0% 50%;
