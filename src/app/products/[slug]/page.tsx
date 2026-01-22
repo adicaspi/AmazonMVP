@@ -5,6 +5,7 @@ import { buildAmazonAffiliateLink } from "@/lib/amazon-links";
 import { ProsCons } from "@/components/ProsCons";
 import { SpecsTable } from "@/components/SpecsTable";
 import { ProductCard } from "@/components/ProductCard";
+import { ProductCTA } from "@/components/ProductCTA";
 import { products } from "@/lib/products-data";
 import type { Metadata } from "next";
 
@@ -98,6 +99,15 @@ export default async function ProductPage({ params }: Props) {
               ))}
             </ul>
           </div>
+
+          {/* CTA #1: Above the fold - After benefits */}
+          <div className="mb-8 sm:mb-10 text-center">
+            <ProductCTA
+              href={affiliateLink}
+              text="Check Price on Amazon"
+              variant="primary"
+            />
+          </div>
           
           {/* Who this product is for */}
           <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 border-l-4 border-emerald-500 p-6 sm:p-8 rounded-r-2xl mb-6 sm:mb-8 shadow-lg">
@@ -137,15 +147,26 @@ export default async function ProductPage({ params }: Props) {
 
           {/* Why AI Picks Recommends This - Moved Up for Trust */}
           {product.whyWePickedIt && (
-            <div className="mb-8 sm:mb-10 p-6 sm:p-8 bg-gradient-to-br from-slate-900 to-slate-800 border-l-4 border-emerald-500 rounded-2xl shadow-xl">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">🎯</span>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">Why AI Picks Recommends This</h3>
+            <>
+              <div className="mb-8 sm:mb-10 p-6 sm:p-8 bg-gradient-to-br from-slate-900 to-slate-800 border-l-4 border-emerald-500 rounded-2xl shadow-xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">🎯</span>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">Why AI Picks Recommends This</h3>
+                </div>
+                <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
+                  {product.whyWePickedIt}
+                </p>
               </div>
-              <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
-                {product.whyWePickedIt}
-              </p>
-            </div>
+
+              {/* CTA #2: After "Why AI Picks Recommends This" */}
+              <div className="mb-8 sm:mb-10 text-center">
+                <ProductCTA
+                  href={affiliateLink}
+                  text="See it on Amazon"
+                  variant="secondary"
+                />
+              </div>
+            </>
           )}
         </div>
 
@@ -159,6 +180,17 @@ export default async function ProductPage({ params }: Props) {
               After extensive research and consideration of user reviews, design quality, and practical benefits, we've identified this as a standout option in its category. It offers a thoughtful solution to common home organization and improvement challenges.
             </p>
           </div>
+
+          {/* CTA #2: After main description (if "Why AI Picks Recommends This" doesn't exist) */}
+          {!product.whyWePickedIt && (
+            <div className="mb-8 sm:mb-10 text-center">
+              <ProductCTA
+                href={affiliateLink}
+                text="See it on Amazon"
+                variant="secondary"
+              />
+            </div>
+          )}
 
           {/* All Benefits */}
           {product.highlights.length > 3 && (
@@ -201,21 +233,18 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </div>
 
-        {/* CTA Below content */}
+        {/* CTA #3: Bottom CTA */}
         <div className="border-t-4 border-emerald-500 pt-10 sm:pt-12 mb-12 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-3xl p-8 sm:p-10 shadow-xl">
           <div className="text-center mb-6">
             <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Ready to Get This Product?</h3>
             <p className="text-base sm:text-lg text-slate-600">Check current price and availability on Amazon</p>
           </div>
           <div className="text-center">
-            <a
+            <ProductCTA
               href={affiliateLink}
-              target="_blank"
-              rel="sponsored nofollow noopener"
-              className="inline-block w-full md:w-auto py-5 sm:py-6 px-10 sm:px-12 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-center font-bold text-lg sm:text-xl rounded-2xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
-            >
-              See it on Amazon (Free Returns) →
-            </a>
+              text="View full details on Amazon"
+              variant="primary"
+            />
           </div>
           <p className="text-xs sm:text-sm text-slate-500 mt-6 sm:mt-8 text-center">
             <span className="font-semibold">Affiliate Disclosure:</span> As an Amazon Associate, we earn from qualifying purchases.

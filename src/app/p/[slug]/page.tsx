@@ -3,6 +3,7 @@ import { getProductBySlug } from "@/lib/products";
 import Image from "next/image";
 import Link from "next/link";
 import { ProductViewTracker } from "./ProductViewTracker";
+import { ProductCTA } from "@/components/ProductCTA";
 import type { Metadata } from "next";
 
 type Props = {
@@ -122,6 +123,15 @@ export default async function ProductPage({ params }: Props) {
                 </ul>
               </section>
 
+              {/* CTA #1: Above the fold - After pain points */}
+              <div className="text-center py-6 sm:py-8">
+                <ProductCTA
+                  href={trackingUrl}
+                  text="Check Price on Amazon"
+                  variant="primary"
+                />
+              </div>
+
         {/* How It Works */}
         <section className="space-y-6">
           <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-50">How It Works</h2>
@@ -183,6 +193,15 @@ export default async function ProductPage({ params }: Props) {
           </section>
         </div>
 
+              {/* CTA #2: After "Who It's For / Not For" */}
+              <div className="text-center py-6 sm:py-8">
+                <ProductCTA
+                  href={trackingUrl}
+                  text="See it on Amazon"
+                  variant="secondary"
+                />
+              </div>
+
               {/* Price Note */}
               {product.priceNote && (
                 <div className="p-5 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/30 text-sm text-amber-800 dark:text-amber-200 shadow-sm">
@@ -191,19 +210,17 @@ export default async function ProductPage({ params }: Props) {
                 </div>
               )}
 
-        {/* CTA Section - Sticky on mobile */}
+        {/* CTA #3: Bottom CTA - Sticky on mobile */}
         <section className="sticky bottom-0 z-10 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-4 bg-white/95 dark:bg-slate-950/95 backdrop-blur-sm border-t border-slate-200 dark:border-slate-800 sm:static sm:bg-transparent sm:border-t-0 sm:py-8 space-y-3">
-          <a
-            href={trackingUrl}
-            className="group block w-full py-5 px-6 bg-gradient-to-r from-slate-900 to-slate-800 dark:from-slate-700 dark:to-slate-600 hover:from-slate-800 hover:to-slate-700 dark:hover:from-slate-600 dark:hover:to-slate-500 text-white font-bold rounded-xl text-center transition-all duration-200 shadow-lg shadow-slate-900/20 hover:shadow-slate-900/30 hover:scale-[1.02] active:scale-[0.98]"
-          >
-            <span className="flex items-center justify-center gap-2">
-              {product.content.ctaText}
-              <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
-            </span>
-          </a>
+          <div className="text-center">
+            <ProductCTA
+              href={trackingUrl}
+              text="View full details on Amazon"
+              variant="primary"
+            />
+          </div>
           <p className="text-xs text-slate-600 dark:text-slate-500 text-center">
-            {product.disclosures.affiliate}
+            {product.disclosures.affiliate || "As an Amazon Associate, we earn from qualifying purchases."}
           </p>
         </section>
 
