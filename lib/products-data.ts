@@ -70,49 +70,47 @@ const productImages: Record<string, string> = {
 
 export const products: Product[] = [
   {
-    id: "B09V5G395G",
-    slug: "amazon-basics-cube-organizer-storage-bins",
-    title: "Amazon Basics Cube Organizer Storage Bins with Handles",
-    benefitTitle: "6-pack collapsible fabric cubes for any space",
-    room: "storage",
-    tags: ["storage", "organization", "collapsible", "cubes", "baskets"],
-    shortDescription: "Pack of 6 collapsible fabric storage cubes with handles, perfect for cube organizers, closets, shelves, and any storage need. 13\"x13\"x13\" each.",
-    whyWePickedIt: "With 116,129 reviews and a 4.7-star rating, this is Amazon's #1 Best Seller in Open Home Storage Bins. The collapsible design saves space when not in use, and the fabric handles make them easy to carry. Perfect for organizing toys, clothes, accessories, or any items in cube storage systems.",
-    image: "https://m.media-amazon.com/images/I/61yVDDy1LRL._AC_SL1500_.jpg",
-    amazonUrl: "https://www.amazon.com/dp/B09V5G395G?tag=aipicks20-20",
-    asin: "B09V5G395G",
-    price: 15.56,
+    id: "B0DNTQ2YNT",
+    slug: "ukeetap-multi-purpose-pull-out-sink-organizer",
+    title: "Ukeetap Multi-Purpose Pull-Out Organizers for Sink and Bathroom",
+    benefitTitle: "Pull-out organizer maximizes under-sink space",
+    room: "bathroom",
+    tags: ["bathroom", "kitchen", "organization", "pull-out", "drawer-organizer", "sink", "storage"],
+    shortDescription: "Multi-purpose pull-out organizer designed for under-sink and bathroom storage. Features smooth sliding mechanism and durable construction to maximize cabinet space.",
+    whyWePickedIt: "This pull-out organizer transforms wasted under-sink space into functional storage. The smooth sliding mechanism provides easy access to items stored in the back of cabinets, while the sturdy construction holds cleaning supplies, toiletries, and more. Perfect for small bathrooms and kitchens where every inch counts.",
+    image: "https://m.media-amazon.com/images/I/811uMdiQm7L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Ukeetap-Multi-Purpose-Pull-Out-Organizers-Bathroom/dp/B0DNTQ2YNT?tag=aipicks20-20",
+    asin: "B0DNTQ2YNT",
+    price: 29.99,
     highlights: [
-      "4.7 out of 5 stars (116,129 reviews)",
-      "#1 Best Seller in Open Home Storage Bins",
-      "Pack of 6 cubes",
-      "Collapsible fabric design",
-      "Sewn-in fabric handles for easy carrying"
+      "Pull-out sliding mechanism for easy access",
+      "Multi-purpose design for sink or bathroom",
+      "Durable construction",
+      "Maximizes under-cabinet storage",
+      "Easy installation"
     ],
     pros: [
-      "Excellent value - 6 cubes in one set",
-      "Collapsible saves space when not in use",
-      "Handles make them easy to carry",
-      "Sturdy yet lightweight fabric",
-      "Multifunctional - use as open-top bins or drawers"
+      "Makes under-sink items easily accessible",
+      "Smooth sliding mechanism",
+      "Sturdy and durable build",
+      "Perfect for small spaces",
+      "Versatile - works in kitchen or bathroom"
     ],
     cons: [
-      "Fabric material may not be as durable as plastic",
-      "May not hold very heavy items"
+      "Requires cabinet measurements before purchase",
+      "May need adjustment for proper fit"
     ],
     specs: {
-      "Rating": "4.7 out of 5 stars",
-      "Reviews": "116,129",
-      "Price": "$15.56",
-      "Dimensions": "13\"L x 13\"W x 13\"H each",
-      "Material": "Fabric",
-      "Quantity": "Pack of 6",
-      "Features": "Collapsible, handles included",
-      "Target User": "People looking to organize items in cube storage systems, closets, or shelves"
+      "Price": "$29.99",
+      "Type": "Pull-out organizer",
+      "Use": "Under-sink storage, bathroom cabinets",
+      "Features": "Sliding mechanism, durable construction",
+      "Installation": "Easy assembly",
+      "Target User": "People looking to maximize under-sink and cabinet storage space"
     },
     status: "published",
     featured: true,
-    dateAdded: "2026-01-21"
+    dateAdded: "2026-01-22"
   },
   {
     id: "B0B31C4XRM",
@@ -540,6 +538,51 @@ export const products: Product[] = [
     },
     status: "published",
     featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B09V5G395G",
+    slug: "amazon-basics-cube-organizer-storage-bins",
+    title: "Amazon Basics Cube Organizer Storage Bins with Handles",
+    benefitTitle: "6-pack collapsible fabric cubes for any space",
+    room: "storage",
+    tags: ["storage", "organization", "collapsible", "cubes", "baskets"],
+    shortDescription: "Pack of 6 collapsible fabric storage cubes with handles, perfect for cube organizers, closets, shelves, and any storage need. 13\"x13\"x13\" each.",
+    whyWePickedIt: "With 116,129 reviews and a 4.7-star rating, this is Amazon's #1 Best Seller in Open Home Storage Bins. The collapsible design saves space when not in use, and the fabric handles make them easy to carry. Perfect for organizing toys, clothes, accessories, or any items in cube storage systems.",
+    image: "https://m.media-amazon.com/images/I/61yVDDy1LRL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/dp/B09V5G395G?tag=aipicks20-20",
+    asin: "B09V5G395G",
+    price: 15.56,
+    highlights: [
+      "4.7 out of 5 stars (116,129 reviews)",
+      "#1 Best Seller in Open Home Storage Bins",
+      "Pack of 6 cubes",
+      "Collapsible fabric design",
+      "Sewn-in fabric handles for easy carrying"
+    ],
+    pros: [
+      "Excellent value - 6 cubes in one set",
+      "Collapsible saves space when not in use",
+      "Handles make them easy to carry",
+      "Sturdy yet lightweight fabric",
+      "Multifunctional - use as open-top bins or drawers"
+    ],
+    cons: [
+      "Fabric material may not be as durable as plastic",
+      "May not hold very heavy items"
+    ],
+    specs: {
+      "Rating": "4.7 out of 5 stars",
+      "Reviews": "116,129",
+      "Price": "$15.56",
+      "Dimensions": "13\"L x 13\"W x 13\"H each",
+      "Material": "Fabric",
+      "Quantity": "Pack of 6",
+      "Features": "Collapsible, handles included",
+      "Target User": "People looking to organize items in cube storage systems, closets, or shelves"
+    },
+    status: "published",
+    featured: true,
     dateAdded: "2026-01-21"
   },
   {
