@@ -103,9 +103,6 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
         >
           View Details & Reviews
         </Link>
-        <p className="text-[10px] sm:text-xs text-slate-500 text-center mt-2 leading-tight">
-          <span className="font-semibold">Affiliate:</span> As an Amazon Associate I earn from qualifying purchases.
-        </p>
       </div>
     </article>
   );
