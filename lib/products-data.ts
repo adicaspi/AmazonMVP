@@ -736,7 +736,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61DJztu5EzL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Serve-Cooking-Utensils/dp/B00MYL7L9G?tag=aipicks20-20",
     asin: "B00MYL7L9G",
-    price: 29.99,
+    price: 15.19,
     highlights: [
       "61-piece wooden play food set",
       "Self-stick tabs for slicing action",
@@ -760,6 +760,7 @@ export const products: Product[] = [
       "Age Range": "3+ years",
       "Pieces": "61 total pieces",
       "Material": "Wood",
+      "Price": "$15.19",
       "Includes": "Play food, wooden knife, tongs, plates, cups, utensils, storage crate",
       "Target User": "Children who love pretend cooking and serving food"
     },
@@ -779,7 +780,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/81RH59GYNdL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Condiments-Set-pcs/dp/B011PZUPYO?tag=aipicks20-20",
     asin: "B011PZUPYO",
-    price: 14.99,
+    price: 11.38,
     highlights: [
       "Wooden condiment bottles and shakers",
       "Realistic details and colors",
@@ -802,6 +803,7 @@ export const products: Product[] = [
       "Brand": "Melissa & Doug",
       "Age Range": "3+ years",
       "Material": "Wood",
+      "Price": "$11.38",
       "Includes": "Ketchup, mustard, salt, pepper, and condiment holders",
       "Target User": "Children with play kitchens who want to add realistic details"
     },
@@ -821,7 +823,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61M1NFAceNL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Favorite-Condiments-Play/dp/B072M2PGX9?tag=aipicks20-20",
     asin: "B072M2PGX9",
-    price: 16.99,
+    price: 16.79,
     highlights: [
       "Wooden condiment play set",
       "Realistic painted details",
@@ -844,6 +846,7 @@ export const products: Product[] = [
       "Brand": "Melissa & Doug",
       "Age Range": "3+ years",
       "Material": "Wood with painted details",
+      "Price": "$16.79",
       "Target User": "Children who enjoy detailed pretend play cooking and serving"
     },
     status: "published",
@@ -862,7 +865,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61Z61ZcNvdL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Tortilla-Sliceable-Multicolor/dp/B07HM95PP1?tag=aipicks20-20",
     asin: "B07HM95PP1",
-    price: 19.99,
+    price: 19.59,
     highlights: [
       "Sliceable wooden play food",
       "Includes tacos, tortillas, and toppings",
@@ -885,6 +888,7 @@ export const products: Product[] = [
       "Brand": "Melissa & Doug",
       "Age Range": "3+ years",
       "Material": "Wood",
+      "Price": "$19.59",
       "Includes": "Tortillas, taco shells, toppings, wooden knife",
       "Features": "Sliceable pieces with self-stick tabs",
       "Target User": "Children who love interactive pretend cooking and food play"
@@ -905,7 +909,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61i7kSAB+AL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Pretend-Durable-Construction/dp/B01M0DQQHQ?tag=aipicks20-20",
     asin: "B01M0DQQHQ",
-    price: 19.99,
+    price: 17.49,
     highlights: [
       "24-piece wooden play set",
       "Mix-and-match ice cream creations",
@@ -929,6 +933,7 @@ export const products: Product[] = [
       "Age Range": "3+ years",
       "Pieces": "24 pieces total",
       "Material": "Wood",
+      "Price": "$17.49",
       "Includes": "6 cookies, 3 ice cream fillings, 6 ice pop halves, 2 Italian ice cups, spoons, menu card, storage tray",
       "Target User": "Children who love pretend play and ice cream"
     },
@@ -948,7 +953,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/81Ei9XuHNrL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Slice-Wooden-Pieces/dp/B06WP15J5R?tag=aipicks20-20",
     asin: "B06WP15J5R",
-    price: 16.99,
+    price: 23.49,
     highlights: [
       "Sliceable wooden cookie dough",
       "Multiple toppings and decorations",
@@ -971,6 +976,7 @@ export const products: Product[] = [
       "Brand": "Melissa & Doug",
       "Age Range": "3+ years",
       "Material": "Wood",
+      "Price": "$23.49",
       "Features": "Sliceable pieces with self-stick tabs",
       "Includes": "Cookie dough, toppings, wooden knife, baking accessories",
       "Target User": "Children who enjoy pretend baking and cooking"
@@ -991,7 +997,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/81lZk2wW7XL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/SIELEVIN-Colorful-Bracelets-Birthday-Christmas/dp/B0DCZ8S2X5?tag=aipicks20-20",
     asin: "B0DCZ8S2X5",
-    price: 12.99,
+    price: 9.98,
     highlights: [
       "Colorful pretend jewelry set",
       "Multiple bracelets and accessories",
@@ -1014,6 +1020,7 @@ export const products: Product[] = [
       "Brand": "SIELEVIN",
       "Age Range": "3+ years",
       "Material": "Plastic",
+      "Price": "$9.98",
       "Use": "Dress-up, pretend play, party favors",
       "Target User": "Girls who love dress-up and princess play"
     },
@@ -1033,7 +1040,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/7197AaQCT7L._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/ReliBeauty-Elastic-Backless-Princess-Accessories/dp/B0811B2GF5?tag=aipicks20-20",
     asin: "B0811B2GF5",
-    price: 18.99,
+    price: 29.99,
     highlights: [
       "Elastic bodice for comfortable fit",
       "Beautiful princess design",
@@ -1056,6 +1063,7 @@ export const products: Product[] = [
       "Brand": "ReliBeauty",
       "Age Range": "3-10 years",
       "Material": "Polyester",
+      "Price": "$29.99",
       "Design": "Elastic backless bodice",
       "Use": "Dress-up, parties, Halloween, photo shoots",
       "Target User": "Girls who love princess play and costumes"
@@ -1076,7 +1084,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/91H57JMpcyL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Princess-Jewelry-Boutique-Costumes-Accessories/dp/B09KXYLWG4?tag=aipicks20-20",
     asin: "B09KXYLWG4",
-    price: 24.99,
+    price: 28.49,
     highlights: [
       "Complete boutique play set",
       "Multiple jewelry pieces",
@@ -1098,6 +1106,7 @@ export const products: Product[] = [
     specs: {
       "Brand": "Princess Jewelry Boutique",
       "Age Range": "3+ years",
+      "Price": "$28.49",
       "Includes": "Jewelry, accessories, dress-up items",
       "Use": "Pretend play, dress-up, boutique role-play",
       "Target User": "Children who love princess play and fashion"
