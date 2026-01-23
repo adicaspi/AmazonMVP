@@ -134,11 +134,19 @@ export default function ProductsPage() {
               className="w-full px-4 py-3 text-sm border-2 border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
             >
               <option value="all">All Rooms</option>
-              {rooms.map(room => (
-                <option key={room} value={room}>
-                  {room.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
-                </option>
-              ))}
+              {rooms.map(room => {
+                let displayName = room;
+                if (room === "beauty-personal-care") {
+                  displayName = "Beauty & Personal Care";
+                } else {
+                  displayName = room.replace(/_/g, " ").replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+                }
+                return (
+                  <option key={room} value={room}>
+                    {displayName}
+                  </option>
+                );
+              })}
             </select>
           </div>
 
@@ -202,7 +210,7 @@ export default function ProductsPage() {
         {/* Results Count */}
         <div className="text-sm text-slate-600">
           Showing {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
-          {selectedRoom !== "all" && ` in ${selectedRoom.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}`}
+          {selectedRoom !== "all" && ` in ${selectedRoom === "beauty-personal-care" ? "Beauty & Personal Care" : selectedRoom.replace(/_/g, " ").replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())}`}
           {selectedCategory !== "all" && ` in ${selectedCategory.replace(/-/g, " ").replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}`}
           {selectedPriceRange !== "all" && ` ${selectedPriceRange === "under-20" ? "under $20" : selectedPriceRange === "20-40" ? "$20-$40" : selectedPriceRange === "40-60" ? "$40-$60" : "over $60"}`}
           {searchQuery && ` matching "${searchQuery}"`}

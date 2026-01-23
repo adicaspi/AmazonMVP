@@ -92,7 +92,7 @@ export function ProductCard({ product, showDescription = true }: ProductCardProp
 
         <div className="flex items-center gap-2 flex-wrap">
           <span className="text-xs px-3 py-1.5 bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 rounded-full font-medium border border-emerald-100 hover:from-emerald-100 hover:to-teal-100 transition-colors">
-            {product.room.replace("_", " ")}
+            {product.room === "beauty-personal-care" ? "Beauty & Personal Care" : product.room.replace("_", " ").replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
           </span>
           {cleanTags.slice(0, 2).map((tag) => (
             <span key={tag} className="text-xs px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition-colors">

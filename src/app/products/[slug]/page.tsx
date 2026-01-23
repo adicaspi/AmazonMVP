@@ -224,7 +224,8 @@ export default async function ProductPage({ params }: Props) {
                   office: "Those creating a more productive and organized workspace.",
                   kids_room: "Parents looking to inspire creativity and learning through quality play experiences."
                 };
-                return roomDefaults[product.room] || `Anyone looking to improve their ${product.room?.replace("_", " ") || "space"} organization and functionality.`;
+                const roomDisplay = product.room === "beauty-personal-care" ? "Beauty & Personal Care" : product.room?.replace("_", " ").replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase()) || "space";
+                return roomDefaults[product.room] || `Anyone looking to improve their ${roomDisplay} organization and functionality.`;
               })()}
             </p>
           </div>
@@ -233,7 +234,7 @@ export default async function ProductPage({ params }: Props) {
           {cleanTags.length > 0 && (
             <div className="flex items-center gap-3 mb-8 flex-wrap">
               <span className="text-sm px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full font-bold shadow-md hover:shadow-lg transition-all">
-                {product.room.replace("_", " ")}
+                {product.room === "beauty-personal-care" ? "Beauty & Personal Care" : product.room.replace("_", " ").replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
               </span>
               {cleanTags.slice(0, 3).map((tag, idx) => (
                 <span
