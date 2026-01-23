@@ -1253,7 +1253,7 @@ export const products: Product[] = [
     dateAdded: "2026-01-21"
   },
   {
-    id: "B0B8F3H5QJ",
+    id: "B0CN9522GD",
     slug: "allopera-pregnancy-pillow-full-body-57-inch",
     title: "ALLOPERA Pregnancy Pillow, Full Body 57 Inch Maternity Pillow",
     benefitTitle: "Full body support for comfortable sleep during pregnancy",
@@ -1262,9 +1262,9 @@ export const products: Product[] = [
     tags: ["baby", "pregnancy", "maternity", "pillow", "sleep", "comfort"],
     shortDescription: "57-inch full body pregnancy pillow designed to support your entire body during pregnancy. Provides comfort for back, belly, and legs while sleeping.",
     whyWePickedIt: "This full-body pregnancy pillow offers comprehensive support for expectant mothers. The 57-inch length provides support for your head, back, belly, and legs all at once, helping you find comfortable sleeping positions throughout your pregnancy. The soft, hypoallergenic filling ensures comfort and safety.",
-    image: "https://m.media-amazon.com/images/I/81K5vJ8KZ5L._AC_SL1500_.jpg",
-    amazonUrl: "https://www.amazon.com/ALLOPERA-Pregnancy-Pillow-Full-Body/dp/B0B8F3H5QJ?tag=aipicks20-20",
-    asin: "B0B8F3H5QJ",
+    image: "https://m.media-amazon.com/images/I/61cFDkOSnvL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/ALLOPERA-Pregnancy-Maternity-Removable-Washable/dp/B0CN9522GD?tag=aipicks20-20",
+    asin: "B0CN9522GD",
     price: 29.93,
     highlights: [
       "57-inch full body support",
@@ -1297,18 +1297,18 @@ export const products: Product[] = [
     dateAdded: "2026-01-21"
   },
   {
-    id: "B08C7NQ8SJ",
+    id: "B0CKW3K16P",
     slug: "no-touch-forehead-thermometer-adults-kids",
-    title: "No-Touch Forehead Thermometer for Adults and Kids",
+    title: "Digital Thermometer for Adults, Accurate Temperature Reading",
     benefitTitle: "Quick, hygienic temperature readings without contact",
     painPoint: "Need a Fast, Hygienic Way to Check Temperature?",
     room: "baby_care",
     tags: ["baby", "health", "thermometer", "medical", "no-touch", "hygienic"],
     shortDescription: "Infrared no-touch forehead thermometer for quick and hygienic temperature readings. Works for adults, kids, and babies. Features backlit display and fever alarm.",
     whyWePickedIt: "This no-touch thermometer provides quick, accurate temperature readings without physical contact, making it perfect for families with children. The hygienic design reduces the risk of spreading germs, and the large backlit display makes it easy to read results even in the dark. The fever alarm alerts you when temperatures are elevated.",
-    image: "https://m.media-amazon.com/images/I/71Q5VZ8KZ5L._AC_SL1500_.jpg",
-    amazonUrl: "https://www.amazon.com/No-Touch-Forehead-Thermometer-Adults/dp/B08C7NQ8SJ?tag=aipicks20-20",
-    asin: "B08C7NQ8SJ",
+    image: "https://m.media-amazon.com/images/I/61VnIhIQSJL._SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Digital-Thermometer-Adults-Accurate-Temperature/dp/B0CKW3K16P?tag=aipicks20-20",
+    asin: "B0CKW3K16P",
     price: 26.99,
     highlights: [
       "No-touch infrared technology",
@@ -1341,7 +1341,7 @@ export const products: Product[] = [
     dateAdded: "2026-01-21"
   },
   {
-    id: "B0C8K9L2M5",
+    id: "B0CD42KQ3K",
     slug: "montessori-sensory-teething-learning-developmental-toy",
     title: "Montessori Sensory Teething Learning Developmental Toy",
     benefitTitle: "Multi-sensory learning toy that soothes teething",
@@ -1350,9 +1350,9 @@ export const products: Product[] = [
     tags: ["baby", "toys", "teething", "montessori", "sensory", "developmental", "educational"],
     shortDescription: "Montessori-inspired sensory teething toy designed to soothe teething discomfort while promoting developmental learning. Features various textures and shapes for sensory exploration.",
     whyWePickedIt: "This Montessori toy combines teething relief with developmental learning. The various textures and shapes help soothe sore gums while encouraging sensory exploration and fine motor skill development. Made from safe, BPA-free materials, it's perfect for babies exploring the world through touch and taste.",
-    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
-    amazonUrl: "https://www.amazon.com/Montessori-Sensory-Teething-Learning-Developmental/dp/B0C8K9L2M5?tag=aipicks20-20",
-    asin: "B0C8K9L2M5",
+    image: "https://m.media-amazon.com/images/I/61wDKHokleL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Montessori-Sensory-Teething-Learning-Developmental/dp/B0CD42KQ3K?tag=aipicks20-20",
+    asin: "B0CD42KQ3K",
     price: 9.99,
     highlights: [
       "Montessori-inspired design",
@@ -1385,7 +1385,7 @@ export const products: Product[] = [
     dateAdded: "2026-01-21"
   },
   {
-    id: "B08XZQJ9K5",
+    id: "B0BS8Y2FLK",
     slug: "peauamie-hyaluronic-acid-eye-cream",
     title: "PEAUAMIE Hyaluronic Acid Eye Cream",
     benefitTitle: "Hydrating eye cream that reduces fine lines and dark circles",
@@ -1394,9 +1394,9 @@ export const products: Product[] = [
     tags: ["beauty", "skincare", "eye-cream", "hyaluronic-acid", "anti-aging", "moisturizer"],
     shortDescription: "Hyaluronic acid eye cream designed to hydrate, reduce fine lines, and minimize dark circles. Suitable for all skin types. Lightweight, non-greasy formula.",
     whyWePickedIt: "This affordable eye cream delivers powerful hydration with hyaluronic acid, helping to plump the delicate skin around your eyes and reduce the appearance of fine lines. The lightweight formula absorbs quickly without leaving a greasy residue, making it perfect for daily use under makeup or at night.",
-    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
-    amazonUrl: "https://www.amazon.com/PEAUAMIE-Hyaluronic-Acid-Eye-Cream/dp/B08XZQJ9K5?tag=aipicks20-20",
-    asin: "B08XZQJ9K5",
+    image: "https://m.media-amazon.com/images/I/61NA-qyv+DL._SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/PEAUAMIE-Hyaluronic-Puffiness-treatment-products/dp/B0BS8Y2FLK?tag=aipicks20-20",
+    asin: "B0BS8Y2FLK",
     price: 7.99,
     highlights: [
       "Hyaluronic acid formula",
@@ -1429,7 +1429,7 @@ export const products: Product[] = [
     dateAdded: "2026-01-21"
   },
   {
-    id: "B07HM95PP2",
+    id: "B06XDYJ44F",
     slug: "maybelline-fit-me-matte-poreless-liquid-foundation",
     title: "Maybelline Fit Me Matte + Poreless Liquid Foundation Makeup",
     benefitTitle: "Matte finish foundation that minimizes pores",
@@ -1438,9 +1438,9 @@ export const products: Product[] = [
     tags: ["beauty", "makeup", "foundation", "matte", "poreless", "maybelline"],
     shortDescription: "Matte and poreless liquid foundation that provides natural-looking coverage while minimizing the appearance of pores. Available in multiple shades for all skin tones.",
     whyWePickedIt: "This drugstore favorite delivers a flawless matte finish that rivals high-end foundations. The formula minimizes pores and controls shine throughout the day, making it perfect for oily and combination skin. With a wide range of shades, it's easy to find your perfect match at an affordable price.",
-    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
-    amazonUrl: "https://www.amazon.com/Maybelline-Fit-Me-Matte-Poreless-Foundation/dp/B07HM95PP2?tag=aipicks20-20",
-    asin: "B07HM95PP2",
+    image: "https://m.media-amazon.com/images/I/71QsfD+b28L._SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Maybelline-Poreless-Foundation-Porcelain-Oil-Free/dp/B06XDYJ44F?tag=aipicks20-20",
+    asin: "B06XDYJ44F",
     price: 8.98,
     highlights: [
       "Matte finish",
@@ -1473,7 +1473,7 @@ export const products: Product[] = [
     dateAdded: "2026-01-21"
   },
   {
-    id: "B000052YI8",
+    id: "B00DG8EZKO",
     slug: "nivea-intense-healing-body-lotion",
     title: "NIVEA Intense Healing Body Lotion",
     benefitTitle: "Deeply moisturizing lotion for dry, rough skin",
@@ -1482,9 +1482,9 @@ export const products: Product[] = [
     tags: ["beauty", "skincare", "body-lotion", "moisturizer", "dry-skin", "healing"],
     shortDescription: "Intense healing body lotion formulated to provide deep moisture for dry, rough skin. Enriched with provitamin B5 and almond oil for long-lasting hydration.",
     whyWePickedIt: "This trusted body lotion delivers intense hydration for even the driest skin. The formula with provitamin B5 and almond oil helps restore skin's natural moisture barrier, leaving skin soft and smooth. It's fast-absorbing and non-greasy, making it perfect for daily use.",
-    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
-    amazonUrl: "https://www.amazon.com/NIVEA-Intense-Healing-Body-Lotion/dp/B000052YI8?tag=aipicks20-20",
-    asin: "B000052YI8",
+    image: "https://m.media-amazon.com/images/I/61vrTcCHk0L._SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/NIVEA-Intense-Healing-Body-Lotion/dp/B00DG8EZKO?tag=aipicks20-20",
+    asin: "B00DG8EZKO",
     price: 6.73,
     highlights: [
       "Intense hydration formula",
@@ -1517,7 +1517,7 @@ export const products: Product[] = [
     dateAdded: "2026-01-21"
   },
   {
-    id: "B000052YI9",
+    id: "B0067YU9D6",
     slug: "jergens-ultra-healing-dry-skin-lotion",
     title: "Jergens Ultra Healing Dry Skin Lotion",
     benefitTitle: "Ultra-healing formula for severely dry skin",
@@ -1526,9 +1526,9 @@ export const products: Product[] = [
     tags: ["beauty", "skincare", "body-lotion", "moisturizer", "dry-skin", "healing", "ultra-healing"],
     shortDescription: "Ultra-healing dry skin lotion designed to restore and heal severely dry, cracked skin. Formulated with advanced moisturizers for long-lasting relief.",
     whyWePickedIt: "This ultra-healing formula is specifically designed for severely dry and cracked skin. The advanced moisturizing formula provides immediate relief and long-lasting hydration, helping to restore your skin's natural barrier. It's a trusted solution for those dealing with persistent dryness.",
-    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
-    amazonUrl: "https://www.amazon.com/Jergens-Ultra-Healing-Dry-Skin/dp/B000052YI9?tag=aipicks20-20",
-    asin: "B000052YI9",
+    image: "https://m.media-amazon.com/images/I/61uIBE8EckL._SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Jergens-Ultra-Healing-Moisturizer-Ounces/dp/B0067YU9D6?tag=aipicks20-20",
+    asin: "B0067YU9D6",
     price: 7.41,
     highlights: [
       "Ultra-healing formula",
@@ -1561,7 +1561,7 @@ export const products: Product[] = [
     dateAdded: "2026-01-21"
   },
   {
-    id: "B00B3X7PAU",
+    id: "B004B8F8MM",
     slug: "gillette-fusion5-power-razor-blades",
     title: "Gillette Fusion5 Power Razor Blades",
     benefitTitle: "Precision blades for a close, comfortable shave",
@@ -1570,9 +1570,9 @@ export const products: Product[] = [
     tags: ["beauty", "shaving", "razor-blades", "gillette", "men", "grooming"],
     shortDescription: "Gillette Fusion5 Power razor blade refills designed for use with Fusion5 Power razors. Features 5 precision blades and a precision trimmer for a close, comfortable shave.",
     whyWePickedIt: "These premium razor blades deliver an exceptionally close and comfortable shave. The 5-blade design with precision trimmer ensures you can tackle both large areas and hard-to-reach spots. The anti-friction coating reduces irritation, making it perfect for daily shaving.",
-    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
-    amazonUrl: "https://www.amazon.com/Gillette-Fusion5-Power-Razor-Blades/dp/B00B3X7PAU?tag=aipicks20-20",
-    asin: "B00B3X7PAU",
+    image: "https://m.media-amazon.com/images/I/81d84V1GPFL._SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Gillette-Fusion5-Cartridges-Lubrication-Precision/dp/B004B8F8MM?tag=aipicks20-20",
+    asin: "B004B8F8MM",
     price: 33.99,
     highlights: [
       "5 precision blades",
@@ -1604,7 +1604,7 @@ export const products: Product[] = [
     dateAdded: "2026-01-21"
   },
   {
-    id: "B001E5E6F8",
+    id: "B00U2VQZDS",
     slug: "neutrogena-makeup-remover-cleansing-towelettes",
     title: "Neutrogena Makeup Remover Cleansing Towelettes",
     benefitTitle: "Gentle, effective makeup removal in one step",
@@ -1613,9 +1613,9 @@ export const products: Product[] = [
     tags: ["beauty", "skincare", "makeup-remover", "towelettes", "cleansing", "neutrogena"],
     shortDescription: "Pre-moistened cleansing towelettes that remove makeup, dirt, and oil in one step. Gentle formula suitable for sensitive skin. Individually wrapped for convenience.",
     whyWePickedIt: "These convenient towelettes make makeup removal quick and easy. The gentle formula effectively removes even waterproof makeup without harsh rubbing, making it perfect for sensitive skin. Individually wrapped for freshness and convenience, they're ideal for travel or daily use.",
-    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
-    amazonUrl: "https://www.amazon.com/Neutrogena-Makeup-Remover-Cleansing-Towelettes/dp/B001E5E6F8?tag=aipicks20-20",
-    asin: "B001E5E6F8",
+    image: "https://m.media-amazon.com/images/I/71eFYqXRGoL._SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Neutrogena-Cleansing-Towelettes-Waterproof-Alcohol-Free/dp/B00U2VQZDS?tag=aipicks20-20",
+    asin: "B00U2VQZDS",
     price: 9.97,
     highlights: [
       "Removes waterproof makeup",
