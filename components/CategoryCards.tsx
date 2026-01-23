@@ -19,6 +19,8 @@ const roomLabels: Record<Room, string> = {
   balcony: "Balcony",
   patio: "Patio",
   basement: "Basement",
+  baby_care: "Baby Care",
+  beauty_personal_care: "Beauty & Personal Care",
 };
 
 const roomIcons: Record<Room, string> = {
@@ -38,6 +40,8 @@ const roomIcons: Record<Room, string> = {
   balcony: "🌿",
   patio: "☀️",
   basement: "🏠",
+  baby_care: "👶",
+  beauty_personal_care: "💄",
 };
 
 const roomColors: Record<Room, string> = {
@@ -57,6 +61,8 @@ const roomColors: Record<Room, string> = {
   balcony: "from-lime-50 to-green-50 border-lime-200 hover:border-lime-300",
   patio: "from-orange-50 to-amber-50 border-orange-200 hover:border-orange-300",
   basement: "from-indigo-50 to-purple-50 border-indigo-200 hover:border-indigo-300",
+  baby_care: "from-pink-50 to-rose-50 border-pink-200 hover:border-pink-300",
+  beauty_personal_care: "from-purple-50 to-pink-50 border-purple-200 hover:border-purple-300",
 };
 
 export function CategoryCards() {
