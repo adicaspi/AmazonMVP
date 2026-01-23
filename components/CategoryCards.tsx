@@ -41,22 +41,22 @@ const roomIcons: Record<Room, string> = {
 };
 
 const roomColors: Record<Room, string> = {
-  living_room: "from-amber-50 to-orange-50 border-amber-200 hover:border-amber-300",
-  kitchen: "from-emerald-50 to-teal-50 border-emerald-200 hover:border-emerald-300",
-  storage: "from-blue-50 to-indigo-50 border-blue-200 hover:border-blue-300",
-  lighting: "from-yellow-50 to-amber-50 border-yellow-200 hover:border-yellow-300",
-  bedroom: "from-purple-50 to-pink-50 border-purple-200 hover:border-purple-300",
-  bathroom: "from-cyan-50 to-blue-50 border-cyan-200 hover:border-cyan-300",
-  office: "from-slate-50 to-gray-50 border-slate-200 hover:border-slate-300",
-  dining: "from-rose-50 to-pink-50 border-rose-200 hover:border-rose-300",
-  outdoor: "from-green-50 to-emerald-50 border-green-200 hover:border-green-300",
-  entryway: "from-stone-50 to-neutral-50 border-stone-200 hover:border-stone-300",
-  laundry: "from-sky-50 to-blue-50 border-sky-200 hover:border-sky-300",
-  kids_room: "from-fuchsia-50 to-pink-50 border-fuchsia-200 hover:border-fuchsia-300",
-  garage: "from-gray-50 to-slate-50 border-gray-200 hover:border-gray-300",
-  balcony: "from-lime-50 to-green-50 border-lime-200 hover:border-lime-300",
-  patio: "from-orange-50 to-amber-50 border-orange-200 hover:border-orange-300",
-  basement: "from-indigo-50 to-purple-50 border-indigo-200 hover:border-indigo-300",
+  living_room: "from-orange-100 via-amber-100 to-yellow-100 border-orange-300 hover:border-orange-400",
+  kitchen: "from-emerald-100 via-teal-100 to-cyan-100 border-emerald-300 hover:border-emerald-400",
+  storage: "from-blue-100 via-indigo-100 to-purple-100 border-blue-300 hover:border-blue-400",
+  lighting: "from-yellow-100 via-amber-100 to-orange-100 border-yellow-300 hover:border-yellow-400",
+  bedroom: "from-purple-100 via-violet-100 to-pink-100 border-purple-300 hover:border-purple-400",
+  bathroom: "from-cyan-100 via-sky-100 to-blue-100 border-cyan-300 hover:border-cyan-400",
+  office: "from-slate-100 via-gray-100 to-zinc-100 border-slate-300 hover:border-slate-400",
+  dining: "from-rose-100 via-pink-100 to-fuchsia-100 border-rose-300 hover:border-rose-400",
+  outdoor: "from-green-100 via-lime-100 to-emerald-100 border-green-300 hover:border-green-400",
+  entryway: "from-stone-100 via-neutral-100 to-amber-100 border-stone-300 hover:border-stone-400",
+  laundry: "from-sky-100 via-blue-100 to-indigo-100 border-sky-300 hover:border-sky-400",
+  kids_room: "from-fuchsia-100 via-pink-100 to-rose-100 border-fuchsia-300 hover:border-fuchsia-400",
+  garage: "from-gray-100 via-slate-100 to-stone-100 border-gray-300 hover:border-gray-400",
+  balcony: "from-lime-100 via-green-100 to-teal-100 border-lime-300 hover:border-lime-400",
+  patio: "from-orange-100 via-red-100 to-rose-100 border-orange-300 hover:border-orange-400",
+  basement: "from-indigo-100 via-purple-100 to-violet-100 border-indigo-300 hover:border-indigo-400",
 };
 
 export function CategoryCards() {
@@ -85,18 +85,18 @@ export function CategoryCards() {
             <Link
               key={room}
               href={`/products?room=${room}`}
-              className={`group relative border-2 bg-gradient-to-br ${roomColors[room]} p-4 sm:p-5 md:p-6 text-center rounded-lg sm:rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 hover:scale-105 overflow-hidden`}
+              className={`group relative border-2 bg-gradient-to-br ${roomColors[room]} p-4 sm:p-5 md:p-6 text-center rounded-xl sm:rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-110 overflow-hidden`}
             >
-              <div className="absolute inset-0 bg-white/0 group-hover:bg-white/60 transition-colors duration-300" />
+              <div className="absolute inset-0 bg-white/0 group-hover:bg-white/40 transition-colors duration-300" />
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute top-2 right-2 w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
                 <div className="absolute top-2 right-2 w-2 h-2 bg-emerald-500 rounded-full" />
               </div>
               <div className="relative z-10">
-                <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 transform group-hover:scale-125 group-hover:rotate-6 transition-all duration-300">
                   {roomIcons[room]}
                 </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-slate-800 transition-colors">
+                <div className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
                   {roomLabels[room]}
                 </div>
               </div>
