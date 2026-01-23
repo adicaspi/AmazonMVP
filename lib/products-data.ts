@@ -1,7 +1,7 @@
 // lib/products-data.ts
 // Product data structure for the editorial site
 
-export type Room = "living_room" | "kitchen" | "storage" | "lighting" | "bedroom" | "bathroom" | "office" | "dining" | "outdoor" | "entryway" | "laundry" | "kids_room" | "garage" | "balcony" | "patio" | "basement" | "baby_care" | "beauty_personal_care";
+export type Room = "living_room" | "kitchen" | "storage" | "lighting" | "bedroom" | "bathroom" | "office" | "dining" | "outdoor" | "entryway" | "laundry" | "kids_room" | "garage" | "balcony" | "patio" | "basement" | "baby_care" | "beauty-personal-care";
 
 export type ProductStatus = "draft" | "published";
 
@@ -1390,7 +1390,7 @@ export const products: Product[] = [
     title: "PEAUAMIE Hyaluronic Acid Eye Cream",
     benefitTitle: "Hydrating eye cream that reduces fine lines and dark circles",
     painPoint: "Tired of Puffy Eyes and Fine Lines?",
-    room: "beauty_personal_care",
+    room: "beauty-personal-care",
     tags: ["beauty", "skincare", "eye-cream", "hyaluronic-acid", "anti-aging", "moisturizer"],
     shortDescription: "Hyaluronic acid eye cream designed to hydrate, reduce fine lines, and minimize dark circles. Suitable for all skin types. Lightweight, non-greasy formula.",
     whyWePickedIt: "This affordable eye cream delivers powerful hydration with hyaluronic acid, helping to plump the delicate skin around your eyes and reduce the appearance of fine lines. The lightweight formula absorbs quickly without leaving a greasy residue, making it perfect for daily use under makeup or at night.",
@@ -1434,7 +1434,7 @@ export const products: Product[] = [
     title: "Maybelline Fit Me Matte + Poreless Liquid Foundation Makeup",
     benefitTitle: "Matte finish foundation that minimizes pores",
     painPoint: "Want Flawless, Matte Skin Without Visible Pores?",
-    room: "beauty_personal_care",
+    room: "beauty-personal-care",
     tags: ["beauty", "makeup", "foundation", "matte", "poreless", "maybelline"],
     shortDescription: "Matte and poreless liquid foundation that provides natural-looking coverage while minimizing the appearance of pores. Available in multiple shades for all skin tones.",
     whyWePickedIt: "This drugstore favorite delivers a flawless matte finish that rivals high-end foundations. The formula minimizes pores and controls shine throughout the day, making it perfect for oily and combination skin. With a wide range of shades, it's easy to find your perfect match at an affordable price.",
@@ -1478,7 +1478,7 @@ export const products: Product[] = [
     title: "NIVEA Intense Healing Body Lotion",
     benefitTitle: "Deeply moisturizing lotion for dry, rough skin",
     painPoint: "Struggling with Dry, Rough Skin?",
-    room: "beauty_personal_care",
+    room: "beauty-personal-care",
     tags: ["beauty", "skincare", "body-lotion", "moisturizer", "dry-skin", "healing"],
     shortDescription: "Intense healing body lotion formulated to provide deep moisture for dry, rough skin. Enriched with provitamin B5 and almond oil for long-lasting hydration.",
     whyWePickedIt: "This trusted body lotion delivers intense hydration for even the driest skin. The formula with provitamin B5 and almond oil helps restore skin's natural moisture barrier, leaving skin soft and smooth. It's fast-absorbing and non-greasy, making it perfect for daily use.",
@@ -1522,7 +1522,7 @@ export const products: Product[] = [
     title: "Jergens Ultra Healing Dry Skin Lotion",
     benefitTitle: "Ultra-healing formula for severely dry skin",
     painPoint: "Need Relief for Severely Dry, Cracked Skin?",
-    room: "beauty_personal_care",
+    room: "beauty-personal-care",
     tags: ["beauty", "skincare", "body-lotion", "moisturizer", "dry-skin", "healing", "ultra-healing"],
     shortDescription: "Ultra-healing dry skin lotion designed to restore and heal severely dry, cracked skin. Formulated with advanced moisturizers for long-lasting relief.",
     whyWePickedIt: "This ultra-healing formula is specifically designed for severely dry and cracked skin. The advanced moisturizing formula provides immediate relief and long-lasting hydration, helping to restore your skin's natural barrier. It's a trusted solution for those dealing with persistent dryness.",
@@ -1566,7 +1566,7 @@ export const products: Product[] = [
     title: "Gillette Fusion5 Power Razor Blades",
     benefitTitle: "Precision blades for a close, comfortable shave",
     painPoint: "Want a Closer, More Comfortable Shave?",
-    room: "beauty_personal_care",
+    room: "beauty-personal-care",
     tags: ["beauty", "shaving", "razor-blades", "gillette", "men", "grooming"],
     shortDescription: "Gillette Fusion5 Power razor blade refills designed for use with Fusion5 Power razors. Features 5 precision blades and a precision trimmer for a close, comfortable shave.",
     whyWePickedIt: "These premium razor blades deliver an exceptionally close and comfortable shave. The 5-blade design with precision trimmer ensures you can tackle both large areas and hard-to-reach spots. The anti-friction coating reduces irritation, making it perfect for daily shaving.",
@@ -1609,7 +1609,7 @@ export const products: Product[] = [
     title: "Neutrogena Makeup Remover Cleansing Towelettes",
     benefitTitle: "Gentle, effective makeup removal in one step",
     painPoint: "Tired of Multiple Steps to Remove Makeup?",
-    room: "beauty_personal_care",
+    room: "beauty-personal-care",
     tags: ["beauty", "skincare", "makeup-remover", "towelettes", "cleansing", "neutrogena"],
     shortDescription: "Pre-moistened cleansing towelettes that remove makeup, dirt, and oil in one step. Gentle formula suitable for sensitive skin. Individually wrapped for convenience.",
     whyWePickedIt: "These convenient towelettes make makeup removal quick and easy. The gentle formula effectively removes even waterproof makeup without harsh rubbing, making it perfect for sensitive skin. Individually wrapped for freshness and convenience, they're ideal for travel or daily use.",
