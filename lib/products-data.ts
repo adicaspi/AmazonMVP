@@ -269,7 +269,7 @@ export const products: Product[] = [
       "Check included pieces before purchasing"
     ],
     specs: {
-      "Price": "$24.99",
+      "Price": "$44.99",
       "Pieces": "8",
       "Coating": "Non-stick",
       "Target User": "People looking for a complete cookware set for everyday cooking"
