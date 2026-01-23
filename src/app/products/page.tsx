@@ -135,7 +135,7 @@ export default function ProductsPage() {
             >
               <option value="all">All Rooms</option>
               {rooms.map(room => {
-                let displayName = room;
+                let displayName: string;
                 if (room === "beauty-personal-care") {
                   displayName = "Beauty & Personal Care";
                 } else {
