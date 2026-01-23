@@ -1,7 +1,19 @@
 // components/AffiliateDisclosure.tsx
-// Amazon Associates disclosure component - Required on all pages
+// Amazon Associates disclosure component - Required on all pages except product pages
+"use client";
+
+import { usePathname } from "next/navigation";
 
 export function AffiliateDisclosure() {
+  const pathname = usePathname();
+  
+  // Hide disclosure on product pages (they have their own disclosure)
+  const isProductPage = pathname?.startsWith("/products/") || pathname?.startsWith("/p/");
+  
+  if (isProductPage) {
+    return null;
+  }
+
   return (
     <div className="bg-slate-50 border-t border-slate-200 py-4 px-4">
       <div className="max-w-7xl mx-auto text-center">

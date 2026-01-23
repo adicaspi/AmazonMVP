@@ -1,7 +1,7 @@
 // lib/products-data.ts
 // Product data structure for the editorial site
 
-export type Room = "living_room" | "kitchen" | "storage" | "lighting" | "bedroom" | "bathroom" | "office" | "dining" | "outdoor" | "entryway" | "laundry" | "kids_room" | "garage" | "balcony" | "patio" | "basement";
+export type Room = "living_room" | "kitchen" | "storage" | "lighting" | "bedroom" | "bathroom" | "office" | "dining" | "outdoor" | "entryway" | "laundry" | "kids_room" | "garage" | "balcony" | "patio" | "basement" | "baby_care" | "beauty_personal_care";
 
 export type ProductStatus = "draft" | "published";
 
@@ -83,7 +83,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/811uMdiQm7L._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Ukeetap-Multi-Purpose-Pull-Out-Organizers-Bathroom/dp/B0DNTQ2YNT?tag=aipicks20-20",
     asin: "B0DNTQ2YNT",
-    price: 29.99,
+    price: 16.99,
     highlights: [
       "Pull-out sliding mechanism for easy access",
       "Multi-purpose design for sink or bathroom",
@@ -103,7 +103,7 @@ export const products: Product[] = [
       "May need adjustment for proper fit"
     ],
     specs: {
-      "Price": "$29.99",
+      "Price": "$16.99",
       "Type": "Pull-out organizer",
       "Use": "Under-sink storage, bathroom cabinets",
       "Features": "Sliding mechanism, durable construction",
@@ -251,7 +251,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/71mDTOYtDSL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B074817DK1?tag=aipicks20-20",
     asin: "B074817DK1",
-    price: 24.99,
+    price: 44.99,
     highlights: [
       "8-piece cookware set",
       "Non-stick coating",
@@ -269,7 +269,7 @@ export const products: Product[] = [
       "Check included pieces before purchasing"
     ],
     specs: {
-      "Price": "$24.99",
+      "Price": "$44.99",
       "Pieces": "8",
       "Coating": "Non-stick",
       "Target User": "People looking for a complete cookware set for everyday cooking"
@@ -334,7 +334,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/81vcpoC1YwL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B0DT5V24MS?tag=aipicks20-20",
     asin: "B0DT5V24MS",
-    price: 25.58,
+    price: 28.99,
     highlights: [
       "4.4 out of 5 stars (6,696 reviews)",
       "Set of 3 shelves",
@@ -357,7 +357,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.4 out of 5 stars",
       "Reviews": "6,696",
-      "Price": "$25.58",
+      "Price": "$28.99",
       "Dimensions": "6.7\"D x 15.7\"W x 1.2\"H each",
       "Weight Capacity": "22 lbs per shelf",
       "Material": "Engineered wood (MDF)",
@@ -380,7 +380,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61+heXD7SeL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B0F8HFLNQG?tag=aipicks20-20",
     asin: "B0F8HFLNQG",
-    price: 5.98,
+    price: 9.99,
     highlights: [
       "4.7 out of 5 stars (25,840 reviews)",
       "Expandable from 8.5\" to 14\" wide",
@@ -390,7 +390,7 @@ export const products: Product[] = [
     ],
     pros: [
       "Adjustable width fits various drawer sizes",
-      "Excellent value under $6",
+      "Excellent value",
       "BPA-free and food-safe",
       "Easy to clean",
       "Prevents partition displacement with buckle design"
@@ -402,7 +402,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.7 out of 5 stars",
       "Reviews": "25,840",
-      "Price": "$5.98 (Prime price)",
+      "Price": "$9.99",
       "Dimensions": "8.5-14\"W x 12\"D x 1.5\"H",
       "Compartments": "7",
       "Material": "BPA-free PP plastic (95% recycled)",
@@ -424,7 +424,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/71A1QQMJjgL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B0CXLK9PJ9?tag=aipicks20-20",
     asin: "B0CXLK9PJ9",
-    price: 24.99,
+    price: 44.79,
     highlights: [
       "Stackable design saves space",
       "Multiple compartments",
@@ -442,7 +442,7 @@ export const products: Product[] = [
       "Check dimensions before purchasing"
     ],
     specs: {
-      "Price": "$24.99",
+      "Price": "$44.79",
       "Design": "Stackable",
       "Use": "Office supplies, craft materials, home organization",
       "Target User": "People looking to organize supplies in office or home spaces"
@@ -463,7 +463,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61AnB4vPuAL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B07XM8Y26Y?tag=aipicks20-20",
     asin: "B07XM8Y26Y",
-    price: 19.09,
+    price: 20.55,
     highlights: [
       "4.4 out of 5 stars (11,969 reviews)",
       "Set of 2 shelves",
@@ -486,7 +486,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.4 out of 5 stars",
       "Reviews": "11,969",
-      "Price": "$19.09",
+      "Price": "$20.55",
       "Dimensions": "12.5\"L x 8\"D x 4.5\"H each",
       "Material": "Alloy steel with plastic coating",
       "Assembly": "Tool-free",
@@ -508,7 +508,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/71eiII6MS-L._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B06X9NQ8GX?tag=aipicks20-20",
     asin: "B06X9NQ8GX",
-    price: 6.81,
+    price: 7.99,
     highlights: [
       "4.7 out of 5 stars (111,028 reviews)",
       "#1 Best Seller in Digital Kitchen Scales",
@@ -530,7 +530,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.7 out of 5 stars",
       "Reviews": "111,028",
-      "Price": "$6.81",
+      "Price": "$7.99",
       "Weight Capacity": "Up to 11 lbs (5000g)",
       "Minimum Weight": "2 grams",
       "Display": "LCD",
@@ -554,7 +554,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61yVDDy1LRL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B09V5G395G?tag=aipicks20-20",
     asin: "B09V5G395G",
-    price: 15.56,
+    price: 16.19,
     highlights: [
       "4.7 out of 5 stars (116,129 reviews)",
       "#1 Best Seller in Open Home Storage Bins",
@@ -576,7 +576,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.7 out of 5 stars",
       "Reviews": "116,129",
-      "Price": "$15.56",
+      "Price": "$16.19",
       "Dimensions": "13\"L x 13\"W x 13\"H each",
       "Material": "Fabric",
       "Quantity": "Pack of 6",
@@ -599,7 +599,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61hEtbJv3YL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B07S6F6LHQ?tag=aipicks20-20",
     asin: "B07S6F6LHQ",
-    price: 23.99,
+    price: 26.99,
     highlights: [
       "4.7 out of 5 stars (63,208 reviews)",
       "22lb (10kg) capacity",
@@ -622,7 +622,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.7 out of 5 stars",
       "Reviews": "63,208",
-      "Price": "$23.99",
+      "Price": "$26.99",
       "Weight Capacity": "Up to 22 lbs (10kg)",
       "Minimum Weight": "3g (0.1oz)",
       "Platform Size": "9\" x 6.3\"",
@@ -648,7 +648,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/71EgKAe11PL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Wooden-Chunky-Puzzle/dp/B000EOEAW6?tag=aipicks20-20",
     asin: "B000EOEAW6",
-    price: 8.99,
+    price: 14.63,
     highlights: [
       "8 chunky wooden puzzle pieces",
       "FSC-certified sustainable wood",
@@ -673,6 +673,7 @@ export const products: Product[] = [
       "Pieces": "8 wooden pieces",
       "Material": "FSC-certified wood",
       "Dimensions": "11.75\" x 8.75\" x 1.25\"",
+      "Price": "$14.63",
       "Target User": "Toddlers and preschoolers learning motor skills and animal recognition"
     },
     status: "published",
@@ -691,7 +692,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61NN1xU+ZML._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Stainless-Pretend-Kitchen/dp/B00CPHX6YI?tag=aipicks20-20",
     asin: "B00CPHX6YI",
-    price: 24.99,
+    price: 28.99,
     highlights: [
       "8-piece stainless steel set",
       "Realistic metal construction",
@@ -715,6 +716,7 @@ export const products: Product[] = [
       "Age Range": "3+ years",
       "Pieces": "8 pieces (pots, pans, lids)",
       "Material": "Stainless steel",
+      "Price": "$28.99",
       "Set Includes": "2 pots with lids, 1 colander, 1 pan, 1 lid",
       "Target User": "Children who enjoy pretend cooking and kitchen play"
     },
@@ -734,7 +736,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61DJztu5EzL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Serve-Cooking-Utensils/dp/B00MYL7L9G?tag=aipicks20-20",
     asin: "B00MYL7L9G",
-    price: 29.99,
+    price: 15.19,
     highlights: [
       "61-piece wooden play food set",
       "Self-stick tabs for slicing action",
@@ -758,6 +760,7 @@ export const products: Product[] = [
       "Age Range": "3+ years",
       "Pieces": "61 total pieces",
       "Material": "Wood",
+      "Price": "$15.19",
       "Includes": "Play food, wooden knife, tongs, plates, cups, utensils, storage crate",
       "Target User": "Children who love pretend cooking and serving food"
     },
@@ -777,7 +780,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/81RH59GYNdL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Condiments-Set-pcs/dp/B011PZUPYO?tag=aipicks20-20",
     asin: "B011PZUPYO",
-    price: 14.99,
+    price: 11.38,
     highlights: [
       "Wooden condiment bottles and shakers",
       "Realistic details and colors",
@@ -800,6 +803,7 @@ export const products: Product[] = [
       "Brand": "Melissa & Doug",
       "Age Range": "3+ years",
       "Material": "Wood",
+      "Price": "$11.38",
       "Includes": "Ketchup, mustard, salt, pepper, and condiment holders",
       "Target User": "Children with play kitchens who want to add realistic details"
     },
@@ -819,7 +823,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61M1NFAceNL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Favorite-Condiments-Play/dp/B072M2PGX9?tag=aipicks20-20",
     asin: "B072M2PGX9",
-    price: 16.99,
+    price: 16.79,
     highlights: [
       "Wooden condiment play set",
       "Realistic painted details",
@@ -842,6 +846,7 @@ export const products: Product[] = [
       "Brand": "Melissa & Doug",
       "Age Range": "3+ years",
       "Material": "Wood with painted details",
+      "Price": "$16.79",
       "Target User": "Children who enjoy detailed pretend play cooking and serving"
     },
     status: "published",
@@ -860,7 +865,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61Z61ZcNvdL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Tortilla-Sliceable-Multicolor/dp/B07HM95PP1?tag=aipicks20-20",
     asin: "B07HM95PP1",
-    price: 19.99,
+    price: 19.59,
     highlights: [
       "Sliceable wooden play food",
       "Includes tacos, tortillas, and toppings",
@@ -883,6 +888,7 @@ export const products: Product[] = [
       "Brand": "Melissa & Doug",
       "Age Range": "3+ years",
       "Material": "Wood",
+      "Price": "$19.59",
       "Includes": "Tortillas, taco shells, toppings, wooden knife",
       "Features": "Sliceable pieces with self-stick tabs",
       "Target User": "Children who love interactive pretend cooking and food play"
@@ -903,7 +909,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61i7kSAB+AL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Pretend-Durable-Construction/dp/B01M0DQQHQ?tag=aipicks20-20",
     asin: "B01M0DQQHQ",
-    price: 19.99,
+    price: 17.49,
     highlights: [
       "24-piece wooden play set",
       "Mix-and-match ice cream creations",
@@ -927,6 +933,7 @@ export const products: Product[] = [
       "Age Range": "3+ years",
       "Pieces": "24 pieces total",
       "Material": "Wood",
+      "Price": "$17.49",
       "Includes": "6 cookies, 3 ice cream fillings, 6 ice pop halves, 2 Italian ice cups, spoons, menu card, storage tray",
       "Target User": "Children who love pretend play and ice cream"
     },
@@ -946,7 +953,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/81Ei9XuHNrL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Slice-Wooden-Pieces/dp/B06WP15J5R?tag=aipicks20-20",
     asin: "B06WP15J5R",
-    price: 16.99,
+    price: 23.49,
     highlights: [
       "Sliceable wooden cookie dough",
       "Multiple toppings and decorations",
@@ -969,6 +976,7 @@ export const products: Product[] = [
       "Brand": "Melissa & Doug",
       "Age Range": "3+ years",
       "Material": "Wood",
+      "Price": "$23.49",
       "Features": "Sliceable pieces with self-stick tabs",
       "Includes": "Cookie dough, toppings, wooden knife, baking accessories",
       "Target User": "Children who enjoy pretend baking and cooking"
@@ -989,7 +997,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/81lZk2wW7XL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/SIELEVIN-Colorful-Bracelets-Birthday-Christmas/dp/B0DCZ8S2X5?tag=aipicks20-20",
     asin: "B0DCZ8S2X5",
-    price: 12.99,
+    price: 9.98,
     highlights: [
       "Colorful pretend jewelry set",
       "Multiple bracelets and accessories",
@@ -1012,6 +1020,7 @@ export const products: Product[] = [
       "Brand": "SIELEVIN",
       "Age Range": "3+ years",
       "Material": "Plastic",
+      "Price": "$9.98",
       "Use": "Dress-up, pretend play, party favors",
       "Target User": "Girls who love dress-up and princess play"
     },
@@ -1031,7 +1040,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/7197AaQCT7L._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/ReliBeauty-Elastic-Backless-Princess-Accessories/dp/B0811B2GF5?tag=aipicks20-20",
     asin: "B0811B2GF5",
-    price: 18.99,
+    price: 29.99,
     highlights: [
       "Elastic bodice for comfortable fit",
       "Beautiful princess design",
@@ -1054,6 +1063,7 @@ export const products: Product[] = [
       "Brand": "ReliBeauty",
       "Age Range": "3-10 years",
       "Material": "Polyester",
+      "Price": "$29.99",
       "Design": "Elastic backless bodice",
       "Use": "Dress-up, parties, Halloween, photo shoots",
       "Target User": "Girls who love princess play and costumes"
@@ -1074,7 +1084,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/91H57JMpcyL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Princess-Jewelry-Boutique-Costumes-Accessories/dp/B09KXYLWG4?tag=aipicks20-20",
     asin: "B09KXYLWG4",
-    price: 24.99,
+    price: 28.49,
     highlights: [
       "Complete boutique play set",
       "Multiple jewelry pieces",
@@ -1096,9 +1106,542 @@ export const products: Product[] = [
     specs: {
       "Brand": "Princess Jewelry Boutique",
       "Age Range": "3+ years",
+      "Price": "$28.49",
       "Includes": "Jewelry, accessories, dress-up items",
       "Use": "Pretend play, dress-up, boutique role-play",
       "Target User": "Children who love princess play and fashion"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B09DNBZJKS",
+    slug: "nuk-learner-cup-10oz-2-pack",
+    title: "NUK Learner Cup, 10 oz, 2 Pack, 8+ Months –BPA Free, Spill Proof Sippy Cup",
+    benefitTitle: "Perfect transition cup from bottle to sippy cup",
+    painPoint: "Struggling to Transition Your Baby from Bottle to Cup?",
+    room: "baby_care",
+    tags: ["baby", "feeding", "sippy-cup", "transition", "bpa-free", "spill-proof"],
+    shortDescription: "10 oz spill-proof sippy cup designed to help babies transition from bottle to cup. Features soft spout, removable handles, and BPA-free construction. Recommended for ages 8 months and up.",
+    whyWePickedIt: "With 46,734 reviews and a 4.8-star rating, this is Amazon's Choice for toddler cups. The soft spout is gentle on gums while teaching babies to drink from a spout, and the removable handles grow with your child. The spill-proof design and easy cleaning make it a parent favorite.",
+    image: "https://m.media-amazon.com/images/I/711EPPijEkL._SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/NUK-Learner-Cup-Pack-Months%EF%BB%BF/dp/B09DNBZJKS?tag=aipicks20-20",
+    asin: "B09DNBZJKS",
+    price: 12.99,
+    highlights: [
+      "4.8 out of 5 stars (46,734 reviews)",
+      "Amazon's Choice for toddler cups",
+      "Spill-proof soft spout design",
+      "Removable handles for growing babies",
+      "BPA-free and dishwasher safe"
+    ],
+    pros: [
+      "Excellent for bottle-to-cup transition",
+      "Truly spill-proof - no leaks",
+      "Soft spout gentle on gums",
+      "Easy to clean and disassemble",
+      "Handles can be removed as baby grows"
+    ],
+    cons: [
+      "Some parents may need to adjust flow by cutting spout",
+      "May be too slow flow for some babies"
+    ],
+    specs: {
+      "Rating": "4.8 out of 5 stars",
+      "Reviews": "46,734",
+      "Price": "$12.99",
+      "Capacity": "10 oz (2 pack)",
+      "Age Range": "8+ months",
+      "Material": "BPA-free plastic and silicone",
+      "Features": "Spill-proof, removable handles, air vent, dishwasher safe",
+      "Target User": "Parents transitioning babies from bottle to sippy cup"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B078SX8N7Y",
+    slug: "pampers-disposable-training-diaper-2t-3t",
+    title: "Pampers Disposable Training Diaper, 2T-3T",
+    benefitTitle: "Reliable training diapers for potty training success",
+    painPoint: "Ready to Start Potty Training But Need Extra Protection?",
+    room: "baby_care",
+    tags: ["baby", "diapers", "potty-training", "training", "disposable"],
+    shortDescription: "Disposable training diapers designed for toddlers during potty training. Provides protection while allowing independence. Size 2T-3T.",
+    whyWePickedIt: "Pampers training diapers offer the perfect balance of protection and independence during potty training. They're designed to help toddlers feel wetness while still providing reliable protection for accidents. Trusted by parents for decades of potty training success.",
+    image: "https://m.media-amazon.com/images/I/61-RS6Bk+cL._AC_SL1000_.jpg",
+    amazonUrl: "https://www.amazon.com/Pampers-Disposable-Training-Diaper-2T-3T/dp/B078SX8N7Y?tag=aipicks20-20",
+    asin: "B078SX8N7Y",
+    price: 24.99,
+    highlights: [
+      "Designed for potty training toddlers",
+      "Size 2T-3T",
+      "Allows toddlers to feel wetness",
+      "Reliable protection for accidents",
+      "Trusted Pampers quality"
+    ],
+    pros: [
+      "Helps toddlers learn to recognize wetness",
+      "Reliable protection during training",
+      "Easy to pull up and down",
+      "Comfortable fit for active toddlers",
+      "Trusted brand with proven results"
+    ],
+    cons: [
+      "Disposable - not environmentally friendly",
+      "May need to try different sizes for best fit"
+    ],
+    specs: {
+      "Brand": "Pampers",
+      "Size": "2T-3T",
+      "Type": "Training diapers",
+      "Price": "$24.99",
+      "Use": "Potty training toddlers",
+      "Features": "Wetness indicator, easy pull-up design",
+      "Target User": "Parents potty training toddlers ages 2-3"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B0C54CC37M",
+    slug: "dr-browns-milestones-training-weighted-straw-cup",
+    title: "Dr. Brown's Milestones Baby's First Straw Cup, Training Cup with Weighted Straw, 9 oz",
+    benefitTitle: "Weighted straw cup for easy drinking at any angle",
+    painPoint: "Want Your Baby to Drink Independently from Any Angle?",
+    room: "baby_care",
+    tags: ["baby", "feeding", "straw-cup", "weighted-straw", "training", "bpa-free"],
+    shortDescription: "9 oz training straw cup with weighted straw that allows babies to drink from any angle. BPA-free, suitable for ages 6 months and up. 2-pack available.",
+    whyWePickedIt: "With 12,045 reviews and a 4.3-star rating, this weighted straw cup is perfect for babies learning to drink independently. The weighted straw allows drinking from any angle, making it ideal for car seats, strollers, and playtime. The soft silicone straw is gentle on gums and encourages proper drinking skills.",
+    image: "https://m.media-amazon.com/images/I/512wBmp8aiL._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Dr-Browns-Milestones-Training-Weighted/dp/B0C54CC37M?tag=aipicks20-20",
+    asin: "B0C54CC37M",
+    price: 14.99,
+    highlights: [
+      "4.3 out of 5 stars (12,045 reviews)",
+      "Weighted straw works at any angle",
+      "9 oz capacity",
+      "BPA-free construction",
+      "Suitable for ages 6 months+"
+    ],
+    pros: [
+      "Weighted straw allows drinking from any angle",
+      "Perfect for car seats and strollers",
+      "Soft silicone straw gentle on gums",
+      "Easy to clean",
+      "Encourages independent drinking"
+    ],
+    cons: [
+      "Straw may need occasional replacement",
+      "Some babies may need time to learn straw drinking"
+    ],
+    specs: {
+      "Rating": "4.3 out of 5 stars",
+      "Reviews": "12,045",
+      "Price": "$14.99",
+      "Capacity": "9 oz (270 mL)",
+      "Age Range": "6 months+",
+      "Material": "BPA-free plastic with silicone straw",
+      "Features": "Weighted straw, leak-proof, dishwasher safe",
+      "Target User": "Parents teaching babies to drink from straw cups"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B0B8F3H5QJ",
+    slug: "allopera-pregnancy-pillow-full-body-57-inch",
+    title: "ALLOPERA Pregnancy Pillow, Full Body 57 Inch Maternity Pillow",
+    benefitTitle: "Full body support for comfortable sleep during pregnancy",
+    painPoint: "Struggling to Sleep Comfortably During Pregnancy?",
+    room: "baby_care",
+    tags: ["baby", "pregnancy", "maternity", "pillow", "sleep", "comfort"],
+    shortDescription: "57-inch full body pregnancy pillow designed to support your entire body during pregnancy. Provides comfort for back, belly, and legs while sleeping.",
+    whyWePickedIt: "This full-body pregnancy pillow offers comprehensive support for expectant mothers. The 57-inch length provides support for your head, back, belly, and legs all at once, helping you find comfortable sleeping positions throughout your pregnancy. The soft, hypoallergenic filling ensures comfort and safety.",
+    image: "https://m.media-amazon.com/images/I/81K5vJ8KZ5L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/ALLOPERA-Pregnancy-Pillow-Full-Body/dp/B0B8F3H5QJ?tag=aipicks20-20",
+    asin: "B0B8F3H5QJ",
+    price: 29.93,
+    highlights: [
+      "57-inch full body support",
+      "Hypoallergenic filling",
+      "Machine washable cover",
+      "Supports back, belly, and legs",
+      "Perfect for all trimesters"
+    ],
+    pros: [
+      "Comprehensive full-body support",
+      "Helps reduce back and hip pain",
+      "Versatile positioning options",
+      "Soft and comfortable",
+      "Easy to clean"
+    ],
+    cons: [
+      "Takes up significant bed space",
+      "May be too large for smaller beds"
+    ],
+    specs: {
+      "Price": "$29.93",
+      "Length": "57 inches",
+      "Material": "Hypoallergenic filling with removable cover",
+      "Care": "Machine washable",
+      "Use": "Pregnancy sleep support",
+      "Target User": "Expectant mothers seeking comfortable sleep during pregnancy"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B08C7NQ8SJ",
+    slug: "no-touch-forehead-thermometer-adults-kids",
+    title: "No-Touch Forehead Thermometer for Adults and Kids",
+    benefitTitle: "Quick, hygienic temperature readings without contact",
+    painPoint: "Need a Fast, Hygienic Way to Check Temperature?",
+    room: "baby_care",
+    tags: ["baby", "health", "thermometer", "medical", "no-touch", "hygienic"],
+    shortDescription: "Infrared no-touch forehead thermometer for quick and hygienic temperature readings. Works for adults, kids, and babies. Features backlit display and fever alarm.",
+    whyWePickedIt: "This no-touch thermometer provides quick, accurate temperature readings without physical contact, making it perfect for families with children. The hygienic design reduces the risk of spreading germs, and the large backlit display makes it easy to read results even in the dark. The fever alarm alerts you when temperatures are elevated.",
+    image: "https://m.media-amazon.com/images/I/71Q5VZ8KZ5L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/No-Touch-Forehead-Thermometer-Adults/dp/B08C7NQ8SJ?tag=aipicks20-20",
+    asin: "B08C7NQ8SJ",
+    price: 26.99,
+    highlights: [
+      "No-touch infrared technology",
+      "Works for adults, kids, and babies",
+      "Backlit LCD display",
+      "Fever alarm function",
+      "1-second reading time"
+    ],
+    pros: [
+      "Hygienic - no physical contact needed",
+      "Very fast readings",
+      "Easy to use",
+      "Suitable for all ages",
+      "Memory function stores last reading"
+    ],
+    cons: [
+      "Requires proper positioning for accuracy",
+      "May need calibration for best results"
+    ],
+    specs: {
+      "Price": "$26.99",
+      "Type": "Infrared no-touch thermometer",
+      "Reading Time": "1 second",
+      "Display": "Backlit LCD",
+      "Features": "Fever alarm, memory function",
+      "Target User": "Families needing quick, hygienic temperature checks"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B0C8K9L2M5",
+    slug: "montessori-sensory-teething-learning-developmental-toy",
+    title: "Montessori Sensory Teething Learning Developmental Toy",
+    benefitTitle: "Multi-sensory learning toy that soothes teething",
+    painPoint: "Looking for a Safe, Educational Toy for Your Teething Baby?",
+    room: "baby_care",
+    tags: ["baby", "toys", "teething", "montessori", "sensory", "developmental", "educational"],
+    shortDescription: "Montessori-inspired sensory teething toy designed to soothe teething discomfort while promoting developmental learning. Features various textures and shapes for sensory exploration.",
+    whyWePickedIt: "This Montessori toy combines teething relief with developmental learning. The various textures and shapes help soothe sore gums while encouraging sensory exploration and fine motor skill development. Made from safe, BPA-free materials, it's perfect for babies exploring the world through touch and taste.",
+    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Montessori-Sensory-Teething-Learning-Developmental/dp/B0C8K9L2M5?tag=aipicks20-20",
+    asin: "B0C8K9L2M5",
+    price: 9.99,
+    highlights: [
+      "Montessori-inspired design",
+      "Multiple textures for teething relief",
+      "BPA-free and safe materials",
+      "Promotes sensory development",
+      "Easy to clean"
+    ],
+    pros: [
+      "Dual purpose - teething and learning",
+      "Safe for babies to chew",
+      "Encourages sensory exploration",
+      "Affordable price",
+      "Developmental benefits"
+    ],
+    cons: [
+      "Small pieces - supervision required",
+      "May need regular cleaning"
+    ],
+    specs: {
+      "Price": "$9.99",
+      "Material": "BPA-free silicone",
+      "Age Range": "3+ months",
+      "Features": "Multiple textures, teething relief, sensory development",
+      "Care": "Dishwasher safe",
+      "Target User": "Parents seeking safe, educational teething toys"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B08XZQJ9K5",
+    slug: "peauamie-hyaluronic-acid-eye-cream",
+    title: "PEAUAMIE Hyaluronic Acid Eye Cream",
+    benefitTitle: "Hydrating eye cream that reduces fine lines and dark circles",
+    painPoint: "Tired of Puffy Eyes and Fine Lines?",
+    room: "beauty_personal_care",
+    tags: ["beauty", "skincare", "eye-cream", "hyaluronic-acid", "anti-aging", "moisturizer"],
+    shortDescription: "Hyaluronic acid eye cream designed to hydrate, reduce fine lines, and minimize dark circles. Suitable for all skin types. Lightweight, non-greasy formula.",
+    whyWePickedIt: "This affordable eye cream delivers powerful hydration with hyaluronic acid, helping to plump the delicate skin around your eyes and reduce the appearance of fine lines. The lightweight formula absorbs quickly without leaving a greasy residue, making it perfect for daily use under makeup or at night.",
+    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/PEAUAMIE-Hyaluronic-Acid-Eye-Cream/dp/B08XZQJ9K5?tag=aipicks20-20",
+    asin: "B08XZQJ9K5",
+    price: 7.99,
+    highlights: [
+      "Hyaluronic acid formula",
+      "Reduces fine lines and wrinkles",
+      "Minimizes dark circles",
+      "Suitable for all skin types",
+      "Non-greasy, fast-absorbing"
+    ],
+    pros: [
+      "Excellent value for money",
+      "Lightweight formula",
+      "Works well under makeup",
+      "Hydrating and moisturizing",
+      "Gentle on sensitive skin"
+    ],
+    cons: [
+      "Results may vary by individual",
+      "May need consistent use for best results"
+    ],
+    specs: {
+      "Price": "$7.99",
+      "Key Ingredient": "Hyaluronic Acid",
+      "Size": "0.5 oz / 15ml",
+      "Skin Type": "All skin types",
+      "Use": "Daily eye care",
+      "Target User": "People looking for affordable, effective eye cream"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B07HM95PP2",
+    slug: "maybelline-fit-me-matte-poreless-liquid-foundation",
+    title: "Maybelline Fit Me Matte + Poreless Liquid Foundation Makeup",
+    benefitTitle: "Matte finish foundation that minimizes pores",
+    painPoint: "Want Flawless, Matte Skin Without Visible Pores?",
+    room: "beauty_personal_care",
+    tags: ["beauty", "makeup", "foundation", "matte", "poreless", "maybelline"],
+    shortDescription: "Matte and poreless liquid foundation that provides natural-looking coverage while minimizing the appearance of pores. Available in multiple shades for all skin tones.",
+    whyWePickedIt: "This drugstore favorite delivers a flawless matte finish that rivals high-end foundations. The formula minimizes pores and controls shine throughout the day, making it perfect for oily and combination skin. With a wide range of shades, it's easy to find your perfect match at an affordable price.",
+    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Maybelline-Fit-Me-Matte-Poreless-Foundation/dp/B07HM95PP2?tag=aipicks20-20",
+    asin: "B07HM95PP2",
+    price: 8.98,
+    highlights: [
+      "Matte finish",
+      "Pore-minimizing formula",
+      "Natural-looking coverage",
+      "Wide shade range",
+      "Long-lasting wear"
+    ],
+    pros: [
+      "Affordable drugstore option",
+      "Great for oily skin",
+      "Buildable coverage",
+      "Blends easily",
+      "Widely available"
+    ],
+    cons: [
+      "May be too matte for dry skin",
+      "Shade matching may require testing"
+    ],
+    specs: {
+      "Price": "$8.98",
+      "Finish": "Matte",
+      "Coverage": "Medium, buildable",
+      "Skin Type": "Oily, combination",
+      "Shades": "Multiple shades available",
+      "Target User": "People seeking affordable matte foundation"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B000052YI8",
+    slug: "nivea-intense-healing-body-lotion",
+    title: "NIVEA Intense Healing Body Lotion",
+    benefitTitle: "Deeply moisturizing lotion for dry, rough skin",
+    painPoint: "Struggling with Dry, Rough Skin?",
+    room: "beauty_personal_care",
+    tags: ["beauty", "skincare", "body-lotion", "moisturizer", "dry-skin", "healing"],
+    shortDescription: "Intense healing body lotion formulated to provide deep moisture for dry, rough skin. Enriched with provitamin B5 and almond oil for long-lasting hydration.",
+    whyWePickedIt: "This trusted body lotion delivers intense hydration for even the driest skin. The formula with provitamin B5 and almond oil helps restore skin's natural moisture barrier, leaving skin soft and smooth. It's fast-absorbing and non-greasy, making it perfect for daily use.",
+    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/NIVEA-Intense-Healing-Body-Lotion/dp/B000052YI8?tag=aipicks20-20",
+    asin: "B000052YI8",
+    price: 6.73,
+    highlights: [
+      "Intense hydration formula",
+      "Enriched with provitamin B5",
+      "Almond oil for nourishment",
+      "Fast-absorbing",
+      "Non-greasy formula"
+    ],
+    pros: [
+      "Effective for very dry skin",
+      "Affordable price",
+      "Trusted brand",
+      "Long-lasting moisture",
+      "Pleasant, subtle scent"
+    ],
+    cons: [
+      "May feel heavy for some users",
+      "Scent may not appeal to everyone"
+    ],
+    specs: {
+      "Price": "$6.73",
+      "Size": "16.9 fl oz",
+      "Key Ingredients": "Provitamin B5, Almond Oil",
+      "Skin Type": "Dry, rough skin",
+      "Features": "Fast-absorbing, non-greasy",
+      "Target User": "People with dry, rough skin needing intense hydration"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B000052YI9",
+    slug: "jergens-ultra-healing-dry-skin-lotion",
+    title: "Jergens Ultra Healing Dry Skin Lotion",
+    benefitTitle: "Ultra-healing formula for severely dry skin",
+    painPoint: "Need Relief for Severely Dry, Cracked Skin?",
+    room: "beauty_personal_care",
+    tags: ["beauty", "skincare", "body-lotion", "moisturizer", "dry-skin", "healing", "ultra-healing"],
+    shortDescription: "Ultra-healing dry skin lotion designed to restore and heal severely dry, cracked skin. Formulated with advanced moisturizers for long-lasting relief.",
+    whyWePickedIt: "This ultra-healing formula is specifically designed for severely dry and cracked skin. The advanced moisturizing formula provides immediate relief and long-lasting hydration, helping to restore your skin's natural barrier. It's a trusted solution for those dealing with persistent dryness.",
+    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Jergens-Ultra-Healing-Dry-Skin/dp/B000052YI9?tag=aipicks20-20",
+    asin: "B000052YI9",
+    price: 7.41,
+    highlights: [
+      "Ultra-healing formula",
+      "For severely dry skin",
+      "Advanced moisturizers",
+      "Long-lasting hydration",
+      "Restores skin barrier"
+    ],
+    pros: [
+      "Very effective for dry skin",
+      "Provides immediate relief",
+      "Trusted brand",
+      "Good value",
+      "Fast-absorbing"
+    ],
+    cons: [
+      "May be too rich for normal skin",
+      "Scent may be strong for some"
+    ],
+    specs: {
+      "Price": "$7.41",
+      "Size": "21 fl oz",
+      "Type": "Ultra-healing lotion",
+      "Skin Type": "Severely dry, cracked skin",
+      "Features": "Advanced moisturizers, barrier restoration",
+      "Target User": "People with severely dry, cracked skin"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B00B3X7PAU",
+    slug: "gillette-fusion5-power-razor-blades",
+    title: "Gillette Fusion5 Power Razor Blades",
+    benefitTitle: "Precision blades for a close, comfortable shave",
+    painPoint: "Want a Closer, More Comfortable Shave?",
+    room: "beauty_personal_care",
+    tags: ["beauty", "shaving", "razor-blades", "gillette", "men", "grooming"],
+    shortDescription: "Gillette Fusion5 Power razor blade refills designed for use with Fusion5 Power razors. Features 5 precision blades and a precision trimmer for a close, comfortable shave.",
+    whyWePickedIt: "These premium razor blades deliver an exceptionally close and comfortable shave. The 5-blade design with precision trimmer ensures you can tackle both large areas and hard-to-reach spots. The anti-friction coating reduces irritation, making it perfect for daily shaving.",
+    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Gillette-Fusion5-Power-Razor-Blades/dp/B00B3X7PAU?tag=aipicks20-20",
+    asin: "B00B3X7PAU",
+    price: 33.99,
+    highlights: [
+      "5 precision blades",
+      "Precision trimmer on back",
+      "Anti-friction coating",
+      "Compatible with Fusion5 Power razors",
+      "Long-lasting sharpness"
+    ],
+    pros: [
+      "Very close shave",
+      "Reduces irritation",
+      "Precision trimmer for edges",
+      "Long-lasting blades",
+      "Trusted brand quality"
+    ],
+    cons: [
+      "Higher price point",
+      "Requires Fusion5 Power razor handle"
+    ],
+    specs: {
+      "Price": "$33.99",
+      "Blades": "5 precision blades",
+      "Compatibility": "Gillette Fusion5 Power razors",
+      "Features": "Precision trimmer, anti-friction coating",
+      "Target User": "Men seeking premium shaving experience"
+    },
+    status: "published",
+    featured: false,
+    dateAdded: "2026-01-21"
+  },
+  {
+    id: "B001E5E6F8",
+    slug: "neutrogena-makeup-remover-cleansing-towelettes",
+    title: "Neutrogena Makeup Remover Cleansing Towelettes",
+    benefitTitle: "Gentle, effective makeup removal in one step",
+    painPoint: "Tired of Multiple Steps to Remove Makeup?",
+    room: "beauty_personal_care",
+    tags: ["beauty", "skincare", "makeup-remover", "towelettes", "cleansing", "neutrogena"],
+    shortDescription: "Pre-moistened cleansing towelettes that remove makeup, dirt, and oil in one step. Gentle formula suitable for sensitive skin. Individually wrapped for convenience.",
+    whyWePickedIt: "These convenient towelettes make makeup removal quick and easy. The gentle formula effectively removes even waterproof makeup without harsh rubbing, making it perfect for sensitive skin. Individually wrapped for freshness and convenience, they're ideal for travel or daily use.",
+    image: "https://m.media-amazon.com/images/I/71K5vJ8KZ5L._AC_SL1500_.jpg",
+    amazonUrl: "https://www.amazon.com/Neutrogena-Makeup-Remover-Cleansing-Towelettes/dp/B001E5E6F8?tag=aipicks20-20",
+    asin: "B001E5E6F8",
+    price: 9.97,
+    highlights: [
+      "Removes waterproof makeup",
+      "Gentle for sensitive skin",
+      "One-step cleansing",
+      "Individually wrapped",
+      "Dermatologist tested"
+    ],
+    pros: [
+      "Convenient and portable",
+      "Effective makeup removal",
+      "Gentle formula",
+      "No rinsing required",
+      "Great for travel"
+    ],
+    cons: [
+      "May need multiple wipes for heavy makeup",
+      "Single-use creates waste"
+    ],
+    specs: {
+      "Price": "$9.97",
+      "Count": "25 towelettes",
+      "Type": "Pre-moistened cleansing wipes",
+      "Skin Type": "All skin types, including sensitive",
+      "Features": "Waterproof makeup removal, individually wrapped",
+      "Target User": "People seeking convenient, effective makeup removal"
     },
     status: "published",
     featured: false,

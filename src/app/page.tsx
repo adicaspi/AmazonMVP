@@ -52,7 +52,7 @@ export default function HomePage() {
               <span className="text-xl">→</span>
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 lg:gap-10 items-stretch">
             {topPicks.map((product, idx) => {
               const delayClass = idx === 0 ? 'animate-fade-in' : 
                                  idx === 1 ? 'animate-fade-in-delay-1' :
@@ -63,7 +63,7 @@ export default function HomePage() {
               return (
                 <div 
                   key={product.id} 
-                  className={`${delayClass} transform hover:scale-105 transition-transform duration-300`}
+                  className={`${delayClass} transform hover:scale-105 transition-transform duration-300 flex`}
                 >
                   <ProductCard product={product} />
                 </div>

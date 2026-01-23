@@ -13,7 +13,26 @@ export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const rooms = getAllRooms();
-  const allTags = Array.from(new Set(products.flatMap(p => p.tags))).sort();
+  // Clean and deduplicate tags - case-insensitive
+  const allTags = (() => {
+    const allTagsRaw = products.flatMap(p => p.tags || []);
+    const seen = new Set<string>();
+    const unique: string[] = [];
+    
+    for (const tag of allTagsRaw) {
+      const trimmed = tag.trim();
+      if (!trimmed) continue;
+      const lower = trimmed.toLowerCase();
+      if (!seen.has(lower)) {
+        seen.add(lower);
+        // Title case: first letter uppercase, rest lowercase
+        const titleCased = trimmed.charAt(0).toUpperCase() + trimmed.slice(1).toLowerCase();
+        unique.push(titleCased);
+      }
+    }
+    
+    return unique.sort();
+  })();
 
   const filteredProducts = useMemo(() => {
     return products.filter(product => {
@@ -192,7 +211,7 @@ export default function ProductsPage() {
 
       {/* Products Grid */}
       {filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

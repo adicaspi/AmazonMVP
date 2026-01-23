@@ -1,11 +1,18 @@
 // components/Footer.tsx
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function Footer() {
+  const pathname = usePathname();
+  
+  // Hide disclosure section on product pages (they have their own disclosure)
+  const isProductPage = pathname?.startsWith("/products/") || pathname?.startsWith("/p/");
+
   return (
     <footer className="border-t border-slate-200 bg-gradient-to-b from-white to-slate-50 mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-4 gap-12">
+        <div className={`grid ${isProductPage ? 'md:grid-cols-3' : 'md:grid-cols-4'} gap-12`}>
           <div>
             <h3 className="font-bold text-xl text-slate-900 mb-4 bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
               AI Picks
@@ -54,12 +61,14 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          <div>
-            <h4 className="font-semibold text-slate-900 mb-4">Affiliate Disclosure</h4>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              As an Amazon Associate I earn from qualifying purchases.
-            </p>
-          </div>
+          {!isProductPage && (
+            <div>
+              <h4 className="font-semibold text-slate-900 mb-4">Affiliate Disclosure</h4>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                As an Amazon Associate I earn from qualifying purchases.
+              </p>
+            </div>
+          )}
         </div>
         <div className="mt-12 pt-8 border-t border-slate-200 text-center">
           <p className="text-sm text-slate-500">
