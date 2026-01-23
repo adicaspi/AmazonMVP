@@ -251,7 +251,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/71mDTOYtDSL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B074817DK1?tag=aipicks20-20",
     asin: "B074817DK1",
-    price: 24.99,
+    price: 44.99,
     highlights: [
       "8-piece cookware set",
       "Non-stick coating",
@@ -334,7 +334,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/81vcpoC1YwL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B0DT5V24MS?tag=aipicks20-20",
     asin: "B0DT5V24MS",
-    price: 25.58,
+    price: 28.99,
     highlights: [
       "4.4 out of 5 stars (6,696 reviews)",
       "Set of 3 shelves",
@@ -357,7 +357,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.4 out of 5 stars",
       "Reviews": "6,696",
-      "Price": "$25.58",
+      "Price": "$28.99",
       "Dimensions": "6.7\"D x 15.7\"W x 1.2\"H each",
       "Weight Capacity": "22 lbs per shelf",
       "Material": "Engineered wood (MDF)",
@@ -380,7 +380,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61+heXD7SeL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B0F8HFLNQG?tag=aipicks20-20",
     asin: "B0F8HFLNQG",
-    price: 5.98,
+    price: 9.99,
     highlights: [
       "4.7 out of 5 stars (25,840 reviews)",
       "Expandable from 8.5\" to 14\" wide",
@@ -390,7 +390,7 @@ export const products: Product[] = [
     ],
     pros: [
       "Adjustable width fits various drawer sizes",
-      "Excellent value under $6",
+      "Excellent value",
       "BPA-free and food-safe",
       "Easy to clean",
       "Prevents partition displacement with buckle design"
@@ -402,7 +402,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.7 out of 5 stars",
       "Reviews": "25,840",
-      "Price": "$5.98 (Prime price)",
+      "Price": "$9.99",
       "Dimensions": "8.5-14\"W x 12\"D x 1.5\"H",
       "Compartments": "7",
       "Material": "BPA-free PP plastic (95% recycled)",
@@ -424,7 +424,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/71A1QQMJjgL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B0CXLK9PJ9?tag=aipicks20-20",
     asin: "B0CXLK9PJ9",
-    price: 24.99,
+    price: 44.79,
     highlights: [
       "Stackable design saves space",
       "Multiple compartments",
@@ -442,7 +442,7 @@ export const products: Product[] = [
       "Check dimensions before purchasing"
     ],
     specs: {
-      "Price": "$24.99",
+      "Price": "$44.79",
       "Design": "Stackable",
       "Use": "Office supplies, craft materials, home organization",
       "Target User": "People looking to organize supplies in office or home spaces"
@@ -463,7 +463,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61AnB4vPuAL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B07XM8Y26Y?tag=aipicks20-20",
     asin: "B07XM8Y26Y",
-    price: 19.09,
+    price: 20.55,
     highlights: [
       "4.4 out of 5 stars (11,969 reviews)",
       "Set of 2 shelves",
@@ -486,7 +486,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.4 out of 5 stars",
       "Reviews": "11,969",
-      "Price": "$19.09",
+      "Price": "$20.55",
       "Dimensions": "12.5\"L x 8\"D x 4.5\"H each",
       "Material": "Alloy steel with plastic coating",
       "Assembly": "Tool-free",
@@ -508,7 +508,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/71eiII6MS-L._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B06X9NQ8GX?tag=aipicks20-20",
     asin: "B06X9NQ8GX",
-    price: 6.81,
+    price: 7.99,
     highlights: [
       "4.7 out of 5 stars (111,028 reviews)",
       "#1 Best Seller in Digital Kitchen Scales",
@@ -530,7 +530,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.7 out of 5 stars",
       "Reviews": "111,028",
-      "Price": "$6.81",
+      "Price": "$7.99",
       "Weight Capacity": "Up to 11 lbs (5000g)",
       "Minimum Weight": "2 grams",
       "Display": "LCD",
@@ -554,7 +554,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61yVDDy1LRL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B09V5G395G?tag=aipicks20-20",
     asin: "B09V5G395G",
-    price: 15.56,
+    price: 16.19,
     highlights: [
       "4.7 out of 5 stars (116,129 reviews)",
       "#1 Best Seller in Open Home Storage Bins",
@@ -576,7 +576,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.7 out of 5 stars",
       "Reviews": "116,129",
-      "Price": "$15.56",
+      "Price": "$16.19",
       "Dimensions": "13\"L x 13\"W x 13\"H each",
       "Material": "Fabric",
       "Quantity": "Pack of 6",
@@ -599,7 +599,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61hEtbJv3YL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/dp/B07S6F6LHQ?tag=aipicks20-20",
     asin: "B07S6F6LHQ",
-    price: 23.99,
+    price: 26.99,
     highlights: [
       "4.7 out of 5 stars (63,208 reviews)",
       "22lb (10kg) capacity",
@@ -622,7 +622,7 @@ export const products: Product[] = [
     specs: {
       "Rating": "4.7 out of 5 stars",
       "Reviews": "63,208",
-      "Price": "$23.99",
+      "Price": "$26.99",
       "Weight Capacity": "Up to 22 lbs (10kg)",
       "Minimum Weight": "3g (0.1oz)",
       "Platform Size": "9\" x 6.3\"",
@@ -648,7 +648,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/71EgKAe11PL._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Wooden-Chunky-Puzzle/dp/B000EOEAW6?tag=aipicks20-20",
     asin: "B000EOEAW6",
-    price: 8.99,
+    price: 14.63,
     highlights: [
       "8 chunky wooden puzzle pieces",
       "FSC-certified sustainable wood",
@@ -673,6 +673,7 @@ export const products: Product[] = [
       "Pieces": "8 wooden pieces",
       "Material": "FSC-certified wood",
       "Dimensions": "11.75\" x 8.75\" x 1.25\"",
+      "Price": "$14.63",
       "Target User": "Toddlers and preschoolers learning motor skills and animal recognition"
     },
     status: "published",
@@ -691,7 +692,7 @@ export const products: Product[] = [
     image: "https://m.media-amazon.com/images/I/61NN1xU+ZML._AC_SL1500_.jpg",
     amazonUrl: "https://www.amazon.com/Melissa-Doug-Stainless-Pretend-Kitchen/dp/B00CPHX6YI?tag=aipicks20-20",
     asin: "B00CPHX6YI",
-    price: 24.99,
+    price: 28.99,
     highlights: [
       "8-piece stainless steel set",
       "Realistic metal construction",
@@ -715,6 +716,7 @@ export const products: Product[] = [
       "Age Range": "3+ years",
       "Pieces": "8 pieces (pots, pans, lids)",
       "Material": "Stainless steel",
+      "Price": "$28.99",
       "Set Includes": "2 pots with lids, 1 colander, 1 pan, 1 lid",
       "Target User": "Children who enjoy pretend cooking and kitchen play"
     },
