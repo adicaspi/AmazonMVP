@@ -97,8 +97,12 @@ export default function GrandeLASHPage() {
               <div className="text-center mb-4">
                 <span className="text-sm font-bold text-slate-500 uppercase tracking-wider">Before</span>
               </div>
-              <div className="aspect-square bg-gradient-to-br from-slate-200 to-slate-300 rounded-xl flex items-center justify-center mb-4">
-                <span className="text-slate-400 text-sm">Before Photo Placeholder</span>
+              <div className="aspect-square rounded-xl overflow-hidden mb-4">
+                <img
+                  src="/images/grandelash/before.png"
+                  alt="Before using GrandeLASH-MD - short, sparse natural lashes"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <p className="text-sm text-slate-600 text-center">Short, sparse natural lashes</p>
             </div>
@@ -109,8 +113,8 @@ export default function GrandeLASHPage() {
               </div>
               <div className="aspect-square rounded-xl overflow-hidden mb-4">
                 <img
-                  src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/5647f537-9976-4960-b43b-e358625f173d.__CR0,0,2928,1200_PT0_SX1464_V1___.jpg"
-                  alt="GrandeLASH-MD Results"
+                  src="/images/grandelash/after.png"
+                  alt="After 6 weeks using GrandeLASH-MD - long, full, naturally enhanced lashes"
                   className="w-full h-full object-cover"
                 />
               </div>
