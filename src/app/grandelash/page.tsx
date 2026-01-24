@@ -54,10 +54,19 @@ export default function GrandeLASHPage() {
               </div>
             </div>
 
+            {/* Product Image */}
+            <div className="mt-8 mb-10 flex justify-center">
+              <img
+                src="https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg"
+                alt="GrandeLASH-MD Lash Enhancing Serum"
+                className="max-w-md w-full rounded-2xl shadow-2xl"
+              />
+            </div>
+
             {/* Primary CTA */}
             <div className="mt-10">
               <a
-                href="https://www.amazon.com/dp/B00KQ8X7VW?tag=aipicks20-20"
+                href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
                 target="_blank"
                 rel="nofollow sponsored noopener noreferrer"
                 className="inline-block px-10 py-5 bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-bold text-lg rounded-xl hover:from-amber-700 hover:to-yellow-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
@@ -98,8 +107,12 @@ export default function GrandeLASHPage() {
               <div className="text-center mb-4">
                 <span className="text-sm font-bold text-amber-700 uppercase tracking-wider">After 6 Weeks</span>
               </div>
-              <div className="aspect-square bg-gradient-to-br from-amber-200 to-yellow-200 rounded-xl flex items-center justify-center mb-4">
-                <span className="text-amber-600 text-sm">After Photo Placeholder</span>
+              <div className="aspect-square rounded-xl overflow-hidden mb-4">
+                <img
+                  src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/5647f537-9976-4960-b43b-e358625f173d.__CR0,0,2928,1200_PT0_SX1464_V1___.jpg"
+                  alt="GrandeLASH-MD Results"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <p className="text-sm text-amber-800 text-center font-semibold">Long, full, naturally enhanced lashes</p>
             </div>
@@ -202,7 +215,7 @@ export default function GrandeLASHPage() {
           {/* CTA after table */}
           <div className="text-center mt-8">
             <a
-              href="https://www.amazon.com/dp/B00KQ8X7VW?tag=aipicks20-20"
+              href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
               className="inline-block px-10 py-5 bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-bold text-lg rounded-xl hover:from-amber-700 hover:to-yellow-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
@@ -367,7 +380,7 @@ export default function GrandeLASHPage() {
           {/* CTA after FAQ */}
           <div className="text-center mt-12">
             <a
-              href="https://www.amazon.com/dp/B00KQ8X7VW?tag=aipicks20-20"
+              href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
               className="inline-block px-10 py-5 bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-bold text-lg rounded-xl hover:from-amber-700 hover:to-yellow-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
