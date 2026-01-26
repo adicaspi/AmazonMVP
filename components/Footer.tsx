@@ -2,6 +2,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export function Footer() {
   const pathname = usePathname();
@@ -14,9 +15,15 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className={`grid ${isProductPage ? 'md:grid-cols-3' : 'md:grid-cols-4'} gap-12`}>
           <div>
-            <h3 className="font-bold text-xl text-slate-900 mb-4 bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
-              AI Picks
-            </h3>
+            <Link href="/" className="inline-block mb-4">
+              <Image
+                src="/logo.png"
+                alt="AiPicks"
+                width={120}
+                height={40}
+                className="h-8 w-auto"
+              />
+            </Link>
             <p className="text-sm text-slate-600 leading-relaxed">
               Curated home accessories and practical guides to upgrade your space.
             </p>

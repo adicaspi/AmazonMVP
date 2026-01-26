@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { SearchBar } from "./SearchBar";
+import Image from "next/image";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,8 +13,15 @@ export function Header() {
     <header className="border-b border-slate-200 bg-white/95 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
-          <Link href="/" className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent hover:from-slate-700 hover:to-slate-500 transition-all flex-shrink-0">
-            AI Picks
+          <Link href="/" className="flex-shrink-0 hover:opacity-80 transition-opacity">
+            <Image
+              src="/logo.png"
+              alt="AiPicks"
+              width={120}
+              height={40}
+              className="h-8 w-auto"
+              priority
+            />
           </Link>
           
           {/* Desktop Navigation + Search */}
