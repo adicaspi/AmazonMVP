@@ -11,6 +11,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "AI Picks - Curated Home Accessories & Guides",
   description: "Minimal, well-designed home accessories that upgrade your space. Curated recommendations and practical guides. As an Amazon Associate I earn from qualifying purchases.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     title: "AI Picks - Curated Home Accessories & Guides",
     description: "Minimal, well-designed home accessories that upgrade your space. Curated recommendations and practical guides.",
