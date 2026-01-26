@@ -19,12 +19,12 @@ export function Footer() {
               <Image
                 src="/logo.png"
                 alt="AiPicks"
-                width={120}
-                height={40}
-                className="h-8 w-auto"
+                width={180}
+                height={60}
+                className="h-12 w-auto"
               />
             </Link>
-            <p className="text-sm text-slate-600 leading-relaxed">
+            <p className="text-base text-slate-600 leading-relaxed">
               Curated home accessories and practical guides to upgrade your space.
             </p>
           </div>
