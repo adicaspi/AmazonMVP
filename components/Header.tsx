@@ -17,9 +17,9 @@ export function Header() {
             <Image
               src="/logo.png"
               alt="AiPicks"
-              width={180}
-              height={60}
-              className="h-12 w-auto"
+              width={240}
+              height={80}
+              className="h-16 w-auto"
               priority
             />
           </Link>
