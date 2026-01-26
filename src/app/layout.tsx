@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  other: {
+    'fb:app_id': process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || '',
+  },
 };
 
 export default function RootLayout({
