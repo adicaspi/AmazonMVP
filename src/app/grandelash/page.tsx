@@ -8,257 +8,372 @@ export const metadata: Metadata = {
 };
 
 export default function GrandeLASHPage() {
+  const amazonLink = "https://www.amazon.com/dp/B082WZTJV5?tag=aipicks20-20";
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section - Clean & Minimal */}
-      <section className="py-8 md:py-12">
-        <div className="max-w-4xl mx-auto px-4">
-          {/* Main Promotional Image */}
-          <div className="mb-8">
-            <Image
-              src="/images/grandelash/promo-before-after.jpeg"
-              alt="GrandLash Before and After Results"
-              width={1024}
-              height={1024}
-              className="w-full h-auto"
-              priority
-            />
-          </div>
+      {/* Announcement Bar */}
+      <div className="bg-rose-600 text-white text-center py-2 px-4 text-sm font-medium">
+        ⭐ Over 90,000 Five-Star Reviews on Amazon ⭐
+      </div>
 
-          {/* CTA Button */}
-          <div className="text-center">
-            <a
-              href="https://www.amazon.com/dp/B082WZTJV5?tag=aipicks20-20"
-              target="_blank"
-              rel="nofollow sponsored noopener noreferrer"
-              className="inline-block px-12 py-4 bg-[#FFD814] hover:bg-[#F7CA00] text-black font-bold text-lg rounded-full transition-all shadow-md hover:shadow-lg"
-            >
-              Check Price on Amazon
-            </a>
-            <p className="text-sm text-gray-500 mt-3">Free shipping with Prime</p>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-rose-50 via-white to-pink-50">
+        <div className="max-w-6xl mx-auto px-4 py-12 md:py-20">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            {/* Left - Content */}
+            <div>
+              <div className="inline-flex items-center gap-2 bg-rose-100 text-rose-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                </span>
+                Trending Now
+              </div>
 
-      {/* Second Promotional Image */}
-      <section className="py-8 md:py-12 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="mb-8">
-            <Image
-              src="/images/grandelash/promo-solution.jpeg"
-              alt="GrandLash - The Problem vs The Solution"
-              width={1024}
-              height={1024}
-              className="w-full h-auto"
-            />
-          </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                Ditch Extensions.<br />
+                <span className="text-rose-600">Grow Your Own</span><br />
+                Natural Lashes.
+              </h1>
 
-          {/* CTA Button */}
-          <div className="text-center">
-            <a
-              href="https://www.amazon.com/dp/B082WZTJV5?tag=aipicks20-20"
-              target="_blank"
-              rel="nofollow sponsored noopener noreferrer"
-              className="inline-block px-12 py-4 bg-[#FFD814] hover:bg-[#F7CA00] text-black font-bold text-lg rounded-full transition-all shadow-md hover:shadow-lg"
-            >
-              Shop Now on Amazon
-            </a>
-          </div>
-        </div>
-      </section>
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                The #1 lash serum trusted by over <strong className="text-gray-900">90,000 women</strong>.
+                Clinically proven results in just 8 weeks. Save $1,800/year compared to extensions.
+              </p>
 
-      {/* Key Benefits - Simple Cards */}
-      <section className="py-12 md:py-16">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-10">
-            Why 90,000+ Women Made The Switch
-          </h2>
+              {/* Trust Badges */}
+              <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  Ophthalmologist Tested
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  Cruelty Free
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  Results in 8 Weeks
+                </div>
+              </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center p-6 border border-gray-200 rounded-xl">
-              <div className="text-4xl mb-4">💰</div>
-              <h3 className="font-bold text-lg mb-2">Save $1,800/Year</h3>
-              <p className="text-gray-600 text-sm">No more expensive monthly fills</p>
+              {/* CTA */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href={amazonLink}
+                  target="_blank"
+                  rel="nofollow sponsored noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                >
+                  <span>Shop on Amazon</span>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+                <div className="flex items-center gap-2 text-sm text-gray-500">
+                  <svg className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <span>4.8/5 from 90,000+ reviews</span>
+                </div>
+              </div>
             </div>
 
-            <div className="text-center p-6 border border-gray-200 rounded-xl">
-              <div className="text-4xl mb-4">⏱️</div>
-              <h3 className="font-bold text-lg mb-2">Results in 8 Weeks</h3>
-              <p className="text-gray-600 text-sm">Visible longer, fuller lashes</p>
-            </div>
-
-            <div className="text-center p-6 border border-gray-200 rounded-xl">
-              <div className="text-4xl mb-4">✓</div>
-              <h3 className="font-bold text-lg mb-2">Ophthalmologist-Tested</h3>
-              <p className="text-gray-600 text-sm">Safe for sensitive eyes</p>
+            {/* Right - Product Image */}
+            <div className="relative">
+              <div className="absolute -top-4 -right-4 bg-rose-600 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg z-10">
+                #1 Best Seller
+              </div>
+              <div className="bg-gradient-to-br from-rose-100 to-pink-100 rounded-3xl p-8 shadow-2xl">
+                <img
+                  src="https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg"
+                  alt="GrandLash Serum"
+                  className="w-full max-w-sm mx-auto drop-shadow-xl"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Comparison Table */}
-      <section className="py-12 md:py-16 bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8">
-            Extensions vs GrandLash
-          </h2>
-
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-gray-900 text-white">
-                  <th className="px-4 py-3 text-left"></th>
-                  <th className="px-4 py-3 text-center">Extensions</th>
-                  <th className="px-4 py-3 text-center bg-green-600">GrandLash</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                <tr>
-                  <td className="px-4 py-3 font-medium">Annual Cost</td>
-                  <td className="px-4 py-3 text-center text-gray-600">$1,500+</td>
-                  <td className="px-4 py-3 text-center font-bold text-green-600">~$70</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3 font-medium">Time</td>
-                  <td className="px-4 py-3 text-center text-gray-600">2-3 hrs/month</td>
-                  <td className="px-4 py-3 text-center font-bold text-green-600">30 sec/day</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3 font-medium">Damage</td>
-                  <td className="px-4 py-3 text-center text-red-600">Yes</td>
-                  <td className="px-4 py-3 text-center font-bold text-green-600">No</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3 font-medium">Natural Look</td>
-                  <td className="px-4 py-3 text-center text-gray-600">Sometimes</td>
-                  <td className="px-4 py-3 text-center font-bold text-green-600">Always</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div className="text-center mt-8">
-            <a
-              href="https://www.amazon.com/dp/B082WZTJV5?tag=aipicks20-20"
-              target="_blank"
-              rel="nofollow sponsored noopener noreferrer"
-              className="inline-block px-12 py-4 bg-[#FFD814] hover:bg-[#F7CA00] text-black font-bold text-lg rounded-full transition-all shadow-md hover:shadow-lg"
-            >
-              Get GrandLash on Amazon
-            </a>
+      {/* Social Proof Bar */}
+      <section className="bg-gray-900 text-white py-6">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+              <div className="text-3xl font-bold text-rose-400">90K+</div>
+              <div className="text-sm text-gray-400">5-Star Reviews</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-rose-400">8 Weeks</div>
+              <div className="text-sm text-gray-400">To See Results</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-rose-400">$1,800</div>
+              <div className="text-sm text-gray-400">Saved Per Year</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-rose-400">3 Months</div>
+              <div className="text-sm text-gray-400">Supply Per Tube</div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Reviews */}
-      <section className="py-12 md:py-16">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <div className="flex items-center justify-center gap-1 mb-2">
+      {/* Before/After Section */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Real Results from Real Women
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              See the transformation for yourself. No filters, no extensions - just naturally longer, fuller lashes.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src="/images/grandelash/promo-before-after.jpeg"
+                alt="Before and After Results"
+                width={600}
+                height={600}
+                className="w-full h-auto"
+              />
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-rose-50 border-l-4 border-rose-500 p-6 rounded-r-xl">
+                <h3 className="font-bold text-xl text-gray-900 mb-2">The Problem with Extensions</h3>
+                <ul className="space-y-2 text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 mt-1">✕</span>
+                    <span>$150-300 every 2-3 weeks</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 mt-1">✕</span>
+                    <span>Damages your natural lashes</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 mt-1">✕</span>
+                    <span>Hours spent at the salon</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-xl">
+                <h3 className="font-bold text-xl text-gray-900 mb-2">The GrandLash Solution</h3>
+                <ul className="space-y-2 text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-500 mt-1">✓</span>
+                    <span>One tube lasts 3 months (~$70)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-500 mt-1">✓</span>
+                    <span>Strengthens & nourishes lashes</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-500 mt-1">✓</span>
+                    <span>30 seconds a day, at home</span>
+                  </li>
+                </ul>
+              </div>
+
+              <a
+                href={amazonLink}
+                target="_blank"
+                rel="nofollow sponsored noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+              >
+                Get Your GrandLash Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-16 md:py-24 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              How It Works
+            </h2>
+            <p className="text-lg text-gray-600">Simple. Effective. Just 30 seconds a day.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
+              <div className="w-16 h-16 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">1</div>
+              <h3 className="font-bold text-xl mb-3">Apply Nightly</h3>
+              <p className="text-gray-600">Apply to clean, dry lashes before bed. One stroke along the lash line.</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
+              <div className="w-16 h-16 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">2</div>
+              <h3 className="font-bold text-xl mb-3">Be Consistent</h3>
+              <p className="text-gray-600">Use daily for best results. The serum works with your natural lash growth cycle.</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
+              <div className="w-16 h-16 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">3</div>
+              <h3 className="font-bold text-xl mb-3">See Results</h3>
+              <p className="text-gray-600">Notice longer, fuller lashes in 4-6 weeks. Full results by 8-12 weeks.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-1 mb-4">
               {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-yellow-400 text-2xl">★</span>
+                <svg key={i} className="w-8 h-8 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
               ))}
             </div>
-            <p className="text-gray-600">90,000+ 5-Star Reviews on Amazon</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+              Loved by 90,000+ Women
+            </h2>
+            <p className="text-lg text-gray-600">Don't just take our word for it</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="p-6 bg-gray-50 rounded-xl">
-              <div className="flex gap-1 mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400">★</span>
-                ))}
+            {[
+              { name: "Sarah M.", text: "After 6 weeks, my lashes are longer than my extensions ever were. I've saved over $1,200 this year!", rating: 5 },
+              { name: "Jessica L.", text: "Extensions were ruining my natural lashes. Switched to GrandLash and they're now longer and thicker than before!", rating: 5 },
+              { name: "Michelle R.", text: "By week 8, people kept asking if I had extensions. This serum is a complete game-changer!", rating: 5 }
+            ].map((review, i) => (
+              <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(review.rating)].map((_, j) => (
+                    <svg key={j} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-4 italic">"{review.text}"</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center font-bold">
+                    {review.name[0]}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">{review.name}</p>
+                    <p className="text-xs text-green-600 font-medium">✓ Verified Purchase</p>
+                  </div>
+                </div>
               </div>
-              <p className="text-gray-700 mb-4">
-                "After 6 weeks, my lashes are longer than my extensions ever were. Saved over $1,200 this year!"
-              </p>
-              <p className="font-medium text-sm">Sarah M. <span className="text-green-600">✓ Verified</span></p>
-            </div>
-
-            <div className="p-6 bg-gray-50 rounded-xl">
-              <div className="flex gap-1 mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400">★</span>
-                ))}
-              </div>
-              <p className="text-gray-700 mb-4">
-                "Extensions were ruining my natural lashes. Switched to GrandLash and they're now longer than ever!"
-              </p>
-              <p className="font-medium text-sm">Jessica L. <span className="text-green-600">✓ Verified</span></p>
-            </div>
-
-            <div className="p-6 bg-gray-50 rounded-xl">
-              <div className="flex gap-1 mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400">★</span>
-                ))}
-              </div>
-              <p className="text-gray-700 mb-4">
-                "By week 8, people kept asking if I had extensions. This serum is a game-changer!"
-              </p>
-              <p className="font-medium text-sm">Michelle R. <span className="text-green-600">✓ Verified</span></p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-12 md:py-16 bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8">
-            Common Questions
-          </h2>
-
-          <div className="space-y-4">
-            <div className="bg-white p-5 rounded-xl">
-              <h3 className="font-bold mb-2">Is it safe for sensitive eyes?</h3>
-              <p className="text-gray-600 text-sm">Yes, it's ophthalmologist-tested and safe for contact lens wearers.</p>
-            </div>
-
-            <div className="bg-white p-5 rounded-xl">
-              <h3 className="font-bold mb-2">How long does one tube last?</h3>
-              <p className="text-gray-600 text-sm">About 3 months with daily use - that's less than $1/day.</p>
-            </div>
-
-            <div className="bg-white p-5 rounded-xl">
-              <h3 className="font-bold mb-2">When will I see results?</h3>
-              <p className="text-gray-600 text-sm">Most users see visible results in 4-6 weeks, with full results by 8 weeks.</p>
-            </div>
+            ))}
           </div>
 
           <div className="text-center mt-10">
             <a
-              href="https://www.amazon.com/dp/B082WZTJV5?tag=aipicks20-20"
+              href={amazonLink}
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
-              className="inline-block px-12 py-4 bg-[#FFD814] hover:bg-[#F7CA00] text-black font-bold text-lg rounded-full transition-all shadow-md hover:shadow-lg"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Check Price on Amazon
+              Join 90,000+ Happy Customers
             </a>
           </div>
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-16 md:py-24 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            {[
+              { q: "Is it safe for sensitive eyes?", a: "Yes! GrandLash is ophthalmologist-tested and safe for sensitive eyes and contact lens wearers." },
+              { q: "How long does one tube last?", a: "One tube lasts approximately 3 months with daily use - that's less than $1 per day!" },
+              { q: "When will I see results?", a: "Most users notice visible results in 4-6 weeks, with full results by 8-12 weeks." },
+              { q: "Can I use it with mascara?", a: "Absolutely! Apply GrandLash at night, and wear your favorite mascara during the day." }
+            ].map((faq, i) => (
+              <div key={i} className="bg-white rounded-xl p-6 shadow-sm">
+                <h3 className="font-bold text-lg text-gray-900 mb-2">{faq.q}</h3>
+                <p className="text-gray-600">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-rose-600 to-pink-600 text-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Ready for Longer, Fuller Lashes?
+          </h2>
+          <p className="text-xl text-rose-100 mb-8 max-w-2xl mx-auto">
+            Join over 90,000 women who've transformed their lashes naturally.
+            Stop spending on extensions and start growing your own beautiful lashes.
+          </p>
+          <a
+            href={amazonLink}
+            target="_blank"
+            rel="nofollow sponsored noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-rose-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
+          >
+            Shop Now on Amazon
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <p className="text-rose-200 text-sm mt-4">Free shipping with Amazon Prime</p>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-10">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="mb-6 pb-6 border-b border-gray-700">
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="mb-8 pb-8 border-b border-gray-700">
             <p className="text-sm text-gray-400">
               <strong className="text-white">Affiliate Disclosure:</strong> As an Amazon Associate, I earn from qualifying purchases. This helps support our recommendations at no extra cost to you.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-6 text-sm text-gray-400 mb-6">
-            <Link href="/privacy" className="hover:text-white">Privacy</Link>
-            <Link href="/disclosure" className="hover:text-white">Terms</Link>
-            <Link href="/contact" className="hover:text-white">Contact</Link>
+          <div className="flex flex-wrap gap-6 text-sm text-gray-400 mb-8">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/disclosure" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
           </div>
 
           <p className="text-xs text-gray-500">
-            Results may vary. Not intended to diagnose or treat any condition. © 2026 AI Picks
+            Results may vary. This product is not intended to diagnose, treat, cure, or prevent any disease. © 2026 AI Picks. All rights reserved.
           </p>
         </div>
       </footer>
+
+      {/* Sticky Mobile CTA */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-gray-200 p-4 md:hidden z-50">
+        <a
+          href={amazonLink}
+          target="_blank"
+          rel="nofollow sponsored noopener noreferrer"
+          className="flex items-center justify-center gap-2 w-full py-4 bg-rose-600 text-white font-bold rounded-full shadow-lg"
+        >
+          <span>Shop on Amazon</span>
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+      <div className="h-24 md:hidden"></div>
     </div>
   );
 }
