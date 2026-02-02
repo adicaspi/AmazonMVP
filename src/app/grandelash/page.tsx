@@ -9,31 +9,38 @@ export const metadata: Metadata = {
 
 export default function GrandeLASHPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-amber-50">
-      {/* Hero Section with Promotional Image */}
-      <section className="relative py-8 md:py-12">
-        {/* Golden sparkle background effect */}
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-100/50 to-transparent pointer-events-none"></div>
+    <div className="min-h-screen bg-gradient-to-b from-amber-100 via-amber-50 to-amber-100">
+      {/* Hero Section - Before/After Style */}
+      <section className="relative py-8 md:py-12 bg-gradient-to-b from-amber-200 via-amber-100 to-amber-50">
+        {/* Decorative golden border */}
+        <div className="absolute inset-4 border-4 border-amber-400/50 pointer-events-none"></div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative">
+          {/* Main Headline */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 text-center mb-8 italic leading-tight">
+            Ditch the Extensions. Grow Your<br />Own Natural Lashes
+          </h1>
+
           {/* Limited Time Offer Badge */}
-          <div className="flex justify-center mb-6">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-bold text-sm rounded-full shadow-lg animate-pulse">
-              <span className="text-lg">⚡</span>
-              <span>LIMITED-TIME OFFER!</span>
-              <span className="text-lg">⚡</span>
+          <div className="absolute top-8 right-8 md:right-12">
+            <div className="bg-gradient-to-br from-amber-400 to-yellow-500 text-white font-bold text-xs px-4 py-3 rounded-lg shadow-lg transform rotate-3 border-2 border-amber-600">
+              <div className="flex items-center gap-1">
+                <span>⚡</span>
+                <span>LIMITED-TIME</span>
+              </div>
+              <div className="text-center">OFFER! ⚡</div>
             </div>
           </div>
 
           {/* Main Promotional Image - Before/After */}
           <div className="flex justify-center mb-8">
-            <div className="relative max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-amber-400">
+            <div className="relative max-w-2xl w-full">
               <Image
                 src="/images/grandelash/promo-before-after.png"
                 alt="GrandLash Before and After Results - Ditch the Extensions, Grow Your Own Natural Lashes"
-                width={800}
-                height={800}
-                className="w-full h-auto"
+                width={1024}
+                height={1024}
+                className="w-full h-auto rounded-lg"
                 priority
               />
             </div>
@@ -45,49 +52,51 @@ export default function GrandeLASHPage() {
               href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
-              className="inline-block px-12 py-5 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 text-white font-bold text-xl rounded-full hover:from-amber-700 hover:via-yellow-600 hover:to-amber-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border-2 border-amber-300"
+              className="inline-block px-16 py-5 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-slate-900 font-black text-xl rounded-full hover:from-amber-600 hover:via-yellow-500 hover:to-amber-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border-4 border-amber-600"
             >
-              🛒 BUY NOW ON AMAZON
+              BUY NOW ON AMAZON
             </a>
-            <p className="text-sm text-slate-600 mt-4 flex items-center justify-center gap-2">
-              <span className="text-emerald-600">✓</span> Free shipping with Prime
-              <span className="mx-2">|</span>
-              <span className="text-emerald-600">✓</span> 90,000+ Happy Customers
-            </p>
           </div>
         </div>
       </section>
 
       {/* Viral Sensation Section */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-amber-100/30 to-white relative overflow-hidden">
-        {/* Golden sparkle decoration */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0iI2ZiYmYyNCIgZmlsbC1vcGFjaXR5PSIwLjMiLz48L3N2Zz4=')] opacity-50"></div>
+      <section className="py-12 md:py-16 bg-gradient-to-b from-amber-200 via-amber-100 to-amber-200 relative overflow-hidden">
+        {/* Sparkle effect background */}
+        <div className="absolute inset-0 opacity-30" style={{
+          backgroundImage: `radial-gradient(circle at 20% 50%, #fbbf24 1px, transparent 1px),
+                           radial-gradient(circle at 80% 30%, #fbbf24 1px, transparent 1px),
+                           radial-gradient(circle at 40% 70%, #fbbf24 1px, transparent 1px),
+                           radial-gradient(circle at 60% 20%, #fbbf24 1px, transparent 1px)`,
+          backgroundSize: '100px 100px'
+        }}></div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-8">
-            {/* Viral Sensation Badge */}
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-amber-400 rounded-full shadow-md mb-6">
-              <span className="text-amber-500 text-xl">★</span>
-              <span className="font-bold text-slate-800">VIRAL SENSATION!</span>
-            </div>
-
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-4 italic">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative">
+          {/* Headlines */}
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-2 italic">
               UNLOCK YOUR LASH POTENTIAL.
             </h2>
-            <h3 className="text-2xl md:text-4xl font-black text-slate-900 mb-8 italic">
+            <h3 className="text-2xl md:text-4xl font-black text-slate-900 italic">
               JOIN 90,000+ BELIEVERS
             </h3>
+
+            {/* Viral Sensation Badge */}
+            <div className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-white border-3 border-amber-500 rounded-full shadow-lg">
+              <span className="text-amber-500 text-2xl">★</span>
+              <span className="font-bold text-slate-800 text-lg">VIRAL SENSATION!</span>
+            </div>
           </div>
 
-          {/* Second Promotional Image - Problem/Solution */}
-          <div className="flex justify-center mb-8">
-            <div className="relative max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-amber-400">
+          {/* Main Promotional Image - Problem/Solution */}
+          <div className="flex justify-center mb-10">
+            <div className="relative max-w-2xl w-full">
               <Image
                 src="/images/grandelash/promo-solution.png"
                 alt="GrandLash - The Problem vs The Solution - Real Results"
-                width={800}
-                height={800}
-                className="w-full h-auto"
+                width={1024}
+                height={1024}
+                className="w-full h-auto rounded-lg"
               />
             </div>
           </div>
@@ -98,9 +107,9 @@ export default function GrandeLASHPage() {
               href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
-              className="inline-block px-12 py-5 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 text-white font-bold text-xl rounded-full hover:from-amber-700 hover:via-yellow-600 hover:to-amber-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border-2 border-amber-300"
+              className="inline-block px-16 py-5 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-slate-900 font-black text-xl rounded-full hover:from-amber-600 hover:via-yellow-500 hover:to-amber-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border-4 border-amber-600 italic"
             >
-              🛍️ SHOP NOW ON AMAZON
+              SHOP NOW ON AMAZON
             </a>
           </div>
         </div>
@@ -367,7 +376,7 @@ export default function GrandeLASHPage() {
           </div>
 
           {/* Final CTA */}
-          <div className="text-center mt-12 p-8 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-2xl border-2 border-amber-300">
+          <div className="text-center mt-12 p-8 bg-gradient-to-r from-amber-200 to-yellow-200 rounded-2xl border-4 border-amber-400">
             <h3 className="text-2xl font-bold text-slate-900 mb-4">
               Ready to Transform Your Lashes?
             </h3>
@@ -378,9 +387,9 @@ export default function GrandeLASHPage() {
               href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
-              className="inline-block px-12 py-5 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 text-white font-bold text-xl rounded-full hover:from-amber-700 hover:via-yellow-600 hover:to-amber-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border-2 border-amber-300"
+              className="inline-block px-16 py-5 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-slate-900 font-black text-xl rounded-full hover:from-amber-600 hover:via-yellow-500 hover:to-amber-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border-4 border-amber-600"
             >
-              🛒 GET GRANDLASH ON AMAZON
+              GET GRANDLASH ON AMAZON
             </a>
           </div>
         </div>
