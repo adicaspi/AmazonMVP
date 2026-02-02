@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import HeroCarousel from "./HeroCarousel";
+import { AmazonButton } from "@/components/AmazonButton";
 
 export const metadata: Metadata = {
   title: "GrandLash - Grow Your Own Natural Lashes | 90,000+ Happy Customers",
@@ -67,17 +68,16 @@ export default function GrandeLASHPage() {
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
+                <AmazonButton
                   href={amazonLink}
-                  target="_blank"
-                  rel="nofollow sponsored noopener noreferrer"
+                  productName="GrandeLASH-MD"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                 >
                   <span>Shop on Amazon</span>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </a>
+                </AmazonButton>
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <svg className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -177,14 +177,13 @@ export default function GrandeLASHPage() {
                 </ul>
               </div>
 
-              <a
+              <AmazonButton
                 href={amazonLink}
-                target="_blank"
-                rel="nofollow sponsored noopener noreferrer"
+                productName="GrandeLASH-MD"
                 className="inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
               >
                 Get Your GrandLash Now
-              </a>
+              </AmazonButton>
             </div>
           </div>
         </div>
@@ -268,14 +267,13 @@ export default function GrandeLASHPage() {
           </div>
 
           <div className="text-center mt-10">
-            <a
+            <AmazonButton
               href={amazonLink}
-              target="_blank"
-              rel="nofollow sponsored noopener noreferrer"
+              productName="GrandeLASH-MD"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
               Join 90,000+ Happy Customers
-            </a>
+            </AmazonButton>
           </div>
         </div>
       </section>
@@ -313,17 +311,16 @@ export default function GrandeLASHPage() {
             Join over 90,000 women who've transformed their lashes naturally.
             Stop spending on extensions and start growing your own beautiful lashes.
           </p>
-          <a
+          <AmazonButton
             href={amazonLink}
-            target="_blank"
-            rel="nofollow sponsored noopener noreferrer"
+            productName="GrandeLASH-MD"
             className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-rose-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
             Shop Now on Amazon
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </a>
+          </AmazonButton>
           <p className="text-rose-200 text-sm mt-4">Free shipping with Amazon Prime</p>
         </div>
       </section>
@@ -351,17 +348,16 @@ export default function GrandeLASHPage() {
 
       {/* Sticky Mobile CTA */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-gray-200 p-4 md:hidden z-50">
-        <a
+        <AmazonButton
           href={amazonLink}
-          target="_blank"
-          rel="nofollow sponsored noopener noreferrer"
+          productName="GrandeLASH-MD"
           className="flex items-center justify-center gap-2 w-full py-4 bg-rose-600 text-white font-bold rounded-full shadow-lg"
         >
           <span>Shop on Amazon</span>
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
-        </a>
+        </AmazonButton>
       </div>
       <div className="h-24 md:hidden"></div>
     </div>
