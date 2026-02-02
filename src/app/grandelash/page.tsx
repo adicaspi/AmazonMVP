@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import HeroCarousel from "./HeroCarousel";
 
 export const metadata: Metadata = {
   title: "GrandLash - Grow Your Own Natural Lashes | 90,000+ Happy Customers",
@@ -86,19 +87,8 @@ export default function GrandeLASHPage() {
               </div>
             </div>
 
-            {/* Right - Product Image */}
-            <div className="relative">
-              <div className="absolute -top-4 -right-4 bg-rose-600 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg z-10">
-                #1 Best Seller
-              </div>
-              <div className="bg-gradient-to-br from-rose-100 to-pink-100 rounded-3xl p-8 shadow-2xl">
-                <img
-                  src="https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg"
-                  alt="GrandLash Serum"
-                  className="w-full max-w-sm mx-auto drop-shadow-xl"
-                />
-              </div>
-            </div>
+            {/* Right - Product Image Carousel */}
+            <HeroCarousel />
           </div>
         </div>
       </section>
