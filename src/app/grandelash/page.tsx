@@ -1,160 +1,164 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "GrandeLASH-MD: The Extension Killer That Saves You $1,800 a Year",
-  description: "Ophthalmologist-tested lash serum that gives you longer, fuller lashes in 4-6 weeks. 90,000+ 5-star reviews. Check price on Amazon.",
+  title: "GrandLash - Ditch Extensions, Grow Your Own Natural Lashes | 90,000+ Happy Customers",
+  description: "Unlock your lash potential with GrandLash serum. Real results in 8 weeks. Ophthalmologist-tested. Join 90,000+ believers. Check price on Amazon.",
 };
 
 export default function GrandeLASHPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-white via-amber-50/30 to-white py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            {/* Badge */}
-            <div className="inline-block mb-6 px-4 py-2 bg-gradient-to-r from-amber-100 to-yellow-100 border-2 border-amber-300 rounded-full">
-              <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">
-                ⭐ 90,000+ 5-Star Reviews on Amazon
-              </span>
+    <div className="min-h-screen bg-gradient-to-b from-amber-100 via-amber-50 to-amber-100">
+      {/* Hero Section - Before/After Style */}
+      <section className="relative py-8 md:py-12 bg-gradient-to-b from-amber-200 via-amber-100 to-amber-50">
+        {/* Decorative golden border */}
+        <div className="absolute inset-4 border-4 border-amber-400/50 pointer-events-none"></div>
+
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative">
+          {/* Main Headline */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 text-center mb-8 italic leading-tight">
+            Ditch the Extensions. Grow Your<br />Own Natural Lashes
+          </h1>
+
+          {/* Limited Time Offer Badge */}
+          <div className="absolute top-8 right-8 md:right-12">
+            <div className="bg-gradient-to-br from-amber-400 to-yellow-500 text-white font-bold text-xs px-4 py-3 rounded-lg shadow-lg transform rotate-3 border-2 border-amber-600">
+              <div className="flex items-center gap-1">
+                <span>⚡</span>
+                <span>LIMITED-TIME</span>
+              </div>
+              <div className="text-center">OFFER! ⚡</div>
             </div>
+          </div>
 
-            {/* Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
-              The <span className="text-amber-600">Extension Killer</span> That Saves You{" "}
-              <span className="text-amber-600">$1,800 a Year</span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-slate-700 mb-4 max-w-3xl mx-auto leading-relaxed">
-              <strong className="text-slate-900">Ophthalmologist-tested</strong> lash serum that gives you{" "}
-              <strong className="text-slate-900">longer, fuller lashes in 4–6 weeks</strong>—without the damage, cost, or maintenance of extensions.
-            </p>
-
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-6 mt-8 text-sm text-slate-600">
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>Ophthalmologist-Tested</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>Results in 4–6 Weeks</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>No Damage to Natural Lashes</span>
-              </div>
-            </div>
-
-            {/* Product Image */}
-            <div className="mt-8 mb-10 flex justify-center">
-              <img
-                src="https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg"
-                alt="GrandeLASH-MD Lash Enhancing Serum"
-                className="max-w-md w-full rounded-2xl shadow-2xl"
+          {/* Main Promotional Image - Before/After */}
+          <div className="flex justify-center mb-8">
+            <div className="relative max-w-2xl w-full">
+              <Image
+                src="/images/grandelash/promo-before-after.png"
+                alt="GrandLash Before and After Results - Ditch the Extensions, Grow Your Own Natural Lashes"
+                width={1024}
+                height={1024}
+                className="w-full h-auto rounded-lg"
+                priority
               />
             </div>
+          </div>
 
-            {/* Primary CTA */}
-            <div className="mt-10">
-              <a
-                href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
-                target="_blank"
-                rel="nofollow sponsored noopener noreferrer"
-                className="inline-block px-10 py-5 bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-bold text-lg rounded-xl hover:from-amber-700 hover:to-yellow-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
-              >
-                Check Price on Amazon →
-              </a>
-              <p className="text-xs text-slate-500 mt-3">Free shipping on orders over $25</p>
-            </div>
+          {/* Primary CTA */}
+          <div className="text-center">
+            <a
+              href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
+              target="_blank"
+              rel="nofollow sponsored noopener noreferrer"
+              className="inline-block px-16 py-5 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-slate-900 font-black text-xl rounded-full hover:from-amber-600 hover:via-yellow-500 hover:to-amber-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border-4 border-amber-600"
+            >
+              BUY NOW ON AMAZON
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Results Section - Before/After */}
+      {/* Viral Sensation Section */}
+      <section className="py-12 md:py-16 bg-gradient-to-b from-amber-200 via-amber-100 to-amber-200 relative overflow-hidden">
+        {/* Sparkle effect background */}
+        <div className="absolute inset-0 opacity-30" style={{
+          backgroundImage: `radial-gradient(circle at 20% 50%, #fbbf24 1px, transparent 1px),
+                           radial-gradient(circle at 80% 30%, #fbbf24 1px, transparent 1px),
+                           radial-gradient(circle at 40% 70%, #fbbf24 1px, transparent 1px),
+                           radial-gradient(circle at 60% 20%, #fbbf24 1px, transparent 1px)`,
+          backgroundSize: '100px 100px'
+        }}></div>
+
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative">
+          {/* Headlines */}
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-2 italic">
+              UNLOCK YOUR LASH POTENTIAL.
+            </h2>
+            <h3 className="text-2xl md:text-4xl font-black text-slate-900 italic">
+              JOIN 90,000+ BELIEVERS
+            </h3>
+
+            {/* Viral Sensation Badge */}
+            <div className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-white border-3 border-amber-500 rounded-full shadow-lg">
+              <span className="text-amber-500 text-2xl">★</span>
+              <span className="font-bold text-slate-800 text-lg">VIRAL SENSATION!</span>
+            </div>
+          </div>
+
+          {/* Main Promotional Image - Problem/Solution */}
+          <div className="flex justify-center mb-10">
+            <div className="relative max-w-2xl w-full">
+              <Image
+                src="/images/grandelash/promo-solution.png"
+                alt="GrandLash - The Problem vs The Solution - Real Results"
+                width={1024}
+                height={1024}
+                className="w-full h-auto rounded-lg"
+              />
+            </div>
+          </div>
+
+          {/* Secondary CTA */}
+          <div className="text-center">
+            <a
+              href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
+              target="_blank"
+              rel="nofollow sponsored noopener noreferrer"
+              className="inline-block px-16 py-5 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-slate-900 font-black text-xl rounded-full hover:from-amber-600 hover:via-yellow-500 hover:to-amber-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border-4 border-amber-600 italic"
+            >
+              SHOP NOW ON AMAZON
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose GrandLash Section */}
       <section className="py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Real Results. Real Lashes. Real Fast.
+              Why 90,000+ Women Chose GrandLash
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              See the transformation in just 4–6 weeks. No extensions. No damage. Just longer, fuller, naturally beautiful lashes.
+              Ditch expensive extensions. Grow your own natural, beautiful lashes.
             </p>
           </div>
 
-          {/* Before/After Comparison */}
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <div className="bg-slate-50 rounded-2xl p-8 border-2 border-slate-200">
-              <div className="text-center mb-4">
-                <span className="text-sm font-bold text-slate-500 uppercase tracking-wider">Before</span>
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {/* Benefit 1 */}
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-8 border-2 border-amber-200 text-center hover:shadow-xl transition-all">
+              <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <span className="text-4xl">💰</span>
               </div>
-              <div className="aspect-square rounded-xl overflow-hidden mb-4">
-                <img
-                  src="/images/grandelash/before.png"
-                  alt="Before using GrandeLASH-MD - short, sparse natural lashes"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="text-sm text-slate-600 text-center">Short, sparse natural lashes</p>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Save $1,800/Year</h3>
+              <p className="text-slate-600">
+                Stop spending on expensive monthly extension fills. One tube lasts 3 months.
+              </p>
             </div>
 
-            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-8 border-2 border-amber-300">
-              <div className="text-center mb-4">
-                <span className="text-sm font-bold text-amber-700 uppercase tracking-wider">After 6 Weeks</span>
+            {/* Benefit 2 */}
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-8 border-2 border-amber-200 text-center hover:shadow-xl transition-all">
+              <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <span className="text-4xl">⏱️</span>
               </div>
-              <div className="aspect-square rounded-xl overflow-hidden mb-4">
-                <img
-                  src="/images/grandelash/after.png"
-                  alt="After 6 weeks using GrandeLASH-MD - long, full, naturally enhanced lashes"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="text-sm text-amber-800 text-center font-semibold">Long, full, naturally enhanced lashes</p>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Results in 8 Weeks</h3>
+              <p className="text-slate-600">
+                See visible results fast. Longer, fuller lashes that are 100% yours.
+              </p>
             </div>
-          </div>
 
-          {/* Science of Growth */}
-          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12 text-white">
-            <h3 className="text-2xl md:text-3xl font-bold mb-6 text-center">
-              The Science of Growth
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🧬</span>
-                </div>
-                <h4 className="font-bold text-lg mb-2">Amino Acids</h4>
-                <p className="text-slate-300 text-sm">
-                  Essential building blocks that strengthen lash follicles and promote healthy growth from the root.
-                </p>
+            {/* Benefit 3 */}
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-8 border-2 border-amber-200 text-center hover:shadow-xl transition-all">
+              <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <span className="text-4xl">👁️</span>
               </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">💧</span>
-                </div>
-                <h4 className="font-bold text-lg mb-2">Hyaluronic Acid</h4>
-                <p className="text-slate-300 text-sm">
-                  Deep hydration that prevents breakage and keeps lashes flexible, reducing daily fallout.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">✨</span>
-                </div>
-                <h4 className="font-bold text-lg mb-2">Vitamin E</h4>
-                <p className="text-slate-300 text-sm">
-                  Powerful antioxidant that protects lash follicles from damage and supports natural growth cycle.
-                </p>
-              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Ophthalmologist-Tested</h3>
+              <p className="text-slate-600">
+                Safe for sensitive eyes. No damage to your natural lashes.
+              </p>
             </div>
           </div>
         </div>
@@ -172,42 +176,42 @@ export default function GrandeLASHPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl border-2 border-slate-200 overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-xl border-2 border-amber-200 overflow-hidden">
             <table className="w-full">
               <thead>
                 <tr className="bg-gradient-to-r from-slate-900 to-slate-800 text-white">
                   <th className="px-6 py-4 text-left font-bold">Comparison</th>
                   <th className="px-6 py-4 text-center font-bold">Lash Extensions</th>
-                  <th className="px-6 py-4 text-center font-bold bg-amber-600">GrandeLASH-MD</th>
+                  <th className="px-6 py-4 text-center font-bold bg-gradient-to-r from-amber-500 to-yellow-500">GrandLash</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200">
-                <tr className="hover:bg-slate-50 transition-colors">
+                <tr className="hover:bg-amber-50 transition-colors">
                   <td className="px-6 py-4 font-semibold text-slate-900">Initial Cost</td>
                   <td className="px-6 py-4 text-center text-slate-600">$150–$300</td>
                   <td className="px-6 py-4 text-center font-bold text-amber-600">$65–$85</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
+                <tr className="hover:bg-amber-50 transition-colors">
                   <td className="px-6 py-4 font-semibold text-slate-900">Monthly Maintenance</td>
                   <td className="px-6 py-4 text-center text-slate-600">$100–$150</td>
                   <td className="px-6 py-4 text-center font-bold text-amber-600">$0</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
+                <tr className="hover:bg-amber-50 transition-colors">
                   <td className="px-6 py-4 font-semibold text-slate-900">Annual Cost</td>
                   <td className="px-6 py-4 text-center text-slate-600">$1,350–$2,100</td>
                   <td className="px-6 py-4 text-center font-bold text-amber-600">$65–$85</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
+                <tr className="hover:bg-amber-50 transition-colors">
                   <td className="px-6 py-4 font-semibold text-slate-900">Time Investment</td>
                   <td className="px-6 py-4 text-center text-slate-600">2–3 hours/month</td>
                   <td className="px-6 py-4 text-center font-bold text-amber-600">30 seconds/day</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
+                <tr className="hover:bg-amber-50 transition-colors">
                   <td className="px-6 py-4 font-semibold text-slate-900">Damage to Natural Lashes</td>
                   <td className="px-6 py-4 text-center text-red-600">Yes—permanent thinning</td>
                   <td className="px-6 py-4 text-center font-bold text-emerald-600">No—strengthens lashes</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors bg-amber-50/50">
+                <tr className="hover:bg-amber-50 transition-colors bg-amber-50/50">
                   <td className="px-6 py-4 font-bold text-slate-900">Total Savings (Year 1)</td>
                   <td className="px-6 py-4 text-center text-slate-600">—</td>
                   <td className="px-6 py-4 text-center font-bold text-amber-700 text-xl">$1,265–$2,015</td>
@@ -217,14 +221,14 @@ export default function GrandeLASHPage() {
           </div>
 
           {/* CTA after table */}
-          <div className="text-center mt-8">
+          <div className="text-center mt-10">
             <a
               href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
-              className="inline-block px-10 py-5 bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-bold text-lg rounded-xl hover:from-amber-700 hover:to-yellow-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+              className="inline-block px-12 py-5 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 text-white font-bold text-xl rounded-full hover:from-amber-700 hover:via-yellow-600 hover:to-amber-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border-2 border-amber-300"
             >
-              Start Saving Today →
+              💵 Start Saving Today - Check Price
             </a>
           </div>
         </div>
@@ -234,9 +238,9 @@ export default function GrandeLASHPage() {
       <section className="py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-amber-100 to-yellow-100 border-2 border-amber-300 rounded-full">
-              <span className="text-sm font-bold text-amber-800">
-                ⭐ 90,000+ Verified 5-Star Reviews on Amazon
+            <div className="inline-block mb-4 px-6 py-3 bg-gradient-to-r from-amber-400 to-yellow-400 border-2 border-amber-500 rounded-full shadow-lg">
+              <span className="text-lg font-bold text-white">
+                ⭐ 90,000+ 5-Star Reviews on Amazon
               </span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
@@ -246,7 +250,7 @@ export default function GrandeLASHPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Testimonial 1 */}
-            <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 border-2 border-slate-200 hover:border-amber-300 transition-all shadow-lg hover:shadow-xl">
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-6 border-2 border-amber-300 hover:border-amber-400 transition-all shadow-lg hover:shadow-xl">
               <div className="flex items-center gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
@@ -255,7 +259,7 @@ export default function GrandeLASHPage() {
                 ))}
               </div>
               <p className="text-slate-700 mb-4 leading-relaxed">
-                "I was spending $150 every 3 weeks on extensions. After 6 weeks with GrandeLASH-MD, my natural lashes are longer than my extensions ever were. I've saved over $1,200 this year alone."
+                "I was spending $150 every 3 weeks on extensions. After 6 weeks with GrandLash, my natural lashes are longer than my extensions ever were. I've saved over $1,200 this year alone."
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-yellow-400 rounded-full flex items-center justify-center text-white font-bold">
@@ -263,13 +267,13 @@ export default function GrandeLASHPage() {
                 </div>
                 <div>
                   <p className="font-semibold text-slate-900">Sarah M.</p>
-                  <p className="text-xs text-slate-500">Verified Purchase</p>
+                  <p className="text-xs text-emerald-600 font-semibold">✓ Verified Purchase</p>
                 </div>
               </div>
             </div>
 
             {/* Testimonial 2 */}
-            <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 border-2 border-slate-200 hover:border-amber-300 transition-all shadow-lg hover:shadow-xl">
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-6 border-2 border-amber-300 hover:border-amber-400 transition-all shadow-lg hover:shadow-xl">
               <div className="flex items-center gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
@@ -278,7 +282,7 @@ export default function GrandeLASHPage() {
                 ))}
               </div>
               <p className="text-slate-700 mb-4 leading-relaxed">
-                "My extensions were causing my natural lashes to fall out. I switched to GrandeLASH-MD and not only did my lashes grow back, they're now longer and thicker than before. No more expensive salon visits!"
+                "My extensions were causing my natural lashes to fall out. I switched to GrandLash and not only did my lashes grow back, they're now longer and thicker than before!"
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-yellow-400 rounded-full flex items-center justify-center text-white font-bold">
@@ -286,13 +290,13 @@ export default function GrandeLASHPage() {
                 </div>
                 <div>
                   <p className="font-semibold text-slate-900">Jessica L.</p>
-                  <p className="text-xs text-slate-500">Verified Purchase</p>
+                  <p className="text-xs text-emerald-600 font-semibold">✓ Verified Purchase</p>
                 </div>
               </div>
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 border-2 border-slate-200 hover:border-amber-300 transition-all shadow-lg hover:shadow-xl">
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-6 border-2 border-amber-300 hover:border-amber-400 transition-all shadow-lg hover:shadow-xl">
               <div className="flex items-center gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
@@ -301,7 +305,7 @@ export default function GrandeLASHPage() {
                 ))}
               </div>
               <p className="text-slate-700 mb-4 leading-relaxed">
-                "I was skeptical, but after 4 weeks I saw real results. By week 8, my lashes were so long people kept asking if I had extensions. This serum is a game-changer—and so much cheaper!"
+                "I was skeptical, but after 4 weeks I saw real results. By week 8, my lashes were so long people kept asking if I had extensions. This serum is a game-changer!"
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-yellow-400 rounded-full flex items-center justify-center text-white font-bold">
@@ -309,7 +313,7 @@ export default function GrandeLASHPage() {
                 </div>
                 <div>
                   <p className="font-semibold text-slate-900">Michelle R.</p>
-                  <p className="text-xs text-slate-500">Verified Purchase</p>
+                  <p className="text-xs text-emerald-600 font-semibold">✓ Verified Purchase</p>
                 </div>
               </div>
             </div>
@@ -318,7 +322,7 @@ export default function GrandeLASHPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50">
+      <section className="py-16 md:py-20 bg-gradient-to-b from-white to-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
@@ -331,65 +335,61 @@ export default function GrandeLASHPage() {
 
           <div className="space-y-6">
             {/* FAQ 1 */}
-            <div className="bg-white rounded-xl p-6 border-2 border-slate-200 hover:border-amber-300 transition-all shadow-md">
+            <div className="bg-white rounded-xl p-6 border-2 border-amber-200 hover:border-amber-400 transition-all shadow-md">
               <h3 className="text-xl font-bold text-slate-900 mb-3">
                 Is it safe for sensitive eyes?
               </h3>
               <p className="text-slate-700 leading-relaxed">
-                Yes. GrandeLASH-MD is <strong>ophthalmologist-tested</strong> and safe for sensitive eyes and contact lens wearers. The formula is free of prostaglandins, which can cause eye irritation. However, if you have a history of eye conditions, we recommend consulting with your eye doctor before use.
+                Yes. GrandLash is <strong>ophthalmologist-tested</strong> and safe for sensitive eyes and contact lens wearers. The formula is gentle and designed for daily use. However, if you have a history of eye conditions, we recommend consulting with your eye doctor before use.
               </p>
             </div>
 
             {/* FAQ 2 */}
-            <div className="bg-white rounded-xl p-6 border-2 border-slate-200 hover:border-amber-300 transition-all shadow-md">
+            <div className="bg-white rounded-xl p-6 border-2 border-amber-200 hover:border-amber-400 transition-all shadow-md">
               <h3 className="text-xl font-bold text-slate-900 mb-3">
                 How long does one tube last?
               </h3>
               <p className="text-slate-700 leading-relaxed">
-                One 2ml tube lasts approximately <strong>3 months</strong> with daily use (one swipe along the lash line). That's about <strong>$0.70 per day</strong>—less than your morning coffee. Compare that to $150 every 3 weeks for extensions, and the savings are undeniable.
+                One tube lasts approximately <strong>3 months</strong> with daily use. That's about <strong>$0.70 per day</strong>—less than your morning coffee. Compare that to $150 every 3 weeks for extensions, and the savings are undeniable.
               </p>
             </div>
 
             {/* FAQ 3 */}
-            <div className="bg-white rounded-xl p-6 border-2 border-slate-200 hover:border-amber-300 transition-all shadow-md">
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
-                What happens if I stop using it?
-              </h3>
-              <p className="text-slate-700 leading-relaxed">
-                Your lashes will gradually return to their natural length over several weeks—<strong>unlike extensions, which can cause permanent damage</strong>. The good news? Many users find that after 3–6 months of use, their natural lash growth cycle has improved, so even after stopping, their lashes remain longer than before they started.
-              </p>
-            </div>
-
-            {/* FAQ 4 */}
-            <div className="bg-white rounded-xl p-6 border-2 border-slate-200 hover:border-amber-300 transition-all shadow-md">
+            <div className="bg-white rounded-xl p-6 border-2 border-amber-200 hover:border-amber-400 transition-all shadow-md">
               <h3 className="text-xl font-bold text-slate-900 mb-3">
                 How quickly will I see results?
               </h3>
               <p className="text-slate-700 leading-relaxed">
-                Most users notice <strong>visible results in 4–6 weeks</strong>, with full results appearing by 8–12 weeks. This is because the serum works with your natural lash growth cycle, strengthening lashes from the root. Unlike extensions that give instant (but temporary) results, GrandeLASH-MD creates lasting, natural beauty.
+                Most users notice <strong>visible results in 4–6 weeks</strong>, with full results appearing by 8 weeks. This is because the serum works with your natural lash growth cycle, strengthening lashes from the root for lasting, natural beauty.
               </p>
             </div>
 
-            {/* FAQ 5 */}
-            <div className="bg-white rounded-xl p-6 border-2 border-slate-200 hover:border-amber-300 transition-all shadow-md">
+            {/* FAQ 4 */}
+            <div className="bg-white rounded-xl p-6 border-2 border-amber-200 hover:border-amber-400 transition-all shadow-md">
               <h3 className="text-xl font-bold text-slate-900 mb-3">
-                Can I use it with mascara and extensions?
+                Can I use it with mascara?
               </h3>
               <p className="text-slate-700 leading-relaxed">
-                Yes, you can use mascara. Apply GrandeLASH-MD at night after removing makeup. However, <strong>we don't recommend using it with extensions</strong>, as the serum works best on natural lashes. Many users transition from extensions to GrandeLASH-MD and find they no longer need extensions once their natural lashes grow.
+                Yes! Apply GrandLash at night after removing makeup, and you can wear mascara during the day. Many users find they need less mascara once their lashes grow longer and fuller.
               </p>
             </div>
           </div>
 
-          {/* CTA after FAQ */}
-          <div className="text-center mt-12">
+          {/* Final CTA */}
+          <div className="text-center mt-12 p-8 bg-gradient-to-r from-amber-200 to-yellow-200 rounded-2xl border-4 border-amber-400">
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">
+              Ready to Transform Your Lashes?
+            </h3>
+            <p className="text-slate-700 mb-6">
+              Join 90,000+ women who ditched extensions for real, natural lashes.
+            </p>
             <a
               href="https://www.amazon.com/dp/B082WZTJV5?social_share=cm_sw_r_cso_wa_mwn_dp_XXB3TP0Q34EC7FSE4TET&badgeInsights=bestseller-insights&th=1&linkCode=ll1&tag=aipicks20-20&linkId=8730dd8a3b2b424aef19cacfd6dd5aa6&language=en_US&ref_=as_li_ss_tl"
               target="_blank"
               rel="nofollow sponsored noopener noreferrer"
-              className="inline-block px-10 py-5 bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-bold text-lg rounded-xl hover:from-amber-700 hover:to-yellow-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+              className="inline-block px-16 py-5 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-slate-900 font-black text-xl rounded-full hover:from-amber-600 hover:via-yellow-500 hover:to-amber-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border-4 border-amber-600"
             >
-              Get Your GrandeLASH-MD on Amazon →
+              GET GRANDLASH ON AMAZON
             </a>
           </div>
         </div>
