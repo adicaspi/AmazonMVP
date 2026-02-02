@@ -16,7 +16,7 @@ export default function GrandeLASHPage() {
           {/* Main Promotional Image */}
           <div className="mb-8">
             <Image
-              src="/images/grandelash/promo-before-after.png"
+              src="/images/grandelash/promo-before-after.jpeg"
               alt="GrandLash Before and After Results"
               width={1024}
               height={1024}
@@ -45,7 +45,7 @@ export default function GrandeLASHPage() {
         <div className="max-w-4xl mx-auto px-4">
           <div className="mb-8">
             <Image
-              src="/images/grandelash/promo-solution.png"
+              src="/images/grandelash/promo-solution.jpeg"
               alt="GrandLash - The Problem vs The Solution"
               width={1024}
               height={1024}
