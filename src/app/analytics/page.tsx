@@ -19,9 +19,14 @@ type AmazonClick = {
   page: string;
 };
 
+type PageView = {
+  id: string;
+  timestamp: string;
+  page: string;
+};
+
 async function getAmazonClicks(): Promise<AmazonClick[]> {
   try {
-    // Read from Supabase
     if (supabase && (await isDatabaseAvailable())) {
       const { data, error } = await supabase
         .from("amazon_clicks")
@@ -36,6 +41,24 @@ async function getAmazonClicks(): Promise<AmazonClick[]> {
     return [];
   } catch {
     return [];
+  }
+}
+
+async function getPageViews(page: string): Promise<number> {
+  try {
+    if (supabase && (await isDatabaseAvailable())) {
+      const { count, error } = await supabase
+        .from("page_views")
+        .select("*", { count: "exact", head: true })
+        .eq("page", page);
+
+      if (!error && count !== null) {
+        return count;
+      }
+    }
+    return 0;
+  } catch {
+    return 0;
   }
 }
 
@@ -123,6 +146,12 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
 export default async function AnalyticsPage() {
   const amazonClicks = await getAmazonClicks();
   const grandeLashStats = getClickStats(amazonClicks, "/grandelash");
+  const grandeLashViews = await getPageViews("/grandelash");
+
+  // Calculate conversion rate
+  const conversionRate = grandeLashViews > 0
+    ? ((grandeLashStats.total / grandeLashViews) * 100).toFixed(1)
+    : "0";
 
   // Calculate today's clicks
   const today = new Date().toISOString().split("T")[0];
@@ -156,6 +185,77 @@ export default async function AnalyticsPage() {
       </header>
 
       <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+        {/* Conversion Funnel */}
+        <section>
+          <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+            <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+            משפך המרה
+          </h2>
+          <p className="text-sm text-gray-500 mb-4">
+            כמה אנשים ביקרו בעמוד וכמה מהם לחצו לאמזון
+          </p>
+
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+            <div className="flex items-center justify-between gap-4">
+              {/* Views */}
+              <div className="flex-1 text-center">
+                <div className="text-4xl font-bold text-gray-900">{grandeLashViews}</div>
+                <div className="text-sm text-gray-500 mt-1">צפיות בעמוד</div>
+                <div className="text-xs text-gray-400 mt-1">אנשים שנכנסו לעמוד GrandeLash</div>
+              </div>
+
+              {/* Arrow */}
+              <div className="flex flex-col items-center px-4">
+                <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+                <div className="text-lg font-bold text-emerald-600 mt-1">{conversionRate}%</div>
+                <div className="text-xs text-gray-400">המרה</div>
+              </div>
+
+              {/* Clicks */}
+              <div className="flex-1 text-center">
+                <div className="text-4xl font-bold text-emerald-600">{grandeLashStats.total}</div>
+                <div className="text-sm text-gray-500 mt-1">לחיצות לאמזון</div>
+                <div className="text-xs text-gray-400 mt-1">אנשים שלחצו על כפתור לאמזון</div>
+              </div>
+            </div>
+
+            {/* Visual funnel bar */}
+            <div className="mt-6 space-y-2">
+              <div className="flex items-center gap-3">
+                <div className="w-20 text-sm text-gray-500 text-right">צפיות</div>
+                <div className="flex-1 h-8 bg-gray-100 rounded-lg overflow-hidden">
+                  <div className="h-full bg-gray-400 rounded-lg" style={{ width: "100%" }}></div>
+                </div>
+                <div className="w-12 text-sm font-medium text-gray-700">{grandeLashViews}</div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-20 text-sm text-gray-500 text-right">לחיצות</div>
+                <div className="flex-1 h-8 bg-gray-100 rounded-lg overflow-hidden">
+                  <div
+                    className="h-full bg-emerald-500 rounded-lg transition-all duration-500"
+                    style={{ width: `${grandeLashViews > 0 ? (grandeLashStats.total / grandeLashViews) * 100 : 0}%` }}
+                  ></div>
+                </div>
+                <div className="w-12 text-sm font-medium text-emerald-600">{grandeLashStats.total}</div>
+              </div>
+            </div>
+
+            {/* Interpretation */}
+            {grandeLashViews > 0 && (
+              <div className="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
+                <p className="text-sm text-emerald-800">
+                  <strong>{conversionRate}%</strong> מהמבקרים לוחצים לאמזון.
+                  {parseFloat(conversionRate) >= 30 && " זה שיעור המרה מעולה! 🎉"}
+                  {parseFloat(conversionRate) >= 15 && parseFloat(conversionRate) < 30 && " זה שיעור המרה טוב."}
+                  {parseFloat(conversionRate) < 15 && " יש מקום לשיפור - נסה לשפר את ה-CTA או את התוכן."}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* Quick Stats */}
         <section>
           <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">

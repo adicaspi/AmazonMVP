@@ -4,6 +4,7 @@ import Image from "next/image";
 import HeroCarousel from "./HeroCarousel";
 import { AmazonButton } from "@/components/AmazonButton";
 import { ViewContentTracker } from "@/components/ViewContentTracker";
+import { PageViewTracker } from "@/components/PageViewTracker";
 
 export const metadata: Metadata = {
   title: "GrandLash - Grow Your Own Natural Lashes | 90,000+ Happy Customers",
@@ -20,6 +21,7 @@ export default function GrandeLASHPage() {
         productId="grandelash"
         category="Beauty"
       />
+      <PageViewTracker page="/grandelash" />
       {/* Announcement Bar */}
       <div className="bg-rose-600 text-white text-center py-2 px-4 text-sm font-medium">
         ⭐ Over 90,000 Five-Star Reviews on Amazon ⭐
