@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import HeroCarousel from "./HeroCarousel";
 import { AmazonButton } from "@/components/AmazonButton";
+import { ViewContentTracker } from "@/components/ViewContentTracker";
 
 export const metadata: Metadata = {
   title: "GrandLash - Grow Your Own Natural Lashes | 90,000+ Happy Customers",
@@ -14,6 +15,11 @@ export default function GrandeLASHPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <ViewContentTracker
+        productName="GrandeLASH-MD Lash Enhancing Serum"
+        productId="grandelash"
+        category="Beauty"
+      />
       {/* Announcement Bar */}
       <div className="bg-rose-600 text-white text-center py-2 px-4 text-sm font-medium">
         ⭐ Over 90,000 Five-Star Reviews on Amazon ⭐
