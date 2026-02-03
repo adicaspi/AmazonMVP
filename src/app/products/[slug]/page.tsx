@@ -6,6 +6,7 @@ import { SpecsTable } from "@/components/SpecsTable";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductCTA } from "@/components/ProductCTA";
 import { WhyAIPicksRecommends } from "@/components/WhyAIPicksRecommends";
+import { ViewContentTracker } from "@/components/ViewContentTracker";
 import { products } from "@/lib/products-data";
 import type { Metadata } from "next";
 
@@ -139,6 +140,11 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
+      <ViewContentTracker
+        productName={product.title}
+        productId={product.id}
+        category={product.room}
+      />
       <article>
         {/* Above the Fold Section - Optimized for visibility, no image */}
         <div className="mb-8 sm:mb-12">
