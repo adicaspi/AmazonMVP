@@ -10,13 +10,23 @@ const images = [
     isExternal: true,
   },
   {
-    src: "/images/grandelash/promo-before-after.jpeg",
-    alt: "Before and After Results",
-    isExternal: false,
+    src: "https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg",
+    alt: "Real Customer Results - Before and After",
+    isExternal: true,
   },
   {
-    src: "/images/grandelash/promo-solution.jpeg",
-    alt: "GrandLash Solution",
+    src: "https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg",
+    alt: "Customer Transformation Results",
+    isExternal: true,
+  },
+  {
+    src: "https://res.cloudinary.com/dzkgopplv/image/upload/v1770125472/WhatsApp_Image_2026-02-03_at_09.48.01_hh0bs8.jpg",
+    alt: "Amazing Lash Growth Results",
+    isExternal: true,
+  },
+  {
+    src: "/images/grandelash/promo-before-after.jpeg",
+    alt: "Before and After Results",
     isExternal: false,
   },
 ];
