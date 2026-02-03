@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type RecentClick = {
   id: string;
@@ -230,11 +231,20 @@ export default function AnalyticsDashboard({
   peakHour,
   trafficSources,
 }: Props) {
+  const router = useRouter();
   const [lang, setLang] = useState<"he" | "en">("he");
   const [darkMode, setDarkMode] = useState(false);
   const t = translations[lang];
   const isRTL = lang === "he";
   const today = new Date().toISOString().split("T")[0];
+
+  // Auto-refresh every 10 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      router.refresh();
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [router]);
 
   // Auto-detect system dark mode preference
   useEffect(() => {
