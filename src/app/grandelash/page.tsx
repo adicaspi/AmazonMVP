@@ -105,28 +105,28 @@ export default function GrandeLASHPage() {
       </section>
 
       {/* Social Proof Bar - Enhanced */}
-      <section className="bg-gray-900 text-white py-8">
+      <section className="bg-gradient-to-r from-rose-100 via-pink-50 to-rose-100 py-8 border-y border-rose-200">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="flex flex-col items-center">
               <span className="text-3xl mb-2">⭐</span>
-              <div className="text-2xl md:text-3xl font-bold text-amber-400">90,000+</div>
-              <div className="text-sm text-gray-400">5-Star Reviews</div>
+              <div className="text-2xl md:text-3xl font-bold text-rose-600">90,000+</div>
+              <div className="text-sm text-gray-600">5-Star Reviews</div>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-3xl mb-2">🏆</span>
-              <div className="text-2xl md:text-3xl font-bold text-amber-400">#1</div>
-              <div className="text-sm text-gray-400">Best Seller on Amazon</div>
+              <div className="text-2xl md:text-3xl font-bold text-rose-600">#1</div>
+              <div className="text-sm text-gray-600">Best Seller on Amazon</div>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-3xl mb-2">👁️</span>
-              <div className="text-2xl md:text-3xl font-bold text-green-400">Tested</div>
-              <div className="text-sm text-gray-400">Ophthalmologist Approved</div>
+              <div className="text-2xl md:text-3xl font-bold text-rose-600">Tested</div>
+              <div className="text-sm text-gray-600">Ophthalmologist Approved</div>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-3xl mb-2">🐰</span>
-              <div className="text-2xl md:text-3xl font-bold text-pink-400">100%</div>
-              <div className="text-sm text-gray-400">Cruelty Free</div>
+              <div className="text-2xl md:text-3xl font-bold text-rose-600">100%</div>
+              <div className="text-sm text-gray-600">Cruelty Free</div>
             </div>
           </div>
         </div>
@@ -411,9 +411,9 @@ export default function GrandeLASHPage() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 md:gap-8 max-w-2xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black aspect-[9/16]">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
               <video
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain rounded-xl"
                 controls
                 playsInline
                 preload="metadata"
@@ -421,15 +421,15 @@ export default function GrandeLASHPage() {
               >
                 <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4" type="video/mp4" />
               </video>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+              <div className="absolute bottom-2 left-2 right-2 bg-rose-600/90 backdrop-blur-sm p-3 rounded-xl">
                 <p className="text-white font-semibold text-sm md:text-base">Real Customer Review</p>
-                <p className="text-rose-200 text-xs md:text-sm">Amazing results in 8 weeks!</p>
+                <p className="text-rose-100 text-xs md:text-sm">Amazing results in 8 weeks!</p>
               </div>
             </div>
 
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black aspect-[9/16]">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
               <video
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain rounded-xl"
                 controls
                 playsInline
                 preload="metadata"
@@ -437,9 +437,9 @@ export default function GrandeLASHPage() {
               >
                 <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125528/WhatsApp_Video_2026-02-01_at_18.10.00_ayx8jr.mp4" type="video/mp4" />
               </video>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+              <div className="absolute bottom-2 left-2 right-2 bg-rose-600/90 backdrop-blur-sm p-3 rounded-xl">
                 <p className="text-white font-semibold text-sm md:text-base">Before & After</p>
-                <p className="text-rose-200 text-xs md:text-sm">See the transformation!</p>
+                <p className="text-rose-100 text-xs md:text-sm">See the transformation!</p>
               </div>
             </div>
           </div>
