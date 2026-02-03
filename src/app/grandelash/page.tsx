@@ -149,47 +149,73 @@ export default function GrandeLASHPage() {
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-xl overflow-x-auto">
-            <table className="w-full text-xs md:text-base">
+          {/* Mobile: Card Layout */}
+          <div className="md:hidden space-y-3">
+            {[
+              { label: "Your Lashes", good: "Real", bad: "Fake" },
+              { label: "Time", good: "30 sec/day", bad: "2-3 hours" },
+              { label: "Cost/Year", good: "~$280", bad: "$2,000+" },
+              { label: "Safety", good: "Doctor Tested", bad: "Glue" },
+              { label: "Health", good: "Strengthens", bad: "Damages" },
+            ].map((row, i) => (
+              <div key={i} className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
+                <div className="text-xs text-gray-500 mb-2 font-medium">{row.label}</div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="bg-green-50 rounded-lg p-2 text-center">
+                    <div className="text-xs text-gray-500 mb-1">GrandLash</div>
+                    <div className="text-green-600 font-bold text-sm">{row.good}</div>
+                  </div>
+                  <div className="bg-red-50 rounded-lg p-2 text-center">
+                    <div className="text-xs text-gray-500 mb-1">Extensions</div>
+                    <div className="text-red-500 font-bold text-sm">{row.bad}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop: Table Layout */}
+          <div className="hidden md:block overflow-hidden rounded-2xl border border-gray-200 shadow-xl">
+            <table className="w-full">
               <thead>
                 <tr className="bg-gray-50">
-                  <th className="px-2 py-2 md:px-6 md:py-4 text-left text-gray-500 font-medium"></th>
-                  <th className="px-2 py-2 md:px-6 md:py-4 text-center">
+                  <th className="px-6 py-4 text-left text-gray-500 font-medium"></th>
+                  <th className="px-6 py-4 text-center">
                     <div className="flex flex-col items-center">
-                      <span className="text-rose-600 font-bold text-sm md:text-lg">GrandLash</span>
-                      <span className="text-green-500 text-xs md:text-sm">✓ Recommended</span>
+                      <span className="text-rose-600 font-bold text-lg">GrandLash</span>
+                      <span className="text-green-500 text-sm">✓ Recommended</span>
                     </div>
                   </th>
-                  <th className="px-2 py-2 md:px-6 md:py-4 text-center">
-                    <span className="text-gray-600 font-bold text-sm md:text-lg">Extensions</span>
+                  <th className="px-6 py-4 text-center">
+                    <span className="text-gray-600 font-bold text-lg">Extensions</span>
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 <tr>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-gray-700 font-medium">Your Lashes</td>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-center text-green-600 font-semibold">Real Lashes</td>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-center text-red-500">Fake</td>
+                  <td className="px-6 py-4 text-gray-700 font-medium">Your Lashes</td>
+                  <td className="px-6 py-4 text-center text-green-600 font-semibold">Grows Your Real Lashes</td>
+                  <td className="px-6 py-4 text-center text-red-500">Fake Lashes</td>
                 </tr>
                 <tr className="bg-gray-50">
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-gray-700 font-medium">Time</td>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-center text-green-600 font-semibold">30 Sec/Day</td>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-center text-red-500">2-3 Hours</td>
+                  <td className="px-6 py-4 text-gray-700 font-medium">Time Required</td>
+                  <td className="px-6 py-4 text-center text-green-600 font-semibold">30 Seconds / Day</td>
+                  <td className="px-6 py-4 text-center text-red-500">2-3 Hours at Salon</td>
                 </tr>
                 <tr>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-gray-700 font-medium">Cost/Year</td>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-center text-green-600 font-semibold">~$280</td>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-center text-red-500">$2,000+</td>
+                  <td className="px-6 py-4 text-gray-700 font-medium">Annual Cost</td>
+                  <td className="px-6 py-4 text-center text-green-600 font-semibold">~$280/year</td>
+                  <td className="px-6 py-4 text-center text-red-500">$2,000+/year</td>
                 </tr>
                 <tr className="bg-gray-50">
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-gray-700 font-medium">Safety</td>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-center text-green-600 font-semibold">Doctor Tested</td>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-center text-red-500">Glue</td>
+                  <td className="px-6 py-4 text-gray-700 font-medium">Safety</td>
+                  <td className="px-6 py-4 text-center text-green-600 font-semibold">Ophthalmologist Tested</td>
+                  <td className="px-6 py-4 text-center text-red-500">Glue & Chemicals</td>
                 </tr>
                 <tr>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-gray-700 font-medium">Health</td>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-center text-green-600 font-semibold">Strengthens</td>
-                  <td className="px-2 py-2 md:px-6 md:py-4 text-center text-red-500">Damages</td>
+                  <td className="px-6 py-4 text-gray-700 font-medium">Lash Health</td>
+                  <td className="px-6 py-4 text-center text-green-600 font-semibold">Strengthens Lashes</td>
+                  <td className="px-6 py-4 text-center text-red-500">Damages Natural Lashes</td>
                 </tr>
               </tbody>
             </table>
