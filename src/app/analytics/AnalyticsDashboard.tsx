@@ -21,6 +21,7 @@ interface Props {
   byDay: Record<string, number>;
   recentClicks: RecentClick[];
   peakHour: number | null;
+  trafficSources: Record<string, number>;
 }
 
 // Translations
@@ -80,6 +81,12 @@ const translations = {
     helpWorkingDesc: "אם יש לחיצות, העמוד עובד! הצעד הבא הוא לבדוק בחשבון Amazon Associates כמה מהלחיצות האלה הפכו לרכישות בפועל.",
     helpPixel: "מה עם Facebook Pixel?",
     helpPixelDesc: "כל לחיצה נשלחת גם ל-Facebook כ-\"Lead\". אפשר לראות את זה ב-Events Manager ולהשתמש בזה לretargeting.",
+    trafficSources: "מקורות תנועה",
+    trafficSourcesDesc: "מאיפה המבקרים הגיעו לעמוד",
+    direct: "ישיר",
+    noTrafficData: "אין נתונים על מקורות תנועה",
+    noTrafficDataDesc: "ברגע שיהיו מבקרים, תראה מאיפה הם הגיעו",
+    visitors: "מבקרים",
     conversionExcellent: "זה שיעור המרה מעולה! 🎉",
     conversionGood: "זה שיעור המרה טוב.",
     conversionImprove: "יש מקום לשיפור - נסה לשפר את ה-CTA או את התוכן.",
@@ -143,6 +150,12 @@ const translations = {
     helpWorkingDesc: "If there are clicks, the page is working! Next step is to check your Amazon Associates account to see how many clicks became actual purchases.",
     helpPixel: "What about Facebook Pixel?",
     helpPixelDesc: "Every click is also sent to Facebook as a \"Lead\" event. You can see it in Events Manager and use it for retargeting.",
+    trafficSources: "Traffic Sources",
+    trafficSourcesDesc: "Where visitors came from",
+    direct: "Direct",
+    noTrafficData: "No traffic source data",
+    noTrafficDataDesc: "Once visitors arrive, you'll see where they came from",
+    visitors: "visitors",
     conversionExcellent: "That's an excellent conversion rate! 🎉",
     conversionGood: "That's a good conversion rate.",
     conversionImprove: "Room for improvement - try to improve the CTA or content.",
@@ -215,6 +228,7 @@ export default function AnalyticsDashboard({
   byDay,
   recentClicks,
   peakHour,
+  trafficSources,
 }: Props) {
   const [lang, setLang] = useState<"he" | "en">("he");
   const t = translations[lang];
@@ -334,6 +348,73 @@ export default function AnalyticsDashboard({
               </div>
             )}
           </div>
+        </section>
+
+        {/* Traffic Sources */}
+        <section>
+          <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+            <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+            {t.trafficSources}
+          </h2>
+          <p className="text-sm text-gray-500 mb-4">{t.trafficSourcesDesc}</p>
+
+          {Object.keys(trafficSources).length > 0 ? (
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+              <div className="divide-y divide-gray-100">
+                {Object.entries(trafficSources)
+                  .sort(([, a], [, b]) => b - a)
+                  .map(([source, count], index) => {
+                    const percentage = views > 0 ? (count / views) * 100 : 0;
+                    const isTop = index === 0;
+                    const displaySource = source === "Direct" ? t.direct : source;
+
+                    // Get icon for source
+                    let icon = "🌐";
+                    if (source.includes("facebook") || source === "fb") icon = "📘";
+                    else if (source.includes("instagram")) icon = "📸";
+                    else if (source.includes("google")) icon = "🔍";
+                    else if (source.includes("tiktok")) icon = "🎵";
+                    else if (source === "Direct") icon = "🔗";
+
+                    return (
+                      <div key={source} className="p-4 hover:bg-gray-50 transition">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <span className="text-lg">{icon}</span>
+                            {isTop && (
+                              <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-medium">
+                                #1
+                              </span>
+                            )}
+                            <span className="font-medium text-gray-900">{displaySource}</span>
+                          </div>
+                          <div className={isRTL ? "text-left" : "text-right"}>
+                            <div className="font-bold text-gray-900">{count}</div>
+                            <div className="text-xs text-gray-500">{percentage.toFixed(1)}%</div>
+                          </div>
+                        </div>
+                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                          <div
+                            className={`h-full rounded-full transition-all duration-500 ${
+                              isTop
+                                ? "bg-gradient-to-r from-purple-500 to-pink-500"
+                                : "bg-gradient-to-r from-gray-400 to-gray-500"
+                            }`}
+                            style={{ width: `${percentage}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+          ) : (
+            <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
+              <div className="text-gray-400 text-4xl mb-3">🌐</div>
+              <p className="text-gray-500">{t.noTrafficData}</p>
+              <p className="text-sm text-gray-400 mt-1">{t.noTrafficDataDesc}</p>
+            </div>
+          )}
         </section>
 
         {/* Quick Stats */}

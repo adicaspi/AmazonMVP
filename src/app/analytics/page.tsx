@@ -55,6 +55,42 @@ async function getPageViews(page: string): Promise<number> {
   }
 }
 
+async function getTrafficSources(page: string): Promise<Record<string, number>> {
+  try {
+    if (supabase && (await isDatabaseAvailable())) {
+      const { data, error } = await supabase
+        .from("page_views")
+        .select("utm_source, referer")
+        .eq("page", page)
+        .limit(1000);
+
+      if (!error && data) {
+        const sources: Record<string, number> = {};
+        data.forEach((view: any) => {
+          let source = "Direct";
+
+          if (view.utm_source) {
+            source = view.utm_source;
+          } else if (view.referer) {
+            try {
+              const url = new URL(view.referer);
+              source = url.hostname.replace("www.", "");
+            } catch {
+              source = view.referer;
+            }
+          }
+
+          sources[source] = (sources[source] || 0) + 1;
+        });
+        return sources;
+      }
+    }
+    return {};
+  } catch {
+    return {};
+  }
+}
+
 function getClickStats(clicks: AmazonClick[], page?: string) {
   const filtered = page ? clicks.filter((c) => c.page === page) : clicks;
 
@@ -92,6 +128,7 @@ export default async function AnalyticsPage() {
   const amazonClicks = await getAmazonClicks();
   const grandeLashStats = getClickStats(amazonClicks, "/grandelash");
   let grandeLashViews = await getPageViews("/grandelash");
+  const trafficSources = await getTrafficSources("/grandelash");
 
   // Fix: Views should always be >= clicks (can't click without viewing)
   if (grandeLashViews < grandeLashStats.total) {
@@ -118,6 +155,7 @@ export default async function AnalyticsPage() {
       byDay={grandeLashStats.byDay}
       recentClicks={grandeLashStats.recentClicks}
       peakHour={grandeLashStats.peakHour}
+      trafficSources={trafficSources}
     />
   );
 }
