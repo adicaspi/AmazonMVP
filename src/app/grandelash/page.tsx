@@ -39,7 +39,7 @@ export default function GrandeLASHPage() {
 
               {/* Main Headline */}
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
-                Grow <span className="text-rose-600">Longer, Thicker</span> Natural Lashes in Just 8 Weeks
+                Grow <span className="text-rose-600">Longer, Thicker</span> Natural Lashes in Just <span className="text-rose-600">8 Weeks</span>
               </h1>
 
               {/* Subheadline - More emotional */}
@@ -49,7 +49,7 @@ export default function GrandeLASHPage() {
 
               {/* Social Proof Line - Enhanced */}
               <p className="text-base text-gray-700 mb-6 font-medium">
-                Clinically tested lash serum trusted by <span className="text-rose-600 font-bold">90,000+ real women worldwide</span>
+                Clinically tested lash serum — trusted by <span className="text-rose-600 font-bold">90,000+ real women worldwide</span>
               </p>
 
               {/* CTA Button */}
@@ -66,15 +66,15 @@ export default function GrandeLASHPage() {
                 </AmazonButton>
               </div>
 
-              {/* Trust Elements Under CTA - Enhanced */}
+              {/* Trust Elements Under CTA - Reordered */}
               <div className="flex flex-col gap-2 text-sm text-gray-600 mb-4">
                 <div className="flex items-center gap-2">
                   <span className="text-green-500 font-bold">✓</span>
-                  <span>Free Prime Shipping</span>
+                  <span><strong>Results or Your Money Back</strong></span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-green-500 font-bold">✓</span>
-                  <span><strong>Results or Your Money Back</strong></span>
+                  <span>Free Prime Shipping</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-green-500 font-bold">✓</span>
@@ -82,7 +82,7 @@ export default function GrandeLASHPage() {
                 </div>
               </div>
 
-              {/* Rating - More tangible */}
+              {/* Rating - Amazon trust */}
               <div className="flex items-center gap-2 text-sm">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
@@ -92,12 +92,12 @@ export default function GrandeLASHPage() {
                   ))}
                 </div>
                 <span className="font-semibold">4.8/5</span>
-                <span className="text-gray-600">Rated by <strong>90,000+ Verified Buyers</strong></span>
+                <span className="text-gray-600">from <strong>90,000+ Verified Amazon Buyers</strong></span>
               </div>
 
-              {/* FOMO Line */}
+              {/* FOMO Line - Shorter */}
               <p className="text-xs text-gray-500 mt-2 italic">
-                One of Amazon's top-selling lash serums this month
+                Amazon Best-Seller This Month
               </p>
             </div>
 
