@@ -46,8 +46,8 @@ export default function GrandeLASHPage() {
               </h1>
 
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                The #1 lash serum trusted by over <strong className="text-gray-900">90,000 women</strong>.
-                Clinically proven results in just 8 weeks. Save $1,800/year compared to extensions.
+                <strong className="text-gray-900">The Best-Selling Lash Serum on Amazon</strong><br />
+                Longer. Thicker. Natural Lashes in 8 Weeks.
               </p>
 
               {/* Trust Badges */}
@@ -72,6 +72,19 @@ export default function GrandeLASHPage() {
                 </div>
               </div>
 
+              {/* Trust Line */}
+              <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-600 mb-4">
+                <span className="flex items-center gap-1">
+                  <span className="text-green-500">✓</span> Free Shipping on Amazon
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="text-green-500">✓</span> 30-Day Money Back Guarantee
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="text-green-500">✓</span> Official Brand Store
+                </span>
+              </div>
+
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <AmazonButton
@@ -79,7 +92,7 @@ export default function GrandeLASHPage() {
                   productName="GrandeLASH-MD"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                 >
-                  <span>Shop on Amazon</span>
+                  <span>Buy Now on Amazon</span>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -192,6 +205,20 @@ export default function GrandeLASHPage() {
               </AmazonButton>
             </div>
           </div>
+
+          {/* CTA After Real Results */}
+          <div className="text-center mt-12">
+            <AmazonButton
+              href={amazonLink}
+              productName="GrandeLASH-MD"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              Buy Now on Amazon
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+          </div>
         </div>
       </section>
 
@@ -293,10 +320,9 @@ export default function GrandeLASHPage() {
 
           <div className="space-y-4">
             {[
-              { q: "Is it safe for sensitive eyes?", a: "Yes! GrandLash is ophthalmologist-tested and safe for sensitive eyes and contact lens wearers." },
-              { q: "How long does one tube last?", a: "One tube lasts approximately 3 months with daily use - that's less than $1 per day!" },
-              { q: "When will I see results?", a: "Most users notice visible results in 4-6 weeks, with full results by 8-12 weeks." },
-              { q: "Can I use it with mascara?", a: "Absolutely! Apply GrandLash at night, and wear your favorite mascara during the day." }
+              { q: "Does it really work?", a: "Clinically proven to show visible lash growth in 8 weeks." },
+              { q: "Is it safe for sensitive eyes?", a: "Ophthalmologist tested, cruelty-free and safe for daily use." },
+              { q: "How long does one tube last?", a: "One tube lasts up to 3 months." }
             ].map((faq, i) => (
               <div key={i} className="bg-white rounded-xl p-6 shadow-sm">
                 <h3 className="font-bold text-lg text-gray-900 mb-2">{faq.q}</h3>
@@ -322,7 +348,7 @@ export default function GrandeLASHPage() {
             productName="GrandeLASH-MD"
             className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-rose-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
-            Shop Now on Amazon
+            Buy Now on Amazon
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -359,7 +385,7 @@ export default function GrandeLASHPage() {
           productName="GrandeLASH-MD"
           className="flex items-center justify-center gap-2 w-full py-4 bg-rose-600 text-white font-bold rounded-full shadow-lg"
         >
-          <span>Shop on Amazon</span>
+          <span>Buy Now on Amazon</span>
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
