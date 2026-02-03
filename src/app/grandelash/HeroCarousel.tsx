@@ -13,13 +13,6 @@ type MediaItem = {
 
 const mediaItems: MediaItem[] = [
   {
-    type: "video",
-    src: "https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4",
-    alt: "Real Customer Results Video",
-    isExternal: true,
-    poster: "https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg",
-  },
-  {
     type: "image",
     src: "https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg",
     alt: "GrandLash Serum Product",
@@ -49,25 +42,37 @@ const mediaItems: MediaItem[] = [
     alt: "Before and After Results",
     isExternal: false,
   },
+  {
+    type: "video",
+    src: "https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4",
+    alt: "Real Customer Results Video",
+    isExternal: true,
+    poster: "https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg",
+  },
 ];
 
 export default function HeroCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userInteracted, setUserInteracted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const modalVideoRef = useRef<HTMLVideoElement>(null);
 
-  // Auto-rotate every 4 seconds (pause when modal is open or on video)
+  // Auto-rotate every 4 seconds (pause when modal is open or user has interacted)
   useEffect(() => {
     if (isModalOpen) return;
-    // Don't auto-rotate away from video while it might be playing
-    if (mediaItems[currentIndex].type === "video") return;
+    if (userInteracted) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % mediaItems.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [isModalOpen, currentIndex]);
+  }, [isModalOpen, userInteracted]);
+
+  // Stop auto-rotation when user interacts
+  const handleUserInteraction = () => {
+    setUserInteracted(true);
+  };
 
   // Close modal on Escape key
   useEffect(() => {
@@ -87,11 +92,18 @@ export default function HeroCarousel() {
   }, [isModalOpen]);
 
   const goToPrevious = () => {
+    handleUserInteraction();
     setCurrentIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length);
   };
 
   const goToNext = () => {
+    handleUserInteraction();
     setCurrentIndex((prev) => (prev + 1) % mediaItems.length);
+  };
+
+  const goToIndex = (index: number) => {
+    handleUserInteraction();
+    setCurrentIndex(index);
   };
 
   const currentMedia = mediaItems[currentIndex];
@@ -131,7 +143,8 @@ export default function HeroCarousel() {
                       playsInline
                       preload="metadata"
                       poster={media.poster}
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => { e.stopPropagation(); handleUserInteraction(); }}
+                      onPlay={handleUserInteraction}
                     >
                       <source src={media.src} type="video/mp4" />
                     </video>
@@ -203,7 +216,7 @@ export default function HeroCarousel() {
             {mediaItems.map((media, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => goToIndex(index)}
                 className={`h-2.5 rounded-full transition-all ${
                   index === currentIndex
                     ? "bg-rose-600 w-6"
@@ -285,7 +298,7 @@ export default function HeroCarousel() {
             {mediaItems.map((media, index) => (
               <button
                 key={index}
-                onClick={(e) => { e.stopPropagation(); setCurrentIndex(index); }}
+                onClick={(e) => { e.stopPropagation(); goToIndex(index); }}
                 className={`h-3 rounded-full transition-all ${
                   index === currentIndex
                     ? "bg-white w-8"
