@@ -1,41 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { supabase, isDatabaseAvailable } from "@/lib/db";
 
 type AmazonClick = {
   id: string;
   timestamp: string;
-  productName: string;
-  buttonPosition: string;
+  product_name: string;
+  button_position: string;
   page: string;
-  userAgent?: string;
+  user_agent?: string;
   referer?: string;
 };
-
-const CLICKS_FILE = path.join(process.cwd(), "data", "amazon-clicks.json");
-
-async function readClicks(): Promise<AmazonClick[]> {
-  try {
-    const content = await fs.readFile(CLICKS_FILE, "utf8");
-    return JSON.parse(content);
-  } catch {
-    return [];
-  }
-}
-
-async function writeClick(click: AmazonClick): Promise<void> {
-  const clicks = await readClicks();
-  clicks.push(click);
-
-  // Keep only last 10,000 clicks
-  const trimmed = clicks.slice(-10000);
-
-  // Ensure data directory exists
-  const dir = path.dirname(CLICKS_FILE);
-  await fs.mkdir(dir, { recursive: true });
-
-  await fs.writeFile(CLICKS_FILE, JSON.stringify(trimmed, null, 2), "utf8");
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -49,17 +23,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const click: AmazonClick = {
+    const click = {
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: new Date().toISOString(),
-      productName,
-      buttonPosition,
-      page,
-      userAgent: request.headers.get("user-agent") || undefined,
-      referer: request.headers.get("referer") || undefined,
+      product_name: productName,
+      button_position: buttonPosition,
+      page: page,
+      user_agent: request.headers.get("user-agent") || null,
+      referer: request.headers.get("referer") || null,
     };
 
-    await writeClick(click);
+    // Try to save to Supabase
+    if (supabase && (await isDatabaseAvailable())) {
+      const { error } = await supabase.from("amazon_clicks").insert(click);
+
+      if (error) {
+        console.error("Supabase error:", error);
+        // Don't fail - just log the error
+      }
+    } else {
+      console.warn("Supabase not available, click not saved");
+    }
 
     return NextResponse.json({ success: true, clickId: click.id });
   } catch (error) {
@@ -77,17 +61,26 @@ export async function GET(request: NextRequest) {
     const page = searchParams.get("page");
     const limit = parseInt(searchParams.get("limit") || "1000");
 
-    let clicks = await readClicks();
+    let clicks: AmazonClick[] = [];
 
-    // Filter by page if provided
-    if (page) {
-      clicks = clicks.filter((c) => c.page === page);
+    // Try to read from Supabase
+    if (supabase && (await isDatabaseAvailable())) {
+      let query = supabase
+        .from("amazon_clicks")
+        .select("*")
+        .order("timestamp", { ascending: false })
+        .limit(limit);
+
+      if (page) {
+        query = query.eq("page", page);
+      }
+
+      const { data, error } = await query;
+
+      if (!error && data) {
+        clicks = data;
+      }
     }
-
-    // Sort by most recent
-    const sorted = clicks.sort(
-      (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-    );
 
     // Calculate stats
     const stats = {
@@ -98,7 +91,7 @@ export async function GET(request: NextRequest) {
 
     clicks.forEach((click) => {
       // Count by position
-      stats.byPosition[click.buttonPosition] = (stats.byPosition[click.buttonPosition] || 0) + 1;
+      stats.byPosition[click.button_position] = (stats.byPosition[click.button_position] || 0) + 1;
 
       // Count by day
       const day = click.timestamp.split("T")[0];
@@ -106,7 +99,7 @@ export async function GET(request: NextRequest) {
     });
 
     return NextResponse.json({
-      clicks: sorted.slice(0, limit),
+      clicks,
       stats,
     });
   } catch (error) {

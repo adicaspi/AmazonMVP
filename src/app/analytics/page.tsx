@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { supabase, isDatabaseAvailable } from "@/lib/db";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -13,19 +14,26 @@ export const metadata: Metadata = {
 type AmazonClick = {
   id: string;
   timestamp: string;
-  productName: string;
-  buttonPosition: string;
+  product_name: string;
+  button_position: string;
   page: string;
 };
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {
   try {
-    const fs = await import("fs/promises");
-    const path = await import("path");
-    const clicksFile = path.join(process.cwd(), "data", "amazon-clicks.json");
-    const content = await fs.readFile(clicksFile, "utf8");
-    const clicks = JSON.parse(content) as AmazonClick[];
-    return clicks || [];
+    // Read from Supabase
+    if (supabase && (await isDatabaseAvailable())) {
+      const { data, error } = await supabase
+        .from("amazon_clicks")
+        .select("*")
+        .order("timestamp", { ascending: false })
+        .limit(1000);
+
+      if (!error && data) {
+        return data;
+      }
+    }
+    return [];
   } catch {
     return [];
   }
@@ -80,7 +88,7 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
 
   filtered.forEach((click) => {
     // Count by position
-    byPosition[click.buttonPosition] = (byPosition[click.buttonPosition] || 0) + 1;
+    byPosition[click.button_position] = (byPosition[click.button_position] || 0) + 1;
 
     // Count by day
     const day = click.timestamp.split("T")[0];
@@ -381,8 +389,8 @@ export default async function AnalyticsPage() {
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {grandeLashStats.recentClicks.map((click, index) => {
-                      const label = positionLabels[click.buttonPosition] || {
-                        name: click.buttonPosition,
+                      const label = positionLabels[click.button_position] || {
+                        name: click.button_position,
                       };
                       const isRecent = index < 3;
 
@@ -407,7 +415,7 @@ export default async function AnalyticsPage() {
                               {label.name}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-sm text-gray-600">{click.productName}</td>
+                          <td className="px-4 py-3 text-sm text-gray-600">{click.product_name}</td>
                         </tr>
                       );
                     })}
