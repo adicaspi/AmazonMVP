@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 type RecentClick = {
@@ -236,20 +236,30 @@ export default function AnalyticsDashboard({
   const isRTL = lang === "he";
   const today = new Date().toISOString().split("T")[0];
 
-  // Dark mode classes
+  // Auto-detect system dark mode preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setDarkMode(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setDarkMode(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+
+  // Dark mode classes - using true black
   const dm = {
-    bg: darkMode ? "bg-gray-900" : "bg-gray-50",
-    headerBg: darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200",
-    cardBg: darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200",
+    bg: darkMode ? "bg-black" : "bg-gray-50",
+    headerBg: darkMode ? "bg-black border-neutral-800" : "bg-white border-gray-200",
+    cardBg: darkMode ? "bg-neutral-900 border-neutral-800" : "bg-white border-gray-200",
     text: darkMode ? "text-gray-100" : "text-gray-900",
     textMuted: darkMode ? "text-gray-400" : "text-gray-500",
     textLight: darkMode ? "text-gray-500" : "text-gray-400",
-    tableBg: darkMode ? "bg-gray-700/50" : "bg-gray-50",
-    tableHover: darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50",
-    divider: darkMode ? "divide-gray-700" : "divide-gray-100",
-    border: darkMode ? "border-gray-700" : "border-gray-200",
-    barBg: darkMode ? "bg-gray-700" : "bg-gray-100",
-    helpBg: darkMode ? "bg-gray-800" : "bg-gray-100",
+    tableBg: darkMode ? "bg-neutral-800/50" : "bg-gray-50",
+    tableHover: darkMode ? "hover:bg-neutral-800" : "hover:bg-gray-50",
+    divider: darkMode ? "divide-neutral-800" : "divide-gray-100",
+    border: darkMode ? "border-neutral-800" : "border-gray-200",
+    barBg: darkMode ? "bg-neutral-800" : "bg-gray-100",
+    helpBg: darkMode ? "bg-neutral-900" : "bg-gray-100",
   };
 
   const conversionRate = views > 0 ? ((totalClicks / views) * 100).toFixed(1) : "0";
@@ -277,7 +287,7 @@ export default function AnalyticsDashboard({
               {/* Dark Mode Toggle */}
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className={`p-2 rounded-lg transition ${darkMode ? "bg-gray-700 hover:bg-gray-600 text-yellow-400" : "bg-gray-100 hover:bg-gray-200 text-gray-600"}`}
+                className={`p-2 rounded-lg transition ${darkMode ? "bg-neutral-800 hover:bg-neutral-700 text-yellow-400" : "bg-gray-100 hover:bg-gray-200 text-gray-600"}`}
                 title={darkMode ? "Light Mode" : "Dark Mode"}
               >
                 {darkMode ? (
@@ -293,7 +303,7 @@ export default function AnalyticsDashboard({
               {/* Language Toggle */}
               <button
                 onClick={() => setLang(lang === "he" ? "en" : "he")}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 ${darkMode ? "bg-gray-700 hover:bg-gray-600 text-gray-200" : "bg-gray-100 hover:bg-gray-200 text-gray-700"}`}
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 ${darkMode ? "bg-neutral-800 hover:bg-neutral-700 text-gray-200" : "bg-gray-100 hover:bg-gray-200 text-gray-700"}`}
               >
                 {lang === "he" ? "🇺🇸 English" : "🇮🇱 עברית"}
               </button>
