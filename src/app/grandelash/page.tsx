@@ -96,24 +96,8 @@ export default function GrandeLASHPage() {
               </div>
             </div>
 
-            {/* Right - Video + Product */}
-            <div className="space-y-4">
-              {/* Hero Video - Vertical Reel Format */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black aspect-[9/16] max-h-[500px] mx-auto">
-                <video
-                  className="w-full h-full object-contain"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
-                >
-                  <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-                  REAL RESULTS
-                </div>
-              </div>
-              {/* Product Image */}
+            {/* Right - Product Carousel with Video */}
+            <div>
               <HeroCarousel />
             </div>
           </div>
