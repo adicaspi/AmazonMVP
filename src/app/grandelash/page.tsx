@@ -62,6 +62,7 @@ export default function GrandeLASHPage() {
                 <AmazonButton
                   href={amazonLink}
                   productName="GrandeLASH-MD"
+                  position="hero-main"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 md:px-10 md:py-5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg md:text-xl rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 w-full sm:w-auto"
                 >
                   <span>Buy Now on Amazon</span>
@@ -225,6 +226,7 @@ export default function GrandeLASHPage() {
             <AmazonButton
               href={amazonLink}
               productName="GrandeLASH-MD"
+              position="comparison-table"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
               Save $1,800/Year - Buy Now
@@ -324,6 +326,7 @@ export default function GrandeLASHPage() {
               <AmazonButton
                 href={amazonLink}
                 productName="GrandeLASH-MD"
+                position="benefits-card"
                 className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 md:px-8 md:py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
               >
                 Get Your GrandLash Now
@@ -417,6 +420,7 @@ export default function GrandeLASHPage() {
             <AmazonButton
               href={amazonLink}
               productName="GrandeLASH-MD"
+              position="how-it-works"
               className="inline-flex items-center justify-center gap-2 px-8 py-3 md:px-10 md:py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
               Join 90,000+ Happy Customers
@@ -482,6 +486,7 @@ export default function GrandeLASHPage() {
             <AmazonButton
               href={amazonLink}
               productName="GrandeLASH-MD"
+              position="video-testimonials"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
               Get These Results Too
@@ -549,6 +554,7 @@ export default function GrandeLASHPage() {
             <AmazonButton
               href={amazonLink}
               productName="GrandeLASH-MD"
+              position="faq-section"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
               Get Your GrandLash Now
@@ -573,6 +579,7 @@ export default function GrandeLASHPage() {
           <AmazonButton
             href={amazonLink}
             productName="GrandeLASH-MD"
+            position="final-cta"
             className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-rose-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
             Buy Now on Amazon
@@ -610,6 +617,7 @@ export default function GrandeLASHPage() {
         <AmazonButton
           href={amazonLink}
           productName="GrandeLASH-MD"
+          position="sticky-mobile"
           className="flex items-center justify-center gap-2 w-full py-4 bg-rose-600 text-white font-bold rounded-full shadow-lg"
         >
           <span>Buy Now on Amazon</span>

@@ -13,15 +13,26 @@ interface AmazonButtonProps {
   children: ReactNode;
   className?: string;
   productName?: string;
+  position?: string; // e.g., "hero", "comparison", "sticky-footer"
 }
 
-export function AmazonButton({ href, children, className, productName }: AmazonButtonProps) {
+export function AmazonButton({ href, children, className, productName, position }: AmazonButtonProps) {
   const handleClick = () => {
     // Track the click as a Lead event in Meta Pixel
     if (typeof window !== "undefined" && window.fbq) {
       window.fbq("track", "Lead", {
         content_name: productName || "Amazon Product",
         content_category: "Affiliate Link Click",
+        content_ids: [position || "unknown"], // Which button was clicked
+        value: position ? 1 : 0,
+        currency: "USD",
+      });
+
+      // Also fire a custom event with more details
+      window.fbq("trackCustom", "AmazonClick", {
+        product: productName || "Amazon Product",
+        button_position: position || "unknown",
+        page_url: window.location.pathname,
       });
     }
   };
