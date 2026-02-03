@@ -1,34 +1,13 @@
-import { getAllProducts } from "@/lib/products";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Analytics Dashboard - AI Picks",
-  description: "Track performance across all product variants. Views, clicks, CTR, and conversion metrics.",
-  openGraph: {
-    title: "Analytics Dashboard - AI Picks",
-    description: "Track performance across all product variants. Views, clicks, CTR, and conversion metrics.",
-    url: "https://www.aipicks.co/analytics",
-    siteName: "AI Picks",
-    type: "website",
-  },
-};
-
-type Event = {
-  id: string;
-  timestamp: string;
-  type: "view" | "click" | "conversion";
-  productId?: string;
-  slug?: string;
-  offerId?: string;
-  utm_source?: string;
-  utm_medium?: string;
-  utm_campaign?: string;
-  utm_content?: string;
+  description: "Track your affiliate performance - views, clicks, and conversions.",
 };
 
 type AmazonClick = {
@@ -38,31 +17,6 @@ type AmazonClick = {
   buttonPosition: string;
   page: string;
 };
-
-type ProductMetrics = {
-  productId: string;
-  slug: string;
-  name: string;
-  angle?: string;
-  views: number;
-  clicks: number;
-  ctr: number;
-  conversions: number;
-};
-
-async function getEvents(): Promise<Event[]> {
-  try {
-    // Read events directly from file (server-side)
-    const fs = await import("fs/promises");
-    const path = await import("path");
-    const eventsFile = path.join(process.cwd(), "data", "events.json");
-    const content = await fs.readFile(eventsFile, "utf8");
-    const events = JSON.parse(content) as Event[];
-    return events || [];
-  } catch {
-    return [];
-  }
-}
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {
   try {
@@ -77,191 +31,220 @@ async function getAmazonClicks(): Promise<AmazonClick[]> {
   }
 }
 
-function getAmazonClickStats(clicks: AmazonClick[], page?: string) {
+// Button position labels in Hebrew
+const positionLabels: Record<string, { name: string; description: string }> = {
+  "hero-main": {
+    name: "כפתור ראשי (Hero)",
+    description: "הכפתור הראשון שמופיע בראש העמוד",
+  },
+  "comparison-table": {
+    name: "טבלת השוואה",
+    description: "הכפתור מתחת לטבלת ההשוואה בין GrandLash להארכות",
+  },
+  "benefits-card": {
+    name: "כרטיס יתרונות",
+    description: "הכפתור בכרטיס היתרונות באמצע העמוד",
+  },
+  "how-it-works": {
+    name: "איך זה עובד",
+    description: "הכפתור אחרי סקשן 'איך זה עובד'",
+  },
+  "video-testimonials": {
+    name: "סרטוני המלצות",
+    description: "הכפתור אחרי סרטוני ההמלצות",
+  },
+  "faq-section": {
+    name: "שאלות נפוצות",
+    description: "הכפתור אחרי סקשן השאלות הנפוצות",
+  },
+  "final-cta": {
+    name: "CTA סופי",
+    description: "הכפתור הגדול בסוף העמוד (רקע ורוד)",
+  },
+  "sticky-mobile": {
+    name: "כפתור צף (מובייל)",
+    description: "הכפתור הקבוע בתחתית המסך במובייל",
+  },
+  unknown: {
+    name: "לא מזוהה",
+    description: "לחיצה ממקום לא מזוהה",
+  },
+};
+
+function getClickStats(clicks: AmazonClick[], page?: string) {
   const filtered = page ? clicks.filter((c) => c.page === page) : clicks;
 
   const byPosition: Record<string, number> = {};
   const byDay: Record<string, number> = {};
+  const byHour: Record<number, number> = {};
 
   filtered.forEach((click) => {
+    // Count by position
     byPosition[click.buttonPosition] = (byPosition[click.buttonPosition] || 0) + 1;
+
+    // Count by day
     const day = click.timestamp.split("T")[0];
     byDay[day] = (byDay[day] || 0) + 1;
+
+    // Count by hour
+    const hour = new Date(click.timestamp).getHours();
+    byHour[hour] = (byHour[hour] || 0) + 1;
   });
+
+  // Find best performing button
+  const sortedPositions = Object.entries(byPosition).sort(([, a], [, b]) => b - a);
+  const bestButton = sortedPositions[0]?.[0] || null;
+
+  // Find peak hour
+  const sortedHours = Object.entries(byHour).sort(([, a], [, b]) => b - a);
+  const peakHour = sortedHours[0] ? parseInt(sortedHours[0][0]) : null;
 
   return {
     total: filtered.length,
     byPosition,
     byDay,
+    byHour,
+    bestButton,
+    peakHour,
     recentClicks: filtered
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-      .slice(0, 10),
+      .slice(0, 15),
   };
 }
 
-function calculateMetrics(events: Event[], products: Awaited<ReturnType<typeof getAllProducts>>): ProductMetrics[] {
-  const metricsMap = new Map<string, ProductMetrics>();
-
-  // Initialize metrics for all products
-  products.forEach((product) => {
-    metricsMap.set(product.id, {
-      productId: product.id,
-      slug: product.slug,
-      name: product.name,
-      angle: product.angle,
-      views: 0,
-      clicks: 0,
-      ctr: 0,
-      conversions: 0,
-    });
-  });
-
-  // Count events
-  events.forEach((event) => {
-    if (!event.productId) return;
-
-    const metrics = metricsMap.get(event.productId);
-    if (!metrics) return;
-
-    if (event.type === "view") {
-      metrics.views++;
-    } else if (event.type === "click") {
-      metrics.clicks++;
-    } else if (event.type === "conversion") {
-      metrics.conversions++;
-    }
-  });
-
-  // Calculate CTR
-  metricsMap.forEach((metrics) => {
-    metrics.ctr = metrics.views > 0 ? (metrics.clicks / metrics.views) * 100 : 0;
-  });
-
-  return Array.from(metricsMap.values()).sort((a, b) => b.views - a.views);
-}
-
-function groupByBaseProduct(metrics: ProductMetrics[]): Map<string, ProductMetrics[]> {
-  const grouped = new Map<string, ProductMetrics[]>();
-
-  metrics.forEach((metric) => {
-    // Extract base product ID (remove -v1, -v2, -v3 suffix)
-    const baseId = metric.productId.replace(/-v\d+$/, "");
-    if (!grouped.has(baseId)) {
-      grouped.set(baseId, []);
-    }
-    grouped.get(baseId)!.push(metric);
-  });
-
-  return grouped;
-}
-
 export default async function AnalyticsPage() {
-  const events = await getEvents();
-  const products = await getAllProducts();
-  const metrics = calculateMetrics(events, products);
-  const grouped = groupByBaseProduct(metrics);
   const amazonClicks = await getAmazonClicks();
-  const grandeLashStats = getAmazonClickStats(amazonClicks, "/grandelash");
+  const grandeLashStats = getClickStats(amazonClicks, "/grandelash");
 
-  const totalViews = events.filter((e) => e.type === "view").length;
-  const totalClicks = events.filter((e) => e.type === "click").length;
-  const totalCTR = totalViews > 0 ? (totalClicks / totalViews) * 100 : 0;
+  // Calculate today's clicks
+  const today = new Date().toISOString().split("T")[0];
+  const todayClicks = grandeLashStats.byDay[today] || 0;
+
+  // Calculate this week's clicks
+  const weekAgo = new Date();
+  weekAgo.setDate(weekAgo.getDate() - 7);
+  const weekClicks = Object.entries(grandeLashStats.byDay)
+    .filter(([day]) => new Date(day) >= weekAgo)
+    .reduce((sum, [, count]) => sum + count, 0);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-slate-900 dark:text-slate-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 space-y-10">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 dark:from-slate-50 dark:to-slate-300 bg-clip-text text-transparent">
-              Analytics Dashboard
-            </h1>
-            <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
-              Track performance across all product variants
-            </p>
-          </div>
-          <Link
-            href="/"
-            className="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-sm font-medium transition-all shadow-sm hover:shadow"
-          >
-            ← Back to Products
-          </Link>
-        </div>
-
-        {/* Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="p-6 rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
-            <div className="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wide font-medium">Total Views</div>
-            <div className="mt-2 text-3xl font-bold text-slate-900 dark:text-slate-50">{totalViews.toLocaleString()}</div>
-          </div>
-          <div className="p-6 rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
-            <div className="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wide font-medium">Total Clicks</div>
-            <div className="mt-2 text-3xl font-bold text-slate-900 dark:text-slate-50">{totalClicks.toLocaleString()}</div>
-          </div>
-          <div className="p-6 rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
-            <div className="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wide font-medium">Overall CTR</div>
-            <div className="mt-2 text-3xl font-bold text-slate-900 dark:text-slate-50">{totalCTR.toFixed(2)}%</div>
-          </div>
-        </div>
-
-        {/* GrandeLash Amazon Clicks */}
-        <section className="space-y-6">
+    <main className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">GrandeLash - Amazon Clicks</h2>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Analytics Dashboard</h1>
+              <p className="text-gray-500 mt-1">מעקב אחרי לחיצות לאמזון מהאתר שלך</p>
+            </div>
             <Link
               href="/grandelash"
-              className="text-sm text-rose-600 hover:text-rose-700 font-medium"
+              className="px-4 py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition font-medium"
             >
-              View page →
+              צפה בעמוד GrandeLash →
             </Link>
           </div>
+        </div>
+      </header>
 
-          {/* GrandeLash Summary */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-5 rounded-xl bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 border border-rose-200 dark:border-rose-800">
-              <div className="text-sm text-rose-600 dark:text-rose-400 font-medium">Total Amazon Clicks</div>
-              <div className="mt-1 text-3xl font-bold text-rose-700 dark:text-rose-300">{grandeLashStats.total}</div>
-            </div>
-            {Object.entries(grandeLashStats.byPosition)
-              .sort(([, a], [, b]) => b - a)
-              .slice(0, 3)
-              .map(([position, count]) => (
-                <div key={position} className="p-5 rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
-                  <div className="text-sm text-slate-500 dark:text-slate-400 font-medium capitalize">
-                    {position.replace(/-/g, " ")}
-                  </div>
-                  <div className="mt-1 text-2xl font-bold text-slate-900 dark:text-slate-50">{count}</div>
-                  <div className="text-xs text-slate-400 mt-1">
-                    {grandeLashStats.total > 0 ? ((count / grandeLashStats.total) * 100).toFixed(1) : 0}% of clicks
-                  </div>
-                </div>
-              ))}
-          </div>
-
-          {/* Clicks by Button Position */}
-          {Object.keys(grandeLashStats.byPosition).length > 0 && (
-            <div className="rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 overflow-hidden">
-              <div className="p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30">
-                <h3 className="font-semibold text-slate-900 dark:text-slate-50">Clicks by Button Position</h3>
+      <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+        {/* Quick Stats */}
+        <section>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 bg-rose-500 rounded-full"></span>
+            סיכום מהיר
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {/* Total Clicks */}
+            <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+              <div className="text-sm text-gray-500 mb-1">סה״כ לחיצות לאמזון</div>
+              <div className="text-3xl font-bold text-gray-900">{grandeLashStats.total}</div>
+              <div className="text-xs text-gray-400 mt-2">
+                מספר הפעמים שמישהו לחץ על כפתור שמוביל לאמזון
               </div>
-              <div className="p-4 space-y-3">
+            </div>
+
+            {/* Today */}
+            <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+              <div className="text-sm text-gray-500 mb-1">היום</div>
+              <div className="text-3xl font-bold text-green-600">{todayClicks}</div>
+              <div className="text-xs text-gray-400 mt-2">לחיצות שהתקבלו היום</div>
+            </div>
+
+            {/* This Week */}
+            <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+              <div className="text-sm text-gray-500 mb-1">השבוע</div>
+              <div className="text-3xl font-bold text-blue-600">{weekClicks}</div>
+              <div className="text-xs text-gray-400 mt-2">לחיצות ב-7 הימים האחרונים</div>
+            </div>
+
+            {/* Best Button */}
+            <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+              <div className="text-sm text-gray-500 mb-1">הכפתור הכי טוב</div>
+              <div className="text-lg font-bold text-purple-600 truncate">
+                {grandeLashStats.bestButton
+                  ? positionLabels[grandeLashStats.bestButton]?.name || grandeLashStats.bestButton
+                  : "אין נתונים"}
+              </div>
+              <div className="text-xs text-gray-400 mt-2">
+                הכפתור שמקבל הכי הרבה לחיצות
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Button Performance */}
+        <section>
+          <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+            ביצועים לפי כפתור
+          </h2>
+          <p className="text-sm text-gray-500 mb-4">
+            איזה כפתורים בעמוד מביאים הכי הרבה לחיצות? ככה תדע איפה לשים את הדגש
+          </p>
+
+          {Object.keys(grandeLashStats.byPosition).length > 0 ? (
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+              <div className="divide-y divide-gray-100">
                 {Object.entries(grandeLashStats.byPosition)
                   .sort(([, a], [, b]) => b - a)
-                  .map(([position, count]) => {
-                    const percentage = grandeLashStats.total > 0 ? (count / grandeLashStats.total) * 100 : 0;
+                  .map(([position, count], index) => {
+                    const percentage =
+                      grandeLashStats.total > 0 ? (count / grandeLashStats.total) * 100 : 0;
+                    const label = positionLabels[position] || {
+                      name: position,
+                      description: "",
+                    };
+                    const isTop = index === 0;
+
                     return (
-                      <div key={position}>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-slate-700 dark:text-slate-300 capitalize font-medium">
-                            {position.replace(/-/g, " ")}
-                          </span>
-                          <span className="text-slate-600 dark:text-slate-400">
-                            {count} ({percentage.toFixed(1)}%)
-                          </span>
+                      <div key={position} className="p-4 hover:bg-gray-50 transition">
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2">
+                              {isTop && (
+                                <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded font-medium">
+                                  #1
+                                </span>
+                              )}
+                              <span className="font-medium text-gray-900">{label.name}</span>
+                            </div>
+                            {label.description && (
+                              <p className="text-xs text-gray-500 mt-1">{label.description}</p>
+                            )}
+                          </div>
+                          <div className="text-right">
+                            <div className="font-bold text-gray-900">{count}</div>
+                            <div className="text-xs text-gray-500">{percentage.toFixed(1)}%</div>
+                          </div>
                         </div>
-                        <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-gradient-to-r from-rose-500 to-pink-500 transition-all duration-500"
+                            className={`h-full rounded-full transition-all duration-500 ${
+                              isTop
+                                ? "bg-gradient-to-r from-rose-500 to-pink-500"
+                                : "bg-gradient-to-r from-gray-400 to-gray-500"
+                            }`}
                             style={{ width: `${percentage}%` }}
                           />
                         </div>
@@ -270,198 +253,266 @@ export default async function AnalyticsPage() {
                   })}
               </div>
             </div>
-          )}
-
-          {/* Recent Clicks */}
-          {grandeLashStats.recentClicks.length > 0 && (
-            <div className="rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 overflow-hidden">
-              <div className="p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30">
-                <h3 className="font-semibold text-slate-900 dark:text-slate-50">Recent Clicks</h3>
-              </div>
-              <div className="divide-y divide-slate-200 dark:divide-slate-700">
-                {grandeLashStats.recentClicks.map((click) => (
-                  <div key={click.id} className="p-4 flex items-center justify-between">
-                    <div>
-                      <span className="px-2 py-1 rounded bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 text-xs font-medium capitalize">
-                        {click.buttonPosition.replace(/-/g, " ")}
-                      </span>
-                    </div>
-                    <div className="text-sm text-slate-500 dark:text-slate-400">
-                      {new Date(click.timestamp).toLocaleString("he-IL", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {grandeLashStats.total === 0 && (
-            <div className="text-center py-10 rounded-xl bg-slate-50 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700">
-              <p className="text-slate-500 dark:text-slate-400">
-                No Amazon clicks recorded yet for GrandeLash page.
+          ) : (
+            <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
+              <div className="text-gray-400 text-4xl mb-3">📊</div>
+              <p className="text-gray-500">עדיין אין נתונים על לחיצות</p>
+              <p className="text-sm text-gray-400 mt-1">
+                ברגע שמישהו ילחץ על כפתור לאמזון, הנתונים יופיעו כאן
               </p>
             </div>
           )}
         </section>
 
-        {/* Product Variants Comparison */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold">Product Variants Performance</h2>
-          
-          {Array.from(grouped.entries()).map(([baseId, variants]) => {
-            const baseProduct = products.find((p) => p.id.startsWith(baseId.replace(/-v\d+$/, "")));
-            const totalVariantViews = variants.reduce((sum, v) => sum + v.views, 0);
-            const totalVariantClicks = variants.reduce((sum, v) => sum + v.clicks, 0);
-            const variantCTR = totalVariantViews > 0 ? (totalVariantClicks / totalVariantViews) * 100 : 0;
+        {/* Insights */}
+        {grandeLashStats.total > 0 && (
+          <section>
+            <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+              תובנות
+            </h2>
+            <p className="text-sm text-gray-500 mb-4">מה אפשר ללמוד מהנתונים</p>
 
-            return (
-              <div
-                key={baseId}
-                className="rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm hover:shadow-md transition-all"
-              >
-                <div className="p-6 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30">
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50">{baseProduct?.name || baseId}</h3>
-                  <div className="mt-2 flex items-center gap-6 text-sm text-slate-600 dark:text-slate-400">
-                    <span>Total: {totalVariantViews} views, {totalVariantClicks} clicks</span>
-                    <span className="font-medium">CTR: {variantCTR.toFixed(2)}%</span>
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Best Performing Button Insight */}
+              {grandeLashStats.bestButton && (
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                  <div className="flex items-start gap-3">
+                    <div className="text-2xl">🏆</div>
+                    <div>
+                      <h3 className="font-semibold text-green-800">הכפתור המנצח</h3>
+                      <p className="text-sm text-green-700 mt-1">
+                        <strong>
+                          {positionLabels[grandeLashStats.bestButton]?.name ||
+                            grandeLashStats.bestButton}
+                        </strong>{" "}
+                        מביא {grandeLashStats.byPosition[grandeLashStats.bestButton]} לחיצות (
+                        {(
+                          (grandeLashStats.byPosition[grandeLashStats.bestButton] /
+                            grandeLashStats.total) *
+                          100
+                        ).toFixed(0)}
+                        % מכל הלחיצות)
+                      </p>
+                    </div>
                   </div>
                 </div>
+              )}
 
-                <div className="divide-y divide-slate-200 dark:divide-slate-700">
-                  {variants.map((variant) => (
-                    <div
-                      key={variant.productId}
-                      className="p-6 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors"
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium border border-slate-200 dark:border-slate-600">
-                              {variant.productId.split("-").pop()?.toUpperCase()}
-                            </span>
-                            {variant.angle && (
-                              <span className="text-sm text-slate-600 dark:text-slate-400 italic line-clamp-1">
-                                {variant.angle}
-                              </span>
-                            )}
-                          </div>
-                          <Link
-                            href={`/p/${variant.slug}`}
-                            className="mt-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
-                          >
-                            View page →
-                          </Link>
-                        </div>
-
-                        <div className="grid grid-cols-3 gap-6 text-right">
-                          <div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide font-medium">Views</div>
-                            <div className="mt-1 text-lg font-bold text-slate-900 dark:text-slate-50">{variant.views}</div>
-                          </div>
-                          <div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide font-medium">Clicks</div>
-                            <div className="mt-1 text-lg font-bold text-slate-900 dark:text-slate-50">{variant.clicks}</div>
-                          </div>
-                          <div>
-                            <div className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide font-medium">CTR</div>
-                            <div className="mt-1 text-lg font-bold text-slate-900 dark:text-slate-50">
-                              {variant.ctr.toFixed(2)}%
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Progress bar for CTR */}
-                      <div className="mt-4">
-                        <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-gradient-to-r from-slate-600 to-slate-700 dark:from-slate-400 dark:to-slate-500 transition-all duration-500"
-                            style={{ width: `${Math.min(variant.ctr, 100)}%` }}
-                          />
-                        </div>
-                      </div>
+              {/* Peak Hour Insight */}
+              {grandeLashStats.peakHour !== null && (
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-200">
+                  <div className="flex items-start gap-3">
+                    <div className="text-2xl">⏰</div>
+                    <div>
+                      <h3 className="font-semibold text-blue-800">שעת השיא</h3>
+                      <p className="text-sm text-blue-700 mt-1">
+                        רוב הלחיצות מגיעות בשעה{" "}
+                        <strong>
+                          {grandeLashStats.peakHour}:00-{grandeLashStats.peakHour + 1}:00
+                        </strong>
+                      </p>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </section>
+              )}
 
-        {/* Individual Product Metrics */}
-        {metrics.length > 0 && (
-          <section className="space-y-6">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">All Products</h2>
-            <div className="rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-slate-50 dark:bg-slate-800/30 border-b border-slate-200 dark:border-slate-700">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-xs font-medium text-slate-600 dark:text-slate-400 uppercase tracking-wide">
-                        Product
-                      </th>
-                      <th className="px-6 py-4 text-right text-xs font-medium text-slate-600 dark:text-slate-400 uppercase tracking-wide">
-                        Views
-                      </th>
-                      <th className="px-6 py-4 text-right text-xs font-medium text-slate-600 dark:text-slate-400 uppercase tracking-wide">
-                        Clicks
-                      </th>
-                      <th className="px-6 py-4 text-right text-xs font-medium text-slate-600 dark:text-slate-400 uppercase tracking-wide">
-                        CTR
-                      </th>
-                      <th className="px-6 py-4 text-right text-xs font-medium text-slate-600 dark:text-slate-400 uppercase tracking-wide">
-                        Conversions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
-                    {metrics.map((metric) => (
-                      <tr key={metric.productId} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                        <td className="px-6 py-4">
-                          <div>
-                            <div className="font-medium text-slate-900 dark:text-slate-50">{metric.name}</div>
-                            {metric.angle && (
-                              <div className="text-sm text-slate-600 dark:text-slate-400 italic line-clamp-1">
-                                {metric.angle}
-                              </div>
-                            )}
-                            <Link
-                              href={`/p/${metric.slug}`}
-                              className="text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 mt-1 transition-colors"
-                            >
-                              View →
-                            </Link>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 text-right font-medium text-slate-900 dark:text-slate-50">{metric.views}</td>
-                        <td className="px-6 py-4 text-right font-medium text-slate-900 dark:text-slate-50">{metric.clicks}</td>
-                        <td className="px-6 py-4 text-right font-medium">
-                          <span className={metric.ctr > 5 ? "text-green-600 dark:text-green-400" : metric.ctr > 2 ? "text-amber-600 dark:text-amber-400" : "text-slate-600 dark:text-slate-400"}>
-                            {metric.ctr.toFixed(2)}%
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-right font-medium text-slate-900 dark:text-slate-50">{metric.conversions}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              {/* Mobile vs Desktop Hint */}
+              {grandeLashStats.byPosition["sticky-mobile"] && (
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                  <div className="flex items-start gap-3">
+                    <div className="text-2xl">📱</div>
+                    <div>
+                      <h3 className="font-semibold text-purple-800">תנועה ממובייל</h3>
+                      <p className="text-sm text-purple-700 mt-1">
+                        {grandeLashStats.byPosition["sticky-mobile"]} לחיצות מהכפתור הצף במובייל (
+                        {(
+                          (grandeLashStats.byPosition["sticky-mobile"] / grandeLashStats.total) *
+                          100
+                        ).toFixed(0)}
+                        %)
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Conversion Path */}
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-200">
+                <div className="flex items-start gap-3">
+                  <div className="text-2xl">💡</div>
+                  <div>
+                    <h3 className="font-semibold text-amber-800">טיפ</h3>
+                    <p className="text-sm text-amber-700 mt-1">
+                      כפתורים בסוף העמוד (FAQ, Final CTA) מראים שאנשים קוראים את כל התוכן לפני
+                      שמחליטים לקנות
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
         )}
 
-        {metrics.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-slate-600 dark:text-slate-400 text-lg">
-              No analytics data yet. Start testing products to see metrics here.
-            </p>
-          </div>
+        {/* Recent Clicks */}
+        <section>
+          <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+            <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+            לחיצות אחרונות
+          </h2>
+          <p className="text-sm text-gray-500 mb-4">15 הלחיצות האחרונות בזמן אמת</p>
+
+          {grandeLashStats.recentClicks.length > 0 ? (
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50 border-b border-gray-200">
+                    <tr>
+                      <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">
+                        תאריך ושעה
+                      </th>
+                      <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">
+                        כפתור
+                      </th>
+                      <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">
+                        מוצר
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    {grandeLashStats.recentClicks.map((click, index) => {
+                      const label = positionLabels[click.buttonPosition] || {
+                        name: click.buttonPosition,
+                      };
+                      const isRecent = index < 3;
+
+                      return (
+                        <tr key={click.id} className={isRecent ? "bg-green-50/50" : ""}>
+                          <td className="px-4 py-3 text-sm text-gray-600">
+                            <div className="flex items-center gap-2">
+                              {isRecent && (
+                                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                              )}
+                              {new Date(click.timestamp).toLocaleString("he-IL", {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "2-digit",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
+                            </div>
+                          </td>
+                          <td className="px-4 py-3">
+                            <span className="inline-flex px-2 py-1 rounded-md bg-rose-100 text-rose-700 text-xs font-medium">
+                              {label.name}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-600">{click.productName}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
+              <div className="text-gray-400 text-4xl mb-3">🕐</div>
+              <p className="text-gray-500">אין לחיצות עדיין</p>
+              <p className="text-sm text-gray-400 mt-1">לחיצות חדשות יופיעו כאן בזמן אמת</p>
+            </div>
+          )}
+        </section>
+
+        {/* Daily Breakdown */}
+        {Object.keys(grandeLashStats.byDay).length > 0 && (
+          <section>
+            <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+              לחיצות לפי יום
+            </h2>
+            <p className="text-sm text-gray-500 mb-4">היסטוריית לחיצות יומית</p>
+
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
+              <div className="space-y-2">
+                {Object.entries(grandeLashStats.byDay)
+                  .sort(([a], [b]) => new Date(b).getTime() - new Date(a).getTime())
+                  .slice(0, 14)
+                  .map(([day, count]) => {
+                    const maxCount = Math.max(...Object.values(grandeLashStats.byDay));
+                    const percentage = maxCount > 0 ? (count / maxCount) * 100 : 0;
+                    const isToday = day === today;
+                    const date = new Date(day);
+                    const dayName = date.toLocaleDateString("he-IL", { weekday: "short" });
+
+                    return (
+                      <div key={day} className="flex items-center gap-3">
+                        <div className="w-20 text-sm text-gray-500 text-right">
+                          {isToday ? (
+                            <span className="text-green-600 font-medium">היום</span>
+                          ) : (
+                            <>
+                              {dayName}{" "}
+                              {date.toLocaleDateString("he-IL", {
+                                day: "2-digit",
+                                month: "2-digit",
+                              })}
+                            </>
+                          )}
+                        </div>
+                        <div className="flex-1 h-6 bg-gray-100 rounded overflow-hidden">
+                          <div
+                            className={`h-full rounded transition-all duration-500 ${
+                              isToday ? "bg-green-500" : "bg-indigo-400"
+                            }`}
+                            style={{ width: `${percentage}%` }}
+                          />
+                        </div>
+                        <div className="w-8 text-sm font-medium text-gray-700 text-left">
+                          {count}
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+          </section>
         )}
+
+        {/* Help Section */}
+        <section className="bg-gray-100 rounded-xl p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">❓ מה המספרים האלה אומרים?</h2>
+          <div className="grid md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <h3 className="font-medium text-gray-800 mb-1">לחיצה לאמזון</h3>
+              <p className="text-gray-600">
+                כל פעם שמישהו לוחץ על כפתור &quot;Buy Now&quot; ועובר לאמזון, זה נספר כלחיצה. זה לא
+                אומר שהוא קנה - רק שהוא התעניין מספיק כדי ללחוץ.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-medium text-gray-800 mb-1">למה חשוב לדעת איזה כפתור?</h3>
+              <p className="text-gray-600">
+                אם רוב הלחיצות מגיעות מכפתור מסוים, כדאי לשים שם יותר דגש. אם כפתור לא מקבל
+                לחיצות, אולי צריך לשנות את המיקום או הטקסט שלו.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-medium text-gray-800 mb-1">איך לדעת אם זה עובד?</h3>
+              <p className="text-gray-600">
+                אם יש לחיצות, העמוד עובד! הצעד הבא הוא לבדוק בחשבון Amazon Associates כמה מהלחיצות
+                האלה הפכו לרכישות בפועל.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-medium text-gray-800 mb-1">מה עם Facebook Pixel?</h3>
+              <p className="text-gray-600">
+                כל לחיצה נשלחת גם ל-Facebook כ-&quot;Lead&quot;. אפשר לראות את זה ב-Events Manager
+                ולהשתמש בזה לretargeting.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   );
