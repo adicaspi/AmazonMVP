@@ -148,6 +148,31 @@ export default function GrandeLASHPage() {
             </p>
           </div>
 
+          {/* Results Gallery */}
+          <div className="grid grid-cols-3 gap-4 mb-12">
+            <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+              <img
+                src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
+                alt="Customer Before and After Results"
+                className="w-full h-full object-cover aspect-square"
+              />
+            </div>
+            <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+              <img
+                src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
+                alt="Amazing Lash Transformation"
+                className="w-full h-full object-cover aspect-square"
+              />
+            </div>
+            <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+              <img
+                src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125472/WhatsApp_Image_2026-02-03_at_09.48.01_hh0bs8.jpg"
+                alt="Real Customer Lash Growth"
+                className="w-full h-full object-cover aspect-square"
+              />
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <Image
@@ -306,6 +331,74 @@ export default function GrandeLASHPage() {
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
               Join 90,000+ Happy Customers
+            </AmazonButton>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Testimonials Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-rose-50 to-pink-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-rose-100 text-rose-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+              </span>
+              Real Video Reviews
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              See The Results For Yourself
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Watch real customers share their amazing transformations
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black aspect-[9/16] md:aspect-video">
+              <video
+                className="w-full h-full object-cover"
+                controls
+                playsInline
+                preload="metadata"
+                poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
+              >
+                <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                <p className="text-white font-semibold">Real Customer Review</p>
+                <p className="text-rose-200 text-sm">Amazing results in just 8 weeks!</p>
+              </div>
+            </div>
+
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black aspect-[9/16] md:aspect-video">
+              <video
+                className="w-full h-full object-cover"
+                controls
+                playsInline
+                preload="metadata"
+                poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
+              >
+                <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125528/WhatsApp_Video_2026-02-01_at_18.10.00_ayx8jr.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                <p className="text-white font-semibold">Before & After Transformation</p>
+                <p className="text-rose-200 text-sm">See the incredible difference!</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-10">
+            <AmazonButton
+              href={amazonLink}
+              productName="GrandeLASH-MD"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              Get These Results Too
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </AmazonButton>
           </div>
         </div>
