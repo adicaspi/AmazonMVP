@@ -31,6 +31,14 @@ type Event = {
   utm_content?: string;
 };
 
+type AmazonClick = {
+  id: string;
+  timestamp: string;
+  productName: string;
+  buttonPosition: string;
+  page: string;
+};
+
 type ProductMetrics = {
   productId: string;
   slug: string;
@@ -54,6 +62,41 @@ async function getEvents(): Promise<Event[]> {
   } catch {
     return [];
   }
+}
+
+async function getAmazonClicks(): Promise<AmazonClick[]> {
+  try {
+    const fs = await import("fs/promises");
+    const path = await import("path");
+    const clicksFile = path.join(process.cwd(), "data", "amazon-clicks.json");
+    const content = await fs.readFile(clicksFile, "utf8");
+    const clicks = JSON.parse(content) as AmazonClick[];
+    return clicks || [];
+  } catch {
+    return [];
+  }
+}
+
+function getAmazonClickStats(clicks: AmazonClick[], page?: string) {
+  const filtered = page ? clicks.filter((c) => c.page === page) : clicks;
+
+  const byPosition: Record<string, number> = {};
+  const byDay: Record<string, number> = {};
+
+  filtered.forEach((click) => {
+    byPosition[click.buttonPosition] = (byPosition[click.buttonPosition] || 0) + 1;
+    const day = click.timestamp.split("T")[0];
+    byDay[day] = (byDay[day] || 0) + 1;
+  });
+
+  return {
+    total: filtered.length,
+    byPosition,
+    byDay,
+    recentClicks: filtered
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+      .slice(0, 10),
+  };
 }
 
 function calculateMetrics(events: Event[], products: Awaited<ReturnType<typeof getAllProducts>>): ProductMetrics[] {
@@ -117,6 +160,8 @@ export default async function AnalyticsPage() {
   const products = await getAllProducts();
   const metrics = calculateMetrics(events, products);
   const grouped = groupByBaseProduct(metrics);
+  const amazonClicks = await getAmazonClicks();
+  const grandeLashStats = getAmazonClickStats(amazonClicks, "/grandelash");
 
   const totalViews = events.filter((e) => e.type === "view").length;
   const totalClicks = events.filter((e) => e.type === "click").length;
@@ -158,6 +203,111 @@ export default async function AnalyticsPage() {
             <div className="mt-2 text-3xl font-bold text-slate-900 dark:text-slate-50">{totalCTR.toFixed(2)}%</div>
           </div>
         </div>
+
+        {/* GrandeLash Amazon Clicks */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">GrandeLash - Amazon Clicks</h2>
+            <Link
+              href="/grandelash"
+              className="text-sm text-rose-600 hover:text-rose-700 font-medium"
+            >
+              View page →
+            </Link>
+          </div>
+
+          {/* GrandeLash Summary */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="p-5 rounded-xl bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 border border-rose-200 dark:border-rose-800">
+              <div className="text-sm text-rose-600 dark:text-rose-400 font-medium">Total Amazon Clicks</div>
+              <div className="mt-1 text-3xl font-bold text-rose-700 dark:text-rose-300">{grandeLashStats.total}</div>
+            </div>
+            {Object.entries(grandeLashStats.byPosition)
+              .sort(([, a], [, b]) => b - a)
+              .slice(0, 3)
+              .map(([position, count]) => (
+                <div key={position} className="p-5 rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+                  <div className="text-sm text-slate-500 dark:text-slate-400 font-medium capitalize">
+                    {position.replace(/-/g, " ")}
+                  </div>
+                  <div className="mt-1 text-2xl font-bold text-slate-900 dark:text-slate-50">{count}</div>
+                  <div className="text-xs text-slate-400 mt-1">
+                    {grandeLashStats.total > 0 ? ((count / grandeLashStats.total) * 100).toFixed(1) : 0}% of clicks
+                  </div>
+                </div>
+              ))}
+          </div>
+
+          {/* Clicks by Button Position */}
+          {Object.keys(grandeLashStats.byPosition).length > 0 && (
+            <div className="rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 overflow-hidden">
+              <div className="p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30">
+                <h3 className="font-semibold text-slate-900 dark:text-slate-50">Clicks by Button Position</h3>
+              </div>
+              <div className="p-4 space-y-3">
+                {Object.entries(grandeLashStats.byPosition)
+                  .sort(([, a], [, b]) => b - a)
+                  .map(([position, count]) => {
+                    const percentage = grandeLashStats.total > 0 ? (count / grandeLashStats.total) * 100 : 0;
+                    return (
+                      <div key={position}>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span className="text-slate-700 dark:text-slate-300 capitalize font-medium">
+                            {position.replace(/-/g, " ")}
+                          </span>
+                          <span className="text-slate-600 dark:text-slate-400">
+                            {count} ({percentage.toFixed(1)}%)
+                          </span>
+                        </div>
+                        <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-gradient-to-r from-rose-500 to-pink-500 transition-all duration-500"
+                            style={{ width: `${percentage}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+          )}
+
+          {/* Recent Clicks */}
+          {grandeLashStats.recentClicks.length > 0 && (
+            <div className="rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 overflow-hidden">
+              <div className="p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30">
+                <h3 className="font-semibold text-slate-900 dark:text-slate-50">Recent Clicks</h3>
+              </div>
+              <div className="divide-y divide-slate-200 dark:divide-slate-700">
+                {grandeLashStats.recentClicks.map((click) => (
+                  <div key={click.id} className="p-4 flex items-center justify-between">
+                    <div>
+                      <span className="px-2 py-1 rounded bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 text-xs font-medium capitalize">
+                        {click.buttonPosition.replace(/-/g, " ")}
+                      </span>
+                    </div>
+                    <div className="text-sm text-slate-500 dark:text-slate-400">
+                      {new Date(click.timestamp).toLocaleString("he-IL", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {grandeLashStats.total === 0 && (
+            <div className="text-center py-10 rounded-xl bg-slate-50 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700">
+              <p className="text-slate-500 dark:text-slate-400">
+                No Amazon clicks recorded yet for GrandeLash page.
+              </p>
+            </div>
+          )}
+        </section>
 
         {/* Product Variants Comparison */}
         <section className="space-y-6">

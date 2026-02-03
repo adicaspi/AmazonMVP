@@ -18,6 +18,8 @@ interface AmazonButtonProps {
 
 export function AmazonButton({ href, children, className, productName, position }: AmazonButtonProps) {
   const handleClick = () => {
+    const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
+
     // Track the click as a Lead event in Meta Pixel
     if (typeof window !== "undefined" && window.fbq) {
       window.fbq("track", "Lead", {
@@ -32,9 +34,22 @@ export function AmazonButton({ href, children, className, productName, position 
       window.fbq("trackCustom", "AmazonClick", {
         product: productName || "Amazon Product",
         button_position: position || "unknown",
-        page_url: window.location.pathname,
+        page_url: pagePath,
       });
     }
+
+    // Also track on our server for the analytics dashboard
+    fetch("/api/amazon-click", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        productName: productName || "Amazon Product",
+        buttonPosition: position || "unknown",
+        page: pagePath,
+      }),
+    }).catch(() => {
+      // Silently fail - don't block navigation
+    });
   };
 
   return (
