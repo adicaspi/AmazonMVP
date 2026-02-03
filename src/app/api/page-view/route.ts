@@ -4,7 +4,7 @@ import { supabase, isDatabaseAvailable } from "@/lib/db";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { page } = body;
+    const { page, utm_source, utm_medium, utm_campaign, utm_content } = body;
 
     if (!page) {
       return NextResponse.json(
@@ -19,6 +19,10 @@ export async function POST(request: NextRequest) {
       page: page,
       user_agent: request.headers.get("user-agent") || null,
       referer: request.headers.get("referer") || null,
+      utm_source: utm_source || null,
+      utm_medium: utm_medium || null,
+      utm_campaign: utm_campaign || null,
+      utm_content: utm_content || null,
     };
 
     // Save to Supabase
@@ -46,14 +50,14 @@ export async function GET(request: NextRequest) {
     const page = searchParams.get("page");
 
     if (!supabase || !(await isDatabaseAvailable())) {
-      return NextResponse.json({ views: [], total: 0 });
+      return NextResponse.json({ views: [], total: 0, sources: {} });
     }
 
     let query = supabase
       .from("page_views")
       .select("*", { count: "exact" })
       .order("timestamp", { ascending: false })
-      .limit(100);
+      .limit(1000);
 
     if (page) {
       query = query.eq("page", page);
@@ -65,9 +69,29 @@ export async function GET(request: NextRequest) {
       throw error;
     }
 
+    // Calculate traffic sources
+    const sources: Record<string, number> = {};
+    data?.forEach((view: any) => {
+      let source = "Direct";
+
+      if (view.utm_source) {
+        source = view.utm_source;
+      } else if (view.referer) {
+        try {
+          const url = new URL(view.referer);
+          source = url.hostname.replace("www.", "");
+        } catch {
+          source = view.referer;
+        }
+      }
+
+      sources[source] = (sources[source] || 0) + 1;
+    });
+
     return NextResponse.json({
       views: data || [],
       total: count || 0,
+      sources,
     });
   } catch (error) {
     console.error("Error reading page views:", error);
