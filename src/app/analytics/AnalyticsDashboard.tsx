@@ -231,9 +231,26 @@ export default function AnalyticsDashboard({
   trafficSources,
 }: Props) {
   const [lang, setLang] = useState<"he" | "en">("he");
+  const [darkMode, setDarkMode] = useState(false);
   const t = translations[lang];
   const isRTL = lang === "he";
   const today = new Date().toISOString().split("T")[0];
+
+  // Dark mode classes
+  const dm = {
+    bg: darkMode ? "bg-gray-900" : "bg-gray-50",
+    headerBg: darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200",
+    cardBg: darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200",
+    text: darkMode ? "text-gray-100" : "text-gray-900",
+    textMuted: darkMode ? "text-gray-400" : "text-gray-500",
+    textLight: darkMode ? "text-gray-500" : "text-gray-400",
+    tableBg: darkMode ? "bg-gray-700/50" : "bg-gray-50",
+    tableHover: darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50",
+    divider: darkMode ? "divide-gray-700" : "divide-gray-100",
+    border: darkMode ? "border-gray-700" : "border-gray-200",
+    barBg: darkMode ? "bg-gray-700" : "bg-gray-100",
+    helpBg: darkMode ? "bg-gray-800" : "bg-gray-100",
+  };
 
   const conversionRate = views > 0 ? ((totalClicks / views) * 100).toFixed(1) : "0";
 
@@ -247,20 +264,36 @@ export default function AnalyticsDashboard({
   };
 
   return (
-    <main className="min-h-screen bg-gray-50" dir={isRTL ? "rtl" : "ltr"}>
+    <main className={`min-h-screen ${dm.bg} transition-colors duration-300`} dir={isRTL ? "rtl" : "ltr"}>
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className={`${dm.headerBg} border-b transition-colors duration-300`}>
         <div className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">{t.title}</h1>
-              <p className="text-gray-500 mt-1">{t.subtitle}</p>
+              <h1 className={`text-2xl font-bold ${dm.text}`}>{t.title}</h1>
+              <p className={`${dm.textMuted} mt-1`}>{t.subtitle}</p>
             </div>
             <div className="flex items-center gap-3">
+              {/* Dark Mode Toggle */}
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className={`p-2 rounded-lg transition ${darkMode ? "bg-gray-700 hover:bg-gray-600 text-yellow-400" : "bg-gray-100 hover:bg-gray-200 text-gray-600"}`}
+                title={darkMode ? "Light Mode" : "Dark Mode"}
+              >
+                {darkMode ? (
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                  </svg>
+                )}
+              </button>
               {/* Language Toggle */}
               <button
                 onClick={() => setLang(lang === "he" ? "en" : "he")}
-                className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition flex items-center gap-2"
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 ${darkMode ? "bg-gray-700 hover:bg-gray-600 text-gray-200" : "bg-gray-100 hover:bg-gray-200 text-gray-700"}`}
               >
                 {lang === "he" ? "🇺🇸 English" : "🇮🇱 עברית"}
               </button>
@@ -278,68 +311,68 @@ export default function AnalyticsDashboard({
       <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
         {/* Conversion Funnel */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+          <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
             {t.conversionFunnel}
           </h2>
-          <p className="text-sm text-gray-500 mb-4">{t.funnelDesc}</p>
+          <p className={`text-sm ${dm.textMuted} mb-4`}>{t.funnelDesc}</p>
 
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+          <div className={`${dm.cardBg} rounded-xl border shadow-sm p-6 transition-colors duration-300`}>
             <div className="flex items-center justify-between gap-4">
               {/* Views */}
               <div className="flex-1 text-center">
-                <div className="text-4xl font-bold text-gray-900">{views}</div>
-                <div className="text-sm text-gray-500 mt-1">{t.pageViews}</div>
-                <div className="text-xs text-gray-400 mt-1">{t.pageViewsDesc}</div>
+                <div className={`text-4xl font-bold ${dm.text}`}>{views}</div>
+                <div className={`text-sm ${dm.textMuted} mt-1`}>{t.pageViews}</div>
+                <div className={`text-xs ${dm.textLight} mt-1`}>{t.pageViewsDesc}</div>
               </div>
 
               {/* Arrow */}
               <div className="flex flex-col items-center px-4">
                 <svg
-                  className={`w-8 h-8 text-gray-300 ${isRTL ? "rotate-180" : ""}`}
+                  className={`w-8 h-8 ${darkMode ? "text-gray-600" : "text-gray-300"} ${isRTL ? "rotate-180" : ""}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div className="text-lg font-bold text-emerald-600 mt-1">{conversionRate}%</div>
-                <div className="text-xs text-gray-400">{t.conversion}</div>
+                <div className="text-lg font-bold text-emerald-500 mt-1">{conversionRate}%</div>
+                <div className={`text-xs ${dm.textLight}`}>{t.conversion}</div>
               </div>
 
               {/* Clicks */}
               <div className="flex-1 text-center">
-                <div className="text-4xl font-bold text-emerald-600">{totalClicks}</div>
-                <div className="text-sm text-gray-500 mt-1">{t.amazonClicks}</div>
-                <div className="text-xs text-gray-400 mt-1">{t.amazonClicksDesc}</div>
+                <div className="text-4xl font-bold text-emerald-500">{totalClicks}</div>
+                <div className={`text-sm ${dm.textMuted} mt-1`}>{t.amazonClicks}</div>
+                <div className={`text-xs ${dm.textLight} mt-1`}>{t.amazonClicksDesc}</div>
               </div>
             </div>
 
             {/* Visual funnel bar */}
             <div className="mt-6 space-y-2">
               <div className="flex items-center gap-3">
-                <div className="w-20 text-sm text-gray-500">{t.views}</div>
-                <div className="flex-1 h-8 bg-gray-100 rounded-lg overflow-hidden">
-                  <div className="h-full bg-gray-400 rounded-lg" style={{ width: "100%" }}></div>
+                <div className={`w-20 text-sm ${dm.textMuted}`}>{t.views}</div>
+                <div className={`flex-1 h-8 ${dm.barBg} rounded-lg overflow-hidden`}>
+                  <div className={`h-full ${darkMode ? "bg-gray-500" : "bg-gray-400"} rounded-lg`} style={{ width: "100%" }}></div>
                 </div>
-                <div className="w-12 text-sm font-medium text-gray-700">{views}</div>
+                <div className={`w-12 text-sm font-medium ${dm.text}`}>{views}</div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-20 text-sm text-gray-500">{t.clicks}</div>
-                <div className="flex-1 h-8 bg-gray-100 rounded-lg overflow-hidden">
+                <div className={`w-20 text-sm ${dm.textMuted}`}>{t.clicks}</div>
+                <div className={`flex-1 h-8 ${dm.barBg} rounded-lg overflow-hidden`}>
                   <div
                     className="h-full bg-emerald-500 rounded-lg transition-all duration-500"
                     style={{ width: `${views > 0 ? (totalClicks / views) * 100 : 0}%` }}
                   ></div>
                 </div>
-                <div className="w-12 text-sm font-medium text-emerald-600">{totalClicks}</div>
+                <div className="w-12 text-sm font-medium text-emerald-500">{totalClicks}</div>
               </div>
             </div>
 
             {/* Interpretation */}
             {views > 0 && (
-              <div className="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
-                <p className="text-sm text-emerald-800">
+              <div className={`mt-4 p-3 rounded-lg border ${darkMode ? "bg-emerald-900/30 border-emerald-800" : "bg-emerald-50 border-emerald-200"}`}>
+                <p className={`text-sm ${darkMode ? "text-emerald-300" : "text-emerald-800"}`}>
                   <strong>{conversionRate}%</strong> {t.ofVisitorsClick}
                   {parseFloat(conversionRate) >= 30 && ` ${t.conversionExcellent}`}
                   {parseFloat(conversionRate) >= 15 && parseFloat(conversionRate) < 30 && ` ${t.conversionGood}`}
@@ -352,15 +385,15 @@ export default function AnalyticsDashboard({
 
         {/* Traffic Sources */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+          <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
             {t.trafficSources}
           </h2>
-          <p className="text-sm text-gray-500 mb-4">{t.trafficSourcesDesc}</p>
+          <p className={`text-sm ${dm.textMuted} mb-4`}>{t.trafficSourcesDesc}</p>
 
           {Object.keys(trafficSources).length > 0 ? (
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-              <div className="divide-y divide-gray-100">
+            <div className={`${dm.cardBg} rounded-xl border shadow-sm overflow-hidden transition-colors duration-300`}>
+              <div className={`divide-y ${dm.divider}`}>
                 {Object.entries(trafficSources)
                   .sort(([, a], [, b]) => b - a)
                   .map(([source, count], index) => {
@@ -432,28 +465,28 @@ export default function AnalyticsDashboard({
                     };
 
                     return (
-                      <div key={source} className="p-4 hover:bg-gray-50 transition">
+                      <div key={source} className={`p-4 ${dm.tableHover} transition`}>
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             {getIcon()}
                             {isTop && (
-                              <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-medium">
+                              <span className={`text-xs px-2 py-0.5 rounded font-medium ${darkMode ? "bg-purple-900/50 text-purple-300" : "bg-purple-100 text-purple-700"}`}>
                                 #1
                               </span>
                             )}
-                            <span className="font-medium text-gray-900">{displaySource}</span>
+                            <span className={`font-medium ${dm.text}`}>{displaySource}</span>
                           </div>
                           <div className={isRTL ? "text-left" : "text-right"}>
-                            <div className="font-bold text-gray-900">{count}</div>
-                            <div className="text-xs text-gray-500">{percentage.toFixed(1)}%</div>
+                            <div className={`font-bold ${dm.text}`}>{count}</div>
+                            <div className={`text-xs ${dm.textMuted}`}>{percentage.toFixed(1)}%</div>
                           </div>
                         </div>
-                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div className={`h-2 ${dm.barBg} rounded-full overflow-hidden`}>
                           <div
                             className={`h-full rounded-full transition-all duration-500 ${
                               isTop
                                 ? "bg-gradient-to-r from-purple-500 to-pink-500"
-                                : "bg-gradient-to-r from-gray-400 to-gray-500"
+                                : darkMode ? "bg-gradient-to-r from-gray-500 to-gray-600" : "bg-gradient-to-r from-gray-400 to-gray-500"
                             }`}
                             style={{ width: `${percentage}%` }}
                           />
@@ -464,57 +497,57 @@ export default function AnalyticsDashboard({
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-              <div className="text-gray-400 text-4xl mb-3">🌐</div>
-              <p className="text-gray-500">{t.noTrafficData}</p>
-              <p className="text-sm text-gray-400 mt-1">{t.noTrafficDataDesc}</p>
+            <div className={`${dm.cardBg} rounded-xl border p-8 text-center transition-colors duration-300`}>
+              <div className={`${dm.textLight} text-4xl mb-3`}>🌐</div>
+              <p className={dm.textMuted}>{t.noTrafficData}</p>
+              <p className={`text-sm ${dm.textLight} mt-1`}>{t.noTrafficDataDesc}</p>
             </div>
           )}
         </section>
 
         {/* Quick Stats */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <h2 className={`text-lg font-semibold ${dm.text} mb-4 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-rose-500 rounded-full"></span>
             {t.quickSummary}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
-              <div className="text-sm text-gray-500 mb-1">{t.totalClicks}</div>
-              <div className="text-3xl font-bold text-gray-900">{totalClicks}</div>
-              <div className="text-xs text-gray-400 mt-2">{t.totalClicksDesc}</div>
+            <div className={`${dm.cardBg} rounded-xl p-5 border shadow-sm transition-colors duration-300`}>
+              <div className={`text-sm ${dm.textMuted} mb-1`}>{t.totalClicks}</div>
+              <div className={`text-3xl font-bold ${dm.text}`}>{totalClicks}</div>
+              <div className={`text-xs ${dm.textLight} mt-2`}>{t.totalClicksDesc}</div>
             </div>
-            <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
-              <div className="text-sm text-gray-500 mb-1">{t.today}</div>
-              <div className="text-3xl font-bold text-green-600">{todayClicks}</div>
-              <div className="text-xs text-gray-400 mt-2">{t.todayDesc}</div>
+            <div className={`${dm.cardBg} rounded-xl p-5 border shadow-sm transition-colors duration-300`}>
+              <div className={`text-sm ${dm.textMuted} mb-1`}>{t.today}</div>
+              <div className="text-3xl font-bold text-green-500">{todayClicks}</div>
+              <div className={`text-xs ${dm.textLight} mt-2`}>{t.todayDesc}</div>
             </div>
-            <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
-              <div className="text-sm text-gray-500 mb-1">{t.thisWeek}</div>
-              <div className="text-3xl font-bold text-blue-600">{weekClicks}</div>
-              <div className="text-xs text-gray-400 mt-2">{t.thisWeekDesc}</div>
+            <div className={`${dm.cardBg} rounded-xl p-5 border shadow-sm transition-colors duration-300`}>
+              <div className={`text-sm ${dm.textMuted} mb-1`}>{t.thisWeek}</div>
+              <div className="text-3xl font-bold text-blue-500">{weekClicks}</div>
+              <div className={`text-xs ${dm.textLight} mt-2`}>{t.thisWeekDesc}</div>
             </div>
-            <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
-              <div className="text-sm text-gray-500 mb-1">{t.bestButton}</div>
-              <div className="text-lg font-bold text-purple-600 truncate">
+            <div className={`${dm.cardBg} rounded-xl p-5 border shadow-sm transition-colors duration-300`}>
+              <div className={`text-sm ${dm.textMuted} mb-1`}>{t.bestButton}</div>
+              <div className="text-lg font-bold text-purple-500 truncate">
                 {bestButton ? getButtonLabel(bestButton).name : t.noData}
               </div>
-              <div className="text-xs text-gray-400 mt-2">{t.bestButtonDesc}</div>
+              <div className={`text-xs ${dm.textLight} mt-2`}>{t.bestButtonDesc}</div>
             </div>
           </div>
         </section>
 
         {/* Button Performance */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+          <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
             {t.buttonPerformance}
           </h2>
-          <p className="text-sm text-gray-500 mb-4">{t.buttonPerformanceDesc}</p>
+          <p className={`text-sm ${dm.textMuted} mb-4`}>{t.buttonPerformanceDesc}</p>
 
           {Object.keys(byPosition).length > 0 ? (
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-              <div className="divide-y divide-gray-100">
+            <div className={`${dm.cardBg} rounded-xl border shadow-sm overflow-hidden transition-colors duration-300`}>
+              <div className={`divide-y ${dm.divider}`}>
                 {Object.entries(byPosition)
                   .sort(([, a], [, b]) => b - a)
                   .map(([position, count], index) => {
@@ -523,30 +556,30 @@ export default function AnalyticsDashboard({
                     const isTop = index === 0;
 
                     return (
-                      <div key={position} className="p-4 hover:bg-gray-50 transition">
+                      <div key={position} className={`p-4 ${dm.tableHover} transition`}>
                         <div className="flex items-start justify-between mb-2">
                           <div className="flex-1">
                             <div className="flex items-center gap-2">
                               {isTop && (
-                                <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded font-medium">
+                                <span className={`text-xs px-2 py-0.5 rounded font-medium ${darkMode ? "bg-yellow-900/50 text-yellow-300" : "bg-yellow-100 text-yellow-700"}`}>
                                   #1
                                 </span>
                               )}
-                              <span className="font-medium text-gray-900">{label.name}</span>
+                              <span className={`font-medium ${dm.text}`}>{label.name}</span>
                             </div>
-                            {label.desc && <p className="text-xs text-gray-500 mt-1">{label.desc}</p>}
+                            {label.desc && <p className={`text-xs ${dm.textMuted} mt-1`}>{label.desc}</p>}
                           </div>
                           <div className={isRTL ? "text-left" : "text-right"}>
-                            <div className="font-bold text-gray-900">{count}</div>
-                            <div className="text-xs text-gray-500">{percentage.toFixed(1)}%</div>
+                            <div className={`font-bold ${dm.text}`}>{count}</div>
+                            <div className={`text-xs ${dm.textMuted}`}>{percentage.toFixed(1)}%</div>
                           </div>
                         </div>
-                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div className={`h-2 ${dm.barBg} rounded-full overflow-hidden`}>
                           <div
                             className={`h-full rounded-full transition-all duration-500 ${
                               isTop
                                 ? "bg-gradient-to-r from-rose-500 to-pink-500"
-                                : "bg-gradient-to-r from-gray-400 to-gray-500"
+                                : darkMode ? "bg-gradient-to-r from-gray-500 to-gray-600" : "bg-gradient-to-r from-gray-400 to-gray-500"
                             }`}
                             style={{ width: `${percentage}%` }}
                           />
@@ -557,10 +590,10 @@ export default function AnalyticsDashboard({
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-              <div className="text-gray-400 text-4xl mb-3">📊</div>
-              <p className="text-gray-500">{t.noClickData}</p>
-              <p className="text-sm text-gray-400 mt-1">{t.noClickDataDesc}</p>
+            <div className={`${dm.cardBg} rounded-xl border p-8 text-center transition-colors duration-300`}>
+              <div className={`${dm.textLight} text-4xl mb-3`}>📊</div>
+              <p className={dm.textMuted}>{t.noClickData}</p>
+              <p className={`text-sm ${dm.textLight} mt-1`}>{t.noClickDataDesc}</p>
             </div>
           )}
         </section>
@@ -568,20 +601,20 @@ export default function AnalyticsDashboard({
         {/* Insights */}
         {totalClicks > 0 && (
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+            <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
               <span className="w-2 h-2 bg-green-500 rounded-full"></span>
               {t.insights}
             </h2>
-            <p className="text-sm text-gray-500 mb-4">{t.insightsDesc}</p>
+            <p className={`text-sm ${dm.textMuted} mb-4`}>{t.insightsDesc}</p>
 
             <div className="grid md:grid-cols-2 gap-4">
               {bestButton && (
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                <div className={`rounded-xl p-5 border ${darkMode ? "bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-800" : "bg-gradient-to-br from-green-50 to-emerald-50 border-green-200"}`}>
                   <div className="flex items-start gap-3">
                     <div className="text-2xl">🏆</div>
                     <div>
-                      <h3 className="font-semibold text-green-800">{t.winningButton}</h3>
-                      <p className="text-sm text-green-700 mt-1">
+                      <h3 className={`font-semibold ${darkMode ? "text-green-300" : "text-green-800"}`}>{t.winningButton}</h3>
+                      <p className={`text-sm ${darkMode ? "text-green-400" : "text-green-700"} mt-1`}>
                         <strong>{getButtonLabel(bestButton).name}</strong> {t.bringsClicks} {byPosition[bestButton]}{" "}
                         {t.clicksWord} ({((byPosition[bestButton] / totalClicks) * 100).toFixed(0)}% {t.ofAllClicks})
                       </p>
@@ -591,12 +624,12 @@ export default function AnalyticsDashboard({
               )}
 
               {peakHour !== null && (
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-200">
+                <div className={`rounded-xl p-5 border ${darkMode ? "bg-gradient-to-br from-blue-900/30 to-indigo-900/30 border-blue-800" : "bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200"}`}>
                   <div className="flex items-start gap-3">
                     <div className="text-2xl">⏰</div>
                     <div>
-                      <h3 className="font-semibold text-blue-800">{t.peakHour}</h3>
-                      <p className="text-sm text-blue-700 mt-1">
+                      <h3 className={`font-semibold ${darkMode ? "text-blue-300" : "text-blue-800"}`}>{t.peakHour}</h3>
+                      <p className={`text-sm ${darkMode ? "text-blue-400" : "text-blue-700"} mt-1`}>
                         {t.peakHourDesc} <strong>{peakHour}:00-{peakHour + 1}:00</strong>
                       </p>
                     </div>
@@ -605,12 +638,12 @@ export default function AnalyticsDashboard({
               )}
 
               {byPosition["sticky-mobile"] && (
-                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                <div className={`rounded-xl p-5 border ${darkMode ? "bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-purple-800" : "bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200"}`}>
                   <div className="flex items-start gap-3">
                     <div className="text-2xl">📱</div>
                     <div>
-                      <h3 className="font-semibold text-purple-800">{t.mobileTraffic}</h3>
-                      <p className="text-sm text-purple-700 mt-1">
+                      <h3 className={`font-semibold ${darkMode ? "text-purple-300" : "text-purple-800"}`}>{t.mobileTraffic}</h3>
+                      <p className={`text-sm ${darkMode ? "text-purple-400" : "text-purple-700"} mt-1`}>
                         {byPosition["sticky-mobile"]} {t.mobileClicksFrom} (
                         {((byPosition["sticky-mobile"] / totalClicks) * 100).toFixed(0)}%)
                       </p>
@@ -619,12 +652,12 @@ export default function AnalyticsDashboard({
                 </div>
               )}
 
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-200">
+              <div className={`rounded-xl p-5 border ${darkMode ? "bg-gradient-to-br from-amber-900/30 to-orange-900/30 border-amber-800" : "bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200"}`}>
                 <div className="flex items-start gap-3">
                   <div className="text-2xl">💡</div>
                   <div>
-                    <h3 className="font-semibold text-amber-800">{t.tip}</h3>
-                    <p className="text-sm text-amber-700 mt-1">{t.tipText}</p>
+                    <h3 className={`font-semibold ${darkMode ? "text-amber-300" : "text-amber-800"}`}>{t.tip}</h3>
+                    <p className={`text-sm ${darkMode ? "text-amber-400" : "text-amber-700"} mt-1`}>{t.tipText}</p>
                   </div>
                 </div>
               </div>
@@ -634,31 +667,31 @@ export default function AnalyticsDashboard({
 
         {/* Recent Clicks */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+          <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
             {t.recentClicks}
           </h2>
-          <p className="text-sm text-gray-500 mb-4">{t.recentClicksDesc}</p>
+          <p className={`text-sm ${dm.textMuted} mb-4`}>{t.recentClicksDesc}</p>
 
           {recentClicks.length > 0 ? (
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+            <div className={`${dm.cardBg} rounded-xl border shadow-sm overflow-hidden transition-colors duration-300`}>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className={`${dm.tableBg} border-b ${dm.border}`}>
                     <tr>
-                      <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase">{t.dateTime}</th>
-                      <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase">{t.button}</th>
-                      <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase">{t.product}</th>
+                      <th className={`px-4 py-3 text-xs font-medium ${dm.textMuted} uppercase`}>{t.dateTime}</th>
+                      <th className={`px-4 py-3 text-xs font-medium ${dm.textMuted} uppercase`}>{t.button}</th>
+                      <th className={`px-4 py-3 text-xs font-medium ${dm.textMuted} uppercase`}>{t.product}</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className={`divide-y ${dm.divider}`}>
                     {recentClicks.map((click, index) => {
                       const label = getButtonLabel(click.button_position);
                       const isRecent = index < 3;
 
                       return (
-                        <tr key={click.id} className={isRecent ? "bg-green-50/50" : ""}>
-                          <td className="px-4 py-3 text-sm text-gray-600">
+                        <tr key={click.id} className={isRecent ? (darkMode ? "bg-green-900/20" : "bg-green-50/50") : ""}>
+                          <td className={`px-4 py-3 text-sm ${dm.textMuted}`}>
                             <div className="flex items-center gap-2">
                               {isRecent && (
                                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
@@ -673,11 +706,11 @@ export default function AnalyticsDashboard({
                             </div>
                           </td>
                           <td className="px-4 py-3">
-                            <span className="inline-flex px-2 py-1 rounded-md bg-rose-100 text-rose-700 text-xs font-medium">
+                            <span className={`inline-flex px-2 py-1 rounded-md text-xs font-medium ${darkMode ? "bg-rose-900/50 text-rose-300" : "bg-rose-100 text-rose-700"}`}>
                               {label.name}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-sm text-gray-600">{click.product_name}</td>
+                          <td className={`px-4 py-3 text-sm ${dm.textMuted}`}>{click.product_name}</td>
                         </tr>
                       );
                     })}
@@ -686,10 +719,10 @@ export default function AnalyticsDashboard({
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-              <div className="text-gray-400 text-4xl mb-3">🕐</div>
-              <p className="text-gray-500">{t.noClicksYet}</p>
-              <p className="text-sm text-gray-400 mt-1">{t.noClicksYetDesc}</p>
+            <div className={`${dm.cardBg} rounded-xl border p-8 text-center transition-colors duration-300`}>
+              <div className={`${dm.textLight} text-4xl mb-3`}>🕐</div>
+              <p className={dm.textMuted}>{t.noClicksYet}</p>
+              <p className={`text-sm ${dm.textLight} mt-1`}>{t.noClicksYetDesc}</p>
             </div>
           )}
         </section>
@@ -697,13 +730,13 @@ export default function AnalyticsDashboard({
         {/* Daily Breakdown */}
         {Object.keys(byDay).length > 0 && (
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+            <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
               <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
               {t.dailyClicks}
             </h2>
-            <p className="text-sm text-gray-500 mb-4">{t.dailyClicksDesc}</p>
+            <p className={`text-sm ${dm.textMuted} mb-4`}>{t.dailyClicksDesc}</p>
 
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
+            <div className={`${dm.cardBg} rounded-xl border shadow-sm p-4 transition-colors duration-300`}>
               <div className="space-y-2">
                 {Object.entries(byDay)
                   .sort(([a], [b]) => new Date(b).getTime() - new Date(a).getTime())
@@ -717,9 +750,9 @@ export default function AnalyticsDashboard({
 
                     return (
                       <div key={day} className="flex items-center gap-3">
-                        <div className="w-20 text-sm text-gray-500">
+                        <div className={`w-20 text-sm ${dm.textMuted}`}>
                           {isToday ? (
-                            <span className="text-green-600 font-medium">{t.todayLabel}</span>
+                            <span className="text-green-500 font-medium">{t.todayLabel}</span>
                           ) : (
                             <>
                               {dayName}{" "}
@@ -730,15 +763,15 @@ export default function AnalyticsDashboard({
                             </>
                           )}
                         </div>
-                        <div className="flex-1 h-6 bg-gray-100 rounded overflow-hidden">
+                        <div className={`flex-1 h-6 ${dm.barBg} rounded overflow-hidden`}>
                           <div
                             className={`h-full rounded transition-all duration-500 ${
-                              isToday ? "bg-green-500" : "bg-indigo-400"
+                              isToday ? "bg-green-500" : "bg-indigo-500"
                             }`}
                             style={{ width: `${percentage}%` }}
                           />
                         </div>
-                        <div className="w-8 text-sm font-medium text-gray-700">{count}</div>
+                        <div className={`w-8 text-sm font-medium ${dm.text}`}>{count}</div>
                       </div>
                     );
                   })}
@@ -748,24 +781,24 @@ export default function AnalyticsDashboard({
         )}
 
         {/* Help Section */}
-        <section className="bg-gray-100 rounded-xl p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">❓ {t.helpTitle}</h2>
+        <section className={`${dm.helpBg} rounded-xl p-6 transition-colors duration-300`}>
+          <h2 className={`text-lg font-semibold ${dm.text} mb-4`}>❓ {t.helpTitle}</h2>
           <div className="grid md:grid-cols-2 gap-4 text-sm">
             <div>
-              <h3 className="font-medium text-gray-800 mb-1">{t.helpClick}</h3>
-              <p className="text-gray-600">{t.helpClickDesc}</p>
+              <h3 className={`font-medium ${darkMode ? "text-gray-200" : "text-gray-800"} mb-1`}>{t.helpClick}</h3>
+              <p className={dm.textMuted}>{t.helpClickDesc}</p>
             </div>
             <div>
-              <h3 className="font-medium text-gray-800 mb-1">{t.helpWhyButton}</h3>
-              <p className="text-gray-600">{t.helpWhyButtonDesc}</p>
+              <h3 className={`font-medium ${darkMode ? "text-gray-200" : "text-gray-800"} mb-1`}>{t.helpWhyButton}</h3>
+              <p className={dm.textMuted}>{t.helpWhyButtonDesc}</p>
             </div>
             <div>
-              <h3 className="font-medium text-gray-800 mb-1">{t.helpWorking}</h3>
-              <p className="text-gray-600">{t.helpWorkingDesc}</p>
+              <h3 className={`font-medium ${darkMode ? "text-gray-200" : "text-gray-800"} mb-1`}>{t.helpWorking}</h3>
+              <p className={dm.textMuted}>{t.helpWorkingDesc}</p>
             </div>
             <div>
-              <h3 className="font-medium text-gray-800 mb-1">{t.helpPixel}</h3>
-              <p className="text-gray-600">{t.helpPixelDesc}</p>
+              <h3 className={`font-medium ${darkMode ? "text-gray-200" : "text-gray-800"} mb-1`}>{t.helpPixel}</h3>
+              <p className={dm.textMuted}>{t.helpPixelDesc}</p>
             </div>
           </div>
         </section>
