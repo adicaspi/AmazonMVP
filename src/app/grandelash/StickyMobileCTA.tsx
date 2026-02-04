@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { AmazonButton } from "@/components/AmazonButton";
 
 interface StickyMobileCTAProps {
@@ -8,39 +7,10 @@ interface StickyMobileCTAProps {
 }
 
 export function StickyMobileCTA({ amazonLink }: StickyMobileCTAProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isScrollingUp, setIsScrollingUp] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const heroHeight = 600; // Approximate hero section height
-
-      // Show after scrolling past hero
-      if (currentScrollY > heroHeight) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-
-      // Track scroll direction for animation
-      setIsScrollingUp(currentScrollY < lastScrollY);
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
-
-  if (!isVisible) return null;
-
   return (
     <>
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-white border-t-2 border-rose-200 p-4 md:hidden z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.15)] transform transition-transform duration-300 ${
-          isVisible ? 'translate-y-0' : 'translate-y-full'
-        }`}
+        className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-rose-200 p-3 md:hidden z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.2)]"
       >
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
