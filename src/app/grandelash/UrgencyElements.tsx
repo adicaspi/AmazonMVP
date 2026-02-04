@@ -52,22 +52,17 @@ export function UrgencyElements() {
         <div className="flex items-center justify-between">
           <div>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-gray-900">$58</span>
-              <span className="text-lg text-gray-400 line-through">$68</span>
-              <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                SAVE 15%
-              </span>
+              <span className="text-3xl font-bold text-gray-900">$36</span>
+              <span className="text-sm text-green-600 font-bold">Amazon's Choice</span>
             </div>
             <p className="text-sm text-green-600 font-medium mt-1">
-              Lowest price in 30 days!
+              ✓ 20K+ bought in past month
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-gray-500">Sale ends in:</p>
-            <p className="text-lg font-mono font-bold text-rose-600">
-              {String(timeLeft.hours).padStart(2, '0')}:
-              {String(timeLeft.minutes).padStart(2, '0')}:
-              {String(timeLeft.seconds).padStart(2, '0')}
+            <p className="text-xs text-gray-500">Free Prime delivery</p>
+            <p className="text-sm font-bold text-rose-600">
+              Ships Today!
             </p>
           </div>
         </div>
