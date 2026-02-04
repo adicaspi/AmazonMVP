@@ -594,6 +594,37 @@ export default function GrandeLASHPage() {
         </div>
       </section>
 
+      {/* Trust Bar Before FAQ */}
+      <section className="py-6 md:py-8 bg-white border-y border-gray-200">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
+            <div className="flex flex-col items-center gap-1.5">
+              <svg className="w-6 h-6 md:w-8 md:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span className="text-xs md:text-sm font-semibold text-gray-800">Prime Shipping</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5">
+              <svg className="w-6 h-6 md:w-8 md:h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-xs md:text-sm font-semibold text-gray-800">30-Day Guarantee</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5">
+              <svg className="w-6 h-6 md:w-8 md:h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              <span className="text-xs md:text-sm font-semibold text-gray-800">Ophthalmologist Tested</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5">
+              <span className="text-2xl md:text-3xl">🐰</span>
+              <span className="text-xs md:text-sm font-semibold text-gray-800">Cruelty Free</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section - Expanded */}
       <section className="py-10 md:py-24 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4">
