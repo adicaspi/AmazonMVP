@@ -6,6 +6,8 @@ import { AmazonButton } from "@/components/AmazonButton";
 import { ViewContentTracker } from "@/components/ViewContentTracker";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
+import { StickyMobileCTA } from "./StickyMobileCTA";
+import { SocialProofPopup } from "./SocialProofPopup";
 
 export const metadata: Metadata = {
   title: "GrandLash - Grow Your Own Natural Lashes | 90,000+ Happy Customers",
@@ -35,8 +37,8 @@ export default function GrandeLASHPage() {
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-rose-50 via-white to-pink-50">
-        <div className="max-w-6xl mx-auto px-4 py-6 md:py-16">
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
+        <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
+          <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
             {/* Mobile: Carousel First, Desktop: Second */}
             <div className="order-1 md:order-2">
               <HeroCarousel />
@@ -44,24 +46,31 @@ export default function GrandeLASHPage() {
 
             {/* Content */}
             <div className="order-2 md:order-1">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold mb-3 md:mb-4">
-                <span>🏆</span>
-                #1 Best Seller on Amazon
+              {/* Mobile: Compact badge row */}
+              <div className="flex flex-wrap items-center gap-2 mb-3 md:mb-4">
+                <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-2.5 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold">
+                  <span>🏆</span>
+                  #1 Best Seller
+                </div>
+                <div className="inline-flex items-center gap-1.5 bg-green-100 text-green-800 px-2.5 py-1 rounded-full text-xs font-bold md:hidden">
+                  <span>⭐</span>
+                  4.8 (90K+ reviews)
+                </div>
               </div>
 
-              {/* Main Headline */}
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-3 md:mb-4">
-                Grow <span className="text-rose-600">Longer, Thicker</span> Natural Lashes in Just <span className="text-rose-600">8 Weeks</span>
+              {/* Main Headline - Bigger on mobile */}
+              <h1 className="text-[1.75rem] leading-[1.2] md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 md:mb-4">
+                Grow <span className="text-rose-600">Longer, Thicker</span> Lashes in <span className="text-rose-600">8 Weeks</span>
               </h1>
 
-              {/* Subheadline - More emotional */}
-              <p className="text-base md:text-xl text-gray-600 mb-4 md:mb-6">
-                Finally get the lashes you've always wanted — without extensions, glue, or expensive salon visits.
+              {/* Subheadline - Shorter on mobile */}
+              <p className="text-sm md:text-xl text-gray-600 mb-3 md:mb-6">
+                <span className="md:hidden">Ditch extensions forever. Real results, naturally.</span>
+                <span className="hidden md:inline">Finally get the lashes you've always wanted — without extensions, glue, or expensive salon visits.</span>
               </p>
 
-              {/* Social Proof Line - Enhanced */}
-              <p className="text-sm md:text-base text-gray-700 mb-4 md:mb-6 font-medium">
+              {/* Social Proof Line - Mobile optimized */}
+              <p className="text-xs md:text-base text-gray-700 mb-3 md:mb-6 font-medium hidden md:block">
                 Clinically tested lash serum — trusted by <span className="text-rose-600 font-bold">90,000+ real women worldwide</span>
               </p>
 
@@ -97,8 +106,8 @@ export default function GrandeLASHPage() {
                 </div>
               </div>
 
-              {/* Trust Elements Under CTA */}
-              <div className="flex flex-col gap-1.5 md:gap-2 text-xs md:text-sm text-gray-600 mb-3 md:mb-4">
+              {/* Trust Elements Under CTA - Desktop only */}
+              <div className="hidden md:flex flex-col gap-2 text-sm text-gray-600 mb-4">
                 <div className="flex items-center gap-2">
                   <span className="text-green-500 font-bold">✓</span>
                   <span><strong>30-Day Money Back Guarantee</strong></span>
@@ -113,11 +122,11 @@ export default function GrandeLASHPage() {
                 </div>
               </div>
 
-              {/* Rating - Amazon trust */}
-              <div className="flex flex-wrap items-center gap-1 md:gap-2 text-xs md:text-sm">
+              {/* Rating - Desktop only (mobile shows in badge) */}
+              <div className="hidden md:flex flex-wrap items-center gap-2 text-sm">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-4 h-4 md:w-5 md:h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg key={i} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
@@ -126,8 +135,8 @@ export default function GrandeLASHPage() {
                 <span className="text-gray-600">from <strong>90,000+ Verified Amazon Buyers</strong></span>
               </div>
 
-              {/* FOMO Line - Shorter */}
-              <p className="text-xs text-gray-500 mt-2 italic">
+              {/* FOMO Line - Desktop only */}
+              <p className="hidden md:block text-xs text-gray-500 mt-2 italic">
                 Amazon Best-Seller This Month
               </p>
             </div>
@@ -275,28 +284,43 @@ export default function GrandeLASHPage() {
             </p>
           </div>
 
-          {/* Results Gallery */}
-          <div className="grid grid-cols-3 gap-2 md:gap-4 mb-8 md:mb-12">
-            <div className="relative rounded-lg md:rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-              <img
-                src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
-                alt="Customer Before and After Results"
-                className="w-full h-full object-cover aspect-square"
-              />
+          {/* Results Gallery - Horizontal scroll on mobile */}
+          <div className="relative mb-6 md:mb-12">
+            <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+                <img
+                  src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
+                  alt="Customer Before and After Results"
+                  className="w-full h-full object-cover aspect-square"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
+                  <p className="text-white text-sm font-semibold">Real Customer Results ⭐</p>
+                </div>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+                <img
+                  src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
+                  alt="Amazing Lash Transformation"
+                  className="w-full h-full object-cover aspect-square"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
+                  <p className="text-white text-sm font-semibold">8 Week Transformation ✨</p>
+                </div>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+                <img
+                  src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125472/WhatsApp_Image_2026-02-03_at_09.48.01_hh0bs8.jpg"
+                  alt="Real Customer Lash Growth"
+                  className="w-full h-full object-cover aspect-square"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
+                  <p className="text-white text-sm font-semibold">Natural Growth 💕</p>
+                </div>
+              </div>
             </div>
-            <div className="relative rounded-lg md:rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-              <img
-                src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
-                alt="Amazing Lash Transformation"
-                className="w-full h-full object-cover aspect-square"
-              />
-            </div>
-            <div className="relative rounded-lg md:rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-              <img
-                src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125472/WhatsApp_Image_2026-02-03_at_09.48.01_hh0bs8.jpg"
-                alt="Real Customer Lash Growth"
-                className="w-full h-full object-cover aspect-square"
-              />
+            {/* Swipe indicator - mobile only */}
+            <div className="flex items-center justify-center gap-2 mt-2 text-xs text-gray-400 md:hidden">
+              <span>← Swipe for more →</span>
             </div>
           </div>
 
@@ -413,32 +437,37 @@ export default function GrandeLASHPage() {
             <p className="text-sm md:text-lg text-gray-600">Don't just take our word for it</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+          {/* Reviews - Horizontal scroll on mobile */}
+          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
             {[
               { name: "Sarah M.", text: "After 6 weeks, my lashes are longer than my extensions ever were. I've saved over $1,200 this year!", rating: 5 },
               { name: "Jessica L.", text: "Extensions were ruining my natural lashes. Switched to GrandLash and they're now longer and thicker than before!", rating: 5 },
               { name: "Michelle R.", text: "By week 8, people kept asking if I had extensions. This serum is a complete game-changer!", rating: 5 }
             ].map((review, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm hover:shadow-lg transition-shadow">
-                <div className="flex gap-0.5 md:gap-1 mb-2 md:mb-4">
+              <div key={i} className="bg-white border border-gray-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-md flex-shrink-0 w-[85vw] md:w-auto snap-center">
+                <div className="flex gap-0.5 mb-2 md:mb-4">
                   {[...Array(review.rating)].map((_, j) => (
-                    <svg key={j} className="w-4 h-4 md:w-5 md:h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg key={j} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
                 </div>
-                <p className="text-sm md:text-base text-gray-700 mb-3 md:mb-4 italic">"{review.text}"</p>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 md:w-10 md:h-10 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center font-bold text-sm md:text-base">
+                <p className="text-base text-gray-700 mb-4 leading-relaxed">"{review.text}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-rose-100 to-pink-100 text-rose-600 rounded-full flex items-center justify-center font-bold">
                     {review.name[0]}
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm md:text-base">{review.name}</p>
-                    <p className="text-xs text-green-600 font-medium">✓ Verified Purchase</p>
+                    <p className="font-semibold text-gray-900">{review.name}</p>
+                    <p className="text-xs text-green-600 font-medium">✓ Verified Amazon Purchase</p>
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+          {/* Swipe indicator - mobile only */}
+          <div className="flex items-center justify-center gap-2 mt-3 text-xs text-gray-400 md:hidden">
+            <span>← Swipe to read more reviews →</span>
           </div>
 
           <div className="text-center mt-6 md:mt-10">
@@ -658,37 +687,11 @@ export default function GrandeLASHPage() {
         </div>
       </footer>
 
-      {/* Sticky Mobile CTA - Enhanced & Prominent */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-rose-200 p-4 md:hidden z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl font-bold text-gray-900">$36</span>
-            <div className="flex flex-col">
-              <span className="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded">Amazon's Choice</span>
-              <span className="text-xs text-gray-500 mt-0.5">20K+ bought last month</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-1.5 text-xs text-green-600 font-bold bg-green-50 px-2 py-1 rounded-full">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            Free Prime
-          </div>
-        </div>
-        <AmazonButton
-          href={amazonLink}
-          productName="GrandeLASH-MD"
-          position="sticky-mobile"
-          className="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold text-lg rounded-xl shadow-lg active:scale-[0.98] transition-transform"
-        >
-          <span>Check Price on Amazon</span>
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </AmazonButton>
-      </div>
-      <div className="h-28 md:hidden"></div>
+      {/* Social Proof Popup */}
+      <SocialProofPopup />
+
+      {/* Sticky Mobile CTA - Shows after scrolling past hero */}
+      <StickyMobileCTA amazonLink={amazonLink} />
     </div>
   );
 }
