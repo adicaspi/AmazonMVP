@@ -21,10 +21,10 @@ export function StickyMobileCTA({ amazonLink }: StickyMobileCTAProps) {
         clearTimeout(scrollTimeoutRef.current);
       }
 
-      // Show again after scrolling stops (300ms delay)
+      // Show again after scrolling stops (1 second delay)
       scrollTimeoutRef.current = setTimeout(() => {
         setIsVisible(true);
-      }, 300);
+      }, 1000);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
