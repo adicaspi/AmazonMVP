@@ -98,15 +98,20 @@ export default function GrandeLASHPage() {
                 </div>
 
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                  Grow <span className="text-rose-600">Longer, Thicker</span> Lashes in <span className="text-rose-600">8 Weeks</span>
+                  Finally Grow <span className="text-rose-600">Longer, Thicker</span> Lashes — <span className="text-rose-600">Without Extensions</span>
                 </h1>
 
-                <p className="text-xl text-gray-600 mb-6">
-                  Finally get the lashes you've always wanted — without extensions, glue, or expensive salon visits.
+                <p className="text-xl text-gray-600 mb-4">
+                  Real results in 8 weeks. No glue, no salon visits, no damage to your natural lashes.
+                </p>
+
+                <p className="text-lg text-green-700 font-bold mb-6 flex items-center gap-2">
+                  <span>💰</span>
+                  Save $1,800+/year compared to lash extensions
                 </p>
 
                 <p className="text-base text-gray-700 mb-6 font-medium">
-                  Clinically tested lash serum — trusted by <span className="text-rose-600 font-bold">90,000+ real women worldwide</span>
+                  Join <span className="text-rose-600 font-bold">90,000+ women</span> who ditched extensions and grew their own beautiful lashes
                 </p>
               </div>
 
@@ -123,7 +128,7 @@ export default function GrandeLASHPage() {
                   position="hero-main"
                   className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
                 >
-                  <span>Check Price on Amazon</span>
+                  <span>Buy Now on Amazon</span>
                   <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -531,10 +536,10 @@ export default function GrandeLASHPage() {
               Real Video Reviews
             </div>
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
-              See The Results For Yourself
+              Real Women. Real Results. No Filters.
             </h2>
             <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
-              Watch real customers share their amazing transformations
+              Watch 20-second transformations from verified customers
             </p>
           </div>
 
@@ -693,12 +698,38 @@ export default function GrandeLASHPage() {
             position="final-cta"
             className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-rose-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 animate-bounce hover:animate-none"
           >
-            Check Price on Amazon
+            Buy Now on Amazon
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </AmazonButton>
           <p className="text-rose-200 text-sm mt-4">Free Prime shipping + 30-day money back guarantee</p>
+        </div>
+      </section>
+
+      {/* Trust Footer */}
+      <section className="bg-gray-100 py-6 md:py-8 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-center">
+            <div className="flex items-center gap-2 text-gray-700">
+              <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span className="text-sm font-medium">Secure Checkout via Amazon</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-700">
+              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span className="text-sm font-medium">Fast Prime Shipping</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-700">
+              <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-sm font-medium">30-Day Money Back Guarantee</span>
+            </div>
+          </div>
         </div>
       </section>
 
