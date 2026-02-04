@@ -10,8 +10,28 @@ import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
 
 export const metadata: Metadata = {
-  title: "GrandLash - Grow Your Own Natural Lashes | 90,000+ Happy Customers",
-  description: "Ditch extensions and grow your own natural lashes. Ophthalmologist-tested. Real results in 8 weeks. Check price on Amazon.",
+  title: "GrandeLASH-MD Lash Serum | Grow Longer Lashes in 8 Weeks",
+  description: "The #1 Best-Selling Lash Serum on Amazon. 90,000+ 5-star reviews. Grow longer, thicker, fuller lashes naturally. Ophthalmologist tested. $36 with free Prime shipping.",
+  openGraph: {
+    title: "GrandeLASH-MD - Grow Longer, Thicker Lashes in 8 Weeks",
+    description: "The #1 Best-Selling Lash Serum on Amazon. 90,000+ 5-star reviews. Ophthalmologist tested. Real results, naturally.",
+    images: [
+      {
+        url: "https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg",
+        width: 1500,
+        height: 1500,
+        alt: "GrandeLASH-MD Lash Enhancing Serum",
+      },
+    ],
+    type: "website",
+    siteName: "AIPicks",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GrandeLASH-MD - Grow Longer, Thicker Lashes in 8 Weeks",
+    description: "The #1 Best-Selling Lash Serum on Amazon. 90,000+ 5-star reviews. Real results in 8 weeks!",
+    images: ["https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg"],
+  },
 };
 
 export default function GrandeLASHPage() {
