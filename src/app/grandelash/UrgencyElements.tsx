@@ -55,12 +55,17 @@ export function UrgencyElements() {
               <span className="text-3xl font-bold text-gray-900">$36</span>
               <span className="text-sm text-green-600 font-bold">Amazon's Choice</span>
             </div>
-            <p className="text-sm text-green-600 font-medium mt-1">
+            <p className="text-sm text-rose-600 font-semibold mt-1">
+              ⏰ Limited-time Amazon price
+            </p>
+            <p className="text-sm text-green-600 font-medium">
               ✓ 20K+ bought in past month
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-gray-500">Free Prime delivery</p>
+            <p className="text-sm font-bold text-blue-600 flex items-center gap-1 justify-end">
+              <span>✓</span> Free Prime shipping
+            </p>
             <p className="text-sm font-bold text-rose-600">
               Ships Today!
             </p>
