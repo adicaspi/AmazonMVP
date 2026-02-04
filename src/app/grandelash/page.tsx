@@ -38,41 +38,57 @@ export default function GrandeLASHPage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-rose-50 via-white to-pink-50">
         <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
+          {/* Mobile: Title + Rating ABOVE image (like Amazon) */}
+          <div className="md:hidden mb-3">
+            <p className="text-xs text-gray-500 mb-1">GrandeLASH-MD by Grande Cosmetics</p>
+            <h1 className="text-lg font-semibold text-gray-900 leading-snug mb-2">
+              Lash Enhancing Serum - Grow Longer, Thicker, Fuller Lashes in 8 Weeks - Ophthalmologist Tested
+            </h1>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">Amazon's Choice</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className={`w-4 h-4 ${i < 5 ? 'text-amber-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <span className="text-sm text-blue-600">4.8</span>
+              <span className="text-sm text-gray-500">(90,000+ reviews)</span>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
-            {/* Mobile: Carousel First, Desktop: Second */}
+            {/* Mobile: Carousel after title, Desktop: Second column */}
             <div className="order-1 md:order-2">
               <HeroCarousel />
             </div>
 
-            {/* Content */}
+            {/* Content - Mobile shows only CTA section, Desktop shows full */}
             <div className="order-2 md:order-1">
-              {/* Mobile: Compact badge row */}
-              <div className="flex flex-wrap items-center gap-2 mb-3 md:mb-4">
-                <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-2.5 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold">
-                  <span>🏆</span>
-                  #1 Best Seller
+              {/* Desktop only: badges and headline */}
+              <div className="hidden md:block">
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-bold">
+                    <span>🏆</span>
+                    #1 Best Seller
+                  </div>
                 </div>
-                <div className="inline-flex items-center gap-1.5 bg-green-100 text-green-800 px-2.5 py-1 rounded-full text-xs font-bold md:hidden">
-                  <span>⭐</span>
-                  4.8 (90K+ reviews)
-                </div>
+
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                  Grow <span className="text-rose-600">Longer, Thicker</span> Lashes in <span className="text-rose-600">8 Weeks</span>
+                </h1>
+
+                <p className="text-xl text-gray-600 mb-6">
+                  Finally get the lashes you've always wanted — without extensions, glue, or expensive salon visits.
+                </p>
+
+                <p className="text-base text-gray-700 mb-6 font-medium">
+                  Clinically tested lash serum — trusted by <span className="text-rose-600 font-bold">90,000+ real women worldwide</span>
+                </p>
               </div>
-
-              {/* Main Headline - Bigger on mobile */}
-              <h1 className="text-[1.75rem] leading-[1.2] md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 md:mb-4">
-                Grow <span className="text-rose-600">Longer, Thicker</span> Lashes in <span className="text-rose-600">8 Weeks</span>
-              </h1>
-
-              {/* Subheadline - Shorter on mobile */}
-              <p className="text-sm md:text-xl text-gray-600 mb-3 md:mb-6">
-                <span className="md:hidden">Ditch extensions forever. Real results, naturally.</span>
-                <span className="hidden md:inline">Finally get the lashes you've always wanted — without extensions, glue, or expensive salon visits.</span>
-              </p>
-
-              {/* Social Proof Line - Mobile optimized */}
-              <p className="text-xs md:text-base text-gray-700 mb-3 md:mb-6 font-medium hidden md:block">
-                Clinically tested lash serum — trusted by <span className="text-rose-600 font-bold">90,000+ real women worldwide</span>
-              </p>
 
               {/* Urgency Elements - Price, Timer, Stock */}
               <div className="mb-4 md:mb-5">
