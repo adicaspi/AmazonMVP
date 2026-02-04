@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { AmazonButton } from "@/components/AmazonButton";
 
 interface StickyMobileCTAProps {
@@ -7,10 +8,41 @@ interface StickyMobileCTAProps {
 }
 
 export function StickyMobileCTA({ amazonLink }: StickyMobileCTAProps) {
+  const [isVisible, setIsVisible] = useState(true);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Hide immediately when scrolling starts
+      setIsVisible(false);
+
+      // Clear existing timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+
+      // Show again after scrolling stops (300ms delay)
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsVisible(true);
+      }, 300);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       <div
-        className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-rose-200 p-3 md:hidden z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.2)]"
+        className={`fixed bottom-0 left-0 right-0 bg-white border-t-2 border-rose-200 p-3 md:hidden z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.2)] transition-transform duration-300 ${
+          isVisible ? 'translate-y-0' : 'translate-y-full'
+        }`}
       >
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
