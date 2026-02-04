@@ -70,19 +70,31 @@ export default function GrandeLASHPage() {
                 <UrgencyElements />
               </div>
 
-              {/* CTA Button - More Compelling */}
-              <div className="mb-3 md:mb-4">
+              {/* CTA Button - Optimized for Mobile */}
+              <div className="mb-4">
                 <AmazonButton
                   href={amazonLink}
                   productName="GrandeLASH-MD"
                   position="hero-main"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-lg md:text-xl rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 w-full sm:w-auto animate-pulse hover:animate-none"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
                 >
                   <span>Check Price on Amazon</span>
-                  <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </AmazonButton>
+                {/* Mobile-only quick trust badges */}
+                <div className="flex items-center justify-center gap-4 mt-3 md:hidden">
+                  <span className="text-xs text-gray-600 flex items-center gap-1">
+                    <span className="text-green-500">✓</span> Free Shipping
+                  </span>
+                  <span className="text-xs text-gray-600 flex items-center gap-1">
+                    <span className="text-green-500">✓</span> 30-Day Returns
+                  </span>
+                  <span className="text-xs text-gray-600 flex items-center gap-1">
+                    <span className="text-green-500">✓</span> Prime
+                  </span>
+                </div>
               </div>
 
               {/* Trust Elements Under CTA */}
@@ -461,7 +473,8 @@ export default function GrandeLASHPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 md:gap-8 max-w-2xl mx-auto">
+          {/* Mobile: Single column, Desktop: Two columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-sm md:max-w-2xl mx-auto">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
               <video
                 className="w-full h-full object-contain rounded-xl"
@@ -521,44 +534,52 @@ export default function GrandeLASHPage() {
             Everything you need to know about GrandLash
           </p>
 
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {[
               {
                 q: "Does it really work?",
-                a: "Yes! GrandLash is clinically proven to show visible lash growth in as little as 4-6 weeks, with full results by 8-12 weeks. Over 90,000 women have seen real results."
-              },
-              {
-                q: "Will it irritate my eyes?",
-                a: "GrandLash is ophthalmologist tested and safe for sensitive eyes. It's also safe for contact lens wearers. Some users may experience mild tingling which is normal and temporary."
+                a: "Yes! GrandLash is clinically proven to show visible lash growth in as little as 4-6 weeks, with full results by 8-12 weeks. Over 90,000 women have seen real results.",
+                showMobile: true
               },
               {
                 q: "When will I see first results?",
-                a: "Most users notice their lashes looking healthier within 2-3 weeks. Visible length improvement typically appears at 4-6 weeks, with dramatic results by week 8-12."
+                a: "Most users notice their lashes looking healthier within 2-3 weeks. Visible length improvement typically appears at 4-6 weeks, with dramatic results by week 8-12.",
+                showMobile: true
               },
               {
-                q: "Can I use it with mascara?",
-                a: "Absolutely! Apply GrandLash at night on clean lashes before bed. During the day, you can wear your favorite mascara as usual."
-              },
-              {
-                q: "Is it safe during pregnancy?",
-                a: "While GrandLash is safe for most users, we recommend consulting with your doctor before using any new cosmetic products during pregnancy or nursing."
-              },
-              {
-                q: "How long does one tube last?",
-                a: "One tube lasts approximately 3 months with daily use. That's less than $1 per day for salon-quality lashes!"
-              },
-              {
-                q: "What happens if I stop using it?",
-                a: "Your lashes will gradually return to their natural state over time. Many users continue with a maintenance routine of 2-3 times per week to keep results."
+                q: "Will it irritate my eyes?",
+                a: "GrandLash is ophthalmologist tested and safe for sensitive eyes. It's also safe for contact lens wearers. Some users may experience mild tingling which is normal and temporary.",
+                showMobile: true
               },
               {
                 q: "What if it doesn't work for me?",
-                a: "Amazon offers a hassle-free return policy. If you're not satisfied with your results, you can return it within 30 days for a full refund."
+                a: "Amazon offers a hassle-free return policy. If you're not satisfied with your results, you can return it within 30 days for a full refund.",
+                showMobile: true
+              },
+              {
+                q: "Can I use it with mascara?",
+                a: "Absolutely! Apply GrandLash at night on clean lashes before bed. During the day, you can wear your favorite mascara as usual.",
+                showMobile: false
+              },
+              {
+                q: "Is it safe during pregnancy?",
+                a: "While GrandLash is safe for most users, we recommend consulting with your doctor before using any new cosmetic products during pregnancy or nursing.",
+                showMobile: false
+              },
+              {
+                q: "How long does one tube last?",
+                a: "One tube lasts approximately 3 months with daily use. That's less than $1 per day for salon-quality lashes!",
+                showMobile: false
+              },
+              {
+                q: "What happens if I stop using it?",
+                a: "Your lashes will gradually return to their natural state over time. Many users continue with a maintenance routine of 2-3 times per week to keep results.",
+                showMobile: false
               }
             ].map((faq, i) => (
-              <div key={i} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="font-bold text-lg text-gray-900 mb-2">{faq.q}</h3>
-                <p className="text-gray-600">{faq.a}</p>
+              <div key={i} className={`bg-white rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow ${!faq.showMobile ? 'hidden md:block' : ''}`}>
+                <h3 className="font-bold text-base md:text-lg text-gray-900 mb-1 md:mb-2">{faq.q}</h3>
+                <p className="text-sm md:text-base text-gray-600">{faq.a}</p>
               </div>
             ))}
           </div>
@@ -637,34 +658,37 @@ export default function GrandeLASHPage() {
         </div>
       </footer>
 
-      {/* Sticky Mobile CTA - Enhanced */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-gray-200 p-3 md:hidden z-50">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-gray-900">$36</span>
-            <span className="bg-green-500 text-white text-xs font-bold px-1.5 py-0.5 rounded">Amazon's Choice</span>
+      {/* Sticky Mobile CTA - Enhanced & Prominent */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-rose-200 p-4 md:hidden z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl font-bold text-gray-900">$36</span>
+            <div className="flex flex-col">
+              <span className="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded">Amazon's Choice</span>
+              <span className="text-xs text-gray-500 mt-0.5">20K+ bought last month</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1 text-xs text-green-600 font-medium">
-            <span className="relative flex h-1.5 w-1.5">
+          <div className="flex items-center gap-1.5 text-xs text-green-600 font-bold bg-green-50 px-2 py-1 rounded-full">
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
             </span>
-            Free Prime Shipping
+            Free Prime
           </div>
         </div>
         <AmazonButton
           href={amazonLink}
           productName="GrandeLASH-MD"
           position="sticky-mobile"
-          className="flex items-center justify-center gap-2 w-full py-3.5 bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold rounded-full shadow-lg"
+          className="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold text-lg rounded-xl shadow-lg active:scale-[0.98] transition-transform"
         >
           <span>Check Price on Amazon</span>
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </AmazonButton>
       </div>
-      <div className="h-24 md:hidden"></div>
+      <div className="h-28 md:hidden"></div>
     </div>
   );
 }
