@@ -28,7 +28,7 @@ export default function GrandeLASHPage() {
       <div className="bg-gradient-to-r from-rose-600 via-pink-600 to-rose-600 text-white text-center py-2.5 px-4">
         <div className="flex items-center justify-center gap-2 text-sm md:text-base font-bold animate-pulse">
           <span>🔥</span>
-          <span>FEBRUARY SALE: Extra 15% OFF Today Only!</span>
+          <span>BEST SELLER: 20K+ Bought Last Month!</span>
           <span>🔥</span>
         </div>
       </div>
@@ -78,7 +78,7 @@ export default function GrandeLASHPage() {
                   position="hero-main"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-lg md:text-xl rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 w-full sm:w-auto animate-pulse hover:animate-none"
                 >
-                  <span>Claim Your 15% OFF Now</span>
+                  <span>Check Price on Amazon</span>
                   <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -587,7 +587,7 @@ export default function GrandeLASHPage() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             </span>
-            15% OFF Sale Ends Tonight!
+            Amazon's Choice - 20K+ Bought Last Month!
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Don't Miss Out - Get Your Dream Lashes Today!
@@ -596,10 +596,9 @@ export default function GrandeLASHPage() {
             Join over 90,000 women who've transformed their lashes naturally.
           </p>
           <div className="flex items-center justify-center gap-3 mb-8">
-            <span className="text-4xl font-bold">$58</span>
-            <span className="text-2xl text-rose-200 line-through">$68</span>
+            <span className="text-4xl font-bold">$36</span>
             <span className="bg-yellow-400 text-yellow-900 text-sm font-bold px-3 py-1 rounded-full">
-              SAVE $10
+              Amazon's Choice
             </span>
           </div>
           <AmazonButton
@@ -608,7 +607,7 @@ export default function GrandeLASHPage() {
             position="final-cta"
             className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-rose-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 animate-bounce hover:animate-none"
           >
-            Claim Your 15% Discount Now
+            Check Price on Amazon
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -642,16 +641,15 @@ export default function GrandeLASHPage() {
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-gray-200 p-3 md:hidden z-50">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-gray-900">$58</span>
-            <span className="text-sm text-gray-400 line-through">$68</span>
-            <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded">-15%</span>
+            <span className="text-xl font-bold text-gray-900">$36</span>
+            <span className="bg-green-500 text-white text-xs font-bold px-1.5 py-0.5 rounded">Amazon's Choice</span>
           </div>
-          <div className="flex items-center gap-1 text-xs text-orange-600 font-medium">
+          <div className="flex items-center gap-1 text-xs text-green-600 font-medium">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
             </span>
-            Sale ends tonight!
+            Free Prime Shipping
           </div>
         </div>
         <AmazonButton
@@ -660,7 +658,7 @@ export default function GrandeLASHPage() {
           position="sticky-mobile"
           className="flex items-center justify-center gap-2 w-full py-3.5 bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold rounded-full shadow-lg"
         >
-          <span>Get 15% OFF - Buy Now</span>
+          <span>Check Price on Amazon</span>
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
