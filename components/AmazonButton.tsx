@@ -17,7 +17,29 @@ interface AmazonButtonProps {
 }
 
 export function AmazonButton({ href, children, className, productName, position }: AmazonButtonProps) {
-  const handleClick = () => {
+
+  const getDeepLink = (url: string): string => {
+    if (typeof window === "undefined") return url;
+
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(userAgent);
+    const isAndroid = /android/.test(userAgent);
+
+    // Extract the path from the Amazon URL (e.g., /dp/B082WZTJV5?tag=aipicks20-20)
+    const amazonPath = url.replace(/^https?:\/\/(www\.)?amazon\.com/, '');
+
+    if (isIOS) {
+      // iOS Amazon app deep link
+      return `com.amazon.mobile.shopping://amazon.com${amazonPath}`;
+    } else if (isAndroid) {
+      // Android Amazon app deep link using intent
+      return `intent://www.amazon.com${amazonPath}#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end`;
+    }
+
+    return url;
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
 
     // Track the click as a Lead event in Meta Pixel
@@ -50,6 +72,23 @@ export function AmazonButton({ href, children, className, productName, position 
     }).catch(() => {
       // Silently fail - don't block navigation
     });
+
+    // Try deep link on mobile
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobile = /iphone|ipad|ipod|android/.test(userAgent);
+
+    if (isMobile) {
+      e.preventDefault();
+      const deepLink = getDeepLink(href);
+
+      // Try to open the app
+      window.location.href = deepLink;
+
+      // Fallback to web if app doesn't open (after 1.5 seconds)
+      setTimeout(() => {
+        window.open(href, '_blank');
+      }, 1500);
+    }
   };
 
   return (
