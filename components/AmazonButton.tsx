@@ -25,15 +25,22 @@ export function AmazonButton({ href, children, className, productName, position 
     const isIOS = /iphone|ipad|ipod/.test(userAgent);
     const isAndroid = /android/.test(userAgent);
 
-    // Extract the path from the Amazon URL (e.g., /dp/B082WZTJV5?tag=aipicks20-20)
-    const amazonPath = url.replace(/^https?:\/\/(www\.)?amazon\.com/, '');
+    // Extract ASIN from URL (e.g., B082WZTJV5 from /dp/B082WZTJV5)
+    const asinMatch = url.match(/\/dp\/([A-Z0-9]{10})/i);
+    const asin = asinMatch ? asinMatch[1] : null;
 
-    if (isIOS) {
-      // iOS Amazon app deep link
-      return `com.amazon.mobile.shopping://amazon.com${amazonPath}`;
-    } else if (isAndroid) {
-      // Android Amazon app deep link using intent
-      return `intent://www.amazon.com${amazonPath}#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end`;
+    // Extract tag parameter
+    const tagMatch = url.match(/tag=([^&]+)/);
+    const tag = tagMatch ? tagMatch[1] : "aipicks20-20";
+
+    if (asin) {
+      if (isIOS) {
+        // iOS Amazon app deep link - direct to product page
+        return `com.amazon.mobile.shopping://www.amazon.com/dp/${asin}?tag=${tag}`;
+      } else if (isAndroid) {
+        // Android Amazon app deep link
+        return `amzn://apps/android?asin=${asin}&tag=${tag}`;
+      }
     }
 
     return url;
