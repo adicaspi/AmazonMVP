@@ -18,34 +18,6 @@ interface AmazonButtonProps {
 
 export function AmazonButton({ href, children, className, productName, position }: AmazonButtonProps) {
 
-  const getDeepLink = (url: string): string => {
-    if (typeof window === "undefined") return url;
-
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isIOS = /iphone|ipad|ipod/.test(userAgent);
-    const isAndroid = /android/.test(userAgent);
-
-    // Extract ASIN from URL (e.g., B082WZTJV5 from /dp/B082WZTJV5)
-    const asinMatch = url.match(/\/dp\/([A-Z0-9]{10})/i);
-    const asin = asinMatch ? asinMatch[1] : null;
-
-    // Extract tag parameter
-    const tagMatch = url.match(/tag=([^&]+)/);
-    const tag = tagMatch ? tagMatch[1] : "aipicks20-20";
-
-    if (asin) {
-      if (isIOS) {
-        // iOS Amazon app deep link - direct to product page
-        return `com.amazon.mobile.shopping://www.amazon.com/dp/${asin}?tag=${tag}`;
-      } else if (isAndroid) {
-        // Android Amazon app deep link
-        return `amzn://apps/android?asin=${asin}&tag=${tag}`;
-      }
-    }
-
-    return url;
-  };
-
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
 
@@ -80,21 +52,15 @@ export function AmazonButton({ href, children, className, productName, position 
       // Silently fail - don't block navigation
     });
 
-    // Try deep link on mobile
+    // On mobile, navigate directly to trigger Universal Links / App Links
     const userAgent = navigator.userAgent.toLowerCase();
     const isMobile = /iphone|ipad|ipod|android/.test(userAgent);
 
     if (isMobile) {
       e.preventDefault();
-      const deepLink = getDeepLink(href);
-
-      // Try to open the app
-      window.location.href = deepLink;
-
-      // Fallback to web if app doesn't open (after 1.5 seconds)
-      setTimeout(() => {
-        window.open(href, '_blank');
-      }, 1500);
+      // Direct navigation triggers Universal Links (iOS) and App Links (Android)
+      // This will open Amazon app if installed, otherwise browser
+      window.location.href = href;
     }
   };
 
