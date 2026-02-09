@@ -112,7 +112,7 @@ export default function GrandeLASHPage() {
 
                 <p className="text-base text-green-700 font-bold mb-6 flex items-center gap-2">
                   <span>💰</span>
-                  Save $2,128/year compared to lash extensions
+                  Save $2,256/year compared to lash extensions
                 </p>
               </div>
 
@@ -441,14 +441,14 @@ export default function GrandeLASHPage() {
             <div className="bg-green-50 border-2 border-green-300 rounded-2xl p-5 md:p-6 text-center shadow-lg relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">RECOMMENDED</div>
               <p className="text-sm font-semibold text-green-600 mb-2 uppercase tracking-wide">GrandLash</p>
-              <p className="text-lg md:text-xl text-gray-700 mb-1">$68 &times; 4 tubes</p>
-              <p className="text-3xl md:text-4xl font-extrabold text-green-600">$272<span className="text-base font-normal text-green-400">/year</span></p>
+              <p className="text-lg md:text-xl text-gray-700 mb-1">$36 &times; 4 tubes</p>
+              <p className="text-3xl md:text-4xl font-extrabold text-green-600">$144<span className="text-base font-normal text-green-400">/year</span></p>
             </div>
 
             {/* You Save */}
             <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border-2 border-amber-300 rounded-2xl p-5 md:p-6 text-center">
               <p className="text-sm font-semibold text-amber-600 mb-2 uppercase tracking-wide">You Save</p>
-              <p className="text-3xl md:text-5xl font-extrabold text-amber-600">$2,128</p>
+              <p className="text-3xl md:text-5xl font-extrabold text-amber-600">$2,256</p>
               <p className="text-base md:text-lg font-bold text-amber-500">Every Year</p>
             </div>
           </div>
@@ -508,7 +508,7 @@ export default function GrandeLASHPage() {
                 </tr>
                 <tr>
                   <td className="px-6 py-4 text-gray-700 font-medium">Annual Cost</td>
-                  <td className="px-6 py-4 text-center text-green-600 font-semibold">$272/year</td>
+                  <td className="px-6 py-4 text-center text-green-600 font-semibold">$144/year</td>
                   <td className="px-6 py-4 text-center text-red-500">$2,400+/year</td>
                 </tr>
                 <tr className="bg-gray-50">
@@ -532,7 +532,7 @@ export default function GrandeLASHPage() {
               position="comparison-table"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Save $2,128/Year — Get GrandLash Now
+              Save $2,256/Year — Get GrandLash Now
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -581,7 +581,7 @@ export default function GrandeLASHPage() {
                 <ul className="space-y-1.5 md:space-y-2 text-sm md:text-base text-gray-600">
                   <li className="flex items-start gap-2">
                     <span className="text-green-500 mt-0.5">✓</span>
-                    <span>One tube lasts 3 months (~$68)</span>
+                    <span>One tube lasts 3 months ($36)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-green-500 mt-0.5">✓</span>
