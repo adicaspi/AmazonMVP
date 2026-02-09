@@ -8,6 +8,7 @@ import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
+import { FAQAccordion } from "./FAQAccordion";
 
 export const metadata: Metadata = {
   title: "GrandeLASH-MD Lash Serum | Grow Longer Lashes in 8 Weeks",
@@ -116,53 +117,64 @@ export default function GrandeLASHPage() {
                 </p>
               </div>
 
+              {/* MOBILE: CTA immediately after carousel (before urgency) */}
+              <div className="md:hidden mb-3">
+                <AmazonButton
+                  href={amazonLink}
+                  productName="GrandeLASH-MD"
+                  position="hero-main-mobile"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-5 bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold text-xl rounded-2xl shadow-xl active:scale-[0.98] transition-transform"
+                >
+                  <span>Start Your Lash Transformation</span>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </AmazonButton>
+                {/* Guarantee badge + trust line */}
+                <div className="flex items-center justify-center gap-2 mt-2.5">
+                  <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  <span className="text-xs text-gray-600">30-Day Guarantee</span>
+                  <span className="text-gray-300">|</span>
+                  <span className="text-xs text-gray-600">Free Prime Shipping</span>
+                  <span className="text-gray-300">|</span>
+                  <span className="text-xs font-bold text-gray-800">$36</span>
+                </div>
+                <p className="text-center text-sm text-gray-600 mt-2 font-medium">
+                  Join <span className="text-rose-600 font-bold">90,000+ women</span> who quit extensions forever.
+                </p>
+              </div>
+
               {/* Urgency Elements - Price, Timer, Stock */}
               <div className="mb-4 md:mb-5">
                 <UrgencyElements />
               </div>
 
-              {/* CTA Button - Outcome Based */}
-              <div className="mb-4">
+              {/* DESKTOP: CTA Button - Outcome Based */}
+              <div className="hidden md:block mb-4">
                 <AmazonButton
                   href={amazonLink}
                   productName="GrandeLASH-MD"
                   position="hero-main"
-                  className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-6 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
                 >
                   <span>Start Your Lash Transformation</span>
-                  <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </AmazonButton>
-                {/* Mobile-only quick trust badges */}
-                <div className="flex items-center justify-center gap-4 mt-3 md:hidden">
-                  <span className="text-xs text-gray-600 flex items-center gap-1">
-                    <span className="text-green-500">✓</span> Free Shipping
-                  </span>
-                  <span className="text-xs text-gray-600 flex items-center gap-1">
-                    <span className="text-green-500">✓</span> 30-Day Returns
-                  </span>
-                  <span className="text-xs text-gray-600 flex items-center gap-1">
-                    <span className="text-green-500">✓</span> Prime
-                  </span>
+                {/* Guarantee badge visual */}
+                <div className="flex items-center justify-center gap-2 mt-3">
+                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  <span className="text-sm text-gray-600"><strong>30-Day Money Back Guarantee</strong> &middot; Free Prime Shipping</span>
                 </div>
               </div>
 
-              {/* Identity Bridge - Mobile */}
-              <p className="text-center text-sm text-gray-600 mb-3 md:hidden font-medium">
-                Join <span className="text-rose-600 font-bold">90,000+ women</span> who quit extensions forever.
-              </p>
-
               {/* Trust Elements Under CTA - Desktop only */}
               <div className="hidden md:flex flex-col gap-2 text-sm text-gray-600 mb-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span>
-                  <span><strong>30-Day Money Back Guarantee</strong></span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span>
-                  <span>Free & Fast Prime Shipping</span>
-                </div>
                 <div className="flex items-center gap-2">
                   <span className="text-green-500 font-bold">✓</span>
                   <span>Ships Today if Ordered Within 2 Hours</span>
@@ -287,7 +299,8 @@ export default function GrandeLASHPage() {
               </div>
             </div>
 
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
+            {/* Second video — desktop only */}
+            <div className="hidden md:block relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
               <video
                 className="w-full h-full object-contain rounded-xl"
                 controls
@@ -668,7 +681,9 @@ export default function GrandeLASHPage() {
             {[
               { name: "Sarah M.", text: "After 6 weeks, my lashes are longer than my extensions ever were. I've saved over $1,200 this year!", rating: 5 },
               { name: "Jessica L.", text: "Extensions were ruining my natural lashes. Switched to GrandLash and they're now longer and thicker than before!", rating: 5 },
-              { name: "Michelle R.", text: "By week 8, people kept asking if I had extensions. This serum is a complete game-changer!", rating: 5 }
+              { name: "Michelle R.", text: "By week 8, people kept asking if I had extensions. This serum is a complete game-changer!", rating: 5 },
+              { name: "Amanda K.", text: "Took about 5 weeks before I really noticed a difference — a bit longer than expected. But by week 8? Absolutely worth the wait. My lashes look incredible now.", rating: 4 },
+              { name: "Rachel T.", text: "I was skeptical but the Amazon reviews convinced me. Now I'm one of them — haven't worn falsies in 3 months!", rating: 5 }
             ].map((review, i) => (
               <div key={i} className="bg-white border border-gray-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-md flex-shrink-0 w-[85vw] md:w-auto snap-center">
                 <div className="flex gap-0.5 mb-2 md:mb-4">
@@ -752,55 +767,16 @@ export default function GrandeLASHPage() {
             Everything you need to know about GrandLash
           </p>
 
-          <div className="space-y-3 md:space-y-4">
-            {[
-              {
-                q: "Does it really work?",
-                a: "Yes! GrandLash is clinically proven to show visible lash growth in as little as 4-6 weeks, with full results by 8-12 weeks. Over 90,000 women have seen real results.",
-                showMobile: true
-              },
-              {
-                q: "When will I see first results?",
-                a: "Most users notice their lashes looking healthier within 2-3 weeks. Visible length improvement typically appears at 4-6 weeks, with dramatic results by week 8-12.",
-                showMobile: true
-              },
-              {
-                q: "Will it irritate my eyes?",
-                a: "GrandLash is ophthalmologist tested and safe for sensitive eyes. It's also safe for contact lens wearers. Some users may experience mild tingling which is normal and temporary.",
-                showMobile: true
-              },
-              {
-                q: "What if it doesn't work for me?",
-                a: "Amazon offers a hassle-free return policy. If you're not satisfied with your results, you can return it within 30 days for a full refund.",
-                showMobile: true
-              },
-              {
-                q: "Can I use it with mascara?",
-                a: "Absolutely! Apply GrandLash at night on clean lashes before bed. During the day, you can wear your favorite mascara as usual.",
-                showMobile: false
-              },
-              {
-                q: "Is it safe during pregnancy?",
-                a: "While GrandLash is safe for most users, we recommend consulting with your doctor before using any new cosmetic products during pregnancy or nursing.",
-                showMobile: false
-              },
-              {
-                q: "How long does one tube last?",
-                a: "One tube lasts approximately 3 months with daily use. That's less than $1 per day for salon-quality lashes!",
-                showMobile: false
-              },
-              {
-                q: "What happens if I stop using it?",
-                a: "Your lashes will gradually return to their natural state over time. Many users continue with a maintenance routine of 2-3 times per week to keep results.",
-                showMobile: false
-              }
-            ].map((faq, i) => (
-              <div key={i} className={`bg-white rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow ${!faq.showMobile ? 'hidden md:block' : ''}`}>
-                <h3 className="font-bold text-base md:text-lg text-gray-900 mb-1 md:mb-2">{faq.q}</h3>
-                <p className="text-sm md:text-base text-gray-600">{faq.a}</p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "Does it really work?", a: "Yes! GrandLash is clinically proven to show visible lash growth in as little as 4-6 weeks, with full results by 8-12 weeks. Over 90,000 women have seen real results." },
+            { q: "When will I see first results?", a: "Most users notice their lashes looking healthier within 2-3 weeks. Visible length improvement typically appears at 4-6 weeks, with dramatic results by week 8-12." },
+            { q: "Will it irritate my eyes?", a: "GrandLash is ophthalmologist tested and safe for sensitive eyes. It's also safe for contact lens wearers. Some users may experience mild tingling which is normal and temporary." },
+            { q: "What if it doesn't work for me?", a: "Amazon offers a hassle-free return policy. If you're not satisfied with your results, you can return it within 30 days for a full refund." },
+            { q: "How long does one tube last?", a: "One tube lasts approximately 3 months with daily use. That's less than $1 per day for salon-quality lashes!" },
+            { q: "Can I use it with mascara?", a: "Absolutely! Apply GrandLash at night on clean lashes before bed. During the day, you can wear your favorite mascara as usual." },
+            { q: "Is it safe during pregnancy?", a: "While GrandLash is safe for most users, we recommend consulting with your doctor before using any new cosmetic products during pregnancy or nursing." },
+            { q: "What happens if I stop using it?", a: "Your lashes will gradually return to their natural state over time. Many users continue with a maintenance routine of 2-3 times per week to keep results." },
+          ]} />
 
           <div className="text-center mt-10">
             <AmazonButton
