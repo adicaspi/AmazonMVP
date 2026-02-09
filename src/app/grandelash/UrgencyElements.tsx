@@ -8,8 +8,8 @@ export function UrgencyElements() {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    // Simulate realistic viewer count (12-28 people)
-    setViewers(Math.floor(Math.random() * 17) + 12);
+    // Simulate high viewer count (85-150 people)
+    setViewers(Math.floor(Math.random() * 66) + 85);
 
     // Simulate low stock (7-15 units)
     setStock(Math.floor(Math.random() * 9) + 7);
@@ -34,8 +34,8 @@ export function UrgencyElements() {
     // Update viewers every 30 seconds
     const viewerInterval = setInterval(() => {
       setViewers(prev => {
-        const change = Math.floor(Math.random() * 5) - 2; // -2 to +2
-        return Math.max(8, Math.min(35, prev + change));
+        const change = Math.floor(Math.random() * 15) - 7; // -7 to +7
+        return Math.max(70, Math.min(180, prev + change));
       });
     }, 30000);
 
@@ -102,11 +102,11 @@ export function MiniUrgency() {
   const [viewers, setViewers] = useState(0);
 
   useEffect(() => {
-    setViewers(Math.floor(Math.random() * 17) + 12);
+    setViewers(Math.floor(Math.random() * 66) + 85);
     const interval = setInterval(() => {
       setViewers(prev => {
-        const change = Math.floor(Math.random() * 5) - 2;
-        return Math.max(8, Math.min(35, prev + change));
+        const change = Math.floor(Math.random() * 15) - 7;
+        return Math.max(70, Math.min(180, prev + change));
       });
     }, 30000);
     return () => clearInterval(interval);
