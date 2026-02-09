@@ -55,38 +55,39 @@ export default function GrandeLASHPage() {
         </div>
       </div>
 
-      {/* Hero Section */}
+      {/* ============================================ */}
+      {/* HERO SECTION — Transformation-First Approach */}
+      {/* ============================================ */}
       <section className="bg-gradient-to-br from-rose-50 via-white to-pink-50">
         <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
-          {/* Mobile: Title + Rating ABOVE image (like Amazon) */}
+          {/* Mobile: Transformation headline + rating ABOVE carousel */}
           <div className="md:hidden mb-3">
-            <p className="text-xs text-gray-500 mb-1">GrandeLASH-MD by Grande Cosmetics</p>
-            <h1 className="text-lg font-semibold text-gray-900 leading-snug mb-2">
-              Lash Enhancing Serum - Grow Longer, Thicker, Fuller Lashes in 8 Weeks - Ophthalmologist Tested
+            <h1 className="text-xl font-bold text-gray-900 leading-snug mb-1.5">
+              From Sparse to <span className="text-rose-600">Full Lashes</span> in 8 Weeks
             </h1>
+            <p className="text-sm text-gray-600 mb-2">
+              Clinically tested serum. 90K+ verified results.
+            </p>
             <div className="flex items-center gap-2 mb-1">
-              <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">Amazon's Choice</span>
-            </div>
-            <div className="flex items-center gap-1">
+              <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} className={`w-4 h-4 ${i < 5 ? 'text-amber-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                  <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
               </div>
-              <span className="text-sm text-blue-600">4.8</span>
-              <span className="text-sm text-gray-500">(90,000+ reviews)</span>
+              <span className="text-sm text-gray-500">4.8 (90K+)</span>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
-            {/* Mobile: Carousel after title, Desktop: Second column */}
+            {/* Carousel — B/A leads */}
             <div className="order-1 md:order-2">
               <HeroCarousel />
             </div>
 
-            {/* Content - Mobile shows only CTA section, Desktop shows full */}
+            {/* Content */}
             <div className="order-2 md:order-1">
               {/* Desktop only: badges and headline */}
               <div className="hidden md:block">
@@ -98,20 +99,20 @@ export default function GrandeLASHPage() {
                 </div>
 
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                  Finally Grow <span className="text-rose-600">Longer, Thicker</span> Lashes — <span className="text-rose-600">Without Extensions</span>
+                  From Sparse to <span className="text-rose-600">Full Lashes</span> — In Just <span className="text-rose-600">8 Weeks</span>
                 </h1>
 
                 <p className="text-xl text-gray-600 mb-4">
-                  Real results in 8 weeks. No glue, no salon visits, no damage to your natural lashes.
+                  Clinically tested serum. No glue, no salon visits, no damage to your natural lashes.
                 </p>
 
-                <p className="text-lg text-green-700 font-bold mb-6 flex items-center gap-2">
+                <p className="text-lg text-rose-700 font-bold mb-4 flex items-center gap-2">
+                  Join <span className="text-rose-600 font-extrabold">90,000+ women</span> who quit extensions forever.
+                </p>
+
+                <p className="text-base text-green-700 font-bold mb-6 flex items-center gap-2">
                   <span>💰</span>
-                  Save $1,800+/year compared to lash extensions
-                </p>
-
-                <p className="text-base text-gray-700 mb-6 font-medium">
-                  Join <span className="text-rose-600 font-bold">90,000+ women</span> who ditched extensions and grew their own beautiful lashes
+                  Save $2,128/year compared to lash extensions
                 </p>
               </div>
 
@@ -120,7 +121,7 @@ export default function GrandeLASHPage() {
                 <UrgencyElements />
               </div>
 
-              {/* CTA Button - Optimized for Mobile */}
+              {/* CTA Button - Outcome Based */}
               <div className="mb-4">
                 <AmazonButton
                   href={amazonLink}
@@ -128,7 +129,7 @@ export default function GrandeLASHPage() {
                   position="hero-main"
                   className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
                 >
-                  <span>Buy Now on Amazon</span>
+                  <span>Start Your Lash Transformation</span>
                   <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -147,6 +148,11 @@ export default function GrandeLASHPage() {
                 </div>
               </div>
 
+              {/* Identity Bridge - Mobile */}
+              <p className="text-center text-sm text-gray-600 mb-3 md:hidden font-medium">
+                Join <span className="text-rose-600 font-bold">90,000+ women</span> who quit extensions forever.
+              </p>
+
               {/* Trust Elements Under CTA - Desktop only */}
               <div className="hidden md:flex flex-col gap-2 text-sm text-gray-600 mb-4">
                 <div className="flex items-center gap-2">
@@ -163,7 +169,7 @@ export default function GrandeLASHPage() {
                 </div>
               </div>
 
-              {/* Rating - Desktop only (mobile shows in badge) */}
+              {/* Rating - Desktop only */}
               <div className="hidden md:flex flex-wrap items-center gap-2 text-sm">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
@@ -175,17 +181,212 @@ export default function GrandeLASHPage() {
                 <span className="font-semibold">4.8/5</span>
                 <span className="text-gray-600">from <strong>90,000+ Verified Amazon Buyers</strong></span>
               </div>
-
-              {/* FOMO Line - Desktop only */}
-              <p className="hidden md:block text-xs text-gray-500 mt-2 italic">
-                Amazon Best-Seller This Month
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Social Proof Bar - Enhanced */}
+      {/* ============================================ */}
+      {/* RAPID PROOF STACK — Immediately After Hero   */}
+      {/* ============================================ */}
+      <section className="py-6 md:py-12 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-xl md:text-3xl font-bold text-gray-900 text-center mb-4 md:mb-8">
+            Real Results from Real Women
+          </h2>
+          {/* 3 Before/After Side by Side */}
+          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+            <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+              <img
+                src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
+                alt="Customer Before and After Results — Week 4"
+                className="w-full h-full object-cover aspect-square"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                <p className="text-white text-sm font-semibold">Week 4 Results</p>
+              </div>
+            </div>
+            <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+              <img
+                src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
+                alt="Amazing Lash Transformation — Week 6"
+                className="w-full h-full object-cover aspect-square"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                <p className="text-white text-sm font-semibold">Week 6 Results</p>
+              </div>
+            </div>
+            <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+              <img
+                src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125472/WhatsApp_Image_2026-02-03_at_09.48.01_hh0bs8.jpg"
+                alt="Real Customer Lash Growth — Week 8"
+                className="w-full h-full object-cover aspect-square"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                <p className="text-white text-sm font-semibold">Week 8 Results</p>
+              </div>
+            </div>
+          </div>
+          {/* Swipe indicator - mobile only */}
+          <div className="flex items-center justify-center gap-2 mt-2 text-xs text-gray-400 md:hidden">
+            <span>&larr; Swipe for more &rarr;</span>
+          </div>
+
+          {/* CTA after proof stack */}
+          <div className="text-center mt-6">
+            <AmazonButton
+              href={amazonLink}
+              productName="GrandeLASH-MD"
+              position="proof-stack"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              Get These Results on Amazon
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* VIDEO PROOF — Moved Up (was below reviews)   */}
+      {/* ============================================ */}
+      <section className="py-8 md:py-16 bg-gradient-to-br from-rose-50 to-pink-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-4 md:mb-8">
+            <div className="inline-flex items-center gap-2 bg-rose-100 text-rose-700 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-2 md:mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+              </span>
+              Real Video Reviews
+            </div>
+            <h2 className="text-xl md:text-3xl font-bold text-gray-900 mb-1 md:mb-3">
+              Watch Real Transformations
+            </h2>
+            <p className="text-sm md:text-base text-gray-600">
+              20-second before &amp; after from verified customers
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-sm md:max-w-2xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
+              <video
+                className="w-full h-full object-contain rounded-xl"
+                controls
+                playsInline
+                preload="metadata"
+                poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
+              >
+                <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute bottom-2 left-2 right-2 bg-rose-600/90 backdrop-blur-sm p-3 rounded-xl">
+                <p className="text-white font-semibold text-sm md:text-base">Real Customer Review</p>
+                <p className="text-rose-100 text-xs md:text-sm">Amazing results in 8 weeks!</p>
+              </div>
+            </div>
+
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
+              <video
+                className="w-full h-full object-contain rounded-xl"
+                controls
+                playsInline
+                preload="metadata"
+                poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
+              >
+                <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125528/WhatsApp_Video_2026-02-01_at_18.10.00_ayx8jr.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute bottom-2 left-2 right-2 bg-rose-600/90 backdrop-blur-sm p-3 rounded-xl">
+                <p className="text-white font-semibold text-sm md:text-base">Before &amp; After</p>
+                <p className="text-rose-100 text-xs md:text-sm">See the transformation!</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-8">
+            <AmazonButton
+              href={amazonLink}
+              productName="GrandeLASH-MD"
+              position="video-testimonials"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              Start Your Transformation on Amazon
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* TRANSFORMATION TIMELINE — High Impact        */}
+      {/* ============================================ */}
+      <section className="py-8 md:py-16 bg-white">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-xl md:text-3xl font-bold text-gray-900 text-center mb-6 md:mb-10">
+            Your Lash Growth Timeline
+          </h2>
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-5 md:left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-rose-200 via-rose-400 to-rose-600"></div>
+
+            <div className="space-y-6 md:space-y-8">
+              {/* Week 1-2 */}
+              <div className="flex gap-4 md:gap-6 items-start">
+                <div className="relative flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center font-bold text-sm md:text-base border-2 border-rose-300 z-10">
+                  1-2
+                </div>
+                <div className="bg-rose-50 rounded-xl p-4 flex-1 border border-rose-100">
+                  <h3 className="font-bold text-base md:text-lg text-gray-900">Conditioning Phase</h3>
+                  <p className="text-sm text-gray-600 mt-1">Serum nourishes and strengthens your natural lash follicles. Lashes begin to feel healthier.</p>
+                </div>
+              </div>
+
+              {/* Week 3-5 */}
+              <div className="flex gap-4 md:gap-6 items-start">
+                <div className="relative flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-rose-200 text-rose-700 rounded-full flex items-center justify-center font-bold text-sm md:text-base border-2 border-rose-400 z-10">
+                  3-5
+                </div>
+                <div className="bg-rose-50 rounded-xl p-4 flex-1 border border-rose-200">
+                  <h3 className="font-bold text-base md:text-lg text-gray-900">Visible Growth</h3>
+                  <p className="text-sm text-gray-600 mt-1">Noticeable length increase. Friends start asking if you got extensions. Lashes appear thicker.</p>
+                </div>
+              </div>
+
+              {/* Week 6-8 */}
+              <div className="flex gap-4 md:gap-6 items-start">
+                <div className="relative flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold text-sm md:text-base border-2 border-rose-600 z-10">
+                  6-8
+                </div>
+                <div className="bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl p-4 flex-1 border border-rose-300 shadow-sm">
+                  <h3 className="font-bold text-base md:text-lg text-gray-900">Full Lash Look</h3>
+                  <p className="text-sm text-gray-600 mt-1">Dramatically longer, fuller, thicker lashes. No mascara needed. Extensions officially unnecessary.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-8">
+            <AmazonButton
+              href={amazonLink}
+              productName="GrandeLASH-MD"
+              position="timeline"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              Start Your 8-Week Transformation
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SOCIAL PROOF BAR                             */}
+      {/* ============================================ */}
       <section className="bg-gradient-to-r from-rose-100 via-pink-50 to-rose-100 py-4 md:py-8 border-y border-rose-200">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 text-center">
@@ -213,7 +414,9 @@ export default function GrandeLASHPage() {
         </div>
       </section>
 
-      {/* Why We're Different - Comparison Table */}
+      {/* ============================================ */}
+      {/* PRICE ANCHORING — Visual Math Breakdown      */}
+      {/* ============================================ */}
       <section className="py-10 md:py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-6 md:mb-12">
@@ -221,16 +424,41 @@ export default function GrandeLASHPage() {
               Why GrandLash Beats Extensions
             </h2>
             <p className="text-sm md:text-lg text-gray-600">
-              See how much you save in time, money, and lash health
+              Do the math — the savings are massive
             </p>
           </div>
 
+          {/* Visual Math — The Money Shot */}
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
+            {/* Extensions Cost */}
+            <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-5 md:p-6 text-center">
+              <p className="text-sm font-semibold text-red-500 mb-2 uppercase tracking-wide">Extensions</p>
+              <p className="text-lg md:text-xl text-gray-700 mb-1">$200 &times; 12 visits</p>
+              <p className="text-3xl md:text-4xl font-extrabold text-red-600">$2,400<span className="text-base font-normal text-red-400">/year</span></p>
+            </div>
+
+            {/* GrandLash Cost */}
+            <div className="bg-green-50 border-2 border-green-300 rounded-2xl p-5 md:p-6 text-center shadow-lg relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">RECOMMENDED</div>
+              <p className="text-sm font-semibold text-green-600 mb-2 uppercase tracking-wide">GrandLash</p>
+              <p className="text-lg md:text-xl text-gray-700 mb-1">$68 &times; 4 tubes</p>
+              <p className="text-3xl md:text-4xl font-extrabold text-green-600">$272<span className="text-base font-normal text-green-400">/year</span></p>
+            </div>
+
+            {/* You Save */}
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border-2 border-amber-300 rounded-2xl p-5 md:p-6 text-center">
+              <p className="text-sm font-semibold text-amber-600 mb-2 uppercase tracking-wide">You Save</p>
+              <p className="text-3xl md:text-5xl font-extrabold text-amber-600">$2,128</p>
+              <p className="text-base md:text-lg font-bold text-amber-500">Every Year</p>
+            </div>
+          </div>
+
+          {/* Comparison Table */}
           {/* Mobile: Card Layout */}
           <div className="md:hidden space-y-3">
             {[
               { label: "Your Lashes", good: "Real", bad: "Fake" },
               { label: "Time", good: "30 sec/day", bad: "2-3 hours" },
-              { label: "Cost/Year", good: "~$280", bad: "$2,000+" },
               { label: "Safety", good: "Doctor Tested", bad: "Glue" },
               { label: "Health", good: "Strengthens", bad: "Damages" },
             ].map((row, i) => (
@@ -280,8 +508,8 @@ export default function GrandeLASHPage() {
                 </tr>
                 <tr>
                   <td className="px-6 py-4 text-gray-700 font-medium">Annual Cost</td>
-                  <td className="px-6 py-4 text-center text-green-600 font-semibold">~$280/year</td>
-                  <td className="px-6 py-4 text-center text-red-500">$2,000+/year</td>
+                  <td className="px-6 py-4 text-center text-green-600 font-semibold">$272/year</td>
+                  <td className="px-6 py-4 text-center text-red-500">$2,400+/year</td>
                 </tr>
                 <tr className="bg-gray-50">
                   <td className="px-6 py-4 text-gray-700 font-medium">Safety</td>
@@ -304,7 +532,7 @@ export default function GrandeLASHPage() {
               position="comparison-table"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Save $1,800/Year - Buy Now
+              Save $2,128/Year — Get GrandLash Now
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -313,58 +541,11 @@ export default function GrandeLASHPage() {
         </div>
       </section>
 
-      {/* Before/After Section */}
-      <section className="py-10 md:py-24">
+      {/* ============================================ */}
+      {/* BEFORE/AFTER DEEP DIVE + Problem/Solution    */}
+      {/* ============================================ */}
+      <section className="py-10 md:py-20">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-6 md:mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
-              Real Results from Real Women
-            </h2>
-            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
-              See the transformation for yourself. No filters, no extensions - just naturally longer, fuller lashes.
-            </p>
-          </div>
-
-          {/* Results Gallery - Horizontal scroll on mobile */}
-          <div className="relative mb-6 md:mb-12">
-            <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
-                <img
-                  src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
-                  alt="Customer Before and After Results"
-                  className="w-full h-full object-cover aspect-square"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
-                  <p className="text-white text-sm font-semibold">Real Customer Results ⭐</p>
-                </div>
-              </div>
-              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
-                <img
-                  src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
-                  alt="Amazing Lash Transformation"
-                  className="w-full h-full object-cover aspect-square"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
-                  <p className="text-white text-sm font-semibold">8 Week Transformation ✨</p>
-                </div>
-              </div>
-              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
-                <img
-                  src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125472/WhatsApp_Image_2026-02-03_at_09.48.01_hh0bs8.jpg"
-                  alt="Real Customer Lash Growth"
-                  className="w-full h-full object-cover aspect-square"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
-                  <p className="text-white text-sm font-semibold">Natural Growth 💕</p>
-                </div>
-              </div>
-            </div>
-            {/* Swipe indicator - mobile only */}
-            <div className="flex items-center justify-center gap-2 mt-2 text-xs text-gray-400 md:hidden">
-              <span>← Swipe for more →</span>
-            </div>
-          </div>
-
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
             <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
               <Image
@@ -400,7 +581,7 @@ export default function GrandeLASHPage() {
                 <ul className="space-y-1.5 md:space-y-2 text-sm md:text-base text-gray-600">
                   <li className="flex items-start gap-2">
                     <span className="text-green-500 mt-0.5">✓</span>
-                    <span>One tube lasts 3 months (~$70)</span>
+                    <span>One tube lasts 3 months (~$68)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-green-500 mt-0.5">✓</span>
@@ -419,14 +600,16 @@ export default function GrandeLASHPage() {
                 position="benefits-card"
                 className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 md:px-8 md:py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
               >
-                Get Your GrandLash Now
+                Ditch Extensions — Get GrandLash
               </AmazonButton>
             </div>
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* ============================================ */}
+      {/* HOW IT WORKS                                 */}
+      {/* ============================================ */}
       <section className="py-10 md:py-24 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-6 md:mb-12">
@@ -461,7 +644,9 @@ export default function GrandeLASHPage() {
         </div>
       </section>
 
-      {/* Reviews Section */}
+      {/* ============================================ */}
+      {/* REVIEWS SECTION                              */}
+      {/* ============================================ */}
       <section className="py-10 md:py-24">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-6 md:mb-12">
@@ -475,7 +660,7 @@ export default function GrandeLASHPage() {
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
               Loved by 90,000+ Women
             </h2>
-            <p className="text-sm md:text-lg text-gray-600">Don't just take our word for it</p>
+            <p className="text-sm md:text-lg text-gray-600">Don&apos;t just take our word for it</p>
           </div>
 
           {/* Reviews - Horizontal scroll on mobile */}
@@ -493,7 +678,7 @@ export default function GrandeLASHPage() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-base text-gray-700 mb-4 leading-relaxed">"{review.text}"</p>
+                <p className="text-base text-gray-700 mb-4 leading-relaxed">&ldquo;{review.text}&rdquo;</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-rose-100 to-pink-100 text-rose-600 rounded-full flex items-center justify-center font-bold">
                     {review.name[0]}
@@ -508,87 +693,17 @@ export default function GrandeLASHPage() {
           </div>
           {/* Swipe indicator - mobile only */}
           <div className="flex items-center justify-center gap-2 mt-3 text-xs text-gray-400 md:hidden">
-            <span>← Swipe to read more reviews →</span>
+            <span>&larr; Swipe to read more reviews &rarr;</span>
           </div>
 
           <div className="text-center mt-6 md:mt-10">
             <AmazonButton
               href={amazonLink}
               productName="GrandeLASH-MD"
-              position="how-it-works"
+              position="reviews-section"
               className="inline-flex items-center justify-center gap-2 px-8 py-3 md:px-10 md:py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Join 90,000+ Happy Customers
-            </AmazonButton>
-          </div>
-        </div>
-      </section>
-
-      {/* Video Testimonials Section */}
-      <section className="py-10 md:py-24 bg-gradient-to-br from-rose-50 to-pink-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-6 md:mb-12">
-            <div className="inline-flex items-center gap-2 bg-rose-100 text-rose-700 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-2 md:mb-4">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-              </span>
-              Real Video Reviews
-            </div>
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
-              Real Women. Real Results. No Filters.
-            </h2>
-            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
-              Watch 20-second transformations from verified customers
-            </p>
-          </div>
-
-          {/* Mobile: Single column, Desktop: Two columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-sm md:max-w-2xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
-              <video
-                className="w-full h-full object-contain rounded-xl"
-                controls
-                playsInline
-                preload="metadata"
-                poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
-              >
-                <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute bottom-2 left-2 right-2 bg-rose-600/90 backdrop-blur-sm p-3 rounded-xl">
-                <p className="text-white font-semibold text-sm md:text-base">Real Customer Review</p>
-                <p className="text-rose-100 text-xs md:text-sm">Amazing results in 8 weeks!</p>
-              </div>
-            </div>
-
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
-              <video
-                className="w-full h-full object-contain rounded-xl"
-                controls
-                playsInline
-                preload="metadata"
-                poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
-              >
-                <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125528/WhatsApp_Video_2026-02-01_at_18.10.00_ayx8jr.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute bottom-2 left-2 right-2 bg-rose-600/90 backdrop-blur-sm p-3 rounded-xl">
-                <p className="text-white font-semibold text-sm md:text-base">Before & After</p>
-                <p className="text-rose-100 text-xs md:text-sm">See the transformation!</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center mt-10">
-            <AmazonButton
-              href={amazonLink}
-              productName="GrandeLASH-MD"
-              position="video-testimonials"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
-            >
-              Get These Results Too
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              Join 90,000+ Women Who Quit Extensions
             </AmazonButton>
           </div>
         </div>
@@ -625,7 +740,9 @@ export default function GrandeLASHPage() {
         </div>
       </section>
 
-      {/* FAQ Section - Expanded */}
+      {/* ============================================ */}
+      {/* FAQ SECTION                                  */}
+      {/* ============================================ */}
       <section className="py-10 md:py-24 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 text-center mb-2 md:mb-4">
@@ -692,7 +809,7 @@ export default function GrandeLASHPage() {
               position="faq-section"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Get Your GrandLash Now
+              Get Your Lash Transformation Now
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -701,7 +818,9 @@ export default function GrandeLASHPage() {
         </div>
       </section>
 
-      {/* Final CTA - With Urgency */}
+      {/* ============================================ */}
+      {/* FINAL CTA — With Identity Bridge              */}
+      {/* ============================================ */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-rose-600 to-pink-600 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-bold mb-6">
@@ -709,27 +828,27 @@ export default function GrandeLASHPage() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             </span>
-            Amazon's Choice - 20K+ Bought Last Month!
+            Amazon&apos;s Choice - 20K+ Bought Last Month!
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Don't Miss Out - Get Your Dream Lashes Today!
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Join 90,000+ Women Who Quit Extensions Forever
           </h2>
           <p className="text-xl text-rose-100 mb-4 max-w-2xl mx-auto">
-            Join over 90,000 women who've transformed their lashes naturally.
+            Start growing your own naturally longer, fuller lashes today.
           </p>
           <div className="flex items-center justify-center gap-3 mb-8">
             <span className="text-4xl font-bold">$36</span>
             <span className="bg-yellow-400 text-yellow-900 text-sm font-bold px-3 py-1 rounded-full">
-              Amazon's Choice
+              Amazon&apos;s Choice
             </span>
           </div>
           <AmazonButton
             href={amazonLink}
             productName="GrandeLASH-MD"
             position="final-cta"
-            className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-rose-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 animate-bounce hover:animate-none"
+            className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-rose-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
-            Buy Now on Amazon
+            Start Your 8-Week Lash Transformation
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -780,7 +899,7 @@ export default function GrandeLASHPage() {
           </div>
 
           <p className="text-xs text-gray-500">
-            Results may vary. This product is not intended to diagnose, treat, cure, or prevent any disease. © 2026 AI Picks. All rights reserved.
+            Results may vary. This product is not intended to diagnose, treat, cure, or prevent any disease. &copy; 2026 AI Picks. All rights reserved.
           </p>
         </div>
       </footer>
@@ -788,7 +907,7 @@ export default function GrandeLASHPage() {
       {/* Social Proof Popup */}
       <SocialProofPopup />
 
-      {/* Sticky Mobile CTA - Shows after scrolling past hero */}
+      {/* Sticky Mobile CTA - Always visible on mobile */}
       <StickyMobileCTA amazonLink={amazonLink} />
     </div>
   );

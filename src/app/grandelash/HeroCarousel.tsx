@@ -14,9 +14,9 @@ type MediaItem = {
 const mediaItems: MediaItem[] = [
   {
     type: "image",
-    src: "https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg",
-    alt: "GrandLash Serum Product",
-    isExternal: true,
+    src: "/images/grandelash/promo-before-after.jpeg",
+    alt: "Before and After — From Sparse to Full Lashes in 8 Weeks",
+    isExternal: false,
   },
   {
     type: "image",
@@ -31,6 +31,13 @@ const mediaItems: MediaItem[] = [
     isExternal: true,
   },
   {
+    type: "video",
+    src: "https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4",
+    alt: "Real Customer Results Video",
+    isExternal: true,
+    poster: "https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg",
+  },
+  {
     type: "image",
     src: "https://res.cloudinary.com/dzkgopplv/image/upload/v1770125472/WhatsApp_Image_2026-02-03_at_09.48.01_hh0bs8.jpg",
     alt: "Amazing Lash Growth Results",
@@ -38,16 +45,9 @@ const mediaItems: MediaItem[] = [
   },
   {
     type: "image",
-    src: "/images/grandelash/promo-before-after.jpeg",
-    alt: "Before and After Results",
-    isExternal: false,
-  },
-  {
-    type: "video",
-    src: "https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4",
-    alt: "Real Customer Results Video",
+    src: "https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg",
+    alt: "GrandLash Serum Product",
     isExternal: true,
-    poster: "https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg",
   },
 ];
 
