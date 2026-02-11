@@ -54,6 +54,30 @@ CREATE TABLE IF NOT EXISTS creatives (
   UNIQUE(product_id)
 );
 
+-- Page views table (for tracking page visits)
+CREATE TABLE IF NOT EXISTS page_views (
+  id TEXT PRIMARY KEY,
+  timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  page TEXT NOT NULL,
+  user_agent TEXT,
+  referer TEXT,
+  utm_source TEXT,
+  utm_medium TEXT,
+  utm_campaign TEXT,
+  utm_content TEXT
+);
+
+-- Amazon clicks table (for tracking affiliate link clicks)
+CREATE TABLE IF NOT EXISTS amazon_clicks (
+  id TEXT PRIMARY KEY,
+  timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  product_name TEXT NOT NULL,
+  button_position TEXT NOT NULL,
+  page TEXT NOT NULL,
+  user_agent TEXT,
+  referer TEXT
+);
+
 -- Indexes for performance
 CREATE INDEX IF NOT EXISTS idx_products_slug ON products(slug);
 CREATE INDEX IF NOT EXISTS idx_products_status ON products(status);
@@ -61,10 +85,16 @@ CREATE INDEX IF NOT EXISTS idx_events_product_id ON events(product_id);
 CREATE INDEX IF NOT EXISTS idx_events_type ON events(type);
 CREATE INDEX IF NOT EXISTS idx_events_timestamp ON events(timestamp DESC);
 CREATE INDEX IF NOT EXISTS idx_creatives_product_id ON creatives(product_id);
+CREATE INDEX IF NOT EXISTS idx_page_views_page ON page_views(page);
+CREATE INDEX IF NOT EXISTS idx_page_views_timestamp ON page_views(timestamp DESC);
+CREATE INDEX IF NOT EXISTS idx_amazon_clicks_page ON amazon_clicks(page);
+CREATE INDEX IF NOT EXISTS idx_amazon_clicks_timestamp ON amazon_clicks(timestamp DESC);
 
 -- Function to update updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER
+SET search_path = ''
+AS $$
 BEGIN
   NEW.updated_at = NOW();
   RETURN NEW;

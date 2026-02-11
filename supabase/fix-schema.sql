@@ -14,6 +14,8 @@ CREATE TRIGGER update_products_updated_at
 ALTER TABLE products ENABLE ROW LEVEL SECURITY;
 ALTER TABLE events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE creatives ENABLE ROW LEVEL SECURITY;
+ALTER TABLE page_views ENABLE ROW LEVEL SECURITY;
+ALTER TABLE amazon_clicks ENABLE ROW LEVEL SECURITY;
 
 -- Ensure indexes exist
 CREATE INDEX IF NOT EXISTS idx_products_slug ON products(slug);
@@ -22,3 +24,7 @@ CREATE INDEX IF NOT EXISTS idx_events_product_id ON events(product_id);
 CREATE INDEX IF NOT EXISTS idx_events_type ON events(type);
 CREATE INDEX IF NOT EXISTS idx_events_timestamp ON events(timestamp DESC);
 CREATE INDEX IF NOT EXISTS idx_creatives_product_id ON creatives(product_id);
+CREATE INDEX IF NOT EXISTS idx_page_views_page ON page_views(page);
+CREATE INDEX IF NOT EXISTS idx_page_views_timestamp ON page_views(timestamp DESC);
+CREATE INDEX IF NOT EXISTS idx_amazon_clicks_page ON amazon_clicks(page);
+CREATE INDEX IF NOT EXISTS idx_amazon_clicks_timestamp ON amazon_clicks(timestamp DESC);
