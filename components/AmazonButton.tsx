@@ -20,13 +20,13 @@ export function AmazonButton({ href, children, className, productName, position 
   const handleClick = () => {
     const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
 
-    // Track the click as a Lead event in Meta Pixel
+    // Track the click as InitiateCheckout event in Meta Pixel
     if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "Lead", {
+      window.fbq("track", "InitiateCheckout", {
         content_name: productName || "Amazon Product",
         content_category: "Affiliate Link Click",
-        content_ids: [position || "unknown"], // Which button was clicked
-        value: position ? 1 : 0,
+        content_ids: [position || "unknown"],
+        value: 36.00,
         currency: "USD",
       });
 
