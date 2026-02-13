@@ -57,32 +57,30 @@ export default function GrandeLASHPage() {
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-rose-50 via-white to-pink-50">
-        <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 py-2 md:py-16">
           {/* Mobile: Title + Rating ABOVE image (like Amazon) */}
-          <div className="md:hidden mb-3">
-            <p className="text-xs text-gray-500 mb-1">GrandeLASH-MD by Grande Cosmetics</p>
-            <h1 className="text-lg font-semibold text-gray-900 leading-snug mb-2">
-              Lash Enhancing Serum - Grow Longer, Thicker, Fuller Lashes in 8 Weeks - Ophthalmologist Tested
+          <div className="md:hidden mb-2">
+            <p className="text-xs text-gray-500 mb-0.5">GrandeLASH-MD by Grande Cosmetics</p>
+            <h1 className="text-base font-semibold text-gray-900 leading-snug mb-1">
+              Lash Enhancing Serum - Grow Longer, Thicker Lashes in 8 Weeks
             </h1>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">Amazon's Choice</span>
-            </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
+              <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} className={`w-4 h-4 ${i < 5 ? 'text-amber-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                  <svg key={i} className={`w-3.5 h-3.5 ${i < 5 ? 'text-amber-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
               </div>
-              <span className="text-sm text-blue-600">4.8</span>
-              <span className="text-sm text-gray-500">(90,000+ reviews)</span>
+              <span className="text-xs text-blue-600">4.8</span>
+              <span className="text-xs text-gray-500">(90K+)</span>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
+          <div className="grid md:grid-cols-2 gap-2 md:gap-8 items-center">
             {/* Mobile: Carousel after title, Desktop: Second column */}
-            <div className="order-1 md:order-2">
+            <div className="order-1 md:order-2 max-h-[45vh] md:max-h-none overflow-hidden">
               <HeroCarousel />
             </div>
 
@@ -116,33 +114,37 @@ export default function GrandeLASHPage() {
               </div>
 
               {/* Urgency Elements - Price, Timer, Stock */}
-              <div className="mb-4 md:mb-5">
+              <div className="mb-2 md:mb-5">
                 <UrgencyElements />
               </div>
 
               {/* CTA Button - Optimized for Mobile */}
-              <div className="mb-4">
+              <div className="mb-3">
                 <AmazonButton
                   href={amazonLink}
                   productName="GrandeLASH-MD"
                   position="hero-main"
-                  className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-4 md:py-6 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
                 >
                   <span>Buy Now on Amazon</span>
                   <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </AmazonButton>
-                {/* Mobile-only quick trust badges */}
-                <div className="flex items-center justify-center gap-4 mt-3 md:hidden">
-                  <span className="text-xs text-gray-600 flex items-center gap-1">
-                    <span className="text-green-500">✓</span> Free Shipping
+                {/* "Ships Today" + trust badges row directly under CTA */}
+                <div className="flex items-center justify-center gap-3 mt-2 md:hidden">
+                  <span className="text-xs font-bold text-emerald-600 flex items-center gap-1">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                    </span>
+                    Ships Today!
                   </span>
                   <span className="text-xs text-gray-600 flex items-center gap-1">
-                    <span className="text-green-500">✓</span> 30-Day Returns
+                    <span className="text-green-500">&#x2713;</span> Free Shipping
                   </span>
                   <span className="text-xs text-gray-600 flex items-center gap-1">
-                    <span className="text-green-500">✓</span> Prime
+                    <span className="text-green-500">&#x2713;</span> Prime
                   </span>
                 </div>
               </div>

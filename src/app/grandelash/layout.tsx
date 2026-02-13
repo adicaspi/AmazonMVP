@@ -22,5 +22,12 @@ export default function GrandeLashLayout({
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <>
+      {/* CSS-based header hide: works immediately, no FOUC.
+          The JS useEffect above is kept as a belt-and-suspenders fallback. */}
+      <style>{`body > header { display: none !important; }`}</style>
+      {children}
+    </>
+  );
 }

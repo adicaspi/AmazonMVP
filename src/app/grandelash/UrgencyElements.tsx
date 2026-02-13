@@ -2,17 +2,36 @@
 
 import { useState, useEffect } from "react";
 
+// Static initial values shown during SSR and before hydration.
+// These prevent the "0" flash that kills credibility.
+const INITIAL_VIEWERS = 24;
+const INITIAL_STOCK = 9;
+
+// Randomized range boundaries
+const VIEWERS_MIN = 18;
+const VIEWERS_MAX = 47;
+const STOCK_MIN = 3;
+const STOCK_MAX = 7;
+
+function getRandomViewers() {
+  return Math.floor(Math.random() * (VIEWERS_MAX - VIEWERS_MIN + 1)) + VIEWERS_MIN;
+}
+
+function getRandomStock() {
+  return Math.floor(Math.random() * (STOCK_MAX - STOCK_MIN + 1)) + STOCK_MIN;
+}
+
 export function UrgencyElements() {
-  const [viewers, setViewers] = useState(0);
-  const [stock, setStock] = useState(0);
+  const [viewers, setViewers] = useState(INITIAL_VIEWERS);
+  const [stock, setStock] = useState(INITIAL_STOCK);
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    // Simulate realistic viewer count (12-28 people)
-    setViewers(Math.floor(Math.random() * 17) + 12);
-
-    // Simulate low stock (7-15 units)
-    setStock(Math.floor(Math.random() * 9) + 7);
+    // Set randomized values on mount (client-side only)
+    setViewers(getRandomViewers());
+    setStock(getRandomStock());
+    setHydrated(true);
 
     // Calculate time until midnight
     const updateTimer = () => {
@@ -31,11 +50,11 @@ export function UrgencyElements() {
     updateTimer();
     const timer = setInterval(updateTimer, 1000);
 
-    // Update viewers every 30 seconds
+    // Drift viewers every 30s with small deltas for realism
     const viewerInterval = setInterval(() => {
       setViewers(prev => {
         const change = Math.floor(Math.random() * 5) - 2; // -2 to +2
-        return Math.max(8, Math.min(35, prev + change));
+        return Math.max(VIEWERS_MIN, Math.min(VIEWERS_MAX, prev + change));
       });
     }, 30000);
 
@@ -53,20 +72,25 @@ export function UrgencyElements() {
           <div>
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-bold text-gray-900">$36</span>
-              <span className="text-sm text-green-600 font-bold">Amazon's Choice</span>
+              <span className="text-sm text-green-600 font-bold">Amazon&apos;s Choice</span>
             </div>
             <p className="text-sm text-rose-600 font-semibold mt-1">
-              ⏰ Limited-time Amazon price
+              &#x23F0; Limited-time Amazon price
             </p>
             <p className="text-sm text-green-600 font-medium">
-              ✓ 20K+ bought in past month
+              &#x2713; 20K+ bought in past month
             </p>
           </div>
           <div className="text-right">
             <p className="text-sm font-bold text-blue-600 flex items-center gap-1 justify-end">
-              <span>✓</span> Free Prime shipping
+              <span>&#x2713;</span> Free Prime shipping
             </p>
-            <p className="text-sm font-bold text-rose-600">
+            {/* Ships Today - prominent green with pulse */}
+            <p className="text-sm font-bold text-emerald-600 flex items-center gap-1.5 justify-end mt-1">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
               Ships Today!
             </p>
           </div>
@@ -88,7 +112,7 @@ export function UrgencyElements() {
 
         {/* Stock Warning */}
         <div className="flex-1 flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-lg px-3 py-2">
-          <span className="text-orange-500">⚠️</span>
+          <span className="text-orange-500">&#x26A0;&#xFE0F;</span>
           <span className="text-sm font-medium text-orange-800">
             Only <strong>{stock}</strong> left at this price!
           </span>
@@ -99,14 +123,14 @@ export function UrgencyElements() {
 }
 
 export function MiniUrgency() {
-  const [viewers, setViewers] = useState(0);
+  const [viewers, setViewers] = useState(INITIAL_VIEWERS);
 
   useEffect(() => {
-    setViewers(Math.floor(Math.random() * 17) + 12);
+    setViewers(getRandomViewers());
     const interval = setInterval(() => {
       setViewers(prev => {
         const change = Math.floor(Math.random() * 5) - 2;
-        return Math.max(8, Math.min(35, prev + change));
+        return Math.max(VIEWERS_MIN, Math.min(VIEWERS_MAX, prev + change));
       });
     }, 30000);
     return () => clearInterval(interval);

@@ -121,10 +121,10 @@ export default function HeroCarousel() {
           #1 Best Seller
         </div>
 
-        <div className="bg-gradient-to-br from-rose-100 to-pink-100 rounded-3xl p-4 md:p-8 shadow-2xl relative overflow-hidden">
+        <div className="bg-gradient-to-br from-rose-100 to-pink-100 rounded-2xl md:rounded-3xl p-2 md:p-8 shadow-2xl relative overflow-hidden">
           {/* Media Container */}
           <div
-            className={`relative aspect-square max-w-md mx-auto ${currentMedia.type !== "video" ? "cursor-zoom-in" : ""}`}
+            className={`relative aspect-[4/3] md:aspect-square max-w-md mx-auto ${currentMedia.type !== "video" ? "cursor-zoom-in" : ""}`}
             onClick={handleContainerClick}
           >
             {mediaItems.map((media, index) => (
@@ -216,7 +216,7 @@ export default function HeroCarousel() {
           </button>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex justify-center gap-2 mt-2 md:mt-4">
             {mediaItems.map((media, index) => (
               <button
                 key={index}
