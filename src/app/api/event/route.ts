@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase, isDatabaseAvailable } from "@/lib/db";
+import { supabase } from "@/lib/db";
 import fs from "fs/promises";
 import path from "path";
 
@@ -44,7 +44,7 @@ function transformDbRow(row: any): Event {
 
 async function readEvents(): Promise<Event[]> {
   // Try database first
-  if (supabase && (await isDatabaseAvailable())) {
+  if (supabase) {
     try {
       const { data, error } = await supabase
         .from("events")
@@ -71,27 +71,43 @@ async function readEvents(): Promise<Event[]> {
 
 async function writeEvent(event: Event): Promise<void> {
   // Try database first
-  if (supabase && (await isDatabaseAvailable())) {
+  if (supabase) {
     try {
-      const { error } = await supabase.from("events").insert({
+      const baseRow: Record<string, any> = {
         id: event.id,
         timestamp: event.timestamp,
         type: event.type,
         product_id: event.productId || null,
         slug: event.slug || null,
         offer_id: event.offerId || null,
+        user_agent: event.userAgent || null,
+        ip: event.ip || null,
+        referer: event.referer || null,
+      };
+
+      const utmFields: Record<string, any> = {
         utm_source: event.utm_source || null,
         utm_medium: event.utm_medium || null,
         utm_campaign: event.utm_campaign || null,
         utm_content: event.utm_content || null,
-        user_agent: event.userAgent || null,
-        ip: event.ip || null,
-        referer: event.referer || null,
-      });
+      };
+
+      // Try with UTM fields first
+      const { error } = await supabase.from("events").insert({ ...baseRow, ...utmFields });
 
       if (!error) {
-        return; // Successfully written to database
+        return;
       }
+
+      // Retry without UTM fields in case columns don't exist
+      console.warn("Event insert failed with UTM, retrying without:", error.message);
+      const { error: retryError } = await supabase.from("events").insert(baseRow);
+
+      if (!retryError) {
+        return;
+      }
+
+      console.warn("Event insert failed, using JSON fallback:", retryError.message);
     } catch (error) {
       console.warn("Failed to write event to database, using JSON fallback:", error);
     }
@@ -100,10 +116,10 @@ async function writeEvent(event: Event): Promise<void> {
   // Fallback to JSON
   const events = await readEvents();
   events.push(event);
-  
+
   // Keep only last 10,000 events (prevent file from growing too large)
   const trimmed = events.slice(-10000);
-  
+
   await fs.writeFile(EVENTS_FILE, JSON.stringify(trimmed, null, 2), "utf8");
 }
 

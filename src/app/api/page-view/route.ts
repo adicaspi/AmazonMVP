@@ -13,12 +13,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const view = {
+    const baseView: Record<string, any> = {
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: new Date().toISOString(),
       page: page,
       user_agent: request.headers.get("user-agent") || null,
       referer: request.headers.get("referer") || null,
+    };
+
+    const utmFields: Record<string, any> = {
       utm_source: utm_source || null,
       utm_medium: utm_medium || null,
       utm_campaign: utm_campaign || null,
@@ -27,14 +30,21 @@ export async function POST(request: NextRequest) {
 
     // Save to Supabase directly
     if (supabase) {
-      const { error } = await supabase.from("page_views").insert(view);
+      // Try with UTM fields first
+      const { error } = await supabase.from("page_views").insert({ ...baseView, ...utmFields });
 
       if (error) {
-        console.error("Supabase page view insert error:", error);
+        console.error("Page view insert error (with UTM), retrying without:", error.message);
+        // Retry without UTM fields in case columns/table schema doesn't match
+        const { error: retryError } = await supabase.from("page_views").insert(baseView);
+
+        if (retryError) {
+          console.error("Page view insert error (without UTM):", retryError.message);
+        }
       }
     }
 
-    return NextResponse.json({ success: true, viewId: view.id });
+    return NextResponse.json({ success: true, viewId: baseView.id });
   } catch (error) {
     console.error("Error tracking page view:", error);
     return NextResponse.json(
