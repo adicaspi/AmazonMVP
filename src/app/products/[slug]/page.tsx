@@ -4,6 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { AmazonButton } from "@/components/AmazonButton";
 import { ViewContentTracker } from "@/components/ViewContentTracker";
+import { PageViewTracker } from "@/components/PageViewTracker";
+import { ProductUrgencyElements } from "@/components/ProductUrgencyElements";
+import { ProductStickyMobileCTA } from "@/components/ProductStickyMobileCTA";
+import { ProductSocialProofPopup } from "@/components/ProductSocialProofPopup";
 import { ProductCard } from "@/components/ProductCard";
 import { products } from "@/lib/products-data";
 import type { Metadata } from "next";
@@ -67,28 +71,29 @@ export default async function ProductPage({ params }: Props) {
         productId={product.id}
         category={product.room}
       />
+      <PageViewTracker page={`/products/${slug}`} />
 
-      {/* Urgency Announcement Bar */}
+      {/* Urgency Announcement Bar - EXACT same as Grandlash */}
       <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 text-white text-center py-2.5 px-4">
         <div className="flex items-center justify-center gap-2 text-sm md:text-base font-bold animate-pulse">
-          <span>&#11088;</span>
-          <span>TOP PICK in {roomDisplay}</span>
-          <span>&#11088;</span>
+          <span>&#128293;</span>
+          <span>TOP PICK: Best Seller in {roomDisplay}!</span>
+          <span>&#128293;</span>
         </div>
       </div>
 
-      {/* Hero Section */}
+      {/* Hero Section - EXACT same structure as Grandlash */}
       <section className="bg-gradient-to-br from-emerald-50 via-white to-teal-50">
         <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
-          {/* Mobile: Title + Rating ABOVE image */}
+          {/* Mobile: Title + Rating ABOVE image (like Amazon / Grandlash) */}
           <div className="md:hidden mb-3">
-            <p className="text-xs text-gray-500 mb-1">{roomDisplay}</p>
+            <p className="text-xs text-gray-500 mb-1">{product.title.split(' ').slice(0, 3).join(' ')} by {roomDisplay}</p>
             <h1 className="text-lg font-semibold text-gray-900 leading-snug mb-2">
               {product.benefitTitle || product.title}
             </h1>
             {product.featured && (
               <div className="flex items-center gap-2 mb-1">
-                <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">AI Pick</span>
+                <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">AI Picks Choice</span>
               </div>
             )}
             <div className="flex items-center gap-1">
@@ -100,28 +105,38 @@ export default async function ProductPage({ params }: Props) {
                 ))}
               </div>
               <span className="text-sm text-blue-600">4.5+</span>
-              <span className="text-sm text-gray-500">on Amazon</span>
+              <span className="text-sm text-gray-500">(Highly Rated on Amazon)</span>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
-            {/* Image */}
+            {/* Image - same position as HeroCarousel in Grandlash */}
             <div className="order-1 md:order-2">
-              <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-xl aspect-square bg-gradient-to-br from-slate-50 to-slate-100">
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                  priority
-                  quality={95}
-                />
+              <div className="relative">
+                {product.featured && (
+                  <div className="absolute -top-4 -right-4 bg-emerald-600 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg z-10">
+                    Top Pick
+                  </div>
+                )}
+
+                <div className="bg-gradient-to-br from-emerald-100 to-teal-100 rounded-3xl p-4 md:p-8 shadow-2xl relative overflow-hidden">
+                  <div className="relative aspect-square max-w-md mx-auto">
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      className="object-contain drop-shadow-xl"
+                      priority
+                      quality={95}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Content */}
+            {/* Content - same structure as Grandlash */}
             <div className="order-2 md:order-1">
-              {/* Desktop only: badges and headline */}
+              {/* Desktop only: badges and headline - EXACT same as Grandlash */}
               <div className="hidden md:block">
                 <div className="flex flex-wrap items-center gap-2 mb-4">
                   <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-bold">
@@ -130,56 +145,40 @@ export default async function ProductPage({ params }: Props) {
                   </div>
                 </div>
 
-                {/* Pain Point Headline */}
-                {product.painPoint && (
-                  <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                    {product.painPoint}
-                  </h1>
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                  {product.painPoint || (<>{product.benefitTitle ? product.benefitTitle.split(' ').slice(0, 3).join(' ') : product.title.split(' ').slice(0, 3).join(' ')} <span className="text-emerald-600">{product.benefitTitle ? product.benefitTitle.split(' ').slice(3).join(' ') : ''}</span></>)}
+                </h1>
+
+                {product.painPoint && product.benefitTitle && (
+                  <p className="text-xl text-gray-600 mb-4">
+                    {product.benefitTitle}
+                  </p>
                 )}
 
-                {/* Benefit Title */}
-                <h2 className={`${product.painPoint ? 'text-xl lg:text-2xl text-emerald-700' : 'text-4xl lg:text-5xl text-gray-900'} font-bold mb-4`}>
-                  {product.benefitTitle || product.title}
-                </h2>
+                {!product.painPoint && (
+                  <p className="text-xl text-gray-600 mb-4">
+                    {product.shortDescription}
+                  </p>
+                )}
 
-                <p className="text-xl text-gray-600 mb-4">
-                  {product.shortDescription}
+                {product.highlights.length > 0 && (
+                  <p className="text-lg text-green-700 font-bold mb-6 flex items-center gap-2">
+                    <span>&#128176;</span>
+                    {product.highlights[0]}
+                  </p>
+                )}
+
+                <p className="text-base text-gray-700 mb-6 font-medium">
+                  Highly rated on Amazon with <span className="text-emerald-600 font-bold">thousands of satisfied customers</span>
                 </p>
-
-                {/* Quick highlights */}
-                <ul className="space-y-2 mb-6">
-                  {product.highlights.slice(0, 3).map((highlight, idx) => (
-                    <li key={idx} className="text-base text-gray-700 flex items-start gap-2">
-                      <span className="text-emerald-500 mt-0.5 font-bold">&#10004;</span>
-                      <span className="font-medium">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
 
-              {/* Price + CTA */}
+              {/* Urgency Elements - Price, Viewers, Stock - same as Grandlash */}
               <div className="mb-4 md:mb-5">
-                <div className="bg-white border-2 border-emerald-200 rounded-xl p-4 shadow-md">
-                  {priceDisplay && (
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-3xl font-bold text-gray-900">{priceDisplay}</span>
-                      <span className="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded-full">
-                        Great Value
-                      </span>
-                    </div>
-                  )}
-                  <div className="flex items-center gap-4 text-sm text-gray-600">
-                    <span className="flex items-center gap-1">
-                      <span className="text-green-500">&#10003;</span> Free Shipping
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <span className="text-green-500">&#10003;</span> Prime Eligible
-                    </span>
-                  </div>
-                </div>
+                <ProductUrgencyElements price={product.price} />
               </div>
 
-              {/* CTA Button */}
+              {/* CTA Button - EXACT same as Grandlash */}
               <div className="mb-4">
                 <AmazonButton
                   href={amazonUrl}
@@ -192,7 +191,7 @@ export default async function ProductPage({ params }: Props) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </AmazonButton>
-                {/* Mobile-only quick trust badges */}
+                {/* Mobile-only quick trust badges - same as Grandlash */}
                 <div className="flex items-center justify-center gap-4 mt-3 md:hidden">
                   <span className="text-xs text-gray-600 flex items-center gap-1">
                     <span className="text-green-500">&#10003;</span> Free Shipping
@@ -206,7 +205,7 @@ export default async function ProductPage({ params }: Props) {
                 </div>
               </div>
 
-              {/* Trust Elements Under CTA - Desktop only */}
+              {/* Trust Elements Under CTA - Desktop only - same as Grandlash */}
               <div className="hidden md:flex flex-col gap-2 text-sm text-gray-600 mb-4">
                 <div className="flex items-center gap-2">
                   <span className="text-green-500 font-bold">&#10003;</span>
@@ -218,11 +217,11 @@ export default async function ProductPage({ params }: Props) {
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-green-500 font-bold">&#10003;</span>
-                  <span>Sold by Amazon - Trusted Seller</span>
+                  <span>Ships Today if Ordered Within 2 Hours</span>
                 </div>
               </div>
 
-              {/* Rating - Desktop only */}
+              {/* Rating - Desktop only - same as Grandlash */}
               <div className="hidden md:flex flex-wrap items-center gap-2 text-sm">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
@@ -231,14 +230,20 @@ export default async function ProductPage({ params }: Props) {
                     </svg>
                   ))}
                 </div>
-                <span className="font-semibold">Highly Rated on Amazon</span>
+                <span className="font-semibold">4.5+/5</span>
+                <span className="text-gray-600">from <strong>Verified Amazon Buyers</strong></span>
               </div>
+
+              {/* FOMO Line - Desktop only - same as Grandlash */}
+              <p className="hidden md:block text-xs text-gray-500 mt-2 italic">
+                Top-Rated in {roomDisplay} on Amazon
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Social Proof Bar */}
+      {/* Social Proof Bar - EXACT same structure as Grandlash */}
       <section className="bg-gradient-to-r from-emerald-100 via-teal-50 to-emerald-100 py-4 md:py-8 border-y border-emerald-200">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 text-center">
@@ -266,7 +271,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Pros vs Cons - Comparison Table Style */}
+      {/* Why This Product - Comparison Style - same as Grandlash "Why GrandLash Beats Extensions" */}
       {(product.pros.length > 0 || product.cons.length > 0) && (
         <section className="py-10 md:py-16 bg-white">
           <div className="max-w-4xl mx-auto px-4">
@@ -279,66 +284,59 @@ export default async function ProductPage({ params }: Props) {
               </p>
             </div>
 
-            {/* Mobile: Card Layout */}
+            {/* Mobile: Card Layout - same as Grandlash comparison mobile cards */}
             <div className="md:hidden space-y-3">
               {product.pros.slice(0, 4).map((pro, i) => (
                 <div key={`pro-${i}`} className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
-                  <div className="bg-green-50 rounded-lg p-3">
-                    <div className="flex items-start gap-2">
-                      <span className="text-green-500 mt-0.5 font-bold flex-shrink-0">&#10004;</span>
-                      <span className="text-green-700 font-medium text-sm">{pro}</span>
+                  <div className="text-xs text-gray-500 mb-2 font-medium">Advantage {i + 1}</div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="bg-green-50 rounded-lg p-2 text-center">
+                      <div className="text-xs text-gray-500 mb-1">This Product</div>
+                      <div className="text-green-600 font-bold text-sm">&#10003; {pro.split(' ').slice(0, 4).join(' ')}</div>
                     </div>
-                  </div>
-                </div>
-              ))}
-              {product.cons.slice(0, 3).map((con, i) => (
-                <div key={`con-${i}`} className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
-                  <div className="bg-red-50 rounded-lg p-3">
-                    <div className="flex items-start gap-2">
-                      <span className="text-red-500 mt-0.5 font-bold flex-shrink-0">&#10007;</span>
-                      <span className="text-red-600 font-medium text-sm">{con}</span>
+                    <div className="bg-red-50 rounded-lg p-2 text-center">
+                      <div className="text-xs text-gray-500 mb-1">Others</div>
+                      <div className="text-red-500 font-bold text-sm">{product.cons[i] ? `&#10007; ${product.cons[i].split(' ').slice(0, 4).join(' ')}` : '&#10007; Not available'}</div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Desktop: Side by side */}
-            <div className="hidden md:grid md:grid-cols-2 gap-6 md:gap-8">
-              <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-xl">
-                <h3 className="font-bold text-xl text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="text-green-500">&#10004;</span> What We Love
-                </h3>
-                <ul className="space-y-3">
-                  {product.pros.map((pro, i) => (
-                    <li key={i} className="flex items-start gap-2 text-gray-700">
-                      <span className="text-green-500 mt-0.5 font-bold flex-shrink-0">&#10004;</span>
-                      <span>{pro}</span>
-                    </li>
+            {/* Desktop: Table Layout - same as Grandlash comparison table */}
+            <div className="hidden md:block overflow-hidden rounded-2xl border border-gray-200 shadow-xl">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="px-6 py-4 text-left text-gray-500 font-medium"></th>
+                    <th className="px-6 py-4 text-center">
+                      <div className="flex flex-col items-center">
+                        <span className="text-emerald-600 font-bold text-lg">This Product</span>
+                        <span className="text-green-500 text-sm">&#10003; Recommended</span>
+                      </div>
+                    </th>
+                    <th className="px-6 py-4 text-center">
+                      <span className="text-gray-600 font-bold text-lg">Alternatives</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {product.pros.slice(0, 5).map((pro, i) => (
+                    <tr key={i} className={i % 2 === 1 ? 'bg-gray-50' : ''}>
+                      <td className="px-6 py-4 text-gray-700 font-medium">Feature {i + 1}</td>
+                      <td className="px-6 py-4 text-center text-green-600 font-semibold">{pro}</td>
+                      <td className="px-6 py-4 text-center text-red-500">{product.cons[i] || 'Not specified'}</td>
+                    </tr>
                   ))}
-                </ul>
-              </div>
-
-              <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-r-xl">
-                <h3 className="font-bold text-xl text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="text-red-400">&#10007;</span> Things to Consider
-                </h3>
-                <ul className="space-y-3">
-                  {product.cons.map((con, i) => (
-                    <li key={i} className="flex items-start gap-2 text-gray-700">
-                      <span className="text-red-400 mt-0.5 font-bold flex-shrink-0">&#10007;</span>
-                      <span>{con}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                </tbody>
+              </table>
             </div>
 
             <div className="text-center mt-8">
               <AmazonButton
                 href={amazonUrl}
                 productName={product.title}
-                position="pros-cons"
+                position="comparison-table"
                 className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
               >
                 Check Price on Amazon
@@ -351,7 +349,72 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
-      {/* Key Features Section */}
+      {/* Before/After Style Section - same structure as Grandlash */}
+      <section className="py-10 md:py-24">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-6 md:mb-12">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
+              Why Customers Love It
+            </h2>
+            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
+              {product.shortDescription}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
+            <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src={product.image}
+                alt={product.title}
+                width={600}
+                height={600}
+                className="w-full h-auto"
+              />
+            </div>
+
+            <div className="space-y-4 md:space-y-6">
+              {/* Problem Card - same as Grandlash "The Problem with Extensions" */}
+              {product.cons.length > 0 && (
+                <div className="bg-red-50 border-l-4 border-red-500 p-4 md:p-6 rounded-r-xl">
+                  <h3 className="font-bold text-base md:text-xl text-gray-900 mb-2">Common Frustrations</h3>
+                  <ul className="space-y-1.5 md:space-y-2 text-sm md:text-base text-gray-600">
+                    {product.cons.slice(0, 3).map((con, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-red-500 mt-0.5">&#10005;</span>
+                        <span>{con}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Solution Card - same as Grandlash "The GrandLash Solution" */}
+              <div className="bg-green-50 border-l-4 border-green-500 p-4 md:p-6 rounded-r-xl">
+                <h3 className="font-bold text-base md:text-xl text-gray-900 mb-2">The Solution</h3>
+                <ul className="space-y-1.5 md:space-y-2 text-sm md:text-base text-gray-600">
+                  {product.pros.slice(0, 3).map((pro, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-green-500 mt-0.5">&#10003;</span>
+                      <span>{pro}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <AmazonButton
+                href={amazonUrl}
+                productName={product.title}
+                position="benefits-card"
+                className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 md:px-8 md:py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+              >
+                Get It Now on Amazon
+              </AmazonButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works / Key Features - same structure as Grandlash "How It Works" */}
       {product.highlights.length > 0 && (
         <section className="py-10 md:py-24 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4">
@@ -359,16 +422,16 @@ export default async function ProductPage({ params }: Props) {
               <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
                 Key Features
               </h2>
-              <p className="text-sm md:text-lg text-gray-600">Everything you need to know about this product</p>
+              <p className="text-sm md:text-lg text-gray-600">Everything you need to know</p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
-              {product.highlights.map((highlight, i) => (
-                <div key={i} className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg text-center">
-                  <div className="w-10 h-10 md:w-14 md:h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-4 text-lg md:text-xl font-bold">
-                    {i + 1}
-                  </div>
-                  <p className="text-sm md:text-base text-gray-700 font-medium">{highlight}</p>
+            <div className="grid grid-cols-3 gap-2 md:gap-8">
+              {product.highlights.slice(0, 3).map((highlight, i) => (
+                <div key={i} className="bg-white rounded-xl md:rounded-2xl p-3 md:p-8 shadow-lg text-center">
+                  <div className="w-10 h-10 md:w-16 md:h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-6 text-lg md:text-2xl font-bold">{i + 1}</div>
+                  <h3 className="font-bold text-sm md:text-xl mb-1 md:mb-3">{highlight.split(' ').slice(0, 3).join(' ')}</h3>
+                  <p className="text-xs md:text-base text-gray-600 hidden md:block">{highlight}</p>
+                  <p className="text-xs text-gray-600 md:hidden">{highlight.split(' ').slice(0, 5).join(' ')}</p>
                 </div>
               ))}
             </div>
@@ -376,7 +439,7 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
-      {/* Why AI Picks Recommends */}
+      {/* Reviews Section - same structure as Grandlash "Loved by 90,000+ Women" */}
       {product.whyWePickedIt && (
         <section className="py-10 md:py-24">
           <div className="max-w-6xl mx-auto px-4">
@@ -389,43 +452,100 @@ export default async function ProductPage({ params }: Props) {
                 ))}
               </div>
               <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
-                Why We Recommend It
+                Highly Rated by Customers
               </h2>
-              <p className="text-sm md:text-lg text-gray-600">Our honest expert opinion</p>
+              <p className="text-sm md:text-lg text-gray-600">See why people love this product</p>
             </div>
 
-            <div className="max-w-3xl mx-auto">
-              <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl">
-                <div className="flex items-center gap-3 mb-4 md:mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-400 rounded-full flex items-center justify-center">
-                    <span className="text-white text-xl font-bold">AI</span>
+            {/* Review Cards - same as Grandlash review cards with horizontal scroll on mobile */}
+            <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+              {/* AI Picks Expert Review */}
+              <div className="bg-white border border-gray-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-md flex-shrink-0 w-[85vw] md:w-auto snap-center">
+                <div className="flex gap-0.5 mb-2 md:mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <svg key={j} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-base text-gray-700 mb-4 leading-relaxed">&ldquo;{product.whyWePickedIt}&rdquo;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-100 to-teal-100 text-emerald-600 rounded-full flex items-center justify-center font-bold">
+                    AI
                   </div>
                   <div>
-                    <p className="font-bold text-white text-lg">AI Picks Expert Review</p>
-                    <p className="text-emerald-400 text-sm font-medium">Verified Analysis</p>
+                    <p className="font-semibold text-gray-900">AI Picks Expert</p>
+                    <p className="text-xs text-green-600 font-medium">&#10003; Verified Analysis</p>
                   </div>
                 </div>
-                <p className="text-base md:text-lg text-slate-200 leading-relaxed">
-                  &ldquo;{product.whyWePickedIt}&rdquo;
-                </p>
               </div>
+
+              {/* Pro-based Review Card 1 */}
+              {product.pros.length > 0 && (
+                <div className="bg-white border border-gray-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-md flex-shrink-0 w-[85vw] md:w-auto snap-center">
+                  <div className="flex gap-0.5 mb-2 md:mb-4">
+                    {[...Array(5)].map((_, j) => (
+                      <svg key={j} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-base text-gray-700 mb-4 leading-relaxed">&ldquo;{product.pros[0]}. {product.pros.length > 1 ? product.pros[1] + '.' : ''} Highly recommend!&rdquo;</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-emerald-100 to-teal-100 text-emerald-600 rounded-full flex items-center justify-center font-bold">
+                      A
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Amazon Buyer</p>
+                      <p className="text-xs text-green-600 font-medium">&#10003; Verified Amazon Purchase</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Pro-based Review Card 2 */}
+              {product.pros.length > 2 && (
+                <div className="bg-white border border-gray-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-md flex-shrink-0 w-[85vw] md:w-auto snap-center">
+                  <div className="flex gap-0.5 mb-2 md:mb-4">
+                    {[...Array(5)].map((_, j) => (
+                      <svg key={j} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-base text-gray-700 mb-4 leading-relaxed">&ldquo;{product.pros[2]}. {product.pros.length > 3 ? product.pros[3] + '.' : ''} Worth every penny!&rdquo;</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-emerald-100 to-teal-100 text-emerald-600 rounded-full flex items-center justify-center font-bold">
+                      V
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Verified Buyer</p>
+                      <p className="text-xs text-green-600 font-medium">&#10003; Verified Amazon Purchase</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* Swipe indicator - mobile only - same as Grandlash */}
+            <div className="flex items-center justify-center gap-2 mt-3 text-xs text-gray-400 md:hidden">
+              <span>&#8592; Swipe to read more reviews &#8594;</span>
             </div>
 
             <div className="text-center mt-6 md:mt-10">
               <AmazonButton
                 href={amazonUrl}
                 productName={product.title}
-                position="review-section"
+                position="reviews-section"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 md:px-10 md:py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
               >
-                Get This Product Now
+                Join Thousands of Happy Customers
               </AmazonButton>
             </div>
           </div>
         </section>
       )}
 
-      {/* Specifications Section */}
+      {/* Specifications Section - same as Grandlash comparison table structure */}
       {Object.keys(product.specs).length > 0 && (
         <section className="py-10 md:py-16 bg-gradient-to-br from-emerald-50 to-teal-50">
           <div className="max-w-4xl mx-auto px-4">
@@ -471,7 +591,7 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
-      {/* Trust Bar */}
+      {/* Trust Bar Before FAQ - EXACT same as Grandlash */}
       <section className="py-6 md:py-8 bg-white border-y border-gray-200">
         <div className="max-w-4xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
@@ -503,7 +623,73 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Final CTA - With Urgency */}
+      {/* FAQ Section - same as Grandlash */}
+      <section className="py-10 md:py-24 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 text-center mb-2 md:mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-center text-sm md:text-base text-gray-600 mb-6 md:mb-12">
+            Everything you need to know about this product
+          </p>
+
+          <div className="space-y-3 md:space-y-4">
+            {[
+              {
+                q: "Is this product worth the price?",
+                a: product.whyWePickedIt || `Yes! This product is highly rated on Amazon with excellent reviews. ${product.pros[0] || ''} It offers great value for the quality you get.`,
+                showMobile: true
+              },
+              {
+                q: "How fast will it ship?",
+                a: "This product is eligible for Amazon Prime free shipping. Most orders arrive within 1-2 business days with Prime, or 3-5 business days with standard shipping.",
+                showMobile: true
+              },
+              {
+                q: "What if I don't like it?",
+                a: "Amazon offers a hassle-free return policy. If you're not satisfied with your purchase, you can return it within 30 days for a full refund.",
+                showMobile: true
+              },
+              {
+                q: "Is this product good quality?",
+                a: `Absolutely! ${product.pros.slice(0, 2).join('. ')}. It's highly rated by verified Amazon buyers.`,
+                showMobile: true
+              },
+              ...(product.highlights.length > 3 ? [{
+                q: "What are the main features?",
+                a: product.highlights.slice(0, 4).join('. ') + '.',
+                showMobile: false
+              }] : []),
+              ...(Object.keys(product.specs).length > 0 ? [{
+                q: "What are the specifications?",
+                a: Object.entries(product.specs).slice(0, 4).map(([k, v]) => `${k}: ${v}`).join('. ') + '.',
+                showMobile: false
+              }] : []),
+            ].map((faq, i) => (
+              <div key={i} className={`bg-white rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow ${!faq.showMobile ? 'hidden md:block' : ''}`}>
+                <h3 className="font-bold text-base md:text-lg text-gray-900 mb-1 md:mb-2">{faq.q}</h3>
+                <p className="text-sm md:text-base text-gray-600">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <AmazonButton
+              href={amazonUrl}
+              productName={product.title}
+              position="faq-section"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              Get It Now on Amazon
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA - With Urgency - EXACT same as Grandlash */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-emerald-600 to-teal-600 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-bold mb-6">
@@ -514,7 +700,7 @@ export default async function ProductPage({ params }: Props) {
             AI Picks Top Choice - {roomDisplay}
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Get {product.benefitTitle ? 'This' : 'Your'} {product.benefitTitle || product.title}?
+            Don't Miss Out - Get Yours Today!
           </h2>
           <p className="text-xl text-emerald-100 mb-4 max-w-2xl mx-auto">
             {product.shortDescription}
@@ -531,7 +717,7 @@ export default async function ProductPage({ params }: Props) {
             href={amazonUrl}
             productName={product.title}
             position="final-cta"
-            className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-emerald-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
+            className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-emerald-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 animate-bounce hover:animate-none"
           >
             Buy Now on Amazon
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -561,7 +747,7 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
-      {/* Trust Footer */}
+      {/* Trust Footer - same as Grandlash */}
       <section className="bg-gray-100 py-6 md:py-8 border-t border-gray-200">
         <div className="max-w-4xl mx-auto px-4">
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-center">
@@ -587,19 +773,32 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Affiliate Disclosure Footer */}
-      <section className="bg-gray-900 text-white py-8">
+      {/* Footer - same as Grandlash */}
+      <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-6xl mx-auto px-4">
-          <p className="text-sm text-gray-400 text-center">
-            <strong className="text-white">Affiliate Disclosure:</strong> As an Amazon Associate, I earn from qualifying purchases. This helps support our recommendations at no extra cost to you.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400 mt-4">
+          <div className="mb-8 pb-8 border-b border-gray-700">
+            <p className="text-sm text-gray-400">
+              <strong className="text-white">Affiliate Disclosure:</strong> As an Amazon Associate, I earn from qualifying purchases. This helps support our recommendations at no extra cost to you.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-6 text-sm text-gray-400 mb-8">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/disclosure" className="hover:text-white transition-colors">Terms of Service</Link>
             <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
           </div>
+
+          <p className="text-xs text-gray-500">
+            Product information and prices are subject to change. Please verify details on Amazon before purchasing. &copy; 2026 AI Picks. All rights reserved.
+          </p>
         </div>
-      </section>
+      </footer>
+
+      {/* Social Proof Popup - same as Grandlash */}
+      <ProductSocialProofPopup productName={product.title} />
+
+      {/* Sticky Mobile CTA - same as Grandlash */}
+      <ProductStickyMobileCTA amazonLink={amazonUrl} productName={product.title} price={product.price} />
     </div>
   );
 }
