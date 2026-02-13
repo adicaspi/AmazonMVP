@@ -51,22 +51,35 @@ export function AmazonButton({ href, children, className, productName, position 
       });
     }
 
-    // Also track on our server for the analytics dashboard
-    fetch("/api/amazon-click", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        productName: productName || "Amazon Product",
-        buttonPosition: position || "unknown",
-        page: pagePath,
-        utmSource,
-        utmMedium,
-        utmCampaign,
-        utmContent,
-      }),
-    }).catch(() => {
-      // Silently fail - don't block navigation
+    // Track on our server for the analytics dashboard
+    const clickData = JSON.stringify({
+      productName: productName || "Amazon Product",
+      buttonPosition: position || "unknown",
+      page: pagePath,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      utmContent,
     });
+
+    // Use sendBeacon for reliable delivery (survives page navigation)
+    const beaconSent =
+      typeof navigator !== "undefined" &&
+      navigator.sendBeacon &&
+      navigator.sendBeacon(
+        "/api/amazon-click",
+        new Blob([clickData], { type: "application/json" })
+      );
+
+    // Fallback to fetch with keepalive if sendBeacon unavailable or failed
+    if (!beaconSent) {
+      fetch("/api/amazon-click", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: clickData,
+        keepalive: true,
+      }).catch(() => {});
+    }
   };
 
   return (
