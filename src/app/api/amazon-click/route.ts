@@ -27,34 +27,45 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const click: Record<string, any> = {
-      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    const clickId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const baseClick: Record<string, any> = {
+      id: clickId,
       timestamp: new Date().toISOString(),
       product_name: productName,
       button_position: buttonPosition,
       page: page,
       user_agent: request.headers.get("user-agent") || null,
       referer: request.headers.get("referer") || null,
+    };
+
+    // UTM fields (may not exist in DB yet)
+    const utmFields: Record<string, any> = {
       utm_source: utmSource || null,
       utm_medium: utmMedium || null,
       utm_campaign: utmCampaign || null,
       utm_content: utmContent || null,
     };
 
-    // Save to Supabase directly (skip isDatabaseAvailable pre-check)
-    if (supabase) {
-      const { error } = await supabase.from("amazon_clicks").insert(click);
-
-      if (error) {
-        console.error("Supabase insert error:", error);
-        return NextResponse.json({ success: false, error: "Failed to save click" }, { status: 500 });
-      }
-    } else {
+    if (!supabase) {
       console.warn("Supabase not configured, click not saved");
       return NextResponse.json({ success: false, error: "Database not configured" }, { status: 503 });
     }
 
-    return NextResponse.json({ success: true, clickId: click.id });
+    // Try with UTM fields first, fallback to base fields if columns don't exist
+    const { error } = await supabase.from("amazon_clicks").insert({ ...baseClick, ...utmFields });
+
+    if (error) {
+      console.error("Supabase insert error (with UTM), retrying without:", error.message);
+      // Retry without UTM fields in case columns don't exist in DB
+      const { error: retryError } = await supabase.from("amazon_clicks").insert(baseClick);
+
+      if (retryError) {
+        console.error("Supabase insert error (without UTM):", retryError);
+        return NextResponse.json({ success: false, error: "Failed to save click" }, { status: 500 });
+      }
+    }
+
+    return NextResponse.json({ success: true, clickId });
   } catch (error) {
     console.error("Error tracking Amazon click:", error);
     return NextResponse.json(
