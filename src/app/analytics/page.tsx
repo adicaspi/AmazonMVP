@@ -16,6 +16,11 @@ type AmazonClick = {
   product_name: string;
   button_position: string;
   page: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  referer?: string;
 };
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {
@@ -97,6 +102,7 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
   const byPosition: Record<string, number> = {};
   const byDay: Record<string, number> = {};
   const byHour: Record<number, number> = {};
+  const clicksBySource: Record<string, number> = {};
 
   filtered.forEach((click) => {
     byPosition[click.button_position] = (byPosition[click.button_position] || 0) + 1;
@@ -104,6 +110,24 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
     byDay[day] = (byDay[day] || 0) + 1;
     const hour = new Date(click.timestamp).getHours();
     byHour[hour] = (byHour[hour] || 0) + 1;
+
+    // Determine traffic source for this click
+    let source = "Direct";
+    if (click.utm_source) {
+      source = click.utm_source;
+    } else if (click.referer) {
+      try {
+        const url = new URL(click.referer);
+        const hostname = url.hostname.replace("www.", "");
+        // Don't count our own site as a source
+        if (!hostname.includes("localhost") && !hostname.includes("aipicks") && !hostname.includes("vercel")) {
+          source = hostname;
+        }
+      } catch {
+        // keep as Direct
+      }
+    }
+    clicksBySource[source] = (clicksBySource[source] || 0) + 1;
   });
 
   const sortedPositions = Object.entries(byPosition).sort(([, a], [, b]) => b - a);
@@ -118,6 +142,7 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
     byHour,
     bestButton,
     peakHour,
+    clicksBySource,
     recentClicks: filtered
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
       .slice(0, 15),
@@ -156,6 +181,7 @@ export default async function AnalyticsPage() {
       recentClicks={grandeLashStats.recentClicks}
       peakHour={grandeLashStats.peakHour}
       trafficSources={trafficSources}
+      clicksBySource={grandeLashStats.clicksBySource}
     />
   );
 }

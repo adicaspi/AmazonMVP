@@ -54,6 +54,43 @@ CREATE TABLE IF NOT EXISTS creatives (
   UNIQUE(product_id)
 );
 
+-- Amazon Clicks table (for tracking clicks to Amazon)
+CREATE TABLE IF NOT EXISTS amazon_clicks (
+  id TEXT PRIMARY KEY,
+  timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  product_name TEXT,
+  button_position TEXT,
+  page TEXT,
+  user_agent TEXT,
+  referer TEXT,
+  utm_source TEXT,
+  utm_medium TEXT,
+  utm_campaign TEXT,
+  utm_content TEXT
+);
+
+-- Page Views table (for tracking page visits)
+CREATE TABLE IF NOT EXISTS page_views (
+  id TEXT PRIMARY KEY,
+  timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  page TEXT,
+  utm_source TEXT,
+  utm_medium TEXT,
+  utm_campaign TEXT,
+  utm_content TEXT,
+  user_agent TEXT,
+  referer TEXT
+);
+
+-- Add UTM columns to amazon_clicks if they don't exist (migration)
+DO $$ BEGIN
+  ALTER TABLE amazon_clicks ADD COLUMN IF NOT EXISTS utm_source TEXT;
+  ALTER TABLE amazon_clicks ADD COLUMN IF NOT EXISTS utm_medium TEXT;
+  ALTER TABLE amazon_clicks ADD COLUMN IF NOT EXISTS utm_campaign TEXT;
+  ALTER TABLE amazon_clicks ADD COLUMN IF NOT EXISTS utm_content TEXT;
+EXCEPTION WHEN OTHERS THEN NULL;
+END $$;
+
 -- Indexes for performance
 CREATE INDEX IF NOT EXISTS idx_products_slug ON products(slug);
 CREATE INDEX IF NOT EXISTS idx_products_status ON products(status);
@@ -61,6 +98,11 @@ CREATE INDEX IF NOT EXISTS idx_events_product_id ON events(product_id);
 CREATE INDEX IF NOT EXISTS idx_events_type ON events(type);
 CREATE INDEX IF NOT EXISTS idx_events_timestamp ON events(timestamp DESC);
 CREATE INDEX IF NOT EXISTS idx_creatives_product_id ON creatives(product_id);
+CREATE INDEX IF NOT EXISTS idx_amazon_clicks_timestamp ON amazon_clicks(timestamp DESC);
+CREATE INDEX IF NOT EXISTS idx_amazon_clicks_utm_source ON amazon_clicks(utm_source);
+CREATE INDEX IF NOT EXISTS idx_amazon_clicks_page ON amazon_clicks(page);
+CREATE INDEX IF NOT EXISTS idx_page_views_page ON page_views(page);
+CREATE INDEX IF NOT EXISTS idx_page_views_timestamp ON page_views(timestamp DESC);
 
 -- Function to update updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()

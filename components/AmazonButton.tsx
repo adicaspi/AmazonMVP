@@ -20,6 +20,19 @@ export function AmazonButton({ href, children, className, productName, position 
   const handleClick = () => {
     const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
 
+    // Extract UTM params from current URL
+    let utmSource = "";
+    let utmMedium = "";
+    let utmCampaign = "";
+    let utmContent = "";
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      utmSource = params.get("utm_source") || "";
+      utmMedium = params.get("utm_medium") || "";
+      utmCampaign = params.get("utm_campaign") || "";
+      utmContent = params.get("utm_content") || "";
+    }
+
     // Track the click as a Lead event in Meta Pixel
     if (typeof window !== "undefined" && window.fbq) {
       window.fbq("track", "Lead", {
@@ -46,6 +59,10 @@ export function AmazonButton({ href, children, className, productName, position 
         productName: productName || "Amazon Product",
         buttonPosition: position || "unknown",
         page: pagePath,
+        utmSource,
+        utmMedium,
+        utmCampaign,
+        utmContent,
       }),
     }).catch(() => {
       // Silently fail - don't block navigation

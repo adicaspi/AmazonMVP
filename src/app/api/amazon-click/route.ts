@@ -9,12 +9,16 @@ type AmazonClick = {
   page: string;
   user_agent?: string;
   referer?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
 };
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { productName, buttonPosition, page } = body;
+    const { productName, buttonPosition, page, utmSource, utmMedium, utmCampaign, utmContent } = body;
 
     if (!productName || !buttonPosition || !page) {
       return NextResponse.json(
@@ -23,7 +27,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const click = {
+    const click: Record<string, any> = {
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: new Date().toISOString(),
       product_name: productName,
@@ -31,6 +35,10 @@ export async function POST(request: NextRequest) {
       page: page,
       user_agent: request.headers.get("user-agent") || null,
       referer: request.headers.get("referer") || null,
+      utm_source: utmSource || null,
+      utm_medium: utmMedium || null,
+      utm_campaign: utmCampaign || null,
+      utm_content: utmContent || null,
     };
 
     // Try to save to Supabase
