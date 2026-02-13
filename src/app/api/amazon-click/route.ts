@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase, isDatabaseAvailable } from "@/lib/db";
+import { supabase } from "@/lib/db";
 
 type AmazonClick = {
   id: string;
@@ -41,16 +41,17 @@ export async function POST(request: NextRequest) {
       utm_content: utmContent || null,
     };
 
-    // Try to save to Supabase
-    if (supabase && (await isDatabaseAvailable())) {
+    // Save to Supabase directly (skip isDatabaseAvailable pre-check)
+    if (supabase) {
       const { error } = await supabase.from("amazon_clicks").insert(click);
 
       if (error) {
-        console.error("Supabase error:", error);
-        // Don't fail - just log the error
+        console.error("Supabase insert error:", error);
+        return NextResponse.json({ success: false, error: "Failed to save click" }, { status: 500 });
       }
     } else {
-      console.warn("Supabase not available, click not saved");
+      console.warn("Supabase not configured, click not saved");
+      return NextResponse.json({ success: false, error: "Database not configured" }, { status: 503 });
     }
 
     return NextResponse.json({ success: true, clickId: click.id });
@@ -71,8 +72,7 @@ export async function GET(request: NextRequest) {
 
     let clicks: AmazonClick[] = [];
 
-    // Try to read from Supabase
-    if (supabase && (await isDatabaseAvailable())) {
+    if (supabase) {
       let query = supabase
         .from("amazon_clicks")
         .select("*")
@@ -85,7 +85,9 @@ export async function GET(request: NextRequest) {
 
       const { data, error } = await query;
 
-      if (!error && data) {
+      if (error) {
+        console.error("Supabase read error:", error);
+      } else if (data) {
         clicks = data;
       }
     }

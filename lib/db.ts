@@ -28,11 +28,12 @@ export const supabase = supabaseUrl && supabaseKey
     })
   : null;
 
-// Check if database is available
+// Check if database is available (lightweight ping)
 export async function isDatabaseAvailable(): Promise<boolean> {
   if (!supabase) return false;
   try {
-    const { error } = await supabase.from("products").select("id").limit(1);
+    // Use a simple RPC or query that doesn't depend on any specific table
+    const { error } = await supabase.from("amazon_clicks").select("id").limit(1);
     return !error;
   } catch {
     return false;

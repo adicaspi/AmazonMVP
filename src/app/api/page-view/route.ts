@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase, isDatabaseAvailable } from "@/lib/db";
+import { supabase } from "@/lib/db";
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,12 +25,12 @@ export async function POST(request: NextRequest) {
       utm_content: utm_content || null,
     };
 
-    // Save to Supabase
-    if (supabase && (await isDatabaseAvailable())) {
+    // Save to Supabase directly
+    if (supabase) {
       const { error } = await supabase.from("page_views").insert(view);
 
       if (error) {
-        console.error("Supabase error:", error);
+        console.error("Supabase page view insert error:", error);
       }
     }
 
@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const page = searchParams.get("page");
 
-    if (!supabase || !(await isDatabaseAvailable())) {
+    if (!supabase) {
       return NextResponse.json({ views: [], total: 0, sources: {} });
     }
 
