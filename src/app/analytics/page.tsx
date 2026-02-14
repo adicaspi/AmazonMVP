@@ -151,39 +151,57 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
   };
 }
 
-export default async function AnalyticsPage() {
-  const amazonClicks = await getAmazonClicks();
-  const grandeLashStats = getClickStats(amazonClicks, "/grandelash");
-  let grandeLashViews = await getPageViews("/grandelash");
-  const trafficSources = await getTrafficSources("/grandelash");
-
-  // Fix: Views should always be >= clicks (can't click without viewing)
-  if (grandeLashViews < grandeLashStats.total) {
-    grandeLashViews = grandeLashStats.total;
+function buildPageData(amazonClicks: AmazonClick[], pageViews: number, stats: ReturnType<typeof getClickStats>) {
+  let views = pageViews;
+  if (views < stats.total) {
+    views = stats.total;
   }
 
   const today = new Date().toISOString().split("T")[0];
-  const todayClicks = grandeLashStats.byDay[today] || 0;
+  const todayClicks = stats.byDay[today] || 0;
 
   const weekAgo = new Date();
   weekAgo.setDate(weekAgo.getDate() - 7);
-  const weekClicks = Object.entries(grandeLashStats.byDay)
+  const weekClicks = Object.entries(stats.byDay)
     .filter(([day]) => new Date(day) >= weekAgo)
     .reduce((sum, [, count]) => sum + count, 0);
 
+  return { views, totalClicks: stats.total, todayClicks, weekClicks, bestButton: stats.bestButton, byPosition: stats.byPosition, byDay: stats.byDay, recentClicks: stats.recentClicks, peakHour: stats.peakHour, clicksBySource: stats.clicksBySource };
+}
+
+export default async function AnalyticsPage() {
+  const amazonClicks = await getAmazonClicks();
+
+  // Grandelash data
+  const grandeLashStats = getClickStats(amazonClicks, "/grandelash");
+  const grandeLashViews = await getPageViews("/grandelash");
+  const grandeLashTraffic = await getTrafficSources("/grandelash");
+  const grandeLashData = buildPageData(amazonClicks, grandeLashViews, grandeLashStats);
+
+  // Lashserum data
+  const lashSerumStats = getClickStats(amazonClicks, "/lashserum");
+  const lashSerumViews = await getPageViews("/lashserum");
+  const lashSerumTraffic = await getTrafficSources("/lashserum");
+  const lashSerumData = buildPageData(amazonClicks, lashSerumViews, lashSerumStats);
+
   return (
     <AnalyticsDashboard
-      views={grandeLashViews}
-      totalClicks={grandeLashStats.total}
-      todayClicks={todayClicks}
-      weekClicks={weekClicks}
-      bestButton={grandeLashStats.bestButton}
-      byPosition={grandeLashStats.byPosition}
-      byDay={grandeLashStats.byDay}
-      recentClicks={grandeLashStats.recentClicks}
-      peakHour={grandeLashStats.peakHour}
-      trafficSources={trafficSources}
-      clicksBySource={grandeLashStats.clicksBySource}
+      pages={[
+        {
+          id: "grandelash",
+          label: "GrandeLash",
+          path: "/grandelash",
+          ...grandeLashData,
+          trafficSources: grandeLashTraffic,
+        },
+        {
+          id: "lashserum",
+          label: "Lash Serum",
+          path: "/lashserum",
+          ...lashSerumData,
+          trafficSources: lashSerumTraffic,
+        },
+      ]}
     />
   );
 }

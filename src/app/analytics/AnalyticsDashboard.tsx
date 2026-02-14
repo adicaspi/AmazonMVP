@@ -12,7 +12,10 @@ type RecentClick = {
   page: string;
 };
 
-interface Props {
+type PageData = {
+  id: string;
+  label: string;
+  path: string;
   views: number;
   totalClicks: number;
   todayClicks: number;
@@ -24,6 +27,10 @@ interface Props {
   peakHour: number | null;
   trafficSources: Record<string, number>;
   clicksBySource: Record<string, number>;
+};
+
+interface Props {
+  pages: PageData[];
 }
 
 // Translations
@@ -231,24 +238,18 @@ const positionLabels: Record<string, { he: string; en: string; desc_he: string; 
 };
 
 export default function AnalyticsDashboard({
-  views,
-  totalClicks,
-  todayClicks,
-  weekClicks,
-  bestButton,
-  byPosition,
-  byDay,
-  recentClicks,
-  peakHour,
-  trafficSources,
-  clicksBySource,
+  pages,
 }: Props) {
   const router = useRouter();
   const [lang, setLang] = useState<"he" | "en">("he");
   const [darkMode, setDarkMode] = useState(false);
+  const [activePageId, setActivePageId] = useState(pages[0]?.id || "grandelash");
   const t = translations[lang];
   const isRTL = lang === "he";
   const today = new Date().toISOString().split("T")[0];
+
+  const activePage = pages.find(p => p.id === activePageId) || pages[0];
+  const { views, totalClicks, todayClicks, weekClicks, bestButton, byPosition, byDay, recentClicks, peakHour, trafficSources, clicksBySource } = activePage;
 
   // Auto-refresh every 10 seconds
   useEffect(() => {
@@ -330,13 +331,39 @@ export default function AnalyticsDashboard({
                 {lang === "he" ? "🇺🇸 English" : "🇮🇱 עברית"}
               </button>
               <Link
-                href="/grandelash"
+                href={activePage.path}
                 className="px-4 py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition font-medium"
               >
                 {t.viewPage} →
               </Link>
             </div>
           </div>
+
+          {/* Page Tabs */}
+          {pages.length > 1 && (
+            <div className="flex gap-2 mt-4">
+              {pages.map((page) => (
+                <button
+                  key={page.id}
+                  onClick={() => setActivePageId(page.id)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                    activePageId === page.id
+                      ? "bg-rose-600 text-white"
+                      : darkMode
+                        ? "bg-neutral-800 text-gray-300 hover:bg-neutral-700"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
+                >
+                  {page.label}
+                  {page.totalClicks > 0 && (
+                    <span className={`${isRTL ? "mr-2" : "ml-2"} text-xs ${activePageId === page.id ? "bg-white/20" : darkMode ? "bg-neutral-700" : "bg-gray-200"} px-1.5 py-0.5 rounded`}>
+                      {page.totalClicks}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </header>
 
