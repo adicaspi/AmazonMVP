@@ -43,6 +43,7 @@ export default function GrandeLASHPage() {
         productName="GrandeLASH-MD Lash Enhancing Serum"
         productId="grandelash"
         category="Beauty"
+        eventType="Lead"
       />
       <PageViewTracker page="/lashserum" />
 

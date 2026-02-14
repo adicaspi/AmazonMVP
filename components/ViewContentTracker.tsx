@@ -12,20 +12,21 @@ interface ViewContentTrackerProps {
   productName: string;
   productId: string;
   category?: string;
+  eventType?: string;
 }
 
-export function ViewContentTracker({ productName, productId, category }: ViewContentTrackerProps) {
+export function ViewContentTracker({ productName, productId, category, eventType = "ViewContent" }: ViewContentTrackerProps) {
   useEffect(() => {
-    // Track ViewContent event when product page loads
+    // Track event when product page loads
     if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "ViewContent", {
+      window.fbq("track", eventType, {
         content_name: productName,
         content_ids: [productId],
         content_category: category || "Product",
         content_type: "product",
       });
     }
-  }, [productName, productId, category]);
+  }, [productName, productId, category, eventType]);
 
   // This component doesn't render anything visible
   return null;
