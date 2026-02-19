@@ -19,7 +19,7 @@ export const metadata: Metadata = {
       "The #1 Best-Selling Teeth Whitening Kit on Amazon. 40,000+ reviews. Dentist-recommended LED whitening. Visible results in 7 days.",
     images: [
       {
-        url: "https://m.media-amazon.com/images/I/81U_TXGxq-L._SL1500_.jpg",
+        url: "https://m.media-amazon.com/images/I/81r-7p7Pj6L._SL1500_.jpg",
         width: 1500,
         height: 1500,
         alt: "AuraGlow Teeth Whitening Kit",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description:
       "The #1 Best-Selling Teeth Whitening Kit on Amazon. 40,000+ reviews. Results in 7 days!",
     images: [
-      "https://m.media-amazon.com/images/I/81U_TXGxq-L._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/81r-7p7Pj6L._SL1500_.jpg",
     ],
   },
 };
