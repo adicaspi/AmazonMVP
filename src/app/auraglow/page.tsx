@@ -177,7 +177,7 @@ export default async function AuraGlowPage() {
 
                 <p className="text-lg text-green-700 font-bold mb-4 flex items-center gap-2">
                   <span>&#128176;</span>
-                  Dental office: $500+. This kit: {price}. Same results.
+                  Just {price} with Free Prime Shipping. 20+ treatments included.
                 </p>
 
                 <p className="text-base text-gray-700 mb-6 font-medium">
@@ -290,12 +290,12 @@ export default async function AuraGlowPage() {
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <span className="text-xl md:text-3xl mb-1 md:mb-2">&#128176;</span>
+              <span className="text-xl md:text-3xl mb-1 md:mb-2">&#127942;</span>
               <div className="text-lg md:text-3xl font-bold text-blue-600">
-                90%+
+                #1
               </div>
               <div className="text-xs md:text-sm text-gray-600">
-                Savings vs Dentist
+                Best Seller
               </div>
             </div>
             <div className="flex flex-col items-center">
@@ -336,7 +336,7 @@ export default async function AuraGlowPage() {
           <div className="md:hidden space-y-3">
             {[
               { label: "Results", good: "7 Days", bad: "1 Visit" },
-              { label: "Cost", good: price, bad: "$500+" },
+              { label: "Cost", good: price, bad: "$300-$600" },
               { label: "Convenience", good: "At Home", bad: "Office Visit" },
               { label: "Sensitivity", good: "Minimal", bad: "Common" },
               { label: "Treatments", good: "20+ Uses", bad: "1 Session" },
@@ -409,7 +409,7 @@ export default async function AuraGlowPage() {
                     {price} (20+ treatments)
                   </td>
                   <td className="px-6 py-4 text-center text-red-500">
-                    $500 - $1,000 per session
+                    $300 - $600 per session
                   </td>
                 </tr>
                 <tr>
@@ -760,7 +760,7 @@ export default async function AuraGlowPage() {
               },
               {
                 q: "How many treatments do I get?",
-                a: `Each kit includes enough whitening gel for 20+ treatments. That's less than $${(priceAmount / 20).toFixed(2)} per treatment compared to $500+ at the dentist.`,
+                a: `Each kit includes enough whitening gel for 20+ treatments. That's less than $${(priceAmount / 20).toFixed(2)} per treatment — incredible value for professional-grade whitening.`,
                 showMobile: true,
               },
               {
@@ -826,29 +826,28 @@ export default async function AuraGlowPage() {
         </div>
       </section>
 
-      {/* Final CTA — Price Anchor + Scarcity */}
+      {/* Final CTA */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 to-cyan-600 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 bg-red-500/90 backdrop-blur px-4 py-2 rounded-full text-sm font-bold mb-6">
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-bold mb-6">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             </span>
-            Limited Time — Amazon Deal May End Soon
+            Amazon&apos;s #1 Best Seller — 15K+ Bought Last Month
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Dental Office: $500+. This Kit: {price}.
+            Get Your Dream Smile for Just {price}
           </h2>
           <p className="text-xl text-blue-100 mb-2 max-w-2xl mx-auto">
-            Same professional-grade formula. 60-day money-back guarantee.
+            Professional-grade whitening. 20+ treatments included. Free Prime shipping.
           </p>
           <p className="text-lg text-blue-200 mb-6 max-w-2xl mx-auto">
-            {reviewCount.toLocaleString()}+ verified buyers. 4.5/5 &quot;Excellent&quot; rating.
+            {reviewCount.toLocaleString()}+ verified buyers. {starRating}/5 rating on Amazon.
           </p>
           <div className="flex items-center justify-center gap-3 mb-8">
-            <span className="text-2xl text-blue-200 line-through">$500+</span>
             <span className="text-5xl font-bold">{price}</span>
-            <span className="bg-green-400 text-green-900 text-sm font-bold px-3 py-1 rounded-full">SAVE 90%+</span>
+            <span className="bg-green-400 text-green-900 text-sm font-bold px-3 py-1 rounded-full">FREE PRIME SHIPPING</span>
           </div>
           <AuraGlowAmazonButton
             href={amazonLink}

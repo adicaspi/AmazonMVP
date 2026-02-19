@@ -27,14 +27,13 @@ export function UrgencyElements() {
           <div>
             <div className="flex items-baseline gap-3">
               <span className="text-3xl font-bold text-gray-900">$48</span>
-              <span className="text-lg text-gray-400 line-through">$500+</span>
-              <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded">SAVE 90%+</span>
+              <span className="bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded">BEST SELLER</span>
             </div>
             <p className="text-sm text-blue-600 font-semibold mt-1">
               Amazon&apos;s Choice for teeth whitening
             </p>
             <p className="text-sm text-green-600 font-medium">
-              vs. dental office treatment
+              15K+ bought in past month
             </p>
           </div>
           <div className="text-right">

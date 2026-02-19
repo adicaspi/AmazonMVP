@@ -13,8 +13,7 @@ export function StickyMobileCTA({ amazonLink }: StickyMobileCTAProps) {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <span className="text-xl font-bold text-gray-900">$48</span>
-            <span className="text-sm text-gray-400 line-through">$500+</span>
-            <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded">DEAL</span>
+            <span className="bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded">#1 BEST SELLER</span>
           </div>
           <div className="flex items-center gap-1.5 text-xs text-green-600 font-bold bg-green-50 px-2 py-1 rounded-full">
             <span className="relative flex h-2 w-2">
