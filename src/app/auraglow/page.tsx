@@ -199,7 +199,7 @@ export default async function AuraGlowPage() {
                   position="hero-main"
                   className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-lg md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
                 >
-                  <span>Check Live Discount &amp; Availability</span>
+                  <span>Buy Now on Amazon</span>
                   <svg
                     className="w-6 h-6 md:w-7 md:h-7"
                     fill="none"
@@ -455,7 +455,7 @@ export default async function AuraGlowPage() {
               position="comparison-table"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Reveal Today&apos;s Prime Price
+              Buy Now on Amazon
               <svg
                 className="w-5 h-5"
                 fill="none"
@@ -674,7 +674,7 @@ export default async function AuraGlowPage() {
               position="reviews-section"
               className="inline-flex items-center justify-center gap-2 px-8 py-3 md:px-10 md:py-4 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Check If the Deal Is Still Live
+              Buy Now on Amazon
             </AuraGlowAmazonButton>
           </div>
         </div>
@@ -807,7 +807,7 @@ export default async function AuraGlowPage() {
               position="faq-section"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              See Today&apos;s Amazon Price
+              Buy Now on Amazon
               <svg
                 className="w-5 h-5"
                 fill="none"
@@ -854,7 +854,7 @@ export default async function AuraGlowPage() {
             position="final-cta"
             className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-[#FF9900] hover:bg-[#e88600] text-white font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
-            Check Live Discount &amp; Availability
+            Buy Now on Amazon
             <svg
               className="w-6 h-6"
               fill="none"
