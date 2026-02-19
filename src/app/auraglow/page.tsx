@@ -97,30 +97,35 @@ export default async function AuraGlowPage() {
       <PageViewTracker page="/auraglow" />
       <AuraGlowPixel />
 
-      {/* Urgency Announcement Bar */}
-      <div className="bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600 text-white text-center py-2.5 px-4">
-        <div className="flex items-center justify-center gap-2 text-sm md:text-base font-bold animate-pulse">
-          <span>&#9889;</span>
-          <span>BEST SELLER: 15K+ Bought Last Month!</span>
-          <span>&#9889;</span>
+      {/* Urgency Announcement Bar — Amazon Deal Alert */}
+      <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white text-center py-2.5 px-4">
+        <div className="flex items-center justify-center gap-2 text-sm md:text-base font-bold">
+          <span>&#128293;</span>
+          <span>LIMITED TIME AMAZON DEAL — Price May Change at Midnight</span>
+          <span>&#128293;</span>
         </div>
       </div>
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 via-white to-cyan-50">
         <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
-          {/* Mobile: Title + Rating ABOVE image */}
+          {/* Mobile: Open Loop Headline + Rating ABOVE image */}
           <div className="md:hidden mb-3">
-            <p className="text-xs text-gray-500 mb-1">AuraGlow Teeth Whitening</p>
-            <h1 className="text-lg font-semibold text-gray-900 leading-snug mb-2">
-              Teeth Whitening Kit with LED Accelerator Light - Professional
-              Results at Home in 7 Days
-            </h1>
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-2 mb-2">
               <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">
                 Amazon&apos;s Choice
               </span>
+              <span className="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">
+                #1 Best Seller
+              </span>
             </div>
+            <h1 className="text-xl font-bold text-gray-900 leading-tight mb-2">
+              The 30-Minute Routine Dentists Use to Whiten{" "}
+              <span className="text-blue-600">10 Shades in 7 Days</span>
+            </h1>
+            <p className="text-sm text-gray-600 mb-2">
+              Professional-grade results. No office visit. No sensitivity.
+            </p>
             <div className="flex items-center gap-1">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
@@ -134,8 +139,8 @@ export default async function AuraGlowPage() {
                   </svg>
                 ))}
               </div>
-              <span className="text-sm text-blue-600">{starRating}</span>
-              <span className="text-sm text-gray-500">({reviewCount.toLocaleString()}+ reviews)</span>
+              <span className="text-sm text-blue-600 font-semibold">{starRating}</span>
+              <span className="text-sm text-gray-500">({reviewCount.toLocaleString()}+ verified)</span>
             </div>
           </div>
 
@@ -147,35 +152,38 @@ export default async function AuraGlowPage() {
 
             {/* Content */}
             <div className="order-2 md:order-1">
-              {/* Desktop only */}
+              {/* Desktop only — Open Loop Headline */}
               <div className="hidden md:block">
                 <div className="flex flex-wrap items-center gap-2 mb-4">
                   <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-bold">
                     <span>&#127942;</span>
                     #1 Best Seller
                   </div>
+                  <div className="inline-flex items-center gap-1.5 bg-green-100 text-green-800 px-3 py-1.5 rounded-full text-sm font-semibold">
+                    <span>&#10003;</span>
+                    4.5/5 &quot;Excellent&quot;
+                  </div>
                 </div>
 
-                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                  Get a{" "}
-                  <span className="text-blue-600">Brighter, Whiter</span>{" "}
-                  Smile — <span className="text-blue-600">From Home</span>
+                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                  The 30-Minute Routine Used by Dentists to Whiten{" "}
+                  <span className="text-blue-600">10 Shades in 7 Days</span>
                 </h1>
 
                 <p className="text-xl text-gray-600 mb-4">
-                  Professional-level teeth whitening in just 30 minutes a day.
-                  Visible results in 7 days. No sensitivity.
+                  35% Carbamide Peroxide. Enamel-safe. Zero sensitivity.
+                  The same formula dentists trust — now available at home.
                 </p>
 
-                <p className="text-lg text-green-700 font-bold mb-6 flex items-center gap-2">
+                <p className="text-lg text-green-700 font-bold mb-4 flex items-center gap-2">
                   <span>&#128176;</span>
-                  Save $500+ compared to dental office whitening
+                  Dental office: $500+. This kit: {price}. Same results.
                 </p>
 
                 <p className="text-base text-gray-700 mb-6 font-medium">
                   Join{" "}
-                  <span className="text-blue-600 font-bold">40,000+</span>{" "}
-                  happy customers who got their dream smile at home
+                  <span className="text-blue-600 font-bold">{reviewCount.toLocaleString()}+</span>{" "}
+                  verified buyers who transformed their smile at home
                 </p>
               </div>
 
@@ -184,14 +192,14 @@ export default async function AuraGlowPage() {
                 <UrgencyElements />
               </div>
 
-              {/* CTA Button */}
+              {/* CTA Button — Micro-Conversion */}
               <div className="mb-4">
                 <AuraGlowAmazonButton
                   href={amazonLink}
                   position="hero-main"
-                  className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-lg md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
                 >
-                  <span>Buy Now on Amazon</span>
+                  <span>Check Live Discount &amp; Availability</span>
                   <svg
                     className="w-6 h-6 md:w-7 md:h-7"
                     fill="none"
@@ -275,37 +283,37 @@ export default async function AuraGlowPage() {
             <div className="flex flex-col items-center">
               <span className="text-xl md:text-3xl mb-1 md:mb-2">&#11088;</span>
               <div className="text-lg md:text-3xl font-bold text-blue-600">
-                40,000+
+                4.5/5
               </div>
               <div className="text-xs md:text-sm text-gray-600">
-                5-Star Reviews
+                &quot;Excellent&quot; Rating
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <span className="text-xl md:text-3xl mb-1 md:mb-2">&#127942;</span>
+              <span className="text-xl md:text-3xl mb-1 md:mb-2">&#128176;</span>
               <div className="text-lg md:text-3xl font-bold text-blue-600">
-                #1
+                90%+
               </div>
               <div className="text-xs md:text-sm text-gray-600">
-                Best Seller
+                Savings vs Dentist
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <span className="text-xl md:text-3xl mb-1 md:mb-2">&#129463;</span>
+              <span className="text-xl md:text-3xl mb-1 md:mb-2">&#128170;</span>
               <div className="text-lg md:text-3xl font-bold text-blue-600">
-                Dentist
+                10 Shades
               </div>
               <div className="text-xs md:text-sm text-gray-600">
-                Recommended
+                Whiter in 7 Days
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <span className="text-xl md:text-3xl mb-1 md:mb-2">&#9889;</span>
+              <span className="text-xl md:text-3xl mb-1 md:mb-2">&#128737;&#65039;</span>
               <div className="text-lg md:text-3xl font-bold text-blue-600">
-                7 Days
+                60-Day
               </div>
               <div className="text-xs md:text-sm text-gray-600">
-                Visible Results
+                Money-Back Guarantee
               </div>
             </div>
           </div>
@@ -445,9 +453,9 @@ export default async function AuraGlowPage() {
             <AuraGlowAmazonButton
               href={amazonLink}
               position="comparison-table"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Save $500+ - Buy Now
+              Reveal Today&apos;s Prime Price
               <svg
                 className="w-5 h-5"
                 fill="none"
@@ -519,59 +527,63 @@ export default async function AuraGlowPage() {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* 3-Step "Easy Path" — Apply, Glow, Smile */}
       <section className="py-10 md:py-24 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-6 md:mb-12">
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
-              How It Works
+              3 Simple Steps. 30 Minutes. Done.
             </h2>
             <p className="text-sm md:text-lg text-gray-600">
-              Simple. Effective. Just 30 minutes a day.
+              No dentist appointment. No complicated routines.
             </p>
           </div>
 
           <div className="grid grid-cols-3 gap-2 md:gap-8">
-            <div className="bg-white rounded-xl md:rounded-2xl p-3 md:p-8 shadow-lg text-center">
-              <div className="w-10 h-10 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-6 text-lg md:text-2xl font-bold">
-                1
+            <div className="bg-white rounded-xl md:rounded-2xl p-3 md:p-8 shadow-lg text-center relative">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-4 text-2xl md:text-3xl">
+                &#128167;
               </div>
-              <h3 className="font-bold text-sm md:text-xl mb-1 md:mb-3">
-                Apply Gel
+              <div className="text-xs text-blue-600 font-bold mb-1">STEP 1</div>
+              <h3 className="font-bold text-base md:text-xl mb-1 md:mb-3 text-gray-900">
+                Apply
               </h3>
               <p className="text-xs md:text-base text-gray-600 hidden md:block">
-                Apply the whitening gel to the comfortable mouth tray. Takes
-                just 30 seconds.
+                Apply the 35% Carbamide Peroxide gel to the tray. Takes 30 seconds.
               </p>
-              <p className="text-xs text-gray-600 md:hidden">Fill tray</p>
+              <p className="text-xs text-gray-500 md:hidden">30 seconds</p>
+              {/* Arrow connector */}
+              <div className="hidden md:block absolute -right-5 top-1/2 -translate-y-1/2 text-gray-300 text-3xl">&rarr;</div>
+            </div>
+
+            <div className="bg-white rounded-xl md:rounded-2xl p-3 md:p-8 shadow-lg text-center relative">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-cyan-100 text-cyan-600 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-4 text-2xl md:text-3xl">
+                &#128161;
+              </div>
+              <div className="text-xs text-cyan-600 font-bold mb-1">STEP 2</div>
+              <h3 className="font-bold text-base md:text-xl mb-1 md:mb-3 text-gray-900">
+                Glow
+              </h3>
+              <p className="text-xs md:text-base text-gray-600 hidden md:block">
+                Activate the LED accelerator light. Relax for 30 minutes while it works.
+              </p>
+              <p className="text-xs text-gray-500 md:hidden">30 minutes</p>
+              {/* Arrow connector */}
+              <div className="hidden md:block absolute -right-5 top-1/2 -translate-y-1/2 text-gray-300 text-3xl">&rarr;</div>
             </div>
 
             <div className="bg-white rounded-xl md:rounded-2xl p-3 md:p-8 shadow-lg text-center">
-              <div className="w-10 h-10 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-6 text-lg md:text-2xl font-bold">
-                2
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-4 text-2xl md:text-3xl">
+                &#128516;
               </div>
-              <h3 className="font-bold text-sm md:text-xl mb-1 md:mb-3">
-                Wear 30 Min
+              <div className="text-xs text-amber-600 font-bold mb-1">STEP 3</div>
+              <h3 className="font-bold text-base md:text-xl mb-1 md:mb-3 text-gray-900">
+                Smile
               </h3>
               <p className="text-xs md:text-base text-gray-600 hidden md:block">
-                Insert tray and activate the LED light. Relax while it works
-                its magic.
+                10 shades whiter in 7 days. Your brightest smile — guaranteed.
               </p>
-              <p className="text-xs text-gray-600 md:hidden">LED + relax</p>
-            </div>
-
-            <div className="bg-white rounded-xl md:rounded-2xl p-3 md:p-8 shadow-lg text-center">
-              <div className="w-10 h-10 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-6 text-lg md:text-2xl font-bold">
-                3
-              </div>
-              <h3 className="font-bold text-sm md:text-xl mb-1 md:mb-3">
-                Smile Bright
-              </h3>
-              <p className="text-xs md:text-base text-gray-600 hidden md:block">
-                See noticeably whiter teeth after just a few sessions. Full
-                results in 7 days.
-              </p>
-              <p className="text-xs text-gray-600 md:hidden">7-day results</p>
+              <p className="text-xs text-gray-500 md:hidden">7-day results</p>
             </div>
           </div>
         </div>
@@ -660,9 +672,9 @@ export default async function AuraGlowPage() {
             <AuraGlowAmazonButton
               href={amazonLink}
               position="reviews-section"
-              className="inline-flex items-center justify-center gap-2 px-8 py-3 md:px-10 md:py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 md:px-10 md:py-4 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Join 40,000+ Happy Customers
+              Check If the Deal Is Still Live
             </AuraGlowAmazonButton>
           </div>
         </div>
@@ -793,9 +805,9 @@ export default async function AuraGlowPage() {
             <AuraGlowAmazonButton
               href={amazonLink}
               position="faq-section"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Get Your AuraGlow Now
+              See Today&apos;s Amazon Price
               <svg
                 className="w-5 h-5"
                 fill="none"
@@ -814,31 +826,36 @@ export default async function AuraGlowPage() {
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* Final CTA — Price Anchor + Scarcity */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 to-cyan-600 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-bold mb-6">
+          <div className="inline-flex items-center gap-2 bg-red-500/90 backdrop-blur px-4 py-2 rounded-full text-sm font-bold mb-6">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             </span>
-            Amazon&apos;s Choice - 15K+ Bought Last Month!
+            Limited Time — Amazon Deal May End Soon
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Get Your Dream Smile Today!
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Dental Office: $500+. This Kit: {price}.
           </h2>
-          <p className="text-xl text-blue-100 mb-4 max-w-2xl mx-auto">
-            Join over 40,000 customers who transformed their smile at home.
+          <p className="text-xl text-blue-100 mb-2 max-w-2xl mx-auto">
+            Same professional-grade formula. 60-day money-back guarantee.
+          </p>
+          <p className="text-lg text-blue-200 mb-6 max-w-2xl mx-auto">
+            {reviewCount.toLocaleString()}+ verified buyers. 4.5/5 &quot;Excellent&quot; rating.
           </p>
           <div className="flex items-center justify-center gap-3 mb-8">
-            <span className="text-4xl font-bold">{price}</span>
+            <span className="text-2xl text-blue-200 line-through">$500+</span>
+            <span className="text-5xl font-bold">{price}</span>
+            <span className="bg-green-400 text-green-900 text-sm font-bold px-3 py-1 rounded-full">SAVE 90%+</span>
           </div>
           <AuraGlowAmazonButton
             href={amazonLink}
             position="final-cta"
-            className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-blue-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 animate-bounce hover:animate-none"
+            className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-[#FF9900] hover:bg-[#e88600] text-white font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
-            Buy Now on Amazon
+            Check Live Discount &amp; Availability
             <svg
               className="w-6 h-6"
               fill="none"
@@ -854,7 +871,7 @@ export default async function AuraGlowPage() {
             </svg>
           </AuraGlowAmazonButton>
           <p className="text-blue-200 text-sm mt-4">
-            Free Prime shipping + 30-day money back guarantee
+            Free Prime shipping + 60-day money-back guarantee
           </p>
         </div>
       </section>

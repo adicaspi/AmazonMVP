@@ -25,22 +25,24 @@ export function UrgencyElements() {
       <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4">
         <div className="flex items-center justify-between">
           <div>
-            <div className="flex items-baseline gap-2">
+            <div className="flex items-baseline gap-3">
               <span className="text-3xl font-bold text-gray-900">$48</span>
+              <span className="text-lg text-gray-400 line-through">$500+</span>
+              <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded">SAVE 90%+</span>
             </div>
             <p className="text-sm text-blue-600 font-semibold mt-1">
               Amazon&apos;s Choice for teeth whitening
             </p>
             <p className="text-sm text-green-600 font-medium">
-              15K+ bought in past month
+              vs. dental office treatment
             </p>
           </div>
           <div className="text-right">
             <p className="text-sm font-bold text-blue-600 flex items-center gap-1 justify-end">
-              <span>&#10003;</span> Free Prime shipping
+              <span>&#10003;</span> Free Prime
             </p>
-            <p className="text-sm font-bold text-blue-700">
-              Ships Today!
+            <p className="text-sm font-bold text-green-700">
+              60-Day Guarantee
             </p>
           </div>
         </div>
