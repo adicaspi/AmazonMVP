@@ -11,7 +11,7 @@ type MediaItem = {
 const mediaItems: MediaItem[] = [
   {
     type: "image",
-    src: "https://m.media-amazon.com/images/I/81r-7p7Pj6L._SL1500_.jpg",
+    src: "https://m.media-amazon.com/images/I/610DA7ixPiL._AC_SL1500_.jpg",
     alt: "AuraGlow Teeth Whitening Kit - Full Package",
   },
   {
