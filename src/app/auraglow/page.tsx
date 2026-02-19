@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export default function AuraGlowPage() {
-  const amazonLink = "https://www.amazon.com/dp/B01EI81TT4?tag=aipicks20-20";
+  const amazonLink = "https://www.amazon.com/dp/B00YI5VJW6?tag=aipicks20-20";
 
   return (
     <div className="min-h-screen bg-white">
