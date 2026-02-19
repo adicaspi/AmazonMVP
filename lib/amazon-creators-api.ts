@@ -143,7 +143,7 @@ export async function getProductsByASIN(
   }
 
   const token = await getAccessToken();
-  const { partnerTag } = getConfig();
+  const { partnerTag, version } = getConfig();
 
   const requestBody = {
     itemIds: asins,
@@ -161,9 +161,10 @@ export async function getProductsByASIN(
   const res = await fetchWithTimeout(`${API_BASE}/catalog/v1/getItems`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json; charset=utf-8",
       Accept: "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}, Version ${version}`,
+      "User-Agent": "creatorsapi-client/1.0",
       "x-marketplace": marketplace,
     },
     body: JSON.stringify(requestBody),
