@@ -1,6 +1,6 @@
 "use client";
 
-import { AmazonButton } from "@/components/AmazonButton";
+import { AuraGlowAmazonButton } from "./AuraGlowAmazonButton";
 
 interface StickyMobileCTAProps {
   amazonLink: string;
@@ -26,9 +26,8 @@ export function StickyMobileCTA({ amazonLink }: StickyMobileCTAProps) {
             Free Prime
           </div>
         </div>
-        <AmazonButton
+        <AuraGlowAmazonButton
           href={amazonLink}
-          productName="AuraGlow Teeth Whitening Kit"
           position="sticky-mobile"
           className="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold text-lg rounded-xl shadow-lg active:scale-[0.98] transition-transform"
         >
@@ -36,7 +35,7 @@ export function StickyMobileCTA({ amazonLink }: StickyMobileCTAProps) {
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
-        </AmazonButton>
+        </AuraGlowAmazonButton>
       </div>
       <div className="h-28 md:hidden"></div>
     </>

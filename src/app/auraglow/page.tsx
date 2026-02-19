@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import HeroCarousel from "./HeroCarousel";
-import { AmazonButton } from "@/components/AmazonButton";
+import { AuraGlowAmazonButton } from "./AuraGlowAmazonButton";
+import { AuraGlowPixel } from "./AuraGlowPixel";
 import { ViewContentTracker } from "@/components/ViewContentTracker";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
@@ -49,6 +50,7 @@ export default function AuraGlowPage() {
         category="Beauty"
       />
       <PageViewTracker page="/auraglow" />
+      <AuraGlowPixel />
 
       {/* Urgency Announcement Bar */}
       <div className="bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600 text-white text-center py-2.5 px-4">
@@ -139,9 +141,8 @@ export default function AuraGlowPage() {
 
               {/* CTA Button */}
               <div className="mb-4">
-                <AmazonButton
+                <AuraGlowAmazonButton
                   href={amazonLink}
-                  productName="AuraGlow Teeth Whitening Kit"
                   position="hero-main"
                   className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
                 >
@@ -159,7 +160,7 @@ export default function AuraGlowPage() {
                       d="M17 8l4 4m0 0l-4 4m4-4H3"
                     />
                   </svg>
-                </AmazonButton>
+                </AuraGlowAmazonButton>
                 {/* Mobile quick trust badges */}
                 <div className="flex items-center justify-center gap-4 mt-3 md:hidden">
                   <span className="text-xs text-gray-600 flex items-center gap-1">
@@ -396,9 +397,8 @@ export default function AuraGlowPage() {
           </div>
 
           <div className="text-center mt-8">
-            <AmazonButton
+            <AuraGlowAmazonButton
               href={amazonLink}
-              productName="AuraGlow Teeth Whitening Kit"
               position="comparison-table"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
@@ -416,7 +416,7 @@ export default function AuraGlowPage() {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </AmazonButton>
+            </AuraGlowAmazonButton>
           </div>
         </div>
       </section>
@@ -612,14 +612,13 @@ export default function AuraGlowPage() {
           </div>
 
           <div className="text-center mt-6 md:mt-10">
-            <AmazonButton
+            <AuraGlowAmazonButton
               href={amazonLink}
-              productName="AuraGlow Teeth Whitening Kit"
               position="reviews-section"
               className="inline-flex items-center justify-center gap-2 px-8 py-3 md:px-10 md:py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
               Join 40,000+ Happy Customers
-            </AmazonButton>
+            </AuraGlowAmazonButton>
           </div>
         </div>
       </section>
@@ -746,9 +745,8 @@ export default function AuraGlowPage() {
           </div>
 
           <div className="text-center mt-10">
-            <AmazonButton
+            <AuraGlowAmazonButton
               href={amazonLink}
-              productName="AuraGlow Teeth Whitening Kit"
               position="faq-section"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
@@ -766,7 +764,7 @@ export default function AuraGlowPage() {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </AmazonButton>
+            </AuraGlowAmazonButton>
           </div>
         </div>
       </section>
@@ -794,9 +792,8 @@ export default function AuraGlowPage() {
               25% OFF
             </span>
           </div>
-          <AmazonButton
+          <AuraGlowAmazonButton
             href={amazonLink}
-            productName="AuraGlow Teeth Whitening Kit"
             position="final-cta"
             className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-blue-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 animate-bounce hover:animate-none"
           >
@@ -814,7 +811,7 @@ export default function AuraGlowPage() {
                 d="M17 8l4 4m0 0l-4 4m4-4H3"
               />
             </svg>
-          </AmazonButton>
+          </AuraGlowAmazonButton>
           <p className="text-blue-200 text-sm mt-4">
             Free Prime shipping + 30-day money back guarantee
           </p>
