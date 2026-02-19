@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { CookieConsent } from "@/components/CookieConsent";
+import { MetaPixelInit } from "@/components/MetaPixelInit";
 
 const META_PIXEL_ID = "876318711699041";
 
@@ -90,7 +91,7 @@ export default function RootLayout({
         {/* Facebook Domain Verification */}
         <meta name="facebook-domain-verification" content="qkdw9hd6ey3pr7msoevv0byie4ls6i" />
 
-        {/* Meta Pixel Code */}
+        {/* Meta Pixel Base Code - loads fbevents.js only, init is handled per-page */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
@@ -101,8 +102,6 @@ export default function RootLayout({
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${META_PIXEL_ID}');
-            fbq('track', 'PageView');
           `}
         </Script>
         <noscript>
@@ -116,6 +115,7 @@ export default function RootLayout({
         </noscript>
       </head>
       <body className={inter.className}>
+        <MetaPixelInit />
         <Header />
         <main className="min-h-screen bg-white">
           {children}

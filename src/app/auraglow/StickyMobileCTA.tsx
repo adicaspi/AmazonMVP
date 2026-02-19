@@ -12,7 +12,7 @@ export function StickyMobileCTA({ amazonLink }: StickyMobileCTAProps) {
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-blue-200 p-3 md:hidden z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.2)]">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
-            <span className="text-2xl font-bold text-gray-900">$29.99</span>
+            <span className="text-2xl font-bold text-gray-900">$48</span>
             <div className="flex flex-col">
               <span className="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
               <span className="text-xs text-gray-500 mt-0.5">15K+ bought last month</span>

@@ -33,7 +33,7 @@ export function trackAuraGlowConversion(buttonPosition: string) {
     content_name: "AuraGlow Teeth Whitening Kit",
     content_category: "Affiliate Link Click",
     content_ids: [buttonPosition],
-    value: 29.99,
+    value: 48,
     currency: "USD",
   });
 

@@ -12,14 +12,14 @@ import { SocialProofPopup } from "./SocialProofPopup";
 export const metadata: Metadata = {
   title: "AuraGlow Teeth Whitening Kit | Professional Results at Home",
   description:
-    "The #1 Best-Selling Teeth Whitening Kit on Amazon. 40,000+ 5-star reviews. Professional-level whitening with LED accelerator light. Visible results in just 7 days. $29.99 with free Prime shipping.",
+    "The #1 Best-Selling Teeth Whitening Kit on Amazon. 40,000+ 5-star reviews. Professional-level whitening with LED accelerator light. Visible results in just 7 days. $48 with free Prime shipping.",
   openGraph: {
     title: "AuraGlow - Professional Teeth Whitening at Home",
     description:
       "The #1 Best-Selling Teeth Whitening Kit on Amazon. 40,000+ reviews. Dentist-recommended LED whitening. Visible results in 7 days.",
     images: [
       {
-        url: "https://m.media-amazon.com/images/I/71cSQmGG+kL._SL1500_.jpg",
+        url: "https://m.media-amazon.com/images/I/81U_TXGxq-L._SL1500_.jpg",
         width: 1500,
         height: 1500,
         alt: "AuraGlow Teeth Whitening Kit",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description:
       "The #1 Best-Selling Teeth Whitening Kit on Amazon. 40,000+ reviews. Results in 7 days!",
     images: [
-      "https://m.media-amazon.com/images/I/71cSQmGG+kL._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/81U_TXGxq-L._SL1500_.jpg",
     ],
   },
 };
@@ -283,7 +283,7 @@ export default function AuraGlowPage() {
           <div className="md:hidden space-y-3">
             {[
               { label: "Results", good: "7 Days", bad: "1 Visit" },
-              { label: "Cost", good: "$29.99", bad: "$500+" },
+              { label: "Cost", good: "$48", bad: "$500+" },
               { label: "Convenience", good: "At Home", bad: "Office Visit" },
               { label: "Sensitivity", good: "Minimal", bad: "Common" },
               { label: "Treatments", good: "20+ Uses", bad: "1 Session" },
@@ -353,7 +353,7 @@ export default function AuraGlowPage() {
                 <tr className="bg-gray-50">
                   <td className="px-6 py-4 text-gray-700 font-medium">Cost</td>
                   <td className="px-6 py-4 text-center text-green-600 font-semibold">
-                    $29.99 (20+ treatments)
+                    $48 (20+ treatments)
                   </td>
                   <td className="px-6 py-4 text-center text-red-500">
                     $500 - $1,000 per session
@@ -703,7 +703,7 @@ export default function AuraGlowPage() {
               },
               {
                 q: "How many treatments do I get?",
-                a: "Each kit includes enough whitening gel for 20+ treatments. That's less than $1.50 per treatment compared to $500+ at the dentist.",
+                a: "Each kit includes enough whitening gel for 20+ treatments. That's less than $2.40 per treatment compared to $500+ at the dentist.",
                 showMobile: true,
               },
               {
@@ -786,11 +786,7 @@ export default function AuraGlowPage() {
             Join over 40,000 customers who transformed their smile at home.
           </p>
           <div className="flex items-center justify-center gap-3 mb-8">
-            <span className="text-4xl font-bold">$29.99</span>
-            <span className="text-lg text-blue-200 line-through">$39.99</span>
-            <span className="bg-yellow-400 text-yellow-900 text-sm font-bold px-3 py-1 rounded-full">
-              25% OFF
-            </span>
+            <span className="text-4xl font-bold">$48</span>
           </div>
           <AuraGlowAmazonButton
             href={amazonLink}

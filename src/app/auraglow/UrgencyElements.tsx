@@ -26,9 +26,7 @@ export function UrgencyElements() {
         <div className="flex items-center justify-between">
           <div>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-gray-900">$29.99</span>
-              <span className="text-lg text-gray-400 line-through">$39.99</span>
-              <span className="text-sm text-green-600 font-bold">25% OFF</span>
+              <span className="text-3xl font-bold text-gray-900">$48</span>
             </div>
             <p className="text-sm text-blue-600 font-semibold mt-1">
               Amazon&apos;s Choice for teeth whitening

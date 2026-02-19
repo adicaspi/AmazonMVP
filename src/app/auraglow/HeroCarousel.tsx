@@ -11,22 +11,22 @@ type MediaItem = {
 const mediaItems: MediaItem[] = [
   {
     type: "image",
-    src: "https://m.media-amazon.com/images/I/71cSQmGG+kL._SL1500_.jpg",
+    src: "https://m.media-amazon.com/images/I/81U_TXGxq-L._SL1500_.jpg",
     alt: "AuraGlow Teeth Whitening Kit - Full Package",
   },
   {
     type: "image",
-    src: "https://m.media-amazon.com/images/I/71u1Xcoj5jL._SL1500_.jpg",
+    src: "https://m.media-amazon.com/images/I/71pMNBDx9uL._SL1500_.jpg",
     alt: "AuraGlow Whitening Kit Contents",
   },
   {
     type: "image",
-    src: "https://m.media-amazon.com/images/I/71TdYa3SXTL._SL1500_.jpg",
+    src: "https://m.media-amazon.com/images/I/813TG8KE5sL._SL1500_.jpg",
     alt: "AuraGlow LED Light and Gel",
   },
   {
     type: "image",
-    src: "https://m.media-amazon.com/images/I/61pz+RgefwL._SL1500_.jpg",
+    src: "https://m.media-amazon.com/images/I/815TuGCSWTL._SL1500_.jpg",
     alt: "AuraGlow Before and After Results",
   },
 ];
