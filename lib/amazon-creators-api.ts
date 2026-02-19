@@ -14,9 +14,16 @@ const TOKEN_ENDPOINTS: Record<string, string> = {
 
 const API_BASE = "https://creatorsapi.amazon";
 const SCOPE = "creatorsapi/default";
+const REQUEST_TIMEOUT_MS = 3000; // 3 second timeout per request
 
 // Cached token
 let cachedToken: { token: string; expiresAt: number } | null = null;
+
+function fetchWithTimeout(url: string, options: RequestInit, timeoutMs = REQUEST_TIMEOUT_MS): Promise<Response> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timeout));
+}
 
 function getConfig() {
   const credentialId = process.env.AMAZON_CREATORS_API_CREDENTIAL_ID;
@@ -51,7 +58,7 @@ async function getAccessToken(): Promise<string> {
     scope: SCOPE,
   });
 
-  const res = await fetch(tokenEndpoint, {
+  const res = await fetchWithTimeout(tokenEndpoint, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: body.toString(),
@@ -151,7 +158,7 @@ export async function getProductsByASIN(
     ],
   };
 
-  const res = await fetch(`${API_BASE}/catalog/v1/getItems`, {
+  const res = await fetchWithTimeout(`${API_BASE}/catalog/v1/getItems`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

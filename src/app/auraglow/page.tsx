@@ -8,7 +8,8 @@ import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
-import { getProductsByASIN } from "@/lib/amazon-creators-api";
+import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api";
+import { unstable_cache } from "next/cache";
 
 export const metadata: Metadata = {
   title: "AuraGlow Teeth Whitening Kit | Professional Results at Home",
@@ -42,18 +43,23 @@ export const metadata: Metadata = {
 
 const ASIN = "B00YI5VJW6";
 
-async function fetchProductData() {
-  try {
-    const products = await getProductsByASIN([ASIN]);
-    if (products.length > 0) return products[0];
-  } catch (err) {
-    console.error("Failed to fetch product data from Amazon Creators API:", err);
-  }
-  return null;
-}
+// Cache API response for 1 hour — page loads are instant after first fetch
+const getCachedProduct = unstable_cache(
+  async (): Promise<AmazonProductData | null> => {
+    try {
+      const products = await getProductsByASIN([ASIN]);
+      if (products.length > 0) return products[0];
+    } catch (err) {
+      console.error("Failed to fetch product data from Amazon Creators API:", err);
+    }
+    return null;
+  },
+  [`product-${ASIN}`],
+  { revalidate: 3600 } // revalidate every hour
+);
 
 export default async function AuraGlowPage() {
-  const product = await fetchProductData();
+  const product = await getCachedProduct();
   const amazonLink = `https://www.amazon.com/dp/${ASIN}?tag=aipicks20-20`;
 
   // Build images array from API data
