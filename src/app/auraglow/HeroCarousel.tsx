@@ -8,7 +8,7 @@ type MediaItem = {
   alt: string;
 };
 
-const mediaItems: MediaItem[] = [
+const FALLBACK_IMAGES: MediaItem[] = [
   {
     type: "image",
     src: "https://m.media-amazon.com/images/I/610DA7ixPiL._AC_SL1500_.jpg",
@@ -31,7 +31,14 @@ const mediaItems: MediaItem[] = [
   },
 ];
 
-export default function HeroCarousel() {
+interface HeroCarouselProps {
+  images?: { src: string; alt: string }[];
+}
+
+export default function HeroCarousel({ images }: HeroCarouselProps) {
+  const mediaItems: MediaItem[] = images?.length
+    ? images.map((img) => ({ type: "image" as const, ...img }))
+    : FALLBACK_IMAGES;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);

@@ -8,6 +8,7 @@ import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
+import { getProductsByASIN } from "@/lib/amazon-creators-api";
 
 export const metadata: Metadata = {
   title: "AuraGlow Teeth Whitening Kit | Professional Results at Home",
@@ -39,8 +40,46 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AuraGlowPage() {
-  const amazonLink = "https://www.amazon.com/dp/B00YI5VJW6?tag=aipicks20-20";
+const ASIN = "B00YI5VJW6";
+
+async function fetchProductData() {
+  try {
+    const products = await getProductsByASIN([ASIN]);
+    if (products.length > 0) return products[0];
+  } catch (err) {
+    console.error("Failed to fetch product data from Amazon Creators API:", err);
+  }
+  return null;
+}
+
+export default async function AuraGlowPage() {
+  const product = await fetchProductData();
+  const amazonLink = `https://www.amazon.com/dp/${ASIN}?tag=aipicks20-20`;
+
+  // Build images array from API data
+  const apiImages: { src: string; alt: string }[] = [];
+  if (product?.primaryImage?.large?.url) {
+    apiImages.push({
+      src: product.primaryImage.large.url,
+      alt: product.title || "AuraGlow Teeth Whitening Kit",
+    });
+  }
+  if (product?.variantImages) {
+    for (const variant of product.variantImages) {
+      if (variant.large?.url) {
+        apiImages.push({
+          src: variant.large.url,
+          alt: product.title || "AuraGlow Teeth Whitening Kit",
+        });
+      }
+    }
+  }
+
+  // Use API price if available, fallback to $48
+  const price = product?.price?.displayAmount || "$48";
+  const priceAmount = product?.price?.amount || 48;
+  const reviewCount = product?.reviewCount || 40000;
+  const starRating = product?.starRating || 4.4;
 
   return (
     <div className="min-h-screen bg-white">
@@ -89,15 +128,15 @@ export default function AuraGlowPage() {
                   </svg>
                 ))}
               </div>
-              <span className="text-sm text-blue-600">4.4</span>
-              <span className="text-sm text-gray-500">(40,000+ reviews)</span>
+              <span className="text-sm text-blue-600">{starRating}</span>
+              <span className="text-sm text-gray-500">({reviewCount.toLocaleString()}+ reviews)</span>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
             {/* Image carousel */}
             <div className="order-1 md:order-2">
-              <HeroCarousel />
+              <HeroCarousel images={apiImages.length > 0 ? apiImages : undefined} />
             </div>
 
             {/* Content */}
@@ -209,9 +248,9 @@ export default function AuraGlowPage() {
                     </svg>
                   ))}
                 </div>
-                <span className="font-semibold">4.4/5</span>
+                <span className="font-semibold">{starRating}/5</span>
                 <span className="text-gray-600">
-                  from <strong>40,000+ Verified Amazon Buyers</strong>
+                  from <strong>{reviewCount.toLocaleString()}+ Verified Amazon Buyers</strong>
                 </span>
               </div>
 
@@ -283,7 +322,7 @@ export default function AuraGlowPage() {
           <div className="md:hidden space-y-3">
             {[
               { label: "Results", good: "7 Days", bad: "1 Visit" },
-              { label: "Cost", good: "$48", bad: "$500+" },
+              { label: "Cost", good: price, bad: "$500+" },
               { label: "Convenience", good: "At Home", bad: "Office Visit" },
               { label: "Sensitivity", good: "Minimal", bad: "Common" },
               { label: "Treatments", good: "20+ Uses", bad: "1 Session" },
@@ -353,7 +392,7 @@ export default function AuraGlowPage() {
                 <tr className="bg-gray-50">
                   <td className="px-6 py-4 text-gray-700 font-medium">Cost</td>
                   <td className="px-6 py-4 text-center text-green-600 font-semibold">
-                    $48 (20+ treatments)
+                    {price} (20+ treatments)
                   </td>
                   <td className="px-6 py-4 text-center text-red-500">
                     $500 - $1,000 per session
@@ -703,7 +742,7 @@ export default function AuraGlowPage() {
               },
               {
                 q: "How many treatments do I get?",
-                a: "Each kit includes enough whitening gel for 20+ treatments. That's less than $2.40 per treatment compared to $500+ at the dentist.",
+                a: `Each kit includes enough whitening gel for 20+ treatments. That's less than $${(priceAmount / 20).toFixed(2)} per treatment compared to $500+ at the dentist.`,
                 showMobile: true,
               },
               {
@@ -786,7 +825,7 @@ export default function AuraGlowPage() {
             Join over 40,000 customers who transformed their smile at home.
           </p>
           <div className="flex items-center justify-center gap-3 mb-8">
-            <span className="text-4xl font-bold">$48</span>
+            <span className="text-4xl font-bold">{price}</span>
           </div>
           <AuraGlowAmazonButton
             href={amazonLink}
