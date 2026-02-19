@@ -5,11 +5,11 @@
  * including images, pricing, reviews, and descriptions.
  */
 
-// Token endpoints per region/version
+// Token endpoints per region/version (keys without 'v' prefix)
 const TOKEN_ENDPOINTS: Record<string, string> = {
-  "v2.1": "https://creatorsapi.auth.us-east-1.amazoncognito.com/oauth2/token", // NA
-  "v2.2": "https://creatorsapi.auth.eu-south-2.amazoncognito.com/oauth2/token", // EU
-  "v2.3": "https://creatorsapi.auth.us-west-2.amazoncognito.com/oauth2/token", // FE
+  "2.1": "https://creatorsapi.auth.us-east-1.amazoncognito.com/oauth2/token", // NA
+  "2.2": "https://creatorsapi.auth.eu-south-2.amazoncognito.com/oauth2/token", // EU
+  "2.3": "https://creatorsapi.auth.us-west-2.amazoncognito.com/oauth2/token", // FE
 };
 
 const API_BASE = "https://creatorsapi.amazon";
@@ -28,7 +28,9 @@ function fetchWithTimeout(url: string, options: RequestInit, timeoutMs = REQUEST
 function getConfig() {
   const credentialId = process.env.AMAZON_CREATORS_API_CREDENTIAL_ID;
   const credentialSecret = process.env.AMAZON_CREATORS_API_SECRET;
-  const version = process.env.AMAZON_CREATORS_API_VERSION || "v2.1";
+  // Normalize version: strip 'v' prefix (env may have "v2.1", API expects "2.1")
+  const rawVersion = process.env.AMAZON_CREATORS_API_VERSION || "2.1";
+  const version = rawVersion.replace(/^v/i, "");
   const partnerTag = process.env.NEXT_PUBLIC_AMAZON_TRACKING_ID || "aipicks20-20";
 
   if (!credentialId || !credentialSecret) {
