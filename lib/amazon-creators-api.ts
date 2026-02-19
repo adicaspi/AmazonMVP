@@ -81,32 +81,32 @@ async function getAccessToken(): Promise<string> {
   return data.access_token;
 }
 
-// Resources available in the API
+// Resources - Creators API uses lowerCamelCase (not PascalCase like old PA-API)
 const ALL_IMAGE_RESOURCES = [
-  "Images.Primary.Small",
-  "Images.Primary.Medium",
-  "Images.Primary.Large",
-  "Images.Variants.Small",
-  "Images.Variants.Medium",
-  "Images.Variants.Large",
+  "images.primary.small",
+  "images.primary.medium",
+  "images.primary.large",
+  "images.variants.small",
+  "images.variants.medium",
+  "images.variants.large",
 ];
 
 const ALL_ITEM_RESOURCES = [
-  "ItemInfo.Title",
-  "ItemInfo.Features",
-  "ItemInfo.ProductInfo",
-  "ItemInfo.ByLineInfo",
+  "itemInfo.title",
+  "itemInfo.features",
+  "itemInfo.productInfo",
+  "itemInfo.byLineInfo",
 ];
 
 const ALL_OFFER_RESOURCES = [
-  "OffersV2.Listings.Price",
-  "OffersV2.Listings.Availability",
-  "OffersV2.Listings.MerchantInfo",
+  "offersV2.listings.price",
+  "offersV2.listings.availability",
+  "offersV2.listings.merchantInfo",
 ];
 
 const REVIEW_RESOURCES = [
-  "CustomerReviews.StarRating",
-  "CustomerReviews.Count",
+  "customerReviews.starRating",
+  "customerReviews.count",
 ];
 
 export interface AmazonProductImage {
