@@ -91,8 +91,9 @@ export default function RootLayout({
         {/* Facebook Domain Verification */}
         <meta name="facebook-domain-verification" content="qkdw9hd6ey3pr7msoevv0byie4ls6i" />
 
-        {/* Meta Pixel Base Code - loads fbevents.js only, init is handled per-page */}
-        <Script id="meta-pixel" strategy="afterInteractive">
+        {/* Meta Pixel Base Code - loads fbevents.js, init is handled per-page */}
+        {/* beforeInteractive ensures fbq stub is defined before React hydration */}
+        <Script id="meta-pixel" strategy="beforeInteractive">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
