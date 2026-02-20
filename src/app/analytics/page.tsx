@@ -18,6 +18,12 @@ type AmazonClick = {
   page: string;
 };
 
+// Pages we track
+const TRACKED_PAGES = [
+  { path: "/auraglow", label: "AuraGlow", color: "blue" },
+  { path: "/grandelash", label: "GrandeLash", color: "rose" },
+] as const;
+
 async function getAmazonClicks(): Promise<AmazonClick[]> {
   try {
     if (supabase && (await isDatabaseAvailable())) {
@@ -25,11 +31,9 @@ async function getAmazonClicks(): Promise<AmazonClick[]> {
         .from("amazon_clicks")
         .select("*")
         .order("timestamp", { ascending: false })
-        .limit(1000);
+        .limit(2000);
 
-      if (!error && data) {
-        return data;
-      }
+      if (!error && data) return data;
     }
     return [];
   } catch {
@@ -45,9 +49,7 @@ async function getPageViews(page: string): Promise<number> {
         .select("*", { count: "exact", head: true })
         .eq("page", page);
 
-      if (!error && count !== null) {
-        return count;
-      }
+      if (!error && count !== null) return count;
     }
     return 0;
   } catch {
@@ -68,7 +70,6 @@ async function getTrafficSources(page: string): Promise<Record<string, number>> 
         const sources: Record<string, number> = {};
         data.forEach((view: any) => {
           let source = "Direct";
-
           if (view.utm_source) {
             source = view.utm_source;
           } else if (view.referer) {
@@ -79,7 +80,6 @@ async function getTrafficSources(page: string): Promise<Record<string, number>> 
               source = view.referer;
             }
           }
-
           sources[source] = (sources[source] || 0) + 1;
         });
         return sources;
@@ -125,37 +125,76 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
 }
 
 export default async function AnalyticsPage() {
-  const amazonClicks = await getAmazonClicks();
-  const grandeLashStats = getClickStats(amazonClicks, "/grandelash");
-  let grandeLashViews = await getPageViews("/grandelash");
-  const trafficSources = await getTrafficSources("/grandelash");
-
-  // Fix: Views should always be >= clicks (can't click without viewing)
-  if (grandeLashViews < grandeLashStats.total) {
-    grandeLashViews = grandeLashStats.total;
-  }
-
+  const allClicks = await getAmazonClicks();
   const today = new Date().toISOString().split("T")[0];
-  const todayClicks = grandeLashStats.byDay[today] || 0;
-
   const weekAgo = new Date();
   weekAgo.setDate(weekAgo.getDate() - 7);
-  const weekClicks = Object.entries(grandeLashStats.byDay)
+
+  // Build page data for each tracked page
+  const pagesData = await Promise.all(
+    TRACKED_PAGES.map(async ({ path, label, color }) => {
+      const stats = getClickStats(allClicks, path);
+      let views = await getPageViews(path);
+      const trafficSources = await getTrafficSources(path);
+
+      // Fix: Views should always be >= clicks
+      if (views < stats.total) views = stats.total;
+
+      const todayClicks = stats.byDay[today] || 0;
+      const weekClicks = Object.entries(stats.byDay)
+        .filter(([day]) => new Date(day) >= weekAgo)
+        .reduce((sum, [, count]) => sum + count, 0);
+
+      return {
+        page: path,
+        label,
+        color,
+        views,
+        totalClicks: stats.total,
+        todayClicks,
+        weekClicks,
+        bestButton: stats.bestButton,
+        byPosition: stats.byPosition,
+        byDay: stats.byDay,
+        recentClicks: stats.recentClicks,
+        peakHour: stats.peakHour,
+        trafficSources,
+      };
+    })
+  );
+
+  // Build "All" aggregate
+  const allStats = getClickStats(allClicks);
+  let allViews = pagesData.reduce((sum, p) => sum + p.views, 0);
+  if (allViews < allStats.total) allViews = allStats.total;
+
+  const allTrafficSources: Record<string, number> = {};
+  pagesData.forEach((p) => {
+    Object.entries(p.trafficSources).forEach(([source, count]) => {
+      allTrafficSources[source] = (allTrafficSources[source] || 0) + count;
+    });
+  });
+
+  const allTodayClicks = allStats.byDay[today] || 0;
+  const allWeekClicks = Object.entries(allStats.byDay)
     .filter(([day]) => new Date(day) >= weekAgo)
     .reduce((sum, [, count]) => sum + count, 0);
 
-  return (
-    <AnalyticsDashboard
-      views={grandeLashViews}
-      totalClicks={grandeLashStats.total}
-      todayClicks={todayClicks}
-      weekClicks={weekClicks}
-      bestButton={grandeLashStats.bestButton}
-      byPosition={grandeLashStats.byPosition}
-      byDay={grandeLashStats.byDay}
-      recentClicks={grandeLashStats.recentClicks}
-      peakHour={grandeLashStats.peakHour}
-      trafficSources={trafficSources}
-    />
-  );
+  const allPageData = {
+    page: "all",
+    label: "All Pages",
+    color: "emerald" as const,
+    views: allViews,
+    totalClicks: allStats.total,
+    todayClicks: allTodayClicks,
+    weekClicks: allWeekClicks,
+    bestButton: allStats.bestButton,
+    byPosition: allStats.byPosition,
+    byDay: allStats.byDay,
+    recentClicks: allStats.recentClicks,
+    peakHour: allStats.peakHour,
+    trafficSources: allTrafficSources,
+  };
+
+  return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} />;
 }
