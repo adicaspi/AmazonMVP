@@ -83,4 +83,21 @@ export function trackAuraGlowConversion(buttonPosition: string) {
     button_position: buttonPosition,
     page_url: window.location.pathname,
   });
+
+  // Fire custom AuraGlowConversion event to both pixels
+  fbq("trackSingleCustom", AURAGLOW_PIXEL_ID, "AuraGlowConversion", {
+    product: "AuraGlow Teeth Whitening Kit",
+    button_position: buttonPosition,
+    page_url: window.location.pathname,
+    value: 48,
+    currency: "USD",
+  });
+
+  fbq("trackSingleCustom", MAIN_PIXEL_ID, "AuraGlowConversion", {
+    product: "AuraGlow Teeth Whitening Kit",
+    button_position: buttonPosition,
+    page_url: window.location.pathname,
+    value: 48,
+    currency: "USD",
+  });
 }
