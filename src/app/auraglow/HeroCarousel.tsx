@@ -11,34 +11,33 @@ type MediaItem = {
 const FALLBACK_IMAGES: MediaItem[] = [
   {
     type: "image",
-    src: "https://m.media-amazon.com/images/I/610DA7ixPiL._AC_SL1500_.jpg",
-    alt: "AuraGlow Teeth Whitening Kit - Full Package",
+    src: "/images/1.jpeg",
+    alt: "AuraGlow Teeth Whitening Kit",
   },
   {
     type: "image",
-    src: "https://m.media-amazon.com/images/I/71pMNBDx9uL._SL1500_.jpg",
-    alt: "AuraGlow Whitening Kit Contents",
+    src: "/images/2.jpeg",
+    alt: "AuraGlow Whitening Results",
   },
   {
     type: "image",
-    src: "https://m.media-amazon.com/images/I/813TG8KE5sL._SL1500_.jpg",
-    alt: "AuraGlow LED Light and Gel",
+    src: "/images/3.jpg",
+    alt: "AuraGlow LED Whitening in Action",
   },
   {
     type: "image",
-    src: "https://m.media-amazon.com/images/I/815TuGCSWTL._SL1500_.jpg",
-    alt: "AuraGlow Before and After Results",
+    src: "/images/4.jpeg",
+    alt: "AuraGlow Before and After",
+  },
+  {
+    type: "image",
+    src: "/images/5.jpeg",
+    alt: "AuraGlow Teeth Whitening Kit Contents",
   },
 ];
 
-interface HeroCarouselProps {
-  images?: { src: string; alt: string }[];
-}
-
-export default function HeroCarousel({ images }: HeroCarouselProps) {
-  const mediaItems: MediaItem[] = images?.length
-    ? images.map((img) => ({ type: "image" as const, ...img }))
-    : FALLBACK_IMAGES;
+export default function HeroCarousel() {
+  const mediaItems: MediaItem[] = FALLBACK_IMAGES;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
