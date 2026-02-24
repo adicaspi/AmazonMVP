@@ -25,12 +25,18 @@ export async function POST(request: NextRequest) {
     }
 
     const pixelId = pixel_id || DEFAULT_PIXEL_ID;
+    const testEventCode = process.env.FACEBOOK_TEST_EVENT_CODE || null;
     const url = `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`;
+
+    const payload: Record<string, unknown> = { data: events };
+    if (testEventCode) {
+      payload.test_event_code = testEventCode;
+    }
 
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ data: events }),
+      body: JSON.stringify(payload),
     });
 
     const result = await response.json();
