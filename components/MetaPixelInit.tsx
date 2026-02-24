@@ -3,24 +3,24 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-const MAIN_PIXEL_ID = "876318711699041";
+const GRANDELASH_PIXEL_ID = "876318711699041";
 
-// Pages that use their own dedicated pixel (skip main pixel)
-const EXCLUDED_PATHS = ["/auraglow"];
+// Each pixel is dedicated to its own product page
+const GRANDELASH_PATHS = ["/grandelash"];
 
 export function MetaPixelInit() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Skip main pixel init for pages that have their own pixel
-    if (EXCLUDED_PATHS.some((p) => pathname.startsWith(p))) return;
+    // Only init GrandeLash pixel on GrandeLash pages
+    if (!GRANDELASH_PATHS.some((p) => pathname.startsWith(p))) return;
 
     function tryInit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const fbq = (window as any).fbq;
       if (!fbq) return false;
 
-      fbq("init", MAIN_PIXEL_ID);
+      fbq("init", GRANDELASH_PIXEL_ID);
       fbq("track", "PageView");
       return true;
     }

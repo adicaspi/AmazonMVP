@@ -8,8 +8,6 @@ import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { CookieConsent } from "@/components/CookieConsent";
 import { MetaPixelInit } from "@/components/MetaPixelInit";
 
-const META_PIXEL_ID = "876318711699041";
-
 const inter = localFont({
   src: [
     {
@@ -105,15 +103,7 @@ export default function RootLayout({
             'https://connect.facebook.net/en_US/fbevents.js');
           `}
         </Script>
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-            alt=""
-          />
-        </noscript>
+        {/* noscript fallbacks are handled per-page by each pixel component */}
       </head>
       <body className={inter.className}>
         <MetaPixelInit />

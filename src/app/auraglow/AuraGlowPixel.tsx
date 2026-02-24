@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { generateEventId } from "@/lib/fb-conversions";
 
 const AURAGLOW_PIXEL_ID = "2679443682454721";
-const MAIN_PIXEL_ID = "876318711699041";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getFbq(): ((...args: any[]) => void) | null {
@@ -14,17 +13,13 @@ function getFbq(): ((...args: any[]) => void) | null {
   return null;
 }
 
-function initPixels() {
+function initPixel() {
   const fbq = getFbq();
   if (!fbq) return false;
 
-  // Init both pixels for this page
+  // Init only the AuraGlow pixel on this page
   fbq("init", AURAGLOW_PIXEL_ID);
-  fbq("init", MAIN_PIXEL_ID);
-
-  // Track PageView on both pixels
   fbq("trackSingle", AURAGLOW_PIXEL_ID, "PageView");
-  fbq("trackSingle", MAIN_PIXEL_ID, "PageView");
 
   return true;
 }
@@ -33,11 +28,11 @@ function initPixels() {
  * Send events to the server-side Conversions API endpoint.
  * Uses the same event_id as the browser pixel for deduplication.
  */
-function sendCAPI(events: object[], pixelId?: string) {
+function sendCAPI(events: object[]) {
   fetch("/api/fb-conversions", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ events, pixel_id: pixelId }),
+    body: JSON.stringify({ events, pixel_id: AURAGLOW_PIXEL_ID }),
   }).catch(() => {
     // Silently fail
   });
@@ -61,14 +56,14 @@ function getUserData(): Record<string, string> {
 export function AuraGlowPixel() {
   useEffect(() => {
     // Try immediately
-    if (initPixels()) return;
+    if (initPixel()) return;
 
     // Retry with intervals in case fbq isn't ready yet
     let attempts = 0;
     const maxAttempts = 10;
     const interval = setInterval(() => {
       attempts++;
-      if (initPixels() || attempts >= maxAttempts) {
+      if (initPixel() || attempts >= maxAttempts) {
         clearInterval(interval);
       }
     }, 300);
@@ -90,9 +85,8 @@ export function trackAuraGlowConversion(buttonPosition: string) {
   const clickEventId = generateEventId();
   const conversionEventId = generateEventId();
 
-  // ── Browser Pixel ──────────────────────────────────
+  // ── Browser Pixel (AuraGlow only) ────────────────────
   if (fbq) {
-    // Fire Lead event to the AuraGlow-specific pixel
     fbq("trackSingle", AURAGLOW_PIXEL_ID, "Lead", {
       content_name: "AuraGlow Teeth Whitening Kit",
       content_category: "Affiliate Link Click",
@@ -101,38 +95,13 @@ export function trackAuraGlowConversion(buttonPosition: string) {
       currency: "USD",
     }, { eventID: leadEventId });
 
-    // Fire Lead event to the main pixel too
-    fbq("trackSingle", MAIN_PIXEL_ID, "Lead", {
-      content_name: "AuraGlow Teeth Whitening Kit",
-      content_category: "Affiliate Link Click",
-      content_ids: [buttonPosition],
-      value: 48,
-      currency: "USD",
-    }, { eventID: leadEventId });
-
-    // Fire custom AmazonClick event to both pixels
     fbq("trackSingleCustom", AURAGLOW_PIXEL_ID, "AmazonClick", {
       product: "AuraGlow Teeth Whitening Kit",
       button_position: buttonPosition,
       page_url: pagePath,
     }, { eventID: clickEventId });
 
-    fbq("trackSingleCustom", MAIN_PIXEL_ID, "AmazonClick", {
-      product: "AuraGlow Teeth Whitening Kit",
-      button_position: buttonPosition,
-      page_url: pagePath,
-    }, { eventID: clickEventId });
-
-    // Fire custom AuraGlowConversion event to both pixels
     fbq("trackSingleCustom", AURAGLOW_PIXEL_ID, "AuraGlowConversion", {
-      product: "AuraGlow Teeth Whitening Kit",
-      button_position: buttonPosition,
-      page_url: pagePath,
-      value: 48,
-      currency: "USD",
-    }, { eventID: conversionEventId });
-
-    fbq("trackSingleCustom", MAIN_PIXEL_ID, "AuraGlowConversion", {
       product: "AuraGlow Teeth Whitening Kit",
       button_position: buttonPosition,
       page_url: pagePath,
@@ -190,8 +159,6 @@ export function trackAuraGlowConversion(buttonPosition: string) {
     },
   ];
 
-  // Send to main pixel
+  // Send only to AuraGlow pixel
   sendCAPI(capiEvents);
-  // Also send to AuraGlow-specific pixel
-  sendCAPI(capiEvents, AURAGLOW_PIXEL_ID);
 }
