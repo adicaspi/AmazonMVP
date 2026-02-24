@@ -1,5 +1,61 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase, isDatabaseAvailable } from "@/lib/db";
+import { generateEventId, getFbCookies } from "@/lib/fb-conversions";
+
+// Map page paths to their dedicated Facebook Pixel IDs
+const PAGE_PIXEL_MAP: Record<string, string> = {
+  "/auraglow": "2679443682454721",
+  "/grandelash": "876318711699041",
+};
+
+function getPixelIdForPage(page: string): string | null {
+  for (const [prefix, pixelId] of Object.entries(PAGE_PIXEL_MAP)) {
+    if (page.startsWith(prefix)) return pixelId;
+  }
+  return null;
+}
+
+async function sendCAPIPageView(
+  pixelId: string,
+  eventSourceUrl: string,
+  fbc: string | null,
+  fbp: string | null,
+  clientIp: string | null,
+  clientUa: string | null,
+) {
+  const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
+  if (!accessToken) return;
+
+  const userData: Record<string, string | null> = {};
+  if (fbc) userData.fbc = fbc;
+  if (fbp) userData.fbp = fbp;
+  if (clientIp) userData.client_ip_address = clientIp;
+  if (clientUa) userData.client_user_agent = clientUa;
+
+  const event = {
+    event_name: "PageView",
+    event_time: Math.floor(Date.now() / 1000),
+    event_id: generateEventId(),
+    event_source_url: eventSourceUrl,
+    action_source: "website",
+    user_data: userData,
+  };
+
+  const testEventCode = process.env.FACEBOOK_TEST_EVENT_CODE || null;
+  const url = `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`;
+  const payload: Record<string, unknown> = { data: [event] };
+  if (testEventCode) payload.test_event_code = testEventCode;
+
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    // Don't block the page view response
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -43,6 +99,14 @@ export async function POST(request: NextRequest) {
       if (error) {
         console.error("Supabase error:", error);
       }
+    }
+
+    // Send PageView to Facebook CAPI (server-side, bypasses ad blockers)
+    const pixelId = getPixelIdForPage(page);
+    if (pixelId) {
+      const { fbc, fbp } = getFbCookies(request.headers.get("cookie"));
+      const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || null;
+      sendCAPIPageView(pixelId, full_url || `https://aipicks.co${page}`, fbc, fbp, clientIp, ua);
     }
 
     return NextResponse.json({ success: true, viewId: view.id });
