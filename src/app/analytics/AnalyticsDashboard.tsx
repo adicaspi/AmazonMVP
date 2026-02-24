@@ -10,6 +10,16 @@ type RecentClick = {
   product_name: string;
   button_position: string;
   page: string;
+  device_type?: string;
+};
+
+type RecentVisit = {
+  id: string;
+  timestamp: string;
+  page: string;
+  utm_source: string | null;
+  device_type: string;
+  full_url: string | null;
 };
 
 type PageData = {
@@ -22,10 +32,15 @@ type PageData = {
   weekClicks: number;
   bestButton: string | null;
   byPosition: Record<string, number>;
+  byPositionDevice: Record<string, Record<string, number>>;
   byDay: Record<string, number>;
+  byDevice: Record<string, number>;
   recentClicks: RecentClick[];
   peakHour: number | null;
   trafficSources: Record<string, number>;
+  viewDeviceCounts: Record<string, number>;
+  sourceDeviceBreakdown: Record<string, Record<string, number>>;
+  recentVisits: RecentVisit[];
 };
 
 interface Props {
@@ -97,6 +112,25 @@ const translations = {
     helpPixelDesc: "כל לחיצה נשלחת גם ל-Facebook כ-Lead. אפשר לראות את זה ב-Events Manager.",
     pageOverview: "סקירת עמודים",
     pageOverviewDesc: "סטטיסטיקות מהירות לכל עמוד",
+    deviceBreakdown: "פילוח לפי מכשיר",
+    deviceBreakdownDesc: "מובייל מול דסקטופ — צפיות ולחיצות",
+    mobile: "מובייל",
+    desktop: "דסקטופ",
+    tablet: "טאבלט",
+    unknown: "לא ידוע",
+    viewsLabel: "צפיות",
+    clicksLabel: "לחיצות",
+    clickLog: "יומן לחיצות מפורט",
+    clickLogDesc: "כל לחיצה עם כפתור, שעה מדויקת, מכשיר ועמוד",
+    time: "שעה",
+    device: "מכשיר",
+    noDeviceData: "אין נתוני מכשיר עדיין",
+    recentVisits: "ביקורים אחרונים",
+    recentVisitsDesc: "כל ביקור עם הקישור המלא שדרכו הגיעו",
+    landingUrl: "קישור כניסה",
+    source: "מקור",
+    noVisitsYet: "אין ביקורים עדיין",
+    directVisit: "ישיר",
   },
   en: {
     title: "Analytics Dashboard",
@@ -161,6 +195,25 @@ const translations = {
     helpPixelDesc: "Every click is also sent to Facebook as a Lead event. Use Events Manager for retargeting.",
     pageOverview: "Page Overview",
     pageOverviewDesc: "Quick stats for each page",
+    deviceBreakdown: "Device Breakdown",
+    deviceBreakdownDesc: "Mobile vs Desktop — views and clicks",
+    mobile: "Mobile",
+    desktop: "Desktop",
+    tablet: "Tablet",
+    unknown: "Unknown",
+    viewsLabel: "Views",
+    clicksLabel: "Clicks",
+    clickLog: "Detailed Click Log",
+    clickLogDesc: "Every click with button, exact time, device and page",
+    time: "Time",
+    device: "Device",
+    noDeviceData: "No device data yet",
+    recentVisits: "Recent Visits",
+    recentVisitsDesc: "Every visit with the full landing URL",
+    landingUrl: "Landing URL",
+    source: "Source",
+    noVisitsYet: "No visits yet",
+    directVisit: "Direct",
   },
 };
 
@@ -231,7 +284,28 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
     return lang === "he" ? label.he : label.en;
   };
 
+  const getDeviceLabel = (device: string) => {
+    if (device === "mobile") return t.mobile;
+    if (device === "desktop") return t.desktop;
+    if (device === "tablet") return t.tablet;
+    return t.unknown;
+  };
+
+  const getDeviceIcon = (device: string) => {
+    if (device === "mobile") return (
+      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2" strokeWidth="2"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg>
+    );
+    if (device === "tablet") return (
+      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" strokeWidth="2"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg>
+    );
+    return (
+      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" strokeWidth="2"/><path d="M8 21h8M12 17v4" strokeWidth="2" strokeLinecap="round"/></svg>
+    );
+  };
+
   const getSourceIcon = (source: string) => {
+    if (source === "campaign")
+      return <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>;
     if (source === "fb" || source.includes("facebook") || source === "an")
       return <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>;
     if (source === "ig" || source.includes("instagram"))
@@ -245,6 +319,7 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
 
   const getSourceDisplayName = (source: string) => {
     if (source === "Direct") return t.direct;
+    if (source === "campaign") return lang === "he" ? "קמפיין (לא מזוהה)" : "Campaign (Unknown)";
     if (source === "an") return "Audience Network";
     if (source === "fb" || source.includes("facebook")) return "Facebook";
     if (source === "ig" || source.includes("instagram")) return "Instagram";
@@ -467,6 +542,7 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
                     .slice(0, 8)
                     .map(([source, count], index) => {
                       const pct = data.views > 0 ? (count / data.views) * 100 : 0;
+                      const deviceBreakdown = data.sourceDeviceBreakdown?.[source] || {};
                       return (
                         <div key={source} className={`p-3 ${dm.tableHover} transition`}>
                           <div className="flex items-center justify-between mb-1.5">
@@ -475,7 +551,10 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
                               {index === 0 && <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${darkMode ? "bg-purple-900/50 text-purple-300" : "bg-purple-100 text-purple-700"}`}>#1</span>}
                               <span className={`text-sm font-medium ${dm.text}`}>{getSourceDisplayName(source)}</span>
                             </div>
-                            <div className={`text-sm font-bold ${dm.text}`}>{count}</div>
+                            <div className="flex items-center gap-2">
+                              <div className={`text-sm font-bold ${dm.text}`}>{count}</div>
+                              <span className={`text-xs ${dm.textMuted}`}>{pct.toFixed(0)}%</span>
+                            </div>
                           </div>
                           <div className={`h-1.5 ${dm.barBg} rounded-full overflow-hidden`}>
                             <div
@@ -483,6 +562,19 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
                               style={{ width: `${pct}%` }}
                             />
                           </div>
+                          {Object.keys(deviceBreakdown).length > 0 && (
+                            <div className="flex items-center gap-3 mt-1.5">
+                              {Object.entries(deviceBreakdown)
+                                .filter(([d]) => d !== "unknown")
+                                .sort(([, a], [, b]) => b - a)
+                                .map(([device, dCount]) => (
+                                  <span key={device} className={`flex items-center gap-1 text-xs ${dm.textMuted}`}>
+                                    {getDeviceIcon(device)}
+                                    {dCount}
+                                  </span>
+                                ))}
+                            </div>
+                          )}
                         </div>
                       );
                     })}
@@ -510,6 +602,7 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
                     .sort(([, a], [, b]) => b - a)
                     .map(([position, count], index) => {
                       const pct = data.totalClicks > 0 ? (count / data.totalClicks) * 100 : 0;
+                      const posDevices = data.byPositionDevice?.[position] || {};
                       return (
                         <div key={position} className={`p-3 ${dm.tableHover} transition`}>
                           <div className="flex items-center justify-between mb-1.5">
@@ -528,6 +621,19 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
                               style={{ width: `${pct}%` }}
                             />
                           </div>
+                          {Object.keys(posDevices).length > 0 && (
+                            <div className="flex items-center gap-3 mt-1.5">
+                              {Object.entries(posDevices)
+                                .filter(([d]) => d !== "unknown")
+                                .sort(([, a], [, b]) => b - a)
+                                .map(([device, dCount]) => (
+                                  <span key={device} className={`flex items-center gap-1 text-xs ${dm.textMuted}`}>
+                                    {getDeviceIcon(device)}
+                                    {dCount}
+                                  </span>
+                                ))}
+                            </div>
+                          )}
                         </div>
                       );
                     })}
@@ -541,6 +647,77 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
             )}
           </section>
         </div>
+
+        {/* Recent Visits with Landing URLs */}
+        {data.recentVisits && data.recentVisits.length > 0 && (
+          <section>
+            <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
+              <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
+              {t.recentVisits}
+            </h2>
+            <p className={`text-sm ${dm.textMuted} mb-3`}>{t.recentVisitsDesc}</p>
+
+            <div className={`${dm.cardBg} rounded-xl border shadow-sm overflow-hidden transition-colors duration-300`}>
+              {/* Table header */}
+              <div className={`grid grid-cols-12 gap-1 px-3 py-2 text-xs font-medium ${dm.textMuted} ${dm.tableBg} border-b ${dm.border}`}>
+                <div className="col-span-3">{t.time}</div>
+                <div className="col-span-2">{t.source}</div>
+                <div className="col-span-1">{t.device}</div>
+                <div className="col-span-6">{t.landingUrl}</div>
+              </div>
+              <div className={`divide-y ${dm.divider}`}>
+                {data.recentVisits.slice(0, 20).map((visit, index) => {
+                  const isRecent = index < 3;
+                  const visitDate = new Date(visit.timestamp);
+                  const sourceName = visit.utm_source ? getSourceDisplayName(visit.utm_source) : t.directVisit;
+                  // Extract just the query string part for display
+                  let urlDisplay = "";
+                  try {
+                    if (visit.full_url) {
+                      const u = new URL(visit.full_url);
+                      urlDisplay = u.pathname + u.search;
+                    }
+                  } catch {
+                    urlDisplay = visit.full_url || "";
+                  }
+
+                  return (
+                    <div key={visit.id} className={`grid grid-cols-12 gap-1 px-3 py-2.5 items-center ${isRecent ? (darkMode ? "bg-teal-900/10" : "bg-teal-50/50") : ""} ${dm.tableHover} transition`}>
+                      <div className="col-span-3 flex items-center gap-1.5">
+                        {isRecent && <span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-pulse flex-shrink-0"></span>}
+                        <span className={`text-xs ${dm.textMuted}`}>
+                          {visitDate.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit" })}
+                          {" "}
+                          <span className={`font-medium ${dm.text}`}>
+                            {visitDate.toLocaleTimeString(lang === "he" ? "he-IL" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+                          </span>
+                        </span>
+                      </div>
+                      <div className="col-span-2 flex items-center gap-1.5">
+                        {visit.utm_source ? getSourceIcon(visit.utm_source) : <span className={`w-4 h-4 inline-flex items-center justify-center rounded-full text-xs ${darkMode ? "bg-gray-700 text-gray-400" : "bg-gray-200 text-gray-500"}`}>D</span>}
+                        <span className={`text-xs font-medium ${dm.text} truncate`}>{sourceName}</span>
+                      </div>
+                      <div className="col-span-1 flex items-center">
+                        {visit.device_type && visit.device_type !== "unknown" ? (
+                          <span className={`flex items-center text-xs ${dm.textMuted}`}>
+                            {getDeviceIcon(visit.device_type)}
+                          </span>
+                        ) : (
+                          <span className={`text-xs ${dm.textLight}`}>—</span>
+                        )}
+                      </div>
+                      <div className="col-span-6">
+                        <span className={`text-xs ${dm.textMuted} font-mono break-all`}>
+                          {urlDisplay || "—"}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Insights */}
         {data.totalClicks > 0 && (
@@ -585,41 +762,136 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
           </section>
         )}
 
-        {/* Recent Clicks + Daily Breakdown side by side */}
+        {/* Device Breakdown */}
+        {(Object.keys(data.viewDeviceCounts || {}).length > 0 || Object.keys(data.byDevice || {}).length > 0) && (
+          <section>
+            <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
+              <span className="w-2 h-2 bg-cyan-500 rounded-full"></span>
+              {t.deviceBreakdown}
+            </h2>
+            <p className={`text-sm ${dm.textMuted} mb-3`}>{t.deviceBreakdownDesc}</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Views by Device */}
+              {Object.keys(data.viewDeviceCounts || {}).length > 0 && (
+                <div className={`${dm.cardBg} rounded-xl border shadow-sm p-4 transition-colors duration-300`}>
+                  <div className={`text-xs font-medium ${dm.textMuted} mb-3`}>{t.viewsLabel}</div>
+                  <div className="space-y-2">
+                    {Object.entries(data.viewDeviceCounts)
+                      .filter(([d]) => d !== "unknown")
+                      .sort(([, a], [, b]) => b - a)
+                      .map(([device, count]) => {
+                        const total = Object.values(data.viewDeviceCounts).reduce((s, c) => s + c, 0);
+                        const pct = total > 0 ? (count / total) * 100 : 0;
+                        return (
+                          <div key={device} className="flex items-center gap-3">
+                            <div className={`flex items-center gap-1.5 w-20 ${dm.textMuted}`}>
+                              {getDeviceIcon(device)}
+                              <span className="text-xs">{getDeviceLabel(device)}</span>
+                            </div>
+                            <div className={`flex-1 h-5 ${dm.barBg} rounded overflow-hidden`}>
+                              <div className={`h-full rounded transition-all duration-500 ${device === "mobile" ? "bg-cyan-500" : device === "tablet" ? "bg-teal-500" : "bg-blue-500"}`} style={{ width: `${pct}%` }} />
+                            </div>
+                            <div className={`w-16 text-xs font-medium ${dm.text} text-${isRTL ? "left" : "right"}`}>
+                              {count} <span className={dm.textMuted}>({pct.toFixed(0)}%)</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              )}
+
+              {/* Clicks by Device */}
+              {Object.keys(data.byDevice || {}).length > 0 && (
+                <div className={`${dm.cardBg} rounded-xl border shadow-sm p-4 transition-colors duration-300`}>
+                  <div className={`text-xs font-medium ${dm.textMuted} mb-3`}>{t.clicksLabel}</div>
+                  <div className="space-y-2">
+                    {Object.entries(data.byDevice)
+                      .filter(([d]) => d !== "unknown")
+                      .sort(([, a], [, b]) => b - a)
+                      .map(([device, count]) => {
+                        const total = Object.values(data.byDevice).reduce((s, c) => s + c, 0);
+                        const pct = total > 0 ? (count / total) * 100 : 0;
+                        return (
+                          <div key={device} className="flex items-center gap-3">
+                            <div className={`flex items-center gap-1.5 w-20 ${dm.textMuted}`}>
+                              {getDeviceIcon(device)}
+                              <span className="text-xs">{getDeviceLabel(device)}</span>
+                            </div>
+                            <div className={`flex-1 h-5 ${dm.barBg} rounded overflow-hidden`}>
+                              <div className={`h-full rounded transition-all duration-500 ${device === "mobile" ? "bg-cyan-500" : device === "tablet" ? "bg-teal-500" : "bg-blue-500"}`} style={{ width: `${pct}%` }} />
+                            </div>
+                            <div className={`w-16 text-xs font-medium ${dm.text} text-${isRTL ? "left" : "right"}`}>
+                              {count} <span className={dm.textMuted}>({pct.toFixed(0)}%)</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Detailed Click Log + Daily Breakdown side by side */}
         <div className="grid md:grid-cols-2 gap-6">
-          {/* Recent Clicks */}
+          {/* Detailed Click Log */}
           <section>
             <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
               <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-              {t.recentClicks}
+              {t.clickLog}
             </h2>
-            <p className={`text-sm ${dm.textMuted} mb-3`}>{t.recentClicksDesc}</p>
+            <p className={`text-sm ${dm.textMuted} mb-3`}>{t.clickLogDesc}</p>
 
             {data.recentClicks.length > 0 ? (
               <div className={`${dm.cardBg} rounded-xl border shadow-sm overflow-hidden transition-colors duration-300`}>
+                {/* Table header */}
+                <div className={`grid grid-cols-12 gap-1 px-3 py-2 text-xs font-medium ${dm.textMuted} ${dm.tableBg} border-b ${dm.border}`}>
+                  <div className="col-span-4">{t.time}</div>
+                  <div className="col-span-3">{t.button}</div>
+                  <div className="col-span-2">{t.device}</div>
+                  {selectedPage === "all" && <div className="col-span-3">{t.page}</div>}
+                </div>
                 <div className={`divide-y ${dm.divider}`}>
-                  {data.recentClicks.slice(0, 10).map((click, index) => {
+                  {data.recentClicks.slice(0, 20).map((click, index) => {
                     const isRecent = index < 3;
+                    const clickDate = new Date(click.timestamp);
                     return (
-                      <div key={click.id} className={`p-3 ${isRecent ? (darkMode ? "bg-green-900/10" : "bg-green-50/50") : ""}`}>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2 min-w-0">
-                            {isRecent && <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse flex-shrink-0"></span>}
-                            <span className={`text-xs ${dm.textMuted} flex-shrink-0`}>
-                              {new Date(click.timestamp).toLocaleString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                      <div key={click.id} className={`grid grid-cols-12 gap-1 px-3 py-2.5 items-center ${isRecent ? (darkMode ? "bg-green-900/10" : "bg-green-50/50") : ""} ${dm.tableHover} transition`}>
+                        <div className="col-span-4 flex items-center gap-1.5">
+                          {isRecent && <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse flex-shrink-0"></span>}
+                          <span className={`text-xs ${dm.textMuted}`}>
+                            {clickDate.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit" })}
+                            {" "}
+                            <span className={`font-medium ${dm.text}`}>
+                              {clickDate.toLocaleTimeString(lang === "he" ? "he-IL" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
                             </span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            {selectedPage === "all" && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${darkMode ? "bg-neutral-800 text-gray-300" : "bg-gray-100 text-gray-600"}`}>
-                                {pageLabels[click.page] || click.page}
-                              </span>
-                            )}
-                            <span className={`text-xs px-2 py-0.5 rounded font-medium ${darkMode ? "bg-rose-900/50 text-rose-300" : "bg-rose-100 text-rose-700"}`}>
-                              {getButtonLabel(click.button_position)}
-                            </span>
-                          </div>
+                          </span>
                         </div>
+                        <div className="col-span-3">
+                          <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${darkMode ? "bg-rose-900/50 text-rose-300" : "bg-rose-100 text-rose-700"}`}>
+                            {getButtonLabel(click.button_position)}
+                          </span>
+                        </div>
+                        <div className="col-span-2 flex items-center gap-1">
+                          {click.device_type && click.device_type !== "unknown" ? (
+                            <span className={`flex items-center gap-1 text-xs ${dm.textMuted}`}>
+                              {getDeviceIcon(click.device_type)}
+                              <span className="hidden sm:inline">{getDeviceLabel(click.device_type)}</span>
+                            </span>
+                          ) : (
+                            <span className={`text-xs ${dm.textLight}`}>—</span>
+                          )}
+                        </div>
+                        {selectedPage === "all" && (
+                          <div className="col-span-3">
+                            <span className={`text-xs px-1.5 py-0.5 rounded ${darkMode ? "bg-neutral-800 text-gray-300" : "bg-gray-100 text-gray-600"}`}>
+                              {pageLabels[click.page] || click.page}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
