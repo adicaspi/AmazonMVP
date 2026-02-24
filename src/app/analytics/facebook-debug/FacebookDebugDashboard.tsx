@@ -521,12 +521,12 @@ export default function FacebookDebugDashboard() {
           <h3 className={`text-sm font-semibold ${dm.text} mb-3`}>{tr.pixelIds}</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className={`p-3 rounded-lg ${darkMode ? "bg-neutral-800" : "bg-gray-50"}`}>
-              <div className={`text-xs ${dm.textMuted} mb-1`}>{tr.mainPixel}</div>
+              <div className={`text-xs ${dm.textMuted} mb-1`}>AIPicksGrandLash</div>
               <div className={`text-sm font-mono font-bold ${dm.text}`}>876318711699041</div>
-              <div className={`text-xs ${dm.textLight} mt-1`}>All pages</div>
+              <div className={`text-xs ${dm.textLight} mt-1`}>/grandelash only</div>
             </div>
             <div className={`p-3 rounded-lg ${darkMode ? "bg-neutral-800" : "bg-gray-50"}`}>
-              <div className={`text-xs ${dm.textMuted} mb-1`}>{tr.auraglowPixel}</div>
+              <div className={`text-xs ${dm.textMuted} mb-1`}>AuraglowTeethWhiteningKit</div>
               <div className={`text-sm font-mono font-bold ${dm.text}`}>2679443682454721</div>
               <div className={`text-xs ${dm.textLight} mt-1`}>/auraglow only</div>
             </div>

@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const DEFAULT_PIXEL_ID = "876318711699041";
-
 export async function POST(request: NextRequest) {
   try {
     const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
@@ -17,6 +15,13 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { events, pixel_id } = body;
 
+    if (!pixel_id) {
+      return NextResponse.json(
+        { error: "pixel_id is required" },
+        { status: 400 }
+      );
+    }
+
     if (!events || !Array.isArray(events) || events.length === 0) {
       return NextResponse.json(
         { error: "events array is required and must not be empty" },
@@ -24,7 +29,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const pixelId = pixel_id || DEFAULT_PIXEL_ID;
+    const pixelId = pixel_id;
     const testEventCode = process.env.FACEBOOK_TEST_EVENT_CODE || null;
     const url = `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`;
 
