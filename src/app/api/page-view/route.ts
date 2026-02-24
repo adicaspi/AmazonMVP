@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase, isDatabaseAvailable } from "@/lib/db";
 import { generateEventId, getFbCookies } from "@/lib/fb-conversions";
+import { normalizeSource } from "@/lib/normalizeSource";
 
 // Map page paths to their dedicated Facebook Pixel IDs
 const PAGE_PIXEL_MAP: Record<string, string> = {
@@ -150,13 +151,17 @@ export async function GET(request: NextRequest) {
       let source = "Direct";
 
       if (view.utm_source) {
-        source = view.utm_source;
+        source = normalizeSource(view.utm_source);
       } else if (view.referer) {
         try {
-          const url = new URL(view.referer);
-          source = url.hostname.replace("www.", "");
+          const host = new URL(view.referer).hostname.replace("www.", "").toLowerCase();
+          if (host === "aipicks.co") {
+            source = "Direct";
+          } else {
+            source = normalizeSource(host);
+          }
         } catch {
-          source = view.referer;
+          source = normalizeSource(view.referer);
         }
       }
 
