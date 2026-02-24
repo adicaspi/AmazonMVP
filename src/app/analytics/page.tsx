@@ -1,4 +1,5 @@
 import { supabase, isDatabaseAvailable } from "@/lib/db";
+import { normalizeSource } from "@/lib/normalizeSource";
 import AnalyticsDashboard from "./AnalyticsDashboard";
 
 // Force dynamic rendering
@@ -92,26 +93,18 @@ async function getTrafficSources(page: string): Promise<TrafficSourceData> {
         data.forEach((view: any) => {
           let source = "Direct";
           if (view.utm_source) {
-            source = view.utm_source;
+            source = normalizeSource(view.utm_source);
           } else if (view.referer) {
             try {
-              const host = new URL(view.referer).hostname.replace("www.", "");
+              const host = new URL(view.referer).hostname.replace("www.", "").toLowerCase();
               // Skip self-referrals
               if (host === "aipicks.co") {
                 source = "Direct";
-              } else if (host.includes("instagram") || host === "l.instagram.com") {
-                source = "instagram";
-              } else if (host.includes("facebook") || host === "lm.facebook.com" || host === "m.facebook.com") {
-                source = "facebook";
-              } else if (host.includes("google")) {
-                source = "google";
-              } else if (host.includes("tiktok") || host === "vm.tiktok.com") {
-                source = "tiktok";
               } else {
-                source = host;
+                source = normalizeSource(host);
               }
             } catch {
-              source = view.referer;
+              source = normalizeSource(view.referer);
             }
           }
           sources[source] = (sources[source] || 0) + 1;
