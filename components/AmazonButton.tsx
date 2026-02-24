@@ -18,11 +18,24 @@ interface AmazonButtonProps {
   position?: string; // e.g., "hero", "comparison", "sticky-footer"
 }
 
+// Map page paths to their dedicated Facebook Pixel IDs
+const PAGE_PIXEL_MAP: Record<string, string> = {
+  "/auraglow": "2679443682454721",
+  "/grandelash": "876318711699041",
+};
+
+function getPixelIdForPage(pagePath: string): string | null {
+  for (const [prefix, pixelId] of Object.entries(PAGE_PIXEL_MAP)) {
+    if (pagePath.startsWith(prefix)) return pixelId;
+  }
+  return null;
+}
+
 /**
  * Send events to the server-side Conversions API endpoint.
  * Uses the same event_id as the browser pixel for deduplication.
  */
-function sendCAPI(events: object[], pixelId?: string) {
+function sendCAPI(events: object[], pixelId: string) {
   fetch("/api/fb-conversions", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -101,7 +114,10 @@ export function AmazonButton({ href, children, className, productName, position 
       },
     ];
 
-    sendCAPI(capiEvents);
+    const pixelId = getPixelIdForPage(pagePath);
+    if (pixelId) {
+      sendCAPI(capiEvents, pixelId);
+    }
 
     // Also track on our server for the analytics dashboard
     fetch("/api/amazon-click", {
