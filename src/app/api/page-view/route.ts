@@ -5,7 +5,7 @@ import { normalizeSource } from "@/lib/normalizeSource";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { page, utm_source, utm_medium, utm_campaign, utm_content } = body;
+    const { page, full_url, utm_source, utm_medium, utm_campaign, utm_content } = body;
 
     if (!page) {
       return NextResponse.json(
@@ -14,12 +14,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Detect device type from user-agent
+    const ua = request.headers.get("user-agent") || "";
+    let device_type = "desktop";
+    if (/tablet|ipad|playbook|silk/i.test(ua)) {
+      device_type = "tablet";
+    } else if (/mobile|iphone|ipod|android.*mobile|windows phone|blackberry/i.test(ua)) {
+      device_type = "mobile";
+    }
+
     const view = {
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: new Date().toISOString(),
       page: page,
-      user_agent: request.headers.get("user-agent") || null,
+      user_agent: ua || null,
       referer: request.headers.get("referer") || null,
+      full_url: full_url || null,
+      device_type,
       utm_source: utm_source || null,
       utm_medium: utm_medium || null,
       utm_campaign: utm_campaign || null,
