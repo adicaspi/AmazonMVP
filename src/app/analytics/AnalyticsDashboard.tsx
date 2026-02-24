@@ -389,6 +389,8 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
         <div className="flex flex-wrap gap-2">
           <a
             href="/analytics/facebook-debug"
+            target="_blank"
+            rel="noopener noreferrer"
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-blue-900/40 text-blue-300 hover:bg-blue-900/60 border border-blue-800" : "bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200"}`}
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -420,6 +422,24 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
           >
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             Events Manager
+          </a>
+          <a
+            href="https://supabase.com/dashboard/project/uoydxjnbqbifcaigeexg/sql/69b2de36-a9ee-4ad4-8e72-c7eedc806b70"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-emerald-900/40 text-emerald-300 hover:bg-emerald-900/60 border border-emerald-800" : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200"}`}
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" /></svg>
+            Supabase
+          </a>
+          <a
+            href="https://vercel.com/ranis-projects-7f7129ce/amazonmvp/deployments"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700" : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300"}`}
+          >
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L24 22H0L12 1Z"/></svg>
+            Vercel
           </a>
         </div>
 
