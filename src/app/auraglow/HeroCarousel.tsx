@@ -16,16 +16,6 @@ const FALLBACK_IMAGES: MediaItem[] = [
   },
   {
     type: "image",
-    src: "/images/2.jpeg",
-    alt: "AuraGlow Whitening Results",
-  },
-  {
-    type: "image",
-    src: "/images/3.jpg",
-    alt: "AuraGlow LED Whitening in Action",
-  },
-  {
-    type: "image",
     src: "/images/4.jpeg",
     alt: "AuraGlow Before and After",
   },
