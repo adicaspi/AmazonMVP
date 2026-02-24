@@ -21,6 +21,7 @@ export function PageViewTracker({ page }: PageViewTrackerProps) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         page,
+        full_url: window.location.href,
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
