@@ -455,6 +455,183 @@ export default async function AuraGlowPage() {
         </div>
       </section>
 
+      {/* Real Results Section */}
+      <section className="py-10 md:py-24">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-6 md:mb-12">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
+              Real Results from Real Customers
+            </h2>
+            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
+              See the transformation for yourself. Professional-grade whitening results at home.
+            </p>
+          </div>
+
+          {/* Results Gallery - Horizontal scroll on mobile */}
+          <div className="relative mb-6 md:mb-12">
+            <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+                <img
+                  src="/images/down1.jpeg"
+                  alt="AuraGlow Before and After - Full Face Results"
+                  className="w-full h-full object-cover aspect-square"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
+                  <p className="text-white text-sm font-semibold">Real Customer Results &#11088;</p>
+                </div>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+                <img
+                  src="/images/down2.jpeg"
+                  alt="AuraGlow Before and After - Teeth Closeup"
+                  className="w-full h-full object-cover aspect-square"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
+                  <p className="text-white text-sm font-semibold">7-Day Transformation &#10024;</p>
+                </div>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+                <img
+                  src="/images/down3.jpeg"
+                  alt="AuraGlow Before and After - Amazing Smile"
+                  className="w-full h-full object-cover aspect-square"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
+                  <p className="text-white text-sm font-semibold">Professional Results &#128171;</p>
+                </div>
+              </div>
+            </div>
+            {/* Swipe indicator - mobile only */}
+            <div className="flex items-center justify-center gap-2 mt-2 text-xs text-gray-400 md:hidden">
+              <span>&larr; Swipe for more &rarr;</span>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
+            <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src="/images/14.jpeg"
+                alt="AuraGlow Whitening Kit"
+                className="w-full h-auto"
+              />
+            </div>
+
+            <div className="space-y-4 md:space-y-6">
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 md:p-6 rounded-r-xl">
+                <h3 className="font-bold text-base md:text-xl text-gray-900 mb-2">The Problem with Dental Whitening</h3>
+                <ul className="space-y-1.5 md:space-y-2 text-sm md:text-base text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 mt-0.5">&#10005;</span>
+                    <span>$300-$600 per dental office visit</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 mt-0.5">&#10005;</span>
+                    <span>Painful sensitivity for days after</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-500 mt-0.5">&#10005;</span>
+                    <span>Requires booking appointments</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-green-50 border-l-4 border-green-500 p-4 md:p-6 rounded-r-xl">
+                <h3 className="font-bold text-base md:text-xl text-gray-900 mb-2">The AuraGlow Solution</h3>
+                <ul className="space-y-1.5 md:space-y-2 text-sm md:text-base text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-500 mt-0.5">&#10003;</span>
+                    <span>Just {price} for 20+ treatments</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-500 mt-0.5">&#10003;</span>
+                    <span>Zero sensitivity with gentle formula</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-500 mt-0.5">&#10003;</span>
+                    <span>30 minutes at home, anytime</span>
+                  </li>
+                </ul>
+              </div>
+
+              <AuraGlowAmazonButton
+                href={amazonLink}
+                position="benefits-card"
+                className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+              >
+                Get Your AuraGlow Now
+              </AuraGlowAmazonButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Testimonials Section */}
+      <section className="py-10 md:py-24 bg-gradient-to-br from-blue-50 to-cyan-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-6 md:mb-12">
+            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-2 md:mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              Real Video Reviews
+            </div>
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
+              Real People. Real Results. No Filters.
+            </h2>
+            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
+              Watch real transformations from verified customers
+            </p>
+          </div>
+
+          {/* Mobile: Single column, Desktop: Two columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-sm md:max-w-2xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-cyan-100 aspect-[9/16] p-2">
+              <video
+                className="w-full h-full object-contain rounded-xl"
+                controls
+                playsInline
+                preload="metadata"
+              >
+                <source src="/Auraglow1.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute bottom-2 left-2 right-2 bg-blue-600/90 backdrop-blur-sm p-3 rounded-xl">
+                <p className="text-white font-semibold text-sm md:text-base">Real Customer Review</p>
+                <p className="text-blue-100 text-xs md:text-sm">Amazing whitening results!</p>
+              </div>
+            </div>
+
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-cyan-100 aspect-[9/16] p-2">
+              <video
+                className="w-full h-full object-contain rounded-xl"
+                controls
+                playsInline
+                preload="metadata"
+              >
+                <source src="/Auraglow2.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute bottom-2 left-2 right-2 bg-blue-600/90 backdrop-blur-sm p-3 rounded-xl">
+                <p className="text-white font-semibold text-sm md:text-base">Before &amp; After</p>
+                <p className="text-blue-100 text-xs md:text-sm">See the transformation!</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-10">
+            <AuraGlowAmazonButton
+              href={amazonLink}
+              position="video-testimonials"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              Get These Results Too
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AuraGlowAmazonButton>
+          </div>
+        </div>
+      </section>
+
       {/* What's in the Kit */}
       <section className="py-10 md:py-24 bg-gradient-to-br from-blue-50 to-cyan-50">
         <div className="max-w-6xl mx-auto px-4">
@@ -565,116 +742,6 @@ export default async function AuraGlowPage() {
                 10 shades whiter in 7 days. Your brightest smile — guaranteed.
               </p>
               <p className="text-xs text-gray-500 md:hidden">7-day results</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Real Results Section */}
-      <section className="py-10 md:py-24">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-6 md:mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
-              Real Results from Real Customers
-            </h2>
-            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
-              See the transformation for yourself. Professional-grade whitening results at home.
-            </p>
-          </div>
-
-          {/* Results Gallery - Horizontal scroll on mobile */}
-          <div className="relative mb-6 md:mb-12">
-            <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
-                <img
-                  src="/images/3.jpg"
-                  alt="AuraGlow Whitening Results"
-                  className="w-full h-full object-cover aspect-square"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
-                  <p className="text-white text-sm font-semibold">Real Customer Results &#11088;</p>
-                </div>
-              </div>
-              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
-                <img
-                  src="/images/4.jpeg"
-                  alt="Before and After Whitening"
-                  className="w-full h-full object-cover aspect-square"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
-                  <p className="text-white text-sm font-semibold">7-Day Transformation &#10024;</p>
-                </div>
-              </div>
-              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
-                <img
-                  src="/images/5.jpeg"
-                  alt="Professional Whitening at Home"
-                  className="w-full h-full object-cover aspect-square"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
-                  <p className="text-white text-sm font-semibold">Professional Results &#128171;</p>
-                </div>
-              </div>
-            </div>
-            {/* Swipe indicator - mobile only */}
-            <div className="flex items-center justify-center gap-2 mt-2 text-xs text-gray-400 md:hidden">
-              <span>&larr; Swipe for more &rarr;</span>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
-            <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src="/images/1.jpeg"
-                alt="AuraGlow Whitening Kit"
-                className="w-full h-auto"
-              />
-            </div>
-
-            <div className="space-y-4 md:space-y-6">
-              <div className="bg-red-50 border-l-4 border-red-500 p-4 md:p-6 rounded-r-xl">
-                <h3 className="font-bold text-base md:text-xl text-gray-900 mb-2">The Problem with Dental Whitening</h3>
-                <ul className="space-y-1.5 md:space-y-2 text-sm md:text-base text-gray-600">
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-500 mt-0.5">&#10005;</span>
-                    <span>$300-$600 per dental office visit</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-500 mt-0.5">&#10005;</span>
-                    <span>Painful sensitivity for days after</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-500 mt-0.5">&#10005;</span>
-                    <span>Requires booking appointments</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="bg-green-50 border-l-4 border-green-500 p-4 md:p-6 rounded-r-xl">
-                <h3 className="font-bold text-base md:text-xl text-gray-900 mb-2">The AuraGlow Solution</h3>
-                <ul className="space-y-1.5 md:space-y-2 text-sm md:text-base text-gray-600">
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-500 mt-0.5">&#10003;</span>
-                    <span>Just {price} for 20+ treatments</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-500 mt-0.5">&#10003;</span>
-                    <span>Zero sensitivity with gentle formula</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-500 mt-0.5">&#10003;</span>
-                    <span>30 minutes at home, anytime</span>
-                  </li>
-                </ul>
-              </div>
-
-              <AuraGlowAmazonButton
-                href={amazonLink}
-                position="benefits-card"
-                className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-[#FF9900] to-[#e88600] hover:from-[#e88600] hover:to-[#d47a00] text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
-              >
-                Get Your AuraGlow Now
-              </AuraGlowAmazonButton>
             </div>
           </div>
         </div>
