@@ -16,6 +16,7 @@ type AmazonClick = {
   product_name: string;
   button_position: string;
   page: string;
+  device_type?: string;
 };
 
 // Pages we track
@@ -57,37 +58,85 @@ async function getPageViews(page: string): Promise<number> {
   }
 }
 
-async function getTrafficSources(page: string): Promise<Record<string, number>> {
+type RecentVisit = {
+  id: string;
+  timestamp: string;
+  page: string;
+  utm_source: string | null;
+  device_type: string;
+  full_url: string | null;
+};
+
+type TrafficSourceData = {
+  sources: Record<string, number>;
+  deviceCounts: Record<string, number>;
+  sourceDeviceBreakdown: Record<string, Record<string, number>>;
+  recentVisits: RecentVisit[];
+};
+
+async function getTrafficSources(page: string): Promise<TrafficSourceData> {
   try {
     if (supabase && (await isDatabaseAvailable())) {
       const { data, error } = await supabase
         .from("page_views")
-        .select("utm_source, referer")
+        .select("id, timestamp, page, utm_source, referer, device_type, full_url")
         .eq("page", page)
+        .order("timestamp", { ascending: false })
         .limit(1000);
 
       if (!error && data) {
         const sources: Record<string, number> = {};
+        const deviceCounts: Record<string, number> = {};
+        const sourceDeviceBreakdown: Record<string, Record<string, number>> = {};
+
         data.forEach((view: any) => {
           let source = "Direct";
           if (view.utm_source) {
             source = view.utm_source;
           } else if (view.referer) {
             try {
-              const url = new URL(view.referer);
-              source = url.hostname.replace("www.", "");
+              const host = new URL(view.referer).hostname.replace("www.", "");
+              // Skip self-referrals
+              if (host === "aipicks.co") {
+                source = "Direct";
+              } else if (host.includes("instagram") || host === "l.instagram.com") {
+                source = "instagram";
+              } else if (host.includes("facebook") || host === "lm.facebook.com" || host === "m.facebook.com") {
+                source = "facebook";
+              } else if (host.includes("google")) {
+                source = "google";
+              } else if (host.includes("tiktok") || host === "vm.tiktok.com") {
+                source = "tiktok";
+              } else {
+                source = host;
+              }
             } catch {
               source = view.referer;
             }
           }
           sources[source] = (sources[source] || 0) + 1;
+
+          const device = view.device_type || "unknown";
+          deviceCounts[device] = (deviceCounts[device] || 0) + 1;
+
+          if (!sourceDeviceBreakdown[source]) sourceDeviceBreakdown[source] = {};
+          sourceDeviceBreakdown[source][device] = (sourceDeviceBreakdown[source][device] || 0) + 1;
         });
-        return sources;
+        const recentVisits: RecentVisit[] = data.slice(0, 30).map((v: any) => ({
+          id: v.id,
+          timestamp: v.timestamp,
+          page: v.page || page,
+          utm_source: v.utm_source || null,
+          device_type: v.device_type || "unknown",
+          full_url: v.full_url || null,
+        }));
+
+        return { sources, deviceCounts, sourceDeviceBreakdown, recentVisits };
       }
     }
-    return {};
+    return { sources: {}, deviceCounts: {}, sourceDeviceBreakdown: {}, recentVisits: [] };
   } catch {
-    return {};
+    return { sources: {}, deviceCounts: {}, sourceDeviceBreakdown: {}, recentVisits: [] };
   }
 }
 
@@ -97,6 +146,8 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
   const byPosition: Record<string, number> = {};
   const byDay: Record<string, number> = {};
   const byHour: Record<number, number> = {};
+  const byDevice: Record<string, number> = {};
+  const byPositionDevice: Record<string, Record<string, number>> = {};
 
   filtered.forEach((click) => {
     byPosition[click.button_position] = (byPosition[click.button_position] || 0) + 1;
@@ -104,6 +155,12 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
     byDay[day] = (byDay[day] || 0) + 1;
     const hour = new Date(click.timestamp).getHours();
     byHour[hour] = (byHour[hour] || 0) + 1;
+
+    const device = click.device_type || "unknown";
+    byDevice[device] = (byDevice[device] || 0) + 1;
+
+    if (!byPositionDevice[click.button_position]) byPositionDevice[click.button_position] = {};
+    byPositionDevice[click.button_position][device] = (byPositionDevice[click.button_position][device] || 0) + 1;
   });
 
   const sortedPositions = Object.entries(byPosition).sort(([, a], [, b]) => b - a);
@@ -116,11 +173,13 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
     byPosition,
     byDay,
     byHour,
+    byDevice,
+    byPositionDevice,
     bestButton,
     peakHour,
     recentClicks: filtered
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-      .slice(0, 15),
+      .slice(0, 30),
   };
 }
 
@@ -135,7 +194,7 @@ export default async function AnalyticsPage() {
     TRACKED_PAGES.map(async ({ path, label, color }) => {
       const stats = getClickStats(allClicks, path);
       let views = await getPageViews(path);
-      const trafficSources = await getTrafficSources(path);
+      const trafficData = await getTrafficSources(path);
 
       // Fix: Views should always be >= clicks
       if (views < stats.total) views = stats.total;
@@ -155,10 +214,15 @@ export default async function AnalyticsPage() {
         weekClicks,
         bestButton: stats.bestButton,
         byPosition: stats.byPosition,
+        byPositionDevice: stats.byPositionDevice,
         byDay: stats.byDay,
+        byDevice: stats.byDevice,
         recentClicks: stats.recentClicks,
         peakHour: stats.peakHour,
-        trafficSources,
+        trafficSources: trafficData.sources,
+        viewDeviceCounts: trafficData.deviceCounts,
+        sourceDeviceBreakdown: trafficData.sourceDeviceBreakdown,
+        recentVisits: trafficData.recentVisits,
       };
     })
   );
@@ -169,9 +233,22 @@ export default async function AnalyticsPage() {
   if (allViews < allStats.total) allViews = allStats.total;
 
   const allTrafficSources: Record<string, number> = {};
+  const allViewDeviceCounts: Record<string, number> = {};
+  const allSourceDeviceBreakdown: Record<string, Record<string, number>> = {};
+  let allRecentVisits: RecentVisit[] = [];
   pagesData.forEach((p) => {
+    allRecentVisits = allRecentVisits.concat(p.recentVisits);
     Object.entries(p.trafficSources).forEach(([source, count]) => {
       allTrafficSources[source] = (allTrafficSources[source] || 0) + count;
+    });
+    Object.entries(p.viewDeviceCounts).forEach(([device, count]) => {
+      allViewDeviceCounts[device] = (allViewDeviceCounts[device] || 0) + count;
+    });
+    Object.entries(p.sourceDeviceBreakdown).forEach(([source, devices]) => {
+      if (!allSourceDeviceBreakdown[source]) allSourceDeviceBreakdown[source] = {};
+      Object.entries(devices).forEach(([device, count]) => {
+        allSourceDeviceBreakdown[source][device] = (allSourceDeviceBreakdown[source][device] || 0) + count;
+      });
     });
   });
 
@@ -190,10 +267,17 @@ export default async function AnalyticsPage() {
     weekClicks: allWeekClicks,
     bestButton: allStats.bestButton,
     byPosition: allStats.byPosition,
+    byPositionDevice: allStats.byPositionDevice,
     byDay: allStats.byDay,
+    byDevice: allStats.byDevice,
     recentClicks: allStats.recentClicks,
     peakHour: allStats.peakHour,
     trafficSources: allTrafficSources,
+    viewDeviceCounts: allViewDeviceCounts,
+    sourceDeviceBreakdown: allSourceDeviceBreakdown,
+    recentVisits: allRecentVisits
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+      .slice(0, 30),
   };
 
   return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} />;

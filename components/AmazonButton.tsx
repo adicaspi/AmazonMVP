@@ -1,10 +1,12 @@
 "use client";
 
 import { ReactNode } from "react";
+import { generateEventId } from "@/lib/fb-conversions";
 
 declare global {
   interface Window {
-    fbq: (action: string, event: string, params?: object) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    fbq: (...args: any[]) => void;
   }
 }
 
@@ -16,27 +18,90 @@ interface AmazonButtonProps {
   position?: string; // e.g., "hero", "comparison", "sticky-footer"
 }
 
+/**
+ * Send events to the server-side Conversions API endpoint.
+ * Uses the same event_id as the browser pixel for deduplication.
+ */
+function sendCAPI(events: object[], pixelId?: string) {
+  fetch("/api/fb-conversions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ events, pixel_id: pixelId }),
+  }).catch(() => {
+    // Silently fail — don't block navigation
+  });
+}
+
 export function AmazonButton({ href, children, className, productName, position }: AmazonButtonProps) {
   const handleClick = () => {
     const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
+    const pageUrl = typeof window !== "undefined" ? window.location.href : "";
+    const now = Math.floor(Date.now() / 1000);
 
-    // Track the click as a Lead event in Meta Pixel
+    // Generate shared event IDs for deduplication
+    const leadEventId = generateEventId();
+    const clickEventId = generateEventId();
+
+    // ── Browser Pixel ──────────────────────────────────
     if (typeof window !== "undefined" && window.fbq) {
       window.fbq("track", "Lead", {
         content_name: productName || "Amazon Product",
         content_category: "Affiliate Link Click",
-        content_ids: [position || "unknown"], // Which button was clicked
+        content_ids: [position || "unknown"],
         value: position ? 1 : 0,
         currency: "USD",
-      });
+      }, { eventID: leadEventId });
 
-      // Also fire a custom event with more details
       window.fbq("trackCustom", "AmazonClick", {
         product: productName || "Amazon Product",
         button_position: position || "unknown",
         page_url: pagePath,
-      });
+      }, { eventID: clickEventId });
     }
+
+    // ── Server CAPI (same event_id = Facebook deduplicates) ──
+    const userData: Record<string, string> = {};
+    // Try to get _fbc and _fbp cookies for better matching
+    if (typeof document !== "undefined") {
+      const cookies = document.cookie;
+      const fbcMatch = cookies.match(/_fbc=([^;]+)/);
+      const fbpMatch = cookies.match(/_fbp=([^;]+)/);
+      if (fbcMatch) userData.fbc = fbcMatch[1];
+      if (fbpMatch) userData.fbp = fbpMatch[1];
+    }
+
+    const capiEvents = [
+      {
+        event_name: "Lead",
+        event_time: now,
+        event_id: leadEventId,
+        event_source_url: pageUrl,
+        action_source: "website",
+        user_data: userData,
+        custom_data: {
+          content_name: productName || "Amazon Product",
+          content_category: "Affiliate Link Click",
+          content_ids: [position || "unknown"],
+          value: position ? 1 : 0,
+          currency: "USD",
+        },
+      },
+      {
+        event_name: "AmazonClick",
+        event_time: now,
+        event_id: clickEventId,
+        event_source_url: pageUrl,
+        action_source: "website",
+        user_data: userData,
+        custom_data: {
+          product: productName || "Amazon Product",
+          button_position: position || "unknown",
+          page_url: pagePath,
+        },
+      },
+    ];
+
+    sendCAPI(capiEvents);
 
     // Also track on our server for the analytics dashboard
     fetch("/api/amazon-click", {

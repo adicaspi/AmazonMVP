@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { generateEventId } from "@/lib/fb-conversions";
 
 const AURAGLOW_PIXEL_ID = "2679443682454721";
 const MAIN_PIXEL_ID = "876318711699041";
@@ -28,6 +29,35 @@ function initPixels() {
   return true;
 }
 
+/**
+ * Send events to the server-side Conversions API endpoint.
+ * Uses the same event_id as the browser pixel for deduplication.
+ */
+function sendCAPI(events: object[], pixelId?: string) {
+  fetch("/api/fb-conversions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ events, pixel_id: pixelId }),
+  }).catch(() => {
+    // Silently fail
+  });
+}
+
+/**
+ * Get _fbc and _fbp cookies from the browser for CAPI user matching.
+ */
+function getUserData(): Record<string, string> {
+  const userData: Record<string, string> = {};
+  if (typeof document !== "undefined") {
+    const cookies = document.cookie;
+    const fbcMatch = cookies.match(/_fbc=([^;]+)/);
+    const fbpMatch = cookies.match(/_fbp=([^;]+)/);
+    if (fbcMatch) userData.fbc = fbcMatch[1];
+    if (fbpMatch) userData.fbp = fbpMatch[1];
+  }
+  return userData;
+}
+
 export function AuraGlowPixel() {
   useEffect(() => {
     // Try immediately
@@ -51,53 +81,117 @@ export function AuraGlowPixel() {
 
 export function trackAuraGlowConversion(buttonPosition: string) {
   const fbq = getFbq();
-  if (!fbq) return;
+  const pageUrl = typeof window !== "undefined" ? window.location.href : "";
+  const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
+  const now = Math.floor(Date.now() / 1000);
 
-  // Fire Lead event to the AuraGlow-specific pixel
-  fbq("trackSingle", AURAGLOW_PIXEL_ID, "Lead", {
-    content_name: "AuraGlow Teeth Whitening Kit",
-    content_category: "Affiliate Link Click",
-    content_ids: [buttonPosition],
-    value: 48,
-    currency: "USD",
-  });
+  // Generate shared event IDs for deduplication
+  const leadEventId = generateEventId();
+  const clickEventId = generateEventId();
+  const conversionEventId = generateEventId();
 
-  // Fire Lead event to the main pixel too
-  fbq("trackSingle", MAIN_PIXEL_ID, "Lead", {
-    content_name: "AuraGlow Teeth Whitening Kit",
-    content_category: "Affiliate Link Click",
-    content_ids: [buttonPosition],
-    value: 48,
-    currency: "USD",
-  });
+  // ── Browser Pixel ──────────────────────────────────
+  if (fbq) {
+    // Fire Lead event to the AuraGlow-specific pixel
+    fbq("trackSingle", AURAGLOW_PIXEL_ID, "Lead", {
+      content_name: "AuraGlow Teeth Whitening Kit",
+      content_category: "Affiliate Link Click",
+      content_ids: [buttonPosition],
+      value: 48,
+      currency: "USD",
+    }, { eventID: leadEventId });
 
-  // Fire custom AmazonClick event to both pixels
-  fbq("trackSingleCustom", AURAGLOW_PIXEL_ID, "AmazonClick", {
-    product: "AuraGlow Teeth Whitening Kit",
-    button_position: buttonPosition,
-    page_url: window.location.pathname,
-  });
+    // Fire Lead event to the main pixel too
+    fbq("trackSingle", MAIN_PIXEL_ID, "Lead", {
+      content_name: "AuraGlow Teeth Whitening Kit",
+      content_category: "Affiliate Link Click",
+      content_ids: [buttonPosition],
+      value: 48,
+      currency: "USD",
+    }, { eventID: leadEventId });
 
-  fbq("trackSingleCustom", MAIN_PIXEL_ID, "AmazonClick", {
-    product: "AuraGlow Teeth Whitening Kit",
-    button_position: buttonPosition,
-    page_url: window.location.pathname,
-  });
+    // Fire custom AmazonClick event to both pixels
+    fbq("trackSingleCustom", AURAGLOW_PIXEL_ID, "AmazonClick", {
+      product: "AuraGlow Teeth Whitening Kit",
+      button_position: buttonPosition,
+      page_url: pagePath,
+    }, { eventID: clickEventId });
 
-  // Fire custom AuraGlowConversion event to both pixels
-  fbq("trackSingleCustom", AURAGLOW_PIXEL_ID, "AuraGlowConversion", {
-    product: "AuraGlow Teeth Whitening Kit",
-    button_position: buttonPosition,
-    page_url: window.location.pathname,
-    value: 48,
-    currency: "USD",
-  });
+    fbq("trackSingleCustom", MAIN_PIXEL_ID, "AmazonClick", {
+      product: "AuraGlow Teeth Whitening Kit",
+      button_position: buttonPosition,
+      page_url: pagePath,
+    }, { eventID: clickEventId });
 
-  fbq("trackSingleCustom", MAIN_PIXEL_ID, "AuraGlowConversion", {
-    product: "AuraGlow Teeth Whitening Kit",
-    button_position: buttonPosition,
-    page_url: window.location.pathname,
-    value: 48,
-    currency: "USD",
-  });
+    // Fire custom AuraGlowConversion event to both pixels
+    fbq("trackSingleCustom", AURAGLOW_PIXEL_ID, "AuraGlowConversion", {
+      product: "AuraGlow Teeth Whitening Kit",
+      button_position: buttonPosition,
+      page_url: pagePath,
+      value: 48,
+      currency: "USD",
+    }, { eventID: conversionEventId });
+
+    fbq("trackSingleCustom", MAIN_PIXEL_ID, "AuraGlowConversion", {
+      product: "AuraGlow Teeth Whitening Kit",
+      button_position: buttonPosition,
+      page_url: pagePath,
+      value: 48,
+      currency: "USD",
+    }, { eventID: conversionEventId });
+  }
+
+  // ── Server CAPI (same event_id = Facebook deduplicates) ──
+  const userData = getUserData();
+
+  const capiEvents = [
+    {
+      event_name: "Lead",
+      event_time: now,
+      event_id: leadEventId,
+      event_source_url: pageUrl,
+      action_source: "website",
+      user_data: userData,
+      custom_data: {
+        content_name: "AuraGlow Teeth Whitening Kit",
+        content_category: "Affiliate Link Click",
+        content_ids: [buttonPosition],
+        value: 48,
+        currency: "USD",
+      },
+    },
+    {
+      event_name: "AmazonClick",
+      event_time: now,
+      event_id: clickEventId,
+      event_source_url: pageUrl,
+      action_source: "website",
+      user_data: userData,
+      custom_data: {
+        product: "AuraGlow Teeth Whitening Kit",
+        button_position: buttonPosition,
+        page_url: pagePath,
+      },
+    },
+    {
+      event_name: "AuraGlowConversion",
+      event_time: now,
+      event_id: conversionEventId,
+      event_source_url: pageUrl,
+      action_source: "website",
+      user_data: userData,
+      custom_data: {
+        product: "AuraGlow Teeth Whitening Kit",
+        button_position: buttonPosition,
+        page_url: pagePath,
+        value: 48,
+        currency: "USD",
+      },
+    },
+  ];
+
+  // Send to main pixel
+  sendCAPI(capiEvents);
+  // Also send to AuraGlow-specific pixel
+  sendCAPI(capiEvents, AURAGLOW_PIXEL_ID);
 }

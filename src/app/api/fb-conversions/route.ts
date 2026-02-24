@@ -1,0 +1,54 @@
+import { NextRequest, NextResponse } from "next/server";
+
+const DEFAULT_PIXEL_ID = "876318711699041";
+
+export async function POST(request: NextRequest) {
+  try {
+    const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
+
+    if (!accessToken) {
+      console.warn("FACEBOOK_ACCESS_TOKEN not configured — CAPI events will not be sent");
+      return NextResponse.json(
+        { error: "FACEBOOK_ACCESS_TOKEN not configured" },
+        { status: 500 }
+      );
+    }
+
+    const body = await request.json();
+    const { events, pixel_id } = body;
+
+    if (!events || !Array.isArray(events) || events.length === 0) {
+      return NextResponse.json(
+        { error: "events array is required and must not be empty" },
+        { status: 400 }
+      );
+    }
+
+    const pixelId = pixel_id || DEFAULT_PIXEL_ID;
+    const url = `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ data: events }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      console.error("Facebook CAPI error:", result);
+      return NextResponse.json(
+        { error: "Facebook API error", details: result },
+        { status: response.status }
+      );
+    }
+
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error("CAPI route error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
