@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+const NY_TZ = "America/New_York";
+
 type RecentClick = {
   id: string;
   timestamp: string;
@@ -241,7 +243,7 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
   const [selectedPage, setSelectedPage] = useState<string>("all");
   const t = translations[lang];
   const isRTL = lang === "he";
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: NY_TZ });
 
   // Get current data based on selection
   const data = selectedPage === "all" ? allData : pagesData.find((p) => p.page === selectedPage) || allData;
@@ -753,10 +755,10 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
                       <div className="col-span-3 flex items-center gap-1.5">
                         {isRecent && <span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-pulse flex-shrink-0"></span>}
                         <span className={`text-xs ${dm.textMuted}`}>
-                          {visitDate.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit" })}
+                          {visitDate.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit", timeZone: NY_TZ })}
                           {" "}
                           <span className={`font-medium ${dm.text}`}>
-                            {visitDate.toLocaleTimeString(lang === "he" ? "he-IL" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+                            {visitDate.toLocaleTimeString(lang === "he" ? "he-IL" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone: NY_TZ })}
                           </span>
                         </span>
                       </div>
@@ -930,10 +932,10 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
                         <div className="col-span-4 flex items-center gap-1.5">
                           {isRecent && <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse flex-shrink-0"></span>}
                           <span className={`text-xs ${dm.textMuted}`}>
-                            {clickDate.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit" })}
+                            {clickDate.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit", timeZone: NY_TZ })}
                             {" "}
                             <span className={`font-medium ${dm.text}`}>
-                              {clickDate.toLocaleTimeString(lang === "he" ? "he-IL" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+                              {clickDate.toLocaleTimeString(lang === "he" ? "he-IL" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone: NY_TZ })}
                             </span>
                           </span>
                         </div>
@@ -990,13 +992,13 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
                       const pct = maxCount > 0 ? (count / maxCount) * 100 : 0;
                       const isToday = day === today;
                       const date = new Date(day);
-                      const dayName = date.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { weekday: "short" });
+                      const dayName = date.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { weekday: "short", timeZone: NY_TZ });
 
                       return (
                         <div key={day} className="flex items-center gap-2">
                           <div className={`w-16 text-xs ${dm.textMuted}`}>
                             {isToday ? <span className="text-green-500 font-medium">{t.todayLabel}</span> : (
-                              <>{dayName} {date.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit" })}</>
+                              <>{dayName} {date.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit", timeZone: NY_TZ })}</>
                             )}
                           </div>
                           <div className={`flex-1 h-5 ${dm.barBg} rounded overflow-hidden`}>

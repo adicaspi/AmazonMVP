@@ -2,6 +2,18 @@ import { supabase, isDatabaseAvailable } from "@/lib/db";
 import { normalizeSource } from "@/lib/normalizeSource";
 import AnalyticsDashboard from "./AnalyticsDashboard";
 
+const NY_TZ = "America/New_York";
+
+function toNYDateString(date: Date | string): string {
+  const d = typeof date === "string" ? new Date(date) : date;
+  return d.toLocaleDateString("en-CA", { timeZone: NY_TZ });
+}
+
+function toNYHour(date: Date | string): number {
+  const d = typeof date === "string" ? new Date(date) : date;
+  return parseInt(d.toLocaleString("en-US", { timeZone: NY_TZ, hour: "numeric", hour12: false }));
+}
+
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -144,9 +156,9 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
 
   filtered.forEach((click) => {
     byPosition[click.button_position] = (byPosition[click.button_position] || 0) + 1;
-    const day = click.timestamp.split("T")[0];
+    const day = toNYDateString(click.timestamp);
     byDay[day] = (byDay[day] || 0) + 1;
-    const hour = new Date(click.timestamp).getHours();
+    const hour = toNYHour(click.timestamp);
     byHour[hour] = (byHour[hour] || 0) + 1;
 
     const device = click.device_type || "unknown";
@@ -178,7 +190,7 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
 
 export default async function AnalyticsPage() {
   const allClicks = await getAmazonClicks();
-  const today = new Date().toISOString().split("T")[0];
+  const today = toNYDateString(new Date());
   const weekAgo = new Date();
   weekAgo.setDate(weekAgo.getDate() - 7);
 
