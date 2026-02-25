@@ -97,6 +97,8 @@ type RecentVisit = {
   utm_source: string | null;
   device_type: string;
   full_url: string | null;
+  visitor_id: string | null;
+  clicked_amazon: boolean;
 };
 
 type TrafficSourceData = {
@@ -106,12 +108,12 @@ type TrafficSourceData = {
   recentVisits: RecentVisit[];
 };
 
-async function getTrafficSources(page: string): Promise<TrafficSourceData> {
+async function getTrafficSources(page: string, clickedVisitorIds: Set<string>): Promise<TrafficSourceData> {
   try {
     if (supabase && (await isDatabaseAvailable())) {
       const { data, error } = await supabase
         .from("page_views")
-        .select("id, timestamp, page, utm_source, referer, device_type, full_url")
+        .select("id, timestamp, page, utm_source, referer, device_type, full_url, visitor_id")
         .eq("page", page)
         .order("timestamp", { ascending: false })
         .limit(1000);
@@ -153,6 +155,8 @@ async function getTrafficSources(page: string): Promise<TrafficSourceData> {
           utm_source: v.utm_source || null,
           device_type: v.device_type || "unknown",
           full_url: v.full_url || null,
+          visitor_id: v.visitor_id || null,
+          clicked_amazon: v.visitor_id ? clickedVisitorIds.has(v.visitor_id) : false,
         }));
 
         return { sources, deviceCounts, sourceDeviceBreakdown, recentVisits };
@@ -287,12 +291,18 @@ export default async function AnalyticsPage() {
   const weekAgo = new Date();
   weekAgo.setDate(weekAgo.getDate() - 7);
 
+  // Build a set of visitor IDs that clicked to Amazon
+  const clickedVisitorIds = new Set<string>();
+  allClicks.forEach((click: any) => {
+    if (click.visitor_id) clickedVisitorIds.add(click.visitor_id);
+  });
+
   // Build page data for each tracked page
   const pagesData = await Promise.all(
     TRACKED_PAGES.map(async ({ path, label, color }) => {
       const stats = getClickStats(allClicks, path);
       let views = await getPageViews(path);
-      const trafficData = await getTrafficSources(path);
+      const trafficData = await getTrafficSources(path, clickedVisitorIds);
 
       // Fix: Views should always be >= clicks
       if (views < stats.total) views = stats.total;

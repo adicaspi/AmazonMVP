@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import { generateEventId } from "@/lib/fb-conversions";
+import { getVisitorId } from "@/lib/visitor-id";
 
 declare global {
   interface Window {
@@ -127,6 +128,7 @@ export function AmazonButton({ href, children, className, productName, position 
         productName: productName || "Amazon Product",
         buttonPosition: position || "unknown",
         page: pagePath,
+        visitorId: getVisitorId(),
       }),
     }).catch(() => {
       // Silently fail - don't block navigation

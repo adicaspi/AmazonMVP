@@ -61,7 +61,7 @@ async function sendCAPIPageView(
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { page, full_url, utm_source, utm_medium, utm_campaign, utm_content } = body;
+    const { page, full_url, visitor_id, utm_source, utm_medium, utm_campaign, utm_content } = body;
 
     if (!page) {
       return NextResponse.json(
@@ -83,6 +83,7 @@ export async function POST(request: NextRequest) {
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: new Date().toISOString(),
       page: page,
+      visitor_id: visitor_id || null,
       user_agent: ua || null,
       referer: request.headers.get("referer") || null,
       full_url: full_url || null,

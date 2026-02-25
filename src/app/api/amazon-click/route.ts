@@ -14,7 +14,7 @@ type AmazonClick = {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { productName, buttonPosition, page } = body;
+    const { productName, buttonPosition, page, visitorId } = body;
 
     if (!productName || !buttonPosition || !page) {
       return NextResponse.json(
@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
       product_name: productName,
       button_position: buttonPosition,
       page: page,
+      visitor_id: visitorId || null,
       user_agent: request.headers.get("user-agent") || null,
       referer: request.headers.get("referer") || null,
     };

@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS page_views (
   id TEXT PRIMARY KEY,
   timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   page TEXT NOT NULL,
+  visitor_id TEXT,
   user_agent TEXT,
   referer TEXT,
   utm_source TEXT,
@@ -64,6 +65,7 @@ CREATE TABLE IF NOT EXISTS amazon_clicks (
   product_name TEXT NOT NULL,
   button_position TEXT NOT NULL,
   page TEXT NOT NULL,
+  visitor_id TEXT,
   user_agent TEXT,
   referer TEXT
 );
@@ -89,6 +91,8 @@ CREATE INDEX IF NOT EXISTS idx_page_views_page ON page_views(page);
 CREATE INDEX IF NOT EXISTS idx_page_views_timestamp ON page_views(timestamp DESC);
 CREATE INDEX IF NOT EXISTS idx_amazon_clicks_page ON amazon_clicks(page);
 CREATE INDEX IF NOT EXISTS idx_amazon_clicks_timestamp ON amazon_clicks(timestamp DESC);
+CREATE INDEX IF NOT EXISTS idx_page_views_visitor_id ON page_views(visitor_id);
+CREATE INDEX IF NOT EXISTS idx_amazon_clicks_visitor_id ON amazon_clicks(visitor_id);
 
 -- Function to update updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()

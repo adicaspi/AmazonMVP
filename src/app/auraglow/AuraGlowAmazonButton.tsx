@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import { trackAuraGlowConversion } from "./AuraGlowPixel";
+import { getVisitorId } from "@/lib/visitor-id";
 
 interface AuraGlowAmazonButtonProps {
   href: string;
@@ -31,6 +32,7 @@ export function AuraGlowAmazonButton({
         productName: "AuraGlow Teeth Whitening Kit",
         buttonPosition: position || "unknown",
         page: pagePath,
+        visitorId: getVisitorId(),
       }),
     }).catch(() => {});
   };
