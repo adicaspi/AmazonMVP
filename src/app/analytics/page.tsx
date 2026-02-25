@@ -32,6 +32,25 @@ type AmazonClick = {
   device_type?: string;
 };
 
+export type FacebookCampaign = {
+  campaign_name: string;
+  spend: number;
+  impressions: number;
+  clicks: number;
+  conversions: number;
+  costPerConversion: number;
+  conversionEventName: string;
+};
+
+export type FacebookAdsData = {
+  campaigns: FacebookCampaign[];
+  totalSpend: number;
+  totalConversions: number;
+  avgCostPerConversion: number;
+  todaySpend: number;
+  currency: string;
+};
+
 // Pages we track
 const TRACKED_PAGES = [
   { path: "/auraglow", label: "AuraGlow", color: "blue" },
@@ -145,6 +164,77 @@ async function getTrafficSources(page: string): Promise<TrafficSourceData> {
   }
 }
 
+function parseFbInsights(rows: any[]): FacebookCampaign[] {
+  return rows.map((row) => {
+    const actions: any[] = row.actions || [];
+    const costPerAction: any[] = row.cost_per_action_type || [];
+    // Find the main conversion action (not link_click, page_view, etc.)
+    const conversionAction = actions.find(
+      (a: any) => a.action_type !== "link_click" && a.action_type !== "page_view" && a.action_type !== "landing_page_view" && a.action_type !== "impressions"
+    );
+    const conversions = conversionAction ? parseInt(conversionAction.value) : 0;
+    const conversionType = conversionAction?.action_type || "";
+    const costEntry = costPerAction.find((c: any) => c.action_type === conversionType);
+    const costPerConversion = costEntry ? parseFloat(costEntry.value) : 0;
+
+    return {
+      campaign_name: row.campaign_name || "Unknown",
+      spend: parseFloat(row.spend || "0"),
+      impressions: parseInt(row.impressions || "0"),
+      clicks: parseInt(row.clicks || "0"),
+      conversions,
+      costPerConversion,
+      conversionEventName: conversionType,
+    };
+  });
+}
+
+async function getFacebookAdsData(): Promise<FacebookAdsData | null> {
+  try {
+    const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
+    const adAccountId = process.env.FACEBOOK_AD_ACCOUNT_ID;
+    if (!accessToken || !adAccountId) return null;
+
+    const baseUrl = `https://graph.facebook.com/v21.0/act_${adAccountId}/insights`;
+    const fields = "campaign_name,actions,cost_per_action_type,spend,impressions,clicks";
+
+    // Fetch last 7 days (by campaign) and today in parallel
+    const [weekRes, todayRes] = await Promise.all([
+      fetch(`${baseUrl}?fields=${fields}&level=campaign&date_preset=last_7d&limit=50&access_token=${accessToken}`),
+      fetch(`${baseUrl}?fields=spend&date_preset=today&limit=1&access_token=${accessToken}`),
+    ]);
+
+    if (!weekRes.ok) {
+      console.error("Facebook Ads API error:", await weekRes.text());
+      return null;
+    }
+
+    const weekJson = await weekRes.json();
+    const todayJson = todayRes.ok ? await todayRes.json() : { data: [] };
+
+    const campaigns = parseFbInsights(weekJson.data || []);
+    const totalSpend = campaigns.reduce((s, c) => s + c.spend, 0);
+    const totalConversions = campaigns.reduce((s, c) => s + c.conversions, 0);
+    const avgCostPerConversion = totalConversions > 0 ? totalSpend / totalConversions : 0;
+    const todaySpend = todayJson.data?.[0] ? parseFloat(todayJson.data[0].spend || "0") : 0;
+
+    // Try to detect currency from account info
+    let currency = "ILS";
+    try {
+      const acctRes = await fetch(`https://graph.facebook.com/v21.0/act_${adAccountId}?fields=currency&access_token=${accessToken}`);
+      if (acctRes.ok) {
+        const acctJson = await acctRes.json();
+        currency = acctJson.currency || "ILS";
+      }
+    } catch { /* fallback to ILS */ }
+
+    return { campaigns, totalSpend, totalConversions, avgCostPerConversion, todaySpend, currency };
+  } catch (err) {
+    console.error("Failed to fetch Facebook Ads data:", err);
+    return null;
+  }
+}
+
 function getClickStats(clicks: AmazonClick[], page?: string) {
   const filtered = page ? clicks.filter((c) => c.page === page) : clicks;
 
@@ -189,7 +279,10 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
 }
 
 export default async function AnalyticsPage() {
-  const allClicks = await getAmazonClicks();
+  const [allClicks, facebookAdsData] = await Promise.all([
+    getAmazonClicks(),
+    getFacebookAdsData(),
+  ]);
   const today = toNYDateString(new Date());
   const weekAgo = new Date();
   weekAgo.setDate(weekAgo.getDate() - 7);
@@ -285,5 +378,5 @@ export default async function AnalyticsPage() {
       .slice(0, 30),
   };
 
-  return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} />;
+  return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} facebookAdsData={facebookAdsData} />;
 }

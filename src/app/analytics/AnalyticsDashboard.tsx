@@ -45,9 +45,29 @@ type PageData = {
   recentVisits: RecentVisit[];
 };
 
+type FacebookCampaign = {
+  campaign_name: string;
+  spend: number;
+  impressions: number;
+  clicks: number;
+  conversions: number;
+  costPerConversion: number;
+  conversionEventName: string;
+};
+
+type FacebookAdsData = {
+  campaigns: FacebookCampaign[];
+  totalSpend: number;
+  totalConversions: number;
+  avgCostPerConversion: number;
+  todaySpend: number;
+  currency: string;
+};
+
 interface Props {
   allData: PageData;
   pagesData: PageData[];
+  facebookAdsData: FacebookAdsData | null;
 }
 
 const translations = {
@@ -133,6 +153,16 @@ const translations = {
     source: "מקור",
     noVisitsYet: "אין ביקורים עדיין",
     directVisit: "ישיר",
+    fbAds: "Facebook Ads",
+    fbAdsDesc: "ביצועי קמפיינים ב-7 הימים האחרונים",
+    fbTotalSpend: "הוצאה כוללת",
+    fbConversions: "המרות",
+    fbCostPerConv: "עלות להמרה",
+    fbTodaySpend: "הוצאה היום",
+    fbCampaign: "קמפיין",
+    fbSpend: "הוצאה",
+    fbNoData: "אין נתוני מודעות — יש לוודא שה-Token כולל הרשאת ads_read וש-FACEBOOK_AD_ACCOUNT_ID מוגדר",
+    fbLast7d: "7 ימים",
   },
   en: {
     title: "Analytics Dashboard",
@@ -216,6 +246,16 @@ const translations = {
     source: "Source",
     noVisitsYet: "No visits yet",
     directVisit: "Direct",
+    fbAds: "Facebook Ads",
+    fbAdsDesc: "Campaign performance over the last 7 days",
+    fbTotalSpend: "Total Spend",
+    fbConversions: "Conversions",
+    fbCostPerConv: "Cost / Conv",
+    fbTodaySpend: "Today's Spend",
+    fbCampaign: "Campaign",
+    fbSpend: "Spend",
+    fbNoData: "No ads data — verify your token has ads_read permission and FACEBOOK_AD_ACCOUNT_ID is set",
+    fbLast7d: "7 days",
   },
 };
 
@@ -236,7 +276,7 @@ const pageLabels: Record<string, string> = {
   "/grandelash": "GrandeLash",
 };
 
-export default function AnalyticsDashboard({ allData, pagesData }: Props) {
+export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData }: Props) {
   const router = useRouter();
   const [lang, setLang] = useState<"he" | "en">("he");
   const [darkMode, setDarkMode] = useState(false);
@@ -607,6 +647,81 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
             </div>
           </div>
         </section>
+
+        {/* Facebook Ads */}
+        {facebookAdsData && facebookAdsData.campaigns.length > 0 ? (
+          <section>
+            <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
+              <svg className="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              {t.fbAds}
+            </h2>
+            <p className={`text-sm ${dm.textMuted} mb-3`}>{t.fbAdsDesc}</p>
+
+            {/* Summary Cards */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+              <div className={`${dm.cardBg} rounded-xl p-4 border shadow-sm transition-colors duration-300`}>
+                <div className={`text-xs ${dm.textMuted} mb-1`}>{t.fbTotalSpend} ({t.fbLast7d})</div>
+                <div className={`text-2xl font-bold ${dm.text}`}>{facebookAdsData.currency === "ILS" ? "₪" : "$"}{facebookAdsData.totalSpend.toFixed(2)}</div>
+              </div>
+              <div className={`${dm.cardBg} rounded-xl p-4 border shadow-sm transition-colors duration-300`}>
+                <div className={`text-xs ${dm.textMuted} mb-1`}>{t.fbConversions}</div>
+                <div className="text-2xl font-bold text-blue-500">{facebookAdsData.totalConversions}</div>
+              </div>
+              <div className={`${dm.cardBg} rounded-xl p-4 border shadow-sm transition-colors duration-300`}>
+                <div className={`text-xs ${dm.textMuted} mb-1`}>{t.fbCostPerConv}</div>
+                <div className="text-2xl font-bold text-amber-500">{facebookAdsData.currency === "ILS" ? "₪" : "$"}{facebookAdsData.avgCostPerConversion.toFixed(2)}</div>
+              </div>
+              <div className={`${dm.cardBg} rounded-xl p-4 border shadow-sm transition-colors duration-300`}>
+                <div className={`text-xs ${dm.textMuted} mb-1`}>{t.fbTodaySpend}</div>
+                <div className="text-2xl font-bold text-green-500">{facebookAdsData.currency === "ILS" ? "₪" : "$"}{facebookAdsData.todaySpend.toFixed(2)}</div>
+              </div>
+            </div>
+
+            {/* Campaign Table */}
+            <div className={`${dm.cardBg} rounded-xl border shadow-sm overflow-hidden transition-colors duration-300`}>
+              <div className={`grid grid-cols-12 gap-1 px-3 py-2 text-xs font-semibold uppercase tracking-wider ${dm.textMuted} ${dm.tableBg}`}>
+                <div className="col-span-5">{t.fbCampaign}</div>
+                <div className="col-span-2 text-center">{t.fbConversions}</div>
+                <div className="col-span-3 text-center">{t.fbCostPerConv}</div>
+                <div className="col-span-2 text-right">{t.fbSpend}</div>
+              </div>
+              <div className={`divide-y ${dm.divider}`}>
+                {facebookAdsData.campaigns
+                  .sort((a, b) => b.spend - a.spend)
+                  .map((campaign, index) => (
+                    <div key={index} className={`grid grid-cols-12 gap-1 px-3 py-2.5 items-center ${dm.tableHover} transition`}>
+                      <div className={`col-span-5 text-sm font-medium ${dm.text} truncate`}>
+                        {campaign.campaign_name}
+                      </div>
+                      <div className="col-span-2 text-center">
+                        <span className={`text-sm font-bold ${campaign.conversions > 0 ? "text-blue-500" : dm.textMuted}`}>
+                          {campaign.conversions}
+                        </span>
+                      </div>
+                      <div className={`col-span-3 text-center text-sm ${dm.textMuted}`}>
+                        {campaign.costPerConversion > 0
+                          ? `${facebookAdsData.currency === "ILS" ? "₪" : "$"}${campaign.costPerConversion.toFixed(2)}`
+                          : "—"}
+                      </div>
+                      <div className={`col-span-2 text-right text-sm font-medium ${dm.text}`}>
+                        {facebookAdsData.currency === "ILS" ? "₪" : "$"}{campaign.spend.toFixed(2)}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </section>
+        ) : !facebookAdsData ? (
+          <section>
+            <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
+              <svg className="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              {t.fbAds}
+            </h2>
+            <div className={`${dm.cardBg} rounded-xl border p-6 text-center transition-colors duration-300`}>
+              <p className={`text-sm ${dm.textMuted}`}>{t.fbNoData}</p>
+            </div>
+          </section>
+        ) : null}
 
         {/* Traffic Sources + Button Performance side by side on desktop */}
         <div className="grid md:grid-cols-2 gap-6">
