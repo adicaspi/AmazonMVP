@@ -22,6 +22,8 @@ type RecentVisit = {
   utm_source: string | null;
   device_type: string;
   full_url: string | null;
+  visitor_id: string | null;
+  clicked_amazon: boolean;
 };
 
 type PageData = {
@@ -151,6 +153,8 @@ const translations = {
     recentVisitsDesc: "כל ביקור עם הקישור המלא שדרכו הגיעו",
     landingUrl: "קישור כניסה",
     source: "מקור",
+    amazon: "אמזון",
+    clickedToAmazon: "לחץ לאמזון",
     noVisitsYet: "אין ביקורים עדיין",
     directVisit: "ישיר",
     fbAds: "Facebook Ads",
@@ -244,6 +248,8 @@ const translations = {
     recentVisitsDesc: "Every visit with the full landing URL",
     landingUrl: "Landing URL",
     source: "Source",
+    amazon: "Amazon",
+    clickedToAmazon: "Clicked to Amazon",
     noVisitsYet: "No visits yet",
     directVisit: "Direct",
     fbAds: "Facebook Ads",
@@ -862,7 +868,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 <div className="col-span-3">{t.time}</div>
                 <div className="col-span-2">{t.source}</div>
                 <div className="col-span-1">{t.device}</div>
-                <div className="col-span-6">{t.landingUrl}</div>
+                <div className="col-span-1 text-center">{t.amazon}</div>
+                <div className="col-span-5">{t.landingUrl}</div>
               </div>
               <div className={`divide-y ${dm.divider}`}>
                 {data.recentVisits.slice(0, 20).map((visit, index) => {
@@ -905,7 +912,16 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                           <span className={`text-xs ${dm.textLight}`}>—</span>
                         )}
                       </div>
-                      <div className="col-span-6">
+                      <div className="col-span-1 flex items-center justify-center">
+                        {visit.clicked_amazon ? (
+                          <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-xs font-bold ${darkMode ? "bg-orange-900/30 text-orange-400" : "bg-orange-100 text-orange-700"}`} title={t.clickedToAmazon}>
+                            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M1.846 18.77c-.052.082-.061.175-.019.261.052.086.139.139.234.139h.007c4.136-.139 8.389 1.271 12.643 2.678l.13.043c.312.104.584.06.833-.078 1.884-1.043 3.745-2.104 5.609-3.17a.278.278 0 0 0 .139-.234.279.279 0 0 0-.122-.243c-1.007-.696-2.074-1.131-3.178-1.302a12.51 12.51 0 0 0-2.504-.087c-1.67.113-3.253.591-4.784 1.057l-.113.035c-.487.148-.748.035-.861-.122-.113-.157-.07-.383.139-.557.93-.782 1.901-1.174 2.9-1.487 1.592-.496 3.236-.73 4.888-.696 1.826.035 3.548.461 5.131 1.557a.43.43 0 0 0 .052.035c.035.017.078.026.122.026a.22.22 0 0 0 .191-.113c.07-.122.052-.243-.052-.348-3.21-3.54-6.922-5.713-11.209-6.592-2.139-.444-4.296-.531-6.474-.27-1.948.235-3.81.74-5.583 1.714a.38.38 0 0 0-.183.209.37.37 0 0 0 .009.278c.174.365.47.548.87.539.278-.009.548-.07.826-.148.191-.052.383-.096.574-.122a15.02 15.02 0 0 1 3.21-.139c3.375.191 6.4 1.287 9.061 3.34a.284.284 0 0 1-.035.487c-2.556 1.357-5.113 2.713-7.67 4.07a.285.285 0 0 1-.348-.044l-.07-.07c-.33-.33-.713-.504-1.139-.504-.548 0-1.174.27-1.914.826L1.846 18.77z"/></svg>
+                          </span>
+                        ) : (
+                          <span className={`text-xs ${dm.textLight}`}>—</span>
+                        )}
+                      </div>
+                      <div className="col-span-5">
                         <span className={`text-xs ${dm.textMuted} font-mono break-all`}>
                           {urlDisplay || "—"}
                         </span>

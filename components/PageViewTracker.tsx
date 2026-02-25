@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { getVisitorId } from "@/lib/visitor-id";
 
 interface PageViewTrackerProps {
   page: string;
@@ -22,6 +23,7 @@ export function PageViewTracker({ page }: PageViewTrackerProps) {
       body: JSON.stringify({
         page,
         full_url: window.location.href,
+        visitor_id: getVisitorId(),
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
