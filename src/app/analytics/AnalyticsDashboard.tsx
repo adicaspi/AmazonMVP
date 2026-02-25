@@ -248,6 +248,14 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
   // Get current data based on selection
   const data = selectedPage === "all" ? allData : pagesData.find((p) => p.page === selectedPage) || allData;
 
+  const [nyTime, setNyTime] = useState("");
+  useEffect(() => {
+    const tick = () => setNyTime(new Date().toLocaleTimeString("en-US", { timeZone: NY_TZ, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true }));
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => router.refresh(), 10000);
     return () => clearInterval(interval);
@@ -338,7 +346,14 @@ export default function AnalyticsDashboard({ allData, pagesData }: Props) {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className={`text-xl font-bold ${dm.text}`}>{t.title}</h1>
-              <p className={`text-sm ${dm.textMuted}`}>{t.subtitle}</p>
+              <div className="flex items-center gap-2">
+                <p className={`text-sm ${dm.textMuted}`}>{t.subtitle}</p>
+                {nyTime && (
+                  <span className={`text-xs font-mono px-2 py-0.5 rounded ${darkMode ? "bg-neutral-800 text-gray-400" : "bg-gray-100 text-gray-500"}`}>
+                    NYC {nyTime}
+                  </span>
+                )}
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <button
