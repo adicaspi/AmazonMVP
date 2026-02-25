@@ -599,7 +599,7 @@ export default function FacebookDebugDashboard() {
             {/* Last Run */}
             {lastRun && (
               <p className={`text-xs ${dm.textLight} text-center`}>
-                {tr.lastRun}: {new Date(lastRun).toLocaleString(lang === "he" ? "he-IL" : "en-US")}
+                {tr.lastRun}: {new Date(lastRun).toLocaleString(lang === "he" ? "he-IL" : "en-US", { timeZone: "America/New_York" })}
               </p>
             )}
 
