@@ -9,6 +9,12 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/grandelash": "876318711699041",
 };
 
+// Product info per page for CAPI event enrichment
+const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id: string }> = {
+  "/auraglow": { name: "AuraGlow Teeth Whitening Kit", value: 48, content_id: "auraglow-kit" },
+  "/grandelash": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 36, content_id: "grandelash-serum" },
+};
+
 function getPixelIdForPage(page: string): string | null {
   for (const [prefix, pixelId] of Object.entries(PAGE_PIXEL_MAP)) {
     if (page.startsWith(prefix)) return pixelId;
@@ -33,7 +39,12 @@ async function sendCAPIPageView(
   if (clientIp) userData.client_ip_address = clientIp;
   if (clientUa) userData.client_user_agent = clientUa;
 
-  const event = {
+  // Look up product info for the page
+  const pagePath = new URL(eventSourceUrl).pathname;
+  const pageKey = Object.keys(PAGE_PRODUCT_MAP).find((prefix) => pagePath.startsWith(prefix));
+  const productInfo = pageKey ? PAGE_PRODUCT_MAP[pageKey] : null;
+
+  const event: Record<string, unknown> = {
     event_name: "PageView",
     event_time: Math.floor(Date.now() / 1000),
     event_id: generateEventId(),
@@ -41,6 +52,16 @@ async function sendCAPIPageView(
     action_source: "website",
     user_data: userData,
   };
+
+  if (productInfo) {
+    event.custom_data = {
+      content_name: productInfo.name,
+      content_ids: [productInfo.content_id],
+      content_type: "product",
+      value: productInfo.value,
+      currency: "USD",
+    };
+  }
 
   const testEventCode = process.env.FACEBOOK_TEST_EVENT_CODE || null;
   const url = `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`;
