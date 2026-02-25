@@ -25,6 +25,12 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/grandelash": "876318711699041",
 };
 
+// Product info per page for accurate CAPI event data
+const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id: string }> = {
+  "/auraglow": { name: "AuraGlow Teeth Whitening Kit", value: 48, content_id: "auraglow-kit" },
+  "/grandelash": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 36, content_id: "grandelash-serum" },
+};
+
 function getPixelIdForPage(pagePath: string): string | null {
   for (const [prefix, pixelId] of Object.entries(PAGE_PIXEL_MAP)) {
     if (pagePath.startsWith(prefix)) return pixelId;
@@ -52,6 +58,13 @@ export function AmazonButton({ href, children, className, productName, position 
     const pageUrl = typeof window !== "undefined" ? window.location.href : "";
     const now = Math.floor(Date.now() / 1000);
 
+    // Look up product info for this page
+    const pageKey = Object.keys(PAGE_PRODUCT_MAP).find((prefix) => pagePath.startsWith(prefix));
+    const productInfo = pageKey ? PAGE_PRODUCT_MAP[pageKey] : null;
+    const name = productName || productInfo?.name || "Amazon Product";
+    const value = productInfo?.value || 0;
+    const contentId = productInfo?.content_id || "unknown";
+
     // Generate shared event IDs for deduplication
     const leadEventId = generateEventId();
     const clickEventId = generateEventId();
@@ -59,17 +72,21 @@ export function AmazonButton({ href, children, className, productName, position 
     // ── Browser Pixel ──────────────────────────────────
     if (typeof window !== "undefined" && window.fbq) {
       window.fbq("track", "Lead", {
-        content_name: productName || "Amazon Product",
+        content_name: name,
         content_category: "Affiliate Link Click",
-        content_ids: [position || "unknown"],
-        value: position ? 1 : 0,
+        content_ids: [contentId],
+        content_type: "product",
+        value: value,
         currency: "USD",
       }, { eventID: leadEventId });
 
       window.fbq("trackCustom", "AmazonClick", {
-        product: productName || "Amazon Product",
+        content_name: name,
+        content_ids: [contentId],
+        content_type: "product",
         button_position: position || "unknown",
-        page_url: pagePath,
+        value: value,
+        currency: "USD",
       }, { eventID: clickEventId });
     }
 
@@ -93,10 +110,11 @@ export function AmazonButton({ href, children, className, productName, position 
         action_source: "website",
         user_data: userData,
         custom_data: {
-          content_name: productName || "Amazon Product",
+          content_name: name,
           content_category: "Affiliate Link Click",
-          content_ids: [position || "unknown"],
-          value: position ? 1 : 0,
+          content_ids: [contentId],
+          content_type: "product",
+          value: value,
           currency: "USD",
         },
       },
@@ -108,9 +126,12 @@ export function AmazonButton({ href, children, className, productName, position 
         action_source: "website",
         user_data: userData,
         custom_data: {
-          product: productName || "Amazon Product",
+          content_name: name,
+          content_ids: [contentId],
+          content_type: "product",
           button_position: position || "unknown",
-          page_url: pagePath,
+          value: value,
+          currency: "USD",
         },
       },
     ];

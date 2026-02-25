@@ -33,7 +33,23 @@ export async function POST(request: NextRequest) {
     const testEventCode = process.env.FACEBOOK_TEST_EVENT_CODE || null;
     const url = `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`;
 
-    const payload: Record<string, unknown> = { data: events };
+    // Enrich each event's user_data with server-side info (IP, UA)
+    // This significantly improves Event Match Quality
+    const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || null;
+    const clientUa = request.headers.get("user-agent") || null;
+
+    const enrichedEvents = events.map((event: Record<string, unknown>) => {
+      const userData = (event.user_data as Record<string, unknown>) || {};
+      if (clientIp && !userData.client_ip_address) {
+        userData.client_ip_address = clientIp;
+      }
+      if (clientUa && !userData.client_user_agent) {
+        userData.client_user_agent = clientUa;
+      }
+      return { ...event, user_data: userData };
+    });
+
+    const payload: Record<string, unknown> = { data: enrichedEvents };
     if (testEventCode) {
       payload.test_event_code = testEventCode;
     }

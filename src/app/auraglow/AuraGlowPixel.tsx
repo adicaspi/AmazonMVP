@@ -90,21 +90,26 @@ export function trackAuraGlowConversion(buttonPosition: string) {
     fbq("trackSingle", AURAGLOW_PIXEL_ID, "Lead", {
       content_name: "AuraGlow Teeth Whitening Kit",
       content_category: "Affiliate Link Click",
-      content_ids: [buttonPosition],
+      content_ids: ["auraglow-kit"],
+      content_type: "product",
       value: 48,
       currency: "USD",
     }, { eventID: leadEventId });
 
     fbq("trackSingleCustom", AURAGLOW_PIXEL_ID, "AmazonClick", {
-      product: "AuraGlow Teeth Whitening Kit",
+      content_name: "AuraGlow Teeth Whitening Kit",
+      content_ids: ["auraglow-kit"],
+      content_type: "product",
       button_position: buttonPosition,
-      page_url: pagePath,
+      value: 48,
+      currency: "USD",
     }, { eventID: clickEventId });
 
     fbq("trackSingleCustom", AURAGLOW_PIXEL_ID, "AuraGlowConversion", {
-      product: "AuraGlow Teeth Whitening Kit",
+      content_name: "AuraGlow Teeth Whitening Kit",
+      content_ids: ["auraglow-kit"],
+      content_type: "product",
       button_position: buttonPosition,
-      page_url: pagePath,
       value: 48,
       currency: "USD",
     }, { eventID: conversionEventId });
@@ -124,7 +129,8 @@ export function trackAuraGlowConversion(buttonPosition: string) {
       custom_data: {
         content_name: "AuraGlow Teeth Whitening Kit",
         content_category: "Affiliate Link Click",
-        content_ids: [buttonPosition],
+        content_ids: ["auraglow-kit"],
+        content_type: "product",
         value: 48,
         currency: "USD",
       },
@@ -137,9 +143,12 @@ export function trackAuraGlowConversion(buttonPosition: string) {
       action_source: "website",
       user_data: userData,
       custom_data: {
-        product: "AuraGlow Teeth Whitening Kit",
+        content_name: "AuraGlow Teeth Whitening Kit",
+        content_ids: ["auraglow-kit"],
+        content_type: "product",
         button_position: buttonPosition,
-        page_url: pagePath,
+        value: 48,
+        currency: "USD",
       },
     },
     {
@@ -150,9 +159,10 @@ export function trackAuraGlowConversion(buttonPosition: string) {
       action_source: "website",
       user_data: userData,
       custom_data: {
-        product: "AuraGlow Teeth Whitening Kit",
+        content_name: "AuraGlow Teeth Whitening Kit",
+        content_ids: ["auraglow-kit"],
+        content_type: "product",
         button_position: buttonPosition,
-        page_url: pagePath,
         value: 48,
         currency: "USD",
       },
