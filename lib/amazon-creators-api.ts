@@ -217,17 +217,30 @@ function parseItem(item: any): AmazonProductData {
   const variantImages = variants.map((v: any) => parseImage(v));
 
   // Parse price from offers
+  // OffersV2 nests price under Price.Money (lowerCamelCase: price.money)
+  // Offers v1 had price directly: Price.Amount (lowerCamelCase: price.amount)
   let price: AmazonProductData["price"];
   const listings = offers?.listings || offers?.Listings || [];
   if (listings.length > 0) {
     const listing = listings[0];
     const priceData = listing.price || listing.Price;
     if (priceData) {
-      price = {
-        amount: priceData.amount || priceData.Amount || 0,
-        currency: priceData.currency || priceData.Currency || "USD",
-        displayAmount: priceData.displayAmount || priceData.DisplayAmount || "",
-      };
+      // OffersV2: price.money.amount / Price.Money.Amount
+      const money = priceData.money || priceData.Money;
+      if (money) {
+        price = {
+          amount: money.amount || money.Amount || 0,
+          currency: money.currency || money.Currency || "USD",
+          displayAmount: money.displayAmount || money.DisplayAmount || "",
+        };
+      } else {
+        // Fallback for Offers v1 format: price.amount / Price.Amount
+        price = {
+          amount: priceData.amount || priceData.Amount || 0,
+          currency: priceData.currency || priceData.Currency || "USD",
+          displayAmount: priceData.displayAmount || priceData.DisplayAmount || "",
+        };
+      }
     }
   }
 
@@ -244,7 +257,9 @@ function parseItem(item: any): AmazonProductData {
       : undefined,
     variantImages,
     price,
-    availability: listings[0]?.availability?.message ||
+    availability: listings[0]?.availability?.type ||
+      listings[0]?.availability?.message ||
+      listings[0]?.Availability?.Type ||
       listings[0]?.Availability?.Message,
     starRating: reviews?.starRating?.value || reviews?.StarRating?.Value,
     reviewCount: reviews?.count || reviews?.Count,
