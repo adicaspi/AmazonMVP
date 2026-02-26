@@ -185,50 +185,6 @@ export async function getProductsByASIN(
   return items.map((item: any) => parseItem(item));
 }
 
-/**
- * Debug: Return raw API response for a single ASIN (used to inspect response shape)
- */
-export async function getProductRawResponse(
-  asin: string,
-  marketplace: string = "www.amazon.com"
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): Promise<any> {
-  const token = await getAccessToken();
-  const { partnerTag, version } = getConfig();
-
-  const requestBody = {
-    itemIds: [asin],
-    itemIdType: "ASIN",
-    partnerTag,
-    partnerType: "Associates",
-    resources: [
-      ...ALL_IMAGE_RESOURCES,
-      ...ALL_ITEM_RESOURCES,
-      ...ALL_OFFER_RESOURCES,
-      ...REVIEW_RESOURCES,
-    ],
-  };
-
-  const res = await fetchWithTimeout(`${API_BASE}/catalog/v1/getItems`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      Accept: "application/json",
-      Authorization: `Bearer ${token}, Version ${version}`,
-      "User-Agent": "creatorsapi-client/1.0",
-      "x-marketplace": marketplace,
-    },
-    body: JSON.stringify(requestBody),
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`GetItems failed (${res.status}): ${text}`);
-  }
-
-  return res.json();
-}
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function parseImageSize(img: any): { url: string; width: number; height: number } | undefined {
   if (!img) return undefined;
