@@ -8,6 +8,8 @@ import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
+import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api";
+import { unstable_cache } from "next/cache";
 
 export const metadata: Metadata = {
   title: "GrandeLASH-MD Lash Serum | Grow Longer Lashes in 8 Weeks",
@@ -34,8 +36,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function GrandeLASHPage() {
-  const amazonLink = "https://www.amazon.com/dp/B082WZTJV5?tag=aipicks20-20";
+const ASIN = "B082WZTJV5";
+
+const getCachedProduct = unstable_cache(
+  async (): Promise<AmazonProductData | null> => {
+    try {
+      const products = await getProductsByASIN([ASIN]);
+      if (products.length > 0) return products[0];
+    } catch (err) {
+      console.error("Failed to fetch GrandeLash data from Amazon Creators API:", err);
+    }
+    return null;
+  },
+  [`product-${ASIN}`],
+  { revalidate: 3600 }
+);
+
+export default async function GrandeLASHPage() {
+  const product = await getCachedProduct();
+  const amazonLink = `https://www.amazon.com/dp/${ASIN}?tag=aipicks20-20`;
+
+  // Use API price if available, fallback to $36
+  const price = product?.price?.displayAmount || "$36";
+  const priceAmount = product?.price?.amount || 36;
+  const reviewCount = product?.reviewCount || 90000;
+  const starRating = product?.starRating || 4.3;
 
   return (
     <div className="min-h-screen bg-white">
@@ -75,8 +100,8 @@ export default function GrandeLASHPage() {
                   </svg>
                 ))}
               </div>
-              <span className="text-sm text-blue-600">4.8</span>
-              <span className="text-sm text-gray-500">(90,000+ reviews)</span>
+              <span className="text-sm text-blue-600">{starRating}</span>
+              <span className="text-sm text-gray-500">({reviewCount.toLocaleString()}+ reviews)</span>
             </div>
           </div>
 
@@ -125,6 +150,7 @@ export default function GrandeLASHPage() {
                 <AmazonButton
                   href={amazonLink}
                   productName="GrandeLASH-MD"
+              priceValue={priceAmount}
                   position="hero-main"
                   className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
                 >
@@ -301,6 +327,7 @@ export default function GrandeLASHPage() {
             <AmazonButton
               href={amazonLink}
               productName="GrandeLASH-MD"
+              priceValue={priceAmount}
               position="comparison-table"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
@@ -416,6 +443,7 @@ export default function GrandeLASHPage() {
               <AmazonButton
                 href={amazonLink}
                 productName="GrandeLASH-MD"
+              priceValue={priceAmount}
                 position="benefits-card"
                 className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 md:px-8 md:py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
               >
@@ -515,6 +543,7 @@ export default function GrandeLASHPage() {
             <AmazonButton
               href={amazonLink}
               productName="GrandeLASH-MD"
+              priceValue={priceAmount}
               position="how-it-works"
               className="inline-flex items-center justify-center gap-2 px-8 py-3 md:px-10 md:py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
@@ -582,6 +611,7 @@ export default function GrandeLASHPage() {
             <AmazonButton
               href={amazonLink}
               productName="GrandeLASH-MD"
+              priceValue={priceAmount}
               position="video-testimonials"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
@@ -689,6 +719,7 @@ export default function GrandeLASHPage() {
             <AmazonButton
               href={amazonLink}
               productName="GrandeLASH-MD"
+              priceValue={priceAmount}
               position="faq-section"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
@@ -718,7 +749,7 @@ export default function GrandeLASHPage() {
             Join over 90,000 women who've transformed their lashes naturally.
           </p>
           <div className="flex items-center justify-center gap-3 mb-8">
-            <span className="text-4xl font-bold">$36</span>
+            <span className="text-4xl font-bold">{price}</span>
             <span className="bg-yellow-400 text-yellow-900 text-sm font-bold px-3 py-1 rounded-full">
               Amazon's Choice
             </span>
@@ -726,6 +757,7 @@ export default function GrandeLASHPage() {
           <AmazonButton
             href={amazonLink}
             productName="GrandeLASH-MD"
+              priceValue={priceAmount}
             position="final-cta"
             className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-rose-600 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 animate-bounce hover:animate-none"
           >
@@ -789,7 +821,7 @@ export default function GrandeLASHPage() {
       <SocialProofPopup />
 
       {/* Sticky Mobile CTA - Shows after scrolling past hero */}
-      <StickyMobileCTA amazonLink={amazonLink} />
+      <StickyMobileCTA amazonLink={amazonLink} price={price} priceValue={priceAmount} />
     </div>
   );
 }

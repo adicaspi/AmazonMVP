@@ -74,7 +74,7 @@ export function AuraGlowPixel() {
   return null;
 }
 
-export function trackAuraGlowConversion(buttonPosition: string) {
+export function trackAuraGlowConversion(buttonPosition: string, priceValue: number = 48) {
   const fbq = getFbq();
   const pageUrl = typeof window !== "undefined" ? window.location.href : "";
   const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
@@ -92,7 +92,7 @@ export function trackAuraGlowConversion(buttonPosition: string) {
       content_category: "Affiliate Link Click",
       content_ids: ["auraglow-kit"],
       content_type: "product",
-      value: 48,
+      value: priceValue,
       currency: "USD",
     }, { eventID: leadEventId });
 
@@ -101,7 +101,7 @@ export function trackAuraGlowConversion(buttonPosition: string) {
       content_ids: ["auraglow-kit"],
       content_type: "product",
       button_position: buttonPosition,
-      value: 48,
+      value: priceValue,
       currency: "USD",
     }, { eventID: clickEventId });
 
@@ -110,7 +110,7 @@ export function trackAuraGlowConversion(buttonPosition: string) {
       content_ids: ["auraglow-kit"],
       content_type: "product",
       button_position: buttonPosition,
-      value: 48,
+      value: priceValue,
       currency: "USD",
     }, { eventID: conversionEventId });
   }
@@ -131,7 +131,7 @@ export function trackAuraGlowConversion(buttonPosition: string) {
         content_category: "Affiliate Link Click",
         content_ids: ["auraglow-kit"],
         content_type: "product",
-        value: 48,
+        value: priceValue,
         currency: "USD",
       },
     },
@@ -147,7 +147,7 @@ export function trackAuraGlowConversion(buttonPosition: string) {
         content_ids: ["auraglow-kit"],
         content_type: "product",
         button_position: buttonPosition,
-        value: 48,
+        value: priceValue,
         currency: "USD",
       },
     },
@@ -163,7 +163,7 @@ export function trackAuraGlowConversion(buttonPosition: string) {
         content_ids: ["auraglow-kit"],
         content_type: "product",
         button_position: buttonPosition,
-        value: 48,
+        value: priceValue,
         currency: "USD",
       },
     },
