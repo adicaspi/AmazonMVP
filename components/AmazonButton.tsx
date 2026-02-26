@@ -17,6 +17,7 @@ interface AmazonButtonProps {
   className?: string;
   productName?: string;
   position?: string; // e.g., "hero", "comparison", "sticky-footer"
+  priceValue?: number; // Dynamic price from Amazon Creators API — overrides hardcoded fallback
 }
 
 // Map page paths to their dedicated Facebook Pixel IDs
@@ -52,7 +53,7 @@ function sendCAPI(events: object[], pixelId: string) {
   });
 }
 
-export function AmazonButton({ href, children, className, productName, position }: AmazonButtonProps) {
+export function AmazonButton({ href, children, className, productName, position, priceValue }: AmazonButtonProps) {
   const handleClick = () => {
     const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
     const pageUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -62,7 +63,8 @@ export function AmazonButton({ href, children, className, productName, position 
     const pageKey = Object.keys(PAGE_PRODUCT_MAP).find((prefix) => pagePath.startsWith(prefix));
     const productInfo = pageKey ? PAGE_PRODUCT_MAP[pageKey] : null;
     const name = productName || productInfo?.name || "Amazon Product";
-    const value = productInfo?.value || 0;
+    // Use dynamic price from Creators API if provided, otherwise fall back to hardcoded
+    const value = priceValue ?? productInfo?.value ?? 0;
     const contentId = productInfo?.content_id || "unknown";
 
     // Generate shared event IDs for deduplication

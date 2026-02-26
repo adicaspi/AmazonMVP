@@ -9,6 +9,7 @@ interface AuraGlowAmazonButtonProps {
   children: ReactNode;
   className?: string;
   position?: string;
+  priceValue?: number;
 }
 
 export function AuraGlowAmazonButton({
@@ -16,13 +17,14 @@ export function AuraGlowAmazonButton({
   children,
   className,
   position,
+  priceValue,
 }: AuraGlowAmazonButtonProps) {
   const handleClick = () => {
     const pagePath =
       typeof window !== "undefined" ? window.location.pathname : "";
 
     // Track to AuraGlow-specific pixel ONLY (2679443682454721)
-    trackAuraGlowConversion(position || "unknown");
+    trackAuraGlowConversion(position || "unknown", priceValue);
 
     // Track on server for analytics dashboard
     fetch("/api/amazon-click", {

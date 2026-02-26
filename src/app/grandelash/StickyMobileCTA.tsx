@@ -4,9 +4,11 @@ import { AmazonButton } from "@/components/AmazonButton";
 
 interface StickyMobileCTAProps {
   amazonLink: string;
+  price?: string;
+  priceValue?: number;
 }
 
-export function StickyMobileCTA({ amazonLink }: StickyMobileCTAProps) {
+export function StickyMobileCTA({ amazonLink, price, priceValue }: StickyMobileCTAProps) {
   return (
     <>
       <div
@@ -14,7 +16,7 @@ export function StickyMobileCTA({ amazonLink }: StickyMobileCTAProps) {
       >
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
-            <span className="text-2xl font-bold text-gray-900">$36</span>
+            <span className="text-2xl font-bold text-gray-900">{price || "$36"}</span>
             <div className="flex flex-col">
               <span className="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded">Amazon's Choice</span>
               <span className="text-xs text-gray-500 mt-0.5">20K+ bought last month</span>
@@ -31,6 +33,7 @@ export function StickyMobileCTA({ amazonLink }: StickyMobileCTAProps) {
         <AmazonButton
           href={amazonLink}
           productName="GrandeLASH-MD"
+          priceValue={priceValue}
           position="sticky-mobile"
           className="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold text-lg rounded-xl shadow-lg active:scale-[0.98] transition-transform"
         >
