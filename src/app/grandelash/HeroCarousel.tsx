@@ -14,6 +14,12 @@ type MediaItem = {
 const mediaItems: MediaItem[] = [
   {
     type: "image",
+    src: "/images/grandelash/real-lash-growth.jpg",
+    alt: "Real Lash Growth Results",
+    isExternal: false,
+  },
+  {
+    type: "image",
     src: "https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg",
     alt: "GrandLash Serum Product",
     isExternal: true,
