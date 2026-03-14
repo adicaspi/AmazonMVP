@@ -92,11 +92,17 @@ const translations = {
     today: "היום",
     todayDesc: "לחיצות שהתקבלו היום",
     todayViews: "צפיות היום",
-    dateFilter: "סינון תאריכים",
+    dateFilter: "תקופה",
     fromDate: "מתאריך",
     toDate: "עד תאריך",
-    clearFilter: "נקה סינון",
+    clearFilter: "נקה",
     filtered: "מסונן",
+    presetAll: "הכל",
+    presetToday: "היום",
+    preset7d: "7 ימים",
+    preset30d: "30 ימים",
+    customRange: "טווח מותאם",
+    apply: "החל",
     thisWeek: "השבוע",
     thisWeekDesc: "לחיצות ב-7 הימים האחרונים",
     bestButton: "הכפתור הטוב",
@@ -193,11 +199,17 @@ const translations = {
     today: "Today",
     todayDesc: "Clicks received today",
     todayViews: "Today's Views",
-    dateFilter: "Date Filter",
+    dateFilter: "Period",
     fromDate: "From",
     toDate: "To",
     clearFilter: "Clear",
     filtered: "Filtered",
+    presetAll: "All Time",
+    presetToday: "Today",
+    preset7d: "7 Days",
+    preset30d: "30 Days",
+    customRange: "Custom",
+    apply: "Apply",
     thisWeek: "This Week",
     thisWeekDesc: "Clicks in the last 7 days",
     bestButton: "Best Button",
@@ -304,6 +316,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const [selectedPage, setSelectedPage] = useState<string>("all");
   const [filterFrom, setFilterFrom] = useState(dateFrom || "");
   const [filterTo, setFilterTo] = useState(dateTo || "");
+  const [showCustomRange, setShowCustomRange] = useState(!!(dateFrom || dateTo));
   const t = translations[lang];
   const isRTL = lang === "he";
   const today = new Date().toLocaleDateString("en-CA", { timeZone: NY_TZ });
@@ -333,19 +346,63 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     return () => mq.removeEventListener("change", h);
   }, []);
 
-  const applyDateFilter = () => {
+  const applyDateFilter = (from?: string, to?: string) => {
+    const f = from ?? filterFrom;
+    const t2 = to ?? filterTo;
     const params = new URLSearchParams();
-    if (filterFrom) params.set("from", filterFrom);
-    if (filterTo) params.set("to", filterTo);
+    if (f) params.set("from", f);
+    if (t2) params.set("to", t2);
     const qs = params.toString();
     router.push(`/analytics${qs ? `?${qs}` : ""}`);
+  };
+
+  const applyPreset = (preset: "today" | "7d" | "30d" | "all") => {
+    setShowCustomRange(false);
+    if (preset === "all") {
+      setFilterFrom("");
+      setFilterTo("");
+      router.push("/analytics");
+      return;
+    }
+    const now = new Date();
+    const todayStr = now.toLocaleDateString("en-CA", { timeZone: NY_TZ });
+    if (preset === "today") {
+      setFilterFrom(todayStr);
+      setFilterTo(todayStr);
+      applyDateFilter(todayStr, todayStr);
+    } else {
+      const daysBack = preset === "7d" ? 7 : 30;
+      const from = new Date(now);
+      from.setDate(from.getDate() - daysBack);
+      const fromStr = from.toLocaleDateString("en-CA", { timeZone: NY_TZ });
+      setFilterFrom(fromStr);
+      setFilterTo(todayStr);
+      applyDateFilter(fromStr, todayStr);
+    }
   };
 
   const clearDateFilter = () => {
     setFilterFrom("");
     setFilterTo("");
+    setShowCustomRange(false);
     router.push("/analytics");
   };
+
+  const getActivePreset = (): string | null => {
+    if (!dateFrom && !dateTo) return "all";
+    const now = new Date();
+    const todayStr = now.toLocaleDateString("en-CA", { timeZone: NY_TZ });
+    if (dateFrom === todayStr && dateTo === todayStr) return "today";
+    if (dateTo === todayStr) {
+      const from = new Date(dateFrom || "");
+      const diff = Math.round((now.getTime() - from.getTime()) / (1000 * 60 * 60 * 24));
+      if (diff === 7) return "7d";
+      if (diff === 30) return "30d";
+    }
+    return null;
+  };
+
+  const activePreset = getActivePreset();
 
   const dm = {
     bg: darkMode ? "bg-black" : "bg-gray-50",
@@ -548,51 +605,80 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         </div>
 
         {/* Date Filter */}
-        <section className={`${dm.cardBg} rounded-xl border p-4 transition-colors duration-300`}>
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-1.5">
-              <svg className={`w-4 h-4 ${dm.textMuted}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-              <span className={`text-sm font-medium ${dm.text}`}>{t.dateFilter}</span>
-            </div>
+        <div className="flex flex-wrap items-center gap-2">
+          {([
+            { key: "all", label: t.presetAll },
+            { key: "today", label: t.presetToday },
+            { key: "7d", label: t.preset7d },
+            { key: "30d", label: t.preset30d },
+          ] as const).map(({ key, label }) => (
+            <button
+              key={key}
+              onClick={() => applyPreset(key)}
+              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${
+                activePreset === key
+                  ? darkMode ? "bg-emerald-700 text-white" : "bg-emerald-500 text-white"
+                  : darkMode ? "bg-neutral-800 text-gray-300 hover:bg-neutral-700 border border-neutral-700" : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+          <button
+            onClick={() => setShowCustomRange(!showCustomRange)}
+            className={`px-3 py-1.5 text-sm font-medium rounded-lg transition flex items-center gap-1.5 ${
+              activePreset === null && isFiltered
+                ? darkMode ? "bg-emerald-700 text-white" : "bg-emerald-500 text-white"
+                : showCustomRange
+                  ? darkMode ? "bg-neutral-700 text-gray-200 border border-neutral-600" : "bg-gray-200 text-gray-700 border border-gray-300"
+                  : darkMode ? "bg-neutral-800 text-gray-300 hover:bg-neutral-700 border border-neutral-700" : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
+            }`}
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+            {t.customRange}
+          </button>
+          {isFiltered && activePreset !== "all" && (
+            <span className={`text-xs ${dm.textMuted}`}>
+              {dateFrom}{dateTo && dateTo !== dateFrom ? ` → ${dateTo}` : ""}
+            </span>
+          )}
+        </div>
+        {showCustomRange && (
+          <div className={`flex flex-wrap items-center gap-3 ${dm.cardBg} rounded-xl border p-3 transition-colors duration-300`}>
             <div className="flex items-center gap-2">
-              <label className={`text-xs ${dm.textMuted}`}>{t.fromDate}</label>
+              <label className={`text-xs font-medium ${dm.textMuted}`}>{t.fromDate}</label>
               <input
                 type="date"
                 value={filterFrom}
                 onChange={(e) => setFilterFrom(e.target.value)}
-                className={`px-2 py-1 text-sm rounded-lg border ${darkMode ? "bg-neutral-800 border-neutral-700 text-gray-200" : "bg-white border-gray-300 text-gray-700"}`}
+                className={`px-2.5 py-1.5 text-sm rounded-lg border ${darkMode ? "bg-neutral-800 border-neutral-700 text-gray-200" : "bg-gray-50 border-gray-300 text-gray-700"}`}
               />
             </div>
             <div className="flex items-center gap-2">
-              <label className={`text-xs ${dm.textMuted}`}>{t.toDate}</label>
+              <label className={`text-xs font-medium ${dm.textMuted}`}>{t.toDate}</label>
               <input
                 type="date"
                 value={filterTo}
                 onChange={(e) => setFilterTo(e.target.value)}
-                className={`px-2 py-1 text-sm rounded-lg border ${darkMode ? "bg-neutral-800 border-neutral-700 text-gray-200" : "bg-white border-gray-300 text-gray-700"}`}
+                className={`px-2.5 py-1.5 text-sm rounded-lg border ${darkMode ? "bg-neutral-800 border-neutral-700 text-gray-200" : "bg-gray-50 border-gray-300 text-gray-700"}`}
               />
             </div>
             <button
-              onClick={applyDateFilter}
-              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${darkMode ? "bg-emerald-700 hover:bg-emerald-600 text-white" : "bg-emerald-500 hover:bg-emerald-600 text-white"}`}
+              onClick={() => applyDateFilter()}
+              className={`px-4 py-1.5 text-sm font-medium rounded-lg transition ${darkMode ? "bg-emerald-700 hover:bg-emerald-600 text-white" : "bg-emerald-500 hover:bg-emerald-600 text-white"}`}
             >
-              {lang === "he" ? "סנן" : "Apply"}
+              {t.apply}
             </button>
             {isFiltered && (
               <button
                 onClick={clearDateFilter}
-                className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${darkMode ? "bg-neutral-700 hover:bg-neutral-600 text-gray-300" : "bg-gray-200 hover:bg-gray-300 text-gray-700"}`}
+                className={`px-3 py-1.5 text-sm rounded-lg transition ${darkMode ? "text-gray-400 hover:text-gray-200" : "text-gray-500 hover:text-gray-700"}`}
               >
                 {t.clearFilter}
               </button>
             )}
-            {isFiltered && (
-              <span className={`text-xs px-2 py-1 rounded-full font-medium ${darkMode ? "bg-amber-900/50 text-amber-300" : "bg-amber-100 text-amber-700"}`}>
-                {t.filtered}: {dateFrom || "..."} → {dateTo || "..."}
-              </span>
-            )}
           </div>
-        </section>
+        )}
 
         {/* Page Overview Cards (only show in "All" view) */}
         {selectedPage === "all" && (
@@ -623,26 +709,26 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                         {p.page} &rarr;
                       </Link>
                     </div>
-                    <div className="grid grid-cols-5 gap-3">
+                    <div className="grid grid-cols-4 gap-3">
                       <div>
                         <div className={`text-2xl font-bold ${dm.text}`}>{p.views}</div>
                         <div className={`text-xs ${dm.textMuted}`}>{t.views}</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-blue-500">{p.todayViews}</div>
-                        <div className={`text-xs ${dm.textMuted}`}>{t.todayViews}</div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-emerald-500">{p.totalClicks}</div>
                         <div className={`text-xs ${dm.textMuted}`}>{t.clicks}</div>
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-green-500">{p.todayClicks}</div>
-                        <div className={`text-xs ${dm.textMuted}`}>{t.today}</div>
-                      </div>
-                      <div>
                         <div className={`text-2xl font-bold ${parseFloat(cr) >= 20 ? "text-emerald-500" : dm.text}`}>{cr}%</div>
                         <div className={`text-xs ${dm.textMuted}`}>{t.conversion}</div>
+                      </div>
+                      <div>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-2xl font-bold text-blue-500">{p.todayViews}</span>
+                          <span className={`text-xs ${dm.textMuted}`}>/</span>
+                          <span className="text-lg font-bold text-green-500">{p.todayClicks}</span>
+                        </div>
+                        <div className={`text-xs ${dm.textMuted}`}>{t.today}</div>
                       </div>
                     </div>
                   </button>
