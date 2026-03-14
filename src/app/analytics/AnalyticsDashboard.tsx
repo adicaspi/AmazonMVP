@@ -31,6 +31,7 @@ type PageData = {
   label: string;
   color: string;
   views: number;
+  todayViews: number;
   totalClicks: number;
   todayClicks: number;
   weekClicks: number;
@@ -70,6 +71,8 @@ interface Props {
   allData: PageData;
   pagesData: PageData[];
   facebookAdsData: FacebookAdsData | null;
+  dateFrom?: string;
+  dateTo?: string;
 }
 
 const translations = {
@@ -88,6 +91,12 @@ const translations = {
     totalClicks: "סה״כ לחיצות",
     today: "היום",
     todayDesc: "לחיצות שהתקבלו היום",
+    todayViews: "צפיות היום",
+    dateFilter: "סינון תאריכים",
+    fromDate: "מתאריך",
+    toDate: "עד תאריך",
+    clearFilter: "נקה סינון",
+    filtered: "מסונן",
     thisWeek: "השבוע",
     thisWeekDesc: "לחיצות ב-7 הימים האחרונים",
     bestButton: "הכפתור הטוב",
@@ -183,6 +192,12 @@ const translations = {
     totalClicks: "Total Clicks",
     today: "Today",
     todayDesc: "Clicks received today",
+    todayViews: "Today's Views",
+    dateFilter: "Date Filter",
+    fromDate: "From",
+    toDate: "To",
+    clearFilter: "Clear",
+    filtered: "Filtered",
     thisWeek: "This Week",
     thisWeekDesc: "Clicks in the last 7 days",
     bestButton: "Best Button",
@@ -282,14 +297,17 @@ const pageLabels: Record<string, string> = {
   "/grandelash": "GrandeLash",
 };
 
-export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData }: Props) {
+export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData, dateFrom, dateTo }: Props) {
   const router = useRouter();
   const [lang, setLang] = useState<"he" | "en">("he");
   const [darkMode, setDarkMode] = useState(false);
   const [selectedPage, setSelectedPage] = useState<string>("all");
+  const [filterFrom, setFilterFrom] = useState(dateFrom || "");
+  const [filterTo, setFilterTo] = useState(dateTo || "");
   const t = translations[lang];
   const isRTL = lang === "he";
   const today = new Date().toLocaleDateString("en-CA", { timeZone: NY_TZ });
+  const isFiltered = !!(dateFrom || dateTo);
 
   // Get current data based on selection
   const data = selectedPage === "all" ? allData : pagesData.find((p) => p.page === selectedPage) || allData;
@@ -314,6 +332,20 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     mq.addEventListener("change", h);
     return () => mq.removeEventListener("change", h);
   }, []);
+
+  const applyDateFilter = () => {
+    const params = new URLSearchParams();
+    if (filterFrom) params.set("from", filterFrom);
+    if (filterTo) params.set("to", filterTo);
+    const qs = params.toString();
+    router.push(`/analytics${qs ? `?${qs}` : ""}`);
+  };
+
+  const clearDateFilter = () => {
+    setFilterFrom("");
+    setFilterTo("");
+    router.push("/analytics");
+  };
 
   const dm = {
     bg: darkMode ? "bg-black" : "bg-gray-50",
@@ -515,6 +547,53 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           </a>
         </div>
 
+        {/* Date Filter */}
+        <section className={`${dm.cardBg} rounded-xl border p-4 transition-colors duration-300`}>
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex items-center gap-1.5">
+              <svg className={`w-4 h-4 ${dm.textMuted}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              <span className={`text-sm font-medium ${dm.text}`}>{t.dateFilter}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <label className={`text-xs ${dm.textMuted}`}>{t.fromDate}</label>
+              <input
+                type="date"
+                value={filterFrom}
+                onChange={(e) => setFilterFrom(e.target.value)}
+                className={`px-2 py-1 text-sm rounded-lg border ${darkMode ? "bg-neutral-800 border-neutral-700 text-gray-200" : "bg-white border-gray-300 text-gray-700"}`}
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <label className={`text-xs ${dm.textMuted}`}>{t.toDate}</label>
+              <input
+                type="date"
+                value={filterTo}
+                onChange={(e) => setFilterTo(e.target.value)}
+                className={`px-2 py-1 text-sm rounded-lg border ${darkMode ? "bg-neutral-800 border-neutral-700 text-gray-200" : "bg-white border-gray-300 text-gray-700"}`}
+              />
+            </div>
+            <button
+              onClick={applyDateFilter}
+              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${darkMode ? "bg-emerald-700 hover:bg-emerald-600 text-white" : "bg-emerald-500 hover:bg-emerald-600 text-white"}`}
+            >
+              {lang === "he" ? "סנן" : "Apply"}
+            </button>
+            {isFiltered && (
+              <button
+                onClick={clearDateFilter}
+                className={`px-3 py-1.5 text-sm font-medium rounded-lg transition ${darkMode ? "bg-neutral-700 hover:bg-neutral-600 text-gray-300" : "bg-gray-200 hover:bg-gray-300 text-gray-700"}`}
+              >
+                {t.clearFilter}
+              </button>
+            )}
+            {isFiltered && (
+              <span className={`text-xs px-2 py-1 rounded-full font-medium ${darkMode ? "bg-amber-900/50 text-amber-300" : "bg-amber-100 text-amber-700"}`}>
+                {t.filtered}: {dateFrom || "..."} → {dateTo || "..."}
+              </span>
+            )}
+          </div>
+        </section>
+
         {/* Page Overview Cards (only show in "All" view) */}
         {selectedPage === "all" && (
           <section>
@@ -544,10 +623,14 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                         {p.page} &rarr;
                       </Link>
                     </div>
-                    <div className="grid grid-cols-4 gap-3">
+                    <div className="grid grid-cols-5 gap-3">
                       <div>
                         <div className={`text-2xl font-bold ${dm.text}`}>{p.views}</div>
                         <div className={`text-xs ${dm.textMuted}`}>{t.views}</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-blue-500">{p.todayViews}</div>
+                        <div className={`text-xs ${dm.textMuted}`}>{t.todayViews}</div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-emerald-500">{p.totalClicks}</div>

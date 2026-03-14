@@ -74,13 +74,36 @@ async function getAmazonClicks(): Promise<AmazonClick[]> {
   }
 }
 
-async function getPageViews(page: string): Promise<number> {
+async function getPageViews(page: string, from?: string, to?: string): Promise<number> {
   try {
     if (supabase && (await isDatabaseAvailable())) {
-      const { count, error } = await supabase
+      let query = supabase
         .from("page_views")
         .select("*", { count: "exact", head: true })
         .eq("page", page);
+
+      if (from) query = query.gte("timestamp", `${from}T00:00:00`);
+      if (to) query = query.lte("timestamp", `${to}T23:59:59`);
+
+      const { count, error } = await query;
+      if (!error && count !== null) return count;
+    }
+    return 0;
+  } catch {
+    return 0;
+  }
+}
+
+async function getTodayPageViews(page: string): Promise<number> {
+  try {
+    if (supabase && (await isDatabaseAvailable())) {
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+      const { count, error } = await supabase
+        .from("page_views")
+        .select("*", { count: "exact", head: true })
+        .eq("page", page)
+        .gte("timestamp", todayStart.toISOString());
 
       if (!error && count !== null) return count;
     }
@@ -282,7 +305,11 @@ function getClickStats(clicks: AmazonClick[], page?: string) {
   };
 }
 
-export default async function AnalyticsPage() {
+export default async function AnalyticsPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string }> }) {
+  const params = await searchParams;
+  const dateFrom = params.from || undefined;
+  const dateTo = params.to || undefined;
+
   const [allClicks, facebookAdsData] = await Promise.all([
     getAmazonClicks(),
     getFacebookAdsData(),
@@ -297,11 +324,20 @@ export default async function AnalyticsPage() {
     if (click.visitor_id) clickedVisitorIds.add(click.visitor_id);
   });
 
+  // Filter clicks by date range if provided
+  const filteredClicks = (dateFrom || dateTo) ? allClicks.filter((click) => {
+    const clickDate = toNYDateString(click.timestamp);
+    if (dateFrom && clickDate < dateFrom) return false;
+    if (dateTo && clickDate > dateTo) return false;
+    return true;
+  }) : allClicks;
+
   // Build page data for each tracked page
   const pagesData = await Promise.all(
     TRACKED_PAGES.map(async ({ path, label, color }) => {
-      const stats = getClickStats(allClicks, path);
-      let views = await getPageViews(path);
+      const stats = getClickStats(filteredClicks, path);
+      let views = await getPageViews(path, dateFrom, dateTo);
+      const todayViews = await getTodayPageViews(path);
       const trafficData = await getTrafficSources(path, clickedVisitorIds);
 
       // Fix: Views should always be >= clicks
@@ -317,6 +353,7 @@ export default async function AnalyticsPage() {
         label,
         color,
         views,
+        todayViews,
         totalClicks: stats.total,
         todayClicks,
         weekClicks,
@@ -336,8 +373,9 @@ export default async function AnalyticsPage() {
   );
 
   // Build "All" aggregate
-  const allStats = getClickStats(allClicks);
+  const allStats = getClickStats(filteredClicks);
   let allViews = pagesData.reduce((sum, p) => sum + p.views, 0);
+  const allTodayViews = pagesData.reduce((sum, p) => sum + p.todayViews, 0);
   if (allViews < allStats.total) allViews = allStats.total;
 
   const allTrafficSources: Record<string, number> = {};
@@ -370,6 +408,7 @@ export default async function AnalyticsPage() {
     label: "All Pages",
     color: "emerald" as const,
     views: allViews,
+    todayViews: allTodayViews,
     totalClicks: allStats.total,
     todayClicks: allTodayClicks,
     weekClicks: allWeekClicks,
@@ -388,5 +427,5 @@ export default async function AnalyticsPage() {
       .slice(0, 30),
   };
 
-  return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} facebookAdsData={facebookAdsData} />;
+  return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} facebookAdsData={facebookAdsData} dateFrom={dateFrom} dateTo={dateTo} />;
 }
