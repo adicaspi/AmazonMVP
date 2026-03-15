@@ -357,7 +357,7 @@ export default async function GrandeLASHPage() {
             <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
               <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
                 <img
-                  src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
+                  src="/images/grandelash/grand1.jpeg"
                   alt="Customer Before and After Results"
                   className="w-full h-full object-cover aspect-square"
                 />
@@ -367,7 +367,7 @@ export default async function GrandeLASHPage() {
               </div>
               <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
                 <img
-                  src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
+                  src="/images/grandelash/grand2.jpeg"
                   alt="Amazing Lash Transformation"
                   className="w-full h-full object-cover aspect-square"
                 />
@@ -377,7 +377,7 @@ export default async function GrandeLASHPage() {
               </div>
               <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
                 <img
-                  src="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125472/WhatsApp_Image_2026-02-03_at_09.48.01_hh0bs8.jpg"
+                  src="/images/grandelash/grand3.jpeg"
                   alt="Real Customer Lash Growth"
                   className="w-full h-full object-cover aspect-square"
                 />
