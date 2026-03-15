@@ -385,6 +385,36 @@ export default async function GrandeLASHPage() {
                   <p className="text-white text-sm font-semibold">Natural Growth 💕</p>
                 </div>
               </div>
+              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+                <img
+                  src="/images/grandelash/grand1.jpeg"
+                  alt="Customer Lash Growth Results"
+                  className="w-full h-full object-cover aspect-square"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
+                  <p className="text-white text-sm font-semibold">Stunning Results ⭐</p>
+                </div>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+                <img
+                  src="/images/grandelash/grand2.jpeg"
+                  alt="Lash Serum Before and After"
+                  className="w-full h-full object-cover aspect-square"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
+                  <p className="text-white text-sm font-semibold">Visible Growth ✨</p>
+                </div>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-center">
+                <img
+                  src="/images/grandelash/grand3.jpeg"
+                  alt="Natural Lash Enhancement Results"
+                  className="w-full h-full object-cover aspect-square"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 md:hidden">
+                  <p className="text-white text-sm font-semibold">Fuller Lashes 💕</p>
+                </div>
+              </div>
             </div>
             {/* Swipe indicator - mobile only */}
             <div className="flex items-center justify-center gap-2 mt-2 text-xs text-gray-400 md:hidden">
