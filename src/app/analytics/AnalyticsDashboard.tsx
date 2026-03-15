@@ -317,10 +317,16 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const [filterFrom, setFilterFrom] = useState(dateFrom || "");
   const [filterTo, setFilterTo] = useState(dateTo || "");
   const [showCustomRange, setShowCustomRange] = useState(!!(dateFrom || dateTo));
+  const [loading, setLoading] = useState(false);
   const t = translations[lang];
   const isRTL = lang === "he";
   const today = new Date().toLocaleDateString("en-CA", { timeZone: NY_TZ });
   const isFiltered = !!(dateFrom || dateTo);
+
+  // Reset loading when server data arrives (props changed)
+  useEffect(() => {
+    setLoading(false);
+  }, [dateFrom, dateTo, allData]);
 
   // Get current data based on selection
   const data = selectedPage === "all" ? allData : pagesData.find((p) => p.page === selectedPage) || allData;
@@ -353,11 +359,13 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     if (f) params.set("from", f);
     if (t2) params.set("to", t2);
     const qs = params.toString();
+    setLoading(true);
     router.push(`/analytics${qs ? `?${qs}` : ""}`);
   };
 
   const applyPreset = (preset: "today" | "7d" | "30d" | "all") => {
     setShowCustomRange(false);
+    setLoading(true);
     if (preset === "all") {
       setFilterFrom("");
       setFilterTo("");
@@ -385,6 +393,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     setFilterFrom("");
     setFilterTo("");
     setShowCustomRange(false);
+    setLoading(true);
     router.push("/analytics");
   };
 
@@ -474,7 +483,17 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   };
 
   return (
-    <main className={`min-h-screen ${dm.bg} transition-colors duration-300`} dir={isRTL ? "rtl" : "ltr"}>
+    <main className={`min-h-screen ${dm.bg} transition-colors duration-300 relative`} dir={isRTL ? "rtl" : "ltr"}>
+      {/* Loading Overlay */}
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+          <div className={`flex flex-col items-center gap-3 px-8 py-6 rounded-2xl shadow-xl ${darkMode ? "bg-neutral-900" : "bg-white"}`}>
+            <div className="w-8 h-8 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+            <span className={`text-sm font-medium ${dm.text}`}>{lang === "he" ? "טוען נתונים..." : "Loading..."}</span>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className={`${dm.headerBg} border-b sticky top-0 z-30 transition-colors duration-300`}>
         <div className="max-w-6xl mx-auto px-4 py-4">
