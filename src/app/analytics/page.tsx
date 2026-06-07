@@ -55,6 +55,7 @@ export type FacebookAdsData = {
 const TRACKED_PAGES = [
   { path: "/auraglow", label: "AuraGlow", color: "blue" },
   { path: "/grandelash", label: "GrandeLash", color: "rose" },
+  { path: "/shark-flexstyle", label: "Shark FlexStyle", color: "amber" },
 ] as const;
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {

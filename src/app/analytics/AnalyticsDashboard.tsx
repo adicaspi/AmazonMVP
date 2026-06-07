@@ -307,6 +307,7 @@ const positionLabels: Record<string, { he: string; en: string }> = {
 const pageLabels: Record<string, string> = {
   "/auraglow": "AuraGlow",
   "/grandelash": "GrandeLash",
+  "/shark-flexstyle": "Shark FlexStyle",
 };
 
 export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData, dateFrom, dateTo }: Props) {
@@ -717,7 +718,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
-                        <span className={`w-3 h-3 rounded-full ${p.color === "blue" ? "bg-blue-500" : "bg-rose-500"}`}></span>
+                        <span className={`w-3 h-3 rounded-full ${p.color === "blue" ? "bg-blue-500" : p.color === "amber" ? "bg-amber-500" : "bg-rose-500"}`}></span>
                         <span className={`font-semibold ${dm.text}`}>{p.label}</span>
                       </div>
                       <Link

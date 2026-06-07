@@ -13,6 +13,7 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
 const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id: string }> = {
   "/auraglow": { name: "AuraGlow Teeth Whitening Kit", value: 48, content_id: "auraglow-kit" },
   "/grandelash": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 36, content_id: "grandelash-serum" },
+  "/shark-flexstyle": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
 };
 
 function getPixelIdForPage(page: string): string | null {
