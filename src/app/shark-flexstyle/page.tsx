@@ -484,7 +484,7 @@ export default async function SharkFlexStylePage() {
             {DEMO_VIDEOS.map((video, i) => (
               <div key={i} className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
                 <video
-                  className="w-full h-full object-cover aspect-video"
+                  className="w-full h-full object-cover aspect-square"
                   controls
                   playsInline
                   preload="metadata"
