@@ -587,6 +587,15 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             GrandeLash
           </a>
           <a
+            href="/shark-flexstyle"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-amber-900/40 text-amber-300 hover:bg-amber-900/60 border border-amber-800" : "bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200"}`}
+          >
+            <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+            Shark FlexStyle
+          </a>
+          <a
             href="https://eventsmanager.facebook.com/events_manager2/list/dataset/2679443682454721/overview?business_id=758181023519141&nav_source=events_manager"
             target="_blank"
             rel="noopener noreferrer"
