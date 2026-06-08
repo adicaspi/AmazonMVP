@@ -16,12 +16,6 @@ const mediaItems: MediaItem[] = [
     alt: "Shark FlexStyle Salon Blowout at Home — Before and After",
   },
   {
-    type: "video",
-    src: "/videos/shark-flexstyle/shark-demo.mp4",
-    alt: "Shark FlexStyle product demo video",
-    poster: "/images/shark-flexstyle/transformation.jpg",
-  },
-  {
     type: "image",
     src: "/images/shark-flexstyle/transformation.jpg",
     alt: "10-Minute Hair Transformation with the Shark FlexStyle",
@@ -30,6 +24,12 @@ const mediaItems: MediaItem[] = [
     type: "image",
     src: "/images/shark-flexstyle/why-switching.jpg",
     alt: "Why Women Are Switching — The Old Routine vs the Shark FlexStyle",
+  },
+  {
+    type: "video",
+    src: "/videos/shark-flexstyle/shark-demo.mp4",
+    alt: "Shark FlexStyle product demo video",
+    poster: "/images/shark-flexstyle/transformation.jpg",
   },
 ];
 
