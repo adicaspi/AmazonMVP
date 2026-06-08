@@ -40,6 +40,17 @@ export const metadata: Metadata = {
 
 const ASIN = "B0B89P16MC";
 
+// Product demo videos. Drop the .mp4 file(s) into public/videos/shark-flexstyle/
+// using the file name below and they appear automatically (poster shows until then).
+const DEMO_VIDEOS = [
+  {
+    src: "/videos/shark-flexstyle/shark-demo.mp4",
+    poster: "/images/shark-flexstyle/transformation.jpg",
+    title: "Shark FlexStyle in Action",
+    subtitle: "Watch it dry, curl & smooth in seconds",
+  },
+];
+
 const getCachedProduct = unstable_cache(
   async (): Promise<AmazonProductData | null> => {
     try {
@@ -446,6 +457,67 @@ export default async function SharkFlexStylePage() {
               <p className="text-xs md:text-base text-gray-600 hidden md:block">Smooth, voluminous, salon-worthy hair — no appointment needed.</p>
               <p className="text-xs text-gray-600 md:hidden">Salon look</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Video Demo */}
+      <section className="py-10 md:py-24 bg-gradient-to-br from-stone-50 to-amber-50">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-6 md:mb-12">
+            <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-2 md:mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              </span>
+              Watch It Work
+            </div>
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
+              See the Shark FlexStyle in Action
+            </h2>
+            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
+              One tool, endless styles — watch how it dries, curls, smooths and volumizes.
+            </p>
+          </div>
+
+          <div className={`grid gap-6 md:gap-8 mx-auto ${DEMO_VIDEOS.length > 1 ? "md:grid-cols-2 max-w-4xl" : "max-w-2xl"}`}>
+            {DEMO_VIDEOS.map((video, i) => (
+              <div key={i} className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
+                <video
+                  className="w-full h-full object-cover aspect-video"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={video.poster}
+                >
+                  <source src={video.src} type="video/mp4" />
+                </video>
+                <div className="absolute top-3 left-3 bg-amber-600 text-white text-xs font-bold px-2 py-1 rounded z-10">
+                  PRODUCT DEMO
+                </div>
+                {(video.title || video.subtitle) && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 pointer-events-none">
+                    {video.title && <p className="text-white font-semibold text-sm md:text-base">{video.title}</p>}
+                    {video.subtitle && <p className="text-amber-100 text-xs md:text-sm">{video.subtitle}</p>}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8 md:mt-10">
+            <AmazonButton
+              href={amazonLink}
+              productName="Shark FlexStyle"
+              priceValue={priceAmount}
+              position="video-demo"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              Get These Results Too
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
           </div>
         </div>
       </section>
