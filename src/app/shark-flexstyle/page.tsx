@@ -7,6 +7,7 @@ import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
+import { DemoVideo } from "./DemoVideo";
 import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api";
 import { unstable_cache } from "next/cache";
 
@@ -482,26 +483,13 @@ export default async function SharkFlexStylePage() {
 
           <div className={`grid gap-6 md:gap-8 mx-auto ${DEMO_VIDEOS.length > 1 ? "md:grid-cols-2 max-w-4xl" : "max-w-2xl"}`}>
             {DEMO_VIDEOS.map((video, i) => (
-              <div key={i} className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
-                <video
-                  className="w-full h-full object-cover aspect-square"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster={video.poster}
-                >
-                  <source src={video.src} type="video/mp4" />
-                </video>
-                <div className="absolute top-3 left-3 bg-amber-600 text-white text-xs font-bold px-2 py-1 rounded z-10">
-                  PRODUCT DEMO
-                </div>
-                {(video.title || video.subtitle) && (
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 pointer-events-none">
-                    {video.title && <p className="text-white font-semibold text-sm md:text-base">{video.title}</p>}
-                    {video.subtitle && <p className="text-amber-100 text-xs md:text-sm">{video.subtitle}</p>}
-                  </div>
-                )}
-              </div>
+              <DemoVideo
+                key={i}
+                src={video.src}
+                poster={video.poster}
+                title={video.title}
+                subtitle={video.subtitle}
+              />
             ))}
           </div>
 
