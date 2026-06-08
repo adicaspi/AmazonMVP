@@ -22,7 +22,7 @@ export function DemoVideo({ src, poster, title, subtitle }: Props) {
     <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
       <video
         ref={videoRef}
-        className="w-full h-full object-cover aspect-square"
+        className="w-full h-full object-contain aspect-square"
         controls
         playsInline
         preload="metadata"
