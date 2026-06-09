@@ -22,7 +22,7 @@ export function DemoVideo({ src, poster, title, subtitle }: Props) {
     <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
       <video
         ref={videoRef}
-        className="w-full h-full object-contain aspect-square"
+        className="w-full h-full object-cover aspect-video"
         controls
         playsInline
         preload="metadata"
@@ -53,7 +53,7 @@ export function DemoVideo({ src, poster, title, subtitle }: Props) {
             </svg>
           </span>
           <span className="relative bg-black/70 text-white text-xs md:text-sm font-semibold px-3 py-1 rounded-full">
-            ▶ Watch It Work (10s)
+            ▶ Watch Video
           </span>
         </button>
       )}

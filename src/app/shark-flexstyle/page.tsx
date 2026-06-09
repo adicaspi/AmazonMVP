@@ -41,14 +41,37 @@ export const metadata: Metadata = {
 
 const ASIN = "B0B89P16MC";
 
-// Product demo videos. Drop the .mp4 file(s) into public/videos/shark-flexstyle/
-// using the file name below and they appear automatically (poster shows until then).
+// Product demo videos. Files live in public/videos/shark-flexstyle/.
 const DEMO_VIDEOS = [
   {
-    src: "/videos/shark-flexstyle/shark-demo.mp4",
-    poster: "/images/shark-flexstyle/transformation.jpg",
-    title: "Shark FlexStyle in Action",
-    subtitle: "Watch it dry, curl & smooth in seconds",
+    src: "/videos/shark-flexstyle/shark-vid-12.mp4",
+    poster: "/videos/shark-flexstyle/shark-vid-12.jpg",
+    title: "How the FlexStyle Works",
+    subtitle: "See the 5-in-1 system in action",
+  },
+  {
+    src: "/videos/shark-flexstyle/shark-vid-15.mp4",
+    poster: "/videos/shark-flexstyle/shark-vid-15.jpg",
+    title: "Dry & Style in One Pass",
+    subtitle: "Powerful airflow, less heat damage",
+  },
+  {
+    src: "/videos/shark-flexstyle/shark-vid-18.mp4",
+    poster: "/videos/shark-flexstyle/shark-vid-18.jpg",
+    title: "Quick Styling Demo",
+    subtitle: "Salon results in minutes",
+  },
+  {
+    src: "/videos/shark-flexstyle/shark-vid-21.mp4",
+    poster: "/videos/shark-flexstyle/shark-vid-21.jpg",
+    title: "Curl, Smooth & Volumize",
+    subtitle: "Every style with one tool",
+  },
+  {
+    src: "/videos/shark-flexstyle/shark-vid-24.mp4",
+    poster: "/videos/shark-flexstyle/shark-vid-24.jpg",
+    title: "Full Styling Walkthrough",
+    subtitle: "From damp hair to a finished blowout",
   },
 ];
 
