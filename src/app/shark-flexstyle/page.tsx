@@ -7,7 +7,7 @@ import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
-import { DemoVideo } from "./DemoVideo";
+import { VideoCarousel } from "./VideoCarousel";
 import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api";
 import { unstable_cache } from "next/cache";
 
@@ -504,16 +504,8 @@ export default async function SharkFlexStylePage() {
             </p>
           </div>
 
-          <div className={`grid gap-6 md:gap-8 mx-auto ${DEMO_VIDEOS.length > 1 ? "md:grid-cols-2 max-w-4xl" : "max-w-2xl"}`}>
-            {DEMO_VIDEOS.map((video, i) => (
-              <DemoVideo
-                key={i}
-                src={video.src}
-                poster={video.poster}
-                title={video.title}
-                subtitle={video.subtitle}
-              />
-            ))}
+          <div className="max-w-3xl mx-auto">
+            <VideoCarousel videos={DEMO_VIDEOS} />
           </div>
 
           <div className="text-center mt-8 md:mt-10">

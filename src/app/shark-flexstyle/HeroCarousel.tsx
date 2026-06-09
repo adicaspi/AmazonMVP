@@ -28,8 +28,38 @@ const mediaItems: MediaItem[] = [
   {
     type: "video",
     src: "/videos/shark-flexstyle/shark-demo.mp4",
-    alt: "Shark FlexStyle product demo video",
+    alt: "Shark FlexStyle product demo",
     poster: "/images/shark-flexstyle/transformation.jpg",
+  },
+  {
+    type: "video",
+    src: "/videos/shark-flexstyle/shark-vid-12.mp4",
+    alt: "How the Shark FlexStyle works",
+    poster: "/videos/shark-flexstyle/shark-vid-12.jpg",
+  },
+  {
+    type: "video",
+    src: "/videos/shark-flexstyle/shark-vid-15.mp4",
+    alt: "Dry and style in one pass",
+    poster: "/videos/shark-flexstyle/shark-vid-15.jpg",
+  },
+  {
+    type: "video",
+    src: "/videos/shark-flexstyle/shark-vid-18.mp4",
+    alt: "Quick styling demo",
+    poster: "/videos/shark-flexstyle/shark-vid-18.jpg",
+  },
+  {
+    type: "video",
+    src: "/videos/shark-flexstyle/shark-vid-21.mp4",
+    alt: "Curl, smooth and volumize",
+    poster: "/videos/shark-flexstyle/shark-vid-21.jpg",
+  },
+  {
+    type: "video",
+    src: "/videos/shark-flexstyle/shark-vid-24.mp4",
+    alt: "Full styling walkthrough",
+    poster: "/videos/shark-flexstyle/shark-vid-24.jpg",
   },
 ];
 
@@ -40,12 +70,14 @@ export default function HeroCarousel() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
+
+  const handleUserInteraction = () => setUserInteracted(true);
 
   const playVideo = (e: React.MouseEvent) => {
     e.stopPropagation();
     handleUserInteraction();
-    videoRef.current?.play();
+    videoRefs.current[currentIndex]?.play();
   };
 
   // Auto-rotate every 4 seconds (pause when modal is open or user has interacted)
@@ -58,8 +90,6 @@ export default function HeroCarousel() {
     }, 4000);
     return () => clearInterval(interval);
   }, [isModalOpen, userInteracted]);
-
-  const handleUserInteraction = () => setUserInteracted(true);
 
   // Close modal on Escape key
   useEffect(() => {
@@ -79,6 +109,14 @@ export default function HeroCarousel() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isModalOpen]);
 
+  // Pause any non-current video and restore the play overlay on slide change
+  useEffect(() => {
+    Object.entries(videoRefs.current).forEach(([i, el]) => {
+      if (el && Number(i) !== currentIndex) el.pause();
+    });
+    setVideoPlaying(false);
+  }, [currentIndex]);
+
   const goToPrevious = () => {
     handleUserInteraction();
     setCurrentIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length);
@@ -95,14 +133,6 @@ export default function HeroCarousel() {
   };
 
   const currentMedia = mediaItems[currentIndex];
-
-  // Pause the video and restore the play overlay when navigating away from it
-  useEffect(() => {
-    if (currentMedia.type !== "video" && videoRef.current) {
-      videoRef.current.pause();
-      setVideoPlaying(false);
-    }
-  }, [currentIndex, currentMedia.type]);
 
   const handleContainerClick = () => {
     if (currentMedia.type !== "video") {
@@ -140,25 +170,25 @@ export default function HeroCarousel() {
                 {media.type === "video" ? (
                   <div className="w-full h-full flex items-center justify-center">
                     <video
-                      ref={videoRef}
-                      className="w-full h-full object-contain rounded-xl shadow-lg"
+                      ref={(el) => { videoRefs.current[index] = el; }}
+                      className="w-full h-full object-contain rounded-xl shadow-lg bg-black"
                       controls
                       playsInline
                       preload="metadata"
                       poster={media.poster}
                       onClick={(e) => { e.stopPropagation(); handleUserInteraction(); }}
-                      onPlay={() => { handleUserInteraction(); setVideoPlaying(true); }}
-                      onPause={() => setVideoPlaying(false)}
-                      onEnded={() => setVideoPlaying(false)}
+                      onPlay={() => { if (index === currentIndex) { handleUserInteraction(); setVideoPlaying(true); } }}
+                      onPause={() => { if (index === currentIndex) setVideoPlaying(false); }}
+                      onEnded={() => { if (index === currentIndex) setVideoPlaying(false); }}
                     >
                       <source src={media.src} type="video/mp4" />
                     </video>
-                    <div className="absolute top-3 left-3 bg-amber-600 text-white text-xs font-bold px-2 py-1 rounded z-10">
+                    <div className="absolute top-3 left-3 bg-amber-600 text-white text-xs font-bold px-2 py-1 rounded z-10 pointer-events-none">
                       PRODUCT DEMO
                     </div>
 
-                    {/* Big Play overlay - makes it obvious this is a video */}
-                    {!videoPlaying && (
+                    {/* Big play overlay - makes it obvious this is a video */}
+                    {index === currentIndex && !videoPlaying && (
                       <button
                         onClick={playVideo}
                         aria-label="Play video"
@@ -172,7 +202,7 @@ export default function HeroCarousel() {
                           </svg>
                         </span>
                         <span className="relative bg-black/70 text-white text-xs md:text-sm font-semibold px-3 py-1 rounded-full">
-                          ▶ Watch It Work (10s)
+                          ▶ Watch Video
                         </span>
                       </button>
                     )}
@@ -191,21 +221,11 @@ export default function HeroCarousel() {
 
             {/* Zoom hint - only for images */}
             {currentMedia.type !== "video" && (
-              <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+              <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1 pointer-events-none">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                 </svg>
                 Click to zoom
-              </div>
-            )}
-
-            {/* Video indicator */}
-            {currentMedia.type === "video" && (
-              <div className="absolute bottom-2 right-2 bg-amber-500/80 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-                Video
               </div>
             )}
           </div>
@@ -232,7 +252,7 @@ export default function HeroCarousel() {
           </button>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex flex-wrap justify-center gap-2 mt-4">
             {mediaItems.map((media, index) => (
               <button
                 key={index}
