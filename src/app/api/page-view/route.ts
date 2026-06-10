@@ -7,6 +7,7 @@ import { normalizeSource } from "@/lib/normalizeSource";
 const PAGE_PIXEL_MAP: Record<string, string> = {
   "/auraglow": "2679443682454721",
   "/grandelash": "876318711699041",
+  "/shark-flexstyle": "1554568722933870",
 };
 
 // Product info per page for CAPI event enrichment

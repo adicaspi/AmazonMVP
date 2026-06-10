@@ -12,6 +12,7 @@ type TestResult = {
 
 const GRANDELASH_PIXEL_ID = "876318711699041";
 const AURAGLOW_PIXEL_ID = "2679443682454721";
+const SHARK_PIXEL_ID = "1554568722933870";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -120,6 +121,7 @@ export async function GET(request: NextRequest) {
     { path: "/", name: "Homepage", nameHe: "דף הבית", expectedPixel: null, pixelName: "" },
     { path: "/auraglow", name: "AuraGlow page", nameHe: "עמוד AuraGlow", expectedPixel: AURAGLOW_PIXEL_ID, pixelName: "AuraGlow" },
     { path: "/grandelash", name: "GrandeLash page", nameHe: "עמוד GrandeLash", expectedPixel: GRANDELASH_PIXEL_ID, pixelName: "GrandeLash" },
+    { path: "/shark-flexstyle", name: "Shark FlexStyle page", nameHe: "עמוד Shark FlexStyle", expectedPixel: SHARK_PIXEL_ID, pixelName: "Shark FlexStyle" },
   ];
 
   for (const page of pagesToCheck) {

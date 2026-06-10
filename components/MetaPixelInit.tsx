@@ -4,24 +4,30 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 const GRANDELASH_PIXEL_ID = "876318711699041";
+const SHARK_PIXEL_ID = "1554568722933870";
 
 // Each pixel is dedicated to its own product page
-const GRANDELASH_PATHS = ["/grandelash"];
+const PIXEL_BY_PATH: { prefix: string; pixelId: string }[] = [
+  { prefix: "/grandelash", pixelId: GRANDELASH_PIXEL_ID },
+  { prefix: "/shark-flexstyle", pixelId: SHARK_PIXEL_ID },
+];
 
 export function MetaPixelInit() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Only init GrandeLash pixel on GrandeLash pages
-    if (!GRANDELASH_PATHS.some((p) => pathname.startsWith(p))) return;
+    // Find the dedicated pixel for the current page (if any)
+    const match = PIXEL_BY_PATH.find((p) => pathname.startsWith(p.prefix));
+    if (!match) return;
 
     function tryInit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const fbq = (window as any).fbq;
       if (!fbq) return false;
 
-      fbq("init", GRANDELASH_PIXEL_ID);
-      fbq("track", "PageView");
+      // trackSingle targets only this page's pixel so it never double-fires another
+      fbq("init", match!.pixelId);
+      fbq("trackSingle", match!.pixelId, "PageView");
       return true;
     }
 
