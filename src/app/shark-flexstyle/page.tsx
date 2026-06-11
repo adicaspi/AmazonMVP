@@ -91,7 +91,9 @@ const getCachedProduct = unstable_cache(
 
 export default async function SharkFlexStylePage() {
   const product = await getCachedProduct();
-  const amazonLink = `https://www.amazon.com/dp/${ASIN}?tag=aipicks20-20`;
+  // Official Amazon SiteStripe affiliate link (tag=aipicks20-20 credits the commission)
+  const amazonLink =
+    "https://www.amazon.com/Shark-HD430-Multi-Styler-Concentrator-Attachment/dp/B0B89P16MC?th=1&linkCode=ll2&tag=aipicks20-20&linkId=389748d8d6071f3ffcc339db218dbd9d&language=en_US&ref_=as_li_ss_tl";
 
   // Use API price if available, fallback to $279
   const price = product?.price?.displayAmount || "$279";
