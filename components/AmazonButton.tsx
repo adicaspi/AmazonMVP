@@ -72,6 +72,7 @@ export function AmazonButton({ href, children, className, productName, position,
     // Generate shared event IDs for deduplication
     const leadEventId = generateEventId();
     const clickEventId = generateEventId();
+    const checkoutEventId = generateEventId();
 
     // ── Browser Pixel ──────────────────────────────────
     if (typeof window !== "undefined" && window.fbq) {
@@ -83,6 +84,17 @@ export function AmazonButton({ href, children, className, productName, position,
         value: value,
         currency: "USD",
       }, { eventID: leadEventId });
+
+      // Standard ecommerce event so Sales-objective campaigns can optimize for it
+      // (the outbound click to Amazon = intent to check out)
+      window.fbq("track", "InitiateCheckout", {
+        content_name: name,
+        content_ids: [contentId],
+        content_type: "product",
+        num_items: 1,
+        value: value,
+        currency: "USD",
+      }, { eventID: checkoutEventId });
 
       window.fbq("trackCustom", "AmazonClick", {
         content_name: name,
@@ -118,6 +130,22 @@ export function AmazonButton({ href, children, className, productName, position,
           content_category: "Affiliate Link Click",
           content_ids: [contentId],
           content_type: "product",
+          value: value,
+          currency: "USD",
+        },
+      },
+      {
+        event_name: "InitiateCheckout",
+        event_time: now,
+        event_id: checkoutEventId,
+        event_source_url: pageUrl,
+        action_source: "website",
+        user_data: userData,
+        custom_data: {
+          content_name: name,
+          content_ids: [contentId],
+          content_type: "product",
+          num_items: 1,
           value: value,
           currency: "USD",
         },
