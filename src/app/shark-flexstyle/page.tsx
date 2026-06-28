@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import HeroCarousel from "./HeroCarousel";
 import { AmazonButton } from "@/components/AmazonButton";
-import { ViewContentTracker } from "@/components/ViewContentTracker";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
 import { StickyMobileCTA } from "./StickyMobileCTA";
@@ -103,11 +102,6 @@ export default async function SharkFlexStylePage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <ViewContentTracker
-        productName="Shark FlexStyle Air Styling & Drying System"
-        productId="shark-flexstyle"
-        category="Beauty"
-      />
       <PageViewTracker page="/shark-flexstyle" />
 
       {/* Urgency Announcement Bar */}
