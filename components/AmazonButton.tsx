@@ -34,11 +34,23 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/shark-flexstyle": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
 };
 
+// Standard pixel events fired when an Amazon CTA is clicked, per page.
+// Falls back to DEFAULT_CLICK_EVENTS for any page not listed here.
+const DEFAULT_CLICK_EVENTS = ["Lead", "InitiateCheckout"];
+const PAGE_CLICK_EVENTS: Record<string, string[]> = {
+  "/shark-flexstyle": ["ViewContent"],
+};
+
 function getPixelIdForPage(pagePath: string): string | null {
   for (const [prefix, pixelId] of Object.entries(PAGE_PIXEL_MAP)) {
     if (pagePath.startsWith(prefix)) return pixelId;
   }
   return null;
+}
+
+function getClickEventsForPage(pagePath: string): string[] {
+  const key = Object.keys(PAGE_CLICK_EVENTS).find((prefix) => pagePath.startsWith(prefix));
+  return key ? PAGE_CLICK_EVENTS[key] : DEFAULT_CLICK_EVENTS;
 }
 
 /**
@@ -69,32 +81,33 @@ export function AmazonButton({ href, children, className, productName, position,
     const value = priceValue ?? productInfo?.value ?? 0;
     const contentId = productInfo?.content_id || "unknown";
 
-    // Generate shared event IDs for deduplication
-    const leadEventId = generateEventId();
+    // Build the custom_data payload for a given standard event
+    const customDataFor = (eventName: string): Record<string, unknown> => {
+      const data: Record<string, unknown> = {
+        content_name: name,
+        content_ids: [contentId],
+        content_type: "product",
+        value: value,
+        currency: "USD",
+      };
+      if (eventName === "Lead") data.content_category = "Affiliate Link Click";
+      if (eventName === "InitiateCheckout") data.num_items = 1;
+      return data;
+    };
+
+    // Which standard events to fire on this page, each with a shared id for dedup
+    const standardEvents = getClickEventsForPage(pagePath).map((eventName) => ({
+      eventName,
+      eventId: generateEventId(),
+    }));
+    // Custom internal event (not used for optimization)
     const clickEventId = generateEventId();
-    const checkoutEventId = generateEventId();
 
     // ── Browser Pixel ──────────────────────────────────
     if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "Lead", {
-        content_name: name,
-        content_category: "Affiliate Link Click",
-        content_ids: [contentId],
-        content_type: "product",
-        value: value,
-        currency: "USD",
-      }, { eventID: leadEventId });
-
-      // Standard ecommerce event so Sales-objective campaigns can optimize for it
-      // (the outbound click to Amazon = intent to check out)
-      window.fbq("track", "InitiateCheckout", {
-        content_name: name,
-        content_ids: [contentId],
-        content_type: "product",
-        num_items: 1,
-        value: value,
-        currency: "USD",
-      }, { eventID: checkoutEventId });
+      for (const e of standardEvents) {
+        window.fbq("track", e.eventName, customDataFor(e.eventName), { eventID: e.eventId });
+      }
 
       window.fbq("trackCustom", "AmazonClick", {
         content_name: name,
@@ -118,38 +131,15 @@ export function AmazonButton({ href, children, className, productName, position,
     }
 
     const capiEvents = [
-      {
-        event_name: "Lead",
+      ...standardEvents.map((e) => ({
+        event_name: e.eventName,
         event_time: now,
-        event_id: leadEventId,
+        event_id: e.eventId,
         event_source_url: pageUrl,
         action_source: "website",
         user_data: userData,
-        custom_data: {
-          content_name: name,
-          content_category: "Affiliate Link Click",
-          content_ids: [contentId],
-          content_type: "product",
-          value: value,
-          currency: "USD",
-        },
-      },
-      {
-        event_name: "InitiateCheckout",
-        event_time: now,
-        event_id: checkoutEventId,
-        event_source_url: pageUrl,
-        action_source: "website",
-        user_data: userData,
-        custom_data: {
-          content_name: name,
-          content_ids: [contentId],
-          content_type: "product",
-          num_items: 1,
-          value: value,
-          currency: "USD",
-        },
-      },
+        custom_data: customDataFor(e.eventName),
+      })),
       {
         event_name: "AmazonClick",
         event_time: now,
