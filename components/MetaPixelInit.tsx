@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { resolveNotrack } from "@/lib/notrack";
 
 const GRANDELASH_PIXEL_ID = "876318711699041";
 const SHARK_PIXEL_ID = "1554568722933870";
@@ -16,6 +17,9 @@ export function MetaPixelInit() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // Skip the site owner's own visits (?notrack=1)
+    if (resolveNotrack()) return;
+
     // Find the dedicated pixel for the current page (if any)
     const match = PIXEL_BY_PATH.find((p) => pathname.startsWith(p.prefix));
     if (!match) return;

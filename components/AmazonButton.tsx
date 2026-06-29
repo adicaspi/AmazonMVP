@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 import { generateEventId } from "@/lib/fb-conversions";
 import { getVisitorId } from "@/lib/visitor-id";
+import { isNotrackEnabled } from "@/lib/notrack";
 
 declare global {
   interface Window {
@@ -69,6 +70,9 @@ function sendCAPI(events: object[], pixelId: string) {
 
 export function AmazonButton({ href, children, className, productName, position, priceValue }: AmazonButtonProps) {
   const handleClick = () => {
+    // Skip counting the site owner's own clicks (?notrack=1); link still navigates
+    if (isNotrackEnabled()) return;
+
     const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
     const pageUrl = typeof window !== "undefined" ? window.location.href : "";
     const now = Math.floor(Date.now() / 1000);

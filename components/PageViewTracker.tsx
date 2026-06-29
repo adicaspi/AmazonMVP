@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { getVisitorId } from "@/lib/visitor-id";
+import { resolveNotrack } from "@/lib/notrack";
 
 interface PageViewTrackerProps {
   page: string;
@@ -9,6 +10,9 @@ interface PageViewTrackerProps {
 
 export function PageViewTracker({ page }: PageViewTrackerProps) {
   useEffect(() => {
+    // Skip counting the site owner's own visits (?notrack=1)
+    if (resolveNotrack()) return;
+
     // Get UTM parameters from URL
     const urlParams = new URLSearchParams(window.location.search);
     const utmSource = urlParams.get("utm_source");
