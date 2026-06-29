@@ -328,6 +328,24 @@ const pageLabels: Record<string, string> = {
   "/shark-flexstyle": "Shark FlexStyle",
 };
 
+function formatTimeAgo(ts: number, now: number, lang: "he" | "en"): string {
+  const diff = Math.max(0, Math.floor((now - ts) / 1000)); // seconds
+  if (diff < 45) return lang === "he" ? "ממש עכשיו" : "just now";
+  const mins = Math.floor(diff / 60);
+  if (mins < 60) {
+    if (lang === "he") return mins <= 1 ? "לפני דקה" : `לפני ${mins} דקות`;
+    return mins <= 1 ? "1 min ago" : `${mins} min ago`;
+  }
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) {
+    if (lang === "he") return hours === 1 ? "לפני שעה" : `לפני ${hours} שעות`;
+    return hours === 1 ? "1 hour ago" : `${hours} hours ago`;
+  }
+  const days = Math.floor(hours / 24);
+  if (lang === "he") return days === 1 ? "לפני יום" : days === 2 ? "לפני יומיים" : `לפני ${days} ימים`;
+  return days === 1 ? "1 day ago" : `${days} days ago`;
+}
+
 export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData, dateFrom, dateTo }: Props) {
   const router = useRouter();
   const [lang, setLang] = useState<"he" | "en">("he");
@@ -355,6 +373,14 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     const tick = () => setNyTime(new Date().toLocaleTimeString("en-US", { timeZone: NY_TZ, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true }));
     tick();
     const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  // Live "X minutes ago" clock for relative timestamps (set after mount to avoid hydration mismatch)
+  const [nowTs, setNowTs] = useState<number | null>(null);
+  useEffect(() => {
+    setNowTs(Date.now());
+    const id = setInterval(() => setNowTs(Date.now()), 30000);
     return () => clearInterval(id);
   }, []);
 
@@ -1145,13 +1171,20 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                     <div key={visit.id} className={`grid grid-cols-12 gap-1 px-3 py-2.5 items-center ${isRecent ? (darkMode ? "bg-teal-900/10" : "bg-teal-50/50") : ""} ${dm.tableHover} transition`}>
                       <div className="col-span-3 flex items-center gap-1.5">
                         {isRecent && <span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-pulse flex-shrink-0"></span>}
-                        <span className={`text-xs ${dm.textMuted}`}>
-                          {visitDate.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit", timeZone: NY_TZ })}
-                          {" "}
-                          <span className={`font-medium ${dm.text}`}>
-                            {visitDate.toLocaleTimeString(lang === "he" ? "he-IL" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone: NY_TZ })}
+                        <div className="flex flex-col leading-tight min-w-0">
+                          <span className={`text-xs ${dm.textMuted}`}>
+                            {visitDate.toLocaleDateString(lang === "he" ? "he-IL" : "en-US", { day: "2-digit", month: "2-digit", timeZone: NY_TZ })}
+                            {" "}
+                            <span className={`font-medium ${dm.text}`}>
+                              {visitDate.toLocaleTimeString(lang === "he" ? "he-IL" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone: NY_TZ })}
+                            </span>
                           </span>
-                        </span>
+                          {nowTs !== null && (
+                            <span className={`text-[10px] ${dm.textLight}`}>
+                              {formatTimeAgo(visitDate.getTime(), nowTs, lang)}
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <div className="col-span-2 flex items-center gap-1.5">
                         {visit.utm_source ? getSourceIcon(visit.utm_source) : <span className={`w-4 h-4 inline-flex items-center justify-center rounded-full text-xs ${darkMode ? "bg-gray-700 text-gray-400" : "bg-gray-200 text-gray-500"}`}>D</span>}
