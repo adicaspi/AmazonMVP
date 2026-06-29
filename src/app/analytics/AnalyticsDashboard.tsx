@@ -183,6 +183,16 @@ const translations = {
     mBridgeRate: "אחוז המרה (Bridge)",
     mBridgeRateDesc: "כמה מהמבקרים לחצו לאמזון",
     funnelEconomicsNote: "טיפ: עלות ללחיצה לאמזון = CPC ÷ אחוז ההמרה. גרסה מדויקת יותר (first-party) נמצאת ב״משפך המרה״ למעלה.",
+    breakEven: "מחשבון Break-Even",
+    breakEvenDesc: "הזן עמלה לעסקה והמרת-אמזון משוערת — וראה אם אתה ברווח או בהפסד",
+    beCommissionLabel: "עמלה לעסקה (₪)",
+    beAmazonConvLabel: "המרת אמזון משוערת (%)",
+    beCostPerAmz: "עלות ללחיצה לאמזון",
+    beRevenuePerAmz: "הכנסה ללחיצה לאמזון",
+    beNet: "רווח / הפסד ללחיצה",
+    beNeededConv: "המרת אמזון לאיזון",
+    beProfitableMsg: "🎉 רווחי! אתה מעל סף הרווחיות",
+    beLosingMsg: "⚠️ מפסיד — שפר CPC / Bridge, או שצריך המרת אמזון גבוהה יותר",
     fbTotalSpend: "הוצאה כוללת",
     fbConversions: "המרות",
     fbCostPerConv: "עלות להמרה",
@@ -299,6 +309,16 @@ const translations = {
     mBridgeRate: "Bridge Conversion Rate",
     mBridgeRateDesc: "Share of visitors who clicked to Amazon",
     funnelEconomicsNote: "Tip: cost per Amazon click = CPC ÷ conversion rate. A more accurate first-party version is in the Conversion Funnel above.",
+    breakEven: "Break-Even Calculator",
+    breakEvenDesc: "Enter commission per sale and estimated Amazon conversion — see if you're profitable",
+    beCommissionLabel: "Commission per sale (₪)",
+    beAmazonConvLabel: "Est. Amazon conversion (%)",
+    beCostPerAmz: "Cost per Amazon click",
+    beRevenuePerAmz: "Revenue per Amazon click",
+    beNet: "Profit / loss per click",
+    beNeededConv: "Break-even Amazon conversion",
+    beProfitableMsg: "🎉 Profitable! You're above break-even",
+    beLosingMsg: "⚠️ Losing — improve CPC / Bridge, or you need a higher Amazon conversion",
     fbTotalSpend: "Total Spend",
     fbConversions: "Conversions",
     fbCostPerConv: "Cost / Conv",
@@ -383,6 +403,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     const id = setInterval(() => setNowTs(Date.now()), 30000);
     return () => clearInterval(id);
   }, []);
+
+  // Break-even calculator inputs
+  const [beCommission, setBeCommission] = useState(30);
+  const [beAmazonConv, setBeAmazonConv] = useState(6);
 
   useEffect(() => {
     const interval = setInterval(() => router.refresh(), 10000);
@@ -485,6 +509,14 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const cpc = fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
   const costPerAmazonClick = fbConversions > 0 ? fbSpend / fbConversions : 0;
   const fbBridgeRate = fbLinkClicks > 0 ? (fbConversions / fbLinkClicks) * 100 : 0;
+
+  // Break-even calculator (uses first-party bridge rate for accuracy)
+  const beBridgeFrac = data.views > 0 ? data.totalClicks / data.views : 0;
+  const beCostPerAmzClick = beBridgeFrac > 0 ? cpc / beBridgeFrac : costPerAmazonClick;
+  const beRevenuePerClick = beCommission * (beAmazonConv / 100);
+  const beNetPerClick = beRevenuePerClick - beCostPerAmzClick;
+  const beBreakEvenConv = beCommission > 0 && beCostPerAmzClick > 0 ? (beCostPerAmzClick / beCommission) * 100 : 0;
+  const beProfitable = beNetPerClick >= 0;
 
   const getButtonLabel = (position: string) => {
     const label = positionLabels[position];
@@ -1006,6 +1038,66 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               </div>
             </div>
             <p className={`text-xs ${dm.textMuted} mt-3`}>{t.funnelEconomicsNote}</p>
+          </section>
+        )}
+
+        {/* Break-Even Calculator */}
+        {facebookAdsData && facebookAdsData.campaigns.length > 0 && (
+          <section>
+            <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
+              <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+              {t.breakEven}
+            </h2>
+            <p className={`text-sm ${dm.textMuted} mb-3`}>{t.breakEvenDesc}</p>
+            <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
+              {/* Inputs */}
+              <div className="flex flex-wrap gap-4 mb-4">
+                <label className="flex flex-col gap-1">
+                  <span className={`text-xs ${dm.textMuted}`}>{t.beCommissionLabel}</span>
+                  <input
+                    type="number"
+                    value={beCommission}
+                    onChange={(e) => setBeCommission(Math.max(0, Number(e.target.value)))}
+                    className={`w-32 rounded-lg border px-3 py-1.5 text-sm ${darkMode ? "bg-gray-800 border-gray-700 text-white" : "bg-white border-gray-300 text-gray-900"}`}
+                  />
+                </label>
+                <label className="flex flex-col gap-1">
+                  <span className={`text-xs ${dm.textMuted}`}>{t.beAmazonConvLabel}</span>
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={beAmazonConv}
+                    onChange={(e) => setBeAmazonConv(Math.max(0, Number(e.target.value)))}
+                    className={`w-32 rounded-lg border px-3 py-1.5 text-sm ${darkMode ? "bg-gray-800 border-gray-700 text-white" : "bg-white border-gray-300 text-gray-900"}`}
+                  />
+                </label>
+              </div>
+
+              {/* Computed */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                <div>
+                  <div className={`text-xs ${dm.textMuted} mb-1`}>{t.beCostPerAmz}</div>
+                  <div className="text-xl font-bold text-amber-500">{fbCur}{beCostPerAmzClick.toFixed(2)}</div>
+                </div>
+                <div>
+                  <div className={`text-xs ${dm.textMuted} mb-1`}>{t.beRevenuePerAmz}</div>
+                  <div className="text-xl font-bold text-blue-500">{fbCur}{beRevenuePerClick.toFixed(2)}</div>
+                </div>
+                <div>
+                  <div className={`text-xs ${dm.textMuted} mb-1`}>{t.beNet}</div>
+                  <div className={`text-xl font-bold ${beProfitable ? "text-emerald-500" : "text-red-500"}`}>{beNetPerClick >= 0 ? "+" : ""}{fbCur}{beNetPerClick.toFixed(2)}</div>
+                </div>
+                <div>
+                  <div className={`text-xs ${dm.textMuted} mb-1`}>{t.beNeededConv}</div>
+                  <div className={`text-xl font-bold ${dm.text}`}>{beBreakEvenConv.toFixed(1)}%</div>
+                </div>
+              </div>
+
+              {/* Verdict */}
+              <div className={`rounded-lg px-4 py-3 text-sm font-semibold text-center ${beProfitable ? (darkMode ? "bg-emerald-900/30 text-emerald-300" : "bg-emerald-50 text-emerald-700") : (darkMode ? "bg-red-900/30 text-red-300" : "bg-red-50 text-red-700")}`}>
+                {beProfitable ? t.beProfitableMsg : t.beLosingMsg}
+              </div>
+            </div>
           </section>
         )}
 
