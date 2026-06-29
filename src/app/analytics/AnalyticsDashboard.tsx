@@ -174,6 +174,15 @@ const translations = {
     directVisit: "ישיר",
     fbAds: "Facebook Ads",
     fbAdsDesc: "ביצועי קמפיינים ב-7 הימים האחרונים",
+    funnelEconomics: "כלכלת המשפך",
+    funnelEconomicsDesc: "המדדים שקובעים רווחיות (7 ימים אחרונים, פייסבוק)",
+    mCpc: "CPC — עלות לקליק",
+    mCpcDesc: "עלות להביא מבקר לעמוד",
+    mCostPerAmazonClick: "עלות ללחיצה לאמזון",
+    mCostPerAmazonClickDesc: "עלות לכל לחיצה שיוצאת לאמזון",
+    mBridgeRate: "אחוז המרה (Bridge)",
+    mBridgeRateDesc: "כמה מהמבקרים לחצו לאמזון",
+    funnelEconomicsNote: "טיפ: עלות ללחיצה לאמזון = CPC ÷ אחוז ההמרה. גרסה מדויקת יותר (first-party) נמצאת ב״משפך המרה״ למעלה.",
     fbTotalSpend: "הוצאה כוללת",
     fbConversions: "המרות",
     fbCostPerConv: "עלות להמרה",
@@ -281,6 +290,15 @@ const translations = {
     directVisit: "Direct",
     fbAds: "Facebook Ads",
     fbAdsDesc: "Campaign performance over the last 7 days",
+    funnelEconomics: "Funnel Economics",
+    funnelEconomicsDesc: "The metrics that decide profitability (last 7 days, Facebook)",
+    mCpc: "CPC — Cost per Click",
+    mCpcDesc: "Cost to bring a visitor to the page",
+    mCostPerAmazonClick: "Cost per Amazon Click",
+    mCostPerAmazonClickDesc: "Cost for each click out to Amazon",
+    mBridgeRate: "Bridge Conversion Rate",
+    mBridgeRateDesc: "Share of visitors who clicked to Amazon",
+    funnelEconomicsNote: "Tip: cost per Amazon click = CPC ÷ conversion rate. A more accurate first-party version is in the Conversion Funnel above.",
     fbTotalSpend: "Total Spend",
     fbConversions: "Conversions",
     fbCostPerConv: "Cost / Conv",
@@ -432,6 +450,15 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   };
 
   const conversionRate = data.views > 0 ? ((data.totalClicks / data.views) * 100).toFixed(1) : "0";
+
+  // Funnel economics (Facebook 7-day data, self-consistent)
+  const fbCur = facebookAdsData?.currency === "ILS" ? "₪" : "$";
+  const fbSpend = facebookAdsData?.totalSpend ?? 0;
+  const fbLinkClicks = facebookAdsData ? facebookAdsData.campaigns.reduce((s, c) => s + c.clicks, 0) : 0;
+  const fbConversions = facebookAdsData?.totalConversions ?? 0;
+  const cpc = fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
+  const costPerAmazonClick = fbConversions > 0 ? fbSpend / fbConversions : 0;
+  const fbBridgeRate = fbLinkClicks > 0 ? (fbConversions / fbLinkClicks) * 100 : 0;
 
   const getButtonLabel = (position: string) => {
     const label = positionLabels[position];
@@ -926,6 +953,35 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             </div>
           </section>
         ) : null}
+
+        {/* Funnel Economics — the 3 KPIs that decide profitability */}
+        {facebookAdsData && facebookAdsData.campaigns.length > 0 && (
+          <section>
+            <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
+              <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+              {t.funnelEconomics}
+            </h2>
+            <p className={`text-sm ${dm.textMuted} mb-3`}>{t.funnelEconomicsDesc}</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
+                <div className={`text-xs ${dm.textMuted} mb-1`}>{t.mCpc}</div>
+                <div className="text-3xl font-bold text-blue-500">{fbCur}{cpc.toFixed(2)}</div>
+                <div className={`text-xs ${dm.textMuted} mt-1`}>{t.mCpcDesc}</div>
+              </div>
+              <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
+                <div className={`text-xs ${dm.textMuted} mb-1`}>{t.mCostPerAmazonClick}</div>
+                <div className="text-3xl font-bold text-amber-500">{fbCur}{costPerAmazonClick.toFixed(2)}</div>
+                <div className={`text-xs ${dm.textMuted} mt-1`}>{t.mCostPerAmazonClickDesc}</div>
+              </div>
+              <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
+                <div className={`text-xs ${dm.textMuted} mb-1`}>{t.mBridgeRate}</div>
+                <div className="text-3xl font-bold text-emerald-500">{fbBridgeRate.toFixed(1)}%</div>
+                <div className={`text-xs ${dm.textMuted} mt-1`}>{t.mBridgeRateDesc}</div>
+              </div>
+            </div>
+            <p className={`text-xs ${dm.textMuted} mt-3`}>{t.funnelEconomicsNote}</p>
+          </section>
+        )}
 
         {/* Traffic Sources + Button Performance side by side on desktop */}
         <div className="grid md:grid-cols-2 gap-6">
