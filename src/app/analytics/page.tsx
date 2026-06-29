@@ -132,13 +132,18 @@ type TrafficSourceData = {
   recentVisits: RecentVisit[];
 };
 
-async function getTrafficSources(page: string, clickedVisitorIds: Set<string>): Promise<TrafficSourceData> {
+async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, from?: string, to?: string): Promise<TrafficSourceData> {
   try {
     if (supabase && (await isDatabaseAvailable())) {
-      const { data, error } = await supabase
+      // Filter by the SAME date range as the page-view count so percentages line up
+      let query = supabase
         .from("page_views")
         .select("id, timestamp, page, utm_source, referer, device_type, full_url, visitor_id")
-        .eq("page", page)
+        .eq("page", page);
+      if (from) query = query.gte("timestamp", `${from}T00:00:00`);
+      if (to) query = query.lte("timestamp", `${to}T23:59:59`);
+
+      const { data, error } = await query
         .order("timestamp", { ascending: false })
         .limit(1000);
 
@@ -339,7 +344,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
       const stats = getClickStats(filteredClicks, path);
       let views = await getPageViews(path, dateFrom, dateTo);
       const todayViews = await getTodayPageViews(path);
-      const trafficData = await getTrafficSources(path, clickedVisitorIds);
+      const trafficData = await getTrafficSources(path, clickedVisitorIds, dateFrom, dateTo);
 
       // Fix: Views should always be >= clicks
       if (views < stats.total) views = stats.total;
