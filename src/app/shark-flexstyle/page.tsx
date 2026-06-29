@@ -118,8 +118,12 @@ export default async function SharkFlexStylePage() {
         <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
           {/* Mobile: Title + Rating ABOVE image (like Amazon) */}
           <div className="md:hidden mb-3">
+            <h2 className="text-xl font-extrabold text-gray-900 leading-tight mb-1">
+              A Salon Blowout at Home — <span className="text-amber-600">In Half the Time</span>
+            </h2>
+            <p className="text-sm text-gray-600 mb-2">Dry, curl, smooth &amp; volumize with one tool — far less heat damage.</p>
             <p className="text-xs text-gray-500 mb-1">Shark FlexStyle by SharkNinja</p>
-            <h1 className="text-lg font-semibold text-gray-900 leading-snug mb-2">
+            <h1 className="text-sm font-medium text-gray-700 leading-snug mb-2">
               Shark FlexStyle Air Styling &amp; Drying System — Dry, Curl, Smooth &amp; Volumize with One Tool (HD430)
             </h1>
             <div className="flex items-center gap-2 mb-1">
@@ -152,7 +156,7 @@ export default async function SharkFlexStylePage() {
               position="hero-mobile-top"
               className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-lg rounded-2xl transition-all shadow-xl active:scale-[0.98]"
             >
-              <span>Buy Now on Amazon</span>
+              <span>Check Price on Amazon</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -213,7 +217,7 @@ export default async function SharkFlexStylePage() {
                   position="hero-main"
                   className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
                 >
-                  <span>Buy Now on Amazon</span>
+                  <span>Check Price on Amazon</span>
                   <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -734,7 +738,7 @@ export default async function SharkFlexStylePage() {
             position="final-cta"
             className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-amber-700 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 animate-bounce hover:animate-none"
           >
-            Buy Now on Amazon
+            Check Price on Amazon
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
