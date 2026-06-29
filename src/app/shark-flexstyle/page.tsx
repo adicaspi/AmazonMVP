@@ -138,6 +138,32 @@ export default async function SharkFlexStylePage() {
             </div>
           </div>
 
+          {/* Mobile: compact price + CTA ABOVE the fold (before the carousel) */}
+          <div className="md:hidden mb-4">
+            <div className="flex items-baseline gap-2 mb-2">
+              <span className="text-2xl font-bold text-gray-900">{price}</span>
+              <span className="text-base text-gray-400 line-through">$329</span>
+              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">SAVE $50</span>
+            </div>
+            <AmazonButton
+              href={amazonLink}
+              productName="Shark FlexStyle"
+              priceValue={priceAmount}
+              position="hero-mobile-top"
+              className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-lg rounded-2xl transition-all shadow-xl active:scale-[0.98]"
+            >
+              <span>Buy Now on Amazon</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+            <div className="flex items-center justify-center gap-4 mt-2 text-xs text-gray-600">
+              <span className="flex items-center gap-1"><span className="text-green-500">✓</span> Free Prime</span>
+              <span className="flex items-center gap-1"><span className="text-green-500">✓</span> Ships Today</span>
+              <span className="flex items-center gap-1"><span className="text-green-500">✓</span> 30-Day Returns</span>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
             {/* Mobile: Carousel after title, Desktop: Second column */}
             <div className="order-1 md:order-2">
