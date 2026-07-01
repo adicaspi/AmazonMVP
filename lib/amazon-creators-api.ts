@@ -13,7 +13,8 @@ const TOKEN_ENDPOINTS: Record<string, string> = {
 };
 
 const API_BASE = "https://creatorsapi.amazon";
-const SCOPE = "creatorsapi/default";
+// v3.x credentials authenticate via Login with Amazon (not Cognito)
+const LWA_TOKEN_ENDPOINT = "https://api.amazon.com/auth/o2/token";
 const REQUEST_TIMEOUT_MS = 3000; // 3 second timeout per request
 
 // Cached token
@@ -37,12 +38,15 @@ function getConfig() {
     throw new Error("Missing Amazon Creators API credentials in environment variables");
   }
 
-  const tokenEndpoint = TOKEN_ENDPOINTS[version];
+  // v3.x uses Login with Amazon + scope "creatorsapi::default"; v2.x uses Cognito + "creatorsapi/default"
+  const isV3 = version.startsWith("3");
+  const tokenEndpoint = isV3 ? LWA_TOKEN_ENDPOINT : TOKEN_ENDPOINTS[version];
+  const scope = isV3 ? "creatorsapi::default" : "creatorsapi/default";
   if (!tokenEndpoint) {
-    throw new Error(`Unsupported API version: ${version}. Supported: ${Object.keys(TOKEN_ENDPOINTS).join(", ")}`);
+    throw new Error(`Unsupported API version: ${version}. Supported: ${Object.keys(TOKEN_ENDPOINTS).join(", ")}, 3.x`);
   }
 
-  return { credentialId, credentialSecret, version, partnerTag, tokenEndpoint };
+  return { credentialId, credentialSecret, version, partnerTag, tokenEndpoint, scope, isV3 };
 }
 
 async function getAccessToken(): Promise<string> {
@@ -51,13 +55,13 @@ async function getAccessToken(): Promise<string> {
     return cachedToken.token;
   }
 
-  const { credentialId, credentialSecret, tokenEndpoint } = getConfig();
+  const { credentialId, credentialSecret, tokenEndpoint, scope } = getConfig();
 
   const body = new URLSearchParams({
     grant_type: "client_credentials",
     client_id: credentialId,
     client_secret: credentialSecret,
-    scope: SCOPE,
+    scope,
   });
 
   const res = await fetchWithTimeout(tokenEndpoint, {
@@ -145,7 +149,7 @@ export async function getProductsByASIN(
   }
 
   const token = await getAccessToken();
-  const { partnerTag, version } = getConfig();
+  const { partnerTag, version, isV3 } = getConfig();
 
   const requestBody = {
     itemIds: asins,
@@ -165,7 +169,7 @@ export async function getProductsByASIN(
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       Accept: "application/json",
-      Authorization: `Bearer ${token}, Version ${version}`,
+      Authorization: isV3 ? `Bearer ${token}` : `Bearer ${token}, Version ${version}`,
       "User-Agent": "creatorsapi-client/1.0",
       "x-marketplace": marketplace,
     },
