@@ -50,9 +50,9 @@ export function UrgencyElements() {
         <div className="flex items-center justify-between">
           <div>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-gray-900">$279</span>
-              <span className="text-lg text-gray-400 line-through">$329</span>
-              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">SAVE $50 · 15% OFF</span>
+              <span className="text-3xl font-bold text-gray-900">$229</span>
+              <span className="text-lg text-gray-400 line-through">$350</span>
+              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">SAVE $121 · 35% OFF</span>
             </div>
             <p className="text-sm text-amber-700 font-semibold mt-1">
               ⏰ Limited-time Amazon price

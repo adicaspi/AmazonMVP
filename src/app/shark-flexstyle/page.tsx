@@ -94,9 +94,9 @@ export default async function SharkFlexStylePage() {
   const amazonLink =
     "https://www.amazon.com/Shark-HD430-Multi-Styler-Concentrator-Attachment/dp/B0B89P16MC?th=1&linkCode=ll2&tag=aipicks20-20&linkId=389748d8d6071f3ffcc339db218dbd9d&language=en_US&ref_=as_li_ss_tl";
 
-  // Use API price if available, fallback to $279
-  const price = product?.price?.displayAmount || "$279";
-  const priceAmount = product?.price?.amount || 279;
+  // Use API price if available, fallback to $229
+  const price = product?.price?.displayAmount || "$229";
+  const priceAmount = product?.price?.amount || 229;
   const reviewCount = product?.reviewCount || 12000;
   const starRating = product?.starRating || 4.5;
 
@@ -146,8 +146,8 @@ export default async function SharkFlexStylePage() {
           <div className="md:hidden mb-4">
             <div className="flex items-baseline gap-2 mb-2">
               <span className="text-2xl font-bold text-gray-900">{price}</span>
-              <span className="text-base text-gray-400 line-through">$329</span>
-              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">SAVE $50</span>
+              <span className="text-base text-gray-400 line-through">$350</span>
+              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">SAVE $121</span>
             </div>
             <AmazonButton
               href={amazonLink}

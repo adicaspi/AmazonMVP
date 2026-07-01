@@ -15,7 +15,7 @@ export function StickyMobileCTA({ amazonLink, price, priceValue }: StickyMobileC
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-amber-200 p-3 md:hidden z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.2)]">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
-            <span className="text-2xl font-bold text-gray-900">{price || "$279"}</span>
+            <span className="text-2xl font-bold text-gray-900">{price || "$229"}</span>
             <div className="flex flex-col">
               <span className="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
               <span className="text-xs text-gray-500 mt-0.5">Thousands bought last month</span>
@@ -49,8 +49,8 @@ export function StickyMobileCTA({ amazonLink, price, priceValue }: StickyMobileC
         <div className="max-w-6xl mx-auto w-full px-6 py-3 flex items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <span className="font-semibold text-gray-900">Shark FlexStyle™ Air Styling &amp; Drying System</span>
-            <span className="text-2xl font-bold text-gray-900">{price || "$279"}</span>
-            <span className="text-base text-gray-400 line-through">$329</span>
+            <span className="text-2xl font-bold text-gray-900">{price || "$229"}</span>
+            <span className="text-base text-gray-400 line-through">$350</span>
             <span className="text-xs text-gray-600 hidden lg:flex items-center gap-3">
               <span className="flex items-center gap-1"><span className="text-green-500">✓</span> 30-Day Money-Back</span>
               <span className="flex items-center gap-1"><span className="text-green-500">✓</span> Free Prime Returns</span>
