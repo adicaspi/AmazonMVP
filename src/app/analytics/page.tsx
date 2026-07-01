@@ -37,6 +37,7 @@ export type FacebookCampaign = {
   spend: number;
   impressions: number;
   clicks: number;
+  linkClicks: number;
   conversions: number;
   costPerConversion: number;
   conversionEventName: string;
@@ -215,6 +216,7 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
       spend: parseFloat(row.spend || "0"),
       impressions: parseInt(row.impressions || "0"),
       clicks: parseInt(row.clicks || "0"),
+      linkClicks: parseInt(row.inline_link_clicks || "0"),
       conversions,
       costPerConversion,
       conversionEventName: conversionType,
@@ -222,18 +224,22 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
   });
 }
 
-async function getFacebookAdsData(): Promise<FacebookAdsData | null> {
+async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookAdsData | null> {
   try {
     const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
     const adAccountId = process.env.FACEBOOK_AD_ACCOUNT_ID;
     if (!accessToken || !adAccountId) return null;
 
     const baseUrl = `https://graph.facebook.com/v21.0/act_${adAccountId}/insights`;
-    const fields = "campaign_name,actions,cost_per_action_type,spend,impressions,clicks";
+    const fields = "campaign_name,actions,cost_per_action_type,spend,impressions,clicks,inline_link_clicks";
+    // Match the dashboard's selected date range; fall back to last 7 days
+    const dateParam = from && to
+      ? `time_range=${encodeURIComponent(JSON.stringify({ since: from, until: to }))}`
+      : "date_preset=last_7d";
 
-    // Fetch last 7 days (by campaign) and today in parallel
+    // Fetch the selected range (by campaign) and today in parallel
     const [weekRes, todayRes] = await Promise.all([
-      fetch(`${baseUrl}?fields=${fields}&level=campaign&date_preset=last_7d&limit=50&access_token=${accessToken}`),
+      fetch(`${baseUrl}?fields=${fields}&level=campaign&${dateParam}&limit=50&access_token=${accessToken}`),
       fetch(`${baseUrl}?fields=spend&date_preset=today&limit=1&access_token=${accessToken}`),
     ]);
 
@@ -318,7 +324,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
 
   const [allClicks, facebookAdsData] = await Promise.all([
     getAmazonClicks(),
-    getFacebookAdsData(),
+    getFacebookAdsData(dateFrom, dateTo),
   ]);
   const today = toNYDateString(new Date());
   const weekAgo = new Date();

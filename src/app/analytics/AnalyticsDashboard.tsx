@@ -53,6 +53,7 @@ type FacebookCampaign = {
   spend: number;
   impressions: number;
   clicks: number;
+  linkClicks: number;
   conversions: number;
   costPerConversion: number;
   conversionEventName: string;
@@ -173,9 +174,9 @@ const translations = {
     noVisitsYet: "אין ביקורים עדיין",
     directVisit: "ישיר",
     fbAds: "Facebook Ads",
-    fbAdsDesc: "ביצועי קמפיינים ב-7 הימים האחרונים",
+    fbAdsDesc: "ביצועי קמפיינים לטווח התאריכים שנבחר",
     funnelEconomics: "כלכלת המשפך",
-    funnelEconomicsDesc: "המדדים שקובעים רווחיות (7 ימים אחרונים, פייסבוק)",
+    funnelEconomicsDesc: "המדדים שקובעים רווחיות (לפי הטווח שנבחר, פייסבוק)",
     mCpc: "CPC — עלות לקליק",
     mCpcDesc: "עלות להביא מבקר לעמוד",
     mCostPerAmazonClick: "עלות ללחיצה לאמזון",
@@ -299,9 +300,9 @@ const translations = {
     noVisitsYet: "No visits yet",
     directVisit: "Direct",
     fbAds: "Facebook Ads",
-    fbAdsDesc: "Campaign performance over the last 7 days",
+    fbAdsDesc: "Campaign performance for the selected date range",
     funnelEconomics: "Funnel Economics",
-    funnelEconomicsDesc: "The metrics that decide profitability (last 7 days, Facebook)",
+    funnelEconomicsDesc: "The metrics that decide profitability (selected range, Facebook)",
     mCpc: "CPC — Cost per Click",
     mCpcDesc: "Cost to bring a visitor to the page",
     mCostPerAmazonClick: "Cost per Amazon Click",
@@ -504,7 +505,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   // Funnel economics (Facebook 7-day data, self-consistent)
   const fbCur = facebookAdsData?.currency === "ILS" ? "₪" : "$";
   const fbSpend = facebookAdsData?.totalSpend ?? 0;
-  const fbLinkClicks = facebookAdsData ? facebookAdsData.campaigns.reduce((s, c) => s + c.clicks, 0) : 0;
+  const fbLinkClicks = facebookAdsData ? facebookAdsData.campaigns.reduce((s, c) => s + (c.linkClicks || 0), 0) : 0;
   const fbConversions = facebookAdsData?.totalConversions ?? 0;
   const cpc = fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
   const costPerAmazonClick = fbConversions > 0 ? fbSpend / fbConversions : 0;
