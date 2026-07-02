@@ -6,7 +6,6 @@ import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
-import { VideoCarousel } from "./VideoCarousel";
 import { BeforeAfterSlider } from "./BeforeAfterSlider";
 import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api";
 import { unstable_cache } from "next/cache";
@@ -40,40 +39,6 @@ export const metadata: Metadata = {
 };
 
 const ASIN = "B0B89P16MC";
-
-// Product demo videos. Files live in public/videos/shark-flexstyle/.
-const DEMO_VIDEOS = [
-  {
-    src: "/videos/shark-flexstyle/shark-vid-12.mp4",
-    poster: "/videos/shark-flexstyle/shark-vid-12.jpg",
-    title: "How the FlexStyle Works",
-    subtitle: "See the 5-in-1 system in action",
-  },
-  {
-    src: "/videos/shark-flexstyle/shark-vid-15.mp4",
-    poster: "/videos/shark-flexstyle/shark-vid-15.jpg",
-    title: "Dry & Style in One Pass",
-    subtitle: "Powerful airflow, less heat damage",
-  },
-  {
-    src: "/videos/shark-flexstyle/shark-vid-18.mp4",
-    poster: "/videos/shark-flexstyle/shark-vid-18.jpg",
-    title: "Quick Styling Demo",
-    subtitle: "Salon results in minutes",
-  },
-  {
-    src: "/videos/shark-flexstyle/shark-vid-21.mp4",
-    poster: "/videos/shark-flexstyle/shark-vid-21.jpg",
-    title: "Curl, Smooth & Volumize",
-    subtitle: "Every style with one tool",
-  },
-  {
-    src: "/videos/shark-flexstyle/shark-vid-24.mp4",
-    poster: "/videos/shark-flexstyle/shark-vid-24.jpg",
-    title: "Full Styling Walkthrough",
-    subtitle: "From damp hair to a finished blowout",
-  },
-];
 
 const getCachedProduct = unstable_cache(
   async (): Promise<AmazonProductData | null> => {
@@ -622,18 +587,23 @@ export default async function SharkFlexStylePage() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
               </span>
-              Watch It Work
+              What&apos;s in the Box
             </div>
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
-              See the Shark FlexStyle in Action
+              Get the Full Kit — 5 Attachments Included
             </h2>
             <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
-              One tool, endless styles — watch how it dries, curls, smooths and volumizes.
+              Auto-wrap curlers, oval brush, paddle brush &amp; concentrator — everything in one box.
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            <VideoCarousel videos={DEMO_VIDEOS} />
+          <div className="max-w-xl mx-auto rounded-2xl overflow-hidden shadow-xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/shark-flexstyle/why-switching.jpg"
+              alt="Shark FlexStyle full kit with all 5 attachments vs the old routine"
+              className="w-full h-auto"
+            />
           </div>
 
           <div className="text-center mt-8 md:mt-10">
