@@ -151,14 +151,14 @@ export default async function SharkFlexStylePage() {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-5 gap-4 md:gap-10 items-center">
+          <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-center">
             {/* Hero visual: auto-playing demo video, then rotates to images (60% width on desktop) */}
-            <div className="order-1 md:order-2 md:col-span-3">
+            <div className="order-1 md:order-2 md:col-span-7">
               <HeroMedia />
             </div>
 
             {/* Content */}
-            <div className="order-2 md:order-1 md:col-span-2">
+            <div className="order-2 md:order-1 md:col-span-5">
               {/* Desktop only: badges and headline */}
               <div className="hidden md:block">
                 <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -168,7 +168,7 @@ export default async function SharkFlexStylePage() {
                   </div>
                 </div>
 
-                <h1 className="text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-gray-900 mb-3">
+                <h1 className="text-4xl lg:text-[44px] font-black tracking-tight leading-[1.08] text-gray-900 mb-4">
                   Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
                 </h1>
 
@@ -185,22 +185,10 @@ export default async function SharkFlexStylePage() {
                   <span className="bg-gray-900 text-white text-xs font-medium px-2.5 py-1 rounded">Amazon&apos;s Choice</span>
                 </div>
 
-                <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+                <p className="text-xl text-gray-600 mb-2 leading-relaxed">
                   Dries + styles in one pass, with far less heat damage. The Dyson alternative — at <strong className="text-gray-900">half the price</strong>.
                 </p>
 
-                <div className="grid grid-cols-3 gap-3 mb-8">
-                  {[
-                    { icon: "🟢", label: "One-Step Styling" },
-                    { icon: "🛡️", label: "Less Heat Damage" },
-                    { icon: "✨", label: "5 Attachments Included" },
-                  ].map((b, i) => (
-                    <div key={i} className="bg-white border border-amber-100 rounded-xl p-3 text-center shadow-sm">
-                      <div className="text-2xl mb-1">{b.icon}</div>
-                      <div className="text-xs font-semibold text-gray-700 leading-tight">{b.label}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
 
               {/* CTA Button */}
@@ -210,10 +198,10 @@ export default async function SharkFlexStylePage() {
                   productName="Shark FlexStyle"
                   priceValue={priceAmount}
                   position="hero-main"
-                  className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98]"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-lg md:text-xl whitespace-nowrap rounded-2xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <span>Check Today&apos;s Amazon Price</span>
-                  <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </AmazonButton>
@@ -236,6 +224,20 @@ export default async function SharkFlexStylePage() {
                 <span>🚚 Prime Shipping</span>
                 <span>🔄 Free Returns</span>
                 <span>⚡ Ships Today</span>
+              </div>
+
+              {/* Benefit cards - Desktop only, below the CTA */}
+              <div className="hidden md:grid grid-cols-3 gap-3 mt-5">
+                {[
+                  { icon: "🟢", label: "One-Step Styling" },
+                  { icon: "🛡️", label: "Less Heat Damage" },
+                  { icon: "✨", label: "5 Attachments Included" },
+                ].map((b, i) => (
+                  <div key={i} className="bg-white border border-amber-100 rounded-xl p-4 text-center shadow-sm">
+                    <div className="text-3xl mb-1.5">{b.icon}</div>
+                    <div className="text-sm font-semibold text-gray-700 leading-tight">{b.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
