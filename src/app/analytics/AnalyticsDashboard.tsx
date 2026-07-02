@@ -100,6 +100,7 @@ const translations = {
     filtered: "מסונן",
     presetAll: "הכל",
     presetToday: "היום",
+    presetYesterday: "אתמול",
     preset7d: "7 ימים",
     preset30d: "30 ימים",
     customRange: "טווח מותאם",
@@ -226,6 +227,7 @@ const translations = {
     filtered: "Filtered",
     presetAll: "All Time",
     presetToday: "Today",
+    presetYesterday: "Yesterday",
     preset7d: "7 Days",
     preset30d: "30 Days",
     customRange: "Custom",
@@ -433,7 +435,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     router.push(`/analytics${qs ? `?${qs}` : ""}`);
   };
 
-  const applyPreset = (preset: "today" | "7d" | "30d" | "all") => {
+  const applyPreset = (preset: "today" | "yesterday" | "7d" | "30d" | "all") => {
     setShowCustomRange(false);
     setLoading(true);
     if (preset === "all") {
@@ -448,6 +450,13 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
       setFilterFrom(todayStr);
       setFilterTo(todayStr);
       applyDateFilter(todayStr, todayStr);
+    } else if (preset === "yesterday") {
+      const y = new Date(now);
+      y.setDate(y.getDate() - 1);
+      const yStr = y.toLocaleDateString("en-CA", { timeZone: NY_TZ });
+      setFilterFrom(yStr);
+      setFilterTo(yStr);
+      applyDateFilter(yStr, yStr);
     } else {
       const daysBack = preset === "7d" ? 7 : 30;
       const from = new Date(now);
@@ -472,6 +481,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     const now = new Date();
     const todayStr = now.toLocaleDateString("en-CA", { timeZone: NY_TZ });
     if (dateFrom === todayStr && dateTo === todayStr) return "today";
+    const yest = new Date(now);
+    yest.setDate(yest.getDate() - 1);
+    const yestStr = yest.toLocaleDateString("en-CA", { timeZone: NY_TZ });
+    if (dateFrom === yestStr && dateTo === yestStr) return "yesterday";
     if (dateTo === todayStr) {
       const from = new Date(dateFrom || "");
       const diff = Math.round((now.getTime() - from.getTime()) / (1000 * 60 * 60 * 24));
@@ -723,6 +736,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           {([
             { key: "all", label: t.presetAll },
             { key: "today", label: t.presetToday },
+            { key: "yesterday", label: t.presetYesterday },
             { key: "7d", label: t.preset7d },
             { key: "30d", label: t.preset30d },
           ] as const).map(({ key, label }) => (
