@@ -509,7 +509,6 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const fbConversions = facebookAdsData?.totalConversions ?? 0;
   const cpc = fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
   const costPerAmazonClick = fbConversions > 0 ? fbSpend / fbConversions : 0;
-  const fbBridgeRate = fbLinkClicks > 0 ? (fbConversions / fbLinkClicks) * 100 : 0;
 
   // Break-even calculator (uses first-party bridge rate for accuracy)
   const beBridgeFrac = data.views > 0 ? data.totalClicks / data.views : 0;
@@ -1029,12 +1028,12 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               </div>
               <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
                 <div className={`text-xs ${dm.textMuted} mb-1`}>{t.mCostPerAmazonClick}</div>
-                <div className="text-3xl font-bold text-amber-500">{fbCur}{costPerAmazonClick.toFixed(2)}</div>
+                <div className="text-3xl font-bold text-amber-500">{beBridgeFrac > 0 ? `${fbCur}${(cpc / beBridgeFrac).toFixed(2)}` : "—"}</div>
                 <div className={`text-xs ${dm.textMuted} mt-1`}>{t.mCostPerAmazonClickDesc}</div>
               </div>
               <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
                 <div className={`text-xs ${dm.textMuted} mb-1`}>{t.mBridgeRate}</div>
-                <div className="text-3xl font-bold text-emerald-500">{fbBridgeRate.toFixed(1)}%</div>
+                <div className="text-3xl font-bold text-emerald-500">{(beBridgeFrac * 100).toFixed(1)}%</div>
                 <div className={`text-xs ${dm.textMuted} mt-1`}>{t.mBridgeRateDesc}</div>
               </div>
             </div>
