@@ -3,7 +3,6 @@ import Link from "next/link";
 import { HeroMedia } from "./HeroMedia";
 import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
-import { UrgencyElements } from "./UrgencyElements";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
 import { BeforeAfterSlider } from "./BeforeAfterSlider";
@@ -149,17 +148,17 @@ export default async function SharkFlexStylePage() {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
-            {/* Hero visual: auto-playing demo video, then rotates to images */}
-            <div className="order-1 md:order-2">
+          <div className="grid md:grid-cols-5 gap-4 md:gap-10 items-center">
+            {/* Hero visual: auto-playing demo video, then rotates to images (60% width on desktop) */}
+            <div className="order-1 md:order-2 md:col-span-3">
               <HeroMedia />
             </div>
 
             {/* Content */}
-            <div className="order-2 md:order-1">
+            <div className="order-2 md:order-1 md:col-span-2">
               {/* Desktop only: badges and headline */}
               <div className="hidden md:block">
-                <div className="flex flex-wrap items-center gap-2 mb-4">
+                <div className="flex flex-wrap items-center gap-2 mb-2">
                   <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-bold">
                     <span>🏆</span>
                     #1 Best Seller
@@ -170,41 +169,35 @@ export default async function SharkFlexStylePage() {
                   Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
                 </h1>
 
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-5">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
-                      <svg key={i} className={`w-5 h-5 ${i < Math.round(starRating) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
+                      <svg key={i} className={`w-6 h-6 ${i < Math.round(starRating) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     ))}
                   </div>
-                  <span className="font-bold text-gray-900">{starRating}</span>
-                  <span className="text-gray-500 text-sm">({reviewCount.toLocaleString()}+ Amazon reviews)</span>
+                  <span className="text-lg font-bold text-gray-900">{starRating} / 5</span>
+                  <span className="text-gray-600">{reviewCount.toLocaleString()}+ Amazon Reviews</span>
+                  <span className="bg-gray-900 text-white text-xs font-medium px-2.5 py-1 rounded">Amazon&apos;s Choice</span>
                 </div>
 
                 <p className="text-xl text-gray-600 mb-6 leading-relaxed">
                   Dries + styles in one pass, with far less heat damage. The Dyson alternative — at <strong className="text-gray-900">half the price</strong>.
                 </p>
 
-                <ul className="space-y-3 mb-7">
-                  <li className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">✓</span>
-                    <span className="text-gray-700"><strong className="text-gray-900">Wet to dry + style in one step</strong> — cut your routine in half</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">✓</span>
-                    <span className="text-gray-700"><strong className="text-gray-900">No extreme heat</strong> — measures temps 1,000x/sec to prevent damage</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">✓</span>
-                    <span className="text-gray-700"><strong className="text-gray-900">5 attachments included</strong> — curl, volumize, smooth &amp; dry</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Urgency Elements - Price, Stock */}
-              <div className="mb-4 md:mb-5">
-                <UrgencyElements />
+                <div className="grid grid-cols-3 gap-3 mb-8">
+                  {[
+                    { icon: "🟢", label: "One-Step Styling" },
+                    { icon: "🛡️", label: "Less Heat Damage" },
+                    { icon: "✨", label: "5 Attachments Included" },
+                  ].map((b, i) => (
+                    <div key={i} className="bg-white border border-amber-100 rounded-xl p-3 text-center shadow-sm">
+                      <div className="text-2xl mb-1">{b.icon}</div>
+                      <div className="text-xs font-semibold text-gray-700 leading-tight">{b.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* CTA Button */}
@@ -214,7 +207,7 @@ export default async function SharkFlexStylePage() {
                   productName="Shark FlexStyle"
                   priceValue={priceAmount}
                   position="hero-main"
-                  className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98]"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-5 md:py-6 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-xl md:text-2xl rounded-2xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <span>Check Today&apos;s Amazon Price</span>
                   <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -235,39 +228,12 @@ export default async function SharkFlexStylePage() {
                 </div>
               </div>
 
-              {/* Trust Elements Under CTA - Desktop only */}
-              <div className="hidden md:flex flex-col gap-2 text-sm text-gray-600 mb-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span>
-                  <span><strong>30-Day Money Back Guarantee</strong></span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span>
-                  <span>Free &amp; Fast Prime Shipping</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span>
-                  <span>Ships Today if Ordered Within 2 Hours</span>
-                </div>
+              {/* Slim trust row - Desktop only */}
+              <div className="hidden md:flex items-center gap-6 text-sm text-gray-600 mt-1">
+                <span>🚚 Prime Shipping</span>
+                <span>🔄 Free Returns</span>
+                <span>⚡ Ships Today</span>
               </div>
-
-              {/* Rating - Desktop only */}
-              <div className="hidden md:flex flex-wrap items-center gap-2 text-sm">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <span className="font-semibold">{starRating}/5</span>
-                <span className="text-gray-600">from <strong>{reviewCount.toLocaleString()}+ Verified Amazon Buyers</strong></span>
-              </div>
-
-              {/* FOMO Line - Desktop only */}
-              <p className="hidden md:block text-xs text-gray-500 mt-2 italic">
-                Amazon Best-Seller This Month
-              </p>
             </div>
           </div>
         </div>
