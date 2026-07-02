@@ -111,6 +111,19 @@ export default async function SharkFlexStylePage() {
               </li>
             </ul>
 
+            <AmazonButton
+              href={amazonLink}
+              productName="Shark FlexStyle"
+              priceValue={priceAmount}
+              position="hero-mobile-top"
+              className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-lg rounded-2xl transition-all shadow-xl active:scale-[0.98]"
+            >
+              <span>Check Today&apos;s Amazon Price</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+
             <div className="flex items-center justify-center gap-5 mt-2 mb-1 text-xs text-gray-600">
               <span>🚚 Prime</span>
               <span>↩️ Free Returns</span>
