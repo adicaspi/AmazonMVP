@@ -6,6 +6,7 @@ import { PageViewTracker } from "@/components/PageViewTracker";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
 import { BeforeAfterSlider } from "./BeforeAfterSlider";
+import { MiniLoop } from "./MiniLoop";
 import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api";
 import { unstable_cache } from "next/cache";
 
@@ -80,24 +81,19 @@ export default async function SharkFlexStylePage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-stone-50 via-white to-amber-50">
         <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
-          {/* Mobile hero — decision-first: headline > proof > CTA (minimal text above the button) */}
+          {/* Mobile hero — headline > media > proof > CTA, all above the fold */}
           <div className="md:hidden mb-4">
-            <h2 className="text-3xl font-black tracking-tight leading-[1.05] text-gray-900 mb-3">
+            <h2 className="text-[26px] font-black tracking-tight leading-[1.05] text-gray-900 mb-2.5">
               Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
             </h2>
 
-            <ul className="space-y-1 mb-3">
-              <li className="flex items-center gap-2 text-[15px] text-gray-800">
-                <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
-                <strong>Dries &amp; Styles in One Pass</strong>
-              </li>
-              <li className="flex items-center gap-2 text-[15px] text-gray-800">
-                <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
-                <strong>Dyson Results. Half the Price.</strong>
-              </li>
-            </ul>
+            {/* GIF-style loop: instant, silent, shows the result immediately (message match with the ad) */}
+            <MiniLoop
+              src="/videos/shark-flexstyle/hero-loop.mp4"
+              className="w-full h-40 object-cover rounded-xl shadow-md mb-2.5"
+            />
 
-            <div className="flex items-center gap-1.5 mb-1.5">
+            <div className="flex items-center gap-1.5 mb-1">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className={`w-4 h-4 ${i < Math.round(starRating) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
@@ -107,14 +103,21 @@ export default async function SharkFlexStylePage() {
               </div>
               <span className="text-sm font-bold text-gray-900">{starRating}</span>
               <span className="text-sm text-gray-500">({reviewCount.toLocaleString()}+ reviews)</span>
+              <span className="bg-gray-900 text-white text-[10px] font-medium px-2 py-0.5 rounded ml-auto">Amazon&apos;s Choice</span>
             </div>
+            <h1 className="text-[11px] text-gray-400 font-medium mb-2">Shark FlexStyle HD430 · 5-in-1 Hair Styler</h1>
 
-            <div className="flex items-center gap-2 mb-4">
-              <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
-              <h1 className="text-xs text-gray-500 font-medium">Shark FlexStyle HD430 · 5-in-1 Hair Styler</h1>
-            </div>
+            <ul className="space-y-0.5 mb-3">
+              <li className="flex items-center gap-2 text-sm text-gray-800">
+                <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
+                <strong>Dyson Results. Half the Price.</strong>
+              </li>
+              <li className="flex items-center gap-2 text-sm text-gray-800">
+                <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
+                <strong>Less Heat Damage</strong>
+              </li>
+            </ul>
 
-            <p className="text-base font-extrabold text-amber-700 mb-2">🔥 Special Deal Today</p>
             <AmazonButton
               href={amazonLink}
               productName="Shark FlexStyle"
@@ -127,7 +130,7 @@ export default async function SharkFlexStylePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </AmazonButton>
-            <div className="flex items-center justify-center gap-5 mt-2.5 mb-1 text-xs text-gray-600">
+            <div className="flex items-center justify-center gap-5 mt-2 mb-1 text-xs text-gray-600">
               <span>🚚 Prime</span>
               <span>↩️ Free Returns</span>
               <span>⚡ Ships Today</span>
