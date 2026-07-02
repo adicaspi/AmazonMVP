@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { AmazonButton } from "@/components/AmazonButton";
 
 interface StickyMobileCTAProps {
@@ -7,44 +8,70 @@ interface StickyMobileCTAProps {
   priceValue?: number;
 }
 
+// Smart sticky: hidden while any hero CTA ([data-hero-cta]) is on screen,
+// slides in once the user scrolls past it, slides away when they scroll back.
+// Never shows two identical buttons at the same time.
 export function StickyMobileCTA({ amazonLink, priceValue }: StickyMobileCTAProps) {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const targets = Array.from(document.querySelectorAll("[data-hero-cta]"));
+    if (targets.length === 0) {
+      setShow(true);
+      return;
+    }
+    const visible = new Set<Element>();
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add(e.target);
+          else visible.delete(e.target);
+        }
+        setShow(visible.size === 0);
+      },
+      { threshold: 0 }
+    );
+    targets.forEach((t) => obs.observe(t));
+    return () => obs.disconnect();
+  }, []);
+
+  const slide = show ? "translate-y-0" : "translate-y-full pointer-events-none";
+
   return (
     <>
-      {/* Mobile sticky bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-amber-200 p-3 md:hidden z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.2)]">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-3">
-            <span className="text-lg font-extrabold text-amber-700">🔥 Deal Today</span>
-            <div className="flex flex-col">
-              <span className="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
-              <span className="text-xs text-gray-500 mt-0.5">Thousands bought last month</span>
+      {/* Mobile: compact sticky bar */}
+      <div className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-3 py-2.5 md:hidden z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.15)] transition-transform duration-300 ${slide}`}>
+        <div className="flex items-center gap-3">
+          <div className="flex flex-col min-w-0">
+            <div className="flex items-center gap-1">
+              <div className="flex">
+                {[...Array(4)].map((_, i) => (
+                  <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <span className="text-xs font-bold text-gray-900">4.3</span>
             </div>
+            <span className="text-[10px] text-gray-500 whitespace-nowrap">Amazon&apos;s Choice</span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-green-600 font-bold bg-green-50 px-2 py-1 rounded-full">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            Free Prime
-          </div>
+          <AmazonButton
+            href={amazonLink}
+            productName="Shark FlexStyle"
+            priceValue={priceValue}
+            position="sticky-mobile"
+            className="flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold text-base rounded-xl shadow-md active:scale-[0.98] transition-transform whitespace-nowrap"
+          >
+            <span>Check Price</span>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </AmazonButton>
         </div>
-        <AmazonButton
-          href={amazonLink}
-          productName="Shark FlexStyle"
-          priceValue={priceValue}
-          position="sticky-mobile"
-          className="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold text-lg rounded-xl shadow-lg active:scale-[0.98] transition-transform"
-        >
-          <span>Check Today&apos;s Amazon Price</span>
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </AmazonButton>
-        <p className="text-center text-[11px] text-gray-500 mt-1.5">🔒 30-Day Money-Back Guarantee · Free Returns</p>
       </div>
 
-      {/* Desktop sticky bar */}
-      <div className="hidden md:flex fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.12)]">
+      {/* Desktop: slim sticky bar */}
+      <div className={`hidden md:flex fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.12)] transition-transform duration-300 ${slide}`}>
         <div className="max-w-6xl mx-auto w-full px-6 py-3 flex items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <span className="font-semibold text-gray-900">Shark FlexStyle™ Air Styling &amp; Drying System</span>
@@ -68,9 +95,6 @@ export function StickyMobileCTA({ amazonLink, priceValue }: StickyMobileCTAProps
           </AmazonButton>
         </div>
       </div>
-
-      {/* Spacer so the fixed bars don't cover footer content */}
-      <div className="h-28 md:h-20"></div>
     </>
   );
 }
