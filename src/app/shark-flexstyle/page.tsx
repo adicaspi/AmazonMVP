@@ -168,7 +168,7 @@ export default async function SharkFlexStylePage() {
                 </h1>
 
                 <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-                  Shark FlexStyle dries + styles with <strong className="text-gray-900">far less heat damage</strong>. Coanda Air auto-wrap curlers, oval brush, paddle brush &amp; concentrator included. The Dyson alternative at <strong className="text-gray-900">half the price</strong>.
+                  Dries + styles in one pass, with far less heat damage. The Dyson alternative — at <strong className="text-gray-900">half the price</strong>.
                 </p>
 
                 <ul className="space-y-3 mb-7">

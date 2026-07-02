@@ -2,18 +2,12 @@
 
 import { useState, useEffect } from "react";
 
+// One clean urgency element: deal line + countdown. No fabricated viewer or
+// stock counters — fake scarcity reads as spam and erodes trust.
 export function UrgencyElements() {
-  const [viewers, setViewers] = useState(0);
-  const [stock, setStock] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    // Simulate realistic viewer count (12-28 people)
-    setViewers(Math.floor(Math.random() * 17) + 12);
-    // Simulate low stock (7-15 units)
-    setStock(Math.floor(Math.random() * 9) + 7);
-
-    // Countdown to midnight ("deal ends")
     const updateTimer = () => {
       const now = new Date();
       const midnight = new Date();
@@ -27,79 +21,26 @@ export function UrgencyElements() {
     };
     updateTimer();
     const timer = setInterval(updateTimer, 1000);
-
-    const viewerInterval = setInterval(() => {
-      setViewers((prev) => {
-        const change = Math.floor(Math.random() * 5) - 2;
-        return Math.max(8, Math.min(35, prev + change));
-      });
-    }, 30000);
-
-    return () => {
-      clearInterval(timer);
-      clearInterval(viewerInterval);
-    };
+    return () => clearInterval(timer);
   }, []);
 
   const pad = (n: number) => n.toString().padStart(2, "0");
 
   return (
-    <div className="space-y-3">
-      {/* Price Display with discount anchor */}
-      <div className="bg-gradient-to-r from-amber-50 to-stone-50 border border-amber-200 rounded-xl p-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-2xl font-extrabold text-amber-700">🔥 Limited-Time Deal</span>
-              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">SPECIAL PRICE TODAY</span>
-            </div>
-            <p className="text-sm text-amber-700 font-semibold mt-1">
-              ⏰ Limited-time Amazon price
-            </p>
-            <p className="text-sm text-green-600 font-medium">
-              ✓ Thousands bought this month
-            </p>
-          </div>
-          <div className="text-right">
-            <p className="text-sm font-bold text-blue-600 flex items-center gap-1 justify-end">
-              <span>✓</span> Free Prime shipping
-            </p>
-            <p className="text-sm font-bold text-amber-700">
-              Ships Today!
-            </p>
-          </div>
-        </div>
+    <div className="bg-gray-900 text-white rounded-xl px-4 py-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+      <div className="flex items-center gap-2">
+        <span className="text-lg">🔥</span>
+        <span className="font-bold">Limited-Time Deal</span>
+        <span className="hidden sm:inline text-xs text-gray-300">· Free Prime shipping · Ships today</span>
       </div>
-
-      {/* Countdown Timer */}
-      <div className="flex items-center justify-center gap-3 bg-gray-900 text-white rounded-xl px-4 py-2.5">
-        <span className="text-sm font-semibold">⏳ Deal ends in</span>
-        <div className="flex items-center gap-1 font-mono font-bold text-lg tabular-nums">
-          <span className="bg-white/15 rounded px-2 py-0.5">{pad(timeLeft.hours)}</span>
+      <div className="flex items-center gap-2">
+        <span className="text-xs text-gray-300">Ends in</span>
+        <div className="flex items-center gap-1 font-mono font-bold text-base tabular-nums">
+          <span className="bg-white/15 rounded px-1.5 py-0.5">{pad(timeLeft.hours)}</span>
           <span>:</span>
-          <span className="bg-white/15 rounded px-2 py-0.5">{pad(timeLeft.minutes)}</span>
+          <span className="bg-white/15 rounded px-1.5 py-0.5">{pad(timeLeft.minutes)}</span>
           <span>:</span>
-          <span className="bg-white/15 rounded px-2 py-0.5">{pad(timeLeft.seconds)}</span>
-        </div>
-      </div>
-
-      {/* Live Viewers & Stock Warning */}
-      <div className="flex flex-col sm:flex-row gap-2">
-        <div className="flex-1 flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-          </span>
-          <span className="text-sm font-medium text-amber-800">
-            <strong>{viewers}</strong> people viewing now
-          </span>
-        </div>
-
-        <div className="flex-1 flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-lg px-3 py-2">
-          <span className="text-orange-500">⚠️</span>
-          <span className="text-sm font-medium text-orange-800">
-            Only <strong>{stock}</strong> left at this price!
-          </span>
+          <span className="bg-white/15 rounded px-1.5 py-0.5">{pad(timeLeft.seconds)}</span>
         </div>
       </div>
     </div>
