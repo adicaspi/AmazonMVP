@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { AmazonButton } from "@/components/AmazonButton";
 
 interface StickyMobileCTAProps {
@@ -8,39 +7,13 @@ interface StickyMobileCTAProps {
   priceValue?: number;
 }
 
-// Smart sticky: hidden while any hero CTA ([data-hero-cta]) is on screen,
-// slides in once the user scrolls past it, slides away when they scroll back.
-// Never shows two identical buttons at the same time.
+// Always-visible sticky CTA bar. On mobile this is the primary action
+// (the hero has no separate button), compact so it supports the content.
 export function StickyMobileCTA({ amazonLink, priceValue }: StickyMobileCTAProps) {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const targets = Array.from(document.querySelectorAll("[data-hero-cta]"));
-    if (targets.length === 0) {
-      setShow(true);
-      return;
-    }
-    const visible = new Set<Element>();
-    const obs = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) visible.add(e.target);
-          else visible.delete(e.target);
-        }
-        setShow(visible.size === 0);
-      },
-      { threshold: 0 }
-    );
-    targets.forEach((t) => obs.observe(t));
-    return () => obs.disconnect();
-  }, []);
-
-  const slide = show ? "translate-y-0" : "translate-y-full pointer-events-none";
-
   return (
     <>
       {/* Mobile: compact sticky bar */}
-      <div className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-3 py-2.5 md:hidden z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.15)] transition-transform duration-300 ${slide}`}>
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-3 py-2.5 md:hidden z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
         <div className="flex items-center gap-3">
           <div className="flex flex-col min-w-0">
             <div className="flex items-center gap-1">
@@ -60,9 +33,9 @@ export function StickyMobileCTA({ amazonLink, priceValue }: StickyMobileCTAProps
             productName="Shark FlexStyle"
             priceValue={priceValue}
             position="sticky-mobile"
-            className="flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold text-base rounded-xl shadow-md active:scale-[0.98] transition-transform whitespace-nowrap"
+            className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold text-base rounded-xl shadow-md active:scale-[0.98] transition-transform whitespace-nowrap"
           >
-            <span>Check Price</span>
+            <span>Check Today&apos;s Amazon Price</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -71,7 +44,7 @@ export function StickyMobileCTA({ amazonLink, priceValue }: StickyMobileCTAProps
       </div>
 
       {/* Desktop: slim sticky bar */}
-      <div className={`hidden md:flex fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.12)] transition-transform duration-300 ${slide}`}>
+      <div className="hidden md:flex fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.12)]">
         <div className="max-w-6xl mx-auto w-full px-6 py-3 flex items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <span className="font-semibold text-gray-900">Shark FlexStyle™ Air Styling &amp; Drying System</span>
@@ -95,6 +68,9 @@ export function StickyMobileCTA({ amazonLink, priceValue }: StickyMobileCTAProps
           </AmazonButton>
         </div>
       </div>
+
+      {/* Spacer so the fixed bars don't cover page content */}
+      <div className="h-20 md:h-20"></div>
     </>
   );
 }
