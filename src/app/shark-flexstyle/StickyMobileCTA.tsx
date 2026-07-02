@@ -35,7 +35,7 @@ export function StickyMobileCTA({ amazonLink, priceValue }: StickyMobileCTAProps
           position="sticky-mobile"
           className="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold text-lg rounded-xl shadow-lg active:scale-[0.98] transition-transform"
         >
-          <span>Check Price on Amazon</span>
+          <span>Check Today&apos;s Amazon Price</span>
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
@@ -61,7 +61,7 @@ export function StickyMobileCTA({ amazonLink, priceValue }: StickyMobileCTAProps
             position="sticky-desktop"
             className="flex items-center justify-center gap-2 px-8 py-3 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-base rounded-full shadow-lg transition-all whitespace-nowrap"
           >
-            <span>Check Price on Amazon</span>
+            <span>Check Today&apos;s Amazon Price</span>
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
