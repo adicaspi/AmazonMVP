@@ -81,20 +81,24 @@ export default async function SharkFlexStylePage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-stone-50 via-white to-amber-50">
         <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
-          {/* Mobile: Title + Rating ABOVE image (like Amazon) */}
-          <div className="md:hidden mb-3">
-            <h2 className="text-3xl font-black tracking-tight leading-[1.05] text-gray-900 mb-2">
+          {/* Mobile hero — decision-first: headline > proof > CTA (minimal text above the button) */}
+          <div className="md:hidden mb-4">
+            <h2 className="text-3xl font-black tracking-tight leading-[1.05] text-gray-900 mb-3">
               Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
             </h2>
-            <p className="text-sm text-gray-600 mb-2">Dries + styles in one pass — <strong className="text-gray-900">far less heat damage</strong>. The Dyson alternative at <strong className="text-gray-900">half the price</strong>.</p>
-            <p className="text-xs text-gray-500 mb-1">Shark FlexStyle by SharkNinja</p>
-            <h1 className="text-sm font-medium text-gray-700 leading-snug mb-2">
-              Shark FlexStyle Air Styling &amp; Drying System — Dry, Curl, Smooth &amp; Volumize with One Tool (HD430)
-            </h1>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
-            </div>
-            <div className="flex items-center gap-1">
+
+            <ul className="space-y-1 mb-3">
+              <li className="flex items-center gap-2 text-[15px] text-gray-800">
+                <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
+                <strong>Dries &amp; Styles in One Pass</strong>
+              </li>
+              <li className="flex items-center gap-2 text-[15px] text-gray-800">
+                <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
+                <strong>Dyson Results. Half the Price.</strong>
+              </li>
+            </ul>
+
+            <div className="flex items-center gap-1.5 mb-1.5">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className={`w-4 h-4 ${i < Math.round(starRating) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
@@ -102,31 +106,16 @@ export default async function SharkFlexStylePage() {
                   </svg>
                 ))}
               </div>
-              <span className="text-sm text-blue-600">{starRating}</span>
+              <span className="text-sm font-bold text-gray-900">{starRating}</span>
               <span className="text-sm text-gray-500">({reviewCount.toLocaleString()}+ reviews)</span>
             </div>
-          </div>
 
-          {/* Mobile: 3 biggest benefits — scannable in under 3 seconds */}
-          <div className="md:hidden grid grid-cols-3 gap-2 mb-3">
-            {[
-              { icon: "💨", label: "Dries + Styles at Once" },
-              { icon: "🛡️", label: "Less Heat Damage" },
-              { icon: "🎯", label: "5 Tools in 1" },
-            ].map((b, i) => (
-              <div key={i} className="bg-amber-50 border border-amber-100 rounded-xl p-2 text-center">
-                <div className="text-2xl">{b.icon}</div>
-                <div className="text-[11px] font-semibold text-gray-700 leading-tight mt-1">{b.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile: compact price + CTA ABOVE the fold (before the carousel) */}
-          <div className="md:hidden mb-4">
-            <div className="flex items-center gap-2 mb-2 flex-wrap">
-              <span className="text-lg font-extrabold text-amber-700">🔥 Special Deal Today</span>
-              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">Limited Time</span>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="bg-gray-900 text-white text-xs font-medium px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
+              <h1 className="text-xs text-gray-500 font-medium">Shark FlexStyle HD430 · 5-in-1 Hair Styler</h1>
             </div>
+
+            <p className="text-base font-extrabold text-amber-700 mb-2">🔥 Special Deal Today</p>
             <AmazonButton
               href={amazonLink}
               productName="Shark FlexStyle"
@@ -139,11 +128,25 @@ export default async function SharkFlexStylePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </AmazonButton>
-            <div className="flex items-center justify-center gap-4 mt-2 text-xs text-gray-600">
-              <span className="flex items-center gap-1"><span className="text-green-500">✓</span> Free Prime</span>
-              <span className="flex items-center gap-1"><span className="text-green-500">✓</span> Ships Today</span>
-              <span className="flex items-center gap-1"><span className="text-green-500">✓</span> 30-Day Returns</span>
+            <div className="flex items-center justify-center gap-5 mt-2.5 mb-1 text-xs text-gray-600">
+              <span>🚚 Prime</span>
+              <span>↩️ Free Returns</span>
+              <span>⚡ Ships Today</span>
             </div>
+          </div>
+
+          {/* Mobile: 3 benefit cards — after the CTA, before the video */}
+          <div className="md:hidden grid grid-cols-3 gap-2 mb-4">
+            {[
+              { icon: "💨", label: "Dries + Styles at Once" },
+              { icon: "🛡️", label: "Less Heat Damage" },
+              { icon: "🎯", label: "5 Tools in 1" },
+            ].map((b, i) => (
+              <div key={i} className="bg-amber-50 border border-amber-100 rounded-lg p-1.5 text-center">
+                <div className="text-xl">{b.icon}</div>
+                <div className="text-[10px] font-semibold text-gray-700 leading-tight mt-0.5">{b.label}</div>
+              </div>
+            ))}
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
