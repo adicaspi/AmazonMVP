@@ -62,8 +62,8 @@ export default async function SharkFlexStylePage() {
 
   // Price value for pixel events only (no specific price shown on the page)
   const priceAmount = product?.price?.amount || 229;
-  const reviewCount = product?.reviewCount || 12000;
-  const starRating = product?.starRating || 4.5;
+  const reviewCount = product?.reviewCount || 6500;
+  const starRating = product?.starRating || 4.3;
 
   return (
     <div className="min-h-screen bg-white">
@@ -71,7 +71,7 @@ export default async function SharkFlexStylePage() {
 
       {/* Urgency Announcement Bar */}
       <div className="bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 text-white text-center py-2.5 px-4">
-        <div className="flex items-center justify-center gap-2 text-sm md:text-base font-bold animate-pulse">
+        <div className="flex items-center justify-center gap-2 text-sm md:text-base font-bold">
           <span>🔥</span>
           <span>BEST SELLER: Thousands Bought This Month!</span>
           <span>🔥</span>
@@ -97,7 +97,7 @@ export default async function SharkFlexStylePage() {
             <div className="flex items-center gap-1">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} className={`w-4 h-4 ${i < 5 ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
+                  <svg key={i} className={`w-4 h-4 ${i < Math.round(starRating) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
@@ -163,9 +163,21 @@ export default async function SharkFlexStylePage() {
                   </div>
                 </div>
 
-                <h1 className="text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-gray-900 mb-5">
+                <h1 className="text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-gray-900 mb-3">
                   Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
                 </h1>
+
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className={`w-5 h-5 ${i < Math.round(starRating) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <span className="font-bold text-gray-900">{starRating}</span>
+                  <span className="text-gray-500 text-sm">({reviewCount.toLocaleString()}+ Amazon reviews)</span>
+                </div>
 
                 <p className="text-xl text-gray-600 mb-6 leading-relaxed">
                   Dries + styles in one pass, with far less heat damage. The Dyson alternative — at <strong className="text-gray-900">half the price</strong>.
@@ -264,8 +276,8 @@ export default async function SharkFlexStylePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 text-center">
             <div className="flex flex-col items-center">
               <span className="text-xl md:text-3xl mb-1 md:mb-2">⭐</span>
-              <div className="text-lg md:text-3xl font-bold text-amber-600">12,000+</div>
-              <div className="text-xs md:text-sm text-gray-600">5-Star Reviews</div>
+              <div className="text-lg md:text-3xl font-bold text-amber-600">6,500+</div>
+              <div className="text-xs md:text-sm text-gray-600">Amazon Reviews</div>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-xl md:text-3xl mb-1 md:mb-2">🏆</span>
@@ -420,7 +432,7 @@ export default async function SharkFlexStylePage() {
               position="comparison-table"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              See Why 12,000+ Women Switched
+              See Why Thousands of Women Switched
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -638,7 +650,7 @@ export default async function SharkFlexStylePage() {
               ))}
             </div>
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
-              12,000+ Women Rated It ★★★★★
+              Rated 4.3/5 by 6,500+ Amazon Buyers
             </h2>
             <p className="text-sm md:text-lg text-gray-600">Don&apos;t just take our word for it</p>
           </div>
@@ -683,7 +695,7 @@ export default async function SharkFlexStylePage() {
               position="reviews-section"
               className="inline-flex items-center justify-center gap-2 px-8 py-3 md:px-10 md:py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              Read 12,000+ Amazon Reviews
+              Read 6,500+ Amazon Reviews
             </AmazonButton>
           </div>
         </div>
@@ -811,7 +823,7 @@ export default async function SharkFlexStylePage() {
             productName="Shark FlexStyle"
             priceValue={priceAmount}
             position="final-cta"
-            className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-amber-700 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 animate-bounce hover:animate-none"
+            className="inline-flex items-center justify-center gap-2 px-12 py-5 bg-white text-amber-700 font-bold text-xl rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
             Check Today&apos;s Amazon Price
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
