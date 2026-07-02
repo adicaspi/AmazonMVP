@@ -49,10 +49,9 @@ export function UrgencyElements() {
       <div className="bg-gradient-to-r from-amber-50 to-stone-50 border border-amber-200 rounded-xl p-4">
         <div className="flex items-center justify-between">
           <div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-gray-900">$229</span>
-              <span className="text-lg text-gray-400 line-through">$350</span>
-              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">SAVE $121 · 35% OFF</span>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-2xl font-extrabold text-amber-700">🔥 Limited-Time Deal</span>
+              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">SPECIAL PRICE TODAY</span>
             </div>
             <p className="text-sm text-amber-700 font-semibold mt-1">
               ⏰ Limited-time Amazon price

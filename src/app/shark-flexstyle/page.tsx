@@ -94,8 +94,7 @@ export default async function SharkFlexStylePage() {
   const amazonLink =
     "https://www.amazon.com/Shark-HD430-Multi-Styler-Concentrator-Attachment/dp/B0B89P16MC?th=1&linkCode=ll2&tag=aipicks20-20&linkId=389748d8d6071f3ffcc339db218dbd9d&language=en_US&ref_=as_li_ss_tl";
 
-  // Use API price if available, fallback to $229
-  const price = product?.price?.displayAmount || "$229";
+  // Price value for pixel events only (no specific price shown on the page)
   const priceAmount = product?.price?.amount || 229;
   const reviewCount = product?.reviewCount || 12000;
   const starRating = product?.starRating || 4.5;
@@ -144,10 +143,9 @@ export default async function SharkFlexStylePage() {
 
           {/* Mobile: compact price + CTA ABOVE the fold (before the carousel) */}
           <div className="md:hidden mb-4">
-            <div className="flex items-baseline gap-2 mb-2">
-              <span className="text-2xl font-bold text-gray-900">{price}</span>
-              <span className="text-base text-gray-400 line-through">$350</span>
-              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">SAVE $121</span>
+            <div className="flex items-center gap-2 mb-2 flex-wrap">
+              <span className="text-lg font-extrabold text-amber-700">🔥 Special Deal Today</span>
+              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">Limited Time</span>
             </div>
             <AmazonButton
               href={amazonLink}
@@ -726,7 +724,7 @@ export default async function SharkFlexStylePage() {
             Join thousands of women getting salon blowouts at home with the Shark FlexStyle.
           </p>
           <div className="flex items-center justify-center gap-3 mb-8">
-            <span className="text-4xl font-bold">{price}</span>
+            <span className="text-3xl font-bold">🔥 Special Deal Today</span>
             <span className="bg-yellow-400 text-yellow-900 text-sm font-bold px-3 py-1 rounded-full">
               Amazon&apos;s Choice
             </span>
@@ -798,7 +796,7 @@ export default async function SharkFlexStylePage() {
       <SocialProofPopup />
 
       {/* Sticky Mobile CTA */}
-      <StickyMobileCTA amazonLink={amazonLink} price={price} priceValue={priceAmount} />
+      <StickyMobileCTA amazonLink={amazonLink} priceValue={priceAmount} />
     </div>
   );
 }
