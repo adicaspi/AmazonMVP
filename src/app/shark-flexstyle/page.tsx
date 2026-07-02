@@ -86,7 +86,7 @@ export default async function SharkFlexStylePage() {
               Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
             </h2>
 
-            <div className="flex items-center gap-1.5 mb-1">
+            <div className="flex flex-wrap items-center gap-1.5 mb-1">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className={`w-4 h-4 ${i < Math.round(starRating) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
@@ -96,7 +96,7 @@ export default async function SharkFlexStylePage() {
               </div>
               <span className="text-sm font-bold text-gray-900">{starRating}</span>
               <span className="text-sm text-gray-500">({reviewCount.toLocaleString()}+ reviews)</span>
-              <span className="bg-gray-900 text-white text-[10px] font-medium px-2 py-0.5 rounded ml-auto">Amazon&apos;s Choice</span>
+              <span className="bg-gray-900 text-white text-[10px] font-medium px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
             </div>
             <h1 className="text-[11px] text-gray-400 font-medium mb-2">Shark FlexStyle HD430 · 5-in-1 Hair Styler</h1>
 
@@ -133,7 +133,7 @@ export default async function SharkFlexStylePage() {
 
           <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-center">
             {/* Hero visual: auto-playing demo video, then rotates to images (60% width on desktop) */}
-            <div className="order-1 md:order-2 md:col-span-7">
+            <div className="order-1 md:order-2 md:col-span-7 md:scale-[1.05]">
               <HeroMedia />
             </div>
 

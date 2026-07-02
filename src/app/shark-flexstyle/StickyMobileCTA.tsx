@@ -34,7 +34,7 @@ export function StickyMobileCTA({ amazonLink, priceValue }: StickyMobileCTAProps
             position="sticky-mobile"
             className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm rounded-lg shadow-sm active:scale-[0.98] transition-transform whitespace-nowrap"
           >
-            <span>See Price</span>
+            <span>See Price on Amazon</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
