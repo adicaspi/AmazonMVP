@@ -7,6 +7,7 @@ import { UrgencyElements } from "./UrgencyElements";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
 import { VideoCarousel } from "./VideoCarousel";
+import { BeforeAfterSlider } from "./BeforeAfterSlider";
 import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api";
 import { unstable_cache } from "next/cache";
 
@@ -470,13 +471,14 @@ export default async function SharkFlexStylePage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
-            <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/shark-flexstyle/transformation.jpg"
-                alt="10-Minute Hair Transformation with the Shark FlexStyle"
-                className="w-full h-auto"
+            <div className="max-w-xs sm:max-w-sm mx-auto w-full">
+              <BeforeAfterSlider
+                before="/images/shark-flexstyle/ba-before.jpg"
+                after="/images/shark-flexstyle/ba-after.jpg"
+                beforeAlt="Frizzy hair before using the Shark FlexStyle"
+                afterAlt="Smooth salon blowout after using the Shark FlexStyle"
               />
+              <p className="text-center text-xs text-gray-500 mt-2">👆 Drag the slider to see the transformation</p>
             </div>
 
             <div className="space-y-4 md:space-y-6">
