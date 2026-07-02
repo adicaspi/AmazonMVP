@@ -6,7 +6,6 @@ import { PageViewTracker } from "@/components/PageViewTracker";
 import { StickyMobileCTA } from "./StickyMobileCTA";
 import { SocialProofPopup } from "./SocialProofPopup";
 import { BeforeAfterSlider } from "./BeforeAfterSlider";
-import { MiniLoop } from "./MiniLoop";
 import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api";
 import { unstable_cache } from "next/cache";
 
@@ -81,17 +80,11 @@ export default async function SharkFlexStylePage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-stone-50 via-white to-amber-50">
         <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
-          {/* Mobile hero — headline > media > proof > CTA, all above the fold */}
-          <div className="md:hidden mb-4">
+          {/* Mobile hero — headline > proof > CTA; the video peeks right below (curiosity) */}
+          <div className="md:hidden mb-3">
             <h2 className="text-[26px] font-black tracking-tight leading-[1.05] text-gray-900 mb-2.5">
               Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
             </h2>
-
-            {/* GIF-style loop: instant, silent, shows the result immediately (message match with the ad) */}
-            <MiniLoop
-              src="/videos/shark-flexstyle/hero-loop.mp4"
-              className="w-full h-40 object-cover rounded-xl shadow-md mb-2.5"
-            />
 
             <div className="flex items-center gap-1.5 mb-1">
               <div className="flex">
@@ -135,20 +128,6 @@ export default async function SharkFlexStylePage() {
               <span>↩️ Free Returns</span>
               <span>⚡ Ships Today</span>
             </div>
-          </div>
-
-          {/* Mobile: 3 benefit cards — after the CTA, before the video */}
-          <div className="md:hidden grid grid-cols-3 gap-2 mb-4">
-            {[
-              { icon: "💨", label: "Dries + Styles at Once" },
-              { icon: "🛡️", label: "Less Heat Damage" },
-              { icon: "🎯", label: "5 Tools in 1" },
-            ].map((b, i) => (
-              <div key={i} className="bg-amber-50 border border-amber-100 rounded-lg p-1.5 text-center">
-                <div className="text-xl">{b.icon}</div>
-                <div className="text-[10px] font-semibold text-gray-700 leading-tight mt-0.5">{b.label}</div>
-              </div>
-            ))}
           </div>
 
           <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-center">
@@ -241,6 +220,20 @@ export default async function SharkFlexStylePage() {
               </div>
             </div>
           </div>
+          {/* Mobile: 3 benefit cards — below the video (video sells; cards support) */}
+          <div className="md:hidden grid grid-cols-3 gap-2 mt-4 mb-1">
+            {[
+              { icon: "💨", label: "Dries + Styles at Once" },
+              { icon: "🛡️", label: "Less Heat Damage" },
+              { icon: "🎯", label: "5 Tools in 1" },
+            ].map((b, i) => (
+              <div key={i} className="bg-amber-50 border border-amber-100 rounded-lg p-1.5 text-center">
+                <div className="text-xl">{b.icon}</div>
+                <div className="text-[10px] font-semibold text-gray-700 leading-tight mt-0.5">{b.label}</div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
