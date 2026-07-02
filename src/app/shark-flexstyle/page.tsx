@@ -96,9 +96,11 @@ export default async function SharkFlexStylePage() {
               </div>
               <span className="text-sm font-bold text-gray-900">{starRating}</span>
               <span className="text-sm text-gray-500">({reviewCount.toLocaleString()}+ reviews)</span>
-              <span className="bg-gray-900 text-white text-[10px] font-medium px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
             </div>
-            <h1 className="text-[11px] text-gray-400 font-medium mb-2">Shark FlexStyle HD430 · 5-in-1 Hair Styler</h1>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="bg-gray-900 text-white text-[10px] font-medium px-2 py-0.5 rounded">Amazon&apos;s Choice</span>
+              <h1 className="text-[11px] text-gray-400 font-medium">Shark FlexStyle HD430 · 5-in-1 Hair Styler</h1>
+            </div>
 
             <ul className="space-y-0.5 mb-3">
               <li className="flex items-center gap-2 text-sm text-gray-800">
@@ -108,6 +110,10 @@ export default async function SharkFlexStylePage() {
               <li className="flex items-center gap-2 text-sm text-gray-800">
                 <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
                 <strong>Less Heat Damage</strong>
+              </li>
+              <li className="flex items-center gap-2 text-sm text-gray-800">
+                <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
+                <strong>5 Styling Attachments Included</strong>
               </li>
             </ul>
 
