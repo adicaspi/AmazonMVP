@@ -1085,7 +1085,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 </div>
                 <div>
                   <div className={`text-xs ${dm.textMuted} mb-1`}>{t.beNet}</div>
-                  <div className={`text-xl font-bold ${beProfitable ? "text-emerald-500" : "text-red-500"}`}>{beNetPerClick >= 0 ? "+" : ""}{fbCur}{beNetPerClick.toFixed(2)}</div>
+                  <div dir="ltr" className={`text-xl font-bold text-right ${beProfitable ? "text-emerald-500" : "text-red-500"}`}>{beNetPerClick >= 0 ? "+" : "-"}{fbCur}{Math.abs(beNetPerClick).toFixed(2)}</div>
                 </div>
                 <div>
                   <div className={`text-xs ${dm.textMuted} mb-1`}>{t.beNeededConv}</div>
