@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { HeroVideo } from "./HeroVideo";
+import { HeroMedia } from "./HeroMedia";
 import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
@@ -83,10 +83,10 @@ export default async function SharkFlexStylePage() {
         <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
           {/* Mobile: Title + Rating ABOVE image (like Amazon) */}
           <div className="md:hidden mb-3">
-            <h2 className="text-xl font-extrabold text-gray-900 leading-tight mb-1">
-              A Salon Blowout at Home — <span className="text-amber-600">In Half the Time</span>
+            <h2 className="text-3xl font-black tracking-tight leading-[1.05] text-gray-900 mb-2">
+              Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
             </h2>
-            <p className="text-sm text-gray-600 mb-2">Dry, curl, smooth &amp; volumize with one tool — far less heat damage.</p>
+            <p className="text-sm text-gray-600 mb-2">Dries + styles in one pass — <strong className="text-gray-900">far less heat damage</strong>. The Dyson alternative at <strong className="text-gray-900">half the price</strong>.</p>
             <p className="text-xs text-gray-500 mb-1">Shark FlexStyle by SharkNinja</p>
             <h1 className="text-sm font-medium text-gray-700 leading-snug mb-2">
               Shark FlexStyle Air Styling &amp; Drying System — Dry, Curl, Smooth &amp; Volumize with One Tool (HD430)
@@ -147,12 +147,9 @@ export default async function SharkFlexStylePage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
-            {/* Hero visual: muted auto-playing demo video (motion above the fold) */}
+            {/* Hero visual: auto-playing demo video, then rotates to images */}
             <div className="order-1 md:order-2">
-              <HeroVideo
-                src="/videos/shark-flexstyle/shark-demo.mp4"
-                poster="/images/shark-flexstyle/transformation.jpg"
-              />
+              <HeroMedia />
             </div>
 
             {/* Content */}
@@ -166,22 +163,28 @@ export default async function SharkFlexStylePage() {
                   </div>
                 </div>
 
-                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                  Get a <span className="text-amber-600">Salon Blowout</span> at Home — <span className="text-amber-600">In Half the Time</span>
+                <h1 className="text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-gray-900 mb-5">
+                  Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
                 </h1>
 
-                <p className="text-xl text-gray-600 mb-4">
-                  Dry. Curl. Smooth. Volumize. One tool replaces your dryer, curler &amp; straightener — with far less heat damage.
+                <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+                  Shark FlexStyle dries + styles with <strong className="text-gray-900">far less heat damage</strong>. Coanda Air auto-wrap curlers, oval brush, paddle brush &amp; concentrator included. The Dyson alternative at <strong className="text-gray-900">half the price</strong>.
                 </p>
 
-                <p className="text-lg text-green-700 font-bold mb-6 flex items-center gap-2">
-                  <span>💰</span>
-                  Replaces $400+ in styling tools — and your standing salon appointments
-                </p>
-
-                <p className="text-base text-gray-700 mb-6 font-medium">
-                  Join <span className="text-amber-600 font-bold">thousands of women</span> getting salon results at home — without the heat damage
-                </p>
+                <ul className="space-y-3 mb-7">
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">✓</span>
+                    <span className="text-gray-700"><strong className="text-gray-900">Wet to dry + style in one step</strong> — cut your routine in half</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">✓</span>
+                    <span className="text-gray-700"><strong className="text-gray-900">No extreme heat</strong> — measures temps 1,000x/sec to prevent damage</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold mt-0.5">✓</span>
+                    <span className="text-gray-700"><strong className="text-gray-900">5 attachments included</strong> — curl, volumize, smooth &amp; dry</span>
+                  </li>
+                </ul>
               </div>
 
               {/* Urgency Elements - Price, Stock */}
