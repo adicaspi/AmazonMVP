@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import HeroCarousel from "./HeroCarousel";
+import { HeroVideo } from "./HeroVideo";
 import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { UrgencyElements } from "./UrgencyElements";
@@ -182,9 +182,12 @@ export default async function SharkFlexStylePage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
-            {/* Mobile: Carousel after title, Desktop: Second column */}
+            {/* Hero visual: muted auto-playing demo video (motion above the fold) */}
             <div className="order-1 md:order-2">
-              <HeroCarousel />
+              <HeroVideo
+                src="/videos/shark-flexstyle/shark-demo.mp4"
+                poster="/images/shark-flexstyle/transformation.jpg"
+              />
             </div>
 
             {/* Content */}
