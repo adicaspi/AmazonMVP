@@ -155,8 +155,15 @@ async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, f
 
         data.forEach((view: any) => {
           let source = "Direct";
+          const fullUrl = view.full_url || "";
           if (view.utm_source) {
             source = normalizeSource(view.utm_source);
+          } else if (fullUrl.includes("fbclid=")) {
+            source = normalizeSource("fb");
+          } else if (fullUrl.includes("gclid=")) {
+            source = normalizeSource("google");
+          } else if (fullUrl.includes("ttclid=")) {
+            source = normalizeSource("tiktok");
           } else if (view.referer) {
             try {
               const host = new URL(view.referer).hostname.replace("www.", "").toLowerCase();

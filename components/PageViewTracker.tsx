@@ -27,6 +27,7 @@ export function PageViewTracker({ page }: PageViewTrackerProps) {
       body: JSON.stringify({
         page,
         full_url: window.location.href,
+        referrer: document.referrer || null,
         visitor_id: getVisitorId(),
         utm_source: utmSource,
         utm_medium: utmMedium,

@@ -84,7 +84,7 @@ async function sendCAPIPageView(
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { page, full_url, visitor_id, utm_source, utm_medium, utm_campaign, utm_content } = body;
+    const { page, full_url, visitor_id, utm_source, utm_medium, utm_campaign, utm_content, referrer } = body;
 
     if (!page) {
       return NextResponse.json(
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
       page: page,
       visitor_id: visitor_id || null,
       user_agent: ua || null,
-      referer: request.headers.get("referer") || null,
+      referer: referrer || null,
       full_url: full_url || null,
       device_type,
       utm_source: utm_source || null,
@@ -174,8 +174,15 @@ export async function GET(request: NextRequest) {
     data?.forEach((view: any) => {
       let source = "Direct";
 
+      const fullUrl = view.full_url || "";
       if (view.utm_source) {
         source = normalizeSource(view.utm_source);
+      } else if (fullUrl.includes("fbclid=")) {
+        source = normalizeSource("fb");
+      } else if (fullUrl.includes("gclid=")) {
+        source = normalizeSource("google");
+      } else if (fullUrl.includes("ttclid=")) {
+        source = normalizeSource("tiktok");
       } else if (view.referer) {
         try {
           const host = new URL(view.referer).hostname.replace("www.", "").toLowerCase();
