@@ -46,6 +46,7 @@ type PageData = {
   viewDeviceCounts: Record<string, number>;
   sourceDeviceBreakdown: Record<string, Record<string, number>>;
   recentVisits: RecentVisit[];
+  adFunnel: Record<string, { views: number; clicks: number }>;
 };
 
 type FacebookCampaign = {
@@ -185,6 +186,12 @@ const translations = {
     mCostPerAmazonClickDesc: "עלות לכל לחיצה שיוצאת לאמזון",
     mBridgeRate: "אחוז המרה (Bridge)",
     mBridgeRateDesc: "כמה מהמבקרים לחצו לאמזון",
+    adFunnelTitle: "משפך המרה לפי מודעה",
+    adFunnelDesc: "איזו מודעה מביאה מבקרים שבאמת לוחצים לאמזון (לפי פרמטר name)",
+    adFunnelAd: "מודעה",
+    adFunnelViews: "צפיות",
+    adFunnelClicks: "לחיצות",
+    adFunnelCR: "המרה",
     funnelEconomicsNote: "טיפ: עלות ללחיצה לאמזון = CPC ÷ אחוז ההמרה. גרסה מדויקת יותר (first-party) נמצאת ב״משפך המרה״ למעלה.",
     breakEven: "מחשבון Break-Even",
     breakEvenDesc: "הזן עמלה לעסקה והמרת-אמזון משוערת — וראה אם אתה ברווח או בהפסד",
@@ -313,6 +320,12 @@ const translations = {
     mCostPerAmazonClickDesc: "Cost for each click out to Amazon",
     mBridgeRate: "Bridge Conversion Rate",
     mBridgeRateDesc: "Share of visitors who clicked to Amazon",
+    adFunnelTitle: "Funnel by Ad",
+    adFunnelDesc: "Which ad drives visitors who actually click to Amazon (by the name param)",
+    adFunnelAd: "Ad",
+    adFunnelViews: "Views",
+    adFunnelClicks: "Clicks",
+    adFunnelCR: "Conversion",
     funnelEconomicsNote: "Tip: cost per Amazon click = CPC ÷ conversion rate. A more accurate first-party version is in the Conversion Funnel above.",
     breakEven: "Break-Even Calculator",
     breakEvenDesc: "Enter commission per sale and estimated Amazon conversion — see if you're profitable",
@@ -963,6 +976,45 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         </section>
 
         {/* Facebook Ads */}
+        {/* Per-ad conversion funnel */}
+        {data.adFunnel && Object.keys(data.adFunnel).length > 0 && (
+          <section>
+            <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
+              <span className="w-2 h-2 bg-fuchsia-500 rounded-full"></span>
+              {t.adFunnelTitle}
+            </h2>
+            <p className={`text-sm ${dm.textMuted} mb-3`}>{t.adFunnelDesc}</p>
+            <div className={`${dm.cardBg} rounded-xl border p-4 transition-colors duration-300`}>
+              <div className={`grid grid-cols-12 gap-2 pb-2 text-xs font-medium ${dm.textMuted}`}>
+                <div className="col-span-3">{t.adFunnelAd}</div>
+                <div className="col-span-2 text-center">{t.adFunnelViews}</div>
+                <div className="col-span-2 text-center">{t.adFunnelClicks}</div>
+                <div className="col-span-5">{t.adFunnelCR}</div>
+              </div>
+              {Object.entries(data.adFunnel)
+                .sort((a, b) => b[1].views - a[1].views)
+                .map(([ad, funnel]) => {
+                  const cr = funnel.views > 0 ? (funnel.clicks / funnel.views) * 100 : 0;
+                  return (
+                    <div key={ad} className={`grid grid-cols-12 gap-2 items-center py-2.5 border-t ${dm.divider}`}>
+                      <div className="col-span-3">
+                        <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-bold ${darkMode ? "bg-fuchsia-900/40 text-fuchsia-300" : "bg-fuchsia-50 text-fuchsia-700"}`}>{ad}</span>
+                      </div>
+                      <div className={`col-span-2 text-center font-bold ${dm.text}`}>{funnel.views}</div>
+                      <div className="col-span-2 text-center font-bold text-emerald-500">{funnel.clicks}</div>
+                      <div className="col-span-5 flex items-center gap-2">
+                        <div className={`flex-1 h-2.5 rounded-full overflow-hidden ${darkMode ? "bg-neutral-800" : "bg-gray-100"}`}>
+                          <div className="h-full bg-fuchsia-500 rounded-full transition-all" style={{ width: `${Math.min(100, cr)}%` }}></div>
+                        </div>
+                        <span className={`text-sm font-bold w-14 text-left ${dm.text}`}>{cr.toFixed(1)}%</span>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </section>
+        )}
+
         {facebookAdsData && facebookAdsData.campaigns.length > 0 ? (
           <section>
             <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>

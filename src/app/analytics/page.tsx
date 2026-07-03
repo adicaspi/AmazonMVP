@@ -30,6 +30,7 @@ type AmazonClick = {
   button_position: string;
   page: string;
   device_type?: string;
+  visitor_id?: string | null;
 };
 
 export type FacebookCampaign = {
@@ -131,6 +132,8 @@ type TrafficSourceData = {
   deviceCounts: Record<string, number>;
   sourceDeviceBreakdown: Record<string, Record<string, number>>;
   recentVisits: RecentVisit[];
+  adViews: Record<string, number>;
+  visitorAdMap: Record<string, string>;
 };
 
 async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, from?: string, to?: string): Promise<TrafficSourceData> {
@@ -152,6 +155,8 @@ async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, f
         const sources: Record<string, number> = {};
         const deviceCounts: Record<string, number> = {};
         const sourceDeviceBreakdown: Record<string, Record<string, number>> = {};
+        const adViews: Record<string, number> = {};
+        const visitorAdMap: Record<string, string> = {};
 
         data.forEach((view: any) => {
           let source = "Direct";
@@ -184,6 +189,17 @@ async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, f
 
           if (!sourceDeviceBreakdown[source]) sourceDeviceBreakdown[source] = {};
           sourceDeviceBreakdown[source][device] = (sourceDeviceBreakdown[source][device] || 0) + 1;
+
+          // Per-ad attribution: ?name=... appended by the Facebook ad URL
+          try {
+            const adName = fullUrl ? new URL(fullUrl).searchParams.get("name") : null;
+            if (adName) {
+              adViews[adName] = (adViews[adName] || 0) + 1;
+              if (view.visitor_id && !visitorAdMap[view.visitor_id]) visitorAdMap[view.visitor_id] = adName;
+            }
+          } catch {
+            // ignore malformed URLs
+          }
         });
         const recentVisits: RecentVisit[] = data.slice(0, 30).map((v: any) => ({
           id: v.id,
@@ -196,12 +212,12 @@ async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, f
           clicked_amazon: v.visitor_id ? clickedVisitorIds.has(v.visitor_id) : false,
         }));
 
-        return { sources, deviceCounts, sourceDeviceBreakdown, recentVisits };
+        return { sources, deviceCounts, sourceDeviceBreakdown, recentVisits, adViews, visitorAdMap };
       }
     }
-    return { sources: {}, deviceCounts: {}, sourceDeviceBreakdown: {}, recentVisits: [] };
+    return { sources: {}, deviceCounts: {}, sourceDeviceBreakdown: {}, recentVisits: [], adViews: {}, visitorAdMap: {} };
   } catch {
-    return { sources: {}, deviceCounts: {}, sourceDeviceBreakdown: {}, recentVisits: [] };
+    return { sources: {}, deviceCounts: {}, sourceDeviceBreakdown: {}, recentVisits: [], adViews: {}, visitorAdMap: {} };
   }
 }
 
@@ -367,6 +383,21 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
         .filter(([day]) => new Date(day) >= weekAgo)
         .reduce((sum, [, count]) => sum + count, 0);
 
+      // Per-ad funnel: views by ?name=, clicks attributed by the visitor's ad
+      const adFunnel: Record<string, { views: number; clicks: number }> = {};
+      Object.entries(trafficData.adViews).forEach(([ad, v]) => {
+        adFunnel[ad] = { views: v, clicks: 0 };
+      });
+      filteredClicks
+        .filter((c) => c.page === path && c.visitor_id)
+        .forEach((c) => {
+          const ad = trafficData.visitorAdMap[c.visitor_id as string];
+          if (ad) {
+            if (!adFunnel[ad]) adFunnel[ad] = { views: 0, clicks: 0 };
+            adFunnel[ad].clicks += 1;
+          }
+        });
+
       return {
         page: path,
         label,
@@ -387,6 +418,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
         viewDeviceCounts: trafficData.deviceCounts,
         sourceDeviceBreakdown: trafficData.sourceDeviceBreakdown,
         recentVisits: trafficData.recentVisits,
+        adFunnel,
       };
     })
   );
@@ -397,12 +429,18 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
   const allTodayViews = pagesData.reduce((sum, p) => sum + p.todayViews, 0);
   if (allViews < allStats.total) allViews = allStats.total;
 
+  const allAdFunnel: Record<string, { views: number; clicks: number }> = {};
   const allTrafficSources: Record<string, number> = {};
   const allViewDeviceCounts: Record<string, number> = {};
   const allSourceDeviceBreakdown: Record<string, Record<string, number>> = {};
   let allRecentVisits: RecentVisit[] = [];
   pagesData.forEach((p) => {
     allRecentVisits = allRecentVisits.concat(p.recentVisits);
+    Object.entries(p.adFunnel).forEach(([ad, f]) => {
+      if (!allAdFunnel[ad]) allAdFunnel[ad] = { views: 0, clicks: 0 };
+      allAdFunnel[ad].views += f.views;
+      allAdFunnel[ad].clicks += f.clicks;
+    });
     Object.entries(p.trafficSources).forEach(([source, count]) => {
       allTrafficSources[source] = (allTrafficSources[source] || 0) + count;
     });
@@ -444,6 +482,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
     recentVisits: allRecentVisits
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
       .slice(0, 30),
+    adFunnel: allAdFunnel,
   };
 
   return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} facebookAdsData={facebookAdsData} dateFrom={dateFrom} dateTo={dateTo} />;
