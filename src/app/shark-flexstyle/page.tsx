@@ -4,7 +4,6 @@ import { HeroMedia } from "./HeroMedia";
 import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { StickyMobileCTA } from "./StickyMobileCTA";
-import { BeforeAfterSlider } from "./BeforeAfterSlider";
 import { KitImage } from "./KitImage";
 import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api";
 import { unstable_cache } from "next/cache";
@@ -131,7 +130,7 @@ export default async function SharkFlexStylePage() {
               </li>
               <li className="flex items-center gap-2 text-sm text-gray-800">
                 <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
-                <strong>Everything You Need in One Tool</strong>
+                <strong>5 Styling Attachments Included</strong>
               </li>
             </ul>
 
@@ -263,6 +262,77 @@ export default async function SharkFlexStylePage() {
         </div>
       </section>
 
+      {/* Before/After — strongest proof, right after the hero video */}
+      <section className="py-10 md:py-16 bg-white">
+        <div className="max-w-2xl mx-auto px-4">
+          <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/shark-flexstyle/ugc-before-after.jpeg"
+              alt="Salon results at home — before and after with the Shark FlexStyle"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto"
+            />
+          </div>
+          <div className="text-center mt-6">
+            <AmazonButton
+              href={amazonLink}
+              productName="Shark FlexStyle"
+              priceValue={priceAmount}
+              position="before-after"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              Check Price &amp; Reviews
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+          </div>
+        </div>
+      </section>
+
+      {/* UGC proof — minimal text, real-feel visuals */}
+      <section className="py-10 md:py-16 bg-gradient-to-br from-stone-50 to-amber-50">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 text-center mb-6 md:mb-8">
+            Why Women Are Switching
+          </h2>
+          <div className="grid grid-cols-2 gap-3 md:gap-5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/shark-flexstyle/ugc-selfie.jpeg"
+              alt="My hair hasn't looked this good in years — Shark FlexStyle result"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto rounded-2xl shadow-lg ring-1 ring-black/5"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/shark-flexstyle/ugc-talking.jpeg"
+              alt="Women can't stop talking about the Shark FlexStyle"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto rounded-2xl shadow-lg ring-1 ring-black/5"
+            />
+          </div>
+          <div className="text-center mt-6">
+            <AmazonButton
+              href={amazonLink}
+              productName="Shark FlexStyle"
+              priceValue={priceAmount}
+              position="ugc-proof"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              View on Amazon
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+          </div>
+        </div>
+      </section>
+
       {/* Social Proof Bar */}
       <section className="bg-gradient-to-r from-amber-100 via-stone-50 to-amber-100 py-4 md:py-8 border-y border-amber-200">
         <div className="max-w-6xl mx-auto px-4">
@@ -287,6 +357,60 @@ export default async function SharkFlexStylePage() {
               <div className="text-lg md:text-3xl font-bold text-amber-600">Less</div>
               <div className="text-xs md:text-sm text-gray-600">Heat Damage</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Video Demo */}
+      <section className="py-10 md:py-24 bg-gradient-to-br from-stone-50 to-amber-50">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-6 md:mb-12">
+            <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-2 md:mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              </span>
+              What&apos;s in the Box
+            </div>
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
+              Get the Full Kit — 5 Attachments Included
+            </h2>
+            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
+              Auto-wrap curlers, oval brush, paddle brush &amp; concentrator — everything in one box.
+            </p>
+          </div>
+
+          <div className="max-w-xl mx-auto rounded-2xl overflow-hidden shadow-xl">
+            <KitImage />
+          </div>
+
+          <div className="max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-6">
+            {[
+              { icon: "🌀", label: "2× Auto-Wrap Curlers" },
+              { icon: "🪮", label: "Oval Brush" },
+              { icon: "🖌️", label: "Paddle Brush" },
+              { icon: "💨", label: "Concentrator" },
+            ].map((a, i) => (
+              <div key={i} className="bg-white border border-amber-100 rounded-xl p-3 text-center shadow-sm">
+                <div className="text-2xl mb-1">{a.icon}</div>
+                <div className="text-xs font-semibold text-gray-700 leading-tight">{a.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8 md:mt-10">
+            <AmazonButton
+              href={amazonLink}
+              productName="Shark FlexStyle"
+              priceValue={priceAmount}
+              position="video-demo"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              See All 5 Attachments on Amazon
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
           </div>
         </div>
       </section>
@@ -364,80 +488,6 @@ export default async function SharkFlexStylePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </AmazonButton>
-          </div>
-        </div>
-      </section>
-
-      {/* Before/After Section */}
-      <section className="py-10 md:py-24">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-6 md:mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
-              From Frizzy to Salon-Smooth in 10 Minutes
-            </h2>
-            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
-              Smooth, voluminous, salon-worthy hair — without the appointment. See the difference for yourself.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
-            <div className="max-w-xs sm:max-w-sm mx-auto w-full">
-              <BeforeAfterSlider
-                before="/images/shark-flexstyle/ba-before.jpg"
-                after="/images/shark-flexstyle/ba-after.jpg"
-                beforeAlt="Frizzy hair before using the Shark FlexStyle"
-                afterAlt="Smooth salon blowout after using the Shark FlexStyle"
-              />
-              <p className="text-center text-xs text-gray-500 mt-2">👆 Drag the slider to see the transformation</p>
-            </div>
-
-            <div className="space-y-4 md:space-y-6">
-              <div className="bg-red-50 border-l-4 border-red-400 p-4 md:p-6 rounded-r-xl">
-                <h3 className="font-bold text-base md:text-xl text-gray-900 mb-2">The Old Routine</h3>
-                <ul className="space-y-1.5 md:space-y-2 text-sm md:text-base text-gray-600">
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-500 mt-0.5">✕</span>
-                    <span>Juggling a dryer, curler &amp; flat iron</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-500 mt-0.5">✕</span>
-                    <span>Repeated extreme heat damages hair</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-500 mt-0.5">✕</span>
-                    <span>30–45 minutes for one style</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="bg-green-50 border-l-4 border-green-500 p-4 md:p-6 rounded-r-xl">
-                <h3 className="font-bold text-base md:text-xl text-gray-900 mb-2">The Shark FlexStyle</h3>
-                <ul className="space-y-1.5 md:space-y-2 text-sm md:text-base text-gray-600">
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-500 mt-0.5">✓</span>
-                    <span>Dries &amp; styles simultaneously</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-500 mt-0.5">✓</span>
-                    <span>Less heat damage — styled with air</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-500 mt-0.5">✓</span>
-                    <span>Multiple styles with one tool, at home</span>
-                  </li>
-                </ul>
-              </div>
-
-              <AmazonButton
-                href={amazonLink}
-                productName="Shark FlexStyle"
-                priceValue={priceAmount}
-                position="benefits-card"
-                className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 md:px-8 md:py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-base md:text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
-              >
-                See It in Action on Amazon
-              </AmazonButton>
-            </div>
           </div>
         </div>
       </section>
@@ -581,60 +631,6 @@ export default async function SharkFlexStylePage() {
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
               See Full Details on Amazon
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </AmazonButton>
-          </div>
-        </div>
-      </section>
-
-      {/* Product Video Demo */}
-      <section className="py-10 md:py-24 bg-gradient-to-br from-stone-50 to-amber-50">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="text-center mb-6 md:mb-12">
-            <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-2 md:mb-4">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-              </span>
-              What&apos;s in the Box
-            </div>
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
-              Get the Full Kit — 5 Attachments Included
-            </h2>
-            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
-              Auto-wrap curlers, oval brush, paddle brush &amp; concentrator — everything in one box.
-            </p>
-          </div>
-
-          <div className="max-w-xl mx-auto rounded-2xl overflow-hidden shadow-xl">
-            <KitImage />
-          </div>
-
-          <div className="max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-6">
-            {[
-              { icon: "🌀", label: "2× Auto-Wrap Curlers" },
-              { icon: "🪮", label: "Oval Brush" },
-              { icon: "🖌️", label: "Paddle Brush" },
-              { icon: "💨", label: "Concentrator" },
-            ].map((a, i) => (
-              <div key={i} className="bg-white border border-amber-100 rounded-xl p-3 text-center shadow-sm">
-                <div className="text-2xl mb-1">{a.icon}</div>
-                <div className="text-xs font-semibold text-gray-700 leading-tight">{a.label}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-8 md:mt-10">
-            <AmazonButton
-              href={amazonLink}
-              productName="Shark FlexStyle"
-              priceValue={priceAmount}
-              position="video-demo"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
-            >
-              See All 5 Attachments on Amazon
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

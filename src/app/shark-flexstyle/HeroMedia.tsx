@@ -17,11 +17,9 @@ const VIDEO = {
 // They render as slides right after the demo video.
 const UGC_CLIPS: { src: string; poster?: string; label?: string }[] = [];
 
-const IMAGES = [
-  { src: "/images/shark-flexstyle/ugc-before-after.jpeg", alt: "Salon results at home — before and after with the Shark FlexStyle" },
-  { src: "/images/shark-flexstyle/ugc-selfie.jpeg", alt: "My hair hasn't looked this good in years — Shark FlexStyle selfie" },
-  { src: "/images/shark-flexstyle/ugc-talking.jpeg", alt: "Women can't stop talking about the Shark FlexStyle" },
-];
+// UGC stills now live in their own sections below the hero (per CRO plan:
+// don't stack all assets above the fold). Keep this empty for a video-only hero.
+const IMAGES: { src: string; alt: string }[] = [];
 
 const TOTAL = 1 + UGC_CLIPS.length + IMAGES.length; // slide 0 = demo video, then UGC, then images
 
@@ -70,7 +68,7 @@ export function HeroMedia() {
             poster={VIDEO.poster}
             autoPlay
             muted
-            loop={false}
+            loop={TOTAL <= 1}
             playsInline
             preload="metadata"
             onEnded={() => { if (!interacted) setIndex(1); }}
@@ -106,6 +104,8 @@ export function HeroMedia() {
         </div>
 
         {/* Arrows */}
+        {TOTAL > 1 && (
+        <>
         <button
           onClick={() => goTo(index - 1)}
           className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 z-20"
@@ -124,9 +124,12 @@ export function HeroMedia() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
+        </>
+        )}
       </div>
 
       {/* Dots */}
+      {TOTAL > 1 && (
       <div className="flex justify-center gap-2 mt-3">
         {Array.from({ length: TOTAL }).map((_, i) => (
           <button
@@ -139,6 +142,7 @@ export function HeroMedia() {
           </button>
         ))}
       </div>
+      )}
     </div>
   );
 }
