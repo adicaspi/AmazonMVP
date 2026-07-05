@@ -933,6 +933,82 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           </div>
         )}
 
+        {/* Campaign Funnel — the ONE place: page tab switches everything.
+            Each page tab is bound to its FB campaign, so every metric here
+            (FB side + landing-page side + profitability) is per-funnel. */}
+        {selectedPage !== "all" && (
+          <section className={`rounded-2xl border-2 p-4 md:p-5 transition-colors duration-300 ${darkMode ? "border-emerald-800 bg-emerald-900/10" : "border-emerald-200 bg-emerald-50/50"}`}>
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
+              <h2 className={`text-lg font-bold ${dm.text} flex items-center gap-2`}>
+                <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                {lang === "he" ? "משפך מקצה לקצה" : "End-to-End Funnel"} — {data.label}
+              </h2>
+              {campaignFilterActive && (
+                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${darkMode ? "bg-blue-900/40 text-blue-300" : "bg-blue-100 text-blue-700"}`}>
+                  {activeCampaign}
+                </span>
+              )}
+            </div>
+            {!campaignFilterActive ? (
+              <div className="flex flex-wrap items-center gap-3 py-2">
+                <p className={`text-sm ${dm.textMuted}`}>
+                  {lang === "he" ? "קשר את הקמפיין של העמוד הזה (פעם אחת, נשמר):" : "Bind this page's campaign (once, saved):"}
+                </p>
+                <select
+                  value=""
+                  onChange={(e) => setCampaignForPage(e.target.value)}
+                  className={`rounded-lg border px-3 py-1.5 text-sm max-w-full ${darkMode ? "bg-neutral-800 border-neutral-700 text-white" : "bg-white border-gray-300 text-gray-900"}`}
+                >
+                  <option value="" disabled>{lang === "he" ? "בחר קמפיין..." : "Choose campaign..."}</option>
+                  {fbCampaigns.map((c) => (
+                    <option key={c.campaign_name} value={c.campaign_name}>{c.campaign_name}</option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <>
+                <p className={`text-xs ${dm.textMuted} mb-3`}>
+                  {lang === "he" ? "פייסבוק → עמוד נחיתה → אמזון, הכל מהקמפיין הזה בלבד" : "Facebook → landing page → Amazon, all from this campaign only"}
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "הוצאה" : "Spend"}</div>
+                    <div className={`text-xl font-bold ${dm.text}`}>{fbCur}{fbSpend.toFixed(2)}</div>
+                  </div>
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "קליקים במודעה" : "Ad Link Clicks"}</div>
+                    <div className="text-xl font-bold text-blue-500">{fbLinkClicks}</div>
+                  </div>
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>CPC</div>
+                    <div className="text-xl font-bold text-blue-500">{fbCur}{cpc.toFixed(2)}</div>
+                  </div>
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "צפיות בעמוד" : "Page Views"}</div>
+                    <div className={`text-xl font-bold ${dm.text}`}>{data.views}</div>
+                  </div>
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "לחיצות לאמזון" : "Amazon Clicks"}</div>
+                    <div className="text-xl font-bold text-orange-500">{data.totalClicks}</div>
+                  </div>
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>Bridge %</div>
+                    <div className="text-xl font-bold text-emerald-500">{(beBridgeFrac * 100).toFixed(1)}%</div>
+                  </div>
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "עלות לקליק אמזון" : "Cost / Amazon Click"}</div>
+                    <div className="text-xl font-bold text-amber-500">{beCostPerAmzClick > 0 ? `${fbCur}${beCostPerAmzClick.toFixed(2)}` : "—"}</div>
+                  </div>
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "רווח/הפסד לקליק" : "Net / Click"}</div>
+                    <div dir="ltr" className={`text-xl font-bold text-right ${beNetPerClick >= 0 ? "text-emerald-500" : "text-red-500"}`}>{beNetPerClick >= 0 ? "+" : "-"}{fbCur}{Math.abs(beNetPerClick).toFixed(2)}</div>
+                  </div>
+                </div>
+              </>
+            )}
+          </section>
+        )}
+
         {/* Page Overview Cards (only show in "All" view) */}
         {selectedPage === "all" && (
           <section>
