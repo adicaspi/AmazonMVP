@@ -427,6 +427,40 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const [beCommission, setBeCommission] = useState(30);
   const [beAmazonConv, setBeAmazonConv] = useState(6);
 
+  // Clear Direct-only traffic for the selected page (owner-only; needs the aip_notrack cookie)
+  const [clearingDirect, setClearingDirect] = useState(false);
+  const clearDirectTraffic = async () => {
+    if (selectedPage === "all" || clearingDirect) return;
+    const label = pagesData.find((p) => p.page === selectedPage)?.label || selectedPage;
+    const msg = lang === "he"
+      ? `למחוק את כל התנועה הישירה (Direct) של ${label}?\n\nנמחקות רק כניסות בלי מקור פרסום (בלי fbclid/utm) והקליקים שלהן. נתוני פייסבוק/מודעות לא נפגעים. אי אפשר לשחזר.`
+      : `Delete ALL Direct traffic for ${label}?\n\nOnly visits with no ad source (no fbclid/utm) and their clicks are removed. Facebook/ad-attributed data is untouched. This cannot be undone.`;
+    if (!window.confirm(msg)) return;
+    setClearingDirect(true);
+    try {
+      const res = await fetch("/api/analytics/clear-direct", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ page: selectedPage }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        window.alert(res.status === 403
+          ? (lang === "he" ? "אין הרשאה — פתח פעם אחת עמוד באתר עם ?notrack=1 בדפדפן הזה ונסה שוב." : "Not authorized — open any site page with ?notrack=1 once in this browser, then retry.")
+          : json.error || "Failed");
+      } else {
+        window.alert(lang === "he"
+          ? `נמחקו ${json.deletedViews} כניסות ישירות ו-${json.deletedClicks} קליקים.`
+          : `Deleted ${json.deletedViews} direct views and ${json.deletedClicks} clicks.`);
+        router.refresh();
+      }
+    } catch {
+      window.alert(lang === "he" ? "שגיאה במחיקה" : "Delete failed");
+    } finally {
+      setClearingDirect(false);
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => router.refresh(), 10000);
     return () => clearInterval(interval);
@@ -690,6 +724,18 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             Pixel Debug
           </a>
+          {selectedPage !== "all" && (
+            <button
+              onClick={clearDirectTraffic}
+              disabled={clearingDirect}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition disabled:opacity-50 ${darkMode ? "bg-red-900/40 text-red-300 hover:bg-red-900/60 border border-red-800" : "bg-red-50 text-red-700 hover:bg-red-100 border border-red-200"}`}
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+              {clearingDirect
+                ? (lang === "he" ? "מוחק..." : "Clearing...")
+                : (lang === "he" ? "נקה תנועה ישירה" : "Clear Direct traffic")}
+            </button>
+          )}
           <a
             href="/auraglow"
             target="_blank"
