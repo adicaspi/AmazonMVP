@@ -38,12 +38,12 @@ export function BeforeAfterSlider({ before, after, beforeAlt = "Before", afterAl
     >
       {/* After image (full, underneath) */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={after} alt={afterAlt} draggable={false} className="absolute inset-0 w-full h-full object-cover" />
+      <img src={after} alt={afterAlt} loading="lazy" decoding="async" draggable={false} className="absolute inset-0 w-full h-full object-cover" />
 
       {/* Before image (clipped to reveal the left `pos%`) */}
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={before} alt={beforeAlt} draggable={false} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={before} alt={beforeAlt} loading="lazy" decoding="async" draggable={false} className="absolute inset-0 w-full h-full object-cover" />
       </div>
 
       {/* Divider + handle */}

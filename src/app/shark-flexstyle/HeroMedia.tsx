@@ -11,13 +11,19 @@ const VIDEO = {
   poster: "/images/shark-flexstyle/transformation.jpg",
 };
 
+// [USER ASSET] Licensed UGC clips (rights required — e.g. Billo/Insense or a
+// signed creator agreement). Drop vertical mp4s into public/videos/shark-flexstyle/
+// and add entries: { src: "/videos/shark-flexstyle/ugc-1.mp4", poster: "...", label: "@handle" }.
+// They render as slides right after the demo video.
+const UGC_CLIPS: { src: string; poster?: string; label?: string }[] = [];
+
 const IMAGES = [
   { src: "/images/shark-flexstyle/salon-blowout.jpg", alt: "Shark FlexStyle before and after — salon blowout at home" },
   { src: "/images/shark-flexstyle/transformation.jpg", alt: "10-minute hair transformation with the Shark FlexStyle" },
   { src: "/images/shark-flexstyle/why-switching.jpg", alt: "The Shark FlexStyle full kit vs the old routine" },
 ];
 
-const TOTAL = 1 + IMAGES.length; // slide 0 = video
+const TOTAL = 1 + UGC_CLIPS.length + IMAGES.length; // slide 0 = demo video, then UGC, then images
 
 export function HeroMedia() {
   const [index, setIndex] = useState(0);
@@ -80,10 +86,17 @@ export function HeroMedia() {
         </div>
 
         {/* Image slides */}
+        {UGC_CLIPS.map((clip, i) => (
+          <div key={`ugc-${i}`} className={`absolute inset-0 transition-opacity duration-500 ${index === i + 1 ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+            <video src={clip.src} poster={clip.poster} muted loop playsInline preload="none" className="w-full h-full object-cover" />
+            {clip.label && <div className="absolute bottom-3 left-3 bg-black/60 text-white text-xs font-semibold px-3 py-1.5 rounded-full z-10 pointer-events-none">{clip.label}</div>}
+          </div>
+        ))}
+
         {IMAGES.map((img, i) => (
-          <div key={i} className={`absolute inset-0 transition-opacity duration-500 ${index === i + 1 ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+          <div key={i} className={`absolute inset-0 transition-opacity duration-500 ${index === i + 1 + UGC_CLIPS.length ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={img.src} alt={img.alt} className="w-full h-full object-contain" draggable={false} />
+            <img src={img.src} alt={img.alt} loading="lazy" decoding="async" className="w-full h-full object-contain" draggable={false} />
           </div>
         ))}
 
