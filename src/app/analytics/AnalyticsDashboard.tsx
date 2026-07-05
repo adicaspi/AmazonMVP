@@ -654,19 +654,19 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
       {/* Header */}
       <header className={`${dm.headerBg} border-b sticky top-0 z-30 transition-colors duration-300`}>
         <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className={`text-xl font-bold ${dm.text}`}>{t.title}</h1>
-              <div className="flex items-center gap-2">
-                <p className={`text-sm ${dm.textMuted}`}>{t.subtitle}</p>
+          <div className="flex items-start md:items-center justify-between gap-2 mb-4">
+            <div className="min-w-0">
+              <h1 className={`text-lg md:text-xl font-bold ${dm.text}`}>{t.title}</h1>
+              <div className="flex items-center gap-2 flex-wrap">
+                <p className={`text-xs md:text-sm ${dm.textMuted}`}>{t.subtitle}</p>
                 {nyTime && (
-                  <span className={`text-xs font-mono px-2 py-0.5 rounded ${darkMode ? "bg-neutral-800 text-gray-400" : "bg-gray-100 text-gray-500"}`}>
+                  <span className={`text-xs font-mono px-2 py-0.5 rounded whitespace-nowrap ${darkMode ? "bg-neutral-800 text-gray-400" : "bg-gray-100 text-gray-500"}`}>
                     NYC {nyTime}
                   </span>
                 )}
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-shrink-0">
               <button
                 onClick={() => setDarkMode(!darkMode)}
                 className={`p-2 rounded-lg transition ${darkMode ? "bg-neutral-800 hover:bg-neutral-700 text-yellow-400" : "bg-gray-100 hover:bg-gray-200 text-gray-600"}`}
@@ -687,10 +687,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           </div>
 
           {/* Page Tabs */}
-          <div className={`flex gap-1 p-1 rounded-xl ${darkMode ? "bg-neutral-900" : "bg-gray-100"}`}>
+          <div className={`flex gap-1 p-1 rounded-xl overflow-x-auto ${darkMode ? "bg-neutral-900" : "bg-gray-100"}`}>
             <button
               onClick={() => setSelectedPage("all")}
-              className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition ${selectedPage === "all" ? dm.tabActive : dm.tabInactive}`}
+              className={`flex-none md:flex-1 whitespace-nowrap px-3 md:px-4 py-2 rounded-lg text-sm font-medium transition ${selectedPage === "all" ? dm.tabActive : dm.tabInactive}`}
             >
               {t.allPages}
             </button>
@@ -698,7 +698,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               <button
                 key={p.page}
                 onClick={() => setSelectedPage(p.page)}
-                className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2 ${selectedPage === p.page ? dm.tabActive : dm.tabInactive}`}
+                className={`flex-none md:flex-1 whitespace-nowrap px-3 md:px-4 py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2 ${selectedPage === p.page ? dm.tabActive : dm.tabInactive}`}
               >
                 <span>{p.label}</span>
                 {p.todayClicks > 0 && (
