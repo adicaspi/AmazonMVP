@@ -42,6 +42,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
 const DEFAULT_CLICK_EVENTS = ["Lead", "InitiateCheckout"];
 const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   "/shark-flexstyle": ["ViewContent"],
+  "/sharkflex": ["InitiateCheckout"],
 };
 
 function getPixelIdForPage(pagePath: string): string | null {
