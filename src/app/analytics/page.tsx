@@ -122,6 +122,7 @@ type RecentVisit = {
   timestamp: string;
   page: string;
   utm_source: string | null;
+  referer: string | null;
   device_type: string;
   full_url: string | null;
   visitor_id: string | null;
@@ -207,6 +208,7 @@ async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, f
           timestamp: v.timestamp,
           page: v.page || page,
           utm_source: v.utm_source || null,
+          referer: v.referer || null,
           device_type: v.device_type || "unknown",
           full_url: v.full_url || null,
           visitor_id: v.visitor_id || null,

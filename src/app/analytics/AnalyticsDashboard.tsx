@@ -20,11 +20,31 @@ type RecentVisit = {
   timestamp: string;
   page: string;
   utm_source: string | null;
+  referer: string | null;
   device_type: string;
   full_url: string | null;
   visitor_id: string | null;
   clicked_amazon: boolean;
 };
+
+// Same classification chain the server uses for the traffic-sources chart:
+// utm > ad click-ids in the URL > external referrer. Returns null for Direct.
+function classifyVisitSource(visit: RecentVisit): string | null {
+  if (visit.utm_source) return visit.utm_source;
+  const url = visit.full_url || "";
+  if (url.includes("fbclid=")) return "fb";
+  if (url.includes("gclid=")) return "google";
+  if (url.includes("ttclid=")) return "tiktok";
+  if (visit.referer) {
+    try {
+      const host = new URL(visit.referer).hostname.replace("www.", "").toLowerCase();
+      if (host !== "aipicks.co") return host;
+    } catch {
+      return visit.referer;
+    }
+  }
+  return null;
+}
 
 type PageData = {
   page: string;
@@ -1380,7 +1400,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 {data.recentVisits.slice(0, 20).map((visit, index) => {
                   const isRecent = index < 3;
                   const visitDate = new Date(visit.timestamp);
-                  const sourceName = visit.utm_source ? getSourceDisplayName(visit.utm_source) : t.directVisit;
+                  const visitSource = classifyVisitSource(visit);
+                  const sourceName = visitSource ? getSourceDisplayName(visitSource) : t.directVisit;
                   // Extract just the query string part for display
                   let urlDisplay = "";
                   try {
@@ -1412,7 +1433,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                         </div>
                       </div>
                       <div className="col-span-2 flex items-center gap-1.5">
-                        {visit.utm_source ? getSourceIcon(visit.utm_source) : <span className={`w-4 h-4 inline-flex items-center justify-center rounded-full text-xs ${darkMode ? "bg-gray-700 text-gray-400" : "bg-gray-200 text-gray-500"}`}>D</span>}
+                        {visitSource ? getSourceIcon(visitSource) : <span className={`w-4 h-4 inline-flex items-center justify-center rounded-full text-xs ${darkMode ? "bg-gray-700 text-gray-400" : "bg-gray-200 text-gray-500"}`}>D</span>}
                         <span className={`text-xs font-medium ${dm.text} truncate`}>{sourceName}</span>
                       </div>
                       <div className="col-span-1 flex items-center">
