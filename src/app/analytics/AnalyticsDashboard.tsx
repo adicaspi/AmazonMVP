@@ -944,9 +944,16 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 {lang === "he" ? "משפך מקצה לקצה" : "End-to-End Funnel"} — {data.label}
               </h2>
               {campaignFilterActive && (
-                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${darkMode ? "bg-blue-900/40 text-blue-300" : "bg-blue-100 text-blue-700"}`}>
-                  {activeCampaign}
-                </span>
+                <select
+                  value={activeCampaign}
+                  onChange={(e) => setCampaignForPage(e.target.value)}
+                  className={`text-xs font-semibold rounded-full px-2.5 py-1 border-0 cursor-pointer ${darkMode ? "bg-blue-900/40 text-blue-300" : "bg-blue-100 text-blue-700"}`}
+                  title={lang === "he" ? "שנה קמפיין" : "Change campaign"}
+                >
+                  {fbCampaigns.map((c) => (
+                    <option key={c.campaign_name} value={c.campaign_name}>{c.campaign_name}</option>
+                  ))}
+                </select>
               )}
             </div>
             {!campaignFilterActive ? (
@@ -1200,25 +1207,14 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             </h2>
             <p className={`text-sm ${dm.textMuted} mb-3`}>{t.fbAdsDesc}</p>
 
-            {/* Campaign filter — ties this page tab to one FB campaign */}
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className={`text-xs font-medium ${dm.textMuted}`}>{lang === "he" ? "קמפיין:" : "Campaign:"}</span>
-              <select
-                value={campaignFilterActive ? activeCampaign : ""}
-                onChange={(e) => setCampaignForPage(e.target.value)}
-                className={`rounded-lg border px-3 py-1.5 text-sm max-w-full ${darkMode ? "bg-neutral-800 border-neutral-700 text-white" : "bg-white border-gray-300 text-gray-900"}`}
-              >
-                <option value="">{lang === "he" ? "כל הקמפיינים" : "All campaigns"}</option>
-                {fbCampaigns.map((c) => (
-                  <option key={c.campaign_name} value={c.campaign_name}>{c.campaign_name}</option>
-                ))}
-              </select>
-              {campaignFilterActive && (
+            {/* Numbers follow the campaign bound to the selected page tab */}
+            {campaignFilterActive && (
+              <div className="mb-3">
                 <span className={`text-xs px-2 py-0.5 rounded-full ${darkMode ? "bg-blue-900/40 text-blue-300" : "bg-blue-50 text-blue-700"}`}>
-                  {lang === "he" ? "כל המספרים למטה — מהקמפיין הזה בלבד" : "All numbers below — this campaign only"}
+                  {lang === "he" ? `מציג את הקמפיין של העמוד: ${activeCampaign}` : `Showing this page's campaign: ${activeCampaign}`}
                 </span>
-              )}
-            </div>
+              </div>
+            )}
 
             {/* Summary Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
@@ -1254,8 +1250,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   .map((campaign, index) => (
                     <div
                       key={index}
-                      onClick={() => setCampaignForPage(campaignFilterActive && campaign.campaign_name === activeCampaign ? "" : campaign.campaign_name)}
-                      className={`grid grid-cols-12 gap-1 px-3 py-2.5 items-center cursor-pointer transition ${campaignFilterActive && campaign.campaign_name === activeCampaign ? (darkMode ? "bg-blue-900/20" : "bg-blue-50") : dm.tableHover}`}
+                      className={`grid grid-cols-12 gap-1 px-3 py-2.5 items-center transition ${campaignFilterActive && campaign.campaign_name === activeCampaign ? (darkMode ? "bg-blue-900/20" : "bg-blue-50") : dm.tableHover}`}
                     >
                       <div className={`col-span-5 text-sm font-medium ${dm.text} truncate flex items-center gap-1.5`}>
                         {campaignFilterActive && campaign.campaign_name === activeCampaign && <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>}
