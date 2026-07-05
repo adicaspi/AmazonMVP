@@ -67,7 +67,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-stone-50 via-white to-amber-50">
-        <div className="max-w-6xl mx-auto px-4 py-4 md:py-16">
+        <div className="max-w-6xl md:max-w-7xl mx-auto px-4 py-4 md:py-20">
           {/* Mobile hero — headline > proof > CTA; the video peeks right below (curiosity) */}
           <div className="md:hidden mb-3">
             <h2 className="text-[26px] font-black tracking-tight leading-[1.05] text-gray-900 mb-2.5">
@@ -121,9 +121,9 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
             <p className="text-center text-xs text-gray-500 mt-2 mb-1">Prime Shipping · Free Returns · Secure Amazon Checkout</p>
           </div>
 
-          <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-center">
+          <div className="grid md:grid-cols-12 gap-4 md:gap-12 items-center">
             {/* Hero visual: auto-playing demo video, then rotates to images (60% width on desktop) */}
-            <div className="order-1 md:order-2 md:col-span-5"><div className="md:max-w-[400px] md:mx-auto">
+            <div className="order-1 md:order-2 md:col-span-5"><div className="md:max-w-[460px] md:mx-auto">
               <HeroMedia />
             </div></div>
 
@@ -138,7 +138,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
                   </div>
                 </div>
 
-                <h1 className="text-4xl lg:text-[44px] font-black tracking-tight leading-[1.08] text-gray-900 mb-4">
+                <h1 className="text-5xl lg:text-[56px] font-black tracking-tight leading-[1.08] text-gray-900 mb-5">
                   Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
                 </h1>
 
@@ -155,7 +155,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
                   <span className="bg-gray-900 text-white text-xs font-medium px-2.5 py-1 rounded">Amazon&apos;s Choice</span>
                 </div>
 
-                <p className="text-xl text-gray-600 mb-2 leading-relaxed">
+                <p className="text-xl lg:text-2xl text-gray-600 mb-2 leading-relaxed">
                   Dyson-style results, less heat damage, and 5 styling attachments — <strong className="text-gray-900">in one tool</strong>.
                 </p>
 
@@ -197,9 +197,9 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
                   { icon: "🛡️", label: "Less Heat Damage" },
                   { icon: "✨", label: "5 Attachments Included" },
                 ].map((b, i) => (
-                  <div key={i} className="bg-white border border-amber-100 rounded-xl p-4 text-center shadow-sm">
+                  <div key={i} className="bg-white border border-amber-100 rounded-xl p-5 text-center shadow-sm">
                     <div className="text-3xl mb-1.5">{b.icon}</div>
-                    <div className="text-sm font-semibold text-gray-700 leading-tight">{b.label}</div>
+                    <div className="text-base font-semibold text-gray-700 leading-tight">{b.label}</div>
                   </div>
                 ))}
               </div>
