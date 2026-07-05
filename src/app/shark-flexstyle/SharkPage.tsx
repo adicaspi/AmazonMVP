@@ -130,7 +130,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
 
           <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-center">
             {/* Hero visual: auto-playing demo video, then rotates to images (60% width on desktop) */}
-            <div className="order-1 md:order-2 md:col-span-7 md:scale-[1.05] max-md:-mx-2">
+            <div className="order-1 md:order-2 md:col-span-7 md:scale-[1.07] max-md:-mx-4">
               <HeroMedia />
             </div>
 
@@ -252,9 +252,23 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
         </div>
       </section>
 
+      {/* WOW moment — one huge emotional image */}
+      <section className="py-4 md:py-14 bg-white">
+        <div className="max-w-3xl mx-auto md:px-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/shark-flexstyle/ugc-selfie.jpeg"
+            alt="My hair hasn't looked this good in years — Shark FlexStyle result"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-auto md:rounded-3xl shadow-xl"
+          />
+        </div>
+      </section>
+
       {/* UGC proof — minimal, emotional */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="max-w-3xl mx-auto px-4">
+      <section className="py-12 md:py-20 bg-stone-50">
+        <div className="max-w-2xl mx-auto px-4">
           <div className="text-center mb-7 md:mb-10">
             <div className="flex justify-center gap-0.5 mb-3">
               {[...Array(5)].map((_, i) => (
@@ -265,12 +279,15 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
             </div>
             <h2 className="text-3xl md:text-4xl font-black tracking-tight text-gray-900">Real women. Real results.</h2>
           </div>
-          <div className="grid grid-cols-2 gap-3 md:gap-5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/shark-flexstyle/ugc-selfie.jpeg" alt="My hair hasn't looked this good in years — Shark FlexStyle result" loading="lazy" decoding="async" className="w-full aspect-[4/5] object-cover rounded-2xl shadow-lg ring-1 ring-black/5" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/shark-flexstyle/ugc-talking.jpeg" alt="Women can't stop talking about the Shark FlexStyle" loading="lazy" decoding="async" className="w-full aspect-[4/5] object-cover rounded-2xl shadow-lg ring-1 ring-black/5" />
-          </div>
+          {/* Single large card; add a second licensed UGC image here to switch to a 2-up grid */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/shark-flexstyle/ugc-talking.jpeg"
+            alt="Women can't stop talking about the Shark FlexStyle"
+            loading="lazy"
+            decoding="async"
+            className="w-full aspect-[4/5] object-cover rounded-3xl shadow-xl ring-1 ring-black/5"
+          />
         </div>
       </section>
 
@@ -288,9 +305,6 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
               Get the Full Kit — 5 Attachments Included
             </h2>
-            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
-              Auto-wrap curlers, oval brush, paddle brush &amp; concentrator — everything in one box.
-            </p>
           </div>
 
           <div className="max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-2">
@@ -314,8 +328,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
       <section className="py-10 md:py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-6 md:mb-10">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2">Shark FlexStyle vs. The Alternatives</h2>
-            <p className="text-sm md:text-lg text-gray-600">Same Coanda air technology as the premium option — at a fraction of the price.</p>
+            <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">Why Pay More for Dyson?</h2>
           </div>
 
           {/* Mobile: cards */}
@@ -396,20 +409,20 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
           </div>
 
           {/* Aggregate rating block */}
-          <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 md:p-8 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 text-center md:text-left">
-            <div>
-              <div className="text-5xl font-black text-gray-900">{starRating}<span className="text-2xl text-gray-400">/5</span></div>
-              <div className="flex justify-center md:justify-start mt-1">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className={`w-6 h-6 ${i < Math.round(starRating) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
+          <div className="bg-white border border-gray-200 rounded-3xl shadow-lg p-8 md:p-10 text-center">
+            <div className="flex justify-center gap-1 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} className={`w-8 h-8 md:w-9 md:h-9 ${i < Math.round(starRating) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
             </div>
-            <div className="text-gray-600">
-              <p className="font-semibold text-gray-900">{reviewCount.toLocaleString()}+ ratings on Amazon</p>
-              <p className="text-sm">Amazon&apos;s Choice · 20K+ bought in the past month</p>
+            <div className="text-6xl md:text-7xl font-black text-gray-900 leading-none">{starRating}<span className="text-3xl text-gray-400">/5</span></div>
+            <p className="text-lg font-semibold text-gray-700 mt-2">{reviewCount.toLocaleString()}+ Amazon Reviews</p>
+            <div className="flex flex-wrap justify-center gap-2 mt-4">
+              <span className="bg-gray-900 text-white text-xs font-bold px-3 py-1.5 rounded-full">Amazon&apos;s Choice</span>
+              <span className="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-full">Prime Eligible</span>
+              <span className="bg-amber-50 text-amber-700 text-xs font-bold px-3 py-1.5 rounded-full">20K+ Bought Last Month</span>
             </div>
           </div>
 
@@ -546,32 +559,6 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
             {["Amazon A-Z Guarantee", "Prime 2-Day Shipping", "30-Day Free Returns"].map((b, i) => (
               <span key={i} className="bg-white/15 backdrop-blur rounded-full px-4 py-2 text-sm font-semibold">{b}</span>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Footer */}
-      <section className="bg-gray-100 py-6 md:py-8 border-t border-gray-200">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-center">
-            <div className="flex items-center gap-2 text-gray-700">
-              <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <span className="text-sm font-medium">Secure Checkout via Amazon</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-700">
-              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              <span className="text-sm font-medium">Fast Prime Shipping</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-700">
-              <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span className="text-sm font-medium">30-Day Money Back Guarantee</span>
-            </div>
           </div>
         </div>
       </section>
