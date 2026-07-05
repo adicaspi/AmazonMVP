@@ -11,6 +11,7 @@ const SHARK_PIXEL_ID = "1554568722933870";
 const PIXEL_BY_PATH: { prefix: string; pixelId: string }[] = [
   { prefix: "/grandelash", pixelId: GRANDELASH_PIXEL_ID },
   { prefix: "/shark-flexstyle", pixelId: SHARK_PIXEL_ID },
+  { prefix: "/sharkflex", pixelId: SHARK_PIXEL_ID },
 ];
 
 export function MetaPixelInit() {

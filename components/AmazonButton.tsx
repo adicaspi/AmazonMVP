@@ -26,6 +26,7 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/auraglow": "2679443682454721",
   "/grandelash": "876318711699041",
   "/shark-flexstyle": "1554568722933870",
+  "/sharkflex": "1554568722933870",
 };
 
 // Product info per page for accurate CAPI event data
@@ -33,6 +34,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/auraglow": { name: "AuraGlow Teeth Whitening Kit", value: 48, content_id: "auraglow-kit" },
   "/grandelash": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 36, content_id: "grandelash-serum" },
   "/shark-flexstyle": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
+  "/sharkflex": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
 };
 
 // Standard pixel events fired when an Amazon CTA is clicked, per page.

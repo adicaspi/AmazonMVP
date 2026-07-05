@@ -364,6 +364,7 @@ const pageLabels: Record<string, string> = {
   "/auraglow": "AuraGlow",
   "/grandelash": "GrandeLash",
   "/shark-flexstyle": "Shark FlexStyle",
+  "/sharkflex": "SharkFlex (Sales)",
 };
 
 function formatTimeAgo(ts: number, now: number, lang: "he" | "en"): string {

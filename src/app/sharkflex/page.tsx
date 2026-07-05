@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SharkPage } from "./SharkPage";
+import { SharkPage } from "../shark-flexstyle/SharkPage";
 
 export const metadata: Metadata = {
   title: "Shark FlexStyle™ Air Styling & Drying System | Salon Blowout at Home",
@@ -29,6 +29,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function SharkFlexStylePage() {
-  return <SharkPage trackingPage="/shark-flexstyle" />;
+export default async function SharkFlexSalesPage() {
+  return <SharkPage trackingPage="/sharkflex" />;
 }
