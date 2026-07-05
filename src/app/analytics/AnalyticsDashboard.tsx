@@ -448,6 +448,15 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         window.alert(res.status === 403
           ? (lang === "he" ? "אין הרשאה — פתח פעם אחת עמוד באתר עם ?notrack=1 בדפדפן הזה ונסה שוב." : "Not authorized — open any site page with ?notrack=1 once in this browser, then retry.")
           : json.error || "Failed");
+      } else if (json.permissionProblem) {
+        window.alert(lang === "he"
+          ? `נמצאו ${json.foundDirectViews} כניסות ישירות אבל הדאטהבייס חסם את המחיקה (0 נמחקו).\n\nכנראה חסר SUPABASE_SERVICE_ROLE_KEY ב-Vercel או שאין מדיניות DELETE ב-Supabase.`
+          : `Found ${json.foundDirectViews} direct views but the database blocked the delete (0 removed).\n\nLikely missing SUPABASE_SERVICE_ROLE_KEY in Vercel or no DELETE policy in Supabase.`);
+      } else if (json.foundDirectViews === 0 && json.totalRows > 0) {
+        const sample = JSON.stringify(json.sample, null, 1);
+        window.alert(lang === "he"
+          ? `לא נמצאו כניסות ישירות למחיקה (${json.totalRows} רשומות נבדקו — כולן משויכות למקור פרסום).\n\nדוגמה:\n${sample}`
+          : `No Direct views found to delete (${json.totalRows} rows checked — all ad-attributed).\n\nSample:\n${sample}`);
       } else {
         window.alert(lang === "he"
           ? `נמחקו ${json.deletedViews} כניסות ישירות ו-${json.deletedClicks} קליקים.`

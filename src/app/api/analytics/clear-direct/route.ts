@@ -93,26 +93,47 @@ export async function POST(request: NextRequest) {
   // Visitors with any ad-attributed visit keep their clicks.
   const directOnlyVisitors = [...directVisitors].filter((id) => !nonDirectVisitors.has(id));
 
+  // .select("id") makes the delete return the actually-deleted rows, so a
+  // silent RLS block (success with 0 rows) is detectable instead of invisible
   let deletedClicks = 0;
   for (const ids of chunk(directOnlyVisitors, 200)) {
-    const { count, error } = await supabase
+    const { data, error } = await supabase
       .from("amazon_clicks")
-      .delete({ count: "exact" })
+      .delete()
       .eq("page", page)
-      .in("visitor_id", ids);
+      .in("visitor_id", ids)
+      .select("id");
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    deletedClicks += count || 0;
+    deletedClicks += data?.length || 0;
   }
 
   let deletedViews = 0;
   for (const ids of chunk(directIds, 200)) {
-    const { count, error } = await supabase
+    const { data, error } = await supabase
       .from("page_views")
-      .delete({ count: "exact" })
-      .in("id", ids);
+      .delete()
+      .in("id", ids)
+      .select("id");
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    deletedViews += count || 0;
+    deletedViews += data?.length || 0;
   }
 
-  return NextResponse.json({ deletedViews, deletedClicks, page });
+  return NextResponse.json({
+    page,
+    totalRows: views.length,
+    foundDirectViews: directIds.length,
+    deletedViews,
+    deletedClicks,
+    // Deletes matched rows but removed none → the DB blocked them (RLS
+    // without a DELETE policy / anon key instead of service role)
+    permissionProblem: directIds.length > 0 && deletedViews === 0,
+    // Nothing classified Direct → show how the rows look so we can see why
+    sample: directIds.length === 0
+      ? views.slice(0, 5).map((v) => ({
+          utm: v.utm_source || null,
+          referer: v.referer || null,
+          url: v.full_url ? v.full_url.slice(0, 120) : null,
+        }))
+      : undefined,
+  });
 }
