@@ -21,11 +21,10 @@ const REAL_REVIEWS: { stars: number; text: string; name: string; date?: string }
 
 // Comparison uses price *tiers*, not exact competitor prices (those go stale).
 const VS_ROWS = [
-  { label: "Coanda auto-wrap curls", shark: "✓", dyson: "✓", old: "✗" },
-  { label: "Styles with air, less extreme heat", shark: "✓", dyson: "✓", old: "✗" },
-  { label: "Dries + styles wet hair", shark: "✓", dyson: "✗", old: "✗" },
-  { label: "5 attachments included", shark: "✓", dyson: "Fewer included", old: "✗" },
-  { label: "Typical price tier", shark: "$$", dyson: "$$$$ (~3x more)", old: "$$" },
+  { label: "Price", shark: "$$", dyson: "$$$$ (~3x more)", old: "$$" },
+  { label: "Attachments", shark: "5 included", dyson: "Fewer included", old: "✗" },
+  { label: "Wet-to-dry styling", shark: "✓", dyson: "✗", old: "✗" },
+  { label: "Value", shark: "Best overall", dyson: "Premium price", old: "Basic" },
 ];
 
 const getCachedProduct = unstable_cache(
@@ -59,12 +58,10 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
       {/* eslint-disable-next-line @next/next/no-head-element */}
       <link rel="preload" as="image" href="/images/shark-flexstyle/transformation.jpg" />
 
-      {/* Urgency Announcement Bar */}
-      <div className="bg-gray-900 text-white text-center py-2.5 px-4">
-        <div className="flex items-center justify-center gap-2 text-sm md:text-base font-bold">
-          <span>🔥</span>
-          <span>20K+ Bought Last Month on Amazon</span>
-          <span>🔥</span>
+      {/* Sticky trust bar */}
+      <div className="sticky top-0 z-40 bg-gray-900 text-white text-center py-2 px-4">
+        <div className="flex items-center justify-center gap-2 text-sm md:text-base font-semibold">
+          <span>Amazon&apos;s Choice · Prime Shipping · Free Returns</span>
         </div>
       </div>
 
@@ -94,15 +91,15 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
             </div>
 
             <ul className="space-y-0.5 mb-3">
-              <li className="flex items-center gap-2 text-sm text-gray-800">
+              <li className="flex items-center gap-2 text-base text-gray-800">
                 <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
                 <strong>Dyson Results. Half the Price.</strong>
               </li>
-              <li className="flex items-center gap-2 text-sm text-gray-800">
+              <li className="flex items-center gap-2 text-base text-gray-800">
                 <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
                 <strong>Less Heat Damage</strong>
               </li>
-              <li className="flex items-center gap-2 text-sm text-gray-800">
+              <li className="flex items-center gap-2 text-base text-gray-800">
                 <span className="flex-shrink-0 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
                 <strong>5 Styling Attachments Included</strong>
               </li>
@@ -121,11 +118,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
               </svg>
             </AmazonButton>
 
-            <div className="flex items-center justify-center gap-5 mt-2 mb-1 text-xs text-gray-600">
-              <span>🚚 Prime</span>
-              <span>↩️ Free Returns</span>
-              <span>⚡ Ships Today</span>
-            </div>
+            <p className="text-center text-xs text-gray-500 mt-2 mb-1">Prime Shipping · Free Returns · Secure Amazon Checkout</p>
           </div>
 
           <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-center">
@@ -163,7 +156,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
                 </div>
 
                 <p className="text-xl text-gray-600 mb-2 leading-relaxed">
-                  Dries + styles in one pass, with far less heat damage. The Dyson alternative — at <strong className="text-gray-900">half the price</strong>.
+                  Dyson-style results, less heat damage, and 5 styling attachments — <strong className="text-gray-900">in one tool</strong>.
                 </p>
 
               </div>
@@ -198,11 +191,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
               </div>
 
               {/* Slim trust row - Desktop only */}
-              <div className="hidden md:flex items-center gap-6 text-sm text-gray-600 mt-1">
-                <span>🚚 Prime Shipping</span>
-                <span>🔄 Free Returns</span>
-                <span>⚡ Ships Today</span>
-              </div>
+              <p className="hidden md:block text-sm text-gray-500 mt-1">Prime Shipping · Free Returns · Secure Amazon Checkout</p>
 
               {/* Benefit cards - Desktop only, below the CTA */}
               <div className="hidden md:grid grid-cols-3 gap-3 mt-5">
@@ -239,6 +228,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
       {/* Before/After — strongest proof, right after the hero video */}
       <section className="py-10 md:py-16 bg-white">
         <div className="max-w-2xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-6">Real salon-style results at home.</h2>
           <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -249,20 +239,20 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
               className="w-full h-auto"
             />
           </div>
-        </div>
-      </section>
-
-      {/* WOW moment — one huge emotional image */}
-      <section className="py-4 md:py-14 bg-white">
-        <div className="max-w-3xl mx-auto md:px-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/shark-flexstyle/ugc-selfie.jpeg"
-            alt="My hair hasn't looked this good in years — Shark FlexStyle result"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-auto md:rounded-3xl shadow-xl"
-          />
+          <div className="text-center mt-6">
+            <AmazonButton
+              href={amazonLink}
+              productName="Shark FlexStyle"
+              priceValue={priceAmount}
+              position="before-after"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              See Price on Amazon
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+          </div>
         </div>
       </section>
 
@@ -279,15 +269,12 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
             </div>
             <h2 className="text-3xl md:text-4xl font-black tracking-tight text-gray-900">Real women. Real results.</h2>
           </div>
-          {/* Single large card; add a second licensed UGC image here to switch to a 2-up grid */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/shark-flexstyle/ugc-talking.jpeg"
-            alt="Women can't stop talking about the Shark FlexStyle"
-            loading="lazy"
-            decoding="async"
-            className="w-full aspect-[4/5] object-cover rounded-3xl shadow-xl ring-1 ring-black/5"
-          />
+          <div className="grid grid-cols-2 gap-3 md:gap-5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/shark-flexstyle/ugc-selfie.jpeg" alt="My hair hasn't looked this good in years — Shark FlexStyle result" loading="lazy" decoding="async" className="w-full aspect-[4/5] object-cover rounded-2xl shadow-lg ring-1 ring-black/5" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/shark-flexstyle/ugc-talking.jpeg" alt="Women can't stop talking about the Shark FlexStyle" loading="lazy" decoding="async" className="w-full aspect-[4/5] object-cover rounded-2xl shadow-lg ring-1 ring-black/5" />
+          </div>
         </div>
       </section>
 
@@ -391,7 +378,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
               position="vs-competition"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
-              See Why It&apos;s the Smart Buy
+              Check Price &amp; Reviews
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -461,59 +448,24 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
           <div className="space-y-3 md:space-y-4">
             {[
               {
-                q: "What's included in the box?",
-                a: "The Shark FlexStyle comes as a complete kit with the styling unit plus multiple attachments — auto-wrap curlers, a paddle brush, an oval brush and a styling concentrator — so you can dry, curl, smooth and volumize right out of the box. (Exact attachments depend on the kit you choose on Amazon.)",
+                q: "Is it worth it?",
+                a: "With 6,500+ Amazon reviews at 4.3/5 and five attachments included, most buyers say it replaced several tools at once.",
                 showMobile: true,
               },
               {
-                q: "Does it really cause less damage than a curling iron?",
-                a: "Yes. The FlexStyle styles primarily with high-velocity airflow rather than extreme contact heat, which helps reduce the heat damage associated with traditional flat irons and curling wands.",
+                q: "Does it damage hair?",
+                a: "It styles with airflow instead of extreme heat, so it's far gentler than flat irons and curling wands.",
                 showMobile: true,
               },
               {
-                q: "Will it work on my hair type?",
-                a: "It's designed to work across a wide range of hair types and lengths. Fine, medium and thick hair can all achieve volume, curls and a smooth blowout by choosing the right attachment.",
+                q: "Is it easy for beginners?",
+                a: "Yes — the curlers wrap hair automatically, and drying + styling happens in one pass.",
                 showMobile: true,
               },
               {
-                q: "How long does it take to style?",
-                a: "Because it dries and styles at the same time, most users cut their routine roughly in half compared with using a separate dryer and curler.",
+                q: "Is it a good Dyson alternative?",
+                a: "Same Coanda-air styling concept at a fraction of the price — and it works on wet hair too.",
                 showMobile: true,
-              },
-              {
-                q: "Can I use it as just a hair dryer?",
-                a: "Absolutely. Attach the concentrator and it doubles as a powerful, fast dryer — then switch attachments to style.",
-                showMobile: false,
-              },
-              {
-                q: "How is it different from the Dyson Airwrap?",
-                a: "Both use the Coanda air effect to wrap and style hair with airflow instead of extreme heat. The FlexStyle also works on wet hair (dry + style in one pass) and costs a fraction of the price; the Airwrap is a premium device with its own strengths. For most people the results are comparable — check the current price and reviews on Amazon and decide what's right for you.",
-                showMobile: true,
-              },
-              {
-                q: "Will it work on curly or fine hair?",
-                a: "Yes — that's what the interchangeable attachments are for. The diffuser-style airflow and brushes work across curly, coily, fine and thick hair; reviewers with fine hair especially like that it styles without the fried feeling of a hot iron.",
-                showMobile: true,
-              },
-              {
-                q: "How loud is it?",
-                a: "About the same as a standard hair dryer — noticeable but normal. It's not a quiet device, but no louder than what you already use.",
-                showMobile: false,
-              },
-              {
-                q: "Is it heavy to hold?",
-                a: "No — it's around 1.5 lbs (roughly 700g), lighter than most dryer-plus-brush combos, and balanced for styling the back of your head.",
-                showMobile: false,
-              },
-              {
-                q: "What warranty does it come with?",
-                a: "It's covered by Shark's manufacturer warranty when bought from Amazon, on top of Amazon's 30-day return window and A-Z Guarantee.",
-                showMobile: false,
-              },
-              {
-                q: "What's the return policy?",
-                a: "You're covered by Amazon's standard 30-day return policy. If it's not for you, returns are simple and free for Prime members.",
-                showMobile: false,
               },
             ].map((faq, i) => (
               <div key={i} className={`bg-white rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow ${!faq.showMobile ? "hidden md:block" : ""}`}>
@@ -529,13 +481,6 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
       {/* Final CTA */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-amber-700 to-amber-600 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-bold mb-6">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-            </span>
-            Amazon&apos;s Choice — Thousands Bought Last Month!
-          </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             One Tool. Endless Styles. Get Yours Today!
           </h2>
