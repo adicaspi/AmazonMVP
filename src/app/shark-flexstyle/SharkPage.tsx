@@ -59,15 +59,15 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
       <link rel="preload" as="image" href="/images/shark-flexstyle/transformation.jpg" />
 
       {/* Sticky trust bar */}
-      <div className="sticky top-0 z-40 bg-gray-900 text-white text-center py-2 px-4">
-        <div className="flex items-center justify-center gap-2 text-sm md:text-base font-semibold">
+      <div className="sticky top-0 z-40 bg-gray-900 text-white text-center py-2 md:py-2.5 px-4">
+        <div className="flex items-center justify-center gap-2 text-sm md:text-base font-semibold md:tracking-wide">
           <span>Amazon&apos;s Choice · Prime Shipping · Free Returns</span>
         </div>
       </div>
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-stone-50 via-white to-amber-50">
-        <div className="max-w-6xl md:max-w-7xl mx-auto px-4 py-4 md:py-20">
+        <div className="max-w-6xl md:max-w-[1400px] mx-auto px-4 lg:px-10 py-4 md:py-12">
           {/* Mobile hero — headline > proof > CTA; the video peeks right below (curiosity) */}
           <div className="md:hidden mb-3">
             <h2 className="text-[26px] font-black tracking-tight leading-[1.05] text-gray-900 mb-2.5">
@@ -123,12 +123,12 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
 
           <div className="grid md:grid-cols-12 gap-4 md:gap-12 items-center">
             {/* Hero visual: auto-playing demo video, then rotates to images (60% width on desktop) */}
-            <div className="order-1 md:order-2 md:col-span-5"><div className="md:max-w-[460px] md:mx-auto">
+            <div className="order-1 md:order-2 md:col-span-6"><div className="md:max-w-[560px] md:mx-auto">
               <HeroMedia />
             </div></div>
 
             {/* Content */}
-            <div className="order-2 md:order-1 md:col-span-7">
+            <div className="order-2 md:order-1 md:col-span-6">
               {/* Desktop only: badges and headline */}
               <div className="hidden md:block">
                 <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -138,8 +138,10 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
                   </div>
                 </div>
 
-                <h1 className="text-5xl lg:text-[56px] font-black tracking-tight leading-[1.08] text-gray-900 mb-5">
-                  Salon Blowouts <span className="text-amber-600">At Home</span> In Minutes
+                <h1 className="text-5xl lg:text-[52px] font-black tracking-tight leading-[1.08] text-gray-900 mb-5">
+                  Salon Blowouts <span className="text-amber-600">At Home</span>
+                  <br />
+                  In Minutes
                 </h1>
 
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-5">
@@ -223,10 +225,11 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
       </section>
 
       {/* Before/After — strongest proof, right after the hero video */}
-      <section className="py-10 md:py-16 bg-white">
-        <div className="max-w-2xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-6">Real salon-style results at home.</h2>
-          <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5">
+      <section className="py-10 md:py-14 bg-white">
+        {/* Mobile: stacked (heading > image > CTA). Desktop: 2-col band — heading+CTA left, image right */}
+        <div className="max-w-2xl md:max-w-6xl mx-auto px-4 md:grid md:grid-cols-2 md:gap-14 md:items-center">
+          <h2 className="text-2xl md:text-5xl font-black tracking-tight text-gray-900 text-center md:text-left mb-6 md:mb-0 md:col-start-1 md:row-start-1 md:self-end">Real salon-style results at home.</h2>
+          <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 md:col-start-2 md:row-start-1 md:row-span-2 md:max-w-[480px] md:justify-self-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/shark-flexstyle/ugc-before-after.jpeg"
@@ -236,7 +239,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
               className="w-full h-auto"
             />
           </div>
-          <div className="text-center mt-6">
+          <div className="text-center md:text-left mt-6 md:mt-8 md:col-start-1 md:row-start-2 md:self-start">
             <AmazonButton
               href={amazonLink}
               productName="Shark FlexStyle"
@@ -254,8 +257,8 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
       </section>
 
       {/* UGC proof — minimal, emotional */}
-      <section className="py-12 md:py-20 bg-stone-50">
-        <div className="max-w-2xl mx-auto px-4">
+      <section className="py-12 md:py-14 bg-stone-50">
+        <div className="max-w-2xl md:max-w-4xl mx-auto px-4">
           <div className="text-center mb-7 md:mb-10">
             <div className="flex justify-center gap-0.5 mb-3">
               {[...Array(5)].map((_, i) => (
@@ -276,7 +279,7 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
       </section>
 
       {/* Product Video Demo */}
-      <section className="py-10 md:py-24 bg-stone-50">
+      <section className="py-10 md:py-14 bg-stone-50">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-6 md:mb-12">
             <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-2 md:mb-4">
@@ -309,8 +312,8 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
       </section>
 
       {/* Shark vs. The Alternatives */}
-      <section className="py-10 md:py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
+      <section className="py-10 md:py-14 bg-white">
+        <div className="max-w-4xl md:max-w-5xl mx-auto px-4">
           <div className="text-center mb-6 md:mb-10">
             <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">Why Pay More for Dyson?</h2>
           </div>
