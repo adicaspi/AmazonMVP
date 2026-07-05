@@ -123,12 +123,12 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
 
           <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-center">
             {/* Hero visual: auto-playing demo video, then rotates to images (60% width on desktop) */}
-            <div className="order-1 md:order-2 md:col-span-7"><div className="md:max-w-[440px] md:mx-auto">
+            <div className="order-1 md:order-2 md:col-span-5"><div className="md:max-w-[400px] md:mx-auto">
               <HeroMedia />
             </div></div>
 
             {/* Content */}
-            <div className="order-2 md:order-1 md:col-span-5">
+            <div className="order-2 md:order-1 md:col-span-7">
               {/* Desktop only: badges and headline */}
               <div className="hidden md:block">
                 <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -187,11 +187,8 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
                     <span className="text-green-500">✓</span> Prime
                   </span>
                 </div>
-                <p className="hidden md:block text-center text-xs text-gray-400 mt-2">Takes you to Amazon.com · Free returns for Prime members</p>
+                <p className="hidden md:block text-center text-xs text-gray-500 mt-2">Prime Shipping · Free Returns · Secure Amazon Checkout</p>
               </div>
-
-              {/* Slim trust row - Desktop only */}
-              <p className="hidden md:block text-sm text-gray-500 mt-1">Prime Shipping · Free Returns · Secure Amazon Checkout</p>
 
               {/* Benefit cards - Desktop only, below the CTA */}
               <div className="hidden md:grid grid-cols-3 gap-3 mt-5">
