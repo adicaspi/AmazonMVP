@@ -468,6 +468,11 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         window.alert(res.status === 403
           ? (lang === "he" ? "אין הרשאה — פתח פעם אחת עמוד באתר עם ?notrack=1 בדפדפן הזה ונסה שוב." : "Not authorized — open any site page with ?notrack=1 once in this browser, then retry.")
           : json.error || "Failed");
+      } else if (json.deletedViews > 0 || json.deletedClicks > 0) {
+        window.alert(lang === "he"
+          ? `נמחקו ${json.deletedViews} כניסות ישירות/טסטים ו-${json.deletedClicks} קליקים.`
+          : `Deleted ${json.deletedViews} direct/test views and ${json.deletedClicks} clicks.`);
+        router.refresh();
       } else if (json.permissionProblem) {
         window.alert(lang === "he"
           ? `נמצאו ${json.foundDirectViews} כניסות ישירות אבל הדאטהבייס חסם את המחיקה (0 נמחקו).\n\nכנראה חסר SUPABASE_SERVICE_ROLE_KEY ב-Vercel או שאין מדיניות DELETE ב-Supabase.`
@@ -475,13 +480,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
       } else if (json.foundDirectViews === 0 && json.totalRows > 0) {
         const sample = JSON.stringify(json.sample, null, 1);
         window.alert(lang === "he"
-          ? `לא נמצאו כניסות ישירות למחיקה (${json.totalRows} רשומות נבדקו — כולן משויכות למקור פרסום).\n\nדוגמה:\n${sample}`
-          : `No Direct views found to delete (${json.totalRows} rows checked — all ad-attributed).\n\nSample:\n${sample}`);
+          ? `לא נמצא מה למחוק — אין כניסות ישירות/טסטים ואין קליקים יתומים (${json.totalRows} רשומות נבדקו, כולן ממקור פרסום).\n\nדוגמה:\n${sample}`
+          : `Nothing to delete — no direct/test views and no orphan clicks (${json.totalRows} rows checked, all ad-attributed).\n\nSample:\n${sample}`);
       } else {
-        window.alert(lang === "he"
-          ? `נמחקו ${json.deletedViews} כניסות ישירות ו-${json.deletedClicks} קליקים.`
-          : `Deleted ${json.deletedViews} direct views and ${json.deletedClicks} clicks.`);
-        router.refresh();
+        window.alert(lang === "he" ? "לא נמצא מה למחוק." : "Nothing to delete.");
       }
     } catch {
       window.alert(lang === "he" ? "שגיאה במחיקה" : "Delete failed");
