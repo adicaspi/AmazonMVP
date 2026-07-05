@@ -354,12 +354,6 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
   const weekAgo = new Date();
   weekAgo.setDate(weekAgo.getDate() - 7);
 
-  // Build a set of visitor IDs that clicked to Amazon
-  const clickedVisitorIds = new Set<string>();
-  allClicks.forEach((click: any) => {
-    if (click.visitor_id) clickedVisitorIds.add(click.visitor_id);
-  });
-
   // Filter clicks by date range if provided
   const filteredClicks = (dateFrom || dateTo) ? allClicks.filter((click) => {
     const clickDate = toNYDateString(click.timestamp);
@@ -374,6 +368,12 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
       const stats = getClickStats(filteredClicks, path);
       let views = await getPageViews(path, dateFrom, dateTo);
       const todayViews = await getTodayPageViews(path);
+      // "Clicked Amazon" flag: only clicks on THIS page within the selected
+      // range — a click on another page must not mark visits here as clicked
+      const clickedVisitorIds = new Set<string>();
+      filteredClicks.forEach((click) => {
+        if (click.page === path && click.visitor_id) clickedVisitorIds.add(click.visitor_id);
+      });
       const trafficData = await getTrafficSources(path, clickedVisitorIds, dateFrom, dateTo);
 
       // Fix: Views should always be >= clicks
