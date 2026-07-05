@@ -18,9 +18,9 @@ const VIDEO = {
 const UGC_CLIPS: { src: string; poster?: string; label?: string }[] = [];
 
 const IMAGES = [
-  { src: "/images/shark-flexstyle/salon-blowout.jpg", alt: "Shark FlexStyle before and after — salon blowout at home" },
-  { src: "/images/shark-flexstyle/transformation.jpg", alt: "10-minute hair transformation with the Shark FlexStyle" },
-  { src: "/images/shark-flexstyle/why-switching.jpg", alt: "The Shark FlexStyle full kit vs the old routine" },
+  { src: "/images/shark-flexstyle/ugc-before-after.jpeg", alt: "Salon results at home — before and after with the Shark FlexStyle" },
+  { src: "/images/shark-flexstyle/ugc-selfie.jpeg", alt: "My hair hasn't looked this good in years — Shark FlexStyle selfie" },
+  { src: "/images/shark-flexstyle/ugc-talking.jpeg", alt: "Women can't stop talking about the Shark FlexStyle" },
 ];
 
 const TOTAL = 1 + UGC_CLIPS.length + IMAGES.length; // slide 0 = demo video, then UGC, then images
