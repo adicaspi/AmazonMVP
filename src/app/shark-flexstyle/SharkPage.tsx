@@ -123,9 +123,9 @@ export async function SharkPage({ trackingPage }: { trackingPage: string }) {
 
           <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-center">
             {/* Hero visual: auto-playing demo video, then rotates to images (60% width on desktop) */}
-            <div className="order-1 md:order-2 md:col-span-7 md:scale-[1.07] max-md:-mx-4">
+            <div className="order-1 md:order-2 md:col-span-7 max-md:-mx-4"><div className="md:max-w-[440px] md:mx-auto">
               <HeroMedia />
-            </div>
+            </div></div>
 
             {/* Content */}
             <div className="order-2 md:order-1 md:col-span-5">

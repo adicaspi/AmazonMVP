@@ -59,7 +59,7 @@ export function HeroMedia() {
 
   return (
     <div className="relative">
-      <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-black transition-transform duration-300 hover:scale-[1.01]" style={{ aspectRatio: "1 / 1" }}>
+      <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-black transition-transform duration-300 hover:scale-[1.01]" style={{ aspectRatio: "930 / 1400" }}>
         {/* Slide 0: auto-playing video */}
         <div className={`absolute inset-0 transition-opacity duration-500 ${index === 0 ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
           <video
