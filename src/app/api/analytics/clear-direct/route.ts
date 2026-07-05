@@ -85,30 +85,37 @@ export async function POST(request: NextRequest) {
   }
 
   const directIds: string[] = [];
-  const directVisitors = new Set<string>();
   const nonDirectVisitors = new Set<string>();
   for (const v of views) {
     if (isRemovable(v)) {
       directIds.push(v.id);
-      if (v.visitor_id) directVisitors.add(v.visitor_id);
     } else if (v.visitor_id) {
       nonDirectVisitors.add(v.visitor_id);
     }
   }
 
-  // Visitors who ONLY ever arrived Direct — their clicks go too.
-  // Visitors with any ad-attributed visit keep their clicks.
-  const directOnlyVisitors = [...directVisitors].filter((id) => !nonDirectVisitors.has(id));
+  // Clicks to remove: any click on this page whose visitor has NO surviving
+  // (ad-attributed) view. This covers direct/test visitors AND "orphan"
+  // clicks whose views were already wiped by a previous cleanup. Clicks from
+  // visitors with at least one real ad-attributed view are kept.
+  const { data: clickRows, error: clickErr } = await supabase
+    .from("amazon_clicks")
+    .select("id, visitor_id")
+    .eq("page", page);
+  if (clickErr) return NextResponse.json({ error: clickErr.message }, { status: 500 });
+
+  const clickIdsToDelete = (clickRows || [])
+    .filter((c) => !c.visitor_id || !nonDirectVisitors.has(c.visitor_id))
+    .map((c) => c.id);
 
   // .select("id") makes the delete return the actually-deleted rows, so a
   // silent RLS block (success with 0 rows) is detectable instead of invisible
   let deletedClicks = 0;
-  for (const ids of chunk(directOnlyVisitors, 200)) {
+  for (const ids of chunk(clickIdsToDelete, 200)) {
     const { data, error } = await supabase
       .from("amazon_clicks")
       .delete()
-      .eq("page", page)
-      .in("visitor_id", ids)
+      .in("id", ids)
       .select("id");
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     deletedClicks += data?.length || 0;
