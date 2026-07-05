@@ -447,6 +447,19 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const [beCommission, setBeCommission] = useState(30);
   const [beAmazonConv, setBeAmazonConv] = useState(6);
 
+  // Which FB campaign belongs to which page tab (persisted in this browser)
+  const [campaignMap, setCampaignMap] = useState<Record<string, string>>({});
+  useEffect(() => {
+    try {
+      setCampaignMap(JSON.parse(localStorage.getItem("aip_campaign_map") || "{}"));
+    } catch { /* keep empty map */ }
+  }, []);
+  const setCampaignForPage = (name: string) => {
+    const next = { ...campaignMap, [selectedPage]: name };
+    setCampaignMap(next);
+    try { localStorage.setItem("aip_campaign_map", JSON.stringify(next)); } catch { /* ignore */ }
+  };
+
   // Clear Direct-only traffic for the selected page (owner-only; needs the aip_notrack cookie)
   const [clearingDirect, setClearingDirect] = useState(false);
   const clearDirectTraffic = async () => {
@@ -604,11 +617,21 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
 
   const conversionRate = data.views > 0 ? ((data.totalClicks / data.views) * 100).toFixed(1) : "0";
 
-  // Funnel economics (Facebook 7-day data, self-consistent)
+  // Per-page campaign filter: each page tab remembers which FB campaign
+  // belongs to it, so spend/CPC/economics are computed per campaign
+  const fbCampaigns = facebookAdsData?.campaigns ?? [];
+  const activeCampaign = campaignMap[selectedPage] || "";
+  const matchedCampaigns = activeCampaign ? fbCampaigns.filter((c) => c.campaign_name === activeCampaign) : fbCampaigns;
+  // Saved campaign missing from this date range → fall back to all
+  const campaignFilterActive = !!activeCampaign && matchedCampaigns.length > 0;
+  const effectiveCampaigns = campaignFilterActive ? matchedCampaigns : fbCampaigns;
+
+  // Funnel economics (Facebook data for the selected campaign(s) + range)
   const fbCur = facebookAdsData?.currency === "ILS" ? "₪" : "$";
-  const fbSpend = facebookAdsData?.totalSpend ?? 0;
-  const fbLinkClicks = facebookAdsData ? facebookAdsData.campaigns.reduce((s, c) => s + (c.linkClicks || 0), 0) : 0;
-  const fbConversions = facebookAdsData?.totalConversions ?? 0;
+  const fbSpend = effectiveCampaigns.reduce((s, c) => s + c.spend, 0);
+  const fbLinkClicks = effectiveCampaigns.reduce((s, c) => s + (c.linkClicks || 0), 0);
+  const fbConversions = effectiveCampaigns.reduce((s, c) => s + c.conversions, 0);
+  const fbAvgCostPerConv = fbConversions > 0 ? fbSpend / fbConversions : 0;
   const cpc = fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
   const costPerAmazonClick = fbConversions > 0 ? fbSpend / fbConversions : 0;
 
@@ -1101,23 +1124,43 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             </h2>
             <p className={`text-sm ${dm.textMuted} mb-3`}>{t.fbAdsDesc}</p>
 
+            {/* Campaign filter — ties this page tab to one FB campaign */}
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <span className={`text-xs font-medium ${dm.textMuted}`}>{lang === "he" ? "קמפיין:" : "Campaign:"}</span>
+              <select
+                value={campaignFilterActive ? activeCampaign : ""}
+                onChange={(e) => setCampaignForPage(e.target.value)}
+                className={`rounded-lg border px-3 py-1.5 text-sm max-w-full ${darkMode ? "bg-neutral-800 border-neutral-700 text-white" : "bg-white border-gray-300 text-gray-900"}`}
+              >
+                <option value="">{lang === "he" ? "כל הקמפיינים" : "All campaigns"}</option>
+                {fbCampaigns.map((c) => (
+                  <option key={c.campaign_name} value={c.campaign_name}>{c.campaign_name}</option>
+                ))}
+              </select>
+              {campaignFilterActive && (
+                <span className={`text-xs px-2 py-0.5 rounded-full ${darkMode ? "bg-blue-900/40 text-blue-300" : "bg-blue-50 text-blue-700"}`}>
+                  {lang === "he" ? "כל המספרים למטה — מהקמפיין הזה בלבד" : "All numbers below — this campaign only"}
+                </span>
+              )}
+            </div>
+
             {/* Summary Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
               <div className={`${dm.cardBg} rounded-xl p-4 border shadow-sm transition-colors duration-300`}>
                 <div className={`text-xs ${dm.textMuted} mb-1`}>{t.fbTotalSpend} ({t.fbLast7d})</div>
-                <div className={`text-2xl font-bold ${dm.text}`}>{facebookAdsData.currency === "ILS" ? "₪" : "$"}{facebookAdsData.totalSpend.toFixed(2)}</div>
+                <div className={`text-2xl font-bold ${dm.text}`}>{fbCur}{fbSpend.toFixed(2)}</div>
               </div>
               <div className={`${dm.cardBg} rounded-xl p-4 border shadow-sm transition-colors duration-300`}>
                 <div className={`text-xs ${dm.textMuted} mb-1`}>{t.fbConversions}</div>
-                <div className="text-2xl font-bold text-blue-500">{facebookAdsData.totalConversions}</div>
+                <div className="text-2xl font-bold text-blue-500">{fbConversions}</div>
               </div>
               <div className={`${dm.cardBg} rounded-xl p-4 border shadow-sm transition-colors duration-300`}>
                 <div className={`text-xs ${dm.textMuted} mb-1`}>{t.fbCostPerConv}</div>
-                <div className="text-2xl font-bold text-amber-500">{facebookAdsData.currency === "ILS" ? "₪" : "$"}{facebookAdsData.avgCostPerConversion.toFixed(2)}</div>
+                <div className="text-2xl font-bold text-amber-500">{fbCur}{fbAvgCostPerConv.toFixed(2)}</div>
               </div>
               <div className={`${dm.cardBg} rounded-xl p-4 border shadow-sm transition-colors duration-300`}>
-                <div className={`text-xs ${dm.textMuted} mb-1`}>{t.fbTodaySpend}</div>
-                <div className="text-2xl font-bold text-green-500">{facebookAdsData.currency === "ILS" ? "₪" : "$"}{facebookAdsData.todaySpend.toFixed(2)}</div>
+                <div className={`text-xs ${dm.textMuted} mb-1`}>{t.fbTodaySpend} {campaignFilterActive && <span>({lang === "he" ? "כל החשבון" : "whole account"})</span>}</div>
+                <div className="text-2xl font-bold text-green-500">{fbCur}{facebookAdsData.todaySpend.toFixed(2)}</div>
               </div>
             </div>
 
@@ -1133,8 +1176,13 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 {facebookAdsData.campaigns
                   .sort((a, b) => b.spend - a.spend)
                   .map((campaign, index) => (
-                    <div key={index} className={`grid grid-cols-12 gap-1 px-3 py-2.5 items-center ${dm.tableHover} transition`}>
-                      <div className={`col-span-5 text-sm font-medium ${dm.text} truncate`}>
+                    <div
+                      key={index}
+                      onClick={() => setCampaignForPage(campaignFilterActive && campaign.campaign_name === activeCampaign ? "" : campaign.campaign_name)}
+                      className={`grid grid-cols-12 gap-1 px-3 py-2.5 items-center cursor-pointer transition ${campaignFilterActive && campaign.campaign_name === activeCampaign ? (darkMode ? "bg-blue-900/20" : "bg-blue-50") : dm.tableHover}`}
+                    >
+                      <div className={`col-span-5 text-sm font-medium ${dm.text} truncate flex items-center gap-1.5`}>
+                        {campaignFilterActive && campaign.campaign_name === activeCampaign && <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>}
                         {campaign.campaign_name}
                       </div>
                       <div className="col-span-2 text-center">
@@ -1174,7 +1222,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
               {t.funnelEconomics}
             </h2>
-            <p className={`text-sm ${dm.textMuted} mb-3`}>{t.funnelEconomicsDesc}</p>
+            <p className={`text-sm ${dm.textMuted} mb-3`}>
+              {t.funnelEconomicsDesc}
+              {campaignFilterActive && <span className="font-semibold"> · {lang === "he" ? "קמפיין" : "campaign"}: {activeCampaign}</span>}
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
                 <div className={`text-xs ${dm.textMuted} mb-1`}>{t.mCpc}</div>
