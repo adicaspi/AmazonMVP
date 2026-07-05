@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabase, isDatabaseAvailable } from "@/lib/db";
 import { generateEventId, getFbCookies } from "@/lib/fb-conversions";
 import { normalizeSource } from "@/lib/normalizeSource";
+import { isFbToolReferrer } from "@/lib/fb-tool-referrers";
 
 // Map page paths to their dedicated Facebook Pixel IDs
 const PAGE_PIXEL_MAP: Record<string, string> = {
@@ -119,8 +120,11 @@ export async function POST(request: NextRequest) {
       utm_content: utm_content || null,
     };
 
-    // Save to Supabase
-    if (supabase && (await isDatabaseAvailable())) {
+    // Save to Supabase — but never record Facebook tool previews (Events
+    // Manager / Ads Manager / Business Suite): that's the owner testing, not
+    // a visitor. Pixel/CAPI below still fire so Test Events keeps working.
+    const isTestPreview = isFbToolReferrer(referrer);
+    if (!isTestPreview && supabase && (await isDatabaseAvailable())) {
       const { error } = await supabase.from("page_views").insert(view);
 
       if (error) {

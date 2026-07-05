@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase, isDatabaseAvailable } from "@/lib/db";
+import { isFbToolReferrer } from "@/lib/fb-tool-referrers";
 
 // Deletes ONLY "Direct" first-party analytics rows for one page:
 // page_views with no utm_source, no ad click-id (fbclid/gclid/ttclid) and no
@@ -31,6 +32,12 @@ function isDirect(view: ViewRow): boolean {
     }
   }
   return true;
+}
+
+// Owner's own test visits (Events Manager preview etc.) are removable too,
+// even though they carry a facebook.com referrer.
+function isRemovable(view: ViewRow): boolean {
+  return isDirect(view) || isFbToolReferrer(view.referer);
 }
 
 function chunk<T>(arr: T[], size: number): T[][] {
@@ -81,7 +88,7 @@ export async function POST(request: NextRequest) {
   const directVisitors = new Set<string>();
   const nonDirectVisitors = new Set<string>();
   for (const v of views) {
-    if (isDirect(v)) {
+    if (isRemovable(v)) {
       directIds.push(v.id);
       if (v.visitor_id) directVisitors.add(v.visitor_id);
     } else if (v.visitor_id) {

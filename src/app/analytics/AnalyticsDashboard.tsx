@@ -453,8 +453,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     if (selectedPage === "all" || clearingDirect) return;
     const label = pagesData.find((p) => p.page === selectedPage)?.label || selectedPage;
     const msg = lang === "he"
-      ? `למחוק את כל התנועה הישירה (Direct) של ${label}?\n\nנמחקות רק כניסות בלי מקור פרסום (בלי fbclid/utm) והקליקים שלהן. נתוני פייסבוק/מודעות לא נפגעים. אי אפשר לשחזר.`
-      : `Delete ALL Direct traffic for ${label}?\n\nOnly visits with no ad source (no fbclid/utm) and their clicks are removed. Facebook/ad-attributed data is untouched. This cannot be undone.`;
+      ? `למחוק את כל התנועה הישירה והטסטים של ${label}?\n\nנמחקות כניסות בלי מקור פרסום (בלי fbclid/utm) וכניסות בדיקה מ-Events Manager/Ads Manager, יחד עם הקליקים שלהן. תנועת מודעות אמיתית לא נפגעת. אי אפשר לשחזר.`
+      : `Delete ALL Direct + test traffic for ${label}?\n\nRemoves visits with no ad source (no fbclid/utm) and Events Manager/Ads Manager test previews, with their clicks. Real ad traffic is untouched. This cannot be undone.`;
     if (!window.confirm(msg)) return;
     setClearingDirect(true);
     try {
