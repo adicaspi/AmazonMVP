@@ -612,17 +612,15 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   };
 
   // Exact page ↔ campaign binding by the real campaign names, straight from
-  // the Facebook API (no legacy aliases — if Meta's reporting hasn't caught
-  // up with a rename yet, we simply wait for it):
-  //   /shark-flexstyle ↔ "... - Sales - VC"
+  // the Facebook API:
+  //   /shark-flexstyle ↔ "... Amazon Click" (the campaign that optimizes on
+  //                       the AmazonClick custom conversion for this page)
   //   /sharkflex       ↔ "... - Sales - IC"
-  //   /sharkflexClick  ↔ "... - Sales - Amazon Click"
-  // ("amazon click" is a whole phrase; "- ic"/"- vc" are suffixes, so none
-  //  of these can cross-match another campaign)
+  //   /sharkflexClick  ↔ no campaign bound
   const PAGE_CAMPAIGN_KEYWORD: Record<string, string[]> = {
-    "/shark-flexstyle": ["- vc"],
+    "/shark-flexstyle": ["amazon click"],
     "/sharkflex": ["- ic"],
-    "/sharkflexClick": ["amazon click"],
+    "/sharkflexClick": [],
   };
   const fbCampaigns = facebookAdsData?.campaigns ?? [];
   const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];
@@ -1038,10 +1036,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             {!campaignFilterActive ? (
               <p className={`text-sm ${dm.textMuted} py-2`}>
                 {lang === "he"
-                  ? campaignKeyword
+                  ? campaignKeyword?.length
                     ? `לא נמצא קמפיין פייסבוק עם "${campaignKeyword.join('" / "')}" בשם בטווח התאריכים הזה — נתוני הפייסבוק יופיעו כשלקמפיין תהיה פעילות בטווח.`
                     : "לעמוד הזה אין קמפיין פייסבוק מקושר."
-                  : campaignKeyword
+                  : campaignKeyword?.length
                     ? `No Facebook campaign containing "${campaignKeyword.join('" / "')}" found in this date range — FB numbers appear once the campaign has activity in range.`
                     : "This page has no linked Facebook campaign."}
               </p>
