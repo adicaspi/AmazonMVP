@@ -74,6 +74,7 @@ const TRACKED_PAGES = [
   { path: "/grandelash", label: "GrandeLash", color: "rose" },
   { path: "/shark-flexstyle", label: "Shark FlexStyle", color: "amber" },
   { path: "/sharkflex", label: "SharkFlex (Sales)", color: "amber" },
+  { path: "/sharkflexClick", label: "SharkFlex (Click)", color: "amber" },
 ] as const;
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {

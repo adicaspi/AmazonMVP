@@ -9,7 +9,7 @@ import { isFbToolReferrer } from "@/lib/fb-tool-referrers";
 // Facebook/Google/TikTok-attributed data is never touched, and nothing on
 // Facebook's side is affected (that data lives at Meta).
 
-const ALLOWED_PAGES = ["/auraglow", "/grandelash", "/shark-flexstyle", "/sharkflex"];
+const ALLOWED_PAGES = ["/auraglow", "/grandelash", "/shark-flexstyle", "/sharkflex", "/sharkflexClick"];
 
 type ViewRow = {
   id: string;
