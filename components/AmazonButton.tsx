@@ -39,13 +39,11 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
 
 // Standard pixel events fired when an Amazon CTA is clicked, per page.
 // Falls back to DEFAULT_CLICK_EVENTS for any page not listed here.
-// NOTE: the custom AmazonClick event ALWAYS fires on every click (browser +
-// CAPI, deduped) regardless of this map — /sharkflex optimizes on AmazonClick,
-// so it sends no standard event at all.
+// (The custom AmazonClick event also fires on every click, browser + CAPI.)
 const DEFAULT_CLICK_EVENTS = ["Lead", "InitiateCheckout"];
 const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   "/shark-flexstyle": ["ViewContent"],
-  "/sharkflex": [],
+  "/sharkflex": ["InitiateCheckout"],
 };
 
 function getPixelIdForPage(pagePath: string): string | null {
