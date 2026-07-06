@@ -611,16 +611,16 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
 
   // Fixed page ↔ campaign binding (by campaign-name keyword, no manual pick):
   // /shark-flexstyle ↔ the "Traffic" campaign, /sharkflex ↔ the "Sales" campaign
-  // Exact page ↔ campaign binding by distinctive name fragments:
-  //   /shark-flexstyle ↔ "... - Sales - VC"  (also matches the pre-rename
-  //                       "... - Traffic - LPV" until Meta's reporting
-  //                       catches up with the rename)
+  // Exact page ↔ campaign binding by the real campaign names, straight from
+  // the Facebook API (no legacy aliases — if Meta's reporting hasn't caught
+  // up with a rename yet, we simply wait for it):
+  //   /shark-flexstyle ↔ "... - Sales - VC"
   //   /sharkflex       ↔ "... - Sales - IC"
   //   /sharkflexClick  ↔ "... - Sales - Amazon Click"
   // ("amazon click" is a whole phrase; "- ic"/"- vc" are suffixes, so none
   //  of these can cross-match another campaign)
   const PAGE_CAMPAIGN_KEYWORD: Record<string, string[]> = {
-    "/shark-flexstyle": ["- vc", "- lpv", "traffic"],
+    "/shark-flexstyle": ["- vc"],
     "/sharkflex": ["- ic"],
     "/sharkflexClick": ["amazon click"],
   };
