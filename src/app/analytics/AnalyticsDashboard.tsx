@@ -641,11 +641,12 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const fbAvgCostPerConv = fbConversions > 0 ? fbSpend / fbConversions : 0;
   const cpc = fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
 
-  // Break-even calculator (first-party bridge only — NO fallback to FB's
-  // cost-per-conversion: with 0 real Amazon clicks there is no profit to
-  // compute, and FB's count may include old test events we can't delete)
+  // Break-even: cost per Amazon click = campaign spend ÷ our recorded clicks
+  // (direct measurement). The old CPC÷Bridge formula overstated cost whenever
+  // page views included non-campaign traffic (bots, reloads) — spend/clicks
+  // doesn't depend on the views count at all.
   const beBridgeFrac = data.views > 0 ? data.totalClicks / data.views : 0;
-  const beCostPerAmzClick = beBridgeFrac > 0 ? cpc / beBridgeFrac : 0;
+  const beCostPerAmzClick = campaignFilterActive && data.totalClicks > 0 ? fbSpend / data.totalClicks : 0;
   const beRevenuePerClick = beCommission * (beAmazonConv / 100);
   const beNetPerClick = beRevenuePerClick - beCostPerAmzClick;
   const beBreakEvenConv = beCommission > 0 && beCostPerAmzClick > 0 ? (beCostPerAmzClick / beCommission) * 100 : 0;
@@ -1376,7 +1377,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               </div>
               <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
                 <div className={`text-xs ${dm.textMuted} mb-1`}>{t.mCostPerAmazonClick}</div>
-                <div className="text-3xl font-bold text-amber-500">{beBridgeFrac > 0 ? `${fbCur}${(cpc / beBridgeFrac).toFixed(2)}` : "—"}</div>
+                <div className="text-3xl font-bold text-amber-500">{beCostPerAmzClick > 0 ? `${fbCur}${beCostPerAmzClick.toFixed(2)}` : "—"}</div>
                 <div className={`text-xs ${dm.textMuted} mt-1`}>{t.mCostPerAmazonClickDesc}</div>
               </div>
               <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
