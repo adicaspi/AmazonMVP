@@ -103,12 +103,33 @@ export async function POST(request: NextRequest) {
   // visitors with at least one real ad-attributed view are kept.
   const { data: clickRows, error: clickErr } = await supabase
     .from("amazon_clicks")
-    .select("id, visitor_id")
+    .select("id, visitor_id, timestamp")
     .eq("page", page);
   if (clickErr) return NextResponse.json({ error: clickErr.message }, { status: 500 });
 
+  // Burst fingerprint: two clicks from the same visitor under 1.5s apart is
+  // physically impossible for a human — Meta's review bots click every
+  // button within milliseconds. All clicks of such visitors are bot clicks.
+  const clicksByVisitor = new Map<string, number[]>();
+  for (const c of clickRows || []) {
+    if (!c.visitor_id) continue;
+    const arr = clicksByVisitor.get(c.visitor_id) || [];
+    arr.push(new Date(c.timestamp).getTime());
+    clicksByVisitor.set(c.visitor_id, arr);
+  }
+  const burstBots = new Set<string>();
+  for (const [visitor, times] of clicksByVisitor) {
+    times.sort((a, b) => a - b);
+    for (let i = 1; i < times.length; i++) {
+      if (times[i] - times[i - 1] < 1500) {
+        burstBots.add(visitor);
+        break;
+      }
+    }
+  }
+
   const clickIdsToDelete = (clickRows || [])
-    .filter((c) => !c.visitor_id || !nonDirectVisitors.has(c.visitor_id))
+    .filter((c) => !c.visitor_id || !nonDirectVisitors.has(c.visitor_id) || burstBots.has(c.visitor_id))
     .map((c) => c.id);
 
   // .select("id") makes the delete return the actually-deleted rows, so a

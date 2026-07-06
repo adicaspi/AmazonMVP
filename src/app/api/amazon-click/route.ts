@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase, isDatabaseAvailable } from "@/lib/db";
+import { isBotUserAgent } from "@/lib/bot-detect";
 
 type AmazonClick = {
   id: string;
@@ -23,6 +24,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Bots don't buy: known crawler user-agents are never recorded
+    const ua = request.headers.get("user-agent") || "";
+    if (isBotUserAgent(ua)) {
+      return NextResponse.json({ success: true, skipped: "bot" });
+    }
+
     const click = {
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: new Date().toISOString(),
@@ -30,12 +37,28 @@ export async function POST(request: NextRequest) {
       button_position: buttonPosition,
       page: page,
       visitor_id: visitorId || null,
-      user_agent: request.headers.get("user-agent") || null,
+      user_agent: ua || null,
       referer: request.headers.get("referer") || null,
     };
 
     // Try to save to Supabase
     if (supabase && (await isDatabaseAvailable())) {
+      // Burst guard: Meta's ad-review bots run real browsers and click every
+      // button within milliseconds. A human cannot produce two clicks from
+      // the same visitor on the same page inside 2 seconds — drop those.
+      if (visitorId) {
+        const { data: recent } = await supabase
+          .from("amazon_clicks")
+          .select("timestamp")
+          .eq("page", page)
+          .eq("visitor_id", visitorId)
+          .order("timestamp", { ascending: false })
+          .limit(1);
+        if (recent && recent[0] && Date.now() - new Date(recent[0].timestamp).getTime() < 2000) {
+          return NextResponse.json({ success: true, skipped: "burst" });
+        }
+      }
+
       const { error } = await supabase.from("amazon_clicks").insert(click);
 
       if (error) {
