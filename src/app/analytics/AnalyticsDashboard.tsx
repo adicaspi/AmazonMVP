@@ -611,10 +611,16 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
 
   // Fixed page ↔ campaign binding (by campaign-name keyword, no manual pick):
   // /shark-flexstyle ↔ the "Traffic" campaign, /sharkflex ↔ the "Sales" campaign
+  // Exact page ↔ campaign binding by distinctive name fragment:
+  //   /shark-flexstyle ↔ "Shark FlexStyle Campaign - Sales - VC"
+  //   /sharkflex       ↔ "Shark FlexStyle Campaign - Sales - IC"
+  //   /sharkflexClick  ↔ "Shark FlexStyle Campaign - Sales - Amazon Click"
+  // ("amazon click" is checked as a whole phrase; "- ic"/"- vc" as suffixes,
+  //  so they can't cross-match each other)
   const PAGE_CAMPAIGN_KEYWORD: Record<string, string> = {
-    "/shark-flexstyle": "traffic",
-    "/sharkflex": "sales",
-    "/sharkflexClick": "click",
+    "/shark-flexstyle": "- vc",
+    "/sharkflex": "- ic",
+    "/sharkflexClick": "amazon click",
   };
   const fbCampaigns = facebookAdsData?.campaigns ?? [];
   const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];
