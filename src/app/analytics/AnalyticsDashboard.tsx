@@ -1068,6 +1068,9 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "לחיצות לאמזון" : "Amazon Clicks"}</div>
                     <div className="text-xl font-bold text-orange-500">{data.totalClicks}</div>
+                    {data.uniqueClickers > 0 && data.uniqueClickers !== data.totalClicks && (
+                      <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? `${data.uniqueClickers} אנשים` : `${data.uniqueClickers} people`}</div>
+                    )}
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>Bridge %</div>
