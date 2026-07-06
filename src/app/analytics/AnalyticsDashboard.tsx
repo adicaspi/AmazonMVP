@@ -447,18 +447,6 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const [beCommission, setBeCommission] = useState(30);
   const [beAmazonConv, setBeAmazonConv] = useState(6);
 
-  // Which FB campaign belongs to which page tab (persisted in this browser)
-  const [campaignMap, setCampaignMap] = useState<Record<string, string>>({});
-  useEffect(() => {
-    try {
-      setCampaignMap(JSON.parse(localStorage.getItem("aip_campaign_map") || "{}"));
-    } catch { /* keep empty map */ }
-  }, []);
-  const setCampaignForPage = (name: string) => {
-    const next = { ...campaignMap, [selectedPage]: name };
-    setCampaignMap(next);
-    try { localStorage.setItem("aip_campaign_map", JSON.stringify(next)); } catch { /* ignore */ }
-  };
 
   // Clear Direct-only traffic for the selected page (owner-only; needs the aip_notrack cookie)
   const [clearingDirect, setClearingDirect] = useState(false);
@@ -617,14 +605,20 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
 
   const conversionRate = data.views > 0 ? ((data.totalClicks / data.views) * 100).toFixed(1) : "0";
 
-  // Per-page campaign filter: each page tab remembers which FB campaign
-  // belongs to it, so spend/CPC/economics are computed per campaign
+  // Fixed page ↔ campaign binding (by campaign-name keyword, no manual pick):
+  // /shark-flexstyle ↔ the "Traffic" campaign, /sharkflex ↔ the "Sales" campaign
+  const PAGE_CAMPAIGN_KEYWORD: Record<string, string> = {
+    "/shark-flexstyle": "traffic",
+    "/sharkflex": "sales",
+  };
   const fbCampaigns = facebookAdsData?.campaigns ?? [];
-  const activeCampaign = campaignMap[selectedPage] || "";
-  const matchedCampaigns = activeCampaign ? fbCampaigns.filter((c) => c.campaign_name === activeCampaign) : fbCampaigns;
-  // Saved campaign missing from this date range → fall back to all
-  const campaignFilterActive = !!activeCampaign && matchedCampaigns.length > 0;
+  const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];
+  const matchedCampaigns = campaignKeyword
+    ? fbCampaigns.filter((c) => c.campaign_name.toLowerCase().includes(campaignKeyword))
+    : [];
+  const campaignFilterActive = matchedCampaigns.length > 0;
   const effectiveCampaigns = campaignFilterActive ? matchedCampaigns : fbCampaigns;
+  const activeCampaign = matchedCampaigns.map((c) => c.campaign_name).join(" + ");
 
   // Funnel economics (Facebook data for the selected campaign(s) + range)
   const fbCur = facebookAdsData?.currency === "ILS" ? "₪" : "$";
@@ -944,34 +938,21 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 {lang === "he" ? "משפך מקצה לקצה" : "End-to-End Funnel"} — {data.label}
               </h2>
               {campaignFilterActive && (
-                <select
-                  value={activeCampaign}
-                  onChange={(e) => setCampaignForPage(e.target.value)}
-                  className={`text-xs font-semibold rounded-full px-2.5 py-1 border-0 cursor-pointer ${darkMode ? "bg-blue-900/40 text-blue-300" : "bg-blue-100 text-blue-700"}`}
-                  title={lang === "he" ? "שנה קמפיין" : "Change campaign"}
-                >
-                  {fbCampaigns.map((c) => (
-                    <option key={c.campaign_name} value={c.campaign_name}>{c.campaign_name}</option>
-                  ))}
-                </select>
+                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${darkMode ? "bg-blue-900/40 text-blue-300" : "bg-blue-100 text-blue-700"}`}>
+                  {activeCampaign}
+                </span>
               )}
             </div>
             {!campaignFilterActive ? (
-              <div className="flex flex-wrap items-center gap-3 py-2">
-                <p className={`text-sm ${dm.textMuted}`}>
-                  {lang === "he" ? "קשר את הקמפיין של העמוד הזה (פעם אחת, נשמר):" : "Bind this page's campaign (once, saved):"}
-                </p>
-                <select
-                  value=""
-                  onChange={(e) => setCampaignForPage(e.target.value)}
-                  className={`rounded-lg border px-3 py-1.5 text-sm max-w-full ${darkMode ? "bg-neutral-800 border-neutral-700 text-white" : "bg-white border-gray-300 text-gray-900"}`}
-                >
-                  <option value="" disabled>{lang === "he" ? "בחר קמפיין..." : "Choose campaign..."}</option>
-                  {fbCampaigns.map((c) => (
-                    <option key={c.campaign_name} value={c.campaign_name}>{c.campaign_name}</option>
-                  ))}
-                </select>
-              </div>
+              <p className={`text-sm ${dm.textMuted} py-2`}>
+                {lang === "he"
+                  ? campaignKeyword
+                    ? `לא נמצא קמפיין פייסבוק עם "${campaignKeyword}" בשם בטווח התאריכים הזה — נתוני הפייסבוק יופיעו כשלקמפיין תהיה פעילות בטווח.`
+                    : "לעמוד הזה אין קמפיין פייסבוק מקושר."
+                  : campaignKeyword
+                    ? `No Facebook campaign containing "${campaignKeyword}" found in this date range — FB numbers appear once the campaign has activity in range.`
+                    : "This page has no linked Facebook campaign."}
+              </p>
             ) : (
               <>
                 <p className={`text-xs ${dm.textMuted} mb-3`}>
