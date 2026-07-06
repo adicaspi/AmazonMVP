@@ -640,11 +640,12 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const fbConversions = effectiveCampaigns.reduce((s, c) => s + c.conversions, 0);
   const fbAvgCostPerConv = fbConversions > 0 ? fbSpend / fbConversions : 0;
   const cpc = fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
-  const costPerAmazonClick = fbConversions > 0 ? fbSpend / fbConversions : 0;
 
-  // Break-even calculator (uses first-party bridge rate for accuracy)
+  // Break-even calculator (first-party bridge only — NO fallback to FB's
+  // cost-per-conversion: with 0 real Amazon clicks there is no profit to
+  // compute, and FB's count may include old test events we can't delete)
   const beBridgeFrac = data.views > 0 ? data.totalClicks / data.views : 0;
-  const beCostPerAmzClick = beBridgeFrac > 0 ? cpc / beBridgeFrac : costPerAmazonClick;
+  const beCostPerAmzClick = beBridgeFrac > 0 ? cpc / beBridgeFrac : 0;
   const beRevenuePerClick = beCommission * (beAmazonConv / 100);
   const beNetPerClick = beRevenuePerClick - beCostPerAmzClick;
   const beBreakEvenConv = beCommission > 0 && beCostPerAmzClick > 0 ? (beCostPerAmzClick / beCommission) * 100 : 0;
@@ -1069,7 +1070,11 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "רווח/הפסד לקליק" : "Net / Click"}</div>
-                    <div dir="ltr" className={`text-xl font-bold text-right ${beNetPerClick >= 0 ? "text-emerald-500" : "text-red-500"}`}>{beNetPerClick >= 0 ? "+" : "-"}{fbCur}{Math.abs(beNetPerClick).toFixed(2)}</div>
+                    {beCostPerAmzClick > 0 ? (
+                      <div dir="ltr" className={`text-xl font-bold text-right ${beNetPerClick >= 0 ? "text-emerald-500" : "text-red-500"}`}>{beNetPerClick >= 0 ? "+" : "-"}{fbCur}{Math.abs(beNetPerClick).toFixed(2)}</div>
+                    ) : (
+                      <div className={`text-xl font-bold ${dm.textMuted}`}>—</div>
+                    )}
                   </div>
                 </div>
               </>
@@ -1420,7 +1425,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div>
                   <div className={`text-xs ${dm.textMuted} mb-1`}>{t.beCostPerAmz}</div>
-                  <div className="text-xl font-bold text-amber-500">{fbCur}{beCostPerAmzClick.toFixed(2)}</div>
+                  <div className={`text-xl font-bold ${beCostPerAmzClick > 0 ? "text-amber-500" : dm.textMuted}`}>{beCostPerAmzClick > 0 ? `${fbCur}${beCostPerAmzClick.toFixed(2)}` : "—"}</div>
                 </div>
                 <div>
                   <div className={`text-xs ${dm.textMuted} mb-1`}>{t.beRevenuePerAmz}</div>
@@ -1428,18 +1433,28 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 </div>
                 <div>
                   <div className={`text-xs ${dm.textMuted} mb-1`}>{t.beNet}</div>
-                  <div dir="ltr" className={`text-xl font-bold text-right ${beProfitable ? "text-emerald-500" : "text-red-500"}`}>{beNetPerClick >= 0 ? "+" : "-"}{fbCur}{Math.abs(beNetPerClick).toFixed(2)}</div>
+                  {beCostPerAmzClick > 0 ? (
+                    <div dir="ltr" className={`text-xl font-bold text-right ${beProfitable ? "text-emerald-500" : "text-red-500"}`}>{beNetPerClick >= 0 ? "+" : "-"}{fbCur}{Math.abs(beNetPerClick).toFixed(2)}</div>
+                  ) : (
+                    <div className={`text-xl font-bold ${dm.textMuted}`}>—</div>
+                  )}
                 </div>
                 <div>
                   <div className={`text-xs ${dm.textMuted} mb-1`}>{t.beNeededConv}</div>
-                  <div className={`text-xl font-bold ${dm.text}`}>{beBreakEvenConv.toFixed(1)}%</div>
+                  <div className={`text-xl font-bold ${dm.text}`}>{beCostPerAmzClick > 0 ? `${beBreakEvenConv.toFixed(1)}%` : "—"}</div>
                 </div>
               </div>
 
               {/* Verdict */}
-              <div className={`rounded-lg px-4 py-3 text-sm font-semibold text-center ${beProfitable ? (darkMode ? "bg-emerald-900/30 text-emerald-300" : "bg-emerald-50 text-emerald-700") : (darkMode ? "bg-red-900/30 text-red-300" : "bg-red-50 text-red-700")}`}>
-                {beProfitable ? t.beProfitableMsg : t.beLosingMsg}
-              </div>
+              {beCostPerAmzClick > 0 ? (
+                <div className={`rounded-lg px-4 py-3 text-sm font-semibold text-center ${beProfitable ? (darkMode ? "bg-emerald-900/30 text-emerald-300" : "bg-emerald-50 text-emerald-700") : (darkMode ? "bg-red-900/30 text-red-300" : "bg-red-50 text-red-700")}`}>
+                  {beProfitable ? t.beProfitableMsg : t.beLosingMsg}
+                </div>
+              ) : (
+                <div className={`rounded-lg px-4 py-3 text-sm font-semibold text-center ${darkMode ? "bg-neutral-800 text-gray-400" : "bg-gray-100 text-gray-500"}`}>
+                  {lang === "he" ? "אין עדיין לחיצות לאמזון בטווח הזה — אין מה לחשב" : "No Amazon clicks in this range yet — nothing to compute"}
+                </div>
+              )}
             </div>
           </section>
         )}
