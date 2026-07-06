@@ -272,16 +272,18 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     if (!accessToken || !adAccountId) return null;
 
     const baseUrl = `https://graph.facebook.com/v21.0/act_${adAccountId}/insights`;
-    const fields = "campaign_name,actions,cost_per_action_type,spend,impressions,clicks,inline_link_clicks";
+    const fields = "campaign_id,campaign_name,actions,cost_per_action_type,spend,impressions,clicks,inline_link_clicks";
     // Match the dashboard's selected date range; fall back to last 7 days
     const dateParam = from && to
       ? `time_range=${encodeURIComponent(JSON.stringify({ since: from, until: to }))}`
       : "date_preset=last_7d";
 
-    // Fetch the selected range (by campaign) and today in parallel
-    const [weekRes, todayRes] = await Promise.all([
+    // Fetch the selected range (by campaign), today's spend, and campaign
+    // statuses in parallel — Off campaigns are hidden from the dashboard
+    const [weekRes, todayRes, statusRes] = await Promise.all([
       fetch(`${baseUrl}?fields=${fields}&level=campaign&${dateParam}&limit=50&access_token=${accessToken}`),
       fetch(`${baseUrl}?fields=spend&date_preset=today&limit=1&access_token=${accessToken}`),
+      fetch(`https://graph.facebook.com/v21.0/act_${adAccountId}/campaigns?fields=id,effective_status&limit=200&access_token=${accessToken}`),
     ]);
 
     if (!weekRes.ok) {
@@ -292,7 +294,19 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     const weekJson = await weekRes.json();
     const todayJson = todayRes.ok ? await todayRes.json() : { data: [] };
 
-    const campaigns = parseFbInsights(weekJson.data || []);
+    // Only ACTIVE campaigns are shown; if the status fetch fails, show all
+    let rows: any[] = weekJson.data || [];
+    if (statusRes.ok) {
+      const statusJson = await statusRes.json();
+      const activeIds = new Set(
+        (statusJson.data || [])
+          .filter((c: any) => c.effective_status === "ACTIVE")
+          .map((c: any) => c.id)
+      );
+      if (activeIds.size > 0) rows = rows.filter((r: any) => activeIds.has(r.campaign_id));
+    }
+
+    const campaigns = parseFbInsights(rows);
     const totalSpend = campaigns.reduce((s, c) => s + c.spend, 0);
     const totalConversions = campaigns.reduce((s, c) => s + c.conversions, 0);
     const avgCostPerConversion = totalConversions > 0 ? totalSpend / totalConversions : 0;
