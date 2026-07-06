@@ -50,6 +50,7 @@ type PageData = {
   label: string;
   color: string;
   views: number;
+  uniqueClickers: number;
   todayViews: number;
   totalClicks: number;
   todayClicks: number;
@@ -104,7 +105,7 @@ const translations = {
     allPages: "הכל",
     conversionFunnel: "משפך המרה",
     funnelDesc: "כמה אנשים ביקרו בעמוד וכמה מהם לחצו לאמזון",
-    pageViews: "צפיות בעמוד",
+    pageViews: "מבקרים בעמוד",
     amazonClicks: "לחיצות לאמזון",
     conversion: "המרה",
     views: "צפיות",
@@ -238,7 +239,7 @@ const translations = {
     allPages: "All",
     conversionFunnel: "Conversion Funnel",
     funnelDesc: "How many people visited the page and how many clicked to Amazon",
-    pageViews: "Page Views",
+    pageViews: "Unique Visitors",
     amazonClicks: "Amazon Clicks",
     conversion: "Conversion",
     views: "Views",
@@ -607,7 +608,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     tabInactive: darkMode ? "text-gray-400 hover:text-gray-200" : "text-gray-500 hover:text-gray-700",
   };
 
-  const conversionRate = data.views > 0 ? ((data.totalClicks / data.views) * 100).toFixed(1) : "0";
+  // People-based conversion: distinct clickers ÷ distinct visitors
+  const conversionRate = data.views > 0 ? ((data.uniqueClickers / data.views) * 100).toFixed(1) : "0";
 
   // Fixed page ↔ campaign binding (by campaign-name keyword, no manual pick):
   // /shark-flexstyle ↔ the "Traffic" campaign, /sharkflex ↔ the "Sales" campaign
@@ -645,7 +647,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   // (direct measurement). The old CPC÷Bridge formula overstated cost whenever
   // page views included non-campaign traffic (bots, reloads) — spend/clicks
   // doesn't depend on the views count at all.
-  const beBridgeFrac = data.views > 0 ? data.totalClicks / data.views : 0;
+  const beBridgeFrac = data.views > 0 ? data.uniqueClickers / data.views : 0;
   const beCostPerAmzClick = campaignFilterActive && data.totalClicks > 0 ? fbSpend / data.totalClicks : 0;
   const beRevenuePerClick = beCommission * (beAmazonConv / 100);
   const beNetPerClick = beRevenuePerClick - beCostPerAmzClick;
@@ -1054,7 +1056,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                     <div className="text-xl font-bold text-blue-500">{fbCur}{cpc.toFixed(2)}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
-                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "צפיות בעמוד" : "Page Views"}</div>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "מבקרים בעמוד" : "Unique Visitors"}</div>
                     <div className={`text-xl font-bold ${dm.text}`}>{data.views}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>

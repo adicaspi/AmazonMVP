@@ -151,6 +151,7 @@ type TrafficSourceData = {
   recentVisits: RecentVisit[];
   adViews: Record<string, number>;
   visitorAdMap: Record<string, string>;
+  uniqueVisitors: number;
 };
 
 async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, from?: string, to?: string): Promise<TrafficSourceData> {
@@ -174,8 +175,13 @@ async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, f
         const sourceDeviceBreakdown: Record<string, Record<string, number>> = {};
         const adViews: Record<string, number> = {};
         const visitorAdMap: Record<string, string> = {};
+        // People, not page loads: back-from-Amazon and reloads create extra
+        // rows for the same person — Facebook's LPV counts landings, so we
+        // count distinct visitors (rows without visitor_id count as one each)
+        const visitorSet = new Set<string>();
 
         data.forEach((view: any) => {
+          visitorSet.add(view.visitor_id || view.id);
           let source = "Direct";
           const fullUrl = view.full_url || "";
           if (view.utm_source) {
@@ -230,12 +236,12 @@ async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, f
           clicked_amazon: v.visitor_id ? clickedVisitorIds.has(v.visitor_id) : false,
         }));
 
-        return { sources, deviceCounts, sourceDeviceBreakdown, recentVisits, adViews, visitorAdMap };
+        return { sources, deviceCounts, sourceDeviceBreakdown, recentVisits, adViews, visitorAdMap, uniqueVisitors: visitorSet.size };
       }
     }
-    return { sources: {}, deviceCounts: {}, sourceDeviceBreakdown: {}, recentVisits: [], adViews: {}, visitorAdMap: {} };
+    return { sources: {}, deviceCounts: {}, sourceDeviceBreakdown: {}, recentVisits: [], adViews: {}, visitorAdMap: {}, uniqueVisitors: 0 };
   } catch {
-    return { sources: {}, deviceCounts: {}, sourceDeviceBreakdown: {}, recentVisits: [], adViews: {}, visitorAdMap: {} };
+    return { sources: {}, deviceCounts: {}, sourceDeviceBreakdown: {}, recentVisits: [], adViews: {}, visitorAdMap: {}, uniqueVisitors: 0 };
   }
 }
 
@@ -402,15 +408,22 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
   const pagesData = await Promise.all(
     TRACKED_PAGES.map(async ({ path, label, color }) => {
       const stats = getClickStats(filteredClicks, path);
-      const views = await getPageViews(path, dateFrom, dateTo);
+      const rawViews = await getPageViews(path, dateFrom, dateTo);
       const todayViews = await getTodayPageViews(path);
       // "Clicked Amazon" flag: only clicks on THIS page within the selected
       // range — a click on another page must not mark visits here as clicked
       const clickedVisitorIds = new Set<string>();
+      let clicksWithoutVisitor = 0;
       filteredClicks.forEach((click) => {
-        if (click.page === path && click.visitor_id) clickedVisitorIds.add(click.visitor_id);
+        if (click.page !== path) return;
+        if (click.visitor_id) clickedVisitorIds.add(click.visitor_id);
+        else clicksWithoutVisitor++;
       });
       const trafficData = await getTrafficSources(path, clickedVisitorIds, dateFrom, dateTo);
+      // "Views" = distinct PEOPLE (like Facebook's landing page views), not
+      // raw page loads — reloads/back-from-Amazon don't inflate the funnel.
+      const views = trafficData.uniqueVisitors > 0 ? trafficData.uniqueVisitors : rawViews;
+      const uniqueClickers = clickedVisitorIds.size + clicksWithoutVisitor;
 
       const todayClicks = stats.byDay[today] || 0;
       const weekClicks = Object.entries(stats.byDay)
@@ -437,6 +450,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
         label,
         color,
         views,
+        uniqueClickers,
         todayViews,
         totalClicks: stats.total,
         todayClicks,
@@ -498,6 +512,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
     label: "All Pages",
     color: "emerald" as const,
     views: allViews,
+    uniqueClickers: pagesData.reduce((sum, p) => sum + p.uniqueClickers, 0),
     todayViews: allTodayViews,
     totalClicks: allStats.total,
     todayClicks: allTodayClicks,
