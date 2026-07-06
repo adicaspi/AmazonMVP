@@ -418,7 +418,9 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const [selectedPage, setSelectedPage] = useState<string>("all");
   const [filterFrom, setFilterFrom] = useState(dateFrom || "");
   const [filterTo, setFilterTo] = useState(dateTo || "");
-  const [showCustomRange, setShowCustomRange] = useState(!!(dateFrom || dateTo));
+  // Closed by default — presets also put from/to in the URL, so opening
+  // whenever dates exist made the custom-range panel look "always pressed"
+  const [showCustomRange, setShowCustomRange] = useState(false);
   const [loading, setLoading] = useState(false);
   const t = translations[lang];
   const isRTL = lang === "he";
