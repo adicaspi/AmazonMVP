@@ -616,11 +616,9 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   //   /shark-flexstyle ↔ "... Amazon Click" (the campaign that optimizes on
   //                       the AmazonClick custom conversion for this page)
   //   /sharkflex       ↔ "... - Sales - IC"
-  //   /sharkflexClick  ↔ no campaign bound
   const PAGE_CAMPAIGN_KEYWORD: Record<string, string[]> = {
     "/shark-flexstyle": ["amazon click"],
     "/sharkflex": ["- ic"],
-    "/sharkflexClick": [],
   };
   const fbCampaigns = facebookAdsData?.campaigns ?? [];
   const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];
