@@ -116,11 +116,9 @@ export function AmazonButton({ href, children, className, productName, position,
       eventName,
       eventId: generateEventId(),
     }));
-    // Custom click event. On /sharkflexClick the Ad Set optimizes on the
-    // event named "Amazon Click" (with a space — that's what exists in the
-    // campaign settings and Ads Manager wouldn't switch), so that page sends
-    // the spaced name; everywhere else keeps the original "AmazonClick".
-    const customEventName = pagePath.startsWith("/sharkflexClick") ? "Amazon Click" : "AmazonClick";
+    // Custom click event — one name everywhere. The Ad Set's custom
+    // conversion listens for this exact event name (plus a URL rule).
+    const customEventName = "AmazonClick";
     const clickEventId = generateEventId();
 
     // ── Browser Pixel ──────────────────────────────────
