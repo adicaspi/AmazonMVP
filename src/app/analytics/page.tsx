@@ -53,6 +53,7 @@ export type FacebookCampaign = {
   impressions: number;
   clicks: number;
   linkClicks: number;
+  landingPageViews: number;
   conversions: number;
   costPerConversion: number;
   conversionEventName: string;
@@ -257,6 +258,7 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
     const conversionType = conversionAction?.action_type || "";
     const costEntry = costPerAction.find((c: any) => c.action_type === conversionType);
     const costPerConversion = costEntry ? parseFloat(costEntry.value) : 0;
+    const lpvEntry = actions.find((a: any) => a.action_type === "landing_page_view");
 
     return {
       campaign_name: row.campaign_name || "Unknown",
@@ -264,6 +266,7 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
       impressions: parseInt(row.impressions || "0"),
       clicks: parseInt(row.clicks || "0"),
       linkClicks: parseInt(row.inline_link_clicks || "0"),
+      landingPageViews: lpvEntry ? parseInt(lpvEntry.value) : 0,
       conversions,
       costPerConversion,
       conversionEventName: conversionType,

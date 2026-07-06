@@ -75,6 +75,7 @@ type FacebookCampaign = {
   impressions: number;
   clicks: number;
   linkClicks: number;
+  landingPageViews: number;
   conversions: number;
   costPerConversion: number;
   conversionEventName: string;
@@ -608,11 +609,6 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     tabInactive: darkMode ? "text-gray-400 hover:text-gray-200" : "text-gray-500 hover:text-gray-700",
   };
 
-  // People-based conversion: distinct clickers ÷ distinct visitors
-  const conversionRate = data.views > 0 ? ((data.uniqueClickers / data.views) * 100).toFixed(1) : "0";
-
-  // Fixed page ↔ campaign binding (by campaign-name keyword, no manual pick):
-  // /shark-flexstyle ↔ the "Traffic" campaign, /sharkflex ↔ the "Sales" campaign
   // Exact page ↔ campaign binding by the real campaign names, straight from
   // the Facebook API (no legacy aliases — if Meta's reporting hasn't caught
   // up with a rename yet, we simply wait for it):
@@ -642,12 +638,22 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const fbConversions = effectiveCampaigns.reduce((s, c) => s + c.conversions, 0);
   const fbAvgCostPerConv = fbConversions > 0 ? fbSpend / fbConversions : 0;
   const cpc = fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
+  const fbLPV = effectiveCampaigns.reduce((s, c) => s + (c.landingPageViews || 0), 0);
+
+  // Visitors: when a campaign is bound, use Facebook's Landing Page Views —
+  // Meta doesn't count its own ad-review crawlers, which run real browsers
+  // and are indistinguishable in our first-party data. Otherwise fall back
+  // to our distinct-visitor count.
+  const useFbViews = campaignFilterActive && fbLPV > 0;
+  const effViews = useFbViews ? fbLPV : data.views;
+  // Bridge: click events ÷ landings (same units Facebook uses for Results/LPV)
+  const beBridgeFrac = useFbViews
+    ? (fbLPV > 0 ? data.totalClicks / fbLPV : 0)
+    : (data.views > 0 ? data.uniqueClickers / data.views : 0);
+  const conversionRate = (beBridgeFrac * 100).toFixed(1);
 
   // Break-even: cost per Amazon click = campaign spend ÷ our recorded clicks
-  // (direct measurement). The old CPC÷Bridge formula overstated cost whenever
-  // page views included non-campaign traffic (bots, reloads) — spend/clicks
-  // doesn't depend on the views count at all.
-  const beBridgeFrac = data.views > 0 ? data.uniqueClickers / data.views : 0;
+  // (direct measurement, independent of any views count).
   const beCostPerAmzClick = campaignFilterActive && data.totalClicks > 0 ? fbSpend / data.totalClicks : 0;
   const beRevenuePerClick = beCommission * (beAmazonConv / 100);
   const beNetPerClick = beRevenuePerClick - beCostPerAmzClick;
@@ -976,7 +982,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           };
           const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.5 ? "good" : cpc <= 1 ? "mid" : "bad";
           const bridgePct = beBridgeFrac * 100;
-          const bridgeStatus = data.views === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
+          const bridgeStatus = effViews === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
           const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.5 ? "mid" : "bad";
           return (
             <section>
@@ -995,7 +1001,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 {kpiCard(
                   "Bridge %",
                   lang === "he" ? "העמוד טוב?" : "Is the page good?",
-                  data.views > 0 ? `${bridgePct.toFixed(1)}%` : "—",
+                  effViews > 0 ? `${bridgePct.toFixed(1)}%` : "—",
                   bridgeStatus,
                   lang === "he" ? "יעד: מעל 25%" : "Target: above 25%"
                 )}
@@ -1057,7 +1063,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "מבקרים בעמוד" : "Unique Visitors"}</div>
-                    <div className={`text-xl font-bold ${dm.text}`}>{data.views}</div>
+                    <div className={`text-xl font-bold ${dm.text}`}>{effViews}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "לחיצות לאמזון" : "Amazon Clicks"}</div>
@@ -1154,7 +1160,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           <div className={`${dm.cardBg} rounded-xl border shadow-sm p-5 transition-colors duration-300`}>
             <div className="flex items-center justify-between gap-4">
               <div className="flex-1 text-center">
-                <div className={`text-3xl font-bold ${dm.text}`}>{data.views}</div>
+                <div className={`text-3xl font-bold ${dm.text}`}>{effViews}</div>
                 <div className={`text-sm ${dm.textMuted} mt-1`}>{t.pageViews}</div>
               </div>
               <div className="flex flex-col items-center px-4">
@@ -1176,18 +1182,18 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 <div className={`flex-1 h-6 ${dm.barBg} rounded-lg overflow-hidden`}>
                   <div className={`h-full ${darkMode ? "bg-gray-500" : "bg-gray-400"} rounded-lg`} style={{ width: "100%" }}></div>
                 </div>
-                <div className={`w-10 text-sm font-medium ${dm.text}`}>{data.views}</div>
+                <div className={`w-10 text-sm font-medium ${dm.text}`}>{effViews}</div>
               </div>
               <div className="flex items-center gap-3">
                 <div className={`w-16 text-sm ${dm.textMuted}`}>{t.clicks}</div>
                 <div className={`flex-1 h-6 ${dm.barBg} rounded-lg overflow-hidden`}>
-                  <div className="h-full bg-emerald-500 rounded-lg transition-all duration-500" style={{ width: `${data.views > 0 ? (data.totalClicks / data.views) * 100 : 0}%` }}></div>
+                  <div className="h-full bg-emerald-500 rounded-lg transition-all duration-500" style={{ width: `${Math.min(beBridgeFrac * 100, 100)}%` }}></div>
                 </div>
                 <div className="w-10 text-sm font-medium text-emerald-500">{data.totalClicks}</div>
               </div>
             </div>
 
-            {data.views > 0 && (
+            {effViews > 0 && (
               <div className={`mt-4 p-3 rounded-lg border ${darkMode ? "bg-emerald-900/30 border-emerald-800" : "bg-emerald-50 border-emerald-200"}`}>
                 <p className={`text-sm ${darkMode ? "text-emerald-300" : "text-emerald-800"}`}>
                   <strong>{conversionRate}%</strong> {t.ofVisitorsClick}
