@@ -940,6 +940,73 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           </div>
         )}
 
+        {/* THE 3 KPIs — big verdict strip: ad (CPC), page (Bridge), business (Net) */}
+        {selectedPage !== "all" && (() => {
+          const kpiCard = (
+            label: string,
+            question: string,
+            value: string,
+            status: "good" | "mid" | "bad" | "na",
+            target: string
+          ) => {
+            const statusStyles = {
+              good: darkMode ? "border-emerald-700 bg-emerald-900/20" : "border-emerald-300 bg-emerald-50",
+              mid: darkMode ? "border-amber-700 bg-amber-900/20" : "border-amber-300 bg-amber-50",
+              bad: darkMode ? "border-red-700 bg-red-900/20" : "border-red-300 bg-red-50",
+              na: darkMode ? "border-neutral-700 bg-neutral-900" : "border-gray-200 bg-white",
+            } as const;
+            const valueColor = {
+              good: "text-emerald-500",
+              mid: "text-amber-500",
+              bad: "text-red-500",
+              na: dm.textMuted,
+            } as const;
+            return (
+              <div className={`rounded-2xl border-2 p-5 text-center transition-colors duration-300 ${statusStyles[status]}`}>
+                <div className={`text-sm font-bold ${dm.text}`}>{label}</div>
+                <div className={`text-xs ${dm.textMuted} mb-2`}>{question}</div>
+                <div dir="ltr" className={`text-4xl md:text-5xl font-black tracking-tight ${valueColor[status]}`}>{value}</div>
+                <div className={`text-xs ${dm.textMuted} mt-2`}>{target}</div>
+              </div>
+            );
+          };
+          const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.5 ? "good" : cpc <= 1 ? "mid" : "bad";
+          const bridgePct = beBridgeFrac * 100;
+          const bridgeStatus = data.views === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
+          const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.5 ? "mid" : "bad";
+          return (
+            <section>
+              <h2 className={`text-lg font-bold ${dm.text} mb-3 flex items-center gap-2`}>
+                <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                {lang === "he" ? "3 המדדים שמנהלים את העסק" : "The 3 Metrics That Run the Business"}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {kpiCard(
+                  "CPC",
+                  lang === "he" ? "המודעה טובה?" : "Is the ad good?",
+                  campaignFilterActive && fbLinkClicks > 0 ? `${fbCur}${cpc.toFixed(2)}` : "—",
+                  cpcStatus,
+                  lang === "he" ? "יעד: מתחת ל-₪0.50" : "Target: under ₪0.50"
+                )}
+                {kpiCard(
+                  "Bridge %",
+                  lang === "he" ? "העמוד טוב?" : "Is the page good?",
+                  data.views > 0 ? `${bridgePct.toFixed(1)}%` : "—",
+                  bridgeStatus,
+                  lang === "he" ? "יעד: מעל 25%" : "Target: above 25%"
+                )}
+                {kpiCard(
+                  lang === "he" ? "רווח/הפסד לקליק" : "Net per Click",
+                  lang === "he" ? "העסק מרוויח?" : "Is the business profitable?",
+                  campaignFilterActive && beCostPerAmzClick > 0 ? `${beNetPerClick >= 0 ? "+" : "-"}${fbCur}${Math.abs(beNetPerClick).toFixed(2)}` : "—",
+                  netStatus,
+                  lang === "he" ? "יעד: חיובי" : "Target: positive"
+                )}
+              </div>
+            </section>
+          );
+        })()}
+
         {/* Campaign Funnel — the ONE place: page tab switches everything.
             Each page tab is bound to its FB campaign, so every metric here
             (FB side + landing-page side + profitability) is per-funnel. */}
