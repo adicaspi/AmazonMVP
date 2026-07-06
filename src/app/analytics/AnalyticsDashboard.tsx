@@ -611,21 +611,23 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
 
   // Fixed page ↔ campaign binding (by campaign-name keyword, no manual pick):
   // /shark-flexstyle ↔ the "Traffic" campaign, /sharkflex ↔ the "Sales" campaign
-  // Exact page ↔ campaign binding by distinctive name fragment:
-  //   /shark-flexstyle ↔ "Shark FlexStyle Campaign - Sales - VC"
-  //   /sharkflex       ↔ "Shark FlexStyle Campaign - Sales - IC"
-  //   /sharkflexClick  ↔ "Shark FlexStyle Campaign - Sales - Amazon Click"
-  // ("amazon click" is checked as a whole phrase; "- ic"/"- vc" as suffixes,
-  //  so they can't cross-match each other)
-  const PAGE_CAMPAIGN_KEYWORD: Record<string, string> = {
-    "/shark-flexstyle": "- vc",
-    "/sharkflex": "- ic",
-    "/sharkflexClick": "amazon click",
+  // Exact page ↔ campaign binding by distinctive name fragments:
+  //   /shark-flexstyle ↔ "... - Sales - VC"  (also matches the pre-rename
+  //                       "... - Traffic - LPV" until Meta's reporting
+  //                       catches up with the rename)
+  //   /sharkflex       ↔ "... - Sales - IC"
+  //   /sharkflexClick  ↔ "... - Sales - Amazon Click"
+  // ("amazon click" is a whole phrase; "- ic"/"- vc" are suffixes, so none
+  //  of these can cross-match another campaign)
+  const PAGE_CAMPAIGN_KEYWORD: Record<string, string[]> = {
+    "/shark-flexstyle": ["- vc", "- lpv", "traffic"],
+    "/sharkflex": ["- ic"],
+    "/sharkflexClick": ["amazon click"],
   };
   const fbCampaigns = facebookAdsData?.campaigns ?? [];
   const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];
   const matchedCampaigns = campaignKeyword
-    ? fbCampaigns.filter((c) => c.campaign_name.toLowerCase().includes(campaignKeyword))
+    ? fbCampaigns.filter((c) => campaignKeyword.some((k) => c.campaign_name.toLowerCase().includes(k)))
     : [];
   const campaignFilterActive = matchedCampaigns.length > 0;
   const effectiveCampaigns = campaignFilterActive ? matchedCampaigns : fbCampaigns;
@@ -958,10 +960,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               <p className={`text-sm ${dm.textMuted} py-2`}>
                 {lang === "he"
                   ? campaignKeyword
-                    ? `לא נמצא קמפיין פייסבוק עם "${campaignKeyword}" בשם בטווח התאריכים הזה — נתוני הפייסבוק יופיעו כשלקמפיין תהיה פעילות בטווח.`
+                    ? `לא נמצא קמפיין פייסבוק עם "${campaignKeyword.join('" / "')}" בשם בטווח התאריכים הזה — נתוני הפייסבוק יופיעו כשלקמפיין תהיה פעילות בטווח.`
                     : "לעמוד הזה אין קמפיין פייסבוק מקושר."
                   : campaignKeyword
-                    ? `No Facebook campaign containing "${campaignKeyword}" found in this date range — FB numbers appear once the campaign has activity in range.`
+                    ? `No Facebook campaign containing "${campaignKeyword.join('" / "')}" found in this date range — FB numbers appear once the campaign has activity in range.`
                     : "This page has no linked Facebook campaign."}
               </p>
             ) : (
