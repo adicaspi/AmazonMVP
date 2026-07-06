@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase, isDatabaseAvailable } from "@/lib/db";
 import { isFbToolReferrer } from "@/lib/fb-tool-referrers";
+import { isBotUserAgent } from "@/lib/bot-detect";
 
 // Deletes ONLY "Direct" first-party analytics rows for one page:
 // page_views with no utm_source, no ad click-id (fbclid/gclid/ttclid) and no
@@ -17,6 +18,7 @@ type ViewRow = {
   utm_source: string | null;
   referer: string | null;
   full_url: string | null;
+  user_agent: string | null;
 };
 
 function isDirect(view: ViewRow): boolean {
@@ -34,10 +36,11 @@ function isDirect(view: ViewRow): boolean {
   return true;
 }
 
-// Owner's own test visits (Events Manager preview etc.) are removable too,
-// even though they carry a facebook.com referrer.
+// Removable: Direct (owner) visits, Events Manager test previews, and bot
+// crawls (Meta ad-review bots carry fbclid so they'd otherwise look like
+// ad traffic — the user-agent gives them away).
 function isRemovable(view: ViewRow): boolean {
-  return isDirect(view) || isFbToolReferrer(view.referer);
+  return isDirect(view) || isFbToolReferrer(view.referer) || isBotUserAgent(view.user_agent);
 }
 
 function chunk<T>(arr: T[], size: number): T[][] {
@@ -75,7 +78,7 @@ export async function POST(request: NextRequest) {
   for (let offset = 0; ; offset += PAGE_SIZE) {
     const { data, error } = await supabase
       .from("page_views")
-      .select("id, visitor_id, utm_source, referer, full_url")
+      .select("id, visitor_id, utm_source, referer, full_url, user_agent")
       .eq("page", page)
       .range(offset, offset + PAGE_SIZE - 1);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });

@@ -3,6 +3,7 @@ import { supabase, isDatabaseAvailable } from "@/lib/db";
 import { generateEventId, getFbCookies } from "@/lib/fb-conversions";
 import { normalizeSource } from "@/lib/normalizeSource";
 import { isFbToolReferrer } from "@/lib/fb-tool-referrers";
+import { isBotUserAgent } from "@/lib/bot-detect";
 
 // Map page paths to their dedicated Facebook Pixel IDs
 const PAGE_PIXEL_MAP: Record<string, string> = {
@@ -96,8 +97,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Detect device type from user-agent
+    // Bots (Meta ad-review crawlers etc.) are not visitors: don't record
+    // them and don't send them to the pixel — they inflate views only.
     const ua = request.headers.get("user-agent") || "";
+    if (isBotUserAgent(ua)) {
+      return NextResponse.json({ success: true, skipped: "bot" });
+    }
     let device_type = "desktop";
     if (/tablet|ipad|playbook|silk/i.test(ua)) {
       device_type = "tablet";
