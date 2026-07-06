@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const NY_TZ = "America/New_York";
 
 type RecentClick = {
   id: string;
@@ -87,6 +86,7 @@ type FacebookAdsData = {
   avgCostPerConversion: number;
   todaySpend: number;
   currency: string;
+  timezone?: string;
 };
 
 interface Props {
@@ -406,6 +406,10 @@ function formatTimeAgo(ts: number, now: number, lang: "he" | "en"): string {
 }
 
 export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData, dateFrom, dateTo }: Props) {
+  // Single dashboard timezone — read live from the Facebook ad account so
+  // every date/hour here lines up with Ads Manager by construction.
+  const NY_TZ = facebookAdsData?.timezone || "America/New_York";
+  const tzLabel = NY_TZ === "Asia/Jerusalem" ? "IL" : NY_TZ === "America/New_York" ? "NYC" : NY_TZ;
   const router = useRouter();
   const [lang, setLang] = useState<"he" | "en">("he");
   const [darkMode, setDarkMode] = useState(false);
@@ -709,7 +713,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 <p className={`text-xs md:text-sm ${dm.textMuted}`}>{t.subtitle}</p>
                 {nyTime && (
                   <span className={`text-xs font-mono px-2 py-0.5 rounded whitespace-nowrap ${darkMode ? "bg-neutral-800 text-gray-400" : "bg-gray-100 text-gray-500"}`}>
-                    NYC {nyTime}
+                    {tzLabel} {nyTime}
                   </span>
                 )}
               </div>
@@ -1189,13 +1193,18 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             <p className={`text-sm ${dm.textMuted} mb-3`}>{t.fbAdsDesc}</p>
 
             {/* Numbers follow the campaign bound to the selected page tab */}
-            {campaignFilterActive && (
-              <div className="mb-3">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              {campaignFilterActive && (
                 <span className={`text-xs px-2 py-0.5 rounded-full ${darkMode ? "bg-blue-900/40 text-blue-300" : "bg-blue-50 text-blue-700"}`}>
                   {lang === "he" ? `מציג את הקמפיין של העמוד: ${activeCampaign}` : `Showing this page's campaign: ${activeCampaign}`}
                 </span>
-              </div>
-            )}
+              )}
+              {facebookAdsData.timezone && (
+                <span className={`text-xs px-2 py-0.5 rounded-full ${darkMode ? "bg-neutral-800 text-gray-400" : "bg-gray-100 text-gray-500"}`}>
+                  {lang === "he" ? "אזור זמן החשבון (מסונכרן לכל הדשבורד):" : "Account timezone (synced dashboard-wide):"} {facebookAdsData.timezone}
+                </span>
+              )}
+            </div>
 
             {/* Summary Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">

@@ -2,17 +2,31 @@ import { supabase, isDatabaseAvailable } from "@/lib/db";
 import { normalizeSource } from "@/lib/normalizeSource";
 import AnalyticsDashboard from "./AnalyticsDashboard";
 
-const NY_TZ = "America/New_York";
+// ONE timezone for the whole dashboard — read from the Facebook ad account
+// itself (timezone_name) so our day buckets line up exactly with Ads Manager.
+// Overwritten per request in AnalyticsPage once the account info arrives.
+let DASH_TZ = "America/New_York";
 
 function toNYDateString(date: Date | string): string {
   const d = typeof date === "string" ? new Date(date) : date;
-  return d.toLocaleDateString("en-CA", { timeZone: NY_TZ });
+  return d.toLocaleDateString("en-CA", { timeZone: DASH_TZ });
 }
 
 function toNYHour(date: Date | string): number {
   const d = typeof date === "string" ? new Date(date) : date;
-  return parseInt(d.toLocaleString("en-US", { timeZone: NY_TZ, hour: "numeric", hour12: false }));
+  return parseInt(d.toLocaleString("en-US", { timeZone: DASH_TZ, hour: "numeric", hour12: false }));
 }
+
+// Convert "YYYY-MM-DD" + local time-of-day in DASH_TZ to a UTC ISO instant,
+// so Supabase timestamp filters use the same day boundaries as Facebook.
+function zonedToUtcISO(dateStr: string, time: string): string {
+  const guess = new Date(`${dateStr}T${time}Z`);
+  const inTz = new Date(guess.toLocaleString("en-US", { timeZone: DASH_TZ }));
+  const inUtc = new Date(guess.toLocaleString("en-US", { timeZone: "UTC" }));
+  return new Date(guess.getTime() - (inTz.getTime() - inUtc.getTime())).toISOString();
+}
+const rangeStartISO = (from: string) => zonedToUtcISO(from, "00:00:00");
+const rangeEndISO = (to: string) => zonedToUtcISO(to, "23:59:59");
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -51,6 +65,7 @@ export type FacebookAdsData = {
   avgCostPerConversion: number;
   todaySpend: number;
   currency: string;
+  timezone: string;
 };
 
 // Pages we track
@@ -86,8 +101,8 @@ async function getPageViews(page: string, from?: string, to?: string): Promise<n
         .select("*", { count: "exact", head: true })
         .eq("page", page);
 
-      if (from) query = query.gte("timestamp", `${from}T00:00:00`);
-      if (to) query = query.lte("timestamp", `${to}T23:59:59`);
+      if (from) query = query.gte("timestamp", rangeStartISO(from));
+      if (to) query = query.lte("timestamp", rangeEndISO(to));
 
       const { count, error } = await query;
       if (!error && count !== null) return count;
@@ -101,13 +116,12 @@ async function getPageViews(page: string, from?: string, to?: string): Promise<n
 async function getTodayPageViews(page: string): Promise<number> {
   try {
     if (supabase && (await isDatabaseAvailable())) {
-      const todayStart = new Date();
-      todayStart.setHours(0, 0, 0, 0);
+      const todayStr = toNYDateString(new Date());
       const { count, error } = await supabase
         .from("page_views")
         .select("*", { count: "exact", head: true })
         .eq("page", page)
-        .gte("timestamp", todayStart.toISOString());
+        .gte("timestamp", rangeStartISO(todayStr));
 
       if (!error && count !== null) return count;
     }
@@ -146,8 +160,8 @@ async function getTrafficSources(page: string, clickedVisitorIds: Set<string>, f
         .from("page_views")
         .select("id, timestamp, page, utm_source, referer, device_type, full_url, visitor_id")
         .eq("page", page);
-      if (from) query = query.gte("timestamp", `${from}T00:00:00`);
-      if (to) query = query.lte("timestamp", `${to}T23:59:59`);
+      if (from) query = query.gte("timestamp", rangeStartISO(from));
+      if (to) query = query.lte("timestamp", rangeEndISO(to));
 
       const { data, error } = await query
         .order("timestamp", { ascending: false })
@@ -283,17 +297,20 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     const avgCostPerConversion = totalConversions > 0 ? totalSpend / totalConversions : 0;
     const todaySpend = todayJson.data?.[0] ? parseFloat(todayJson.data[0].spend || "0") : 0;
 
-    // Try to detect currency from account info
+    // Detect currency + timezone from account info (timezone must match the
+    // dashboard's Asia/Jerusalem assumption for day buckets to line up)
     let currency = "ILS";
+    let timezone = "";
     try {
-      const acctRes = await fetch(`https://graph.facebook.com/v21.0/act_${adAccountId}?fields=currency&access_token=${accessToken}`);
+      const acctRes = await fetch(`https://graph.facebook.com/v21.0/act_${adAccountId}?fields=currency,timezone_name&access_token=${accessToken}`);
       if (acctRes.ok) {
         const acctJson = await acctRes.json();
         currency = acctJson.currency || "ILS";
+        timezone = acctJson.timezone_name || "";
       }
     } catch { /* fallback to ILS */ }
 
-    return { campaigns, totalSpend, totalConversions, avgCostPerConversion, todaySpend, currency };
+    return { campaigns, totalSpend, totalConversions, avgCostPerConversion, todaySpend, currency, timezone };
   } catch (err) {
     console.error("Failed to fetch Facebook Ads data:", err);
     return null;
@@ -352,6 +369,8 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
     getAmazonClicks(),
     getFacebookAdsData(dateFrom, dateTo),
   ]);
+  // Align ALL date bucketing to the ad account's timezone (before any use)
+  if (facebookAdsData?.timezone) DASH_TZ = facebookAdsData.timezone;
   const today = toNYDateString(new Date());
   const weekAgo = new Date();
   weekAgo.setDate(weekAgo.getDate() - 7);
@@ -368,7 +387,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
   const pagesData = await Promise.all(
     TRACKED_PAGES.map(async ({ path, label, color }) => {
       const stats = getClickStats(filteredClicks, path);
-      let views = await getPageViews(path, dateFrom, dateTo);
+      const views = await getPageViews(path, dateFrom, dateTo);
       const todayViews = await getTodayPageViews(path);
       // "Clicked Amazon" flag: only clicks on THIS page within the selected
       // range — a click on another page must not mark visits here as clicked
@@ -377,9 +396,6 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
         if (click.page === path && click.visitor_id) clickedVisitorIds.add(click.visitor_id);
       });
       const trafficData = await getTrafficSources(path, clickedVisitorIds, dateFrom, dateTo);
-
-      // Fix: Views should always be >= clicks
-      if (views < stats.total) views = stats.total;
 
       const todayClicks = stats.byDay[today] || 0;
       const weekClicks = Object.entries(stats.byDay)
@@ -428,9 +444,8 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
 
   // Build "All" aggregate
   const allStats = getClickStats(filteredClicks);
-  let allViews = pagesData.reduce((sum, p) => sum + p.views, 0);
+  const allViews = pagesData.reduce((sum, p) => sum + p.views, 0);
   const allTodayViews = pagesData.reduce((sum, p) => sum + p.todayViews, 0);
-  if (allViews < allStats.total) allViews = allStats.total;
 
   const allAdFunnel: Record<string, { views: number; clicks: number }> = {};
   const allTrafficSources: Record<string, number> = {};
