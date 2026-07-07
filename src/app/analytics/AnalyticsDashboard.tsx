@@ -638,17 +638,16 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const cpc = fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
   const fbLPV = effectiveCampaigns.reduce((s, c) => s + (c.landingPageViews || 0), 0);
 
-  // Visitors: when a campaign is bound, use Facebook's Landing Page Views —
-  // Meta doesn't count its own ad-review crawlers, which run real browsers
-  // and are indistinguishable in our first-party data. Otherwise fall back
-  // to our distinct-visitor count.
-  const useFbViews = campaignFilterActive && fbLPV > 0;
-  const effViews = useFbViews ? fbLPV : data.views;
-  // Bridge: click events ÷ landings (same units Facebook uses for Results/LPV)
-  const beBridgeFrac = useFbViews
-    ? (fbLPV > 0 ? data.totalClicks / fbLPV : 0)
-    : (data.views > 0 ? data.uniqueClickers / data.views : 0);
-  const conversionRate = (beBridgeFrac * 100).toFixed(1);
+  // TWO SEPARATE WORLDS, never mixed:
+  // — Facebook numbers (spend/clicks/LPV/attributed conversions) power the
+  //   top KPI verdict and the "Facebook" table. FB bridge = attributed
+  //   conversions ÷ landing page views, all from the same API.
+  // — Our first-party numbers (distinct visitors, recorded clicks) power the
+  //   "ours" table and the conversion-funnel section below.
+  const fbBridgeFrac = campaignFilterActive && fbLPV > 0 ? fbConversions / fbLPV : 0;
+  const fpBridgeFrac = data.views > 0 ? data.uniqueClickers / data.views : 0;
+  const beBridgeFrac = campaignFilterActive ? fbBridgeFrac : fpBridgeFrac;
+  const conversionRate = (fpBridgeFrac * 100).toFixed(1);
 
   // Break-even: cost per Amazon click = campaign spend ÷ Facebook-ATTRIBUTED
   // conversions — the conservative source. Our own click count could still
@@ -982,7 +981,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           };
           const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.5 ? "good" : cpc <= 1 ? "mid" : "bad";
           const bridgePct = beBridgeFrac * 100;
-          const bridgeStatus = effViews === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
+          const bridgeDenominator = campaignFilterActive ? fbLPV : data.views;
+          const bridgeStatus = bridgeDenominator === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
           const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.5 ? "mid" : "bad";
           return (
             <section>
@@ -1001,7 +1001,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 {kpiCard(
                   "Bridge %",
                   lang === "he" ? "העמוד טוב?" : "Is the page good?",
-                  effViews > 0 ? `${bridgePct.toFixed(1)}%` : "—",
+                  bridgeDenominator > 0 ? `${bridgePct.toFixed(1)}%` : "—",
                   bridgeStatus,
                   lang === "he" ? "יעד: מעל 25%" : "Target: above 25%"
                 )}
@@ -1045,10 +1045,13 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               </p>
             ) : (
               <>
-                <p className={`text-xs ${dm.textMuted} mb-3`}>
-                  {lang === "he" ? "פייסבוק → עמוד נחיתה → אמזון, הכל מהקמפיין הזה בלבד" : "Facebook → landing page → Amazon, all from this campaign only"}
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {/* ── Facebook table: every number from Meta's API, nothing else ── */}
+                <div className="flex items-center gap-2 mb-2 mt-2">
+                  <svg className="w-4 h-4 text-blue-500 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                  <span className={`text-sm font-bold ${dm.text}`}>{lang === "he" ? "נתוני פייסבוק" : "Facebook Data"}</span>
+                  <span className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "הכל ישירות מה-API של מטא" : "everything straight from Meta's API"}</span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "הוצאה" : "Spend"}</div>
                     <div className={`text-xl font-bold ${dm.text}`}>{fbCur}{fbSpend.toFixed(2)}</div>
@@ -1059,27 +1062,24 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>CPC</div>
-                    <div className="text-xl font-bold text-blue-500">{fbCur}{cpc.toFixed(2)}</div>
+                    <div className="text-xl font-bold text-blue-500">{fbLinkClicks > 0 ? `${fbCur}${cpc.toFixed(2)}` : "—"}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
-                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "מבקרים בעמוד" : "Unique Visitors"}</div>
-                    <div className={`text-xl font-bold ${dm.text}`}>{effViews}</div>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "נחיתות בעמוד (LPV)" : "Landing Page Views"}</div>
+                    <div className={`text-xl font-bold ${dm.text}`}>{fbLPV}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
-                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "לחיצות לאמזון" : "Amazon Clicks"}</div>
-                    <div className="text-xl font-bold text-orange-500">{data.totalClicks}</div>
-                    {data.uniqueClickers > 0 && data.uniqueClickers !== data.totalClicks && (
-                      <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? `${data.uniqueClickers} אנשים` : `${data.uniqueClickers} people`}</div>
-                    )}
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "המרות מיוחסות" : "Attributed Conversions"}</div>
+                    <div className="text-xl font-bold text-orange-500">{fbConversions}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>Bridge %</div>
-                    <div className="text-xl font-bold text-emerald-500">{(beBridgeFrac * 100).toFixed(1)}%</div>
+                    <div className="text-xl font-bold text-emerald-500">{fbLPV > 0 ? `${(fbBridgeFrac * 100).toFixed(1)}%` : "—"}</div>
+                    <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "המרות ÷ נחיתות" : "conversions ÷ landings"}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
-                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "עלות לקליק אמזון" : "Cost / Amazon Click"}</div>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "עלות להמרה" : "Cost / Conversion"}</div>
                     <div className="text-xl font-bold text-amber-500">{beCostPerAmzClick > 0 ? `${fbCur}${beCostPerAmzClick.toFixed(2)}` : "—"}</div>
-                    <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "לפי ייחוס פייסבוק" : "per FB attribution"}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "רווח/הפסד לקליק" : "Net / Click"}</div>
@@ -1088,6 +1088,32 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                     ) : (
                       <div className={`text-xl font-bold ${dm.textMuted}`}>—</div>
                     )}
+                  </div>
+                </div>
+
+                {/* ── Our table: first-party measurement only, nothing from FB ── */}
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                  <span className={`text-sm font-bold ${dm.text}`}>{lang === "he" ? "המדידה שלנו" : "Our Measurement"}</span>
+                  <span className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "First-Party — נמדד ישירות בעמוד, מכל מקורות התנועה" : "first-party — measured on the page itself, all traffic sources"}</span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "מבקרים בעמוד" : "Unique Visitors"}</div>
+                    <div className={`text-xl font-bold ${dm.text}`}>{data.views}</div>
+                  </div>
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "לחיצות לאמזון" : "Amazon Clicks"}</div>
+                    <div className="text-xl font-bold text-orange-500">{data.totalClicks}</div>
+                  </div>
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "אנשים שלחצו" : "People Who Clicked"}</div>
+                    <div className="text-xl font-bold text-orange-500">{data.uniqueClickers}</div>
+                  </div>
+                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
+                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>Bridge %</div>
+                    <div className="text-xl font-bold text-emerald-500">{data.views > 0 ? `${(fpBridgeFrac * 100).toFixed(1)}%` : "—"}</div>
+                    <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "אנשים שלחצו ÷ מבקרים" : "clickers ÷ visitors"}</div>
                   </div>
                 </div>
               </>
@@ -1164,7 +1190,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           <div className={`${dm.cardBg} rounded-xl border shadow-sm p-5 transition-colors duration-300`}>
             <div className="flex items-center justify-between gap-4">
               <div className="flex-1 text-center">
-                <div className={`text-3xl font-bold ${dm.text}`}>{effViews}</div>
+                <div className={`text-3xl font-bold ${dm.text}`}>{data.views}</div>
                 <div className={`text-sm ${dm.textMuted} mt-1`}>{t.pageViews}</div>
               </div>
               <div className="flex flex-col items-center px-4">
@@ -1186,18 +1212,18 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 <div className={`flex-1 h-6 ${dm.barBg} rounded-lg overflow-hidden`}>
                   <div className={`h-full ${darkMode ? "bg-gray-500" : "bg-gray-400"} rounded-lg`} style={{ width: "100%" }}></div>
                 </div>
-                <div className={`w-10 text-sm font-medium ${dm.text}`}>{effViews}</div>
+                <div className={`w-10 text-sm font-medium ${dm.text}`}>{data.views}</div>
               </div>
               <div className="flex items-center gap-3">
                 <div className={`w-16 text-sm ${dm.textMuted}`}>{t.clicks}</div>
                 <div className={`flex-1 h-6 ${dm.barBg} rounded-lg overflow-hidden`}>
-                  <div className="h-full bg-emerald-500 rounded-lg transition-all duration-500" style={{ width: `${Math.min(beBridgeFrac * 100, 100)}%` }}></div>
+                  <div className="h-full bg-emerald-500 rounded-lg transition-all duration-500" style={{ width: `${Math.min(fpBridgeFrac * 100, 100)}%` }}></div>
                 </div>
                 <div className="w-10 text-sm font-medium text-emerald-500">{data.totalClicks}</div>
               </div>
             </div>
 
-            {effViews > 0 && (
+            {data.views > 0 && (
               <div className={`mt-4 p-3 rounded-lg border ${darkMode ? "bg-emerald-900/30 border-emerald-800" : "bg-emerald-50 border-emerald-200"}`}>
                 <p className={`text-sm ${darkMode ? "text-emerald-300" : "text-emerald-800"}`}>
                   <strong>{conversionRate}%</strong> {t.ofVisitorsClick}
