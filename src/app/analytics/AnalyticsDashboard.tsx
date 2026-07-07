@@ -650,9 +650,11 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     : (data.views > 0 ? data.uniqueClickers / data.views : 0);
   const conversionRate = (beBridgeFrac * 100).toFixed(1);
 
-  // Break-even: cost per Amazon click = campaign spend ÷ our recorded clicks
-  // (direct measurement, independent of any views count).
-  const beCostPerAmzClick = campaignFilterActive && data.totalClicks > 0 ? fbSpend / data.totalClicks : 0;
+  // Break-even: cost per Amazon click = campaign spend ÷ Facebook-ATTRIBUTED
+  // conversions — the conservative source. Our own click count could still
+  // hide an undetected bot, which would understate cost and fake profit;
+  // Meta's attributed count can't be bot-inflated.
+  const beCostPerAmzClick = campaignFilterActive && fbConversions > 0 ? fbSpend / fbConversions : 0;
   const beRevenuePerClick = beCommission * (beAmazonConv / 100);
   const beNetPerClick = beRevenuePerClick - beCostPerAmzClick;
   const beBreakEvenConv = beCommission > 0 && beCostPerAmzClick > 0 ? (beCostPerAmzClick / beCommission) * 100 : 0;
@@ -1077,6 +1079,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "עלות לקליק אמזון" : "Cost / Amazon Click"}</div>
                     <div className="text-xl font-bold text-amber-500">{beCostPerAmzClick > 0 ? `${fbCur}${beCostPerAmzClick.toFixed(2)}` : "—"}</div>
+                    <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "לפי ייחוס פייסבוק" : "per FB attribution"}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "רווח/הפסד לקליק" : "Net / Click"}</div>
