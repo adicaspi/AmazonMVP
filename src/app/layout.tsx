@@ -5,7 +5,6 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
-import { CookieConsent } from "@/components/CookieConsent";
 import { MetaPixelInit } from "@/components/MetaPixelInit";
 
 const inter = localFont({
@@ -113,7 +112,6 @@ export default function RootLayout({
         </main>
         <AffiliateDisclosure />
         <Footer />
-        <CookieConsent />
       </body>
     </html>
   );
