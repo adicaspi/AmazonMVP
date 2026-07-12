@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BirkPage } from "./BirkPage";
+import { BirkPage } from "../BirkenstockArizona/BirkPage";
 
 export const metadata: Metadata = {
   title: "Birkenstock Arizona Soft Footbed | The Original Two-Strap Sandal",
@@ -28,6 +28,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BirkenstockArizonaPage() {
-  return <BirkPage trackingPage="/BirkenstockArizona" />;
+export default function BirkenstockTrafficPage() {
+  return <BirkPage trackingPage="/BirkenstockTraffic" />;
 }
