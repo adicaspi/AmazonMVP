@@ -8,10 +8,14 @@ const GRANDELASH_PIXEL_ID = "876318711699041";
 const SHARK_PIXEL_ID = "1554568722933870";
 
 // Each pixel is dedicated to its own product page
+const BIRKENSTOCK_PIXEL_ID = "1025959486467199";
+
 const PIXEL_BY_PATH: { prefix: string; pixelId: string }[] = [
   { prefix: "/grandelash", pixelId: GRANDELASH_PIXEL_ID },
   { prefix: "/shark-flexstyle", pixelId: SHARK_PIXEL_ID },
   { prefix: "/sharkflex", pixelId: SHARK_PIXEL_ID },
+  { prefix: "/BirkenstockArizona", pixelId: BIRKENSTOCK_PIXEL_ID },
+  { prefix: "/BirkenstockTraffic", pixelId: BIRKENSTOCK_PIXEL_ID },
 ];
 
 export function MetaPixelInit() {

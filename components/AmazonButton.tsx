@@ -27,6 +27,8 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/grandelash": "876318711699041",
   "/shark-flexstyle": "1554568722933870",
   "/sharkflex": "1554568722933870",
+  "/BirkenstockArizona": "1025959486467199",
+  "/BirkenstockTraffic": "1025959486467199",
 };
 
 // Product info per page for accurate CAPI event data
