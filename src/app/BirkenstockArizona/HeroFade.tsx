@@ -9,9 +9,9 @@ import { useEffect, useRef, useState } from "react";
 // pos = object-position: crops bias toward where the sandals are in each
 // frame, so the shorter mobile crop never cuts the product out.
 const IMAGES = [
-  { src: "/images/birkenstock/airport-3.jpg", alt: "Birkenstock Arizona Soft Footbed sandals, travel-ready at the gate", pos: "50% 62%" },
+  { src: "/images/birkenstock/airport-3.jpg", alt: "Birkenstock Arizona Soft Footbed sandals, travel-ready at the gate", pos: "50% 88%" },
   { src: "/images/birkenstock/unboxing.jpg", alt: "Unboxing a fresh pair of Birkenstock Arizona sandals", pos: "50% 40%" },
-  { src: "/images/birkenstock/cafe.jpg", alt: "Sidewalk cafe mornings in Birkenstock Arizona", pos: "50% 78%" },
+  { src: "/images/birkenstock/cafe.jpg", alt: "Sidewalk cafe mornings in Birkenstock Arizona", pos: "50% 84%" },
 ];
 
 export function HeroFade() {
