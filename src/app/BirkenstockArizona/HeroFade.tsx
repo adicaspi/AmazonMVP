@@ -31,8 +31,9 @@ export function HeroFade() {
   return (
     <div>
       <div
-        className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"
-        style={{ aspectRatio: "2 / 3" }}
+        // Mobile: shorter 4/5 crop so the badge + headline peek below the fold
+        // (teaser); desktop keeps the taller 2/3 portrait.
+        className="relative aspect-[4/5] md:aspect-[2/3] rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchStartX.current === null) return;
