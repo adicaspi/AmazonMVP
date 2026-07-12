@@ -87,7 +87,7 @@ export default function BirkenstockArizonaPage() {
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-[52px] font-black tracking-tight leading-[1.08] text-gray-900 mb-4">
-                Why Millions <span className="text-amber-700">Never Go Back</span> After Wearing Birkenstocks
+                The Sandals Millions <span className="text-amber-700">Never Replace</span>
               </h1>
 
               {STAR_RATING !== null && REVIEW_COUNT !== null && (
