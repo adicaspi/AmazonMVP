@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 // Slide 0 = the exact image used in the ads (message match).
 const IMAGES = [
   { src: "/images/birkenstock/hero-airport.jpg", alt: "Birkenstock Arizona Soft Footbed sandals at the airport", pos: "50% 50%" },
+  { src: "/images/birkenstock/boardwalk-pov.jpg", alt: "Birkenstock Arizona sandals on a beach boardwalk", pos: "50% 55%" },
   { src: "/images/birkenstock/cafe.jpg", alt: "Sidewalk cafe mornings in Birkenstock Arizona", pos: "50% 84%" },
   { src: "/images/birkenstock/unboxing.jpg", alt: "Unboxing a fresh pair of Birkenstock Arizona sandals", pos: "50% 40%" },
 ];
