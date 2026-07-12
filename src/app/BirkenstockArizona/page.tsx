@@ -32,7 +32,7 @@ const TRACKING_PAGE = "/BirkenstockArizona";
 
 // [USER ASSET] Drop images into public/images/birkenstock/ and list them here
 // (official brand assets or your own photos only — no stolen creator content)
-const HERO_IMAGE: string | null = "/images/birkenstock/hero-airport.jpg";
+const HERO_IMAGE: string | null = "/images/birkenstock/airport-3.jpg";
 
 const FAQS = [
   {
@@ -197,13 +197,16 @@ export default function BirkenstockArizonaPage() {
       <section className="py-10 md:py-14 bg-white">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-8">
-            From morning walks to weekend getaways
+            From coffee runs to weekend getaways
           </h2>
           <div className="grid grid-cols-3 gap-2 md:gap-4">
             {[
-              { src: "/images/birkenstock/dog-walk-1.jpg", alt: "Everyday comfort — walking the dog in Birkenstock Arizona" },
-              { src: "/images/birkenstock/airport-2.jpg", alt: "Travel-ready — Birkenstock Arizona at the airport" },
-              { src: "/images/birkenstock/dog-walk-3.jpg", alt: "All-day wear — Birkenstock Arizona around the neighborhood" },
+              { src: "/images/birkenstock/cafe.jpg", alt: "Sidewalk cafe mornings in Birkenstock Arizona" },
+              { src: "/images/birkenstock/market.jpg", alt: "Farmers market strolls in Birkenstock Arizona" },
+              { src: "/images/birkenstock/dog-walk-1.jpg", alt: "Everyday dog walks in Birkenstock Arizona" },
+              { src: "/images/birkenstock/street-europe.jpg", alt: "City trips in Birkenstock Arizona" },
+              { src: "/images/birkenstock/canal.jpg", alt: "Vacation days in Birkenstock Arizona" },
+              { src: "/images/birkenstock/hero-airport.jpg", alt: "Travel-ready in Birkenstock Arizona" },
             ].map((img, i) => (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className="w-full aspect-[2/3] object-cover rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5" />
