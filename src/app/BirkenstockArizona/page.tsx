@@ -78,16 +78,16 @@ export default function BirkenstockArizonaPage() {
       </div>
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-stone-50 via-white to-amber-50">
+      <section className="bg-gradient-to-br from-stone-100 via-white to-amber-100">
         <div className="max-w-6xl md:max-w-7xl mx-auto px-4 lg:px-10 py-8 md:py-14">
           <div className="grid gap-6 md:gap-12 items-center md:grid-cols-2">
-            <div className="text-center md:text-right md:rtl:text-left">
+            <div className="order-2 md:order-1 text-center md:text-left">
               <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-bold mb-4">
-                Since 1774 · The Original
+                ✓ Worn Worldwide Since 1774
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-[52px] font-black tracking-tight leading-[1.08] text-gray-900 mb-4">
-                The Sandal That <span className="text-amber-700">Molds Itself</span> To Your Feet
+                Why Millions <span className="text-amber-700">Never Go Back</span> After Wearing Birkenstocks
               </h1>
 
               {STAR_RATING !== null && REVIEW_COUNT !== null && (
@@ -99,8 +99,8 @@ export default function BirkenstockArizonaPage() {
                       </svg>
                     ))}
                   </div>
-                  <span className="text-lg font-bold text-gray-900">{STAR_RATING} / 5</span>
-                  <span className="text-gray-600">{REVIEW_COUNT} Amazon Reviews</span>
+                  <span className="text-lg font-bold text-gray-900">{STAR_RATING}/5</span>
+                  <span className="text-gray-600">Loved by {REVIEW_COUNT} Amazon Customers</span>
                 </div>
               )}
 
@@ -111,30 +111,36 @@ export default function BirkenstockArizonaPage() {
                   "One pair lasts for years, not one summer",
                 ].map((b, i) => (
                   <li key={i} className="flex items-center gap-2 text-base md:text-lg text-gray-800">
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-amber-600 text-white flex items-center justify-center text-[11px] font-bold">✓</span>
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-600 text-white flex items-center justify-center text-[13px] font-bold">✓</span>
                     <strong>{b}</strong>
                   </li>
                 ))}
               </ul>
 
               <div className="max-w-md mx-auto md:mx-0">
+                <p className="text-center md:text-left text-base text-gray-800 mb-1">
+                  <span className="font-bold">Typically around $117</span>
+                  <span className="text-gray-400">*</span>
+                </p>
+                <p className="text-center md:text-left text-xs text-gray-600 mb-3">✓ Prime Shipping&ensp;✓ Free Returns&ensp;✓ Secure Amazon Checkout</p>
                 <AmazonButton
                   href={AMAZON_LINK}
                   productName="Birkenstock Arizona"
                   priceValue={PRICE_VALUE}
                   position="hero-main"
-                  className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white font-bold text-lg rounded-2xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white font-bold text-lg rounded-2xl transition-all duration-200 shadow-2xl shadow-amber-900/30 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
                 >
-                  <span>Check Today&apos;s Amazon Price</span>
+                  <span>See Today&apos;s Price on Amazon</span>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </AmazonButton>
-                <p className="text-center text-xs text-gray-500 mt-2">Prime Shipping · Free Returns · Secure Amazon Checkout</p>
+                <p className="text-center md:text-left text-xs text-gray-600 mt-2">Popular colors tend to sell out during summer.</p>
+                <p className="text-center md:text-left text-[10px] text-gray-400 mt-0.5">*Price may vary on Amazon</p>
               </div>
             </div>
 
-            <div className="max-w-md mx-auto md:max-w-[420px] w-full">
+            <div className="order-1 md:order-2 max-w-md mx-auto md:max-w-[420px] w-full">
               <HeroFade />
             </div>
           </div>
@@ -145,7 +151,7 @@ export default function BirkenstockArizonaPage() {
       <section className="py-10 md:py-14 bg-white">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-8">
-            Why feet love the Arizona
+            Why Millions Choose Birkenstock
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
             {[
@@ -198,6 +204,49 @@ export default function BirkenstockArizonaPage() {
               That&apos;s why people don&apos;t just &quot;own&quot; Birkenstocks — they live in them,
               and refuse to wear anything else all summer.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Birkenstock vs generic sandals */}
+      <section className="py-10 md:py-14 bg-stone-50">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-8">
+            Why not just buy cheap sandals?
+          </h2>
+          <div className="grid grid-cols-2 gap-3 md:gap-5">
+            <div className="bg-white border-2 border-amber-300 rounded-2xl p-4 md:p-6 shadow-md">
+              <div className="text-sm md:text-base font-black text-amber-800 mb-3">Birkenstock Arizona</div>
+              <ul className="space-y-2.5">
+                {[
+                  "Contoured cork footbed with real arch support",
+                  "Molds to the shape of your foot",
+                  "Lasts for years — resoleable & repairable",
+                  "Gets more comfortable with wear",
+                ].map((t, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs md:text-sm text-gray-800">
+                    <span className="text-green-600 font-bold mt-0.5">✓</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-6">
+              <div className="text-sm md:text-base font-bold text-gray-500 mb-3">Generic Sandals</div>
+              <ul className="space-y-2.5">
+                {[
+                  "Flat foam sole, no support",
+                  "Loses shape within weeks",
+                  "New pair needed every season",
+                  "Comfort fades as the foam flattens",
+                ].map((t, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs md:text-sm text-gray-500">
+                    <span className="text-red-400 font-bold mt-0.5">✕</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -294,7 +343,10 @@ export default function BirkenstockArizonaPage() {
       {/* Sticky mobile CTA */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-gray-200 px-3 py-1.5 md:hidden z-[9999] shadow-[0_-2px_12px_rgba(0,0,0,0.10)]">
         <div className="flex items-center gap-3">
-          <span className="text-[11px] font-semibold text-gray-700 whitespace-nowrap">Birkenstock<br />Arizona</span>
+          <div className="flex flex-col items-center leading-tight flex-shrink-0">
+            <span className="text-xs font-bold text-gray-900">★ 4.5</span>
+            <span className="text-[10px] text-gray-500 whitespace-nowrap">Amazon · Prime ✓</span>
+          </div>
           <AmazonButton
             href={AMAZON_LINK}
             productName="Birkenstock Arizona"
