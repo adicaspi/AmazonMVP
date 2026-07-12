@@ -4,7 +4,7 @@ import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
 
 export const metadata: Metadata = {
-  title: "Birkenstock Arizona | The Original Two-Strap Sandal",
+  title: "Birkenstock Arizona Soft Footbed | The Original Two-Strap Sandal",
   description:
     "The iconic Birkenstock Arizona with the legendary contoured cork footbed that molds to your feet. Comfort that lasts for years — with free Prime shipping and returns.",
   openGraph: {
@@ -25,8 +25,8 @@ const PRICE_VALUE = 117;
 
 // [USER ASSET] Verify on the live listing and fill in — the rating block
 // stays hidden until BOTH values are set (no invented numbers, ever):
-const STAR_RATING: number | null = null; // e.g. 4.4
-const REVIEW_COUNT: string | null = null; // e.g. "50,000+"
+const STAR_RATING: number | null = 4.5; // verified on listing 2026-07-12
+const REVIEW_COUNT: string | null = "13,000+"; // 13,173 on listing 2026-07-12
 
 const TRACKING_PAGE = "/BirkenstockArizona";
 
@@ -40,8 +40,8 @@ const FAQS = [
     a: "The contoured cork-latex footbed is the reason people wear the same pair for 5–10 years. It molds to the shape of your foot over the first weeks, so the sandal ends up custom-fitted to you — something foam slides can't do.",
   },
   {
-    q: "Do they hurt at first?",
-    a: "There's a short break-in period. The cork footbed is firm by design and softens into your foot shape within a couple of weeks of regular wear. Most people say that's exactly when they get addicted to them.",
+    q: "What's the difference between Soft Footbed and the classic?",
+    a: "This is the Soft Footbed version — it adds an extra layer of foam cushioning on top of the classic anatomical cork core. Same legendary support, but comfortable from the very first wear, with little to no break-in.",
   },
   {
     q: "How do I pick my size?",
@@ -94,8 +94,8 @@ export default function BirkenstockArizonaPage() {
 
               <ul className="space-y-2 mb-6 inline-block text-left">
                 {[
-                  "Contoured cork footbed — shapes itself to YOUR foot",
-                  "Deep heel cup & arch support podiatrists talk about",
+                  "Soft Footbed — extra cushioning, comfortable from day one",
+                  "Contoured cork core that shapes itself to YOUR foot",
                   "One pair lasts for years, not one summer",
                 ].map((b, i) => (
                   <li key={i} className="flex items-center gap-2 text-base md:text-lg text-gray-800">
