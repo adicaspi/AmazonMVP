@@ -259,7 +259,7 @@ export default function BirkenstockArizonaPage() {
           </h2>
           <div className="grid grid-cols-3 gap-2 md:gap-4">
             {[
-              { src: "/images/birkenstock/cafe.jpg", alt: "Sidewalk cafe mornings in Birkenstock Arizona" },
+              { src: "/images/birkenstock/boardwalk.jpg", alt: "Beach boardwalk evenings in Birkenstock Arizona" },
               { src: "/images/birkenstock/market.jpg", alt: "Farmers market strolls in Birkenstock Arizona" },
               { src: "/images/birkenstock/dog-walk-1.jpg", alt: "Everyday dog walks in Birkenstock Arizona" },
               { src: "/images/birkenstock/street-europe.jpg", alt: "City trips in Birkenstock Arizona" },
