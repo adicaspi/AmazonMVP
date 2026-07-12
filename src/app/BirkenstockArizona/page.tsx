@@ -11,8 +11,22 @@ export const metadata: Metadata = {
     title: "Birkenstock Arizona — The Original Since 1774",
     description:
       "The contoured cork footbed molds to your feet over time. One sandal, years of comfort.",
+    images: [
+      {
+        url: "https://www.aipicks.co/images/birkenstock/airport-3.jpg",
+        width: 800,
+        height: 1200,
+        alt: "Birkenstock Arizona Soft Footbed Sandals",
+      },
+    ],
     type: "website",
     siteName: "AIPicks",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Birkenstock Arizona — The Original Since 1774",
+    description: "The contoured cork footbed molds to your feet over time.",
+    images: ["https://www.aipicks.co/images/birkenstock/airport-3.jpg"],
   },
 };
 
