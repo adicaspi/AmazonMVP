@@ -169,21 +169,60 @@ export default function BirkenstockArizonaPage() {
         </div>
       </section>
 
-      {/* The footbed story */}
+      {/* The footbed story + unboxing shot */}
       <section className="py-10 md:py-14 bg-stone-50">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-4">
-            The secret is under your feet
+        <div className="max-w-5xl mx-auto px-4 md:grid md:grid-cols-2 md:gap-12 md:items-center">
+          <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 mb-6 md:mb-0 max-w-md mx-auto md:max-w-none">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/birkenstock/unboxing.jpg" alt="Unboxing a fresh pair of Birkenstock Arizona sandals" loading="lazy" decoding="async" className="w-full h-auto" />
+          </div>
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-4">
+              The secret is under your feet
+            </h2>
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-3">
+              Every Arizona is built on Birkenstock&apos;s legendary <strong>contoured cork-latex footbed</strong> —
+              a deep heel cup, real arch support, and a roomy toe box. The Soft Footbed version adds an
+              extra cushioning layer, so it feels great from the very first step.
+            </p>
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+              That&apos;s why people don&apos;t just &quot;own&quot; Birkenstocks — they live in them,
+              and refuse to wear anything else all summer.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Lifestyle strip */}
+      <section className="py-10 md:py-14 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-8">
+            From morning walks to weekend getaways
           </h2>
-          <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-3">
-            Every Arizona is built on Birkenstock&apos;s legendary <strong>contoured cork-latex footbed</strong> —
-            a deep heel cup, real arch support, and a roomy toe box. It starts firm, then gradually
-            takes the shape of <em>your</em> foot.
-          </p>
-          <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-            That&apos;s why people don&apos;t &quot;own&quot; Birkenstocks — they break them in, and then
-            refuse to wear anything else all summer.
-          </p>
+          <div className="grid grid-cols-3 gap-2 md:gap-4">
+            {[
+              { src: "/images/birkenstock/dog-walk-1.jpg", alt: "Everyday comfort — walking the dog in Birkenstock Arizona" },
+              { src: "/images/birkenstock/airport-2.jpg", alt: "Travel-ready — Birkenstock Arizona at the airport" },
+              { src: "/images/birkenstock/dog-walk-3.jpg", alt: "All-day wear — Birkenstock Arizona around the neighborhood" },
+            ].map((img, i) => (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className="w-full aspect-[2/3] object-cover rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5" />
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <AmazonButton
+              href={AMAZON_LINK}
+              productName="Birkenstock Arizona"
+              priceValue={PRICE_VALUE}
+              position="lifestyle"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-700 hover:bg-amber-800 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              See Price on Amazon
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+          </div>
         </div>
       </section>
 
