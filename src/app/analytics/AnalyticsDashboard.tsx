@@ -454,6 +454,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   // Break-even calculator inputs
   const [beCommission, setBeCommission] = useState(30);
   const [beAmazonConv, setBeAmazonConv] = useState(6);
+  const [beUsdRate, setBeUsdRate] = useState(3.65); // ILS per USD, for the EPC card
 
 
   // Clear Direct-only traffic for the selected page (owner-only; needs the aip_notrack cookie)
@@ -655,6 +656,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   // Meta's attributed count can't be bot-inflated.
   const beCostPerAmzClick = campaignFilterActive && fbConversions > 0 ? fbSpend / fbConversions : 0;
   const beRevenuePerClick = beCommission * (beAmazonConv / 100);
+  // EPC: expected earnings per Amazon click, in USD (commission input is ILS)
+  const epcUsd = beUsdRate > 0 ? (beCommission / beUsdRate) * (beAmazonConv / 100) : 0;
   const beNetPerClick = beRevenuePerClick - beCostPerAmzClick;
   const beBreakEvenConv = beCommission > 0 && beCostPerAmzClick > 0 ? (beCostPerAmzClick / beCommission) * 100 : 0;
   const beProfitable = beNetPerClick >= 0;
@@ -1407,7 +1410,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               {t.funnelEconomicsDesc}
               {campaignFilterActive && <span className="font-semibold"> · {lang === "he" ? "קמפיין" : "campaign"}: {activeCampaign}</span>}
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
                 <div className={`text-xs ${dm.textMuted} mb-1`}>{t.mCpc}</div>
                 <div className="text-3xl font-bold text-blue-500">{fbCur}{cpc.toFixed(2)}</div>
@@ -1422,6 +1425,11 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 <div className={`text-xs ${dm.textMuted} mb-1`}>{t.mBridgeRate}</div>
                 <div className="text-3xl font-bold text-emerald-500">{(beBridgeFrac * 100).toFixed(1)}%</div>
                 <div className={`text-xs ${dm.textMuted} mt-1`}>{t.mBridgeRateDesc}</div>
+              </div>
+              <div className={`${dm.cardBg} rounded-xl border p-5 transition-colors duration-300`}>
+                <div className={`text-xs ${dm.textMuted} mb-1`}>EPC ($)</div>
+                <div dir="ltr" className="text-3xl font-bold text-teal-500 text-right">${epcUsd.toFixed(2)}</div>
+                <div className={`text-xs ${dm.textMuted} mt-1`}>{lang === "he" ? "רווח צפוי לקליק-אמזון אחרי המרה, בדולרים (עמלה ÷ שער × %המרה)" : "Expected earnings per Amazon click after conversion, in USD"}</div>
               </div>
             </div>
             <p className={`text-xs ${dm.textMuted} mt-3`}>{t.funnelEconomicsNote}</p>
@@ -1455,6 +1463,16 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                     step="0.1"
                     value={beAmazonConv}
                     onChange={(e) => setBeAmazonConv(Math.max(0, Number(e.target.value)))}
+                    className={`w-32 rounded-lg border px-3 py-1.5 text-sm ${darkMode ? "bg-gray-800 border-gray-700 text-white" : "bg-white border-gray-300 text-gray-900"}`}
+                  />
+                </label>
+                <label className="flex flex-col gap-1">
+                  <span className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "שער דולר (₪ לדולר)" : "USD rate (ILS per $)"}</span>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={beUsdRate}
+                    onChange={(e) => setBeUsdRate(Math.max(0, Number(e.target.value)))}
                     className={`w-32 rounded-lg border px-3 py-1.5 text-sm ${darkMode ? "bg-gray-800 border-gray-700 text-white" : "bg-white border-gray-300 text-gray-900"}`}
                   />
                 </label>
