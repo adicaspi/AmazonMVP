@@ -35,6 +35,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/grandelash": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 36, content_id: "grandelash-serum" },
   "/shark-flexstyle": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
   "/sharkflex": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
+  "/BirkenstockArizona": { name: "Birkenstock Arizona Birko-Flor Sandals", value: 117, content_id: "birkenstock-arizona" },
 };
 
 // Standard pixel events fired when an Amazon CTA is clicked, per page.
@@ -44,6 +45,8 @@ const DEFAULT_CLICK_EVENTS = ["Lead", "InitiateCheckout"];
 const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   "/shark-flexstyle": ["ViewContent"],
   "/sharkflex": ["InitiateCheckout"],
+  // No FB dataset for Birkenstock yet — internal analytics only until one exists
+  "/BirkenstockArizona": [],
 };
 
 // Longest matching prefix wins

@@ -1,0 +1,264 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { AmazonButton } from "@/components/AmazonButton";
+import { PageViewTracker } from "@/components/PageViewTracker";
+
+export const metadata: Metadata = {
+  title: "Birkenstock Arizona | The Original Two-Strap Sandal",
+  description:
+    "The iconic Birkenstock Arizona with the legendary contoured cork footbed that molds to your feet. Comfort that lasts for years — with free Prime shipping and returns.",
+  openGraph: {
+    title: "Birkenstock Arizona — The Original Since 1774",
+    description:
+      "The contoured cork footbed molds to your feet over time. One sandal, years of comfort.",
+    type: "website",
+    siteName: "AIPicks",
+  },
+};
+
+// ── Product constants ─────────────────────────────────────────────
+const ASIN = "B000K9YUSE";
+// Official SiteStripe affiliate link (tag=aipicks20-20 credits the commission)
+const AMAZON_LINK = `https://www.amazon.com/Birkenstock-Womens-Arizona-Birko-Flo-Sandals/dp/${ASIN}?th=1&psc=1&linkCode=ll2&tag=aipicks20-20&linkId=755143f5a48c80129aae27bd92b45a5d&language=en_US&ref_=as_li_ss_tl`;
+// Pixel value only — no price is shown on the page
+const PRICE_VALUE = 117;
+
+// [USER ASSET] Verify on the live listing and fill in — the rating block
+// stays hidden until BOTH values are set (no invented numbers, ever):
+const STAR_RATING: number | null = null; // e.g. 4.4
+const REVIEW_COUNT: string | null = null; // e.g. "50,000+"
+
+const TRACKING_PAGE = "/BirkenstockArizona";
+
+// [USER ASSET] Drop images into public/images/birkenstock/ and list them here
+// (official brand assets or your own photos only — no stolen creator content)
+const HERO_IMAGE: string | null = null; // e.g. "/images/birkenstock/arizona-hero.jpg"
+
+const FAQS = [
+  {
+    q: "Are Birkenstocks really worth the price?",
+    a: "The contoured cork-latex footbed is the reason people wear the same pair for 5–10 years. It molds to the shape of your foot over the first weeks, so the sandal ends up custom-fitted to you — something foam slides can't do.",
+  },
+  {
+    q: "Do they hurt at first?",
+    a: "There's a short break-in period. The cork footbed is firm by design and softens into your foot shape within a couple of weeks of regular wear. Most people say that's exactly when they get addicted to them.",
+  },
+  {
+    q: "How do I pick my size?",
+    a: "Birkenstock uses EU sizing — the Amazon listing has a size chart and both Regular and Narrow widths. If you're between sizes, most wearers size down. And with free Prime returns, an exchange costs you nothing.",
+  },
+  {
+    q: "What is Birko-Flor?",
+    a: "Birkenstock's signature upper material: a skin-friendly, leather-look finish that's durable, easy to wipe clean, and vegan-friendlier than leather — at a lower price than the leather versions.",
+  },
+];
+
+export default function BirkenstockArizonaPage() {
+  return (
+    <div className="min-h-screen bg-white">
+      <PageViewTracker page={TRACKING_PAGE} />
+
+      {/* Sticky trust bar */}
+      <div className="sticky top-0 z-40 bg-stone-900 text-white text-center py-2 md:py-2.5 px-4">
+        <div className="flex items-center justify-center gap-2 text-sm md:text-base font-semibold md:tracking-wide">
+          <span>Prime Shipping · Free Returns · Secure Amazon Checkout</span>
+        </div>
+      </div>
+
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-stone-50 via-white to-amber-50">
+        <div className="max-w-6xl md:max-w-7xl mx-auto px-4 lg:px-10 py-8 md:py-14">
+          <div className={`grid gap-6 md:gap-12 items-center ${HERO_IMAGE ? "md:grid-cols-2" : ""}`}>
+            <div className="text-center md:text-right md:rtl:text-left">
+              <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-bold mb-4">
+                Since 1774 · The Original
+              </div>
+
+              <h1 className="text-4xl md:text-5xl lg:text-[52px] font-black tracking-tight leading-[1.08] text-gray-900 mb-4">
+                The Sandal That <span className="text-amber-700">Molds Itself</span> To Your Feet
+              </h1>
+
+              {STAR_RATING !== null && REVIEW_COUNT !== null && (
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 mb-4">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className={`w-6 h-6 ${i < Math.round(STAR_RATING) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <span className="text-lg font-bold text-gray-900">{STAR_RATING} / 5</span>
+                  <span className="text-gray-600">{REVIEW_COUNT} Amazon Reviews</span>
+                </div>
+              )}
+
+              <ul className="space-y-2 mb-6 inline-block text-left">
+                {[
+                  "Contoured cork footbed — shapes itself to YOUR foot",
+                  "Deep heel cup & arch support podiatrists talk about",
+                  "One pair lasts for years, not one summer",
+                ].map((b, i) => (
+                  <li key={i} className="flex items-center gap-2 text-base md:text-lg text-gray-800">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-amber-600 text-white flex items-center justify-center text-[11px] font-bold">✓</span>
+                    <strong>{b}</strong>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="max-w-md mx-auto md:mx-0">
+                <AmazonButton
+                  href={AMAZON_LINK}
+                  productName="Birkenstock Arizona"
+                  priceValue={PRICE_VALUE}
+                  position="hero-main"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white font-bold text-lg rounded-2xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+                >
+                  <span>Check Today&apos;s Amazon Price</span>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </AmazonButton>
+                <p className="text-center text-xs text-gray-500 mt-2">Prime Shipping · Free Returns · Secure Amazon Checkout</p>
+              </div>
+            </div>
+
+            {HERO_IMAGE && (
+              <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={HERO_IMAGE} alt="Birkenstock Arizona sandals" className="w-full h-auto" />
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Why this sandal */}
+      <section className="py-10 md:py-14 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-8">
+            Why feet love the Arizona
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+            {[
+              { icon: "🦶", title: "Custom Fit Over Time", text: "The cork-latex footbed softens and molds to your unique foot shape" },
+              { icon: "🏛️", title: "250 Years of Craft", text: "Made by Birkenstock since 1774 — the original, not a lookalike" },
+              { icon: "🔧", title: "Adjustable Straps", text: "Two individually adjustable buckles for a precise fit" },
+              { icon: "♻️", title: "Built To Last", text: "Resoleable and repairable — one pair, many summers" },
+            ].map((c, i) => (
+              <div key={i} className="bg-stone-50 border border-stone-200 rounded-xl p-4 text-center">
+                <div className="text-3xl mb-2">{c.icon}</div>
+                <div className="text-sm md:text-base font-bold text-gray-900 mb-1">{c.title}</div>
+                <div className="text-xs md:text-sm text-gray-600 leading-snug">{c.text}</div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <AmazonButton
+              href={AMAZON_LINK}
+              productName="Birkenstock Arizona"
+              priceValue={PRICE_VALUE}
+              position="benefits"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-700 hover:bg-amber-800 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+            >
+              See Price on Amazon
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </AmazonButton>
+          </div>
+        </div>
+      </section>
+
+      {/* The footbed story */}
+      <section className="py-10 md:py-14 bg-stone-50">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-4">
+            The secret is under your feet
+          </h2>
+          <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-3">
+            Every Arizona is built on Birkenstock&apos;s legendary <strong>contoured cork-latex footbed</strong> —
+            a deep heel cup, real arch support, and a roomy toe box. It starts firm, then gradually
+            takes the shape of <em>your</em> foot.
+          </p>
+          <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+            That&apos;s why people don&apos;t &quot;own&quot; Birkenstocks — they break them in, and then
+            refuse to wear anything else all summer.
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-10 md:py-14 bg-white">
+        <div className="max-w-2xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-8">
+            Quick answers
+          </h2>
+          <div className="space-y-4">
+            {FAQS.map((f, i) => (
+              <div key={i} className="border border-stone-200 rounded-xl p-4 md:p-5">
+                <div className="font-bold text-gray-900 mb-1.5">{f.q}</div>
+                <div className="text-sm md:text-base text-gray-600 leading-relaxed">{f.a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-12 md:py-16 bg-gradient-to-r from-amber-700 to-amber-800">
+        <div className="max-w-2xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
+            Your Feet Will Thank You For Years.
+          </h2>
+          <p className="text-amber-100 mb-6">Check the current price and available colors on Amazon.</p>
+          <AmazonButton
+            href={AMAZON_LINK}
+            productName="Birkenstock Arizona"
+            priceValue={PRICE_VALUE}
+            position="final-cta"
+            className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white hover:bg-stone-100 text-amber-800 font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
+          >
+            Check Today&apos;s Amazon Price
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </AmazonButton>
+          <div className="flex items-center justify-center gap-4 mt-5 text-amber-100 text-xs">
+            <span>✓ Prime Shipping</span>
+            <span>✓ Free Returns</span>
+            <span>✓ Secure Checkout</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Affiliate disclosure */}
+      <footer className="py-6 bg-stone-900 text-center px-4">
+        <p className="text-xs text-stone-400 max-w-2xl mx-auto">
+          As an Amazon Associate, we earn from qualifying purchases. Prices and availability are
+          subject to change — always verify on Amazon.{" "}
+          <Link href="/privacy" className="underline">Privacy Policy</Link>
+        </p>
+      </footer>
+
+      {/* Sticky mobile CTA */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-gray-200 px-3 py-1.5 md:hidden z-[9999] shadow-[0_-2px_12px_rgba(0,0,0,0.10)]">
+        <div className="flex items-center gap-3">
+          <span className="text-[11px] font-semibold text-gray-700 whitespace-nowrap">Birkenstock<br />Arizona</span>
+          <AmazonButton
+            href={AMAZON_LINK}
+            productName="Birkenstock Arizona"
+            priceValue={PRICE_VALUE}
+            position="sticky-mobile"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-amber-700 hover:bg-amber-800 text-white font-bold text-sm rounded-lg shadow-sm active:scale-[0.98] transition-transform whitespace-nowrap"
+          >
+            <span>See Price on Amazon</span>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </AmazonButton>
+        </div>
+      </div>
+      <div className="h-14 md:h-0"></div>
+    </div>
+  );
+}
