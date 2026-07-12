@@ -140,7 +140,7 @@ export default function BirkenstockArizonaPage() {
               </div>
             </div>
 
-            <div className="order-1 md:order-2 max-w-md mx-auto md:max-w-[420px] w-full">
+            <div className="order-1 md:order-2 max-w-[260px] md:max-w-[420px] mx-auto w-full">
               <HeroFade />
             </div>
           </div>

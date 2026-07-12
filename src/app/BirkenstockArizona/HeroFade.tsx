@@ -33,9 +33,9 @@ export function HeroFade() {
   return (
     <div>
       <div
-        // Mobile: square crop so the badge + headline + stars peek below the fold
-        // (teaser); desktop keeps the taller 2/3 portrait.
-        className="relative aspect-square md:aspect-[2/3] rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"
+        // Natural 2/3 ratio — images show in full, no cropping. The teaser
+        // effect comes from the narrower mobile width set by the parent.
+        className="relative aspect-[2/3] rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchStartX.current === null) return;
