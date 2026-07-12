@@ -8,9 +8,10 @@ import { useEffect, useRef, useState } from "react";
 // { type: "video", src: "/videos/birkenstock/demo.mp4", poster: "..." }
 // pos = object-position: crops bias toward where the sandals are in each
 // frame, so the shorter mobile crop never cuts the product out.
+// Slide 0 = the exact image used in the ads (message match).
 const IMAGES = [
+  { src: "/images/birkenstock/hero-airport.jpg", alt: "Birkenstock Arizona Soft Footbed sandals at the airport", pos: "50% 50%" },
   { src: "/images/birkenstock/cafe.jpg", alt: "Sidewalk cafe mornings in Birkenstock Arizona", pos: "50% 84%" },
-  { src: "/images/birkenstock/airport-3.jpg", alt: "Birkenstock Arizona Soft Footbed sandals, travel-ready at the gate", pos: "50% 88%" },
   { src: "/images/birkenstock/unboxing.jpg", alt: "Unboxing a fresh pair of Birkenstock Arizona sandals", pos: "50% 40%" },
 ];
 

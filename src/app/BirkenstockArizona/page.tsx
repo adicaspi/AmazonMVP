@@ -14,7 +14,7 @@ export const metadata: Metadata = {
       "The contoured cork footbed molds to your feet over time. One sandal, years of comfort.",
     images: [
       {
-        url: "https://www.aipicks.co/images/birkenstock/airport-3.jpg",
+        url: "https://www.aipicks.co/images/birkenstock/hero-airport.jpg",
         width: 800,
         height: 1200,
         alt: "Birkenstock Arizona Soft Footbed Sandals",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Birkenstock Arizona — The Original Since 1774",
     description: "The contoured cork footbed molds to your feet over time.",
-    images: ["https://www.aipicks.co/images/birkenstock/airport-3.jpg"],
+    images: ["https://www.aipicks.co/images/birkenstock/hero-airport.jpg"],
   },
 };
 
@@ -264,7 +264,7 @@ export default function BirkenstockArizonaPage() {
               { src: "/images/birkenstock/dog-walk-1.jpg", alt: "Everyday dog walks in Birkenstock Arizona" },
               { src: "/images/birkenstock/street-europe.jpg", alt: "City trips in Birkenstock Arizona" },
               { src: "/images/birkenstock/canal.jpg", alt: "Vacation days in Birkenstock Arizona" },
-              { src: "/images/birkenstock/hero-airport.jpg", alt: "Travel-ready in Birkenstock Arizona" },
+              { src: "/images/birkenstock/airport-3.jpg", alt: "Travel-ready in Birkenstock Arizona" },
             ].map((img, i) => (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className="w-full aspect-[2/3] object-cover rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5" />
