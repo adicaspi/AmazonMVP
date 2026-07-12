@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
+import { HeroFade } from "./HeroFade";
 
 export const metadata: Metadata = {
   title: "Birkenstock Arizona Soft Footbed | The Original Two-Strap Sandal",
@@ -44,9 +45,6 @@ const REVIEW_COUNT: string | null = "13,000+"; // 13,173 on listing 2026-07-12
 
 const TRACKING_PAGE = "/BirkenstockArizona";
 
-// [USER ASSET] Drop images into public/images/birkenstock/ and list them here
-// (official brand assets or your own photos only — no stolen creator content)
-const HERO_IMAGE: string | null = "/images/birkenstock/airport-3.jpg";
 
 const FAQS = [
   {
@@ -82,7 +80,7 @@ export default function BirkenstockArizonaPage() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-stone-50 via-white to-amber-50">
         <div className="max-w-6xl md:max-w-7xl mx-auto px-4 lg:px-10 py-8 md:py-14">
-          <div className={`grid gap-6 md:gap-12 items-center ${HERO_IMAGE ? "md:grid-cols-2" : ""}`}>
+          <div className="grid gap-6 md:gap-12 items-center md:grid-cols-2">
             <div className="text-center md:text-right md:rtl:text-left">
               <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-bold mb-4">
                 Since 1774 · The Original
@@ -136,12 +134,9 @@ export default function BirkenstockArizonaPage() {
               </div>
             </div>
 
-            {HERO_IMAGE && (
-              <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={HERO_IMAGE} alt="Birkenstock Arizona sandals" className="w-full h-auto" />
-              </div>
-            )}
+            <div className="max-w-md mx-auto md:max-w-[420px] w-full">
+              <HeroFade />
+            </div>
           </div>
         </div>
       </section>
