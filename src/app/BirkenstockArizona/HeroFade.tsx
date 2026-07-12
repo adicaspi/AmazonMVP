@@ -6,10 +6,12 @@ import { useEffect, useRef, useState } from "react";
 // Auto-advances every 4s until the user interacts.
 // [USER ASSET] When the demo video arrives, add it as slide 0:
 // { type: "video", src: "/videos/birkenstock/demo.mp4", poster: "..." }
+// pos = object-position: crops bias toward where the sandals are in each
+// frame, so the shorter mobile crop never cuts the product out.
 const IMAGES = [
-  { src: "/images/birkenstock/airport-3.jpg", alt: "Birkenstock Arizona Soft Footbed sandals, travel-ready at the gate" },
-  { src: "/images/birkenstock/unboxing.jpg", alt: "Unboxing a fresh pair of Birkenstock Arizona sandals" },
-  { src: "/images/birkenstock/cafe.jpg", alt: "Sidewalk cafe mornings in Birkenstock Arizona" },
+  { src: "/images/birkenstock/airport-3.jpg", alt: "Birkenstock Arizona Soft Footbed sandals, travel-ready at the gate", pos: "50% 62%" },
+  { src: "/images/birkenstock/unboxing.jpg", alt: "Unboxing a fresh pair of Birkenstock Arizona sandals", pos: "50% 40%" },
+  { src: "/images/birkenstock/cafe.jpg", alt: "Sidewalk cafe mornings in Birkenstock Arizona", pos: "50% 78%" },
 ];
 
 export function HeroFade() {
@@ -52,6 +54,7 @@ export function HeroFade() {
             decoding="async"
             draggable={false}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${i === index ? "opacity-100" : "opacity-0"}`}
+            style={{ objectPosition: img.pos }}
           />
         ))}
 
