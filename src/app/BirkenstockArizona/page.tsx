@@ -32,7 +32,7 @@ const TRACKING_PAGE = "/BirkenstockArizona";
 
 // [USER ASSET] Drop images into public/images/birkenstock/ and list them here
 // (official brand assets or your own photos only — no stolen creator content)
-const HERO_IMAGE: string | null = null; // e.g. "/images/birkenstock/arizona-hero.jpg"
+const HERO_IMAGE: string | null = "/images/birkenstock/hero-airport.jpg";
 
 const FAQS = [
   {
