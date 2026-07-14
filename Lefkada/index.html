@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>לפקדה 2027 — תכנון ההפלגה</title>
+</head>
+<body style="margin:0">
+<style>
+  :root {
+    --ink: #12222E;
+    --ink-soft: #3E5461;
+    --paper: #F2F5F6;
+    --card: #FFFFFF;
+    --line: #D7E0E4;
+    --sea: #0E5E77;
+    --sea-strong: #0A4A5E;
+    --route: #1C88A8;
+    --route-soft: #DDEEF3;
+    --olive: #75803B;
+    --olive-soft: #EEF0DF;
+    --sun: #C7A15A;
+    --shadow: 0 1px 2px rgba(18, 34, 46, .06), 0 8px 24px rgba(18, 34, 46, .07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #DCE8EC;
+      --ink-soft: #9FB4BD;
+      --paper: #0B1B24;
+      --card: #12242F;
+      --line: #23414F;
+      --sea: #4FB3D1;
+      --sea-strong: #7ECDE4;
+      --route: #4FB3D1;
+      --route-soft: #123240;
+      --olive: #B9C47A;
+      --olive-soft: #232B14;
+      --sun: #D9B87A;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #DCE8EC;
+    --ink-soft: #9FB4BD;
+    --paper: #0B1B24;
+    --card: #12242F;
+    --line: #23414F;
+    --sea: #4FB3D1;
+    --sea-strong: #7ECDE4;
+    --route: #4FB3D1;
+    --route-soft: #123240;
+    --olive: #B9C47A;
+    --olive-soft: #232B14;
+    --sun: #D9B87A;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35);
+  }
+  :root[data-theme="light"] {
+    --ink: #12222E;
+    --ink-soft: #3E5461;
+    --paper: #F2F5F6;
+    --card: #FFFFFF;
+    --line: #D7E0E4;
+    --sea: #0E5E77;
+    --sea-strong: #0A4A5E;
+    --route: #1C88A8;
+    --route-soft: #DDEEF3;
+    --olive: #75803B;
+    --olive-soft: #EEF0DF;
+    --sun: #C7A15A;
+    --shadow: 0 1px 2px rgba(18, 34, 46, .06), 0 8px 24px rgba(18, 34, 46, .07);
+  }
+
+  body { background: var(--paper); }
+
+  .lfk {
+    direction: rtl;
+    font-family: "Noto Sans Hebrew", "Segoe UI", "Arial Hebrew", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .lfk .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 96px; }
+
+  /* ---- hero ---- */
+  .hero { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+  .hero .kicker {
+    display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .08em;
+    color: var(--sea); border: 1px solid var(--line); border-radius: 999px;
+    padding: 4px 14px; margin-bottom: 20px; background: var(--card);
+  }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 54px); font-weight: 800; line-height: 1.15;
+    margin: 0 0 12px; text-wrap: balance; color: var(--ink);
+  }
+  .hero h1 em { font-style: normal; color: var(--sea); }
+  .hero .sub { font-size: 18px; color: var(--ink-soft); max-width: 40em; margin: 0 0 28px; }
+  .facts { display: flex; flex-wrap: wrap; gap: 12px; }
+  .fact {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 12px 18px; box-shadow: var(--shadow); min-width: 130px;
+  }
+  .fact b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; color: var(--sea-strong); }
+  .fact span { font-size: 13px; color: var(--ink-soft); }
+  #countdown b { letter-spacing: .02em; }
+
+  /* ---- sections ---- */
+  .sec { padding-top: 56px; }
+  .sec > h2 {
+    font-size: 26px; font-weight: 800; margin: 0 0 6px; color: var(--ink);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .sec > h2::before {
+    content: ""; width: 26px; height: 4px; border-radius: 2px; background: var(--sea); flex: none;
+  }
+  .sec.land > h2::before { background: var(--olive); }
+  .sec > .lead { color: var(--ink-soft); margin: 0 0 24px; max-width: 44em; }
+
+  /* ---- timeline table ---- */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: right; padding: 11px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  th { font-size: 13px; font-weight: 700; color: var(--ink-soft); background: color-mix(in srgb, var(--card) 70%, var(--paper)); }
+  td.num, th.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pill {
+    display: inline-block; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;
+    background: var(--route-soft); color: var(--sea-strong); white-space: nowrap;
+  }
+  .pill.land { background: var(--olive-soft); color: var(--olive); }
+
+  /* ---- day cards ---- */
+  .days { display: grid; gap: 0; margin-top: 8px; }
+  .day {
+    position: relative; padding: 22px 34px 26px 0; border-right: 3px solid var(--route);
+    margin-right: 10px;
+  }
+  .day::before {
+    content: ""; position: absolute; right: -11.5px; top: 30px; width: 20px; height: 20px;
+    border-radius: 50%; background: var(--card); border: 4px solid var(--route);
+  }
+  .day:last-child { border-right-color: transparent; }
+  .day .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 20px 24px; box-shadow: var(--shadow);
+  }
+  .day h3 { margin: 0 0 2px; font-size: 19px; font-weight: 800; }
+  .day .route-line { color: var(--sea); font-weight: 700; font-size: 15px; margin: 0 0 10px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+  .stat {
+    font-size: 13px; font-weight: 700; color: var(--sea-strong); background: var(--route-soft);
+    border-radius: 8px; padding: 3px 10px; font-variant-numeric: tabular-nums;
+  }
+  .day p { margin: 0 0 10px; font-size: 15px; }
+  .day p:last-child { margin-bottom: 0; }
+  .day .alt { font-size: 14px; color: var(--ink-soft); border-top: 1px dashed var(--line); padding-top: 10px; }
+  .day .alt b { color: var(--ink); }
+
+  /* ---- map ---- */
+  .map-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    box-shadow: var(--shadow); padding: 18px; overflow-x: auto;
+  }
+  .map-card svg { display: block; min-width: 560px; width: 100%; height: auto; }
+  .map-note { font-size: 13px; color: var(--ink-soft); margin: 10px 4px 0; }
+
+  /* ---- generic cards ---- */
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .box {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 20px 22px; box-shadow: var(--shadow);
+  }
+  .box h3 { margin: 0 0 10px; font-size: 17px; font-weight: 800; color: var(--sea-strong); }
+  .sec.land .box h3 { color: var(--olive); }
+  .box ul { margin: 0; padding-right: 18px; }
+  .box li { margin-bottom: 7px; font-size: 15px; }
+  .box li:last-child { margin-bottom: 0; }
+  .rec {
+    border-inline-start: 4px solid var(--sea); background: var(--route-soft);
+    border-radius: 10px; padding: 14px 18px; margin-top: 16px; font-size: 15px;
+  }
+  .sec.land .rec { border-inline-start-color: var(--olive); background: var(--olive-soft); }
+
+  /* ---- checklist ---- */
+  .check { list-style: none; margin: 0; padding: 0; }
+  .check li { display: flex; gap: 10px; align-items: baseline; margin-bottom: 8px; font-size: 15px; }
+  .check li::before {
+    content: "☐"; color: var(--sea); font-size: 16px; flex: none; transform: translateY(1px);
+  }
+
+  .footnote { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-soft); }
+
+  @media (max-width: 640px) {
+    .hero { padding-top: 40px; }
+    .day { padding-right: 20px; }
+    th, td { padding: 9px 12px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .day .card { transition: transform .15s ease; }
+    .day .card:hover { transform: translateY(-2px); }
+  }
+</style>
+
+<div class="lfk" lang="he">
+  <div class="wrap">
+
+    <!-- ================= HERO ================= -->
+    <header class="hero">
+      <span class="kicker">IONIAN SEA · ΛΕΥΚΑΔΑ · יוני 2027</span>
+      <h1>לפקדה 2027 — <em>שבוע ההפלגה</em> של החבר'ה</h1>
+      <p class="sub">
+        9 חברים · שבת 19/06 עד שבת 26/06/2027 · חמישה ימי שיט רגועים באיים היוניים
+        (מקסימום 3–4 שעות הפלגה ביום), ואז סופ״ש בוילה בפורטו ראפטי עם הנשים.
+      </p>
+      <div class="facts">
+        <div class="fact"><b>9</b><span>חברים על הסירה</span></div>
+        <div class="fact"><b>5</b><span>ימי שיט (א׳–ה׳)</span></div>
+        <div class="fact"><b>‎~66 מייל ימי</b><span>סה״כ מסלול</span></div>
+        <div class="fact"><b>3–4 שע׳</b><span>שיט ממוצע ליום</span></div>
+        <div class="fact" id="countdown"><b>—</b><span>ימים לטיסה</span></div>
+      </div>
+    </header>
+
+    <!-- ================= AT A GLANCE ================= -->
+    <section class="sec">
+      <h2>לוח הזמנים במבט אחד</h2>
+      <p class="lead">שבוע מלא: יומיים "מסגרת" לטיסות והתארגנות, חמישה ימי שיט קצרים ונינוחים, ויומיים וילה.</p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th class="num">תאריך</th><th>יום</th><th>מה קורה</th><th>לינה</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="num">19/06</td><td>שבת</td>
+              <td><span class="pill">הגעה</span> טיסה ת״א → אתונה → פרבזה (PVK). קבלת הסירה במרינת לפקדה אחה״צ, בריף בטיחות, סידור קבינות, קניות גדולות, ערב פתיחה בעיירה לפקדה.</td>
+              <td>על הסירה, מרינת לפקדה</td>
+            </tr>
+            <tr>
+              <td class="num">20/06</td><td>ראשון</td>
+              <td><span class="pill">שיט יום 1</span> לפקדה → סקורפיוס (עצירת רחצה) → מגניסי (ספרטוחורי / ואתי).</td>
+              <td>מגניסי</td>
+            </tr>
+            <tr>
+              <td class="num">21/06</td><td>שני</td>
+              <td><span class="pill">שיט יום 2</span> מגניסי → קלמוס (עצירת רחצה) → קסטוס.</td>
+              <td>קסטוס</td>
+            </tr>
+            <tr>
+              <td class="num">22/06</td><td>שלישי</td>
+              <td><span class="pill">שיט יום 3</span> קסטוס → קיוני (איתקה).</td>
+              <td>קיוני, איתקה</td>
+            </tr>
+            <tr>
+              <td class="num">23/06</td><td>רביעי</td>
+              <td><span class="pill">שיט יום 4</span> קיוני → אטוקוס (One House Bay, עצירת רחצה) → סיבוטה (לפקדה).</td>
+              <td>סיבוטה</td>
+            </tr>
+            <tr>
+              <td class="num">24/06</td><td>חמישי</td>
+              <td><span class="pill">שיט יום 5</span> סיבוטה → מרינת לפקדה (החזרת סירה עד 13:00). <span class="pill land">מעבר</span> מיניבוס ללפקדה → פורטו ראפטי (~5 שע׳), מפגש עם הנשים בערב.</td>
+              <td>וילה, פורטו ראפטי</td>
+            </tr>
+            <tr>
+              <td class="num">25/06</td><td>שישי</td>
+              <td><span class="pill land">וילה</span> בוקר חוף, צהריים דגים בנמל, שקיעה במקדש פוסידון בסוניון, ערב BBQ בוילה.</td>
+              <td>וילה, פורטו ראפטי</td>
+            </tr>
+            <tr>
+              <td class="num">26/06</td><td>שבת</td>
+              <td><span class="pill land">חזרה</span> בוקר רגוע בבריכה/חוף, נסיעה קצרה לשדה (~30 דק׳), טיסה אתונה → ת״א.</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= ROUTE MAP ================= -->
+    <section class="sec">
+      <h2>מפת המסלול</h2>
+      <p class="lead">מסלול מעגלי דרום־מזרחה מלפקדה: כל הקטעים קצרים, במים מוגנים בין האיים — בלי קטעי ים פתוח ארוכים.</p>
+      <div class="map-card">
+        <svg viewBox="0 0 720 480" role="img" aria-label="מפה סכמטית של מסלול ההפלגה בין לפקדה, מגניסי, קסטוס, איתקה וסיבוטה">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 1 L 8 5 L 0 9 z" fill="var(--route)"></path>
+            </marker>
+          </defs>
+          <!-- sea grid -->
+          <g stroke="var(--line)" stroke-width="1" opacity="0.55">
+            <line x1="0" y1="120" x2="720" y2="120"></line>
+            <line x1="0" y1="240" x2="720" y2="240"></line>
+            <line x1="0" y1="360" x2="720" y2="360"></line>
+            <line x1="180" y1="0" x2="180" y2="480"></line>
+            <line x1="360" y1="0" x2="360" y2="480"></line>
+            <line x1="540" y1="0" x2="540" y2="480"></line>
+          </g>
+          <!-- land masses (schematic) -->
+          <g fill="var(--olive-soft)" stroke="var(--olive)" stroke-width="1.5" opacity="0.9">
+            <ellipse cx="500" cy="120" rx="95" ry="75"></ellipse>   <!-- Lefkada -->
+            <ellipse cx="415" cy="235" rx="40" ry="26"></ellipse>   <!-- Meganisi -->
+            <ellipse cx="470" cy="180" rx="14" ry="11"></ellipse>   <!-- Skorpios -->
+            <ellipse cx="250" cy="250" rx="24" ry="42"></ellipse>   <!-- Kalamos -->
+            <ellipse cx="205" cy="330" rx="16" ry="30"></ellipse>   <!-- Kastos -->
+            <ellipse cx="330" cy="395" rx="70" ry="45"></ellipse>   <!-- Ithaca -->
+            <ellipse cx="255" cy="415" rx="14" ry="10"></ellipse>   <!-- Atokos -->
+          </g>
+          <!-- route -->
+          <g fill="none" stroke="var(--route)" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round">
+            <path d="M 545 75 C 520 130, 495 160, 472 178" marker-end="url(#arr)"></path>          <!-- Lefkas -> Skorpios -->
+            <path d="M 465 192 C 450 210, 440 220, 430 226" marker-end="url(#arr)"></path>          <!-- Skorpios -> Meganisi -->
+            <path d="M 400 255 C 340 290, 260 300, 218 322" marker-end="url(#arr)"></path>          <!-- Meganisi -> Kastos -->
+            <path d="M 210 355 C 235 385, 270 390, 300 383" marker-end="url(#arr)"></path>          <!-- Kastos -> Kioni -->
+            <path d="M 300 400 L 262 410" marker-end="url(#arr)"></path>                            <!-- Kioni -> Atokos -->
+            <path d="M 268 405 C 330 370, 400 320, 442 260" marker-end="url(#arr)"></path>          <!-- Atokos -> Sivota -->
+            <path d="M 455 240 C 500 200, 530 140, 545 85" marker-end="url(#arr)"></path>           <!-- Sivota -> Lefkas -->
+          </g>
+          <!-- ports -->
+          <g font-family="inherit" font-size="15" font-weight="700" fill="var(--ink)">
+            <circle cx="548" cy="72" r="7" fill="var(--sea)"></circle>
+            <text x="562" y="66">מרינת לפקדה</text>
+            <text x="562" y="84" font-size="12" font-weight="400" fill="var(--ink-soft)">התחלה + סיום</text>
+
+            <circle cx="470" cy="182" r="5" fill="var(--sun)"></circle>
+            <text x="484" y="176">סקורפיוס 🏊</text>
+
+            <circle cx="420" cy="240" r="7" fill="var(--sea)"></circle>
+            <text x="435" y="262">מגניסי · לילה 1</text>
+
+            <circle cx="252" cy="252" r="5" fill="var(--sun)"></circle>
+            <text x="268" y="246">קלמוס 🏊</text>
+
+            <circle cx="207" cy="335" r="7" fill="var(--sea)"></circle>
+            <text x="120" y="330">קסטוס · לילה 2</text>
+
+            <circle cx="308" cy="385" r="7" fill="var(--sea)"></circle>
+            <text x="322" y="440">קיוני (איתקה) · לילה 3</text>
+
+            <circle cx="258" cy="412" r="5" fill="var(--sun)"></circle>
+            <text x="150" y="425">אטוקוס 🏊</text>
+
+            <circle cx="450" cy="248" r="7" fill="var(--sea)"></circle>
+            <text x="465" y="300">סיבוטה · לילה 4</text>
+          </g>
+        </svg>
+        <p class="map-note">מפה סכמטית — לא לניווט. נקודות כתומות = עצירות רחצה, נקודות כחולות = עגינת לילה.</p>
+      </div>
+    </section>
+
+    <!-- ================= DAY BY DAY ================= -->
+    <section class="sec">
+      <h2>המסלול יום־יום</h2>
+      <p class="lead">
+        קצב שיוט של קטמרן: ‎5.5–6 קשר. כל יום: יציאה ~09:30 אחרי קפה, עצירת רחצה בדרך,
+        קשירה בנמל עד 14:00–15:00 — ואז חופש: חוף, טברנה, סיאסטה. אף יום לא עובר 4 שעות שיט נטו.
+      </p>
+      <div class="days">
+
+        <div class="day">
+          <div class="card">
+            <h3>יום 1 · ראשון 20/06</h3>
+            <p class="route-line">מרינת לפקדה ← סקורפיוס ← מגניסי (ספרטוחורי או ואתי)</p>
+            <div class="stats"><span class="stat">‎~12 מייל ימי</span><span class="stat">‎~2.5–3 שע׳ שיט</span><span class="stat">עצירת רחצה: סקורפיוס</span></div>
+            <p>יציאה רגועה דרומה בתעלה המוגנת של לפקדה. עוגנים לרחצה ראשונה מול האי הפרטי של אונאסיס — סקורפיוס — במים טורקיז. ממשיכים לספרטוחורי שבמגניסי: כפר קטן על צוק עם סמטאות לבנות.</p>
+            <p><b>ערב:</b> טברנות על המים בספרטוחורי (Porto Spilia — קושרים ממש מול השולחן) או בנמל ואתי.</p>
+            <p class="alt"><b>חלופה:</b> אם רוצים יום פתיחה קצר במיוחד — לילה בנידרי (‎~8 מייל, שעה וחצי) והמשך למגניסי למחרת.</p>
+          </div>
+        </div>
+
+        <div class="day">
+          <div class="card">
+            <h3>יום 2 · שני 21/06</h3>
+            <p class="route-line">מגניסי ← קלמוס ← קסטוס</p>
+            <div class="stats"><span class="stat">‎~11 מייל ימי</span><span class="stat">‎~2.5 שע׳ שיט</span><span class="stat">עצירת רחצה: מפרץ בקלמוס</span></div>
+            <p>חוצים דרומה לצמד האיים השקטים של האזור. עצירת צהריים במפרץ מבודד בקלמוס, וממשיכים לקסטוס — אי עם ‎~50 תושבים, נמל אחד, טחנת רוח ושלווה מוחלטת.</p>
+            <p><b>ערב:</b> טברנת הדגים המפורסמת של האי (כדאי להזמין שולחן מראש בעונה) ובר הטחנה על הגבעה לשקיעה.</p>
+            <p class="alt"><b>טיפ:</b> בקסטוס הרציף קטן — להגיע עד 14:00 כדי לתפוס מקום קשירה נוח.</p>
+          </div>
+        </div>
+
+        <div class="day">
+          <div class="card">
+            <h3>יום 3 · שלישי 22/06</h3>
+            <p class="route-line">קסטוס ← קיוני (איתקה)</p>
+            <div class="stats"><span class="stat">‎~12 מייל ימי</span><span class="stat">‎~3 שע׳ שיט</span><span class="stat">קטע "ים פתוח" קצר</span></div>
+            <p>הקטע היפה של השבוע: חציית התעלה לאיתקה של אודיסאוס. קיוני הוא הנמל הצילומי ביותר ביוניים — קשת בתים פסטליים סביב מפרצון עם שלוש טחנות רוח.</p>
+            <p><b>ערב:</b> אפרול על הרציף, מסעדות ברמה גבוהה סביב הנמל. שווה עצירת רחצה במפרץ סרקיניקו ממש לפני הכניסה.</p>
+            <p class="alt"><b>חלופה:</b> פיסקרדו שבקפלוניה (‎~14 מייל, ‎~3.5 שע׳) — עיירה ונציאנית שיקית יותר, עמוסה יותר. אפשר להחליט לפי מצב הרוח בבוקר.</p>
+          </div>
+        </div>
+
+        <div class="day">
+          <div class="card">
+            <h3>יום 4 · רביעי 23/06</h3>
+            <p class="route-line">קיוני ← אטוקוס (One House Bay) ← סיבוטה</p>
+            <div class="stats"><span class="stat">‎~15 מייל ימי</span><span class="stat">‎~3.5–4 שע׳ שיט</span><span class="stat">עצירת רחצה: One House Bay</span></div>
+            <p>היום הכי "פוסטר" של הטיול: עוגנים ב־One House Bay באי הלא־מיושב אטוקוס — חוף גיר לבן, מים שקופים, ובית בודד אחד. צהריים ארוכים במים, וקפיצה קצרה לסיבוטה — פיורד קטן ומוגן בדרום לפקדה.</p>
+            <p><b>ערב:</b> ערב הסיום הימי — טברנות על קו המים בסיבוטה (Stavros / Ionion). לילה אחרון על הסירה.</p>
+          </div>
+        </div>
+
+        <div class="day">
+          <div class="card">
+            <h3>יום 5 · חמישי 24/06</h3>
+            <p class="route-line">סיבוטה ← מרינת לפקדה · החזרת הסירה עד 13:00</p>
+            <div class="stats"><span class="stat">‎~14 מייל ימי</span><span class="stat">‎~3 שע׳ שיט</span><span class="stat">יציאה מוקדמת 08:30</span></div>
+            <p>שיט בוקר אחרון צפונה לאורך החוף המזרחי, תדלוק והחזרת הסירה במרינה. צ׳ק־אאוט, מקלחות במרינה, ארוחת צהריים קלה — ועולים על המיניבוס לפורטו ראפטי.</p>
+            <p><b>חשוב:</b> לסכם מראש עם חברת הצ׳רטר על החזרה ביום חמישי בצהריים (הצ׳רטר הסטנדרטי הוא שבת–שבת; משאירים את יום שישי "על השולחן" — ראו סעיף הסירה).</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= BOAT ================= -->
+    <section class="sec">
+      <h2>הסירה: מה מזמינים ל־9 אנשים</h2>
+      <p class="lead">בשביל 9 חברים שרוצים שבוע נוח (ולא מחנה אימונים), ההמלצה החד־משמעית: קטמרן גדול עם סקיפר.</p>
+      <div class="grid2">
+        <div class="box">
+          <h3>האופציה המומלצת — קטמרן 6 קבינות</h3>
+          <ul>
+            <li><b>דגמים לדוגמה:</b> Bali 4.8 · Lagoon 50 · Fountaine Pajot Saba 50.</li>
+            <li>6 קבינות: מקום אמיתי ל־9 + קבינת סקיפר, בלי לישון בסלון.</li>
+            <li>יציבות, רשת ענקית מקדימה, מטבח ואזורי צל — מושלם לעצירות הרחצה הארוכות.</li>
+            <li><b>מחיר משוער יוני 2027:</b> ‎€11,000–15,000 לשבוע + סקיפר ‎€180–220 ליום.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>אופציה חסכונית — מונוהאל 5 קבינות</h3>
+          <ul>
+            <li><b>דגמים לדוגמה:</b> Sun Loft 47 · Oceanis 51.1 · Sun Odyssey 519.</li>
+            <li><b>מחיר משוער:</b> ‎€6,000–8,500 לשבוע + סקיפר.</li>
+            <li>חיסכון של ‎~€400–600 לאיש, אבל צפוף יותר ל־9 ופחות שטחי בילוי.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>בסיס יציאה</h3>
+          <ul>
+            <li><b>מרינת לפקדה (D-Marin, עיירת לפקדה)</b> — הבסיס הגדול והנוח ביותר, סופרמרקטים במרחק הליכה. <b>המומלץ.</b></li>
+            <li>חלופות: נידרי (דרומית יותר, קרובה למסלול) או פרבזה (צמוד לשדה התעופה).</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>הנקודה של יום חמישי</h3>
+          <ul>
+            <li>רוב הצ׳רטרים הם שבת אחה״צ → שבת בוקר. אנחנו מחזירים <b>חמישי 13:00</b>.</li>
+            <li>לבקש מהחברה "early check-in ביום שבת + drop-off חמישי" — לרוב משלמים שבוע מלא אבל אפשר למקסם: check-in מוקדם בשבת ולפעמים הנחה קטנה.</li>
+            <li>לוודא בחוזה: החזרת סירה + צ׳ק־אאוט וניקיון ביום חמישי, לא שישי.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rec">
+        <b>שורה תחתונה:</b> לסגור עד <b>אוקטובר 2026</b> קטמרן 6 קבינות עם סקיפר מבסיס לפקדה.
+        הזמנה מוקדמת ביוניים = הנחות Early-Bird של ‎10–15% ובחירה מהסירות הטובות. מקדמה טיפוסית: 50%.
+      </div>
+    </section>
+
+    <!-- ================= LOGISTICS ================= -->
+    <section class="sec">
+      <h2>טיסות והגעה</h2>
+      <div class="grid2">
+        <div class="box">
+          <h3>הלוך · שבת 19/06</h3>
+          <ul>
+            <li><b>ת״א → אתונה:</b> טיסת בוקר (‎~2 שע׳, אל־על / Aegean / bluebird).</li>
+            <li><b>אתונה → פרבזה (PVK/Aktion):</b> טיסה פנימית ‎~55 דק׳ (Olympic/Sky Express) <i>או</i> מיניבוס ‎~4.5 שע׳.</li>
+            <li>פרבזה → מרינת לפקדה: מוניות/טרנספר ‎~25 דק׳.</li>
+            <li>יעד: להגיע למרינה עד 16:00–17:00 לצ׳ק־אין על הסירה.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>מעבר לוילה · חמישי 24/06</h3>
+          <ul>
+            <li><b>מומלץ: מיניבוס פרטי ישיר</b> לפקדה → פורטו ראפטי, ‎~5 שע׳ כולל עצירה, ‎€650–850 לקבוצה (~€80 לאיש). יציאה 14:00, הגעה ‎~19:00 — בדיוק לארוחת ערב עם הנשים.</li>
+            <li>חלופה: טיסה PVK → אתונה + טרנספר 45 דק׳ לוילה. תלוי בלו״ז הטיסות של 2027 — לבדוק כשנפתח.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>חזרה · שבת 26/06</h3>
+          <ul>
+            <li>הוילה בפורטו ראפטי נמצאת ‎~30 דק׳ משדה התעופה של אתונה — נוחות מקסימלית.</li>
+            <li>טיסת צהריים/ערב אתונה → ת״א, לפי מה שנוח לזוגות.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>הנשים 💙</h3>
+          <ul>
+            <li>נוחתות באתונה ביום חמישי 24/06 (או קודם, למי שרוצה יום באתונה).</li>
+            <li>טרנספר קצר לפורטו ראפטי — מסתדרות בוילה לפני שאנחנו מגיעים.</li>
+            <li>כדאי לתאם שכולן מזמינות טיסות באותם מועדים.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VILLA ================= -->
+    <section class="sec land">
+      <h2>הוילה בפורטו ראפטי · חמישי–שבת 24–26/06</h2>
+      <p class="lead">סוף שבוע של יבשה: הוילה של החבר׳ה בפורטו ראפטי, עיירת חוף במזרח אטיקה — 40 דק׳ מאתונה, מול מפרץ עם אי קטן באמצע.</p>
+      <div class="grid2">
+        <div class="box">
+          <h3>חמישי בערב — האיחוד</h3>
+          <ul>
+            <li>הגעה ‎~19:00, מקלחות והתארגנות.</li>
+            <li>ערב פתיחה: טברנת דגים על הנמל של פורטו ראפטי — כל ה־18.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>שישי — היום הגדול</h3>
+          <ul>
+            <li><b>בוקר:</b> חוף — Avlaki או Erotospilia (המפרצון הסלעי היפה של האזור).</li>
+            <li><b>צהריים:</b> דגים ואוזו על המים.</li>
+            <li><b>אחה״צ:</b> בריכה, סיאסטה, פלטת גבינות.</li>
+            <li><b>שקיעה:</b> נסיעה של ‎~35 דק׳ למקדש פוסידון בכף סוניון — אחת השקיעות היפות ביוון.</li>
+            <li><b>ערב:</b> BBQ גדול בוילה. מוזיקה, סיפורים מההפלגה (מצונזרים).</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>שבת — סיום רגוע</h3>
+          <ul>
+            <li>בוקר בריכה וקפה, איסוף ואריזה.</li>
+            <li>יציאה מדורגת לשדה לפי טיסות — 30 דק׳ נסיעה בלבד.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>לוגיסטיקת וילה</h3>
+          <ul>
+            <li>קניות מראש: סופר AB/Sklavenitis בפורטו ראפטי, או משלוח ביום חמישי בבוקר לוילה.</li>
+            <li>לתאם עם בעל הבית: מצעים/מגבות ל־18, מצב הבריכה, גריל וגז.</li>
+            <li>2–3 רכבים שכורים או טרנספרים לערב סוניון.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rec">
+        <b>חלוקת אחריות לוילה:</b> בעל הוילה מתאם את הבית; אחראי אוכל סוגר את הזמנת הסופר וה־BBQ;
+        הנשים בוחרות את מסעדת חמישי בערב. 🍷
+      </div>
+    </section>
+
+    <!-- ================= BUDGET ================= -->
+    <section class="sec">
+      <h2>תקציב משוער לאיש</h2>
+      <p class="lead">הערכות ל־9 משתתפים, קטמרן 6 קבינות עם סקיפר. מחירי 2027 עשויים לזוז ‎±15%.</p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>סעיף</th><th class="num">טווח לאיש</th><th>הערות</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>טיסות ת״א ↔ אתונה</td><td class="num">‎€300–450</td><td>הזמנה מוקדמת = הקצה הנמוך</td></tr>
+            <tr><td>אתונה ↔ פרבזה (פנימית/מיניבוס)</td><td class="num">‎€90–160</td><td>הלוך בטיסה, חזור במיניבוס לוילה</td></tr>
+            <tr><td>צ׳רטר קטמרן + סקיפר</td><td class="num">‎€1,350–1,850</td><td>‎€12–16.5K ÷ 9; מונוהאל: ‎€800–1,100</td></tr>
+            <tr><td>דלק, מרינות, מים</td><td class="num">‎€60–90</td><td>ביוניים רוב הרציפים זולים/חינם</td></tr>
+            <tr><td>קניות לסירה (אוכל, שתייה, קרח)</td><td class="num">‎€60–80</td><td>קופה משותפת, קנייה גדולה בשבת</td></tr>
+            <tr><td>טברנות וברים · 5 ערבים</td><td class="num">‎€250–350</td><td>‎€50–70 לערב כולל יין</td></tr>
+            <tr><td>וילה: אוכל, BBQ, שכירת רכבים</td><td class="num">‎€120–180</td><td>לינה חינם 🙏 תודה לבעל הבית</td></tr>
+            <tr>
+              <td><b>סה״כ משוער</b></td>
+              <td class="num"><b>‎€2,250–3,150</b></td>
+              <td>עם מונוהאל: ‎~€1,700–2,400</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rec">
+        <b>קופה משותפת:</b> גזבר גובה ‎€400 לאיש לפני הטיסה (קניות, דלק, מרינות, מיניבוס) ומסכם בסוף.
+        חשבונות טברנה מתחלקים במקום.
+      </div>
+    </section>
+
+    <!-- ================= WEATHER ================= -->
+    <section class="sec">
+      <h2>מזג אוויר ותנאי שיט ביוני</h2>
+      <div class="grid2">
+        <div class="box">
+          <h3>מה מצפה לנו</h3>
+          <ul>
+            <li><b>טמפ׳:</b> ‎27–31°C ביום, ‎20–22° בלילה. מים: ‎23–25°.</li>
+            <li><b>רוח:</b> בקרים שקטים; ה"מייסטרו" (NW ‎12–18 קשר) נכנס אחה״צ — בדיוק כשאנחנו כבר קשורים בנמל.</li>
+            <li><b>גשם:</b> כמעט אפסי ביוני. הים בין האיים מוגן ושטוח.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>איך זה משרת את התכנון</h3>
+          <ul>
+            <li>שיט בשעות הבוקר הרגועות (09:30–13:30) — בדיוק חלון ה־3–4 שעות שלנו.</li>
+            <li>אחה״צ בעגינה: רחצה, SUP, טברנה — כשהרוח בחוץ עושה את שלה.</li>
+            <li>הסקיפר מחליט סופית כל בוקר לפי התחזית; יש חלופות לכל יום.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TASKS ================= -->
+    <section class="sec">
+      <h2>משימות ולוח הזמנות</h2>
+      <div class="grid2">
+        <div class="box">
+          <h3>עכשיו — עד אוקטובר 2026</h3>
+          <ul class="check">
+            <li>וידוא סופי: 9 משתתפים + מקדמה פנימית ‎€500 לאיש</li>
+            <li>בחירת חברת צ׳רטר וסגירת קטמרן + סקיפר (מקדמה 50%)</li>
+            <li>לעגן בחוזה: החזרה בחמישי 13:00</li>
+            <li>בעל הוילה חוסם את התאריכים 24–26/06</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>אוקטובר 2026 — ינואר 2027</h3>
+          <ul class="check">
+            <li>טיסות ת״א↔אתונה לכל ה־18 (גברים + נשים) כשנפתחות</li>
+            <li>טיסות פנימיות אתונה↔פרבזה או סגירת מיניבוסים</li>
+            <li>יתרת תשלום לסירה (לרוב עד 60 יום לפני)</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>מרץ — מאי 2027</h3>
+          <ul class="check">
+            <li>הזמנת מיניבוס חמישי לפקדה→פורטו ראפטי</li>
+            <li>שכירת רכבים לוילה + ביטוחי נסיעות לכולם</li>
+            <li>הזמנת שולחנות: קסטוס וקיוני לערבים שלנו</li>
+            <li>רשימת קניות לסירה + הזמנת סופר לוילה</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>חלוקת תפקידים</h3>
+          <ul>
+            <li><b>מנהל הפלגה:</b> מול חברת הצ׳רטר והסקיפר</li>
+            <li><b>גזבר:</b> קופה משותפת + התחשבנות</li>
+            <li><b>טיסות והסעות:</b> ריכוז כרטיסים לכל ה־18</li>
+            <li><b>אוכל ומשקאות:</b> קניות סירה + BBQ</li>
+            <li><b>וילה:</b> בעל הבית + תיאום מול הנשים</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PACKING ================= -->
+    <section class="sec">
+      <h2>מה מביאים</h2>
+      <div class="grid2">
+        <div class="box">
+          <h3>חובה</h3>
+          <ul class="check">
+            <li>תיק רך בלבד (לא מזוודה קשיחה — אין לה מקום בסירה)</li>
+            <li>דרכון בתוקף 6 חודשים + ביטוח נסיעות</li>
+            <li>כובע, משקפי שמש עם שרוך, קרם הגנה 50</li>
+            <li>נעליים עם סוליה בהירה לסיפון + סנדלים</li>
+            <li>סווטשירט לערבים, מטען נייד</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>שווה להביא</h3>
+          <ul class="check">
+            <li>מסכת שנורקל (המים שקופים ברמות)</li>
+            <li>רמקול בלוטות׳ + פלייליסט מוכן</li>
+            <li>קלפים / שש־בש מגנטי</li>
+            <li>דגל/חולצות קבוצה 😎</li>
+            <li>תרופה נגד מחלת ים למי שרגיש (הים בפנים שטוח, אבל ליתר ביטחון)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <p class="footnote">
+      תכנון ראשוני · יוני 2027 · המרחקים והזמנים מבוססים על קצב שיוט של ‎5.5–6 קשר ועל מסלול החוף המזרחי המוגן.
+      מחירים הם הערכות להזמנה מוקדמת לעונת יוני 2027 — לעדכן אחרי קבלת הצעות מחיר מחברות הצ׳רטר.
+    </p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var el = document.querySelector('#countdown b');
+    if (!el) return;
+    var target = new Date(2027, 5, 19); // 19 June 2027
+    var days = Math.max(0, Math.ceil((target - new Date()) / 86400000));
+    el.textContent = days.toLocaleString('he-IL');
+  })();
+</script>
+</body>
+</html>
