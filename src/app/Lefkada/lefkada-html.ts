@@ -1,11 +1,6 @@
-<!doctype html>
-<html lang="he" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>לפקדה 2027 — תכנון ההפלגה</title>
-</head>
-<body style="margin:0">
+// Static markup for the /Lefkada trip page. Rendered via dangerouslySetInnerHTML
+// in LefkadaPage.tsx; the countdown value is filled in by React after mount.
+export const LEFKADA_HTML = `
 <style>
   :root {
     --ink: #12222E;
@@ -669,15 +664,4 @@
     </p>
   </div>
 </div>
-
-<script>
-  (function () {
-    var el = document.querySelector('#countdown b');
-    if (!el) return;
-    var target = new Date(2027, 5, 19); // 19 June 2027
-    var days = Math.max(0, Math.ceil((target - new Date()) / 86400000));
-    el.textContent = days.toLocaleString('he-IL');
-  })();
-</script>
-</body>
-</html>
+`;
