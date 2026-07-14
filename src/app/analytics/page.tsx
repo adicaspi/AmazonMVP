@@ -251,9 +251,10 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
   return rows.map((row) => {
     const actions: any[] = row.actions || [];
     const costPerAction: any[] = row.cost_per_action_type || [];
-    // Find the main conversion action (not link_click, page_view, etc.)
+    // Only true pixel conversions count — engagement actions (post_engagement,
+    // video_view...) on traffic campaigns must not masquerade as conversions
     const conversionAction = actions.find(
-      (a: any) => a.action_type !== "link_click" && a.action_type !== "page_view" && a.action_type !== "landing_page_view" && a.action_type !== "impressions"
+      (a: any) => typeof a.action_type === "string" && a.action_type.startsWith("offsite_conversion")
     );
     const conversions = conversionAction ? parseInt(conversionAction.value) : 0;
     const conversionType = conversionAction?.action_type || "";

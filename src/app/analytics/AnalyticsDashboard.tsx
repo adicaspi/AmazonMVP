@@ -648,7 +648,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   //   "ours" table and the conversion-funnel section below.
   const fbBridgeFrac = campaignFilterActive && fbLPV > 0 ? fbConversions / fbLPV : 0;
   const fpBridgeFrac = data.views > 0 ? data.uniqueClickers / data.views : 0;
-  const beBridgeFrac = campaignFilterActive ? fbBridgeFrac : fpBridgeFrac;
+  // Traffic campaigns track no pixel conversion — fall back to the
+  // first-party bridge so the card still answers "is the page good?"
+  const useFbBridge = campaignFilterActive && fbConversions > 0 && fbLPV > 0;
+  const beBridgeFrac = useFbBridge ? fbBridgeFrac : fpBridgeFrac;
   const conversionRate = (fpBridgeFrac * 100).toFixed(1);
 
   // Break-even: cost per Amazon click = campaign spend ÷ Facebook-ATTRIBUTED
@@ -985,7 +988,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           };
           const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.5 ? "good" : cpc <= 1 ? "mid" : "bad";
           const bridgePct = beBridgeFrac * 100;
-          const bridgeDenominator = campaignFilterActive ? fbLPV : data.views;
+          const bridgeDenominator = useFbBridge ? fbLPV : data.views;
           const bridgeStatus = bridgeDenominator === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
           const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.5 ? "mid" : "bad";
           return (
@@ -1078,7 +1081,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>Bridge %</div>
-                    <div className="text-xl font-bold text-emerald-500">{fbLPV > 0 ? `${(fbBridgeFrac * 100).toFixed(1)}%` : "—"}</div>
+                    <div className="text-xl font-bold text-emerald-500">{useFbBridge ? `${(fbBridgeFrac * 100).toFixed(1)}%` : "—"}</div>
                     <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "המרות ÷ נחיתות" : "conversions ÷ landings"}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
