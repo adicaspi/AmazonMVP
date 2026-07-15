@@ -620,7 +620,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const PAGE_CAMPAIGN_KEYWORD: Record<string, string[]> = {
     "/shark-flexstyle": ["amazon click"],
     "/sharkflex": ["- ic"],
-    "/BirkenstockTraffic": ["birkenstock", "arizona"],
+    "/BirkenstockTraffic": ["arizona traffic", "birkenstock traffic"],
+    "/BirkenstockSales": ["arizona sales", "birkenstock sales"],
   };
   const fbCampaigns = facebookAdsData?.campaigns ?? [];
   const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];

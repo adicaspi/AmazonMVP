@@ -29,6 +29,7 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/sharkflex": "1554568722933870",
   "/BirkenstockArizona": "1025959486467199",
   "/BirkenstockTraffic": "1025959486467199",
+  "/BirkenstockSales": "1025959486467199",
 };
 
 // Product info per page for accurate CAPI event data
@@ -39,6 +40,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/sharkflex": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
   "/BirkenstockArizona": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
   "/BirkenstockTraffic": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
+  "/BirkenstockSales": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
 };
 
 // Standard pixel events fired when an Amazon CTA is clicked, per page.
@@ -51,6 +53,8 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   // No FB dataset for Birkenstock yet — internal analytics only until one exists
   "/BirkenstockArizona": [],
   "/BirkenstockTraffic": [],
+  // Sales campaign optimizes on InitiateCheckout (same pattern as /sharkflex)
+  "/BirkenstockSales": ["InitiateCheckout"],
 };
 
 // Longest matching prefix wins

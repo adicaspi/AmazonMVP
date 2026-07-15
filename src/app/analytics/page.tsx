@@ -77,6 +77,7 @@ const TRACKED_PAGES = [
   { path: "/sharkflex", label: "SharkFlex (Sales)", color: "amber" },
   { path: "/BirkenstockArizona", label: "Birkenstock", color: "amber" },
   { path: "/BirkenstockTraffic", label: "Birkenstock (Traffic)", color: "amber" },
+  { path: "/BirkenstockSales", label: "Birkenstock (Sales)", color: "amber" },
 ] as const;
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {

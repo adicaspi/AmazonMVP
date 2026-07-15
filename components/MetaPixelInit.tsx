@@ -16,6 +16,7 @@ const PIXEL_BY_PATH: { prefix: string; pixelId: string }[] = [
   { prefix: "/sharkflex", pixelId: SHARK_PIXEL_ID },
   { prefix: "/BirkenstockArizona", pixelId: BIRKENSTOCK_PIXEL_ID },
   { prefix: "/BirkenstockTraffic", pixelId: BIRKENSTOCK_PIXEL_ID },
+  { prefix: "/BirkenstockSales", pixelId: BIRKENSTOCK_PIXEL_ID },
 ];
 
 export function MetaPixelInit() {
