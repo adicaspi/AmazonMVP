@@ -53,8 +53,8 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   // No FB dataset for Birkenstock yet — internal analytics only until one exists
   "/BirkenstockArizona": [],
   "/BirkenstockTraffic": [],
-  // Sales campaign optimizes on InitiateCheckout (same pattern as /sharkflex)
-  "/BirkenstockSales": ["InitiateCheckout"],
+  // Sales campaign optimizes on the custom AmazonClickBirkenstock event
+  "/BirkenstockSales": [],
 };
 
 // Longest matching prefix wins
@@ -122,9 +122,9 @@ export function AmazonButton({ href, children, className, productName, position,
       eventName,
       eventId: generateEventId(),
     }));
-    // Custom click event — one name everywhere. The Ad Set's custom
-    // conversion listens for this exact event name (plus a URL rule).
-    const customEventName = "AmazonClick";
+    // Custom click event. Birkenstock pages fire their own branded event
+    // (the Sales ad set optimizes on it); Shark pages keep AmazonClick.
+    const customEventName = pagePath.startsWith("/Birkenstock") ? "AmazonClickBirkenstock" : "AmazonClick";
     const clickEventId = generateEventId();
 
     // ── Browser Pixel ──────────────────────────────────
