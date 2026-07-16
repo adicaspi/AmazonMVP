@@ -6,9 +6,8 @@ import { HeroFade } from "./HeroFade";
 // Shared Birkenstock bridge page. Rendered by two routes with separate
 // tracking: /BirkenstockArizona and /BirkenstockTraffic (per-campaign).
 // ── Product constants ─────────────────────────────────────────────
-const ASIN = "B000K9YUSE";
-// Official SiteStripe affiliate link (tag=aipicks20-20 credits the commission)
-const AMAZON_LINK = `https://www.amazon.com/Birkenstock-Womens-Arizona-Birko-Flo-Sandals/dp/${ASIN}?th=1&psc=1&linkCode=ll2&tag=aipicks20-20&linkId=755143f5a48c80129aae27bd92b45a5d&language=en_US&ref_=as_li_ss_tl`;
+// Official SiteStripe short link (carries the affiliate tag through redirect)
+const AMAZON_LINK = "https://amzn.to/4w9kJ7B";
 // Pixel value only — no price is shown on the page
 const PRICE_VALUE = 117;
 
