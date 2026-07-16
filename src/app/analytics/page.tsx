@@ -70,7 +70,7 @@ export type FacebookAdsData = {
 };
 
 // Pages we track
-const TRACKED_PAGES = [
+const TRACKED_PAGES: { path: string; label: string; color: string; archived?: boolean }[] = [
   { path: "/auraglow", label: "AuraGlow", color: "blue" },
   { path: "/grandelash", label: "GrandeLash", color: "rose" },
   { path: "/shark-flexstyle", label: "Shark FlexStyle", color: "amber" },
@@ -78,7 +78,7 @@ const TRACKED_PAGES = [
   { path: "/BirkenstockArizona", label: "Birkenstock", color: "amber" },
   { path: "/BirkenstockTraffic", label: "Birkenstock (Traffic)", color: "amber" },
   { path: "/BirkenstockSales", label: "Birkenstock (Sales)", color: "amber" },
-] as const;
+];
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {
   try {
@@ -412,7 +412,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
 
   // Build page data for each tracked page
   const pagesData = await Promise.all(
-    TRACKED_PAGES.map(async ({ path, label, color }) => {
+    TRACKED_PAGES.map(async ({ path, label, color, archived }) => {
       const stats = getClickStats(filteredClicks, path);
       const rawViews = await getPageViews(path, dateFrom, dateTo);
       const todayViews = await getTodayPageViews(path);
@@ -455,6 +455,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
         page: path,
         label,
         color,
+        archived: archived ?? false,
         views,
         uniqueClickers,
         todayViews,
@@ -477,17 +478,19 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
     })
   );
 
-  // Build "All" aggregate
-  const allStats = getClickStats(filteredClicks);
-  const allViews = pagesData.reduce((sum, p) => sum + p.views, 0);
-  const allTodayViews = pagesData.reduce((sum, p) => sum + p.todayViews, 0);
+  // Build "All" aggregate — active (non-archived) pages only
+  const activePagesData = pagesData.filter((p) => !p.archived);
+  const activePaths = new Set(activePagesData.map((p) => p.page));
+  const allStats = getClickStats(filteredClicks.filter((c) => activePaths.has(c.page)));
+  const allViews = activePagesData.reduce((sum, p) => sum + p.views, 0);
+  const allTodayViews = activePagesData.reduce((sum, p) => sum + p.todayViews, 0);
 
   const allAdFunnel: Record<string, { views: number; clicks: number }> = {};
   const allTrafficSources: Record<string, number> = {};
   const allViewDeviceCounts: Record<string, number> = {};
   const allSourceDeviceBreakdown: Record<string, Record<string, number>> = {};
   let allRecentVisits: RecentVisit[] = [];
-  pagesData.forEach((p) => {
+  activePagesData.forEach((p) => {
     allRecentVisits = allRecentVisits.concat(p.recentVisits);
     Object.entries(p.adFunnel).forEach(([ad, f]) => {
       if (!allAdFunnel[ad]) allAdFunnel[ad] = { views: 0, clicks: 0 };
@@ -518,7 +521,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
     label: "All Pages",
     color: "emerald" as const,
     views: allViews,
-    uniqueClickers: pagesData.reduce((sum, p) => sum + p.uniqueClickers, 0),
+    uniqueClickers: activePagesData.reduce((sum, p) => sum + p.uniqueClickers, 0),
     todayViews: allTodayViews,
     totalClicks: allStats.total,
     todayClicks: allTodayClicks,

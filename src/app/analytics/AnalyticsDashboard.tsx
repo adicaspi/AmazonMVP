@@ -49,6 +49,7 @@ type PageData = {
   page: string;
   label: string;
   color: string;
+  archived?: boolean;
   views: number;
   uniqueClickers: number;
   todayViews: number;
@@ -416,6 +417,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const [lang, setLang] = useState<"he" | "en">("he");
   const [darkMode, setDarkMode] = useState(false);
   const [selectedPage, setSelectedPage] = useState<string>("all");
+  const [showArchived, setShowArchived] = useState(false);
   const [filterFrom, setFilterFrom] = useState(dateFrom || "");
   const [filterTo, setFilterTo] = useState(dateTo || "");
   // Closed by default — presets also put from/to in the URL, so opening
@@ -523,7 +525,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     if (t2) params.set("to", t2);
     const qs = params.toString();
     setLoading(true);
-    router.push(`/analytics${qs ? `?${qs}` : ""}`);
+    router.replace(`/analytics${qs ? `?${qs}` : ""}`);
   };
 
   const applyPreset = (preset: "today" | "yesterday" | "yesterdayToday" | "7d" | "30d" | "all") => {
@@ -532,7 +534,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     if (preset === "all") {
       setFilterFrom("");
       setFilterTo("");
-      router.push("/analytics");
+      router.replace("/analytics");
       return;
     }
     const now = new Date();
@@ -571,7 +573,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     setFilterTo("");
     setShowCustomRange(false);
     setLoading(true);
-    router.push("/analytics");
+    router.replace("/analytics");
   };
 
   const getActivePreset = (): string | null => {
@@ -624,6 +626,17 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/BirkenstockSales": ["arizona sales", "birkenstock sales"],
   };
   const fbCampaigns = facebookAdsData?.campaigns ?? [];
+
+  // AUTO-ARCHIVE (decided live from Facebook): a page is archived when it has
+  // no ACTIVE campaign matching its keywords (fbCampaigns only contains
+  // active campaigns with activity) AND no first-party activity in range.
+  const pageHasActiveCampaign = (path: string) => {
+    const kws = PAGE_CAMPAIGN_KEYWORD[path];
+    return !!kws?.length && fbCampaigns.some((c) => kws.some((k) => c.campaign_name.toLowerCase().includes(k)));
+  };
+  const isArchived = (p: PageData) =>
+    !pageHasActiveCampaign(p.page) && p.views === 0 && p.totalClicks === 0;
+
   const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];
   const matchedCampaigns = campaignKeyword
     ? fbCampaigns.filter((c) => campaignKeyword.some((k) => c.campaign_name.toLowerCase().includes(k)))
@@ -772,7 +785,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             >
               {t.allPages}
             </button>
-            {pagesData.map((p) => (
+            {pagesData.filter((p) => !isArchived(p) || showArchived).map((p) => (
               <button
                 key={p.page}
                 onClick={() => setSelectedPage(p.page)}
@@ -786,6 +799,15 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 )}
               </button>
             ))}
+            {pagesData.some((p) => isArchived(p)) && (
+              <button
+                onClick={() => setShowArchived(!showArchived)}
+                title={lang === "he" ? "עמודים בארכיון" : "Archived pages"}
+                className={`flex-none whitespace-nowrap px-3 py-2 rounded-lg text-xs font-medium transition ${showArchived ? dm.tabActive : dm.tabInactive}`}
+              >
+                🗄️ {showArchived ? (lang === "he" ? "הסתר ארכיון" : "Hide archive") : (lang === "he" ? "ארכיון" : "Archive")}
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -1137,7 +1159,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               {t.pageOverview}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {pagesData.map((p) => {
+              {pagesData.filter((p) => !isArchived(p) || showArchived).map((p) => {
                 const cr = p.views > 0 ? ((p.totalClicks / p.views) * 100).toFixed(1) : "0";
                 return (
                   <button
