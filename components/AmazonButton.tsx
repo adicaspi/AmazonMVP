@@ -122,9 +122,10 @@ export function AmazonButton({ href, children, className, productName, position,
       eventName,
       eventId: generateEventId(),
     }));
-    // Custom click event. Birkenstock pages fire their own branded event
-    // (the Sales ad set optimizes on it); Shark pages keep AmazonClick.
-    const customEventName = pagePath.startsWith("/Birkenstock") ? "AmazonClickBirkenstock" : "AmazonClick";
+    // Custom click event — one name everywhere: AmazonClick. The custom
+    // conversions in the ad account scope it per product by URL rule
+    // (BirkenstockSales / shark-flexstyle), and the pixels differ anyway.
+    const customEventName = "AmazonClick";
     const clickEventId = generateEventId();
 
     // ── Browser Pixel ──────────────────────────────────
