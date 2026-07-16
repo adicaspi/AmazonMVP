@@ -7,7 +7,7 @@ import { HeroFade } from "./HeroFade";
 // tracking: /BirkenstockArizona and /BirkenstockTraffic (per-campaign).
 // ── Product constants ─────────────────────────────────────────────
 // Official SiteStripe short link (carries the affiliate tag through redirect)
-const AMAZON_LINK = "https://amzn.to/4w9kJ7B";
+const AMAZON_LINK = "https://amzn.to/4po8lOl";
 // Pixel value only — no price is shown on the page
 const PRICE_VALUE = 117;
 
