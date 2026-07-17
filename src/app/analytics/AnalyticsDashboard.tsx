@@ -453,10 +453,48 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     return () => clearInterval(id);
   }, []);
 
-  // Break-even calculator inputs
-  const [beCommission, setBeCommission] = useState(4.7); // USD
-  const [beAmazonConv, setBeAmazonConv] = useState(6);
-  const [beUsdRate, setBeUsdRate] = useState(3.65); // ILS per USD, for the EPC card
+  // Break-even calculator inputs. Commission auto-fills per page from the
+  // verified listing numbers; every edit persists in localStorage so values
+  // survive reloads (per-browser — localStorage doesn't sync across devices).
+  const PAGE_COMMISSION_DEFAULT: Record<string, number> = {
+    "/shark-flexstyle": 6.9, // $229.99 x 3%
+    "/sharkflex": 6.9,
+    "/BirkenstockArizona": 4.7, // $117.95 x 4%
+    "/BirkenstockTraffic": 4.7,
+    "/BirkenstockSales": 4.7,
+  };
+  const [beCommission, setBeCommissionState] = useState(4.7); // USD
+  const [beAmazonConv, setBeAmazonConvState] = useState(6);
+  const [beUsdRate, setBeUsdRateState] = useState(3.65); // ILS per USD
+
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem("aip_be_settings") || "{}");
+      if (saved.conv > 0) setBeAmazonConvState(saved.conv);
+      if (saved.rate > 0) setBeUsdRateState(saved.rate);
+      setBeCommissionState(saved.commission?.[selectedPage] ?? PAGE_COMMISSION_DEFAULT[selectedPage] ?? 5);
+    } catch { /* keep defaults */ }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedPage]);
+
+  const persistBe = (patch: Record<string, unknown>) => {
+    try {
+      const saved = JSON.parse(localStorage.getItem("aip_be_settings") || "{}");
+      localStorage.setItem("aip_be_settings", JSON.stringify({ ...saved, ...patch, commission: { ...(saved.commission || {}), ...((patch as any).commission || {}) } }));
+    } catch { /* ignore */ }
+  };
+  const setBeCommission = (v: number) => {
+    setBeCommissionState(v);
+    persistBe({ commission: { [selectedPage]: v } });
+  };
+  const setBeAmazonConv = (v: number) => {
+    setBeAmazonConvState(v);
+    persistBe({ conv: v });
+  };
+  const setBeUsdRate = (v: number) => {
+    setBeUsdRateState(v);
+    persistBe({ rate: v });
+  };
 
 
   // Clear Direct-only traffic for the selected page (owner-only; needs the aip_notrack cookie)
