@@ -2,11 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabase, isDatabaseAvailable } from "@/lib/db";
 
 // Server-side persistence for dashboard settings (break-even inputs):
-// the last saved value wins on every device. Owner-only writes.
+// the last saved value wins on every device. Open to any browser by the
+// owner's request — worst case someone changes calculator inputs.
 export async function POST(request: NextRequest) {
-  if (request.cookies.get("aip_notrack")?.value !== "1") {
-    return NextResponse.json({ error: "Not authorized" }, { status: 403 });
-  }
   if (!supabase || !(await isDatabaseAvailable())) {
     return NextResponse.json({ error: "Database unavailable" }, { status: 503 });
   }
