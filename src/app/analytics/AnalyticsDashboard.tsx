@@ -96,6 +96,7 @@ interface Props {
   allData: PageData;
   pagesData: PageData[];
   facebookAdsData: FacebookAdsData | null;
+  usdIlsRate?: number | null;
   dateFrom?: string;
   dateTo?: string;
 }
@@ -408,7 +409,7 @@ function formatTimeAgo(ts: number, now: number, lang: "he" | "en"): string {
   return days === 1 ? "1 day ago" : `${days} days ago`;
 }
 
-export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData, dateFrom, dateTo }: Props) {
+export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData, usdIlsRate, dateFrom, dateTo }: Props) {
   // Single dashboard timezone — read live from the Facebook ad account so
   // every date/hour here lines up with Ads Manager by construction.
   const NY_TZ = facebookAdsData?.timezone || "America/New_York";
@@ -465,13 +466,16 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   };
   const [beCommission, setBeCommissionState] = useState(4.7); // USD
   const [beAmazonConv, setBeAmazonConvState] = useState(6);
-  const [beUsdRate, setBeUsdRateState] = useState(3.65); // ILS per USD
+  const [beUsdRate, setBeUsdRateState] = useState(usdIlsRate ?? 3.65); // ILS per USD
+  // Live rate wins: refreshes (every 10s) re-sync the field automatically
+  useEffect(() => {
+    if (usdIlsRate && usdIlsRate > 0) setBeUsdRateState(usdIlsRate);
+  }, [usdIlsRate]);
 
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem("aip_be_settings") || "{}");
       if (saved.conv > 0) setBeAmazonConvState(saved.conv);
-      if (saved.rate > 0) setBeUsdRateState(saved.rate);
       setBeCommissionState(saved.commission?.[selectedPage] ?? PAGE_COMMISSION_DEFAULT[selectedPage] ?? 5);
     } catch { /* keep defaults */ }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -491,10 +495,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     setBeAmazonConvState(v);
     persistBe({ conv: v });
   };
-  const setBeUsdRate = (v: number) => {
-    setBeUsdRateState(v);
-    persistBe({ rate: v });
-  };
+  const setBeUsdRate = (v: number) => setBeUsdRateState(v);
 
 
   // Clear Direct-only traffic for the selected page (owner-only; needs the aip_notrack cookie)
@@ -1536,7 +1537,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   />
                 </label>
                 <label className="flex flex-col gap-1">
-                  <span className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "שער דולר (להמרת נתוני פייסבוק)" : "USD rate (converts FB data)"}</span>
+                  <span className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "שער דולר (נמשך אוטומטית מהרשת)" : "USD rate (auto-fetched)"}</span>
                   <input
                     type="number"
                     step="0.01"

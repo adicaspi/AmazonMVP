@@ -344,6 +344,19 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
   }
 }
 
+// Live USD→ILS rate for displaying Facebook's ILS spend in dollars.
+// Free keyless API, cached for an hour; null falls back to the default.
+async function getUsdIlsRate(): Promise<number | null> {
+  try {
+    const res = await fetch("https://open.er-api.com/v6/latest/USD", { next: { revalidate: 3600 } });
+    if (!res.ok) return null;
+    const rate = (await res.json())?.rates?.ILS;
+    return typeof rate === "number" && rate > 0 ? rate : null;
+  } catch {
+    return null;
+  }
+}
+
 function getClickStats(clicks: AmazonClick[], page?: string) {
   const filtered = page ? clicks.filter((c) => c.page === page) : clicks;
 
@@ -392,9 +405,10 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
   const dateFrom = params.from || undefined;
   const dateTo = params.to || undefined;
 
-  const [allClicks, facebookAdsData] = await Promise.all([
+  const [allClicks, facebookAdsData, usdIlsRate] = await Promise.all([
     getAmazonClicks(),
     getFacebookAdsData(dateFrom, dateTo),
+    getUsdIlsRate(),
   ]);
   // Align ALL date bucketing to the ad account's timezone (before any use)
   if (facebookAdsData?.timezone) DASH_TZ = facebookAdsData.timezone;
@@ -542,5 +556,5 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
     adFunnel: allAdFunnel,
   };
 
-  return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} facebookAdsData={facebookAdsData} dateFrom={dateFrom} dateTo={dateTo} />;
+  return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} facebookAdsData={facebookAdsData} usdIlsRate={usdIlsRate} dateFrom={dateFrom} dateTo={dateTo} />;
 }
