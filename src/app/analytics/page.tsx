@@ -357,6 +357,23 @@ async function getUsdIlsRate(): Promise<number | null> {
   }
 }
 
+// Break-even inputs saved by the owner — server-side, so every device sees
+// the last saved values. Missing table / no row → null (defaults apply).
+async function getBeSettings(): Promise<Record<string, unknown> | null> {
+  try {
+    if (!supabase || !(await isDatabaseAvailable())) return null;
+    const { data, error } = await supabase
+      .from("dashboard_settings")
+      .select("value")
+      .eq("key", "break_even")
+      .maybeSingle();
+    if (error || !data) return null;
+    return data.value as Record<string, unknown>;
+  } catch {
+    return null;
+  }
+}
+
 function getClickStats(clicks: AmazonClick[], page?: string) {
   const filtered = page ? clicks.filter((c) => c.page === page) : clicks;
 
@@ -405,10 +422,11 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
   const dateFrom = params.from || undefined;
   const dateTo = params.to || undefined;
 
-  const [allClicks, facebookAdsData, usdIlsRate] = await Promise.all([
+  const [allClicks, facebookAdsData, usdIlsRate, beSettings] = await Promise.all([
     getAmazonClicks(),
     getFacebookAdsData(dateFrom, dateTo),
     getUsdIlsRate(),
+    getBeSettings(),
   ]);
   // Align ALL date bucketing to the ad account's timezone (before any use)
   if (facebookAdsData?.timezone) DASH_TZ = facebookAdsData.timezone;
@@ -556,5 +574,5 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
     adFunnel: allAdFunnel,
   };
 
-  return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} facebookAdsData={facebookAdsData} usdIlsRate={usdIlsRate} dateFrom={dateFrom} dateTo={dateTo} />;
+  return <AnalyticsDashboard allData={allPageData} pagesData={pagesData} facebookAdsData={facebookAdsData} usdIlsRate={usdIlsRate} beSettings={beSettings} dateFrom={dateFrom} dateTo={dateTo} />;
 }

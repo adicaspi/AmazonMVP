@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -97,6 +97,7 @@ interface Props {
   pagesData: PageData[];
   facebookAdsData: FacebookAdsData | null;
   usdIlsRate?: number | null;
+  beSettings?: Record<string, unknown> | null;
   dateFrom?: string;
   dateTo?: string;
 }
@@ -409,7 +410,7 @@ function formatTimeAgo(ts: number, now: number, lang: "he" | "en"): string {
   return days === 1 ? "1 day ago" : `${days} days ago`;
 }
 
-export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData, usdIlsRate, dateFrom, dateTo }: Props) {
+export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData, usdIlsRate, beSettings, dateFrom, dateTo }: Props) {
   // Single dashboard timezone — read live from the Facebook ad account so
   // every date/hour here lines up with Ads Manager by construction.
   const NY_TZ = facebookAdsData?.timezone || "America/New_York";
@@ -472,28 +473,34 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     if (usdIlsRate && usdIlsRate > 0) setBeUsdRateState(usdIlsRate);
   }, [usdIlsRate]);
 
+  // Settings live in the DATABASE — the last saved value wins on every
+  // device. Kept in a ref so tab switches read the freshest local copy.
+  const beStore = useRef<{ conv?: number; commission?: Record<string, number> }>(
+    (beSettings as { conv?: number; commission?: Record<string, number> }) || {}
+  );
   useEffect(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem("aip_be_settings") || "{}");
-      if (saved.conv > 0) setBeAmazonConvState(saved.conv);
-      setBeCommissionState(saved.commission?.[selectedPage] ?? PAGE_COMMISSION_DEFAULT[selectedPage] ?? 5);
-    } catch { /* keep defaults */ }
+    const saved = beStore.current;
+    if (saved.conv && saved.conv > 0) setBeAmazonConvState(saved.conv);
+    setBeCommissionState(saved.commission?.[selectedPage] ?? PAGE_COMMISSION_DEFAULT[selectedPage] ?? 5);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPage]);
 
-  const persistBe = (patch: Record<string, unknown>) => {
-    try {
-      const saved = JSON.parse(localStorage.getItem("aip_be_settings") || "{}");
-      localStorage.setItem("aip_be_settings", JSON.stringify({ ...saved, ...patch, commission: { ...(saved.commission || {}), ...((patch as any).commission || {}) } }));
-    } catch { /* ignore */ }
+  const persistBe = () => {
+    fetch("/api/analytics/settings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ value: beStore.current }),
+    }).catch(() => { /* offline — retried on next change */ });
   };
   const setBeCommission = (v: number) => {
     setBeCommissionState(v);
-    persistBe({ commission: { [selectedPage]: v } });
+    beStore.current = { ...beStore.current, commission: { ...(beStore.current.commission || {}), [selectedPage]: v } };
+    persistBe();
   };
   const setBeAmazonConv = (v: number) => {
     setBeAmazonConvState(v);
-    persistBe({ conv: v });
+    beStore.current = { ...beStore.current, conv: v };
+    persistBe();
   };
   const setBeUsdRate = (v: number) => setBeUsdRateState(v);
 
