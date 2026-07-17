@@ -218,7 +218,7 @@ const translations = {
     funnelEconomicsNote: "החישוב: עלות ללחיצה לאמזון = הוצאה ÷ המרות מיוחסות (פייסבוק). זה לא שווה בדיוק ל-CPC ÷ Bridge, כי CPC נמדד על קליקים במודעה ו-Bridge על נחיתות בעמוד — וחלק מהלוחצים לא מגיעים לעמוד.",
     breakEven: "מחשבון Break-Even",
     breakEvenDesc: "הזן עמלה לעסקה והמרת-אמזון משוערת — וראה אם אתה ברווח או בהפסד",
-    beCommissionLabel: "עמלה לעסקה (₪)",
+    beCommissionLabel: "עמלה לעסקה ($)",
     beAmazonConvLabel: "המרת אמזון משוערת (%)",
     beCostPerAmz: "עלות ללחיצה לאמזון",
     beRevenuePerAmz: "הכנסה ללחיצה לאמזון",
@@ -352,7 +352,7 @@ const translations = {
     funnelEconomicsNote: "Formula: cost per Amazon click = spend ÷ FB-attributed conversions. It won't exactly equal CPC ÷ Bridge because CPC counts ad clicks while Bridge counts landings — some clickers never land.",
     breakEven: "Break-Even Calculator",
     breakEvenDesc: "Enter commission per sale and estimated Amazon conversion — see if you're profitable",
-    beCommissionLabel: "Commission per sale (₪)",
+    beCommissionLabel: "Commission per sale ($)",
     beAmazonConvLabel: "Est. Amazon conversion (%)",
     beCostPerAmz: "Cost per Amazon click",
     beRevenuePerAmz: "Revenue per Amazon click",
@@ -454,7 +454,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   }, []);
 
   // Break-even calculator inputs
-  const [beCommission, setBeCommission] = useState(30);
+  const [beCommission, setBeCommission] = useState(4.7); // USD
   const [beAmazonConv, setBeAmazonConv] = useState(6);
   const [beUsdRate, setBeUsdRate] = useState(3.65); // ILS per USD, for the EPC card
 
@@ -646,8 +646,12 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const activeCampaign = matchedCampaigns.map((c) => c.campaign_name).join(" + ");
 
   // Funnel economics (Facebook data for the selected campaign(s) + range)
-  const fbCur = facebookAdsData?.currency === "ILS" ? "₪" : "$";
-  const fbSpend = effectiveCampaigns.reduce((s, c) => s + c.spend, 0);
+  // ALL money on this dashboard is displayed in USD. Facebook reports in
+  // the account currency (ILS) — converted here using the editable rate.
+  const fbCur = "$";
+  const usdRate = facebookAdsData?.currency === "ILS" && beUsdRate > 0 ? beUsdRate : 1;
+  const usd = (v: number) => v / usdRate;
+  const fbSpend = usd(effectiveCampaigns.reduce((s, c) => s + c.spend, 0));
   const fbLinkClicks = effectiveCampaigns.reduce((s, c) => s + (c.linkClicks || 0), 0);
   const fbConversions = effectiveCampaigns.reduce((s, c) => s + c.conversions, 0);
   const fbAvgCostPerConv = fbConversions > 0 ? fbSpend / fbConversions : 0;
@@ -674,8 +678,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   // Meta's attributed count can't be bot-inflated.
   const beCostPerAmzClick = campaignFilterActive && fbConversions > 0 ? fbSpend / fbConversions : 0;
   const beRevenuePerClick = beCommission * (beAmazonConv / 100);
-  // EPC: expected earnings per Amazon click, in USD (commission input is ILS)
-  const epcUsd = beUsdRate > 0 ? (beCommission / beUsdRate) * (beAmazonConv / 100) : 0;
+  // EPC: expected earnings per Amazon click (commission input is USD)
+  const epcUsd = beCommission * (beAmazonConv / 100);
   const beNetPerClick = beRevenuePerClick - beCostPerAmzClick;
   const beBreakEvenConv = beCommission > 0 && beCostPerAmzClick > 0 ? (beCostPerAmzClick / beCommission) * 100 : 0;
   const beProfitable = beNetPerClick >= 0;
@@ -1009,11 +1013,11 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               </div>
             );
           };
-          const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.5 ? "good" : cpc <= 1 ? "mid" : "bad";
+          const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.15 ? "good" : cpc <= 0.3 ? "mid" : "bad";
           const bridgePct = beBridgeFrac * 100;
           const bridgeDenominator = useFbBridge ? fbLPV : data.views;
           const bridgeStatus = bridgeDenominator === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
-          const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.5 ? "mid" : "bad";
+          const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.15 ? "mid" : "bad";
           return (
             <section>
               <h2 className={`text-lg font-bold ${dm.text} mb-3 flex items-center gap-2`}>
@@ -1026,7 +1030,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   lang === "he" ? "המודעה טובה?" : "Is the ad good?",
                   campaignFilterActive && fbLinkClicks > 0 ? `${fbCur}${cpc.toFixed(2)}` : "—",
                   cpcStatus,
-                  lang === "he" ? "יעד: מתחת ל-₪0.50" : "Target: under ₪0.50"
+                  lang === "he" ? "יעד: מתחת ל-$0.15" : "Target: under $0.15"
                 )}
                 {kpiCard(
                   "Bridge %",
@@ -1372,7 +1376,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               </div>
               <div className={`${dm.cardBg} rounded-xl p-4 border shadow-sm transition-colors duration-300`}>
                 <div className={`text-xs ${dm.textMuted} mb-1`}>{t.fbTodaySpend} {campaignFilterActive && <span>({lang === "he" ? "כל החשבון" : "whole account"})</span>}</div>
-                <div className="text-2xl font-bold text-green-500">{fbCur}{facebookAdsData.todaySpend.toFixed(2)}</div>
+                <div className="text-2xl font-bold text-green-500">{fbCur}{usd(facebookAdsData.todaySpend).toFixed(2)}</div>
               </div>
             </div>
 
@@ -1403,11 +1407,11 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                       </div>
                       <div className={`col-span-3 text-center text-sm ${dm.textMuted}`}>
                         {campaign.costPerConversion > 0
-                          ? `${facebookAdsData.currency === "ILS" ? "₪" : "$"}${campaign.costPerConversion.toFixed(2)}`
+                          ? `${fbCur}${usd(campaign.costPerConversion).toFixed(2)}`
                           : "—"}
                       </div>
                       <div className={`col-span-2 text-right text-sm font-medium ${dm.text}`}>
-                        {facebookAdsData.currency === "ILS" ? "₪" : "$"}{campaign.spend.toFixed(2)}
+                        {fbCur}{usd(campaign.spend).toFixed(2)}
                       </div>
                     </div>
                   ))}
@@ -1494,7 +1498,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   />
                 </label>
                 <label className="flex flex-col gap-1">
-                  <span className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "שער דולר (₪ לדולר)" : "USD rate (ILS per $)"}</span>
+                  <span className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "שער דולר (להמרת נתוני פייסבוק)" : "USD rate (converts FB data)"}</span>
                   <input
                     type="number"
                     step="0.01"
