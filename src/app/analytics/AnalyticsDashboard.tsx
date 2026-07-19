@@ -710,11 +710,17 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   //   conversions ÷ landing page views, all from the same API.
   // — Our first-party numbers (distinct visitors, recorded clicks) power the
   //   "ours" table and the conversion-funnel section below.
-  const fbBridgeFrac = campaignFilterActive && fbLPV > 0 ? fbConversions / fbLPV : 0;
+  // FB bridge = conversions / AD CLICKS (both from Meta's reporting).
+  // Link clicks beat LPV as denominator: LPV undercounts (needs Meta's JS
+  // to fire on landing), which produced absurd >100% ratios on small
+  // same-day windows. A >100% result still means a distorted window ->
+  // treated as no-data rather than displayed.
+  const fbBridgeRaw = campaignFilterActive && fbLinkClicks > 0 ? fbConversions / fbLinkClicks : 0;
   const fpBridgeFrac = data.views > 0 ? data.uniqueClickers / data.views : 0;
   // Traffic campaigns track no pixel conversion — fall back to the
   // first-party bridge so the card still answers "is the page good?"
-  const useFbBridge = campaignFilterActive && fbConversions > 0 && fbLPV > 0;
+  const useFbBridge = campaignFilterActive && fbConversions > 0 && fbLinkClicks > 0 && fbBridgeRaw <= 1;
+  const fbBridgeFrac = useFbBridge ? fbBridgeRaw : 0;
   const beBridgeFrac = useFbBridge ? fbBridgeFrac : fpBridgeFrac;
   const conversionRate = (fpBridgeFrac * 100).toFixed(1);
 
@@ -1061,7 +1067,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           };
           const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.15 ? "good" : cpc <= 0.3 ? "mid" : "bad";
           const bridgePct = beBridgeFrac * 100;
-          const bridgeDenominator = useFbBridge ? fbLPV : data.views;
+          const bridgeDenominator = useFbBridge ? fbLinkClicks : data.views;
           const bridgeStatus = bridgeDenominator === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
           const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.15 ? "mid" : "bad";
           return (
@@ -1155,7 +1161,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>Bridge %</div>
                     <div className="text-xl font-bold text-emerald-500">{useFbBridge ? `${(fbBridgeFrac * 100).toFixed(1)}%` : "—"}</div>
-                    <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "המרות ÷ נחיתות" : "conversions ÷ landings"}</div>
+                    <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "המרות ÷ קליקים במודעה" : "conversions ÷ ad clicks"}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "עלות להמרה" : "Cost / Conversion"}</div>
