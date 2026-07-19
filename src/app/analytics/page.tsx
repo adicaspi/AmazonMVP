@@ -252,13 +252,23 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
   return rows.map((row) => {
     const actions: any[] = row.actions || [];
     const costPerAction: any[] = row.cost_per_action_type || [];
-    // Only true pixel conversions count — engagement actions (post_engagement,
-    // video_view...) on traffic campaigns must not masquerade as conversions
-    const conversionAction = actions.find(
-      (a: any) => typeof a.action_type === "string" && a.action_type.startsWith("offsite_conversion")
-    );
-    const conversions = conversionAction ? parseInt(conversionAction.value) : 0;
-    const conversionType = conversionAction?.action_type || "";
+    // Numerator = Facebook's own "Results" metric (exactly what Ads Manager
+    // shows per campaign). Fallback: first true pixel conversion action —
+    // engagement actions must not masquerade as conversions.
+    let conversions = 0;
+    let conversionType = "";
+    const resultEntry = Array.isArray(row.results) ? row.results[0] : null;
+    const resultValue = resultEntry?.values?.[0]?.value;
+    if (resultValue !== undefined && resultValue !== null) {
+      conversions = parseInt(resultValue) || 0;
+      conversionType = String(resultEntry.indicator || "results").replace("actions:", "");
+    } else {
+      const conversionAction = actions.find(
+        (a: any) => typeof a.action_type === "string" && a.action_type.startsWith("offsite_conversion")
+      );
+      conversions = conversionAction ? parseInt(conversionAction.value) : 0;
+      conversionType = conversionAction?.action_type || "";
+    }
     const costEntry = costPerAction.find((c: any) => c.action_type === conversionType);
     const costPerConversion = costEntry ? parseFloat(costEntry.value) : 0;
     const lpvEntry = actions.find((a: any) => a.action_type === "landing_page_view");
@@ -284,7 +294,7 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     if (!accessToken || !adAccountId) return null;
 
     const baseUrl = `https://graph.facebook.com/v21.0/act_${adAccountId}/insights`;
-    const fields = "campaign_id,campaign_name,actions,cost_per_action_type,spend,impressions,clicks,inline_link_clicks";
+    const fields = "campaign_id,campaign_name,actions,results,cost_per_action_type,spend,impressions,clicks,inline_link_clicks";
     // Match the dashboard's selected date range; fall back to last 7 days
     const dateParam = from && to
       ? `time_range=${encodeURIComponent(JSON.stringify({ since: from, until: to }))}`
@@ -298,12 +308,19 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
       fetch(`https://graph.facebook.com/v21.0/act_${adAccountId}/campaigns?fields=id,effective_status&limit=200&access_token=${accessToken}`),
     ]);
 
+    let weekOk = weekRes;
     if (!weekRes.ok) {
-      console.error("Facebook Ads API error:", await weekRes.text());
-      return null;
+      console.error("Facebook Ads API error (with results field):", await weekRes.text());
+      // Some accounts/levels reject `results` — retry without it
+      const fallbackFields = fields.replace(",results", "");
+      weekOk = await fetch(`${baseUrl}?fields=${fallbackFields}&level=campaign&${dateParam}&limit=50&access_token=${accessToken}`);
+      if (!weekOk.ok) {
+        console.error("Facebook Ads API error:", await weekOk.text());
+        return null;
+      }
     }
 
-    const weekJson = await weekRes.json();
+    const weekJson = await weekOk.json();
     const todayJson = todayRes.ok ? await todayRes.json() : { data: [] };
 
     // Only ACTIVE campaigns are shown; if the status fetch fails, show all
