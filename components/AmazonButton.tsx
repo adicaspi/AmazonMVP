@@ -39,10 +39,10 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/grandelash": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 36, content_id: "grandelash-serum" },
   "/shark-flexstyle": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
   "/sharkflex": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
-  "/BirkenstockArizona": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
-  "/BirkenstockTraffic": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
-  "/BirkenstockSales": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
-  "/BirkenstockInstagram": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
+  "/BirkenstockArizona": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
+  "/BirkenstockTraffic": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
+  "/BirkenstockSales": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
+  "/BirkenstockInstagram": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
 };
 
 // Standard pixel events fired when an Amazon CTA is clicked, per page.

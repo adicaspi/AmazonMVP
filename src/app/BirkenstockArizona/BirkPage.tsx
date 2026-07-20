@@ -10,7 +10,7 @@ import { HeroFade } from "./HeroFade";
 // routes can override it via the amazonLink prop (e.g. per-channel tags)
 const DEFAULT_AMAZON_LINK = "https://amzn.to/4fKMb5x"; // FB channel tag
 // Pixel value only — no price is shown on the page
-const PRICE_VALUE = 117;
+const PRICE_VALUE = 120; // cheapest variant $119.95; colors range up to ~$160
 
 // [USER ASSET] Verify on the live listing and fill in — the rating block
 // stays hidden until BOTH values are set (no invented numbers, ever):
@@ -92,7 +92,7 @@ export function BirkPage({ trackingPage, amazonLink }: { trackingPage: string; a
 
               <div className="max-w-md mx-auto md:mx-0">
                 <p className="text-center md:text-left text-base text-gray-800 mb-1">
-                  <span className="font-bold">Typically around $117</span>
+                  <span className="font-bold">From around $120</span>
                   <span className="text-gray-400">*</span>
                 </p>
                 <p className="text-center md:text-left text-xs text-gray-600 mb-3">✓ Prime Shipping&ensp;✓ Free Returns&ensp;✓ Secure Amazon Checkout</p>
@@ -109,7 +109,7 @@ export function BirkPage({ trackingPage, amazonLink }: { trackingPage: string; a
                   </svg>
                 </AmazonButton>
                 <p className="text-center md:text-left text-xs text-gray-600 mt-2">Popular colors tend to sell out during summer.</p>
-                <p className="text-center md:text-left text-[10px] text-gray-400 mt-0.5">*Price may vary on Amazon</p>
+                <p className="text-center md:text-left text-[10px] text-gray-400 mt-0.5">*Price varies by color &amp; size on Amazon</p>
               </div>
             </div>
 

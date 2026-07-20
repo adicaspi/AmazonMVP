@@ -461,10 +461,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const PAGE_COMMISSION_DEFAULT: Record<string, number> = {
     "/shark-flexstyle": 6.9, // $229.99 x 3%
     "/sharkflex": 6.9,
-    "/BirkenstockArizona": 4.7, // $117.95 x 4%
-    "/BirkenstockTraffic": 4.7,
-    "/BirkenstockSales": 4.7,
-    "/BirkenstockInstagram": 4.7,
+    "/BirkenstockArizona": 4.8, // cheapest variant $119.95 x 4%
+    "/BirkenstockTraffic": 4.8,
+    "/BirkenstockSales": 4.8,
+    "/BirkenstockInstagram": 4.8,
   };
   const [beCommission, setBeCommissionState] = useState(4.7); // USD
   const [beAmazonConv, setBeAmazonConvState] = useState(6);
