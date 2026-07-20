@@ -6,8 +6,9 @@ import { HeroFade } from "./HeroFade";
 // Shared Birkenstock bridge page. Rendered by two routes with separate
 // tracking: /BirkenstockArizona and /BirkenstockTraffic (per-campaign).
 // ── Product constants ─────────────────────────────────────────────
-// Official SiteStripe short link (carries the affiliate tag through redirect)
-const AMAZON_LINK = "https://amzn.to/4po8lOl";
+// Official SiteStripe short link (carries the affiliate tag through redirect);
+// routes can override it via the amazonLink prop (e.g. per-channel tags)
+const DEFAULT_AMAZON_LINK = "https://amzn.to/4po8lOl";
 // Pixel value only — no price is shown on the page
 const PRICE_VALUE = 117;
 
@@ -36,7 +37,8 @@ const FAQS = [
   },
 ];
 
-export function BirkPage({ trackingPage }: { trackingPage: string }) {
+export function BirkPage({ trackingPage, amazonLink }: { trackingPage: string; amazonLink?: string }) {
+  const AMAZON_LINK = amazonLink ?? DEFAULT_AMAZON_LINK;
   return (
     <div className="min-h-screen bg-white">
       <PageViewTracker page={trackingPage} />
