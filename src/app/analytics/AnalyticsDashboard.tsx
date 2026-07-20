@@ -464,6 +464,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/BirkenstockArizona": 4.7, // $117.95 x 4%
     "/BirkenstockTraffic": 4.7,
     "/BirkenstockSales": 4.7,
+    "/BirkenstockInstagram": 4.7,
   };
   const [beCommission, setBeCommissionState] = useState(4.7); // USD
   const [beAmazonConv, setBeAmazonConvState] = useState(6);
@@ -670,6 +671,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/sharkflex": ["- ic"],
     "/BirkenstockTraffic": ["arizona traffic", "birkenstock traffic"],
     "/BirkenstockSales": ["arizona sales", "birkenstock sales"],
+    "/BirkenstockInstagram": ["arizona instagram", "birkenstock instagram"],
   };
   const fbCampaigns = facebookAdsData?.campaigns ?? [];
 

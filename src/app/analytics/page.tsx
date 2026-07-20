@@ -78,6 +78,7 @@ const TRACKED_PAGES: { path: string; label: string; color: string; archived?: bo
   { path: "/BirkenstockArizona", label: "Birkenstock", color: "amber" },
   { path: "/BirkenstockTraffic", label: "Birkenstock (Traffic)", color: "amber" },
   { path: "/BirkenstockSales", label: "Birkenstock (Sales)", color: "amber" },
+  { path: "/BirkenstockInstagram", label: "Birkenstock (Instagram)", color: "amber" },
 ];
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {

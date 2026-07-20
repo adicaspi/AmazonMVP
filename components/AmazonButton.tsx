@@ -30,6 +30,7 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/BirkenstockArizona": "1025959486467199",
   "/BirkenstockTraffic": "1025959486467199",
   "/BirkenstockSales": "1025959486467199",
+  "/BirkenstockInstagram": "1025959486467199",
 };
 
 // Product info per page for accurate CAPI event data
@@ -41,6 +42,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/BirkenstockArizona": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
   "/BirkenstockTraffic": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
   "/BirkenstockSales": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
+  "/BirkenstockInstagram": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 117, content_id: "birkenstock-arizona" },
 };
 
 // Standard pixel events fired when an Amazon CTA is clicked, per page.
@@ -55,6 +57,7 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   "/BirkenstockTraffic": [],
   // Sales campaign optimizes on the custom AmazonClickBirkenstock event
   "/BirkenstockSales": [],
+  "/BirkenstockInstagram": [],
 };
 
 // Longest matching prefix wins
