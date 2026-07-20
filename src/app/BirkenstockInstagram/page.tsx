@@ -29,5 +29,5 @@ export const metadata: Metadata = {
 };
 
 export default function BirkenstockInstagramPage() {
-  return <BirkPage trackingPage="/BirkenstockInstagram" amazonLink="https://amzn.to/4fvIsYr" />;
+  return <BirkPage trackingPage="/BirkenstockInstagram" amazonLink="https://amzn.to/4wKr3C4" />;
 }

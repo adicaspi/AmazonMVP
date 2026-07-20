@@ -8,7 +8,7 @@ import { HeroFade } from "./HeroFade";
 // ── Product constants ─────────────────────────────────────────────
 // Official SiteStripe short link (carries the affiliate tag through redirect);
 // routes can override it via the amazonLink prop (e.g. per-channel tags)
-const DEFAULT_AMAZON_LINK = "https://amzn.to/4po8lOl";
+const DEFAULT_AMAZON_LINK = "https://amzn.to/4fKMb5x"; // FB channel tag
 // Pixel value only — no price is shown on the page
 const PRICE_VALUE = 117;
 
