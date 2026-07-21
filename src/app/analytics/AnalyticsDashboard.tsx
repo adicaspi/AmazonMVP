@@ -671,23 +671,35 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/sharkflex": ["- ic"],
     "/BirkenstockTraffic": ["arizona traffic", "birkenstock traffic"],
     "/BirkenstockSales": ["arizona sales", "birkenstock sales"],
-    "/BirkenstockInstagram": ["arizona instagram", "birkenstock instagram"],
+    "/BirkenstockInstagram": ["- ig", "arizona instagram", "birkenstock instagram"],
+  };
+  // A campaign matching an exclude fragment never binds to that page — e.g.
+  // "Arizona Sales Campaign - IG - new" contains "arizona sales" but belongs
+  // to the Instagram tab, not the Sales tab.
+  const PAGE_CAMPAIGN_EXCLUDE: Record<string, string[]> = {
+    "/BirkenstockSales": ["- ig", "instagram"],
+    "/BirkenstockTraffic": ["- ig", "instagram"],
+  };
+  const campaignMatchesPage = (path: string, name: string) => {
+    const kws = PAGE_CAMPAIGN_KEYWORD[path];
+    if (!kws?.length) return false;
+    const n = name.toLowerCase();
+    if (!kws.some((k) => n.includes(k))) return false;
+    return !(PAGE_CAMPAIGN_EXCLUDE[path] || []).some((x) => n.includes(x));
   };
   const fbCampaigns = facebookAdsData?.campaigns ?? [];
 
   // AUTO-ARCHIVE (decided live from Facebook): a page is archived when it has
   // no ACTIVE campaign matching its keywords (fbCampaigns only contains
   // active campaigns with activity) AND no first-party activity in range.
-  const pageHasActiveCampaign = (path: string) => {
-    const kws = PAGE_CAMPAIGN_KEYWORD[path];
-    return !!kws?.length && fbCampaigns.some((c) => kws.some((k) => c.campaign_name.toLowerCase().includes(k)));
-  };
+  const pageHasActiveCampaign = (path: string) =>
+    fbCampaigns.some((c) => campaignMatchesPage(path, c.campaign_name));
   const isArchived = (p: PageData) =>
     !pageHasActiveCampaign(p.page) && p.views === 0 && p.totalClicks === 0;
 
   const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];
   const matchedCampaigns = campaignKeyword
-    ? fbCampaigns.filter((c) => campaignKeyword.some((k) => c.campaign_name.toLowerCase().includes(k)))
+    ? fbCampaigns.filter((c) => campaignMatchesPage(selectedPage, c.campaign_name))
     : [];
   const campaignFilterActive = matchedCampaigns.length > 0;
   const effectiveCampaigns = campaignFilterActive ? matchedCampaigns : fbCampaigns;
