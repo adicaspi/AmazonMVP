@@ -465,6 +465,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/BirkenstockTraffic": 4.8,
     "/BirkenstockSales": 4.8,
     "/BirkenstockInstagram": 4.8,
+    "/BirkenstockAudience": 4.8,
   };
   const [beCommission, setBeCommissionState] = useState(4.7); // USD
   const [beAmazonConv, setBeAmazonConvState] = useState(6);
@@ -672,13 +673,15 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/BirkenstockTraffic": ["arizona traffic", "birkenstock traffic"],
     "/BirkenstockSales": ["arizona sales", "birkenstock sales"],
     "/BirkenstockInstagram": ["- ig", "arizona instagram", "birkenstock instagram"],
+    "/BirkenstockAudience": ["audience", "retargeting"],
   };
   // A campaign matching an exclude fragment never binds to that page — e.g.
   // "Arizona Sales Campaign - IG - new" contains "arizona sales" but belongs
   // to the Instagram tab, not the Sales tab.
   const PAGE_CAMPAIGN_EXCLUDE: Record<string, string[]> = {
-    "/BirkenstockSales": ["- ig", "instagram"],
-    "/BirkenstockTraffic": ["- ig", "instagram"],
+    "/BirkenstockSales": ["- ig", "instagram", "audience", "retargeting"],
+    "/BirkenstockTraffic": ["- ig", "instagram", "audience", "retargeting"],
+    "/BirkenstockInstagram": ["audience", "retargeting"],
   };
   const campaignMatchesPage = (path: string, name: string) => {
     const kws = PAGE_CAMPAIGN_KEYWORD[path];
