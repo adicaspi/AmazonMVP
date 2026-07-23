@@ -461,11 +461,14 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const PAGE_COMMISSION_DEFAULT: Record<string, number> = {
     "/shark-flexstyle": 6.9, // $229.99 x 3%
     "/sharkflex": 6.9,
-    "/BirkenstockArizona": 4.8, // cheapest variant $119.95 x 4%
-    "/BirkenstockTraffic": 4.8,
-    "/BirkenstockSales": 4.8,
-    "/BirkenstockInstagram": 4.8,
-    "/BirkenstockAudience": 4.8,
+    // Associates report showed most orders are cheap cross-products, not
+    // sandals — measured avg commission per order ~$0.90. Update again as
+    // real data accumulates.
+    "/BirkenstockArizona": 0.9,
+    "/BirkenstockTraffic": 0.9,
+    "/BirkenstockSales": 0.9,
+    "/BirkenstockInstagram": 0.9,
+    "/BirkenstockAudience": 0.9,
   };
   const [beCommission, setBeCommissionState] = useState(4.7); // USD
   const [beAmazonConv, setBeAmazonConvState] = useState(6);
@@ -1113,7 +1116,9 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   lang === "he" ? "העסק מרוויח?" : "Is the business profitable?",
                   campaignFilterActive && beCostPerAmzClick > 0 ? `${beNetPerClick >= 0 ? "+" : "-"}${fbCur}${Math.abs(beNetPerClick).toFixed(2)}` : "—",
                   netStatus,
-                  lang === "he" ? "יעד: חיובי" : "Target: positive"
+                  lang === "he"
+                    ? `יעד: חיובי · לפי עמלה $${beCommission} והמרה ${beAmazonConv}% מהמחשבון — עדכן לנתוני ה-Associates`
+                    : `Target: positive · assumes $${beCommission} commission x ${beAmazonConv}% (calculator) — sync with Associates data`
                 )}
               </div>
             </section>
