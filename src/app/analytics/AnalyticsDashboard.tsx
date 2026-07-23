@@ -461,17 +461,15 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const PAGE_COMMISSION_DEFAULT: Record<string, number> = {
     "/shark-flexstyle": 6.9, // $229.99 x 3%
     "/sharkflex": 6.9,
-    // Associates report showed most orders are cheap cross-products, not
-    // sandals — measured avg commission per order ~$0.90. Update again as
-    // real data accumulates.
-    "/BirkenstockArizona": 0.9,
-    "/BirkenstockTraffic": 0.9,
-    "/BirkenstockSales": 0.9,
-    "/BirkenstockInstagram": 0.9,
-    "/BirkenstockAudience": 0.9,
+    // Owner's working assumption: full sandal commission ($119.95 x 4%)
+    "/BirkenstockArizona": 4.8,
+    "/BirkenstockTraffic": 4.8,
+    "/BirkenstockSales": 4.8,
+    "/BirkenstockInstagram": 4.8,
+    "/BirkenstockAudience": 4.8,
   };
   const [beCommission, setBeCommissionState] = useState(4.7); // USD
-  const [beAmazonConv, setBeAmazonConvState] = useState(6);
+  const [beAmazonConv, setBeAmazonConvState] = useState(7);
   const [beUsdRate, setBeUsdRateState] = useState(usdIlsRate ?? 3.65); // ILS per USD
   // Live rate wins: refreshes (every 10s) re-sync the field automatically
   useEffect(() => {
