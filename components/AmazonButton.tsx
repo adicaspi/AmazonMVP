@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { generateEventId } from "@/lib/fb-conversions";
 import { getVisitorId } from "@/lib/visitor-id";
 import { isNotrackEnabled } from "@/lib/notrack";
@@ -95,6 +95,14 @@ function sendCAPI(events: object[], pixelId: string) {
 }
 
 export function AmazonButton({ href, children, className, productName, position, priceValue }: AmazonButtonProps) {
+  // Mobile: navigate in the SAME tab — iOS/Android only hand a tap off to
+  // the Amazon app (universal/app links) on same-tab navigations; a new
+  // tab always opens the website. Desktop keeps the new tab.
+  const [target, setTarget] = useState<string | undefined>("_blank");
+  useEffect(() => {
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) setTarget(undefined);
+  }, []);
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Deep-link into the Amazon APP only inside Meta's in-app browsers
     // (FB/IG), where a normal link stays trapped in a logged-out webview.
@@ -248,7 +256,7 @@ export function AmazonButton({ href, children, className, productName, position,
   return (
     <a
       href={href}
-      target="_blank"
+      target={target}
       rel="nofollow sponsored noopener noreferrer"
       className={className}
       onClick={handleClick}
