@@ -29,5 +29,5 @@ export const metadata: Metadata = {
 };
 
 export default function BirkenstockAudiencePage() {
-  return <BirkPage trackingPage="/BirkenstockAudience" amazonLink="https://amzn.to/4fDfPJ0" />;
+  return <BirkPage trackingPage="/BirkenstockAudience" amazonLink="https://www.amazon.com/Birkenstock-Womens-Arizona-Birko-Flo-Sandals/dp/B002LZUNJU?th=1&psc=1&linkCode=sl2&tag=custom-audience-fb-20&linkId=9361a77d4a12ec014f6a3c75e9b63507&language=en_US&ref_=as_li_ss_tl" />;
 }

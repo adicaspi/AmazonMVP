@@ -8,7 +8,9 @@ import { HeroFade } from "./HeroFade";
 // ── Product constants ─────────────────────────────────────────────
 // Official SiteStripe short link (carries the affiliate tag through redirect);
 // routes can override it via the amazonLink prop (e.g. per-channel tags)
-const DEFAULT_AMAZON_LINK = "https://amzn.to/4fKMb5x"; // FB channel tag
+// Direct amazon.com URL — the amzn.to redirect hop blocked the handoff
+// to the Amazon APP from in-app browsers (FB/IG), hurting conversion.
+const DEFAULT_AMAZON_LINK = "https://www.amazon.com/Birkenstock-Womens-Arizona-Birko-Flo-Sandals/dp/B002LZUNJU?th=1&linkCode=sl2&tag=birkenstock02-20&linkId=940e335759bd1ba7de92e2118fc9daab&language=en_US&ref_=as_li_ss_tl"; // FB channel tag
 // Pixel value only — no price is shown on the page
 const PRICE_VALUE = 120; // cheapest variant $119.95; colors range up to ~$160
 

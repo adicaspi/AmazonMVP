@@ -88,6 +88,7 @@ function sendCAPI(events: object[], pixelId: string) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ events, pixel_id: pixelId }),
+    keepalive: true,
   }).catch(() => {
     // Silently fail — don't block navigation
   });
@@ -198,6 +199,7 @@ export function AmazonButton({ href, children, className, productName, position,
     fetch("/api/amazon-click", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      keepalive: true,
       body: JSON.stringify({
         productName: productName || "Amazon Product",
         buttonPosition: position || "unknown",
