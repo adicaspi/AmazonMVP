@@ -104,15 +104,14 @@ export function AmazonButton({ href, children, className, productName, position,
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Deep-link into the Amazon APP only inside Meta's in-app browsers
-    // (FB/IG), where a normal link stays trapped in a logged-out webview.
-    // Regular mobile browsers open the app natively via universal links —
-    // no scheme needed, no iOS "Open in Amazon?" dialog.
+    // Deep-link into the Amazon APP on all mobile. Amazon deliberately
+    // does NOT allow silent app-open from web links (their AASA excludes
+    // product pages), so the URL scheme + one-tap iOS dialog is the only
+    // path to the logged-in app with 1-click buy — worth it for conversion.
     const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
     const isIOS = /iPhone|iPad|iPod/i.test(ua);
     const isAndroid = /Android/i.test(ua);
-    const isMetaInApp = /FBAN|FBAV|FB_IAB|Instagram/i.test(ua);
-    if (isMetaInApp && (isIOS || isAndroid)) {
+    if (isIOS || isAndroid) {
       e.preventDefault();
       const webUrl = href;
       if (isIOS) {
