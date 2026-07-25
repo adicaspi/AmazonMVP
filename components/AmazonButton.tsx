@@ -95,7 +95,33 @@ function sendCAPI(events: object[], pixelId: string) {
 }
 
 export function AmazonButton({ href, children, className, productName, position, priceValue }: AmazonButtonProps) {
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Mobile: deep-link straight into the Amazon APP (logged-in, 1-click
+    // buy). App URL schemes are the only reliable escape from the FB/IG
+    // in-app browser; if the app isn't installed we fall back to the site.
+    const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+    const isAndroid = /Android/i.test(ua);
+    if (isIOS || isAndroid) {
+      e.preventDefault();
+      const webUrl = href;
+      if (isIOS) {
+        const appUrl = webUrl.replace(/^https:\/\/(www\.)?/, "com.amazon.mobile.shopping.web://");
+        window.location.href = appUrl;
+        // If the app didn't take over within 1.6s, open the website instead
+        setTimeout(() => {
+          if (!document.hidden) window.location.href = webUrl;
+        }, 1600);
+      } else {
+        const u = new URL(webUrl);
+        window.location.href =
+          `intent://${u.host}${u.pathname}${u.search}#Intent;scheme=https;` +
+          `package=com.amazon.mShop.android.shopping;` +
+          `S.browser_fallback_url=${encodeURIComponent(webUrl)};end`;
+      }
+    }
+    // Desktop keeps the default new-tab navigation
+
     // Skip counting the site owner's own clicks (?notrack=1); link still navigates
     if (isNotrackEnabled()) return;
 
