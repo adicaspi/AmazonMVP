@@ -96,22 +96,30 @@ function sendCAPI(events: object[], pixelId: string) {
 
 export function AmazonButton({ href, children, className, productName, position, priceValue }: AmazonButtonProps) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Mobile: deep-link straight into the Amazon APP (logged-in, 1-click
-    // buy). App URL schemes are the only reliable escape from the FB/IG
-    // in-app browser; if the app isn't installed we fall back to the site.
+    // Deep-link into the Amazon APP only inside Meta's in-app browsers
+    // (FB/IG), where a normal link stays trapped in a logged-out webview.
+    // Regular mobile browsers open the app natively via universal links —
+    // no scheme needed, no iOS "Open in Amazon?" dialog.
     const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
     const isIOS = /iPhone|iPad|iPod/i.test(ua);
     const isAndroid = /Android/i.test(ua);
-    if (isIOS || isAndroid) {
+    const isMetaInApp = /FBAN|FBAV|FB_IAB|Instagram/i.test(ua);
+    if (isMetaInApp && (isIOS || isAndroid)) {
       e.preventDefault();
       const webUrl = href;
       if (isIOS) {
         const appUrl = webUrl.replace(/^https:\/\/(www\.)?/, "com.amazon.mobile.shopping.web://");
+        // Fall back to the website ONLY if we can tell the app never took
+        // over: any hide/blur means the app (or its dialog) opened.
+        let left = false;
+        const markLeft = () => { left = true; };
+        document.addEventListener("visibilitychange", markLeft, { once: true });
+        window.addEventListener("pagehide", markLeft, { once: true });
+        window.addEventListener("blur", markLeft, { once: true });
         window.location.href = appUrl;
-        // If the app didn't take over within 1.6s, open the website instead
         setTimeout(() => {
-          if (!document.hidden) window.location.href = webUrl;
-        }, 1600);
+          if (!left && !document.hidden) window.location.href = webUrl;
+        }, 2500);
       } else {
         const u = new URL(webUrl);
         window.location.href =
@@ -120,7 +128,7 @@ export function AmazonButton({ href, children, className, productName, position,
           `S.browser_fallback_url=${encodeURIComponent(webUrl)};end`;
       }
     }
-    // Desktop keeps the default new-tab navigation
+    // Regular browsers (mobile + desktop) keep default navigation
 
     // Skip counting the site owner's own clicks (?notrack=1); link still navigates
     if (isNotrackEnabled()) return;
