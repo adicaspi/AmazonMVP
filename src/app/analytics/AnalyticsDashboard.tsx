@@ -919,33 +919,29 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 : (lang === "he" ? "נקה תנועה ישירה" : "Clear Direct traffic")}
             </button>
           )}
-          <a
-            href="/auraglow"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-cyan-900/40 text-cyan-300 hover:bg-cyan-900/60 border border-cyan-800" : "bg-cyan-50 text-cyan-700 hover:bg-cyan-100 border border-cyan-200"}`}
-          >
-            <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-            AuraGlow
-          </a>
-          <a
-            href="/grandelash"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-rose-900/40 text-rose-300 hover:bg-rose-900/60 border border-rose-800" : "bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200"}`}
-          >
-            <span className="w-2 h-2 rounded-full bg-rose-500"></span>
-            GrandeLash
-          </a>
-          <a
-            href="/shark-flexstyle"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-amber-900/40 text-amber-300 hover:bg-amber-900/60 border border-amber-800" : "bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200"}`}
-          >
-            <span className="w-2 h-2 rounded-full bg-amber-500"></span>
-            Shark FlexStyle
-          </a>
+          {/* One link per live page — same active/archived rule as the tabs,
+              so new pages show up here automatically and dead ones drop off. */}
+          {pagesData.filter((p) => !isArchived(p)).map((p, i) => {
+            const palette = [
+              { dark: "bg-amber-900/40 text-amber-300 hover:bg-amber-900/60 border border-amber-800", light: "bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200", dot: "bg-amber-500" },
+              { dark: "bg-cyan-900/40 text-cyan-300 hover:bg-cyan-900/60 border border-cyan-800", light: "bg-cyan-50 text-cyan-700 hover:bg-cyan-100 border border-cyan-200", dot: "bg-cyan-500" },
+              { dark: "bg-rose-900/40 text-rose-300 hover:bg-rose-900/60 border border-rose-800", light: "bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200", dot: "bg-rose-500" },
+              { dark: "bg-violet-900/40 text-violet-300 hover:bg-violet-900/60 border border-violet-800", light: "bg-violet-50 text-violet-700 hover:bg-violet-100 border border-violet-200", dot: "bg-violet-500" },
+              { dark: "bg-lime-900/40 text-lime-300 hover:bg-lime-900/60 border border-lime-800", light: "bg-lime-50 text-lime-700 hover:bg-lime-100 border border-lime-200", dot: "bg-lime-500" },
+            ][i % 5];
+            return (
+              <a
+                key={p.page}
+                href={p.page}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? palette.dark : palette.light}`}
+              >
+                <span className={`w-2 h-2 rounded-full ${palette.dot}`}></span>
+                {p.label}
+              </a>
+            );
+          })}
           <a
             href="https://eventsmanager.facebook.com/events_manager2/list/dataset/2679443682454721/overview?business_id=758181023519141&nav_source=events_manager"
             target="_blank"
