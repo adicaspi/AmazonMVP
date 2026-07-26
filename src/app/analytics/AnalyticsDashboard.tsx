@@ -735,11 +735,11 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   // treated as no-data rather than displayed.
   const fbBridgeRaw = campaignFilterActive && fbLinkClicks > 0 ? fbConversions / fbLinkClicks : 0;
   const fpBridgeFrac = data.views > 0 ? data.uniqueClickers / data.views : 0;
-  // Traffic campaigns track no pixel conversion — fall back to the
-  // first-party bridge so the card still answers "is the page good?"
+  // Campaign tabs are FACEBOOK-ONLY (owner's rule): no first-party fallback.
+  // Distorted windows (>100%) show as no-data rather than a fake number.
   const useFbBridge = campaignFilterActive && fbConversions > 0 && fbLinkClicks > 0 && fbBridgeRaw <= 1;
   const fbBridgeFrac = useFbBridge ? fbBridgeRaw : 0;
-  const beBridgeFrac = useFbBridge ? fbBridgeFrac : fpBridgeFrac;
+  const beBridgeFrac = campaignFilterActive ? fbBridgeFrac : fpBridgeFrac;
   const conversionRate = (fpBridgeFrac * 100).toFixed(1);
 
   // Break-even: cost per Amazon click = campaign spend ÷ Facebook-ATTRIBUTED
@@ -1085,7 +1085,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           };
           const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.15 ? "good" : cpc <= 0.3 ? "mid" : "bad";
           const bridgePct = beBridgeFrac * 100;
-          const bridgeDenominator = useFbBridge ? fbLinkClicks : data.views;
+          const bridgeDenominator = campaignFilterActive ? (useFbBridge ? fbLinkClicks : 0) : data.views;
           const bridgeStatus = bridgeDenominator === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
           const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.15 ? "mid" : "bad";
           return (
@@ -1197,31 +1197,6 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   </div>
                 </div>
 
-                {/* ── Our table: first-party measurement only, nothing from FB ── */}
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
-                  <span className={`text-sm font-bold ${dm.text}`}>{lang === "he" ? "המדידה שלנו" : "Our Measurement"}</span>
-                  <span className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "First-Party — נמדד ישירות בעמוד, מכל מקורות התנועה" : "first-party — measured on the page itself, all traffic sources"}</span>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
-                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "מבקרים בעמוד" : "Unique Visitors"}</div>
-                    <div className={`text-xl font-bold ${dm.text}`}>{data.views}</div>
-                  </div>
-                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
-                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "לחיצות לאמזון" : "Amazon Clicks"}</div>
-                    <div className="text-xl font-bold text-orange-500">{data.totalClicks}</div>
-                  </div>
-                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
-                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "אנשים שלחצו" : "People Who Clicked"}</div>
-                    <div className="text-xl font-bold text-orange-500">{data.uniqueClickers}</div>
-                  </div>
-                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
-                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>Bridge %</div>
-                    <div className="text-xl font-bold text-emerald-500">{data.views > 0 ? `${(fpBridgeFrac * 100).toFixed(1)}%` : "—"}</div>
-                    <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "אנשים שלחצו ÷ מבקרים" : "clickers ÷ visitors"}</div>
-                  </div>
-                </div>
               </>
             )}
           </section>
@@ -1286,6 +1261,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         )}
 
         {/* Conversion Funnel */}
+        {!campaignFilterActive && (
         <section>
           <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
@@ -1341,8 +1317,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             )}
           </div>
         </section>
+        )}
 
         {/* Quick Stats */}
+        {!campaignFilterActive && (
         <section>
           <h2 className={`text-lg font-semibold ${dm.text} mb-3 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-rose-500 rounded-full"></span>
@@ -1369,6 +1347,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             </div>
           </div>
         </section>
+        )}
 
         {/* Facebook Ads */}
         {/* Per-ad conversion funnel */}
