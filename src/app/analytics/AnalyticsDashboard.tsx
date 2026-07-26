@@ -760,6 +760,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   // EPC: expected earnings per Amazon click (commission input is USD)
   const epcUsd = beCommission * (beAmazonConv / 100);
   const beNetPerClick = beRevenuePerClick - beCostPerAmzClick;
+  // Period total: expected revenue (EPC x FB results) minus FB spend.
+  const beNetTotal = epcUsd * fbConversions - fbSpend;
   const beBreakEvenConv = beCommission > 0 && beCostPerAmzClick > 0 ? (beCostPerAmzClick / beCommission) * 100 : 0;
   const beProfitable = beNetPerClick >= 0;
 
@@ -1065,7 +1067,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             question: string,
             value: string,
             status: "good" | "mid" | "bad" | "na",
-            target: string
+            target: string,
+            extra?: React.ReactNode
           ) => {
             const statusStyles = {
               good: darkMode ? "border-emerald-700 bg-emerald-900/20" : "border-emerald-300 bg-emerald-50",
@@ -1084,6 +1087,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 <div className={`text-sm font-bold ${dm.text}`}>{label}</div>
                 <div className={`text-xs ${dm.textMuted} mb-2`}>{question}</div>
                 <div dir="ltr" className={`text-4xl md:text-5xl font-black tracking-tight ${valueColor[status]}`}>{value}</div>
+                {extra}
                 <div className={`text-xs ${dm.textMuted} mt-2`}>{target}</div>
               </div>
             );
@@ -1114,12 +1118,26 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 )}
                 {kpiCard(
                   lang === "he" ? "רווח/הפסד לקליק" : "Net per Click",
-                  lang === "he" ? "העסק מרוויח?" : "Is the business profitable?",
+                  lang === "he" ? "EPC פחות CPA — העסק מרוויח?" : "EPC minus CPA — profitable?",
                   campaignFilterActive && beCostPerAmzClick > 0 ? `${beNetPerClick >= 0 ? "+" : "-"}${fbCur}${Math.abs(beNetPerClick).toFixed(2)}` : "—",
                   netStatus,
                   lang === "he"
                     ? `יעד: חיובי · לפי עמלה $${beCommission} והמרה ${beAmazonConv}% מהמחשבון — עדכן לנתוני ה-Associates`
-                    : `Target: positive · assumes $${beCommission} commission x ${beAmazonConv}% (calculator) — sync with Associates data`
+                    : `Target: positive · assumes $${beCommission} commission x ${beAmazonConv}% (calculator) — sync with Associates data`,
+                  campaignFilterActive && beCostPerAmzClick > 0 ? (
+                    <div className="mt-1 space-y-0.5">
+                      <div dir="ltr" className={`text-xs font-semibold ${dm.text}`}>
+                        {`EPC $${epcUsd.toFixed(2)} − CPA $${beCostPerAmzClick.toFixed(2)} = ${beNetPerClick >= 0 ? "+" : "−"}$${Math.abs(beNetPerClick).toFixed(2)}`}
+                      </div>
+                      <div className={`text-xs font-bold ${beNetTotal >= 0 ? "text-emerald-500" : "text-red-500"}`}>
+                        {lang === "he" ? "סה“כ בטווח: " : "Period total: "}
+                        <span dir="ltr">{`${beNetTotal >= 0 ? "+" : "−"}$${Math.abs(beNetTotal).toFixed(2)}`}</span>
+                      </div>
+                      <div dir="ltr" className={`text-[11px] ${dm.textMuted}`}>
+                        {`($${epcUsd.toFixed(2)} × ${fbConversions} results) − $${fbSpend.toFixed(2)} spend`}
+                      </div>
+                    </div>
+                  ) : undefined
                 )}
               </div>
             </section>
