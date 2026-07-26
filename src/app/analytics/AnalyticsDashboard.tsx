@@ -1093,21 +1093,38 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             );
           };
           const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.15 ? "good" : cpc <= 0.3 ? "mid" : "bad";
+          // Bridge = FB Results ÷ FB link clicks — both numbers straight from
+          // Meta's API. Can exceed 100% (FB counts every AmazonClick event,
+          // incl. double-taps, per link click) — shown as-is, never hidden.
+          const bridgePct = fbBridgeRaw * 100;
+          const bridgeStatus = !campaignFilterActive || fbLinkClicks === 0 || fbConversions === 0 ? "na" : bridgePct >= 50 ? "good" : bridgePct >= 30 ? "mid" : "bad";
           const cpaStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beCostPerAmzClick <= epcUsd ? "good" : beCostPerAmzClick <= epcUsd * 1.5 ? "mid" : "bad";
           const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.15 ? "mid" : "bad";
           return (
             <section>
               <h2 className={`text-lg font-bold ${dm.text} mb-3 flex items-center gap-2`}>
                 <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                {lang === "he" ? "3 המדדים שמנהלים את העסק" : "The 3 Metrics That Run the Business"}
+                {lang === "he" ? "4 המדדים שמנהלים את העסק" : "The 4 Metrics That Run the Business"}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {kpiCard(
                   "CPC",
                   lang === "he" ? "המודעה טובה?" : "Is the ad good?",
                   campaignFilterActive && fbLinkClicks > 0 ? `${fbCur}${cpc.toFixed(2)}` : "—",
                   cpcStatus,
                   lang === "he" ? "יעד: מתחת ל-$0.15" : "Target: under $0.15"
+                )}
+                {kpiCard(
+                  lang === "he" ? "ברידג'" : "Bridge",
+                  lang === "he" ? "העמוד מעביר לאמזון?" : "Does the page bridge to Amazon?",
+                  campaignFilterActive && fbLinkClicks > 0 && fbConversions > 0 ? `${Math.round(bridgePct)}%` : "—",
+                  bridgeStatus,
+                  lang === "he" ? "יעד: מעל 50% · מעל 100% = כמה אירועים לקליק" : "Target: over 50% · >100% = multiple events per click",
+                  campaignFilterActive && fbLinkClicks > 0 && fbConversions > 0 ? (
+                    <div dir="ltr" className={`text-xs font-semibold mt-1 ${dm.text}`}>
+                      {`${fbConversions} results ÷ ${fbLinkClicks} link clicks`}
+                    </div>
+                  ) : undefined
                 )}
                 {kpiCard(
                   "CPA",
