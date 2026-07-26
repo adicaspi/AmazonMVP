@@ -1094,9 +1094,6 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           };
           const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.15 ? "good" : cpc <= 0.3 ? "mid" : "bad";
           const cpaStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beCostPerAmzClick <= epcUsd ? "good" : beCostPerAmzClick <= epcUsd * 1.5 ? "mid" : "bad";
-          const bridgePct = beBridgeFrac * 100;
-          const bridgeDenominator = campaignFilterActive ? (useFbBridge ? fbLinkClicks : 0) : data.views;
-          const bridgeStatus = bridgeDenominator === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
           const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.15 ? "mid" : "bad";
           return (
             <section>
@@ -1104,20 +1101,13 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 <span className="w-2 h-2 bg-red-500 rounded-full"></span>
                 {lang === "he" ? "3 המדדים שמנהלים את העסק" : "The 3 Metrics That Run the Business"}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {kpiCard(
                   "CPC",
                   lang === "he" ? "המודעה טובה?" : "Is the ad good?",
                   campaignFilterActive && fbLinkClicks > 0 ? `${fbCur}${cpc.toFixed(2)}` : "—",
                   cpcStatus,
                   lang === "he" ? "יעד: מתחת ל-$0.15" : "Target: under $0.15"
-                )}
-                {kpiCard(
-                  "Bridge %",
-                  lang === "he" ? "העמוד טוב?" : "Is the page good?",
-                  bridgeDenominator > 0 ? `${bridgePct.toFixed(1)}%` : "—",
-                  bridgeStatus,
-                  lang === "he" ? "יעד: מעל 25%" : "Target: above 25%"
                 )}
                 {kpiCard(
                   "CPA",
@@ -1194,11 +1184,6 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "המרות מיוחסות" : "Attributed Conversions"}</div>
                     <div className="text-xl font-bold text-orange-500">{fbConversions}</div>
-                  </div>
-                  <div className={`${dm.cardBg} rounded-xl p-3 border`}>
-                    <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>Bridge %</div>
-                    <div className="text-xl font-bold text-emerald-500">{useFbBridge ? `${(fbBridgeFrac * 100).toFixed(1)}%` : "—"}</div>
-                    <div className={`text-[10px] ${dm.textMuted}`}>{lang === "he" ? "המרות ÷ קליקים במודעה" : "conversions ÷ ad clicks"}</div>
                   </div>
                   <div className={`${dm.cardBg} rounded-xl p-3 border`}>
                     <div className={`text-[11px] ${dm.textMuted} mb-0.5`}>{lang === "he" ? "עלות להמרה" : "Cost / Conversion"}</div>
@@ -1368,7 +1353,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
 
         {/* Facebook Ads */}
         {/* Per-ad conversion funnel */}
-        {data.adFunnel && Object.keys(data.adFunnel).length > 0 && (
+        {!campaignFilterActive && data.adFunnel && Object.keys(data.adFunnel).length > 0 && (
           <section>
             <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
               <span className="w-2 h-2 bg-fuchsia-500 rounded-full"></span>
@@ -1498,8 +1483,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           </section>
         ) : null}
 
-        {/* Funnel Economics — the 3 KPIs that decide profitability */}
-        {facebookAdsData && facebookAdsData.campaigns.length > 0 && (
+        {/* Funnel Economics — hidden on campaign tabs (duplicates the KPI strip) */}
+        {!campaignFilterActive && facebookAdsData && facebookAdsData.campaigns.length > 0 && (
           <section>
             <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
               <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
@@ -1615,7 +1600,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           </section>
         )}
 
-        {/* Traffic Sources + Button Performance side by side on desktop */}
+        {/* Traffic Sources + Button Performance — first-party, hidden on campaign tabs */}
+        {!campaignFilterActive && (
         <div className="grid md:grid-cols-2 gap-6">
           {/* Traffic Sources */}
           <section>
@@ -1738,9 +1724,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             )}
           </section>
         </div>
+        )}
 
         {/* Recent Visits with Landing URLs */}
-        {data.recentVisits && data.recentVisits.length > 0 && (
+        {!campaignFilterActive && data.recentVisits && data.recentVisits.length > 0 && (
           <section>
             <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
               <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
@@ -1829,7 +1816,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         )}
 
         {/* Insights */}
-        {data.totalClicks > 0 && (
+        {!campaignFilterActive && data.totalClicks > 0 && (
           <section>
             <h2 className={`text-lg font-semibold ${dm.text} mb-3 flex items-center gap-2`}>
               <span className="w-2 h-2 bg-green-500 rounded-full"></span>
@@ -1872,7 +1859,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         )}
 
         {/* Device Breakdown */}
-        {(Object.keys(data.viewDeviceCounts || {}).length > 0 || Object.keys(data.byDevice || {}).length > 0) && (
+        {!campaignFilterActive && (Object.keys(data.viewDeviceCounts || {}).length > 0 || Object.keys(data.byDevice || {}).length > 0) && (
           <section>
             <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
               <span className="w-2 h-2 bg-cyan-500 rounded-full"></span>
@@ -1944,7 +1931,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           </section>
         )}
 
-        {/* Detailed Click Log + Daily Breakdown side by side */}
+        {/* Detailed Click Log + Daily Breakdown — first-party, hidden on campaign tabs */}
+        {!campaignFilterActive && (
         <div className="grid md:grid-cols-2 gap-6">
           {/* Detailed Click Log */}
           <section>
@@ -2057,6 +2045,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             )}
           </section>
         </div>
+        )}
 
         {/* Help Section */}
         <section className={`${dm.helpBg} rounded-xl p-5 transition-colors duration-300`}>
