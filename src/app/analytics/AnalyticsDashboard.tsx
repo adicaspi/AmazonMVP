@@ -1084,6 +1084,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             );
           };
           const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.15 ? "good" : cpc <= 0.3 ? "mid" : "bad";
+          const cpaStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beCostPerAmzClick <= epcUsd ? "good" : beCostPerAmzClick <= epcUsd * 1.5 ? "mid" : "bad";
           const bridgePct = beBridgeFrac * 100;
           const bridgeDenominator = campaignFilterActive ? (useFbBridge ? fbLinkClicks : 0) : data.views;
           const bridgeStatus = bridgeDenominator === 0 ? "na" : bridgePct >= 25 ? "good" : bridgePct >= 15 ? "mid" : "bad";
@@ -1094,7 +1095,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 <span className="w-2 h-2 bg-red-500 rounded-full"></span>
                 {lang === "he" ? "3 המדדים שמנהלים את העסק" : "The 3 Metrics That Run the Business"}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {kpiCard(
                   "CPC",
                   lang === "he" ? "המודעה טובה?" : "Is the ad good?",
@@ -1108,6 +1109,13 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   bridgeDenominator > 0 ? `${bridgePct.toFixed(1)}%` : "—",
                   bridgeStatus,
                   lang === "he" ? "יעד: מעל 25%" : "Target: above 25%"
+                )}
+                {kpiCard(
+                  "CPA",
+                  lang === "he" ? "כמה עולה המרה?" : "Cost per result?",
+                  campaignFilterActive && beCostPerAmzClick > 0 ? `${fbCur}${beCostPerAmzClick.toFixed(2)}` : "—",
+                  cpaStatus,
+                  lang === "he" ? `יעד: מתחת ל-EPC ($${epcUsd.toFixed(2)})` : `Target: under EPC ($${epcUsd.toFixed(2)})`
                 )}
                 {kpiCard(
                   lang === "he" ? "רווח/הפסד לקליק" : "Net per Click",
