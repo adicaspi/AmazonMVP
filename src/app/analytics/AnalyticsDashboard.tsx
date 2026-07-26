@@ -85,6 +85,7 @@ type FacebookCampaign = {
 
 type FacebookAdsData = {
   campaigns: FacebookCampaign[];
+  todayCampaigns?: FacebookCampaign[];
   totalSpend: number;
   totalConversions: number;
   avgCostPerConversion: number;
@@ -694,6 +695,18 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   };
   const fbCampaigns = facebookAdsData?.campaigns ?? [];
 
+  // Tab badge for campaign-bound pages = Facebook's Results TODAY (never our
+  // click count — sources must not mix). null = page has no campaign binding
+  // or FB data is unavailable, in which case the badge falls back to
+  // first-party today clicks.
+  const fbTodayResultsFor = (path: string): number | null => {
+    const tc = facebookAdsData?.todayCampaigns;
+    if (!tc || !PAGE_CAMPAIGN_KEYWORD[path]?.length) return null;
+    return tc
+      .filter((c) => campaignMatchesPage(path, c.campaign_name))
+      .reduce((s, c) => s + c.conversions, 0);
+  };
+
   // AUTO-ARCHIVE (decided live from Facebook): a page is archived when it has
   // no ACTIVE campaign matching its keywords (fbCampaigns only contains
   // active campaigns with activity) AND no first-party activity in range.
@@ -877,11 +890,15 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 className={`flex-none md:flex-1 whitespace-nowrap px-3 md:px-4 py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2 ${selectedPage === p.page ? dm.tabActive : dm.tabInactive}`}
               >
                 <span>{p.label}</span>
-                {p.todayClicks > 0 && (
-                  <span className="bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
-                    {p.todayClicks}
-                  </span>
-                )}
+                {(() => {
+                  const fbToday = fbTodayResultsFor(p.page);
+                  const badge = fbToday !== null ? fbToday : p.todayClicks;
+                  return badge > 0 ? (
+                    <span className="bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
+                      {badge}
+                    </span>
+                  ) : null;
+                })()}
               </button>
             ))}
             {pagesData.some((p) => isArchived(p)) && (

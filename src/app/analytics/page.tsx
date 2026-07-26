@@ -62,6 +62,9 @@ export type FacebookCampaign = {
 
 export type FacebookAdsData = {
   campaigns: FacebookCampaign[];
+  // Today's per-campaign insights, independent of the selected date range —
+  // powers the tab badges (FB Results today), so badges never mix sources.
+  todayCampaigns: FacebookCampaign[];
   totalSpend: number;
   totalConversions: number;
   avgCostPerConversion: number;
@@ -304,11 +307,11 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
       ? `time_range=${encodeURIComponent(JSON.stringify({ since: from, until: to }))}`
       : "date_preset=last_7d";
 
-    // Fetch the selected range (by campaign), today's spend, and campaign
-    // statuses in parallel — Off campaigns are hidden from the dashboard
+    // Fetch the selected range (by campaign), today's per-campaign insights,
+    // and campaign statuses in parallel — Off campaigns are hidden
     const [weekRes, todayRes, statusRes] = await Promise.all([
       fetch(`${baseUrl}?fields=${fields}&level=campaign&${dateParam}&limit=50&access_token=${accessToken}`),
-      fetch(`${baseUrl}?fields=spend&date_preset=today&limit=1&access_token=${accessToken}`),
+      fetch(`${baseUrl}?fields=${fields}&level=campaign&date_preset=today&limit=50&access_token=${accessToken}`),
       fetch(`https://graph.facebook.com/v21.0/act_${adAccountId}/campaigns?fields=id,effective_status&limit=200&access_token=${accessToken}`),
     ]);
 
@@ -325,10 +328,18 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     }
 
     const weekJson = await weekOk.json();
-    const todayJson = todayRes.ok ? await todayRes.json() : { data: [] };
+
+    // Same `results` fallback for the today fetch
+    let todayOk = todayRes;
+    if (!todayRes.ok) {
+      const fallbackFields = fields.replace(",results", "");
+      todayOk = await fetch(`${baseUrl}?fields=${fallbackFields}&level=campaign&date_preset=today&limit=50&access_token=${accessToken}`);
+    }
+    const todayJson = todayOk.ok ? await todayOk.json() : { data: [] };
 
     // Only ACTIVE campaigns are shown; if the status fetch fails, show all
     let rows: any[] = weekJson.data || [];
+    let todayRows: any[] = todayJson.data || [];
     if (statusRes.ok) {
       const statusJson = await statusRes.json();
       const activeIds = new Set(
@@ -336,14 +347,18 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
           .filter((c: any) => c.effective_status === "ACTIVE")
           .map((c: any) => c.id)
       );
-      if (activeIds.size > 0) rows = rows.filter((r: any) => activeIds.has(r.campaign_id));
+      if (activeIds.size > 0) {
+        rows = rows.filter((r: any) => activeIds.has(r.campaign_id));
+        todayRows = todayRows.filter((r: any) => activeIds.has(r.campaign_id));
+      }
     }
 
     const campaigns = parseFbInsights(rows);
+    const todayCampaigns = parseFbInsights(todayRows);
     const totalSpend = campaigns.reduce((s, c) => s + c.spend, 0);
     const totalConversions = campaigns.reduce((s, c) => s + c.conversions, 0);
     const avgCostPerConversion = totalConversions > 0 ? totalSpend / totalConversions : 0;
-    const todaySpend = todayJson.data?.[0] ? parseFloat(todayJson.data[0].spend || "0") : 0;
+    const todaySpend = todayCampaigns.reduce((s, c) => s + c.spend, 0);
 
     // Detect currency + timezone from account info (timezone must match the
     // dashboard's Asia/Jerusalem assumption for day buckets to line up)
@@ -358,7 +373,7 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
       }
     } catch { /* fallback to ILS */ }
 
-    return { campaigns, totalSpend, totalConversions, avgCostPerConversion, todaySpend, currency, timezone };
+    return { campaigns, todayCampaigns, totalSpend, totalConversions, avgCostPerConversion, todaySpend, currency, timezone };
   } catch (err) {
     console.error("Failed to fetch Facebook Ads data:", err);
     return null;
