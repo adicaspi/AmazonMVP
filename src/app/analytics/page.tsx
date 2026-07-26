@@ -53,6 +53,7 @@ export type FacebookCampaign = {
   impressions: number;
   clicks: number;
   linkClicks: number;
+  cpcLink: number;
   landingPageViews: number;
   conversions: number;
   costPerConversion: number;
@@ -281,6 +282,7 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
       impressions: parseInt(row.impressions || "0"),
       clicks: parseInt(row.clicks || "0"),
       linkClicks: parseInt(row.inline_link_clicks || "0"),
+      cpcLink: parseFloat(row.cost_per_inline_link_click || "0"),
       landingPageViews: lpvEntry ? parseInt(lpvEntry.value) : 0,
       conversions,
       costPerConversion,
@@ -296,7 +298,7 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     if (!accessToken || !adAccountId) return null;
 
     const baseUrl = `https://graph.facebook.com/v21.0/act_${adAccountId}/insights`;
-    const fields = "campaign_id,campaign_name,actions,results,cost_per_action_type,spend,impressions,clicks,inline_link_clicks";
+    const fields = "campaign_id,campaign_name,actions,results,cost_per_action_type,spend,impressions,clicks,inline_link_clicks,cost_per_inline_link_click";
     // Match the dashboard's selected date range; fall back to last 7 days
     const dateParam = from && to
       ? `time_range=${encodeURIComponent(JSON.stringify({ since: from, until: to }))}`

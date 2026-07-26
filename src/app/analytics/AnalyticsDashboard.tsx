@@ -76,6 +76,7 @@ type FacebookCampaign = {
   impressions: number;
   clicks: number;
   linkClicks: number;
+  cpcLink: number;
   landingPageViews: number;
   conversions: number;
   costPerConversion: number;
@@ -718,8 +719,16 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const fbSpend = usd(effectiveCampaigns.reduce((s, c) => s + c.spend, 0));
   const fbLinkClicks = effectiveCampaigns.reduce((s, c) => s + (c.linkClicks || 0), 0);
   const fbConversions = effectiveCampaigns.reduce((s, c) => s + c.conversions, 0);
-  const fbAvgCostPerConv = fbConversions > 0 ? fbSpend / fbConversions : 0;
-  const cpc = fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
+  // FACEBOOK'S OWN computed metrics, verbatim (single bound campaign =
+  // the normal case). Only the ILS->USD conversion is applied. Multi-
+  // campaign fallback divides FB totals — same math FB uses to aggregate.
+  const single = effectiveCampaigns.length === 1 ? effectiveCampaigns[0] : null;
+  const cpc = single && single.cpcLink > 0
+    ? usd(single.cpcLink)
+    : fbLinkClicks > 0 ? fbSpend / fbLinkClicks : 0;
+  const fbAvgCostPerConv = single && single.costPerConversion > 0
+    ? usd(single.costPerConversion)
+    : fbConversions > 0 ? fbSpend / fbConversions : 0;
   const fbLPV = effectiveCampaigns.reduce((s, c) => s + (c.landingPageViews || 0), 0);
 
   // TWO SEPARATE WORLDS, never mixed:
@@ -746,7 +755,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   // conversions — the conservative source. Our own click count could still
   // hide an undetected bot, which would understate cost and fake profit;
   // Meta's attributed count can't be bot-inflated.
-  const beCostPerAmzClick = campaignFilterActive && fbConversions > 0 ? fbSpend / fbConversions : 0;
+  const beCostPerAmzClick = campaignFilterActive && fbConversions > 0 ? fbAvgCostPerConv : 0;
   const beRevenuePerClick = beCommission * (beAmazonConv / 100);
   // EPC: expected earnings per Amazon click (commission input is USD)
   const epcUsd = beCommission * (beAmazonConv / 100);
