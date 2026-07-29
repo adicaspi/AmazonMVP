@@ -68,6 +68,13 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
     .map((img) => img?.large?.url)
     .filter((u): u is string => !!u)
     .map((u) => ({ url: u.replace("._SL500_.", "._SL1000_."), alt }));
+  // Story + lifestyle slots run on the official Amazon images until real
+  // lifestyle photos replace them (studio shots render uncropped on white)
+  const storyImage = STORY_IMAGE ?? (apiImages[1] ? { src: apiImages[1].url, alt } : null);
+  const usingApiLifestyle = LIFESTYLE_IMAGES.length === 0;
+  const lifestyleImages = usingApiLifestyle
+    ? apiImages.slice(2, 8).map((i) => ({ src: i.url, alt: i.alt }))
+    : LIFESTYLE_IMAGES;
   return (
     <div className="min-h-screen bg-white">
       <PageViewTracker page={trackingPage} />
@@ -192,14 +199,14 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
 
       {/* The lining story + photo */}
       <section className="py-10 md:py-14 bg-stone-50">
-        <div className={`max-w-5xl mx-auto px-4 ${STORY_IMAGE ? "md:grid md:grid-cols-2 md:gap-12 md:items-center" : ""}`}>
-          {STORY_IMAGE && (
+        <div className={`max-w-5xl mx-auto px-4 ${storyImage ? "md:grid md:grid-cols-2 md:gap-12 md:items-center" : ""}`}>
+          {storyImage && (
             <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 mb-6 md:mb-0 max-w-md mx-auto md:max-w-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={STORY_IMAGE.src} alt={STORY_IMAGE.alt} loading="lazy" decoding="async" className="w-full h-auto" />
+              <img src={storyImage.src} alt={storyImage.alt} loading="lazy" decoding="async" className="w-full h-auto" />
             </div>
           )}
-          <div className={STORY_IMAGE ? "text-center md:text-left" : "text-center max-w-2xl mx-auto"}>
+          <div className={storyImage ? "text-center md:text-left" : "text-center max-w-2xl mx-auto"}>
             <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-4">
               The secret is in the lining
             </h2>
@@ -260,16 +267,16 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
       </section>
 
       {/* Lifestyle strip — [USER ASSET] appears once photos are added above */}
-      {LIFESTYLE_IMAGES.length > 0 && (
+      {lifestyleImages.length > 0 && (
         <section className="py-10 md:py-14 bg-white">
           <div className="max-w-5xl mx-auto px-4">
             <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-8">
-              From slow mornings to cozy nights in
+              {usingApiLifestyle ? "The Scuffette II, from every angle" : "From slow mornings to cozy nights in"}
             </h2>
             <div className="grid grid-cols-3 gap-2 md:gap-4">
-              {LIFESTYLE_IMAGES.map((img, i) => (
+              {lifestyleImages.map((img, i) => (
                 /* eslint-disable-next-line @next/next/no-img-element */
-                <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className="w-full aspect-[2/3] object-cover rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5" />
+                <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className={`w-full aspect-[2/3] rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5 ${usingApiLifestyle ? "object-contain bg-white p-2" : "object-cover"}`} />
               ))}
             </div>
             <div className="text-center mt-8">
