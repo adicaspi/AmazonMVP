@@ -8,19 +8,22 @@ import type { AmazonProductData } from "@/lib/amazon-creators-api";
 // page structure. Rendered by /UggScuffette; future channel routes can pass
 // their own trackingPage + amazonLink exactly like the Birkenstock family.
 // ── Product constants ─────────────────────────────────────────────
-// [USER ASSET] Affiliate link pending — swap in the SiteStripe link (resolved
-// to a DIRECT amazon.com URL with tag + linkId, NEVER amzn.to: the redirect
-// hop breaks the Amazon-app handoff from in-app browsers).
-const DEFAULT_AMAZON_LINK = "https://www.amazon.com/UGG-Scuffette-Slipper-Chestnut-Size/dp/B082HHR652?th=1&psc=1";
+// Default affiliate link with the account's main tag (aipicks20-20, as
+// returned by the Creators API detailPageURL). [USER ASSET] Swap for the
+// campaign-specific SiteStripe link when provided — resolved to a DIRECT
+// amazon.com URL (NEVER amzn.to: the redirect hop breaks the Amazon-app
+// handoff from in-app browsers).
+const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B082HHR652?tag=aipicks20-20&linkCode=ogi&th=1&psc=1";
 // Pixel value only — no price is shown on the page
 const PRICE_VALUE = 90;
 
-// Manual fallbacks, used only when the Creators API is unavailable — the
-// rating block stays hidden until real values exist (no invented numbers,
-// ever). Live values come from the API via the `product` prop.
-const STAR_RATING: number | null = null;
-const REVIEW_COUNT: number | null = null;
-const PRICE_ANCHOR: string | null = null;
+// Verified on the live listing 2026-07-29 (user screenshot): 4.7★, 23,437
+// ratings. The Creators API doesn't return the reviews resource, so these
+// verified values are the display source; price still comes live from the
+// API when available.
+const STAR_RATING: number | null = 4.7;
+const REVIEW_COUNT: number | null = 23437;
+const PRICE_ANCHOR: string | null = "Around $99.95";
 
 // 13,182 → "13,000+" — round down so the claim is always true
 function roundedCount(n: number): string {
@@ -58,9 +61,13 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
   const reviewCount = product?.reviewCount ? roundedCount(product.reviewCount) : REVIEW_COUNT !== null ? roundedCount(REVIEW_COUNT) : null;
   const priceValue = product?.price?.amount || PRICE_VALUE;
   const priceAnchor = product?.price?.displayAmount ? `Around ${product.price.displayAmount}` : PRICE_ANCHOR;
-  const apiImage = product?.primaryImage?.large?.url
-    ? { url: product.primaryImage.large.url, alt: product.title || "UGG Scuffette II Slipper" }
-    : null;
+  // All official Amazon images: primary + variants. _SL500_ → _SL1000_ for
+  // retina sharpness (Amazon's CDN resizes on the fly).
+  const alt = product?.title || "UGG Scuffette II Slipper";
+  const apiImages = [product?.primaryImage, ...(product?.variantImages || [])]
+    .map((img) => img?.large?.url)
+    .filter((u): u is string => !!u)
+    .map((u) => ({ url: u.replace("._SL500_.", "._SL1000_."), alt }));
   return (
     <div className="min-h-screen bg-white">
       <PageViewTracker page={trackingPage} />
@@ -140,7 +147,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
             </div>
 
             <div className="order-1 md:order-2 max-w-[260px] md:max-w-[420px] mx-auto w-full">
-              <HeroFade apiImage={apiImage} />
+              <HeroFade apiImages={apiImages} />
             </div>
           </div>
         </div>
