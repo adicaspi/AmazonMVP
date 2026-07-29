@@ -30,4 +30,5 @@ metric. FB conversions come from the official `results` insights field.
 New product pages must be wired in: AmazonButton maps (pixel/product/click
 events), MetaPixelInit, api/page-view maps, analytics TRACKED_PAGES,
 clear-direct ALLOWED_PAGES, and campaign keyword binding in
-AnalyticsDashboard.
+AnalyticsDashboard. Every landing route also needs its own layout.tsx
+(copy from any Birkenstock route) that hides the global site header.
