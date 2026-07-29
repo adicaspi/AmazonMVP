@@ -677,6 +677,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/BirkenstockSales": ["arizona sales", "birkenstock sales"],
     "/BirkenstockInstagram": ["- ig", "arizona instagram", "birkenstock instagram"],
     "/BirkenstockAudience": ["audience", "retargeting"],
+    // Future UGG campaign binds by name automatically
+    "/UggScuffette": ["ugg", "scuffette"],
   };
   // A campaign matching an exclude fragment never binds to that page — e.g.
   // "Arizona Sales Campaign - IG - new" contains "arizona sales" but belongs

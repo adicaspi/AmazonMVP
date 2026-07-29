@@ -32,6 +32,7 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/BirkenstockSales": "1025959486467199",
   "/BirkenstockInstagram": "1025959486467199",
   "/BirkenstockAudience": "1025959486467199",
+  // [USER ASSET] /UggScuffette: add its dedicated pixel ID here when created
 };
 
 // Product info per page for accurate CAPI event data
@@ -45,6 +46,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/BirkenstockSales": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
   "/BirkenstockInstagram": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
   "/BirkenstockAudience": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
+  "/UggScuffette": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
 };
 
 // Standard pixel events fired when an Amazon CTA is clicked, per page.
@@ -61,6 +63,8 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   "/BirkenstockSales": [],
   "/BirkenstockInstagram": [],
   "/BirkenstockAudience": [],
+  // Custom AmazonClick only until a UGG pixel + campaign exist
+  "/UggScuffette": [],
 };
 
 // Longest matching prefix wins

@@ -84,6 +84,7 @@ const TRACKED_PAGES: { path: string; label: string; color: string; archived?: bo
   { path: "/BirkenstockSales", label: "Birkenstock (Sales)", color: "amber" },
   { path: "/BirkenstockInstagram", label: "Birkenstock (Instagram)", color: "amber" },
   { path: "/BirkenstockAudience", label: "Birkenstock (Audience)", color: "amber" },
+  { path: "/UggScuffette", label: "UGG Scuffette", color: "amber" },
 ];
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {

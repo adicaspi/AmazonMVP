@@ -10,7 +10,7 @@ import { isBotUserAgent } from "@/lib/bot-detect";
 // Facebook/Google/TikTok-attributed data is never touched, and nothing on
 // Facebook's side is affected (that data lives at Meta).
 
-const ALLOWED_PAGES = ["/auraglow", "/grandelash", "/shark-flexstyle", "/sharkflex", "/BirkenstockArizona", "/BirkenstockTraffic", "/BirkenstockSales", "/BirkenstockInstagram", "/BirkenstockAudience"];
+const ALLOWED_PAGES = ["/auraglow", "/grandelash", "/shark-flexstyle", "/sharkflex", "/BirkenstockArizona", "/BirkenstockTraffic", "/BirkenstockSales", "/BirkenstockInstagram", "/BirkenstockAudience", "/UggScuffette"];
 
 type ViewRow = {
   id: string;
