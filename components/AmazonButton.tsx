@@ -47,6 +47,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/BirkenstockInstagram": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
   "/BirkenstockAudience": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
   "/UggScuffette": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
+  "/UggCozy": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
 };
 
 // Standard pixel events fired when an Amazon CTA is clicked, per page.
@@ -65,6 +66,7 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   "/BirkenstockAudience": [],
   // Custom AmazonClick only until a UGG pixel + campaign exist
   "/UggScuffette": [],
+  "/UggCozy": [],
 };
 
 // Longest matching prefix wins
