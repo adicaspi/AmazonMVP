@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { UggPage } from "./UggPage";
+import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api";
+import { unstable_cache } from "next/cache";
 
 export const metadata: Metadata = {
   title: "UGG Scuffette II Slipper | The Cozy Classic",
@@ -28,6 +30,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function UggScuffettePage() {
-  return <UggPage trackingPage="/UggScuffette" />;
+const ASIN = "B082HHR652";
+
+// Live listing data (rating, review count, price, official image) from the
+// Amazon Creators API — cached 1 hour, same pattern as /auraglow
+const getCachedProduct = unstable_cache(
+  async (): Promise<AmazonProductData | null> => {
+    try {
+      const products = await getProductsByASIN([ASIN]);
+      if (products.length > 0) return products[0];
+    } catch (err) {
+      console.error("Failed to fetch UGG data from Amazon Creators API:", err);
+    }
+    return null;
+  },
+  [`product-${ASIN}`],
+  { revalidate: 3600 }
+);
+
+export default async function UggScuffettePage() {
+  const product = await getCachedProduct();
+  return <UggPage trackingPage="/UggScuffette" product={product} />;
 }

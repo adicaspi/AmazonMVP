@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { HeroFade } from "./HeroFade";
+import type { AmazonProductData } from "@/lib/amazon-creators-api";
 
 // Shared UGG Scuffette II bridge page — one-to-one clone of the Birkenstock
 // page structure. Rendered by /UggScuffette; future channel routes can pass
@@ -14,12 +15,18 @@ const DEFAULT_AMAZON_LINK = "https://www.amazon.com/UGG-Scuffette-Slipper-Chestn
 // Pixel value only — no price is shown on the page
 const PRICE_VALUE = 90;
 
-// [USER ASSET] Verify on the live listing and fill in — the rating block
-// stays hidden until BOTH values are set (no invented numbers, ever):
+// Manual fallbacks, used only when the Creators API is unavailable — the
+// rating block stays hidden until real values exist (no invented numbers,
+// ever). Live values come from the API via the `product` prop.
 const STAR_RATING: number | null = null;
-const REVIEW_COUNT: string | null = null;
-// [USER ASSET] Price anchor, e.g. "From around $90*" — hidden until verified
+const REVIEW_COUNT: number | null = null;
 const PRICE_ANCHOR: string | null = null;
+
+// 13,182 → "13,000+" — round down so the claim is always true
+function roundedCount(n: number): string {
+  if (n >= 1000) return `${(Math.floor(n / 1000) * 1000).toLocaleString("en-US")}+`;
+  return n.toLocaleString("en-US");
+}
 
 // [USER ASSET] Lifestyle photos pending — fill to show the strip + story image
 const STORY_IMAGE: { src: string; alt: string } | null = null;
@@ -44,8 +51,16 @@ const FAQS = [
   },
 ];
 
-export function UggPage({ trackingPage, amazonLink }: { trackingPage: string; amazonLink?: string }) {
+export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: string; amazonLink?: string; product?: AmazonProductData | null }) {
   const AMAZON_LINK = amazonLink ?? DEFAULT_AMAZON_LINK;
+  // Live listing data from the Creators API, with manual fallbacks
+  const starRating = product?.starRating ?? STAR_RATING;
+  const reviewCount = product?.reviewCount ? roundedCount(product.reviewCount) : REVIEW_COUNT !== null ? roundedCount(REVIEW_COUNT) : null;
+  const priceValue = product?.price?.amount || PRICE_VALUE;
+  const priceAnchor = product?.price?.displayAmount ? `Around ${product.price.displayAmount}` : PRICE_ANCHOR;
+  const apiImage = product?.primaryImage?.large?.url
+    ? { url: product.primaryImage.large.url, alt: product.title || "UGG Scuffette II Slipper" }
+    : null;
   return (
     <div className="min-h-screen bg-white">
       <PageViewTracker page={trackingPage} />
@@ -70,17 +85,17 @@ export function UggPage({ trackingPage, amazonLink }: { trackingPage: string; am
                 The Slippers You&apos;ll <span className="text-amber-700">Never Want To Take Off</span>
               </h1>
 
-              {STAR_RATING !== null && REVIEW_COUNT !== null && (
+              {starRating !== null && reviewCount !== null && (
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 mb-4">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
-                      <svg key={i} className={`w-6 h-6 ${i < Math.round(STAR_RATING) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
+                      <svg key={i} className={`w-6 h-6 ${i < Math.round(starRating) ? "text-amber-400" : "text-gray-300"}`} fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     ))}
                   </div>
-                  <span className="text-lg font-bold text-gray-900">{STAR_RATING}/5</span>
-                  <span className="text-gray-600">Loved by {REVIEW_COUNT} Amazon Customers</span>
+                  <span className="text-lg font-bold text-gray-900">{starRating}/5</span>
+                  <span className="text-gray-600">Loved by {reviewCount} Amazon Customers</span>
                 </div>
               )}
 
@@ -98,9 +113,9 @@ export function UggPage({ trackingPage, amazonLink }: { trackingPage: string; am
               </ul>
 
               <div className="max-w-md mx-auto md:mx-0">
-                {PRICE_ANCHOR !== null && (
+                {priceAnchor !== null && (
                   <p className="text-center md:text-left text-base text-gray-800 mb-1">
-                    <span className="font-bold">{PRICE_ANCHOR}</span>
+                    <span className="font-bold">{priceAnchor}</span>
                     <span className="text-gray-400">*</span>
                   </p>
                 )}
@@ -108,7 +123,7 @@ export function UggPage({ trackingPage, amazonLink }: { trackingPage: string; am
                 <AmazonButton
                   href={AMAZON_LINK}
                   productName="UGG Scuffette II"
-                  priceValue={PRICE_VALUE}
+                  priceValue={priceValue}
                   position="hero-main"
                   className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white font-bold text-lg rounded-2xl transition-all duration-200 shadow-2xl shadow-amber-900/30 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
                 >
@@ -118,14 +133,14 @@ export function UggPage({ trackingPage, amazonLink }: { trackingPage: string; am
                   </svg>
                 </AmazonButton>
                 <p className="text-center md:text-left text-xs text-gray-600 mt-2">Popular colors tend to sell out as the weather cools.</p>
-                {PRICE_ANCHOR !== null && (
+                {priceAnchor !== null && (
                   <p className="text-center md:text-left text-[10px] text-gray-400 mt-0.5">*Price varies by color &amp; size on Amazon</p>
                 )}
               </div>
             </div>
 
             <div className="order-1 md:order-2 max-w-[260px] md:max-w-[420px] mx-auto w-full">
-              <HeroFade />
+              <HeroFade apiImage={apiImage} />
             </div>
           </div>
         </div>
@@ -155,7 +170,7 @@ export function UggPage({ trackingPage, amazonLink }: { trackingPage: string; am
             <AmazonButton
               href={AMAZON_LINK}
               productName="UGG Scuffette II"
-              priceValue={PRICE_VALUE}
+              priceValue={priceValue}
               position="benefits"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-700 hover:bg-amber-800 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
             >
@@ -254,7 +269,7 @@ export function UggPage({ trackingPage, amazonLink }: { trackingPage: string; am
               <AmazonButton
                 href={AMAZON_LINK}
                 productName="UGG Scuffette II"
-                priceValue={PRICE_VALUE}
+                priceValue={priceValue}
                 position="lifestyle"
                 className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-amber-700 hover:bg-amber-800 text-white font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
               >
@@ -295,7 +310,7 @@ export function UggPage({ trackingPage, amazonLink }: { trackingPage: string; am
           <AmazonButton
             href={AMAZON_LINK}
             productName="UGG Scuffette II"
-            priceValue={PRICE_VALUE}
+            priceValue={priceValue}
             position="final-cta"
             className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white hover:bg-stone-100 text-amber-800 font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
           >
@@ -325,13 +340,13 @@ export function UggPage({ trackingPage, amazonLink }: { trackingPage: string; am
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-gray-200 px-3 py-1.5 md:hidden z-[9999] shadow-[0_-2px_12px_rgba(0,0,0,0.10)]">
         <div className="flex items-center gap-3">
           <div className="flex flex-col items-center leading-tight flex-shrink-0">
-            {STAR_RATING !== null && <span className="text-xs font-bold text-gray-900">★ {STAR_RATING}</span>}
+            {starRating !== null && <span className="text-xs font-bold text-gray-900">★ {starRating}</span>}
             <span className="text-[10px] text-gray-500 whitespace-nowrap">Amazon · Prime ✓</span>
           </div>
           <AmazonButton
             href={AMAZON_LINK}
             productName="UGG Scuffette II"
-            priceValue={PRICE_VALUE}
+            priceValue={priceValue}
             position="sticky-mobile"
             className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-amber-700 hover:bg-amber-800 text-white font-bold text-sm rounded-lg shadow-sm active:scale-[0.98] transition-transform whitespace-nowrap"
           >

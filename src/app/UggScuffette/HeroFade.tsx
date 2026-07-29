@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 // pos = object-position: bias crops toward where the slippers are in frame.
 const IMAGES: { src: string; alt: string; pos: string }[] = [];
 
-export function HeroFade() {
+export function HeroFade({ apiImage }: { apiImage?: { url: string; alt: string } | null }) {
   const [index, setIndex] = useState(0);
   const [interacted, setInteracted] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -26,14 +26,22 @@ export function HeroFade() {
     setIndex(((i % IMAGES.length) + IMAGES.length) % IMAGES.length);
   };
 
-  // Placeholder until product photos arrive
+  // Until lifestyle photos arrive: the official Amazon product image from
+  // the Creators API, or a clean branded placeholder if the API is down
   if (IMAGES.length === 0) {
     return (
       <div>
-        <div className="relative aspect-[2/3] rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-gradient-to-br from-amber-100 via-stone-100 to-amber-200 flex flex-col items-center justify-center gap-3">
-          <span className="text-6xl">🐑</span>
-          <span className="text-xl font-black tracking-tight text-amber-900">UGG Scuffette II</span>
-          <span className="text-xs text-amber-800/70">Photos coming soon</span>
+        <div className="relative aspect-[2/3] rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-gradient-to-br from-amber-50 via-white to-stone-100 flex flex-col items-center justify-center gap-3">
+          {apiImage ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img src={apiImage.url} alt={apiImage.alt} loading="eager" decoding="async" draggable={false} className="absolute inset-0 w-full h-full object-contain p-4" />
+          ) : (
+            <>
+              <span className="text-6xl">🐑</span>
+              <span className="text-xl font-black tracking-tight text-amber-900">UGG Scuffette II</span>
+              <span className="text-xs text-amber-800/70">Photos coming soon</span>
+            </>
+          )}
         </div>
       </div>
     );
