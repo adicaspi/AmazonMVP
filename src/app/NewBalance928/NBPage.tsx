@@ -5,8 +5,8 @@ import { HeroFade } from "../UggScuffette/HeroFade";
 import type { AmazonProductData } from "@/lib/amazon-creators-api";
 
 // CRO bridge page for the New Balance 928v3 walking shoe (/NewBalance928) —
-// same emotion-first funnel as /UggCozy: attention → desire → social proof →
-// benefits → transformation → objections → trust → Amazon.
+// emotion-first funnel: attention → desire → social proof → benefits →
+// transformation → objections → trust → Amazon.
 // Comfort/support narrative only — no medical claims, ever.
 // ── Product constants ─────────────────────────────────────────────
 // User's SiteStripe link (tag=aipicks20-20 + linkId), cleaned of search

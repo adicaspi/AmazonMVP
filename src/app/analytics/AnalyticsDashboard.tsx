@@ -678,10 +678,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/BirkenstockSales": ["arizona sales", "birkenstock sales"],
     "/BirkenstockInstagram": ["- ig", "arizona instagram", "birkenstock instagram"],
     "/BirkenstockAudience": ["audience", "retargeting"],
-    // Future UGG campaigns bind by name automatically; "cozy" in the
-    // campaign name routes to the CRO page, anything else UGG to the original
+    // Future UGG campaign binds by name automatically
     "/UggScuffette": ["ugg", "scuffette"],
-    "/UggCozy": ["cozy"],
     "/NewBalance928": ["new balance", "928", "balance"],
   };
   // A campaign matching an exclude fragment never binds to that page — e.g.
@@ -691,8 +689,6 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/BirkenstockSales": ["- ig", "instagram", "audience", "retargeting"],
     "/BirkenstockTraffic": ["- ig", "instagram", "audience", "retargeting"],
     "/BirkenstockInstagram": ["audience", "retargeting"],
-    // "UGG Cozy ..." campaigns belong to /UggCozy, not the original page
-    "/UggScuffette": ["cozy"],
   };
   const campaignMatchesPage = (path: string, name: string) => {
     const kws = PAGE_CAMPAIGN_KEYWORD[path];
