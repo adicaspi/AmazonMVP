@@ -16,7 +16,8 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/BirkenstockSales": "1025959486467199",
   "/BirkenstockInstagram": "1025959486467199",
   "/BirkenstockAudience": "1025959486467199",
-  // [USER ASSET] /UggScuffette: add its dedicated pixel ID here when created
+  // [USER ASSET] /UggScuffette + /UggCozy: add dedicated pixel ID when created
+  "/NewBalance928": "1011147045043568",
 };
 
 // Product info per page for CAPI event enrichment
@@ -32,6 +33,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/BirkenstockAudience": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
   "/UggScuffette": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
   "/UggCozy": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
+  "/NewBalance928": { name: "New Balance Women's 928v3 Walking Shoe", value: 158, content_id: "newbalance-928v3" },
 };
 
 function getPixelIdForPage(page: string): string | null {

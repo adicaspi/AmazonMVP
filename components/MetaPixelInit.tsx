@@ -9,6 +9,7 @@ const SHARK_PIXEL_ID = "1554568722933870";
 
 // Each pixel is dedicated to its own product page
 const BIRKENSTOCK_PIXEL_ID = "1025959486467199";
+const NEWBALANCE_PIXEL_ID = "1011147045043568";
 
 const PIXEL_BY_PATH: { prefix: string; pixelId: string }[] = [
   { prefix: "/grandelash", pixelId: GRANDELASH_PIXEL_ID },
@@ -19,7 +20,8 @@ const PIXEL_BY_PATH: { prefix: string; pixelId: string }[] = [
   { prefix: "/BirkenstockSales", pixelId: BIRKENSTOCK_PIXEL_ID },
   { prefix: "/BirkenstockInstagram", pixelId: BIRKENSTOCK_PIXEL_ID },
   { prefix: "/BirkenstockAudience", pixelId: BIRKENSTOCK_PIXEL_ID },
-  // [USER ASSET] /UggScuffette: add { prefix, pixelId } when its pixel exists
+  // [USER ASSET] /UggScuffette + /UggCozy: add { prefix, pixelId } when its pixel exists
+  { prefix: "/NewBalance928", pixelId: NEWBALANCE_PIXEL_ID },
 ];
 
 export function MetaPixelInit() {

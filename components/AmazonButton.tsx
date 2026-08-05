@@ -32,7 +32,8 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/BirkenstockSales": "1025959486467199",
   "/BirkenstockInstagram": "1025959486467199",
   "/BirkenstockAudience": "1025959486467199",
-  // [USER ASSET] /UggScuffette: add its dedicated pixel ID here when created
+  // [USER ASSET] /UggScuffette + /UggCozy: add dedicated pixel ID when created
+  "/NewBalance928": "1011147045043568",
 };
 
 // Product info per page for accurate CAPI event data
@@ -48,6 +49,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/BirkenstockAudience": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
   "/UggScuffette": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
   "/UggCozy": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
+  "/NewBalance928": { name: "New Balance Women's 928v3 Walking Shoe", value: 158, content_id: "newbalance-928v3" },
 };
 
 // Standard pixel events fired when an Amazon CTA is clicked, per page.
@@ -67,6 +69,8 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   // Custom AmazonClick only until a UGG pixel + campaign exist
   "/UggScuffette": [],
   "/UggCozy": [],
+  // Custom AmazonClick only — campaign optimizes on it via custom conversion
+  "/NewBalance928": [],
 };
 
 // Longest matching prefix wins
@@ -122,17 +126,22 @@ export function AmazonButton({ href, children, className, productName, position,
       const webUrl = href;
       if (isIOS) {
         const appUrl = webUrl.replace(/^https:\/\/(www\.)?/, "com.amazon.mobile.shopping.web://");
-        // Fall back to the website ONLY if we can tell the app never took
-        // over: any hide/blur means the app (or its dialog) opened.
+        // Fall back to the website unless the app actually took over.
+        // ONLY visibilitychange/pagehide count as "app opened" — the page
+        // really disappears. `blur` must NOT count: Safari's "address is
+        // invalid" alert (no Amazon app installed) fires blur while the page
+        // stays visible, and treating that as success stranded no-app users
+        // with an error and no navigation.
         let left = false;
         const markLeft = () => { left = true; };
         document.addEventListener("visibilitychange", markLeft, { once: true });
         window.addEventListener("pagehide", markLeft, { once: true });
-        window.addEventListener("blur", markLeft, { once: true });
         window.location.href = appUrl;
+        // Short timer: users without the app reach Amazon web fast (the
+        // system alert may briefly show, then the site loads behind it).
         setTimeout(() => {
           if (!left && !document.hidden) window.location.href = webUrl;
-        }, 2500);
+        }, 1200);
       } else {
         const u = new URL(webUrl);
         window.location.href =

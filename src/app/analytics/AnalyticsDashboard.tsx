@@ -681,6 +681,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     // campaign name routes to the CRO page, anything else UGG to the original
     "/UggScuffette": ["ugg", "scuffette"],
     "/UggCozy": ["cozy"],
+    "/NewBalance928": ["new balance", "928", "balance"],
   };
   // A campaign matching an exclude fragment never binds to that page — e.g.
   // "Arizona Sales Campaign - IG - new" contains "arizona sales" but belongs

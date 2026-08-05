@@ -16,6 +16,10 @@ with fallback). This is THE conversion driver — users land logged-in with
 - Amazon's AASA excludes product pages, so the scheme (with iOS's one-time
   dialog) is the ONLY way to open the app; do not "simplify" back to plain
   links on mobile.
+- iOS fallback detection: ONLY visibilitychange/pagehide mean "app opened".
+  NEVER add `blur` — Safari's "address is invalid" alert (no app installed)
+  fires blur while the page stays visible, which cancels the web fallback
+  and strands the user. Fallback timer stays short (~1.2s).
 
 ### 2. Truthful marketing only
 Page claims (rating, review count, price anchors) must match the live
