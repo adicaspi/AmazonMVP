@@ -21,12 +21,16 @@ with fallback). This is THE conversion driver — users land logged-in with
   — it must PAUSE the fallback until focus returns, never count as success
   and never race the user with a timer.
 - Owner's rules: app users' browser stays on OUR page (no web navigation at
-  all); no-app users get Amazon web in a NEW tab. iOS blocks window.open
-  outside the click gesture, so the fallback NEVER navigates our tab —
-  it shows the "Continue to Amazon" sheet whose tap (a fresh gesture) opens
-  a guaranteed new tab. Post-focus grace is 1300ms: tapping "Open" on the
-  app-confirm regains focus BEFORE the app switch, and a shorter grace
-  races it and web-navigates on top of the app launch.
+  all); no-app users get Amazon web in a NEW tab and must NEVER see
+  Safari's "address is invalid" alert. Since iOS pops that alert on any
+  unhandled scheme attempt (unsuppressible), the scheme runs ONLY in Meta
+  in-app browsers (isMetaInApp — the ad traffic, near-universal app
+  ownership, webviews don't show the Safari alert). Regular iOS
+  Safari/Chrome: plain target=_blank anchor, no scheme ever.
+  In-app fallback NEVER navigates our tab — the "Continue to Amazon"
+  sheet's tap (a fresh gesture) opens the web. Post-focus grace is 1300ms:
+  tapping "Open" on the app-confirm regains focus BEFORE the app switch,
+  and a shorter grace races it and web-navigates on top of the launch.
 - window.stop() MUST be called when the app takes over and again on
   pageshow: Safari re-issues the pending scheme navigation on tab resume
   without a user gesture, which pops the "address is invalid" alert at

@@ -71,6 +71,14 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   "/NewBalance928": [],
 };
 
+// In-app browsers of Meta apps (and similar) — the ad-click traffic. Only
+// here do we attempt the Amazon app scheme on iOS: virtually everyone has
+// the app, and these webviews don't show Safari's "address is invalid"
+// alert. Regular Safari/Chrome get a clean new-tab web link instead.
+function isMetaInApp(ua: string): boolean {
+  return /FBAN|FBAV|FB_IAB|Instagram|Messenger|Line\/|Telegram/i.test(ua);
+}
+
 // Longest matching prefix wins
 function longestPrefixMatch<T>(map: Record<string, T>, pagePath: string): T | null {
   const key = Object.keys(map)
@@ -113,7 +121,15 @@ export function AmazonButton({ href, children, className, productName, position,
   // outside the click gesture, so an automatic new tab is impossible.
   const [showContinue, setShowContinue] = useState(false);
   useEffect(() => {
-    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) setTarget(undefined);
+    const ua = navigator.userAgent;
+    if (/Android/i.test(ua)) {
+      setTarget(undefined); // intent:// needs same-tab; falls back silently
+    } else if (/iPhone|iPad|iPod/i.test(ua)) {
+      // In-app browsers (FB/IG — the ad traffic): same-tab for the scheme
+      // handoff. Regular Safari/Chrome: keep _blank — plain new-tab link,
+      // no scheme attempt, so the "address is invalid" alert never shows.
+      setTarget(isMetaInApp(ua) ? undefined : "_blank");
+    }
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -122,7 +138,10 @@ export function AmazonButton({ href, children, className, productName, position,
     // product pages), so the URL scheme + one-tap iOS dialog is the only
     // path to the logged-in app with 1-click buy — worth it for conversion.
     const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
-    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+    // iOS app-scheme attempt happens ONLY in Meta in-app browsers: regular
+    // Safari/Chrome users just follow the anchor to a new tab (no scheme →
+    // Safari's "address is invalid" alert can never appear for them).
+    const isIOS = /iPhone|iPad|iPod/i.test(ua) && isMetaInApp(ua);
     const isAndroid = /Android/i.test(ua);
     if (isIOS || isAndroid) {
       e.preventDefault();
