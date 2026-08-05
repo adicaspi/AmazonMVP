@@ -20,6 +20,10 @@ with fallback). This is THE conversion driver — users land logged-in with
   NEVER add `blur` — Safari's "address is invalid" alert (no app installed)
   fires blur while the page stays visible, which cancels the web fallback
   and strands the user. Fallback timer stays short (~1.2s).
+- window.stop() MUST be called when the app takes over and again on
+  pageshow: Safari re-issues the pending scheme navigation on tab resume
+  without a user gesture, which pops the "address is invalid" alert at
+  users returning FROM the app. Do not remove the cancelPending calls.
 
 ### 2. Truthful marketing only
 Page claims (rating, review count, price anchors) must match the live
