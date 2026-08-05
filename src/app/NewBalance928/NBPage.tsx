@@ -14,16 +14,19 @@ import type { AmazonProductData } from "@/lib/amazon-creators-api";
 const DEFAULT_AMAZON_LINK = "https://www.amazon.com/New-Balance-Womens-928v3-Walking/dp/B01N553EY1?th=1&psc=1&linkCode=ll2&tag=aipicks20-20&linkId=fd074e39d3507e4f26bb208b00185bb2&language=en_US&ref_=as_li_ss_tl";
 const PRICE_VALUE = 158;
 
-// [USER ASSET] Verify on the live listing (screenshot) and fill in — every
-// rating element stays hidden until BOTH are set. No invented numbers, ever.
-const STAR_RATING: number | null = null;
-const REVIEW_COUNT: number | null = null;
+// Verified on the live listing 2026-07-29 (user screenshot): 4.4★, 3,950
+// ratings. The Creators API doesn't return the reviews resource, so these
+// verified values are the display source. No invented numbers, ever.
+const STAR_RATING: number | null = 4.4;
+const REVIEW_COUNT: number | null = 3950;
 
 // [USER ASSET] Real Amazon review quotes (verified via screenshots).
 const REVIEW_QUOTES: { text: string; author: string }[] = [];
 
+// Round DOWN so the claim is always true: 3,950 → "3,900+"
 function roundedCount(n: number): string {
-  if (n >= 1000) return `${(Math.floor(n / 1000) * 1000).toLocaleString("en-US")}+`;
+  if (n >= 10000) return `${(Math.floor(n / 1000) * 1000).toLocaleString("en-US")}+`;
+  if (n >= 1000) return `${(Math.floor(n / 100) * 100).toLocaleString("en-US")}+`;
   return n.toLocaleString("en-US");
 }
 
