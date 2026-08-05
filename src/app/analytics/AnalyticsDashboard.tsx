@@ -922,88 +922,91 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
       </header>
 
       <div className="max-w-6xl mx-auto px-4 py-6 space-y-6">
-        {/* Quick Links */}
-        <div className="flex flex-wrap gap-2">
-          <a
-            href="/analytics/facebook-debug"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-blue-900/40 text-blue-300 hover:bg-blue-900/60 border border-blue-800" : "bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200"}`}
-          >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            Pixel Debug
-          </a>
-          {selectedPage !== "all" && (
-            <button
-              onClick={clearDirectTraffic}
-              disabled={clearingDirect}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition disabled:opacity-50 ${darkMode ? "bg-red-900/40 text-red-300 hover:bg-red-900/60 border border-red-800" : "bg-red-50 text-red-700 hover:bg-red-100 border border-red-200"}`}
-            >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-              {clearingDirect
-                ? (lang === "he" ? "מוחק..." : "Clearing...")
-                : (lang === "he" ? "נקה תנועה ישירה" : "Clear Direct traffic")}
-            </button>
-          )}
-          {/* One link per live page — same active/archived rule as the tabs,
-              so new pages show up here automatically and dead ones drop off. */}
-          {pagesData.filter((p) => !isArchived(p)).map((p, i) => {
-            const palette = [
-              { dark: "bg-amber-900/40 text-amber-300 hover:bg-amber-900/60 border border-amber-800", light: "bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200", dot: "bg-amber-500" },
-              { dark: "bg-cyan-900/40 text-cyan-300 hover:bg-cyan-900/60 border border-cyan-800", light: "bg-cyan-50 text-cyan-700 hover:bg-cyan-100 border border-cyan-200", dot: "bg-cyan-500" },
-              { dark: "bg-rose-900/40 text-rose-300 hover:bg-rose-900/60 border border-rose-800", light: "bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200", dot: "bg-rose-500" },
-              { dark: "bg-violet-900/40 text-violet-300 hover:bg-violet-900/60 border border-violet-800", light: "bg-violet-50 text-violet-700 hover:bg-violet-100 border border-violet-200", dot: "bg-violet-500" },
-              { dark: "bg-lime-900/40 text-lime-300 hover:bg-lime-900/60 border border-lime-800", light: "bg-lime-50 text-lime-700 hover:bg-lime-100 border border-lime-200", dot: "bg-lime-500" },
-            ][i % 5];
-            return (
+        {/* Quick Links — one tidy card: pages row, then tools row */}
+        <div className={`rounded-xl border p-3 space-y-2.5 ${darkMode ? "bg-neutral-900 border-neutral-800" : "bg-white border-gray-200"}`}>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className={`text-[10px] font-bold uppercase tracking-wider w-12 ${darkMode ? "text-gray-500" : "text-gray-400"}`}>
+              {lang === "he" ? "עמודים" : "Pages"}
+            </span>
+            {/* One link per live page — same active/archived rule as the tabs */}
+            {pagesData.filter((p) => !isArchived(p)).map((p, i) => {
+              const palette = [
+                { dark: "bg-amber-900/40 text-amber-300 hover:bg-amber-900/60 border border-amber-800", light: "bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200", dot: "bg-amber-500" },
+                { dark: "bg-cyan-900/40 text-cyan-300 hover:bg-cyan-900/60 border border-cyan-800", light: "bg-cyan-50 text-cyan-700 hover:bg-cyan-100 border border-cyan-200", dot: "bg-cyan-500" },
+                { dark: "bg-rose-900/40 text-rose-300 hover:bg-rose-900/60 border border-rose-800", light: "bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200", dot: "bg-rose-500" },
+                { dark: "bg-violet-900/40 text-violet-300 hover:bg-violet-900/60 border border-violet-800", light: "bg-violet-50 text-violet-700 hover:bg-violet-100 border border-violet-200", dot: "bg-violet-500" },
+                { dark: "bg-lime-900/40 text-lime-300 hover:bg-lime-900/60 border border-lime-800", light: "bg-lime-50 text-lime-700 hover:bg-lime-100 border border-lime-200", dot: "bg-lime-500" },
+              ][i % 5];
+              return (
+                <a
+                  key={p.page}
+                  href={p.page}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? palette.dark : palette.light}`}
+                >
+                  <span className={`w-2 h-2 rounded-full ${palette.dot}`}></span>
+                  {p.label}
+                </a>
+              );
+            })}
+          </div>
+          <div className={`border-t ${darkMode ? "border-neutral-800" : "border-gray-100"}`}></div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className={`text-[10px] font-bold uppercase tracking-wider w-12 ${darkMode ? "text-gray-500" : "text-gray-400"}`}>
+              {lang === "he" ? "כלים" : "Tools"}
+            </span>
+            {([
+              {
+                href: "/analytics/facebook-debug",
+                label: "Pixel Debug",
+                icon: <svg className="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+              },
+              {
+                href: "https://eventsmanager.facebook.com/events_manager2/list/dataset/2679443682454721/overview?business_id=758181023519141&nav_source=events_manager",
+                label: "Events Manager",
+                icon: <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>,
+              },
+              {
+                href: "https://supabase.com/dashboard/project/uoydxjnbqbifcaigeexg/sql/69b2de36-a9ee-4ad4-8e72-c7eedc806b70",
+                label: "Supabase",
+                icon: <svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" /></svg>,
+              },
+              {
+                href: "https://vercel.com/ranis-projects-7f7129ce/amazonmvp/deployments",
+                label: "Vercel",
+                icon: <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L24 22H0L12 1Z"/></svg>,
+              },
+              {
+                href: "https://affiliate-program.amazon.com/home",
+                label: "Amazon Affiliates",
+                icon: <svg className="w-3.5 h-3.5 text-orange-500" viewBox="0 0 24 24" fill="currentColor"><path d="M.045 18.02c.072-.116.187-.124.348-.022 2.344 1.47 4.882 2.208 7.614 2.208 2.51 0 4.907-.572 7.19-1.716 2.283-1.144 4.218-2.787 5.805-4.93.088-.122.165-.13.234-.02.036.065.018.155-.055.27-.914 1.436-2.068 2.7-3.46 3.79a18.14 18.14 0 01-4.608 2.588c-1.674.658-3.42.988-5.237.988-1.564 0-3.082-.275-4.554-.825-1.472-.55-2.78-1.32-3.925-2.31-.064-.056-.08-.1-.045-.134zm6.664-7.46c0-.98.234-1.82.703-2.52.47-.7 1.108-1.243 1.914-1.628a6.52 6.52 0 012.714-.577c.96 0 1.832.17 2.616.51v.544c0 .648-.147 1.296-.44 1.943-.294.648-.7 1.164-1.218 1.55-.518.386-1.044.58-1.578.58-.352 0-.6-.097-.742-.293-.143-.196-.165-.458-.066-.786.22-.73.33-1.206.33-1.428 0-.462-.183-.693-.55-.693-.44 0-.876.27-1.307.81-.43.54-.646 1.17-.646 1.89 0 .882.37 1.51 1.11 1.884-.352 1.386-.603 2.36-.753 2.92-.15.56-.22 1.146-.22 1.76 0 .136.012.338.036.604.024.266.06.47.108.61-.648-.302-1.19-.78-1.627-1.432-.437-.652-.655-1.39-.655-2.21 0-.418.068-.978.204-1.68.136-.703.33-1.486.58-2.35-.723-.35-1.085-.96-1.085-1.83zm0 0"/></svg>,
+              },
+            ] as const).map((tool) => (
               <a
-                key={p.page}
-                href={p.page}
+                key={tool.label}
+                href={tool.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? palette.dark : palette.light}`}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-neutral-800 text-gray-300 hover:bg-neutral-700 border border-neutral-700" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}
               >
-                <span className={`w-2 h-2 rounded-full ${palette.dot}`}></span>
-                {p.label}
+                {tool.icon}
+                {tool.label}
               </a>
-            );
-          })}
-          <a
-            href="https://eventsmanager.facebook.com/events_manager2/list/dataset/2679443682454721/overview?business_id=758181023519141&nav_source=events_manager"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-indigo-900/40 text-indigo-300 hover:bg-indigo-900/60 border border-indigo-800" : "bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200"}`}
-          >
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            Events Manager
-          </a>
-          <a
-            href="https://supabase.com/dashboard/project/uoydxjnbqbifcaigeexg/sql/69b2de36-a9ee-4ad4-8e72-c7eedc806b70"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-emerald-900/40 text-emerald-300 hover:bg-emerald-900/60 border border-emerald-800" : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200"}`}
-          >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" /></svg>
-            Supabase
-          </a>
-          <a
-            href="https://vercel.com/ranis-projects-7f7129ce/amazonmvp/deployments"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700" : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300"}`}
-          >
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L24 22H0L12 1Z"/></svg>
-            Vercel
-          </a>
-          <a
-            href="https://affiliate-program.amazon.com/home"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? "bg-orange-900/40 text-orange-300 hover:bg-orange-900/60 border border-orange-800" : "bg-orange-50 text-orange-700 hover:bg-orange-100 border border-orange-200"}`}
-          >
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M.045 18.02c.072-.116.187-.124.348-.022 2.344 1.47 4.882 2.208 7.614 2.208 2.51 0 4.907-.572 7.19-1.716 2.283-1.144 4.218-2.787 5.805-4.93.088-.122.165-.13.234-.02.036.065.018.155-.055.27-.914 1.436-2.068 2.7-3.46 3.79a18.14 18.14 0 01-4.608 2.588c-1.674.658-3.42.988-5.237.988-1.564 0-3.082-.275-4.554-.825-1.472-.55-2.78-1.32-3.925-2.31-.064-.056-.08-.1-.045-.134zm6.664-7.46c0-.98.234-1.82.703-2.52.47-.7 1.108-1.243 1.914-1.628a6.52 6.52 0 012.714-.577c.96 0 1.832.17 2.616.51v.544c0 .648-.147 1.296-.44 1.943-.294.648-.7 1.164-1.218 1.55-.518.386-1.044.58-1.578.58-.352 0-.6-.097-.742-.293-.143-.196-.165-.458-.066-.786.22-.73.33-1.206.33-1.428 0-.462-.183-.693-.55-.693-.44 0-.876.27-1.307.81-.43.54-.646 1.17-.646 1.89 0 .882.37 1.51 1.11 1.884-.352 1.386-.603 2.36-.753 2.92-.15.56-.22 1.146-.22 1.76 0 .136.012.338.036.604.024.266.06.47.108.61-.648-.302-1.19-.78-1.627-1.432-.437-.652-.655-1.39-.655-2.21 0-.418.068-.978.204-1.68.136-.703.33-1.486.58-2.35-.723-.35-1.085-.96-1.085-1.83zm0 0"/></svg>
-            Amazon Affiliates
-          </a>
+            ))}
+            {selectedPage !== "all" && (
+              <button
+                onClick={clearDirectTraffic}
+                disabled={clearingDirect}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition disabled:opacity-50 ${darkMode ? "bg-red-900/40 text-red-300 hover:bg-red-900/60 border border-red-800" : "bg-red-50 text-red-700 hover:bg-red-100 border border-red-200"}`}
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                {clearingDirect
+                  ? (lang === "he" ? "מוחק..." : "Clearing...")
+                  : (lang === "he" ? "נקה תנועה ישירה" : "Clear Direct traffic")}
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Date Filter */}
