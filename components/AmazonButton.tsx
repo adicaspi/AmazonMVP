@@ -126,29 +126,45 @@ export function AmazonButton({ href, children, className, productName, position,
       const webUrl = href;
       if (isIOS) {
         const appUrl = webUrl.replace(/^https:\/\/(www\.)?/, "com.amazon.mobile.shopping.web://");
-        // Fall back to the website unless the app actually took over.
-        // ONLY visibilitychange/pagehide count as "app opened" — the page
-        // really disappears. `blur` must NOT count: Safari's "address is
-        // invalid" alert (no Amazon app installed) fires blur while the page
-        // stays visible, and treating that as success stranded no-app users
-        // with an error and no navigation.
-        // Abort the still-pending scheme navigation once the app has taken
-        // over (and again when the page is shown on return): Safari re-issues
-        // the pending navigation on resume WITHOUT a user gesture, which
-        // popped the "address is invalid" alert at users coming BACK from
-        // the app. window.stop() clears the pending load so nothing replays.
+        // OWNER'S TWO RULES:
+        // 1. App installed → the app opens and our page stays untouched in
+        //    the browser (no web navigation anywhere).
+        // 2. No app → Amazon web opens in a NEW tab, our page stays open
+        //    (falls back to same-tab only if the popup is blocked).
+        //
+        // Mechanics: ONLY visibilitychange/pagehide mean "app opened" (the
+        // page really disappears). `blur` means a system dialog is up — the
+        // app-confirm dialog OR the "address is invalid" alert — so the
+        // fallback must WAIT for focus to return instead of racing the user
+        // (racing caused app users to get web-navigated too). window.stop()
+        // clears the pending scheme load so Safari can't replay it (gesture-
+        // less replays pop the invalid-address alert on return from the app).
         const cancelPending = () => { try { window.stop(); } catch { /* noop */ } };
         let left = false;
+        let blurred = false;
         const markLeft = () => { left = true; cancelPending(); };
         document.addEventListener("visibilitychange", markLeft, { once: true });
         window.addEventListener("pagehide", markLeft, { once: true });
         window.addEventListener("pageshow", cancelPending);
+        const openWeb = () => {
+          if (left || document.hidden) return;
+          cancelPending();
+          // New tab (WebKit's transient user activation lasts ~5s, so this
+          // is allowed shortly after the tap); blocked → same-tab.
+          const w = window.open(webUrl, "_blank");
+          if (!w) window.location.href = webUrl;
+        };
+        window.addEventListener("blur", () => {
+          blurred = true;
+          // Dialog dismissed without the app taking over ("Cancel" on the
+          // confirm, or OK on the no-app alert) → web fallback. If the app
+          // DID open, `left` is set and openWeb no-ops on return.
+          window.addEventListener("focus", () => setTimeout(openWeb, 400), { once: true });
+        }, { once: true });
         window.location.href = appUrl;
-        // Short timer: users without the app reach Amazon web fast (the
-        // system alert may briefly show, then the site loads behind it).
         setTimeout(() => {
-          if (!left && !document.hidden) window.location.href = webUrl;
-        }, 1200);
+          if (!left && !blurred) openWeb();
+        }, 1400);
       } else {
         const u = new URL(webUrl);
         window.location.href =

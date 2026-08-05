@@ -17,9 +17,12 @@ with fallback). This is THE conversion driver — users land logged-in with
   dialog) is the ONLY way to open the app; do not "simplify" back to plain
   links on mobile.
 - iOS fallback detection: ONLY visibilitychange/pagehide mean "app opened".
-  NEVER add `blur` — Safari's "address is invalid" alert (no app installed)
-  fires blur while the page stays visible, which cancels the web fallback
-  and strands the user. Fallback timer stays short (~1.2s).
+  `blur` means a system dialog is up (app-confirm OR invalid-address alert)
+  — it must PAUSE the fallback until focus returns, never count as success
+  and never race the user with a timer.
+- Owner's rules: app users' browser stays on OUR page (no web navigation at
+  all); no-app users get Amazon web in a NEW tab via window.open (WebKit
+  transient activation ~5s allows it), same-tab only if popup-blocked.
 - window.stop() MUST be called when the app takes over and again on
   pageshow: Safari re-issues the pending scheme navigation on tab resume
   without a user gesture, which pops the "address is invalid" alert at
