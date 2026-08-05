@@ -54,10 +54,29 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
 
   return (
     <div>
+      <div className={apiMode ? "flex gap-3 items-start" : ""}>
+      {/* Desktop thumbnail rail — Amazon-style: hover or click swaps the
+          main image. Mobile keeps swipe + dots. */}
+      {apiMode && slides.length > 1 && (
+        <div className="hidden md:flex flex-col gap-2 shrink-0">
+          {slides.map((img, i) => (
+            <button
+              key={img.src}
+              onMouseEnter={() => goTo(i)}
+              onClick={() => goTo(i)}
+              aria-label={`Image ${i + 1}`}
+              className={`w-14 h-14 rounded-lg overflow-hidden border-2 bg-white transition ${i === index ? "border-gray-900" : "border-gray-200 hover:border-gray-400"}`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={img.src} alt={img.alt} loading="lazy" decoding="async" draggable={false} className="w-full h-full object-contain" />
+            </button>
+          ))}
+        </div>
+      )}
       <div
         // API mode: square frame, edge to edge — exactly how Amazon shows
         // its product images. Lifestyle mode: natural 2/3, no cropping.
-        className={`relative overflow-hidden ${apiMode ? "aspect-square bg-white" : "aspect-[2/3] rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"}`}
+        className={`relative overflow-hidden ${apiMode ? "aspect-square bg-white flex-1 min-w-0" : "aspect-[2/3] rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"}`}
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchStartX.current === null) return;
@@ -104,10 +123,11 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
           </>
         )}
       </div>
+      </div>
 
-      {/* Dots */}
+      {/* Dots — mobile only in API mode (desktop has the thumbnail rail) */}
       {slides.length > 1 && (
-        <div className="flex justify-center gap-2 mt-3">
+        <div className={`flex justify-center gap-2 mt-3 ${apiMode ? "md:hidden" : ""}`}>
           {slides.map((_, i) => (
             <button
               key={i}
