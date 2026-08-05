@@ -21,8 +21,12 @@ with fallback). This is THE conversion driver — users land logged-in with
   — it must PAUSE the fallback until focus returns, never count as success
   and never race the user with a timer.
 - Owner's rules: app users' browser stays on OUR page (no web navigation at
-  all); no-app users get Amazon web in a NEW tab via window.open (WebKit
-  transient activation ~5s allows it), same-tab only if popup-blocked.
+  all); no-app users get Amazon web in a NEW tab. iOS blocks window.open
+  outside the click gesture, so the fallback NEVER navigates our tab —
+  it shows the "Continue to Amazon" sheet whose tap (a fresh gesture) opens
+  a guaranteed new tab. Post-focus grace is 1300ms: tapping "Open" on the
+  app-confirm regains focus BEFORE the app switch, and a shorter grace
+  races it and web-navigates on top of the app launch.
 - window.stop() MUST be called when the app takes over and again on
   pageshow: Safari re-issues the pending scheme navigation on tab resume
   without a user gesture, which pops the "address is invalid" alert at

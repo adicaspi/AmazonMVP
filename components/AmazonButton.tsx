@@ -107,6 +107,11 @@ export function AmazonButton({ href, children, className, productName, position,
   // the Amazon app (universal/app links) on same-tab navigations; a new
   // tab always opens the website. Desktop keeps the new tab.
   const [target, setTarget] = useState<string | undefined>("_blank");
+  // iOS fallback: when the app didn't take over, we NEVER navigate this tab —
+  // a "Continue to Amazon" sheet appears instead, and its tap (a real user
+  // gesture) opens Amazon in a guaranteed NEW tab. iOS blocks window.open
+  // outside the click gesture, so an automatic new tab is impossible.
+  const [showContinue, setShowContinue] = useState(false);
   useEffect(() => {
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) setTarget(undefined);
   }, []);
@@ -144,25 +149,26 @@ export function AmazonButton({ href, children, className, productName, position,
         document.addEventListener("visibilitychange", markLeft, { once: true });
         window.addEventListener("pagehide", markLeft, { once: true });
         window.addEventListener("pageshow", cancelPending);
-        const openWeb = () => {
+        // Fallback NEVER navigates this tab. It shows the continue sheet,
+        // whose tap is a fresh user gesture → guaranteed new tab.
+        const offerContinue = () => {
           if (left || document.hidden) return;
           cancelPending();
-          // New tab (WebKit's transient user activation lasts ~5s, so this
-          // is allowed shortly after the tap); blocked → same-tab.
-          const w = window.open(webUrl, "_blank");
-          if (!w) window.location.href = webUrl;
+          setShowContinue(true);
         };
         window.addEventListener("blur", () => {
           blurred = true;
-          // Dialog dismissed without the app taking over ("Cancel" on the
-          // confirm, or OK on the no-app alert) → web fallback. If the app
-          // DID open, `left` is set and openWeb no-ops on return.
-          window.addEventListener("focus", () => setTimeout(openWeb, 400), { once: true });
+          // A system dialog was dismissed. Tapping "Open" on the app-confirm
+          // regains focus a beat BEFORE the app switch — so wait a long
+          // grace (1300ms) for visibilitychange to set `left` before
+          // concluding the app didn't open. (A 400ms grace lost this race
+          // and web-navigated on top of the app launch.)
+          window.addEventListener("focus", () => setTimeout(offerContinue, 1300), { once: true });
         }, { once: true });
         window.location.href = appUrl;
         setTimeout(() => {
-          if (!left && !blurred) openWeb();
-        }, 1400);
+          if (!left && !blurred) offerContinue();
+        }, 1600);
       } else {
         const u = new URL(webUrl);
         window.location.href =
@@ -289,14 +295,41 @@ export function AmazonButton({ href, children, className, productName, position,
   };
 
   return (
-    <a
-      href={href}
-      target={target}
-      rel="nofollow sponsored noopener noreferrer"
-      className={className}
-      onClick={handleClick}
-    >
-      {children}
-    </a>
+    <>
+      <a
+        href={href}
+        target={target}
+        rel="nofollow sponsored noopener noreferrer"
+        className={className}
+        onClick={handleClick}
+      >
+        {children}
+      </a>
+      {/* iOS fallback sheet — plain anchor, NOT wired to handleClick: its tap
+          is a real gesture, so target=_blank reliably opens a NEW tab while
+          our page stays open underneath. */}
+      {showContinue && (
+        <div className="fixed inset-x-0 bottom-0 z-[10001] p-4 pb-6 bg-white/95 backdrop-blur border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
+          <div className="max-w-md mx-auto text-center">
+            <p className="text-sm font-semibold text-gray-800 mb-2">Amazon app didn&apos;t open?</p>
+            <a
+              href={href}
+              target="_blank"
+              rel="nofollow sponsored noopener noreferrer"
+              onClick={() => setShowContinue(false)}
+              className="flex items-center justify-center gap-2 w-full py-3.5 bg-gray-900 hover:bg-black text-white font-bold text-base rounded-xl shadow-lg active:scale-[0.98] transition-transform"
+            >
+              Continue to Amazon
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <button onClick={() => setShowContinue(false)} className="mt-2 text-xs text-gray-500 underline">
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
