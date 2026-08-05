@@ -28,10 +28,11 @@ export function HeroFade({ apiImages }: { apiImages?: { url: string; alt: string
   const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
-    if (interacted || slides.length < 2) return;
+    // Amazon-style: product images never auto-rotate; only lifestyle mode does
+    if (apiMode || interacted || slides.length < 2) return;
     const t = setInterval(() => setIndex((i) => (i + 1) % slides.length), 4000);
     return () => clearInterval(t);
-  }, [interacted, slides.length]);
+  }, [apiMode, interacted, slides.length]);
 
   const goTo = (i: number) => {
     setInteracted(true);
@@ -79,8 +80,8 @@ export function HeroFade({ apiImages }: { apiImages?: { url: string; alt: string
           />
         ))}
 
-        {/* Arrows */}
-        {slides.length > 1 && (
+        {/* Arrows — lifestyle mode only; Amazon shows none */}
+        {!apiMode && slides.length > 1 && (
           <>
             <button
               onClick={() => goTo(index - 1)}
