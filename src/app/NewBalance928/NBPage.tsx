@@ -92,8 +92,8 @@ export function NBPage({ trackingPage, amazonLink, product }: { trackingPage: st
       {/* 1. HERO — desire above the fold */}
       <section className="bg-white">
         <div className="max-w-6xl md:max-w-7xl mx-auto px-4 lg:px-10 py-8 md:py-14">
-          <div className="grid gap-6 md:gap-12 items-center md:grid-cols-2">
-            <div className="order-2 md:order-1 text-center md:text-left">
+          <div className="grid gap-6 md:gap-10 items-center md:items-start md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+            <div className="order-2 text-center md:text-left">
               <div className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-900 px-4 py-2 rounded-full text-sm font-bold mb-4">
                 🚶‍♀️ The walking shoe with a devoted following
               </div>
@@ -148,7 +148,7 @@ export function NBPage({ trackingPage, amazonLink, product }: { trackingPage: st
               </div>
             </div>
 
-            <div className="order-1 md:order-2 w-full max-w-[520px] mx-auto">
+            <div className="order-1 w-full max-w-[520px] md:max-w-none mx-auto">
               <HeroFade apiImages={apiImages} placeholderEmoji="👟" placeholderTitle="New Balance 928v3" />
             </div>
           </div>
