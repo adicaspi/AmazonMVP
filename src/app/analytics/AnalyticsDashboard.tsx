@@ -50,6 +50,7 @@ type PageData = {
   label: string;
   color: string;
   archived?: boolean;
+  pinned?: boolean;
   views: number;
   uniqueClickers: number;
   todayViews: number;
@@ -720,7 +721,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const pageHasActiveCampaign = (path: string) =>
     fbCampaigns.some((c) => campaignMatchesPage(path, c.campaign_name));
   const isArchived = (p: PageData) =>
-    !pageHasActiveCampaign(p.page) && p.views === 0 && p.totalClicks === 0;
+    !p.pinned && !pageHasActiveCampaign(p.page) && p.views === 0 && p.totalClicks === 0;
 
   const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];
   const matchedCampaigns = campaignKeyword

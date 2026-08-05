@@ -74,7 +74,8 @@ export type FacebookAdsData = {
 };
 
 // Pages we track
-const TRACKED_PAGES: { path: string; label: string; color: string; archived?: boolean }[] = [
+// pinned: always visible in the dashboard even with zero activity (new pages)
+const TRACKED_PAGES: { path: string; label: string; color: string; archived?: boolean; pinned?: boolean }[] = [
   { path: "/auraglow", label: "AuraGlow", color: "blue" },
   { path: "/grandelash", label: "GrandeLash", color: "rose" },
   { path: "/shark-flexstyle", label: "Shark FlexStyle", color: "amber" },
@@ -84,9 +85,9 @@ const TRACKED_PAGES: { path: string; label: string; color: string; archived?: bo
   { path: "/BirkenstockSales", label: "Birkenstock (Sales)", color: "amber" },
   { path: "/BirkenstockInstagram", label: "Birkenstock (Instagram)", color: "amber" },
   { path: "/BirkenstockAudience", label: "Birkenstock (Audience)", color: "amber" },
-  { path: "/UggScuffette", label: "UGG Scuffette", color: "amber" },
-  { path: "/UggCozy", label: "UGG (Cozy)", color: "amber" },
-  { path: "/NewBalance928", label: "New Balance 928", color: "blue" },
+  { path: "/UggScuffette", label: "UGG Scuffette", color: "amber", pinned: true },
+  { path: "/UggCozy", label: "UGG (Cozy)", color: "amber", pinned: true },
+  { path: "/NewBalance928", label: "New Balance 928", color: "blue", pinned: true },
 ];
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {
@@ -483,7 +484,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
 
   // Build page data for each tracked page
   const pagesData = await Promise.all(
-    TRACKED_PAGES.map(async ({ path, label, color, archived }) => {
+    TRACKED_PAGES.map(async ({ path, label, color, archived, pinned }) => {
       const stats = getClickStats(filteredClicks, path);
       const rawViews = await getPageViews(path, dateFrom, dateTo);
       const todayViews = await getTodayPageViews(path);
@@ -527,6 +528,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
         label,
         color,
         archived: archived ?? false,
+        pinned: pinned ?? false,
         views,
         uniqueClickers,
         todayViews,
