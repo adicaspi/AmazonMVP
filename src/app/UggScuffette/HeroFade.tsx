@@ -58,14 +58,16 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
       {/* Desktop thumbnail rail — Amazon-style: hover or click swaps the
           main image. Mobile keeps swipe + dots. */}
       {apiMode && slides.length > 1 && (
-        <div className="hidden md:flex flex-col gap-2 shrink-0">
+        <div className="hidden md:flex flex-col gap-[9px] shrink-0 pt-1">
           {slides.map((img, i) => (
             <button
               key={img.src}
               onMouseEnter={() => goTo(i)}
               onClick={() => goTo(i)}
               aria-label={`Image ${i + 1}`}
-              className={`w-14 h-14 rounded-lg overflow-hidden border-2 bg-white transition ${i === index ? "border-gray-900" : "border-gray-200 hover:border-gray-400"}`}
+              // Amazon-exact thumbs: small, rounded, hairline gray border;
+              // the selected one gets Amazon's blue ring
+              className={`w-11 h-11 rounded-lg overflow-hidden bg-white transition ${i === index ? "border-2 border-blue-500 shadow-[0_0_0_2px_rgba(59,130,246,0.15)]" : "border border-gray-300 hover:border-gray-500"}`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={img.src} alt={img.alt} loading="lazy" decoding="async" draggable={false} className="w-full h-full object-contain" />
@@ -98,6 +100,27 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
             style={{ objectPosition: img.pos }}
           />
         ))}
+
+        {/* Share button — Amazon's circular top-right control */}
+        {apiMode && (
+          <button
+            onClick={() => {
+              const url = typeof window !== "undefined" ? window.location.href.split("?")[0] : "";
+              if (navigator.share) {
+                navigator.share({ url }).catch(() => { /* user cancelled */ });
+              } else {
+                navigator.clipboard?.writeText(url).catch(() => { /* noop */ });
+              }
+            }}
+            aria-label="Share"
+            className="hidden md:flex absolute right-3 top-3 w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full items-center justify-center z-10 transition"
+          >
+            <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 15V4m0 0L8 8m4-4l4 4" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12v7a1.5 1.5 0 001.5 1.5h11A1.5 1.5 0 0019 19v-7" />
+            </svg>
+          </button>
+        )}
 
         {/* Arrows — lifestyle mode only; Amazon shows none */}
         {!apiMode && slides.length > 1 && (
