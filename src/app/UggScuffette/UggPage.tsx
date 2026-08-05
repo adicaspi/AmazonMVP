@@ -153,7 +153,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
               </div>
             </div>
 
-            <div className="order-1 md:order-2 max-w-[260px] md:max-w-[420px] mx-auto w-full">
+            <div className="order-1 md:order-2 max-w-[360px] md:max-w-[480px] mx-auto w-full">
               <HeroFade apiImages={apiImages} />
             </div>
           </div>
@@ -276,7 +276,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
             <div className="grid grid-cols-3 gap-2 md:gap-4">
               {lifestyleImages.map((img, i) => (
                 /* eslint-disable-next-line @next/next/no-img-element */
-                <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className={`w-full aspect-[2/3] rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5 ${usingApiLifestyle ? "object-contain bg-white p-2" : "object-cover"}`} />
+                <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className={`w-full rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5 ${usingApiLifestyle ? "aspect-square object-contain bg-white" : "aspect-[2/3] object-cover"}`} />
               ))}
             </div>
             <div className="text-center mt-8">

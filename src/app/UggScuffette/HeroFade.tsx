@@ -19,6 +19,10 @@ export function HeroFade({ apiImages }: { apiImages?: { url: string; alt: string
       ? IMAGES.map((img) => ({ ...img, contain: false }))
       : (apiImages || []).map((img) => ({ src: img.url, alt: img.alt, pos: "50% 50%", contain: true }));
 
+  // Amazon product shots are square canvases — render them exactly like
+  // Amazon does: square frame, edge to edge, no padding. Lifestyle photos
+  // (manual IMAGES) keep the tall 2:3 crop.
+  const apiMode = IMAGES.length === 0;
   const [index, setIndex] = useState(0);
   const [interacted, setInteracted] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -50,9 +54,9 @@ export function HeroFade({ apiImages }: { apiImages?: { url: string; alt: string
   return (
     <div>
       <div
-        // Natural 2/3 ratio — images show in full, no cropping. The teaser
-        // effect comes from the narrower mobile width set by the parent.
-        className="relative aspect-[2/3] rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-white"
+        // API mode: square frame, edge to edge — exactly how Amazon shows
+        // its product images. Lifestyle mode: natural 2/3, no cropping.
+        className={`relative ${apiMode ? "aspect-square" : "aspect-[2/3]"} rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-white`}
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchStartX.current === null) return;
@@ -70,7 +74,7 @@ export function HeroFade({ apiImages }: { apiImages?: { url: string; alt: string
             loading={i === 0 ? "eager" : "lazy"}
             decoding="async"
             draggable={false}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${img.contain ? "object-contain p-3" : "object-cover"} ${i === index ? "opacity-100" : "opacity-0"}`}
+            className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${img.contain ? "object-contain" : "object-cover"} ${i === index ? "opacity-100" : "opacity-0"}`}
             style={{ objectPosition: img.pos }}
           />
         ))}

@@ -148,7 +148,7 @@ export function CozyPage({ trackingPage, amazonLink, product }: { trackingPage: 
               </div>
             </div>
 
-            <div className="order-1 md:order-2 max-w-[260px] md:max-w-[420px] mx-auto w-full">
+            <div className="order-1 md:order-2 max-w-[360px] md:max-w-[480px] mx-auto w-full">
               <HeroFade apiImages={apiImages} />
             </div>
           </div>
