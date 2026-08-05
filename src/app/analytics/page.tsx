@@ -78,8 +78,8 @@ export type FacebookAdsData = {
 const TRACKED_PAGES: { path: string; label: string; color: string; archived?: boolean; pinned?: boolean }[] = [
   { path: "/auraglow", label: "AuraGlow", color: "blue" },
   { path: "/grandelash", label: "GrandeLash", color: "rose" },
-  { path: "/shark-flexstyle", label: "Shark FlexStyle", color: "amber" },
-  { path: "/sharkflex", label: "SharkFlex (Sales)", color: "amber" },
+  { path: "/shark-flexstyle", label: "Shark FlexStyle", color: "amber", archived: true },
+  { path: "/sharkflex", label: "SharkFlex (Sales)", color: "amber", archived: true },
   { path: "/BirkenstockArizona", label: "Birkenstock", color: "amber", archived: true },
   { path: "/BirkenstockTraffic", label: "Birkenstock (Traffic)", color: "amber", archived: true },
   { path: "/BirkenstockSales", label: "Birkenstock (Sales)", color: "amber", archived: true },
