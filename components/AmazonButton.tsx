@@ -125,10 +125,14 @@ export function AmazonButton({ href, children, className, productName, position,
     if (/Android/i.test(ua)) {
       setTarget(undefined); // intent:// needs same-tab; falls back silently
     } else if (/iPhone|iPad|iPod/i.test(ua)) {
-      // In-app browsers (FB/IG — the ad traffic): same-tab for the scheme
-      // handoff. Regular Safari/Chrome: keep _blank — plain new-tab link,
-      // no scheme attempt, so the "address is invalid" alert never shows.
-      setTarget(isMetaInApp(ua) ? undefined : "_blank");
+      // ALL iOS same-tab. In-app browsers: the scheme handoff needs it.
+      // Regular Safari: Amazon's AASA DOES include /dp/ product paths
+      // (verified against /.well-known/apple-app-site-association), so a
+      // plain same-tab anchor tap IS a Universal Link — iOS silently opens
+      // the Amazon app when installed (and our page stays put), or just
+      // loads amazon.com when not. target=_blank KILLS this handoff, and
+      // no scheme runs here so the "address is invalid" alert can't appear.
+      setTarget(undefined);
     }
   }, []);
 
