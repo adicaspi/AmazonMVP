@@ -716,8 +716,11 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   // active campaigns with activity) AND no first-party activity in range.
   const pageHasActiveCampaign = (path: string) =>
     fbCampaigns.some((c) => campaignMatchesPage(path, c.campaign_name));
+  // Manual archived flag (TRACKED_PAGES) wins over everything, then the
+  // auto rule: no active campaign + no activity (pinned pages exempt)
   const isArchived = (p: PageData) =>
-    !p.pinned && !pageHasActiveCampaign(p.page) && p.views === 0 && p.totalClicks === 0;
+    p.archived === true ||
+    (!p.pinned && !pageHasActiveCampaign(p.page) && p.views === 0 && p.totalClicks === 0);
 
   const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];
   const matchedCampaigns = campaignKeyword
