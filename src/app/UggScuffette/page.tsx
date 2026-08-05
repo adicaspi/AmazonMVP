@@ -13,9 +13,9 @@ export const metadata: Metadata = {
       "Genuine suede, plush wool lining, and a real outsole for indoors and out.",
     images: [
       {
-        url: "https://www.aipicks.co/images/ugg/hero.jpg",
-        width: 800,
-        height: 1200,
+        url: "https://m.media-amazon.com/images/I/31KstO2FSiL._SL1000_.jpg",
+        width: 1000,
+        height: 1000,
         alt: "UGG Scuffette II Slippers",
       },
     ],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "UGG Scuffette II — The Slippers You'll Live In",
     description: "Genuine suede, plush wool lining, cozy from the first slip-in.",
-    images: ["https://www.aipicks.co/images/ugg/hero.jpg"],
+    images: ["https://m.media-amazon.com/images/I/31KstO2FSiL._SL1000_.jpg"],
   },
 };
 

@@ -13,9 +13,9 @@ export const metadata: Metadata = {
       "The plush wool slipper women keep coming back for. 4.7★ on Amazon.",
     images: [
       {
-        url: "https://www.aipicks.co/images/ugg/hero.jpg",
-        width: 800,
-        height: 1200,
+        url: "https://m.media-amazon.com/images/I/31KstO2FSiL._SL1000_.jpg",
+        width: 1000,
+        height: 1000,
         alt: "UGG Scuffette II Slippers",
       },
     ],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "UGG Scuffette II — The Cozy Upgrade Your Feet Deserve",
     description: "The plush wool slipper women keep coming back for. 4.7★ on Amazon.",
-    images: ["https://www.aipicks.co/images/ugg/hero.jpg"],
+    images: ["https://m.media-amazon.com/images/I/31KstO2FSiL._SL1000_.jpg"],
   },
 };
 

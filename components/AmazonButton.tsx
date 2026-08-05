@@ -132,10 +132,17 @@ export function AmazonButton({ href, children, className, productName, position,
         // invalid" alert (no Amazon app installed) fires blur while the page
         // stays visible, and treating that as success stranded no-app users
         // with an error and no navigation.
+        // Abort the still-pending scheme navigation once the app has taken
+        // over (and again when the page is shown on return): Safari re-issues
+        // the pending navigation on resume WITHOUT a user gesture, which
+        // popped the "address is invalid" alert at users coming BACK from
+        // the app. window.stop() clears the pending load so nothing replays.
+        const cancelPending = () => { try { window.stop(); } catch { /* noop */ } };
         let left = false;
-        const markLeft = () => { left = true; };
+        const markLeft = () => { left = true; cancelPending(); };
         document.addEventListener("visibilitychange", markLeft, { once: true });
         window.addEventListener("pagehide", markLeft, { once: true });
+        window.addEventListener("pageshow", cancelPending);
         window.location.href = appUrl;
         // Short timer: users without the app reach Amazon web fast (the
         // system alert may briefly show, then the site loads behind it).
