@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
+import { OpenInAppLink } from "@/components/OpenInAppLink";
 import { HeroFade } from "../UggScuffette/HeroFade";
 import type { AmazonProductData } from "@/lib/amazon-creators-api";
 
@@ -22,6 +23,21 @@ const REVIEW_COUNT: number | null = 3950;
 
 // [USER ASSET] Real Amazon review quotes (verified via screenshots).
 const REVIEW_QUOTES: { text: string; author: string }[] = [];
+
+// Official Amazon CDN images (stable URLs, fetched via the Creators API) —
+// the guaranteed fallback when a live API fetch fails, so the gallery NEVER
+// degrades to the placeholder again.
+const FALLBACK_IMAGES = [
+  "https://m.media-amazon.com/images/I/31FScmxvWAL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/31SU-Pv0s9L._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/41j3nBiUN2L._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/31Y18ea2kXL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/219Me3tKA2L._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/31mW+YLDGhL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/4141rhLr-pL._SL1000_.jpg",
+];
+// Listing price verified 2026-07-29 (user screenshot) — used when the API is down
+const FALLBACK_PRICE_ANCHOR = "Around $159.95";
 
 // Round DOWN so the claim is always true: 3,950 → "3,900+"
 function roundedCount(n: number): string {
@@ -71,12 +87,13 @@ export function NBPage({ trackingPage, amazonLink, product }: { trackingPage: st
     : REVIEW_COUNT !== null ? roundedCount(REVIEW_COUNT) : null;
   const hasRating = starRating !== null && reviewCount !== null;
   const priceValue = product?.price?.amount || PRICE_VALUE;
-  const priceAnchor = product?.price?.displayAmount ? `Around ${product.price.displayAmount}` : null;
+  const priceAnchor = product?.price?.displayAmount ? `Around ${product.price.displayAmount}` : FALLBACK_PRICE_ANCHOR;
   const alt = product?.title || "New Balance Women's 928v3 Walking Shoe";
-  const apiImages = [product?.primaryImage, ...(product?.variantImages || [])]
+  const liveImages = [product?.primaryImage, ...(product?.variantImages || [])]
     .map((img) => img?.large?.url)
     .filter((u): u is string => !!u)
     .map((u) => ({ url: u.replace("._SL500_.", "._SL1000_."), alt }));
+  const apiImages = liveImages.length > 0 ? liveImages : FALLBACK_IMAGES.map((url) => ({ url, alt }));
 
   return (
     <div className="min-h-screen bg-white">
@@ -142,6 +159,7 @@ export function NBPage({ trackingPage, amazonLink, product }: { trackingPage: st
                   </svg>
                 </AmazonButton>
                 <p className="text-center md:text-left text-xs text-gray-600 mt-2">Popular sizes and widths sell out — availability varies by color.</p>
+                <OpenInAppLink href={AMAZON_LINK} productName="New Balance 928v3" />
                 {priceAnchor && (
                   <p className="text-center md:text-left text-[10px] text-gray-400 mt-0.5">*Price varies by color, size &amp; width on Amazon</p>
                 )}

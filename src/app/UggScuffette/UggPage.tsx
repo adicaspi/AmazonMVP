@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
+import { OpenInAppLink } from "@/components/OpenInAppLink";
 import { HeroFade } from "./HeroFade";
 import type { AmazonProductData } from "@/lib/amazon-creators-api";
 
@@ -35,6 +36,20 @@ function roundedCount(n: number): string {
 const STORY_IMAGE: { src: string; alt: string } | null = null;
 const LIFESTYLE_IMAGES: { src: string; alt: string }[] = [];
 
+// Official Amazon CDN images (stable URLs, fetched via the Creators API) —
+// the guaranteed fallback when a live API fetch fails, so the gallery NEVER
+// degrades to the placeholder again.
+const FALLBACK_IMAGES = [
+  "https://m.media-amazon.com/images/I/31KstO2FSiL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/316onCBt0ML._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/31a4zASQ53L._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/31Uaka6V-oL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/31XSW7iTpzL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/31L+PhAyzGL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/31nQDJYvXDL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/31YxvBnMW7L._SL1000_.jpg",
+];
+
 const FAQS = [
   {
     q: "Are UGG slippers really worth the price?",
@@ -64,10 +79,11 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
   // All official Amazon images: primary + variants. _SL500_ → _SL1000_ for
   // retina sharpness (Amazon's CDN resizes on the fly).
   const alt = product?.title || "UGG Scuffette II Slipper";
-  const apiImages = [product?.primaryImage, ...(product?.variantImages || [])]
+  const liveImages = [product?.primaryImage, ...(product?.variantImages || [])]
     .map((img) => img?.large?.url)
     .filter((u): u is string => !!u)
     .map((u) => ({ url: u.replace("._SL500_.", "._SL1000_."), alt }));
+  const apiImages = liveImages.length > 0 ? liveImages : FALLBACK_IMAGES.map((url) => ({ url, alt }));
   // Story + lifestyle slots run on the official Amazon images until real
   // lifestyle photos replace them (studio shots render uncropped on white)
   const storyImage = STORY_IMAGE ?? (apiImages[1] ? { src: apiImages[1].url, alt } : null);
@@ -147,6 +163,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
                   </svg>
                 </AmazonButton>
                 <p className="text-center md:text-left text-xs text-gray-600 mt-2">Popular colors tend to sell out as the weather cools.</p>
+                <OpenInAppLink href={AMAZON_LINK} productName="UGG Scuffette II" />
                 {priceAnchor !== null && (
                   <p className="text-center md:text-left text-[10px] text-gray-400 mt-0.5">*Price varies by color &amp; size on Amazon</p>
                 )}
