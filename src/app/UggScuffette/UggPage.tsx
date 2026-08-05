@@ -293,7 +293,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
             <div className="grid grid-cols-3 gap-2 md:gap-4">
               {lifestyleImages.map((img, i) => (
                 /* eslint-disable-next-line @next/next/no-img-element */
-                <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className={`w-full ${usingApiLifestyle ? "aspect-square object-contain bg-white" : "aspect-[2/3] object-cover rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5"}`} />
+                <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className={`w-full ${usingApiLifestyle ? "aspect-[4/3] object-contain bg-white" : "aspect-[2/3] object-cover rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5"}`} />
               ))}
             </div>
             <div className="text-center mt-8">

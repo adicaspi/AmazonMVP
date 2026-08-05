@@ -67,7 +67,7 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
               aria-label={`Image ${i + 1}`}
               // Amazon-exact thumbs: small, rounded, hairline gray border;
               // the selected one gets Amazon's blue ring
-              className={`w-11 h-11 rounded-lg overflow-hidden bg-white transition ${i === index ? "border-2 border-blue-500 shadow-[0_0_0_2px_rgba(59,130,246,0.15)]" : "border border-gray-300 hover:border-gray-500"}`}
+              className={`w-14 h-14 rounded-lg overflow-hidden bg-white transition ${i === index ? "border-2 border-blue-500 shadow-[0_0_0_2px_rgba(59,130,246,0.15)]" : "border border-gray-300 hover:border-gray-500"}`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={img.src} alt={img.alt} loading="lazy" decoding="async" draggable={false} className="w-full h-full object-contain" />
@@ -78,7 +78,7 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
       <div
         // API mode: square frame, edge to edge — exactly how Amazon shows
         // its product images. Lifestyle mode: natural 2/3, no cropping.
-        className={`relative overflow-hidden ${apiMode ? "aspect-square bg-white flex-1 min-w-0" : "aspect-[2/3] rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"}`}
+        className={`relative overflow-hidden ${apiMode ? "aspect-[4/3] bg-white flex-1 min-w-0" : "aspect-[2/3] rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"}`}
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchStartX.current === null) return;
