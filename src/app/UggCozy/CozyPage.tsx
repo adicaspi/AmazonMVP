@@ -92,7 +92,7 @@ export function CozyPage({ trackingPage, amazonLink, product }: { trackingPage: 
       </div>
 
       {/* 1. HERO — desire above the fold */}
-      <section className="bg-gradient-to-br from-amber-50 via-white to-stone-100">
+      <section className="bg-white">
         <div className="max-w-6xl md:max-w-7xl mx-auto px-4 lg:px-10 py-8 md:py-14">
           <div className="grid gap-6 md:gap-12 items-center md:grid-cols-2">
             <div className="order-2 md:order-1 text-center md:text-left">
@@ -148,7 +148,7 @@ export function CozyPage({ trackingPage, amazonLink, product }: { trackingPage: 
               </div>
             </div>
 
-            <div className="order-1 md:order-2 max-w-[360px] md:max-w-[480px] mx-auto w-full">
+            <div className="order-1 md:order-2 w-full max-w-[520px] mx-auto">
               <HeroFade apiImages={apiImages} />
             </div>
           </div>

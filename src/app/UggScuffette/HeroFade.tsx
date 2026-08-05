@@ -56,7 +56,7 @@ export function HeroFade({ apiImages }: { apiImages?: { url: string; alt: string
       <div
         // API mode: square frame, edge to edge — exactly how Amazon shows
         // its product images. Lifestyle mode: natural 2/3, no cropping.
-        className={`relative ${apiMode ? "aspect-square" : "aspect-[2/3]"} rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-white`}
+        className={`relative overflow-hidden ${apiMode ? "aspect-square bg-white" : "aspect-[2/3] rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"}`}
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchStartX.current === null) return;

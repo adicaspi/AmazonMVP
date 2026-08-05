@@ -87,7 +87,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
       </div>
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-stone-100 via-white to-amber-100">
+      <section className="bg-white">
         <div className="max-w-6xl md:max-w-7xl mx-auto px-4 lg:px-10 py-8 md:py-14">
           <div className="grid gap-6 md:gap-12 items-center md:grid-cols-2">
             <div className="order-2 md:order-1 text-center md:text-left">
@@ -153,7 +153,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
               </div>
             </div>
 
-            <div className="order-1 md:order-2 max-w-[360px] md:max-w-[480px] mx-auto w-full">
+            <div className="order-1 md:order-2 w-full max-w-[520px] mx-auto">
               <HeroFade apiImages={apiImages} />
             </div>
           </div>
@@ -201,7 +201,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
       <section className="py-10 md:py-14 bg-stone-50">
         <div className={`max-w-5xl mx-auto px-4 ${storyImage ? "md:grid md:grid-cols-2 md:gap-12 md:items-center" : ""}`}>
           {storyImage && (
-            <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 mb-6 md:mb-0 max-w-md mx-auto md:max-w-none">
+            <div className={`mb-6 md:mb-0 max-w-md mx-auto md:max-w-none ${STORY_IMAGE ? "rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5" : ""}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={storyImage.src} alt={storyImage.alt} loading="lazy" decoding="async" className="w-full h-auto" />
             </div>
@@ -276,7 +276,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
             <div className="grid grid-cols-3 gap-2 md:gap-4">
               {lifestyleImages.map((img, i) => (
                 /* eslint-disable-next-line @next/next/no-img-element */
-                <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className={`w-full rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5 ${usingApiLifestyle ? "aspect-square object-contain bg-white" : "aspect-[2/3] object-cover"}`} />
+                <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className={`w-full ${usingApiLifestyle ? "aspect-square object-contain bg-white" : "aspect-[2/3] object-cover rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5"}`} />
               ))}
             </div>
             <div className="text-center mt-8">
