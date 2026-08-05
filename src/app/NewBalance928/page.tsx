@@ -36,20 +36,22 @@ const ASIN = "B01N553EY1";
 // reviews resource isn't returned by Amazon, so rating comes from verified
 // constants in NBPage once confirmed on the listing.
 const getCachedProduct = unstable_cache(
+  // Throws on API failure so unstable_cache does NOT store the miss —
+  // a cached null used to blank the page images for a full hour.
   async (): Promise<AmazonProductData | null> => {
-    try {
-      const products = await getProductsByASIN([ASIN]);
-      if (products.length > 0) return products[0];
-    } catch (err) {
-      console.error("Failed to fetch New Balance data from Amazon Creators API:", err);
-    }
-    return null;
+    const products = await getProductsByASIN([ASIN]);
+    return products.length > 0 ? products[0] : null;
   },
   [`product-${ASIN}`],
   { revalidate: 3600 }
 );
 
 export default async function NewBalance928Page() {
-  const product = await getCachedProduct();
+  let product = null;
+  try {
+    product = await getCachedProduct();
+  } catch (err) {
+    console.error("Amazon Creators API fetch failed:", err);
+  }
   return <NBPage trackingPage="/NewBalance928" product={product} />;
 }

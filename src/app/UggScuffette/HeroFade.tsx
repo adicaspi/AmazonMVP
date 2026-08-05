@@ -13,7 +13,7 @@ const IMAGES: { src: string; alt: string; pos: string }[] = [];
 
 type Slide = { src: string; alt: string; pos: string; contain: boolean };
 
-export function HeroFade({ apiImages }: { apiImages?: { url: string; alt: string }[] }) {
+export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeholderTitle = "UGG Scuffette II" }: { apiImages?: { url: string; alt: string }[]; placeholderEmoji?: string; placeholderTitle?: string }) {
   const slides: Slide[] =
     IMAGES.length > 0
       ? IMAGES.map((img) => ({ ...img, contain: false }))
@@ -44,8 +44,8 @@ export function HeroFade({ apiImages }: { apiImages?: { url: string; alt: string
     return (
       <div>
         <div className="relative aspect-[2/3] rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-gradient-to-br from-amber-50 via-white to-stone-100 flex flex-col items-center justify-center gap-3">
-          <span className="text-6xl">🐑</span>
-          <span className="text-xl font-black tracking-tight text-amber-900">UGG Scuffette II</span>
+          <span className="text-6xl">{placeholderEmoji}</span>
+          <span className="text-xl font-black tracking-tight text-amber-900">{placeholderTitle}</span>
           <span className="text-xs text-amber-800/70">Photos coming soon</span>
         </div>
       </div>

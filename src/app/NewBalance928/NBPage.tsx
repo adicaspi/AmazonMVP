@@ -149,7 +149,7 @@ export function NBPage({ trackingPage, amazonLink, product }: { trackingPage: st
             </div>
 
             <div className="order-1 md:order-2 w-full max-w-[520px] mx-auto">
-              <HeroFade apiImages={apiImages} />
+              <HeroFade apiImages={apiImages} placeholderEmoji="👟" placeholderTitle="New Balance 928v3" />
             </div>
           </div>
         </div>
