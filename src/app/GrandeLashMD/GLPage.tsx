@@ -98,12 +98,9 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
     .map((img) => img?.large?.url)
     .filter((u): u is string => !!u)
     .map((u) => ({ url: u.replace("._SL500_.", "._SL1000_."), alt }));
-  // The Creators API caps images at 500px; this official 1500px bottle shot
-  // (carried over from the original page) leads the gallery for sharpness.
-  const HIRES_HERO = { url: "https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg", alt };
-  const rest = (liveImages.length > 0 ? liveImages : FALLBACK_IMAGES.map((url) => ({ url, alt })))
-    .filter((i) => !i.url.includes("61QhbRMdKIL"));
-  const apiImages = [HIRES_HERO, ...rest];
+  // Gallery = the official listing images (clean white canvases). The old
+  // 1500px bottle shot was rejected — it has a gray background baked in.
+  const apiImages = liveImages.length > 0 ? liveImages : FALLBACK_IMAGES.map((url) => ({ url, alt }));
 
   return (
     <div className="min-h-screen bg-white">
