@@ -11,16 +11,20 @@ import { useEffect, useRef, useState } from "react";
 // object-contain (white studio background, never cropped).
 const IMAGES: { src: string; alt: string; pos: string }[] = [];
 
-type Slide = { src: string; alt: string; pos: string; contain: boolean };
+type Slide = { kind: "image" | "video"; src: string; alt: string; pos: string; contain: boolean; poster?: string };
 
 // frameAspect: match the product images' own canvas — "4/3" for the
 // 500x375 shoe shots, "square" for 500x500 canvases (e.g. GrandeLash) —
 // so the image always fills the frame edge to edge.
-export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeholderTitle = "UGG Scuffette II", frameAspect = "4/3" }: { apiImages?: { url: string; alt: string }[]; placeholderEmoji?: string; placeholderTitle?: string; frameAspect?: "4/3" | "square" }) {
+export function HeroFade({ apiImages, videos, placeholderEmoji = "\ud83d\udc11", placeholderTitle = "UGG Scuffette II", frameAspect = "4/3" }: { apiImages?: { url: string; alt: string }[]; videos?: { src: string; poster: string }[]; placeholderEmoji?: string; placeholderTitle?: string; frameAspect?: "4/3" | "square" }) {
   const slides: Slide[] =
     IMAGES.length > 0
-      ? IMAGES.map((img) => ({ ...img, contain: false }))
-      : (apiImages || []).map((img) => ({ src: img.url, alt: img.alt, pos: "50% 50%", contain: true }));
+      ? IMAGES.map((img) => ({ ...img, kind: "image" as const, contain: false }))
+      : [
+          ...(apiImages || []).map((img) => ({ kind: "image" as const, src: img.url, alt: img.alt, pos: "50% 50%", contain: true })),
+          // Videos ride at the end of the gallery, Amazon-style
+          ...(videos || []).map((v) => ({ kind: "video" as const, src: v.src, poster: v.poster, alt: "Product video", pos: "50% 50%", contain: true })),
+        ];
 
   // Amazon product shots are square canvases — render them exactly like
   // Amazon does: square frame, edge to edge, no padding. Lifestyle photos
@@ -74,8 +78,20 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
               // the selected one gets Amazon's blue ring
               className={`w-14 h-14 rounded-lg overflow-hidden bg-white transition ${i === index ? "border-2 border-blue-500 shadow-[0_0_0_2px_rgba(59,130,246,0.15)]" : "border border-gray-300 hover:border-gray-500"}`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img.src} alt={img.alt} loading="lazy" decoding="async" draggable={false} className="w-full h-full object-contain" />
+              {img.kind === "video" ? (
+                <span className="relative block w-full h-full">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={img.poster} alt={img.alt} loading="lazy" decoding="async" draggable={false} className="w-full h-full object-cover" />
+                  <span className="absolute inset-0 flex items-center justify-center bg-black/20">
+                    <span className="w-6 h-6 rounded-full bg-white/90 flex items-center justify-center">
+                      <svg className="w-3 h-3 text-gray-900 translate-x-[1px]" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72c0 .84.93 1.35 1.64.9l10.18-6.86a1.08 1.08 0 000-1.8L9.64 4.24A1.08 1.08 0 008 5.14z" /></svg>
+                    </span>
+                  </span>
+                </span>
+              ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={img.src} alt={img.alt} loading="lazy" decoding="async" draggable={false} className="w-full h-full object-contain" />
+              )}
             </button>
           ))}
         </div>
@@ -98,7 +114,7 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
           if (Math.abs(dx) > 40) goTo(index + (dx < 0 ? 1 : -1));
         }}
       >
-        {slides.map((img, i) => (
+        {slides.map((img, i) => img.kind === "video" ? null : (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img
             key={img.src}
@@ -116,6 +132,21 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
             }}
           />
         ))}
+
+        {/* Active video slide — mounted only while selected, so switching
+            slides stops playback */}
+        {slides[index]?.kind === "video" && (
+          <video
+            key={slides[index].src}
+            className="absolute inset-0 w-full h-full object-contain bg-black"
+            controls
+            playsInline
+            preload="metadata"
+            poster={slides[index].poster}
+          >
+            <source src={slides[index].src} type="video/mp4" />
+          </video>
+        )}
 
         {/* Share button — Amazon's circular top-right control */}
         {apiMode && (

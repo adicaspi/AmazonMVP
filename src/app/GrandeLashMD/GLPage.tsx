@@ -128,8 +128,8 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
       {/* 1. HERO — desire above the fold */}
       <section className="bg-white">
         <div className="max-w-6xl md:max-w-7xl mx-auto px-4 lg:px-10 py-8 md:py-14">
-          <div className="grid gap-6 md:gap-10 items-center md:items-start md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-            <div className="order-2 text-center md:text-left">
+          <div className="grid gap-6 md:gap-10 items-center md:items-stretch md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+            <div className="order-2 text-center md:text-left md:flex md:flex-col">
               <div className="inline-flex items-center gap-1.5 bg-rose-100 text-rose-800 px-4 py-2 rounded-full text-sm font-bold mb-4">
                 🏆 #1 Best Seller on Amazon — Eyelash Primers
               </div>
@@ -157,7 +157,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
                 </div>
               )}
 
-              <div className="max-w-md mx-auto md:mx-0">
+              <div className="max-w-md mx-auto md:mx-0 md:mt-auto">
                 {priceAnchor && (
                   <p className="text-center md:text-left text-base text-gray-800 mb-1">
                     <span className="font-bold">{priceAnchor}</span>
@@ -187,7 +187,16 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
             </div>
 
             <div className="order-1 w-full max-w-[520px] md:max-w-none mx-auto">
-              <HeroFade apiImages={apiImages} placeholderEmoji="👁️" placeholderTitle="GrandeLASH-MD" frameAspect="square" />
+              <HeroFade
+                apiImages={apiImages}
+                videos={[
+                  { src: "https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4", poster: "https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg" },
+                  { src: "https://res.cloudinary.com/dzkgopplv/video/upload/v1770125528/WhatsApp_Video_2026-02-01_at_18.10.00_ayx8jr.mp4", poster: "https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg" },
+                ]}
+                placeholderEmoji="👁️"
+                placeholderTitle="GrandeLASH-MD"
+                frameAspect="square"
+              />
             </div>
           </div>
         </div>

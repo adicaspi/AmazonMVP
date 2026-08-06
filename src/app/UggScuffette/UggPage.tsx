@@ -105,8 +105,8 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
       {/* Hero */}
       <section className="bg-white">
         <div className="max-w-6xl md:max-w-7xl mx-auto px-4 lg:px-10 py-8 md:py-14">
-          <div className="grid gap-6 md:gap-10 items-center md:items-start md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-            <div className="order-2 text-center md:text-left">
+          <div className="grid gap-6 md:gap-10 items-center md:items-stretch md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+            <div className="order-2 text-center md:text-left md:flex md:flex-col">
               <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-bold mb-4">
                 ✓ The Original UGG — Loved Worldwide
               </div>
@@ -142,7 +142,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
                 ))}
               </ul>
 
-              <div className="max-w-md mx-auto md:mx-0">
+              <div className="max-w-md mx-auto md:mx-0 md:mt-auto">
                 {priceAnchor !== null && (
                   <p className="text-center md:text-left text-base text-gray-800 mb-1">
                     <span className="font-bold">{priceAnchor}</span>
