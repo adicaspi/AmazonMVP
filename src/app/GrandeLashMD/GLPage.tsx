@@ -98,9 +98,21 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
     .map((img) => img?.large?.url)
     .filter((u): u is string => !!u)
     .map((u) => ({ url: u.replace("._SL500_.", "._SL1000_."), alt }));
-  // Gallery = the official listing images (clean white canvases). The old
-  // 1500px bottle shot was rejected — it has a gray background baked in.
-  const apiImages = liveImages.length > 0 ? liveImages : FALLBACK_IMAGES.map((url) => ({ url, alt }));
+  // Gallery = the SAME official listing images, but at 1500px — the hi-res
+  // IDs came from the user's saved copies of the listing gallery (the
+  // Creators API only serves 500px renditions of these). Clean white
+  // canvases, sharp under the hover zoom. API/fallback lists are unused
+  // for display but kept above as documentation of the 500px originals.
+  void liveImages;
+  const HIRES_IMAGES = [
+    "https://m.media-amazon.com/images/I/717u2paAZ2L._SL1500_.jpg",
+    "https://m.media-amazon.com/images/I/81E22aBL+8L._SL1500_.jpg",
+    "https://m.media-amazon.com/images/I/71FFdWG73aL._SL1500_.jpg",
+    "https://m.media-amazon.com/images/I/71czW2Nmv4L._SL1500_.jpg",
+    "https://m.media-amazon.com/images/I/81XWfU5FMvL._SL1500_.jpg",
+    "https://m.media-amazon.com/images/I/81LFSfUnpVL._SL1500_.jpg",
+  ];
+  const apiImages = HIRES_IMAGES.map((url) => ({ url, alt }));
 
   return (
     <div className="min-h-screen bg-white">
