@@ -28,6 +28,8 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
   const apiMode = IMAGES.length === 0;
   const [index, setIndex] = useState(0);
   const [interacted, setInteracted] = useState(false);
+  // Amazon-style hover zoom (desktop): magnify around the cursor position
+  const [zoom, setZoom] = useState<{ x: number; y: number } | null>(null);
   const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
@@ -81,7 +83,13 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
       <div
         // API mode: square frame, edge to edge — exactly how Amazon shows
         // its product images. Lifestyle mode: natural 2/3, no cropping.
-        className={`relative overflow-hidden ${apiMode ? `${frameAspect === "square" ? "aspect-square" : "aspect-[4/3]"} bg-white flex-1 min-w-0` : "aspect-[2/3] rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"}`}
+        className={`relative overflow-hidden ${apiMode ? `${frameAspect === "square" ? "aspect-square" : "aspect-[4/3]"} bg-white flex-1 min-w-0 md:cursor-zoom-in` : "aspect-[2/3] rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"}`}
+        onMouseMove={(e) => {
+          if (!apiMode) return;
+          const r = e.currentTarget.getBoundingClientRect();
+          setZoom({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+        }}
+        onMouseLeave={() => setZoom(null)}
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchStartX.current === null) return;
@@ -100,7 +108,12 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
             decoding="async"
             draggable={false}
             className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${img.contain ? "object-contain" : "object-cover"} ${i === index ? "opacity-100" : "opacity-0"}`}
-            style={{ objectPosition: img.pos }}
+            style={{
+              objectPosition: img.pos,
+              ...(apiMode && zoom && i === index
+                ? { transform: "scale(1.9)", transformOrigin: `${zoom.x}% ${zoom.y}%` }
+                : {}),
+            }}
           />
         ))}
 
