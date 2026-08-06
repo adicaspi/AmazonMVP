@@ -105,9 +105,9 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
   // for display but kept above as documentation of the 500px originals.
   void liveImages;
   const HIRES_IMAGES = [
+    "https://m.media-amazon.com/images/I/71FFdWG73aL._SL1500_.jpg",
     "https://m.media-amazon.com/images/I/717u2paAZ2L._SL1500_.jpg",
     "https://m.media-amazon.com/images/I/81E22aBL+8L._SL1500_.jpg",
-    "https://m.media-amazon.com/images/I/71FFdWG73aL._SL1500_.jpg",
     "https://m.media-amazon.com/images/I/71czW2Nmv4L._SL1500_.jpg",
     "https://m.media-amazon.com/images/I/81XWfU5FMvL._SL1500_.jpg",
     "https://m.media-amazon.com/images/I/81LFSfUnpVL._SL1500_.jpg",
