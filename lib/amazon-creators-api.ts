@@ -139,6 +139,30 @@ export interface AmazonProductData {
 /**
  * Fetch product data from Amazon Creators API by ASIN(s)
  */
+// Raw getItems call with caller-chosen resources — used by the diagnostic
+// /api/product?res=... to probe what the API can return (e.g. videos)
+export async function getItemsRaw(
+  asins: string[],
+  resources: string[],
+  marketplace: string = "www.amazon.com"
+): Promise<unknown> {
+  const token = await getAccessToken();
+  const { partnerTag, version, isV3 } = getConfig();
+  const res = await fetchWithTimeout(`${API_BASE}/catalog/v1/getItems`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Accept: "application/json",
+      Authorization: isV3 ? `Bearer ${token}` : `Bearer ${token}, Version ${version}`,
+      "User-Agent": "creatorsapi-client/1.0",
+      "x-marketplace": marketplace,
+    },
+    body: JSON.stringify({ itemIds: asins, itemIdType: "ASIN", partnerTag, partnerType: "Associates", resources }),
+  });
+  const text = await res.text();
+  try { return { status: res.status, body: JSON.parse(text) }; } catch { return { status: res.status, body: text }; }
+}
+
 export async function getProductsByASIN(
   asins: string[],
   marketplace: string = "www.amazon.com"

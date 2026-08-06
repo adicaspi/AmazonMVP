@@ -1,11 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getProductsByASIN } from "@/lib/amazon-creators-api";
+import { getProductsByASIN, getItemsRaw } from "@/lib/amazon-creators-api";
 
 export async function GET(request: NextRequest) {
   const asin = request.nextUrl.searchParams.get("asin");
 
   if (!asin) {
     return NextResponse.json({ error: "Missing 'asin' parameter" }, { status: 400 });
+  }
+
+  // Experimental resource probe: ?res=comma,separated,resources returns the
+  // raw getItems response (invalid resources return the API's own error,
+  // which enumerates what IS valid — how we learn about e.g. video support)
+  const resOverride = request.nextUrl.searchParams.get("res");
+  if (resOverride) {
+    try {
+      const raw = await getItemsRaw([asin], resOverride.split(","));
+      return NextResponse.json(raw as object, { headers: { "Cache-Control": "no-store" } });
+    } catch (error) {
+      return NextResponse.json({ error: String(error) }, { status: 500 });
+    }
   }
 
   // Validate ASIN format (10 alphanumeric characters)

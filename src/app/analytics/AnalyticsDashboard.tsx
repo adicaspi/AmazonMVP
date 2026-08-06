@@ -681,6 +681,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     // Future UGG campaign binds by name automatically
     "/UggScuffette": ["ugg", "scuffette"],
     "/NewBalance928": ["new balance", "928", "balance"],
+    "/GrandeLashMD": ["grandelash", "grande", "lash"],
   };
   // A campaign matching an exclude fragment never binds to that page — e.g.
   // "Arizona Sales Campaign - IG - new" contains "arizona sales" but belongs

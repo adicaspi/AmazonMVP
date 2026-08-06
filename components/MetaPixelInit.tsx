@@ -13,6 +13,7 @@ const NEWBALANCE_PIXEL_ID = "1011147045043568";
 
 const PIXEL_BY_PATH: { prefix: string; pixelId: string }[] = [
   { prefix: "/grandelash", pixelId: GRANDELASH_PIXEL_ID },
+  { prefix: "/GrandeLashMD", pixelId: GRANDELASH_PIXEL_ID },
   { prefix: "/shark-flexstyle", pixelId: SHARK_PIXEL_ID },
   { prefix: "/sharkflex", pixelId: SHARK_PIXEL_ID },
   { prefix: "/BirkenstockArizona", pixelId: BIRKENSTOCK_PIXEL_ID },
