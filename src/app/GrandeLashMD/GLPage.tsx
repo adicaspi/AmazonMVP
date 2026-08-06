@@ -244,6 +244,57 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
         </div>
       </section>
 
+      {/* 3.5 VIDEO REVIEWS — carried over from the original page */}
+      <section className="py-10 md:py-14 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-3">
+            Real women. Real results. No filters.
+          </h2>
+          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
+            Watch 20-second transformations from real customers.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-sm md:max-w-2xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
+              <video
+                className="w-full h-full object-contain rounded-xl"
+                controls
+                playsInline
+                preload="metadata"
+                poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
+              >
+                <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute bottom-2 left-2 right-2 bg-rose-600/90 backdrop-blur-sm p-3 rounded-xl">
+                <p className="text-white font-semibold text-sm md:text-base">Real Customer Review</p>
+                <p className="text-rose-100 text-xs md:text-sm">Amazing results in 8 weeks!</p>
+              </div>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
+              <video
+                className="w-full h-full object-contain rounded-xl"
+                controls
+                playsInline
+                preload="metadata"
+                poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
+              >
+                <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125528/WhatsApp_Video_2026-02-01_at_18.10.00_ayx8jr.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute bottom-2 left-2 right-2 bg-rose-600/90 backdrop-blur-sm p-3 rounded-xl">
+                <p className="text-white font-semibold text-sm md:text-base">Before &amp; After</p>
+                <p className="text-rose-100 text-xs md:text-sm">See the transformation!</p>
+              </div>
+            </div>
+          </div>
+          <CtaBlock
+            href={AMAZON_LINK}
+            position="video-reviews"
+            priceValue={priceValue}
+            lead="Ready to start your own transformation?"
+            label="Check Today's Amazon Price"
+          />
+        </div>
+      </section>
+
       {/* 4. THE ROUTINE — sell the simplicity */}
       <section className="py-10 md:py-14 bg-white">
         <div className="max-w-5xl mx-auto px-4 md:grid md:grid-cols-2 md:gap-12 md:items-center">
