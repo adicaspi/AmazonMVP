@@ -3,6 +3,7 @@ import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { OpenInAppLink } from "@/components/OpenInAppLink";
 import { HeroFade } from "../UggScuffette/HeroFade";
+import { VideoCard } from "@/components/VideoCard";
 import type { AmazonProductData } from "@/lib/amazon-creators-api";
 
 // CRO bridge page for GrandeLASH-MD (/GrandeLash) — emotion-first funnel:
@@ -97,7 +98,12 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
     .map((img) => img?.large?.url)
     .filter((u): u is string => !!u)
     .map((u) => ({ url: u.replace("._SL500_.", "._SL1000_."), alt }));
-  const apiImages = liveImages.length > 0 ? liveImages : FALLBACK_IMAGES.map((url) => ({ url, alt }));
+  // The Creators API caps images at 500px; this official 1500px bottle shot
+  // (carried over from the original page) leads the gallery for sharpness.
+  const HIRES_HERO = { url: "https://m.media-amazon.com/images/I/61QhbRMdKIL._SL1500_.jpg", alt };
+  const rest = (liveImages.length > 0 ? liveImages : FALLBACK_IMAGES.map((url) => ({ url, alt })))
+    .filter((i) => !i.url.includes("61QhbRMdKIL"));
+  const apiImages = [HIRES_HERO, ...rest];
 
   return (
     <div className="min-h-screen bg-white">
@@ -253,37 +259,19 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
             Watch 20-second transformations from real customers.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-sm md:max-w-2xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
-              <video
-                className="w-full h-full object-contain rounded-xl"
-                controls
-                playsInline
-                preload="metadata"
-                poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
-              >
-                <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute bottom-2 left-2 right-2 bg-rose-600/90 backdrop-blur-sm p-3 rounded-xl">
-                <p className="text-white font-semibold text-sm md:text-base">Real Customer Review</p>
-                <p className="text-rose-100 text-xs md:text-sm">Amazing results in 8 weeks!</p>
-              </div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-rose-100 to-pink-100 aspect-[9/16] p-2">
-              <video
-                className="w-full h-full object-contain rounded-xl"
-                controls
-                playsInline
-                preload="metadata"
-                poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
-              >
-                <source src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125528/WhatsApp_Video_2026-02-01_at_18.10.00_ayx8jr.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute bottom-2 left-2 right-2 bg-rose-600/90 backdrop-blur-sm p-3 rounded-xl">
-                <p className="text-white font-semibold text-sm md:text-base">Before &amp; After</p>
-                <p className="text-rose-100 text-xs md:text-sm">See the transformation!</p>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-sm md:max-w-2xl mx-auto">
+            <VideoCard
+              src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4"
+              poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125476/WhatsApp_Image_2026-02-03_at_09.47.22_qin8v4.jpg"
+              title="Real Customer Review"
+              sub="Amazing results in 8 weeks!"
+            />
+            <VideoCard
+              src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125528/WhatsApp_Video_2026-02-01_at_18.10.00_ayx8jr.mp4"
+              poster="https://res.cloudinary.com/dzkgopplv/image/upload/v1770125473/WhatsApp_Image_2026-02-03_at_09.49.37_sian5m.jpg"
+              title="Before &amp; After"
+              sub="See the transformation!"
+            />
           </div>
           <CtaBlock
             href={AMAZON_LINK}
