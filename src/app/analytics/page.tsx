@@ -414,6 +414,73 @@ async function getBeSettings(): Promise<Record<string, unknown> | null> {
   }
 }
 
+// ── Conversion funnel: ONE honest methodology ─────────────────────────
+// Both stages come from full-range DB queries (paginated, no row caps) and
+// count PEOPLE. A clicker enters the rate only if they also VISITED in
+// range, so conversion can never exceed 100%. Everything else (raw loads,
+// total click events, out-of-range clickers) is reported separately for
+// transparency instead of silently polluting the rate.
+export type FunnelData = {
+  people: number;        // distinct visitors in range (no-id rows count once each)
+  rawViews: number;      // raw page loads in range
+  clickers: number;      // distinct visitors who visited AND clicked in range
+  orphanClickers: number;// clicked in range but have no visit in range
+  totalClicks: number;   // all click events in range (multi-clicks included)
+  noIdClicks: number;    // click events with no visitor id
+};
+
+async function fetchAllRows<T>(
+  table: string,
+  columns: string,
+  page: string,
+  from?: string,
+  to?: string
+): Promise<T[]> {
+  if (!supabase || !(await isDatabaseAvailable())) return [];
+  const rows: T[] = [];
+  const PAGE_SIZE = 1000;
+  for (let offset = 0; ; offset += PAGE_SIZE) {
+    let q = supabase.from(table).select(columns).eq("page", page);
+    if (from) q = q.gte("timestamp", rangeStartISO(from));
+    if (to) q = q.lte("timestamp", rangeEndISO(to));
+    const { data, error } = await q.range(offset, offset + PAGE_SIZE - 1);
+    if (error || !data || data.length === 0) break;
+    rows.push(...(data as T[]));
+    if (data.length < PAGE_SIZE) break;
+  }
+  return rows;
+}
+
+async function getFunnelData(page: string, from?: string, to?: string): Promise<FunnelData> {
+  try {
+    const [viewRows, clickRows] = await Promise.all([
+      fetchAllRows<{ id: string; visitor_id: string | null }>("page_views", "id, visitor_id", page, from, to),
+      fetchAllRows<{ id: string; visitor_id: string | null }>("amazon_clicks", "id, visitor_id", page, from, to),
+    ]);
+    const visitors = new Set<string>();
+    viewRows.forEach((v) => visitors.add(v.visitor_id || v.id));
+    const clickerIds = new Set<string>();
+    let noIdClicks = 0;
+    clickRows.forEach((c) => {
+      if (c.visitor_id) clickerIds.add(c.visitor_id);
+      else noIdClicks++;
+    });
+    let clickers = 0;
+    let orphanClickers = 0;
+    clickerIds.forEach((id) => (visitors.has(id) ? clickers++ : orphanClickers++));
+    return {
+      people: visitors.size,
+      rawViews: viewRows.length,
+      clickers,
+      orphanClickers,
+      totalClicks: clickRows.length,
+      noIdClicks,
+    };
+  } catch {
+    return { people: 0, rawViews: 0, clickers: 0, orphanClickers: 0, totalClicks: 0, noIdClicks: 0 };
+  }
+}
+
 function getClickStats(clicks: AmazonClick[], page?: string) {
   const filtered = page ? clicks.filter((c) => c.page === page) : clicks;
 
@@ -497,7 +564,10 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
         if (click.visitor_id) clickedVisitorIds.add(click.visitor_id);
         else clicksWithoutVisitor++;
       });
-      const trafficData = await getTrafficSources(path, clickedVisitorIds, dateFrom, dateTo);
+      const [trafficData, funnel] = await Promise.all([
+        getTrafficSources(path, clickedVisitorIds, dateFrom, dateTo),
+        getFunnelData(path, dateFrom, dateTo),
+      ]);
       // "Views" = distinct PEOPLE (like Facebook's landing page views), not
       // raw page loads — reloads/back-from-Amazon don't inflate the funnel.
       const views = trafficData.uniqueVisitors > 0 ? trafficData.uniqueVisitors : rawViews;
@@ -529,6 +599,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
         color,
         archived: archived ?? false,
         pinned: pinned ?? false,
+        funnel,
         views,
         uniqueClickers,
         todayViews,
@@ -593,6 +664,19 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
     page: "all",
     label: "All Pages",
     color: "emerald" as const,
+    // Aggregate funnel = sum over active (non-archived) pages; a person
+    // visiting two pages counts once per page
+    funnel: activePagesData.reduce(
+      (acc, p) => ({
+        people: acc.people + p.funnel.people,
+        rawViews: acc.rawViews + p.funnel.rawViews,
+        clickers: acc.clickers + p.funnel.clickers,
+        orphanClickers: acc.orphanClickers + p.funnel.orphanClickers,
+        totalClicks: acc.totalClicks + p.funnel.totalClicks,
+        noIdClicks: acc.noIdClicks + p.funnel.noIdClicks,
+      }),
+      { people: 0, rawViews: 0, clickers: 0, orphanClickers: 0, totalClicks: 0, noIdClicks: 0 }
+    ),
     views: allViews,
     uniqueClickers: activePagesData.reduce((sum, p) => sum + p.uniqueClickers, 0),
     todayViews: allTodayViews,

@@ -51,6 +51,14 @@ type PageData = {
   color: string;
   archived?: boolean;
   pinned?: boolean;
+  funnel?: {
+    people: number;
+    rawViews: number;
+    clickers: number;
+    orphanClickers: number;
+    totalClicks: number;
+    noIdClicks: number;
+  };
   views: number;
   uniqueClickers: number;
   todayViews: number;
@@ -1321,64 +1329,91 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           </section>
         )}
 
-        {/* Conversion Funnel */}
-        {!campaignFilterActive && (
+        {/* Conversion Funnel — ONE methodology: people, full-range queries,
+            a clicker counts only if they also visited in range (rate can
+            never exceed 100%). Event totals shown separately for honesty. */}
+        {!campaignFilterActive && (() => {
+          const f = data.funnel ?? { people: data.views, rawViews: data.views, clickers: data.uniqueClickers, orphanClickers: 0, totalClicks: data.totalClicks, noIdClicks: 0 };
+          const rate = f.people > 0 ? (f.clickers / f.people) * 100 : 0;
+          const rateStr = rate.toFixed(1);
+          return (
         <section>
           <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
             {t.conversionFunnel}
           </h2>
-          <p className={`text-sm ${dm.textMuted} mb-3`}>{t.funnelDesc}</p>
+          <p className={`text-sm ${dm.textMuted} mb-3`}>
+            {lang === "he"
+              ? "אנשים (לא כניסות): כמה אנשים ביקרו וכמה מהם לחצו לאמזון באותו טווח"
+              : "People (not page loads): how many visited and how many of them clicked to Amazon in the same range"}
+          </p>
 
           <div className={`${dm.cardBg} rounded-xl border shadow-sm p-5 transition-colors duration-300`}>
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex-1 text-center">
-                <div className={`text-3xl font-bold ${dm.text}`}>{data.views}</div>
-                <div className={`text-sm ${dm.textMuted} mt-1`}>{t.pageViews}</div>
-              </div>
-              <div className="flex flex-col items-center px-4">
-                <svg className={`w-6 h-6 ${darkMode ? "text-gray-600" : "text-gray-300"} ${isRTL ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-                <div className="text-lg font-bold text-emerald-500 mt-1">{conversionRate}%</div>
-                <div className={`text-xs ${dm.textLight}`}>{t.conversion}</div>
-              </div>
-              <div className="flex-1 text-center">
-                <div className="text-3xl font-bold text-emerald-500">{data.totalClicks}</div>
-                <div className={`text-sm ${dm.textMuted} mt-1`}>{t.amazonClicks}</div>
-              </div>
-            </div>
-
-            <div className="mt-5 space-y-2">
-              <div className="flex items-center gap-3">
-                <div className={`w-16 text-sm ${dm.textMuted}`}>{t.views}</div>
-                <div className={`flex-1 h-6 ${dm.barBg} rounded-lg overflow-hidden`}>
-                  <div className={`h-full ${darkMode ? "bg-gray-500" : "bg-gray-400"} rounded-lg`} style={{ width: "100%" }}></div>
+            {f.people === 0 ? (
+              <p className={`text-sm ${dm.textMuted} text-center py-4`}>
+                {lang === "he" ? "אין תנועה בטווח התאריכים שנבחר." : "No traffic in the selected date range."}
+              </p>
+            ) : (
+              <>
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex-1 text-center">
+                    <div className={`text-3xl font-bold ${dm.text}`}>{f.people}</div>
+                    <div className={`text-sm ${dm.textMuted} mt-1`}>{lang === "he" ? "אנשים ביקרו" : "People visited"}</div>
+                    <div className={`text-[11px] ${dm.textLight}`}>{lang === "he" ? `${f.rawViews} כניסות` : `${f.rawViews} page loads`}</div>
+                  </div>
+                  <div className="flex flex-col items-center px-4">
+                    <svg className={`w-6 h-6 ${darkMode ? "text-gray-600" : "text-gray-300"} ${isRTL ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                    <div className="text-lg font-bold text-emerald-500 mt-1">{rateStr}%</div>
+                    <div className={`text-xs ${dm.textLight}`}>{t.conversion}</div>
+                  </div>
+                  <div className="flex-1 text-center">
+                    <div className="text-3xl font-bold text-emerald-500">{f.clickers}</div>
+                    <div className={`text-sm ${dm.textMuted} mt-1`}>{lang === "he" ? "מהם לחצו לאמזון" : "Of them clicked to Amazon"}</div>
+                    <div className={`text-[11px] ${dm.textLight}`}>{lang === "he" ? `${f.totalClicks} לחיצות סה"כ` : `${f.totalClicks} total clicks`}</div>
+                  </div>
                 </div>
-                <div className={`w-10 text-sm font-medium ${dm.text}`}>{data.views}</div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className={`w-16 text-sm ${dm.textMuted}`}>{t.clicks}</div>
-                <div className={`flex-1 h-6 ${dm.barBg} rounded-lg overflow-hidden`}>
-                  <div className="h-full bg-emerald-500 rounded-lg transition-all duration-500" style={{ width: `${Math.min(fpBridgeFrac * 100, 100)}%` }}></div>
-                </div>
-                <div className="w-10 text-sm font-medium text-emerald-500">{data.totalClicks}</div>
-              </div>
-            </div>
 
-            {data.views > 0 && (
-              <div className={`mt-4 p-3 rounded-lg border ${darkMode ? "bg-emerald-900/30 border-emerald-800" : "bg-emerald-50 border-emerald-200"}`}>
-                <p className={`text-sm ${darkMode ? "text-emerald-300" : "text-emerald-800"}`}>
-                  <strong>{conversionRate}%</strong> {t.ofVisitorsClick}
-                  {parseFloat(conversionRate) >= 30 && ` ${t.conversionExcellent}`}
-                  {parseFloat(conversionRate) >= 15 && parseFloat(conversionRate) < 30 && ` ${t.conversionGood}`}
-                  {parseFloat(conversionRate) < 15 && ` ${t.conversionImprove}`}
-                </p>
-              </div>
+                <div className="mt-5 space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-16 text-sm ${dm.textMuted}`}>{lang === "he" ? "אנשים" : "People"}</div>
+                    <div className={`flex-1 h-6 ${dm.barBg} rounded-lg overflow-hidden`}>
+                      <div className={`h-full ${darkMode ? "bg-gray-500" : "bg-gray-400"} rounded-lg`} style={{ width: "100%" }}></div>
+                    </div>
+                    <div className={`w-10 text-sm font-medium ${dm.text}`}>{f.people}</div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-16 text-sm ${dm.textMuted}`}>{lang === "he" ? "לחצו" : "Clicked"}</div>
+                    <div className={`flex-1 h-6 ${dm.barBg} rounded-lg overflow-hidden`}>
+                      <div className="h-full bg-emerald-500 rounded-lg transition-all duration-500" style={{ width: `${Math.min(rate, 100)}%` }}></div>
+                    </div>
+                    <div className="w-10 text-sm font-medium text-emerald-500">{f.clickers}</div>
+                  </div>
+                </div>
+
+                {(f.orphanClickers > 0 || f.noIdClicks > 0) && (
+                  <p className={`mt-3 text-[11px] ${dm.textLight}`}>
+                    {lang === "he"
+                      ? `לא נכללו בחישוב: ${f.orphanClickers > 0 ? `${f.orphanClickers} שלחצו אך ביקרו מחוץ לטווח` : ""}${f.orphanClickers > 0 && f.noIdClicks > 0 ? " · " : ""}${f.noIdClicks > 0 ? `${f.noIdClicks} לחיצות ללא מזהה מבקר` : ""}`
+                      : `Excluded from the rate: ${f.orphanClickers > 0 ? `${f.orphanClickers} clicked but visited outside the range` : ""}${f.orphanClickers > 0 && f.noIdClicks > 0 ? " · " : ""}${f.noIdClicks > 0 ? `${f.noIdClicks} clicks with no visitor id` : ""}`}
+                  </p>
+                )}
+
+                <div className={`mt-4 p-3 rounded-lg border ${darkMode ? "bg-emerald-900/30 border-emerald-800" : "bg-emerald-50 border-emerald-200"}`}>
+                  <p className={`text-sm ${darkMode ? "text-emerald-300" : "text-emerald-800"}`}>
+                    <strong>{rateStr}%</strong> {t.ofVisitorsClick}
+                    {rate >= 30 && ` ${t.conversionExcellent}`}
+                    {rate >= 15 && rate < 30 && ` ${t.conversionGood}`}
+                    {rate < 15 && ` ${t.conversionImprove}`}
+                  </p>
+                </div>
+              </>
             )}
           </div>
         </section>
-        )}
+          );
+        })()}
 
         {/* Quick Stats */}
         {!campaignFilterActive && (
