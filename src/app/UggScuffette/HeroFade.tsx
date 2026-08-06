@@ -13,7 +13,10 @@ const IMAGES: { src: string; alt: string; pos: string }[] = [];
 
 type Slide = { src: string; alt: string; pos: string; contain: boolean };
 
-export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeholderTitle = "UGG Scuffette II" }: { apiImages?: { url: string; alt: string }[]; placeholderEmoji?: string; placeholderTitle?: string }) {
+// frameAspect: match the product images' own canvas — "4/3" for the
+// 500x375 shoe shots, "square" for 500x500 canvases (e.g. GrandeLash) —
+// so the image always fills the frame edge to edge.
+export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeholderTitle = "UGG Scuffette II", frameAspect = "4/3" }: { apiImages?: { url: string; alt: string }[]; placeholderEmoji?: string; placeholderTitle?: string; frameAspect?: "4/3" | "square" }) {
   const slides: Slide[] =
     IMAGES.length > 0
       ? IMAGES.map((img) => ({ ...img, contain: false }))
@@ -78,7 +81,7 @@ export function HeroFade({ apiImages, placeholderEmoji = "\ud83d\udc11", placeho
       <div
         // API mode: square frame, edge to edge — exactly how Amazon shows
         // its product images. Lifestyle mode: natural 2/3, no cropping.
-        className={`relative overflow-hidden ${apiMode ? "aspect-[4/3] bg-white flex-1 min-w-0" : "aspect-[2/3] rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"}`}
+        className={`relative overflow-hidden ${apiMode ? `${frameAspect === "square" ? "aspect-square" : "aspect-[4/3]"} bg-white flex-1 min-w-0` : "aspect-[2/3] rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 bg-stone-100"}`}
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchStartX.current === null) return;

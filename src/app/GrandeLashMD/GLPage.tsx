@@ -172,7 +172,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
             </div>
 
             <div className="order-1 w-full max-w-[520px] md:max-w-none mx-auto">
-              <HeroFade apiImages={apiImages} placeholderEmoji="👁️" placeholderTitle="GrandeLASH-MD" />
+              <HeroFade apiImages={apiImages} placeholderEmoji="👁️" placeholderTitle="GrandeLASH-MD" frameAspect="square" />
             </div>
           </div>
         </div>
