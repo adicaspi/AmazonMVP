@@ -88,6 +88,7 @@ const TRACKED_PAGES: { path: string; label: string; color: string; archived?: bo
   { path: "/UggScuffette", label: "UGG Scuffette", color: "amber", pinned: true },
   { path: "/NewBalance928", label: "New Balance 928", color: "blue", pinned: true },
   { path: "/GrandeLashMD", label: "GrandeLash (New)", color: "rose", pinned: true },
+  { path: "/GrandeLashInstagram", label: "GrandeLash (IG)", color: "rose", pinned: true },
 ];
 
 async function getAmazonClicks(): Promise<AmazonClick[]> {
