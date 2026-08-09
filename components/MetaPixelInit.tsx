@@ -28,14 +28,16 @@ const PIXEL_BY_PATH: { prefix: string; pixelId: string }[] = [
 
 export function MetaPixelInit() {
   const pathname = usePathname();
+  const match = PIXEL_BY_PATH.find((p) => pathname.startsWith(p.prefix));
 
   useEffect(() => {
     // Skip the site owner's own visits (?notrack=1)
     if (resolveNotrack()) return;
-
-    // Find the dedicated pixel for the current page (if any)
-    const match = PIXEL_BY_PATH.find((p) => pathname.startsWith(p.prefix));
     if (!match) return;
+    // The inline script below already fired for this page load — this
+    // effect only covers client-side navigations between pages.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((window as any).__aipPixelFiredPath === pathname) return;
 
     function tryInit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,6 +47,8 @@ export function MetaPixelInit() {
       // trackSingle targets only this page's pixel so it never double-fires another
       fbq("init", match!.pixelId);
       fbq("trackSingle", match!.pixelId, "PageView");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).__aipPixelFiredPath = pathname;
       return true;
     }
 
@@ -62,7 +66,17 @@ export function MetaPixelInit() {
     }, 300);
 
     return () => clearInterval(interval);
-  }, [pathname]);
+  }, [pathname, match]);
 
-  return null;
+  if (!match) return null;
+
+  // The init ships INSIDE the initial HTML: Meta's pixel scanner reads the
+  // static page source and needs to see fbq('init', ...) there — the old
+  // effect-only init was invisible to it ("A pixel wasn't detected").
+  // Bonus: PageView now fires before hydration, earlier and more reliably.
+  const inlineInit =
+    `try{if(document.cookie.indexOf('aip_notrack=1')===-1&&location.search.indexOf('notrack=1')===-1){` +
+    `fbq('init','${match.pixelId}');fbq('trackSingle','${match.pixelId}','PageView');` +
+    `window.__aipPixelFiredPath=location.pathname;}}catch(e){}`;
+  return <script dangerouslySetInnerHTML={{ __html: inlineInit }} />;
 }
