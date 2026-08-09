@@ -44,9 +44,9 @@ const getCachedProduct = unstable_cache(
 );
 
 // Instagram channel clone — identical page via the shared GLPage, its own
-// tracking name for per-channel attribution.
-// [USER ASSET] When an IG-specific SiteStripe link (separate Associates
-// tracking ID) is provided, pass it as amazonLink here.
+// tracking name + its own Associates tracking ID (grand-lash-ig-20) for
+// per-channel attribution on both sides.
+const IG_AMAZON_LINK = "https://www.amazon.com/dp/B07QNQJ5FK?th=1&linkCode=ll2&tag=grand-lash-ig-20&linkId=82e1beee67f7319de5b270fad3f84090&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl";
 export default async function GrandeLashInstagramPage() {
   let product = null;
   try {
@@ -54,5 +54,5 @@ export default async function GrandeLashInstagramPage() {
   } catch (err) {
     console.error("Amazon Creators API fetch failed:", err);
   }
-  return <GLPage trackingPage="/GrandeLashInstagram" product={product} />;
+  return <GLPage trackingPage="/GrandeLashInstagram" amazonLink={IG_AMAZON_LINK} product={product} />;
 }

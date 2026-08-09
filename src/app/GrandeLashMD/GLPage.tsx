@@ -12,9 +12,10 @@ import type { AmazonProductData } from "@/lib/amazon-creators-api";
 // Claims follow the listing's own wording ("longer, thicker,
 // fuller-LOOKING lashes") — no medical/growth claims.
 // ── Product constants ─────────────────────────────────────────────
-// User's SiteStripe link (tag=aipicks20-20 + linkId), cleaned of tracking
-// params — DIRECT amazon.com URL only (NEVER amzn.to: breaks app handoff).
-const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B07QNQJ5FK?th=1&linkCode=ll2&tag=aipicks20-20&linkId=1545e4b7b289aa91cb1bc76e48498002&language=en_US&ref_=as_li_ss_tl";
+// Facebook-channel SiteStripe link (tag=grand-lash-fb-20) — DIRECT
+// amazon.com URL only (NEVER amzn.to: breaks app handoff). The IG route
+// overrides with its own grand-lash-ig-20 link via the amazonLink prop.
+const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B07QNQJ5FK?th=1&linkCode=ll2&tag=grand-lash-fb-20&linkId=affd6e90c46144f081b7000833c2e1ee&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl";
 const PRICE_VALUE = 100;
 
 // Verified on the live listing 2026-08-06 (user screenshot): 4.2★, 59,511
