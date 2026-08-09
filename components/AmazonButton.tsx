@@ -27,6 +27,7 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/grandelash": "876318711699041",
   "/GrandeLashMD": "876318711699041",
   "/GrandeLashInstagram": "876318711699041",
+  "/GrandeLash65": "876318711699041",
   "/shark-flexstyle": "1554568722933870",
   "/sharkflex": "1554568722933870",
   "/BirkenstockArizona": "1025959486467199",
@@ -52,6 +53,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/UggScuffette": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
   "/GrandeLashMD": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 100, content_id: "grandelash-serum" },
   "/GrandeLashInstagram": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 100, content_id: "grandelash-serum" },
+  "/GrandeLash65": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 100, content_id: "grandelash-serum" },
   "/NewBalance928": { name: "New Balance Women's 928v3 Walking Shoe", value: 158, content_id: "newbalance-928v3" },
 };
 
@@ -75,6 +77,7 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   "/NewBalance928": [],
   "/GrandeLashMD": [],
   "/GrandeLashInstagram": [],
+  "/GrandeLash65": [],
 };
 
 // In-app browsers of Meta apps (and similar) — the ad-click traffic. Only

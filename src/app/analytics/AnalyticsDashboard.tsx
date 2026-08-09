@@ -691,12 +691,13 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/NewBalance928": ["new balance", "928", "balance"],
     "/GrandeLashMD": ["grandelash", "grande", "lash"],
     "/GrandeLashInstagram": ["- ig", "grandelash instagram", "grande instagram", "lash instagram"],
+    "/GrandeLash65": ["65", "broad", "all ages"],
   };
   // A campaign matching an exclude fragment never binds to that page — e.g.
   // "Arizona Sales Campaign - IG - new" contains "arizona sales" but belongs
   // to the Instagram tab, not the Sales tab.
   const PAGE_CAMPAIGN_EXCLUDE: Record<string, string[]> = {
-    "/GrandeLashMD": ["- ig", "instagram"],
+    "/GrandeLashMD": ["- ig", "instagram", "65", "broad", "all ages"],
     "/BirkenstockSales": ["- ig", "instagram", "audience", "retargeting"],
     "/BirkenstockTraffic": ["- ig", "instagram", "audience", "retargeting"],
     "/BirkenstockInstagram": ["audience", "retargeting"],
