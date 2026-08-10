@@ -952,7 +952,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               return (
                 <a
                   key={p.page}
-                  href={p.page}
+                  // notrack: visits from the dashboard are the owner's — the
+                  // param sets the aip_notrack cookie so they're never
+                  // counted, and clear-direct authorization works
+                  href={`${p.page}?notrack=1`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? palette.dark : palette.light}`}
