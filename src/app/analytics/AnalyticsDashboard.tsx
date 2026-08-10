@@ -1298,10 +1298,20 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {pagesData.filter((p) => !isArchived(p) || showArchived).map((p) => {
-                // SAME numbers as the funnel inside the tab: people, people
-                // who clicked, and their ratio — one methodology everywhere
+                // Campaign-bound page → the card shows FACEBOOK numbers,
+                // exactly what the tab shows inside. Unbound → our funnel.
+                const pageFb = fbCampaigns.filter((c) => campaignMatchesPage(p.page, c.campaign_name));
+                const fbAct = pageFb.filter((c) => c.spend > 0 || c.linkClicks > 0 || c.conversions > 0);
+                const fbBound = fbAct.length > 0;
+                const cardFbLink = fbAct.reduce((sum, c) => sum + c.linkClicks, 0);
+                const cardFbUniq = fbAct.reduce((sum, c) => sum + (c.uniqueLinkClicks || 0), 0);
+                const cardFbConv = fbAct.reduce((sum, c) => sum + c.conversions, 0);
+                const cardDen = cardFbUniq > 0 ? cardFbUniq : cardFbLink;
                 const pf = p.funnel ?? { people: p.views, rawViews: p.views, clickers: p.uniqueClickers, orphanClickers: 0, totalClicks: p.totalClicks, noIdClicks: 0 };
-                const cr = pf.people > 0 ? ((pf.clickers / pf.people) * 100).toFixed(1) : "0";
+                const cr = fbBound
+                  ? (cardDen > 0 ? Math.min((cardFbConv / cardDen) * 100, 100).toFixed(1) : "0")
+                  : (pf.people > 0 ? ((pf.clickers / pf.people) * 100).toFixed(1) : "0");
+                const fbToday = fbTodayResultsFor(p.page);
                 return (
                   <button
                     key={p.page}
@@ -1323,23 +1333,29 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                     </div>
                     <div className="grid grid-cols-4 gap-3">
                       <div>
-                        <div className={`text-2xl font-bold ${dm.text}`}>{pf.people}</div>
-                        <div className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "אנשים" : "People"}</div>
+                        <div className={`text-2xl font-bold ${dm.text}`}>{fbBound ? cardDen : pf.people}</div>
+                        <div className={`text-xs ${dm.textMuted}`}>{fbBound ? (lang === "he" ? "קליקים במודעה" : "Ad clicks") : (lang === "he" ? "אנשים" : "People")}</div>
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-emerald-500">{pf.clickers}</div>
-                        <div className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "לחצו לאמזון" : "Clicked"}</div>
+                        <div className="text-2xl font-bold text-emerald-500">{fbBound ? cardFbConv : pf.clickers}</div>
+                        <div className={`text-xs ${dm.textMuted}`}>{fbBound ? (lang === "he" ? "המרות (FB)" : "Results (FB)") : (lang === "he" ? "לחצו לאמזון" : "Clicked")}</div>
                       </div>
                       <div>
                         <div className={`text-2xl font-bold ${parseFloat(cr) >= 20 ? "text-emerald-500" : dm.text}`}>{cr}%</div>
                         <div className={`text-xs ${dm.textMuted}`}>{t.conversion}</div>
                       </div>
                       <div>
-                        <div className="flex items-baseline gap-1">
-                          <span className="text-2xl font-bold text-blue-500">{p.todayViews}</span>
-                          <span className={`text-xs ${dm.textMuted}`}>/</span>
-                          <span className="text-lg font-bold text-green-500">{p.todayClicks}</span>
-                        </div>
+                        {fbBound ? (
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-2xl font-bold text-blue-500">{fbToday ?? 0}</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-2xl font-bold text-blue-500">{p.todayViews}</span>
+                            <span className={`text-xs ${dm.textMuted}`}>/</span>
+                            <span className="text-lg font-bold text-green-500">{p.todayClicks}</span>
+                          </div>
+                        )}
                         <div className={`text-xs ${dm.textMuted}`}>{t.today}</div>
                       </div>
                     </div>
