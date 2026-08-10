@@ -318,7 +318,7 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     const [weekRes, todayRes, statusRes] = await Promise.all([
       fetch(`${baseUrl}?fields=${fields}&level=campaign&${dateParam}&limit=50&access_token=${accessToken}`),
       fetch(`${baseUrl}?fields=${fields}&level=campaign&date_preset=today&limit=50&access_token=${accessToken}`),
-      fetch(`https://graph.facebook.com/v21.0/act_${adAccountId}/campaigns?fields=id,effective_status&limit=200&access_token=${accessToken}`),
+      fetch(`https://graph.facebook.com/v21.0/act_${adAccountId}/campaigns?fields=id,name,effective_status&limit=200&access_token=${accessToken}`),
     ]);
 
     let weekOk = weekRes;
@@ -346,13 +346,12 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     // Only ACTIVE campaigns are shown; if the status fetch fails, show all
     let rows: any[] = weekJson.data || [];
     let todayRows: any[] = todayJson.data || [];
+    let activeCampaignNames: string[] = [];
     if (statusRes.ok) {
       const statusJson = await statusRes.json();
-      const activeIds = new Set(
-        (statusJson.data || [])
-          .filter((c: any) => c.effective_status === "ACTIVE")
-          .map((c: any) => c.id)
-      );
+      const active = (statusJson.data || []).filter((c: any) => c.effective_status === "ACTIVE");
+      activeCampaignNames = active.map((c: any) => String(c.name || ""));
+      const activeIds = new Set(active.map((c: any) => c.id));
       if (activeIds.size > 0) {
         rows = rows.filter((r: any) => activeIds.has(r.campaign_id));
         todayRows = todayRows.filter((r: any) => activeIds.has(r.campaign_id));
@@ -360,6 +359,26 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     }
 
     const campaigns = parseFbInsights(rows);
+    // Freshly launched (or in-review) ACTIVE campaigns have NO insights row
+    // until the first spend — append zero rows so dashboard tabs can bind
+    // to them immediately instead of looking "not recognized".
+    const namesWithData = new Set(campaigns.map((c) => c.campaign_name));
+    for (const name of activeCampaignNames) {
+      if (name && !namesWithData.has(name)) {
+        campaigns.push({
+          campaign_name: name,
+          spend: 0,
+          impressions: 0,
+          clicks: 0,
+          linkClicks: 0,
+          cpcLink: 0,
+          landingPageViews: 0,
+          conversions: 0,
+          costPerConversion: 0,
+          conversionEventName: "",
+        });
+      }
+    }
     const todayCampaigns = parseFbInsights(todayRows);
     const totalSpend = campaigns.reduce((s, c) => s + c.spend, 0);
     const totalConversions = campaigns.reduce((s, c) => s + c.conversions, 0);
