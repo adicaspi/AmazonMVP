@@ -285,8 +285,15 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
     const costPerConversion = costEntry ? parseFloat(costEntry.value) : 0;
     const lpvEntry = actions.find((a: any) => a.action_type === "landing_page_view");
 
+    // Binding + display name carries the ad-set: one campaign with
+    // per-channel ad sets (…_Instagram / …_Facebook_NoAge) must split
+    // across the per-channel dashboard tabs.
+    const adset = row.adset_name ? String(row.adset_name) : "";
+    const name = adset && adset !== row.campaign_name
+      ? `${row.campaign_name} — ${adset}`
+      : (row.campaign_name || "Unknown");
     return {
-      campaign_name: row.campaign_name || "Unknown",
+      campaign_name: name,
       spend: parseFloat(row.spend || "0"),
       impressions: parseInt(row.impressions || "0"),
       clicks: parseInt(row.clicks || "0"),
@@ -307,7 +314,7 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     if (!accessToken || !adAccountId) return null;
 
     const baseUrl = `https://graph.facebook.com/v21.0/act_${adAccountId}/insights`;
-    const fields = "campaign_id,campaign_name,actions,results,cost_per_action_type,spend,impressions,clicks,inline_link_clicks,cost_per_inline_link_click";
+    const fields = "campaign_id,campaign_name,adset_name,actions,results,cost_per_action_type,spend,impressions,clicks,inline_link_clicks,cost_per_inline_link_click";
     // Match the dashboard's selected date range; fall back to last 7 days
     const dateParam = from && to
       ? `time_range=${encodeURIComponent(JSON.stringify({ since: from, until: to }))}`
@@ -316,8 +323,8 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     // Fetch the selected range (by campaign), today's per-campaign insights,
     // and campaign statuses in parallel — Off campaigns are hidden
     const [weekRes, todayRes, statusRes] = await Promise.all([
-      fetch(`${baseUrl}?fields=${fields}&level=campaign&${dateParam}&limit=50&access_token=${accessToken}`),
-      fetch(`${baseUrl}?fields=${fields}&level=campaign&date_preset=today&limit=50&access_token=${accessToken}`),
+      fetch(`${baseUrl}?fields=${fields}&level=adset&${dateParam}&limit=100&access_token=${accessToken}`),
+      fetch(`${baseUrl}?fields=${fields}&level=adset&date_preset=today&limit=100&access_token=${accessToken}`),
       fetch(`https://graph.facebook.com/v21.0/act_${adAccountId}/campaigns?fields=id,name,effective_status&limit=200&access_token=${accessToken}`),
     ]);
 
@@ -326,7 +333,7 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
       console.error("Facebook Ads API error (with results field):", await weekRes.text());
       // Some accounts/levels reject `results` — retry without it
       const fallbackFields = fields.replace(",results", "");
-      weekOk = await fetch(`${baseUrl}?fields=${fallbackFields}&level=campaign&${dateParam}&limit=50&access_token=${accessToken}`);
+      weekOk = await fetch(`${baseUrl}?fields=${fallbackFields}&level=adset&${dateParam}&limit=100&access_token=${accessToken}`);
       if (!weekOk.ok) {
         console.error("Facebook Ads API error:", await weekOk.text());
         return null;
@@ -339,7 +346,7 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     let todayOk = todayRes;
     if (!todayRes.ok) {
       const fallbackFields = fields.replace(",results", "");
-      todayOk = await fetch(`${baseUrl}?fields=${fallbackFields}&level=campaign&date_preset=today&limit=50&access_token=${accessToken}`);
+      todayOk = await fetch(`${baseUrl}?fields=${fallbackFields}&level=adset&date_preset=today&limit=100&access_token=${accessToken}`);
     }
     const todayJson = todayOk.ok ? await todayOk.json() : { data: [] };
 
