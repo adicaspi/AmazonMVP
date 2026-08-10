@@ -369,9 +369,13 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     // Freshly launched (or in-review) ACTIVE campaigns have NO insights row
     // until the first spend — append zero rows so dashboard tabs can bind
     // to them immediately instead of looking "not recognized".
-    const namesWithData = new Set(campaigns.map((c) => c.campaign_name));
+    // A campaign "has data" if any of its AD SET rows exist (composed
+    // names start with the campaign name) — otherwise the zero-row would
+    // wrongly join every tab the campaign name matches.
+    const hasData = (name: string) =>
+      campaigns.some((c) => c.campaign_name === name || c.campaign_name.startsWith(name + " — "));
     for (const name of activeCampaignNames) {
-      if (name && !namesWithData.has(name)) {
+      if (name && !hasData(name)) {
         campaigns.push({
           campaign_name: name,
           spend: 0,
