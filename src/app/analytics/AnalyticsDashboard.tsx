@@ -1298,7 +1298,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {pagesData.filter((p) => !isArchived(p) || showArchived).map((p) => {
-                const cr = p.views > 0 ? ((p.totalClicks / p.views) * 100).toFixed(1) : "0";
+                // SAME numbers as the funnel inside the tab: people, people
+                // who clicked, and their ratio — one methodology everywhere
+                const pf = p.funnel ?? { people: p.views, rawViews: p.views, clickers: p.uniqueClickers, orphanClickers: 0, totalClicks: p.totalClicks, noIdClicks: 0 };
+                const cr = pf.people > 0 ? ((pf.clickers / pf.people) * 100).toFixed(1) : "0";
                 return (
                   <button
                     key={p.page}
@@ -1320,12 +1323,12 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                     </div>
                     <div className="grid grid-cols-4 gap-3">
                       <div>
-                        <div className={`text-2xl font-bold ${dm.text}`}>{p.views}</div>
-                        <div className={`text-xs ${dm.textMuted}`}>{t.views}</div>
+                        <div className={`text-2xl font-bold ${dm.text}`}>{pf.people}</div>
+                        <div className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "אנשים" : "People"}</div>
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-emerald-500">{p.totalClicks}</div>
-                        <div className={`text-xs ${dm.textMuted}`}>{t.clicks}</div>
+                        <div className="text-2xl font-bold text-emerald-500">{pf.clickers}</div>
+                        <div className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "לחצו לאמזון" : "Clicked"}</div>
                       </div>
                       <div>
                         <div className={`text-2xl font-bold ${parseFloat(cr) >= 20 ? "text-emerald-500" : dm.text}`}>{cr}%</div>
