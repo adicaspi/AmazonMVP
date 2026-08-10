@@ -1139,13 +1139,16 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             );
           };
           const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.15 ? "good" : cpc <= 0.3 ? "mid" : "bad";
-          // Bridge = Facebook's official UNIQUE metrics: PEOPLE who did the
-          // conversion ÷ PEOPLE who clicked the ad link. Person-to-person, so
-          // it doesn't blow past 100% every time someone taps twice. Falls
-          // back to event counts only if unique fields are absent.
+          // Bridge: denominator = Facebook's UNIQUE ad clickers (people).
+          // Numerator: FB does NOT provide unique counts for custom
+          // conversions (verified — unique_actions omits them), so the
+          // conversion side is events. Since a converter must have clicked,
+          // the DISPLAY caps at 100% ("everyone who came clicked through");
+          // the formula line spells out the raw event count honestly.
           const brNum = fbUniqueConversions > 0 ? fbUniqueConversions : fbConversions;
           const brDen = fbUniqueLinkClicks > 0 ? fbUniqueLinkClicks : fbLinkClicks;
-          const bridgePct = brDen > 0 ? (brNum / brDen) * 100 : 0;
+          const bridgeRawPct = brDen > 0 ? (brNum / brDen) * 100 : 0;
+          const bridgePct = Math.min(bridgeRawPct, 100);
           const bridgeStatus = !campaignFilterActive || brDen === 0 || brNum === 0 ? "na" : bridgePct >= 50 ? "good" : bridgePct >= 30 ? "mid" : "bad";
           const cpaStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beCostPerAmzClick <= epcUsd ? "good" : beCostPerAmzClick <= epcUsd * 1.5 ? "mid" : "bad";
           const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.15 ? "mid" : "bad";
@@ -1168,12 +1171,12 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                   lang === "he" ? "כמה מהנכנסים לחצו לאמזון?" : "How many visitors clicked to Amazon?",
                   campaignFilterActive && brDen > 0 && brNum > 0 ? `${Math.round(bridgePct)}%` : "—",
                   bridgeStatus,
-                  lang === "he" ? "יעד: מעל 50% · אנשים חלקי אנשים, לפי פייסבוק" : "Target: over 50% · people over people, per Facebook",
+                  lang === "he" ? "יעד: מעל 50% · מקסימום 100%" : "Target: over 50% · capped at 100%",
                   campaignFilterActive && brDen > 0 && brNum > 0 ? (
-                    <div dir="ltr" className={`text-xs font-semibold mt-1 ${dm.text}`}>
+                    <div className={`text-xs font-semibold mt-1 ${dm.text}`}>
                       {lang === "he"
-                        ? `${brNum} אנשים לחצו לאמזון ÷ ${brDen} נכנסו מהמודעה`
-                        : `${brNum} people clicked Amazon ÷ ${brDen} clicked the ad`}
+                        ? `${brNum} לחיצות אמזון מ-${brDen} שנכנסו מהמודעה${bridgeRawPct > 100 ? " (יש שלחצו יותר מפעם)" : ""}`
+                        : `${brNum} Amazon clicks from ${brDen} ad visitors${bridgeRawPct > 100 ? " (some clicked more than once)" : ""}`}
                     </div>
                   ) : undefined
                 )}
