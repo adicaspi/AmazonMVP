@@ -53,9 +53,11 @@ export type FacebookCampaign = {
   impressions: number;
   clicks: number;
   linkClicks: number;
+  uniqueLinkClicks: number;
   cpcLink: number;
   landingPageViews: number;
   conversions: number;
+  uniqueConversions: number;
   costPerConversion: number;
   conversionEventName: string;
 };
@@ -281,6 +283,13 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
       conversions = conversionAction ? parseInt(conversionAction.value) : 0;
       conversionType = conversionAction?.action_type || "";
     }
+    // Facebook's official UNIQUE counts — PEOPLE, not events. These make
+    // the Bridge a person-to-person ratio instead of events/clicks (which
+    // confusingly exceeds 100% whenever people click the button twice).
+    const uniqueActions: any[] = row.unique_actions || [];
+    const uniqueEntry = uniqueActions.find((a: any) => a.action_type === conversionType)
+      || uniqueActions.find((a: any) => typeof a.action_type === "string" && a.action_type.startsWith("offsite_conversion"));
+    const uniqueConversions = uniqueEntry ? parseInt(uniqueEntry.value) || 0 : 0;
     const costEntry = costPerAction.find((c: any) => c.action_type === conversionType);
     const costPerConversion = costEntry ? parseFloat(costEntry.value) : 0;
     const lpvEntry = actions.find((a: any) => a.action_type === "landing_page_view");
@@ -298,9 +307,11 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
       impressions: parseInt(row.impressions || "0"),
       clicks: parseInt(row.clicks || "0"),
       linkClicks: parseInt(row.inline_link_clicks || "0"),
+      uniqueLinkClicks: parseInt(row.unique_inline_link_clicks || "0"),
       cpcLink: parseFloat(row.cost_per_inline_link_click || "0"),
       landingPageViews: lpvEntry ? parseInt(lpvEntry.value) : 0,
       conversions,
+      uniqueConversions,
       costPerConversion,
       conversionEventName: conversionType,
     };
@@ -314,7 +325,7 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
     if (!accessToken || !adAccountId) return null;
 
     const baseUrl = `https://graph.facebook.com/v21.0/act_${adAccountId}/insights`;
-    const fields = "campaign_id,campaign_name,adset_name,actions,results,cost_per_action_type,spend,impressions,clicks,inline_link_clicks,cost_per_inline_link_click";
+    const fields = "campaign_id,campaign_name,adset_name,actions,results,unique_actions,cost_per_action_type,spend,impressions,clicks,inline_link_clicks,unique_inline_link_clicks,cost_per_inline_link_click";
     // Match the dashboard's selected date range; fall back to last 7 days
     const dateParam = from && to
       ? `time_range=${encodeURIComponent(JSON.stringify({ since: from, until: to }))}`
@@ -382,9 +393,11 @@ async function getFacebookAdsData(from?: string, to?: string): Promise<FacebookA
           impressions: 0,
           clicks: 0,
           linkClicks: 0,
+          uniqueLinkClicks: 0,
           cpcLink: 0,
           landingPageViews: 0,
           conversions: 0,
+          uniqueConversions: 0,
           costPerConversion: 0,
           conversionEventName: "",
         });

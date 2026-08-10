@@ -85,9 +85,11 @@ type FacebookCampaign = {
   impressions: number;
   clicks: number;
   linkClicks: number;
+  uniqueLinkClicks: number;
   cpcLink: number;
   landingPageViews: number;
   conversions: number;
+  uniqueConversions: number;
   costPerConversion: number;
   conversionEventName: string;
 };
@@ -751,6 +753,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const fbSpend = usd(effectiveCampaigns.reduce((s, c) => s + c.spend, 0));
   const fbLinkClicks = effectiveCampaigns.reduce((s, c) => s + (c.linkClicks || 0), 0);
   const fbConversions = effectiveCampaigns.reduce((s, c) => s + c.conversions, 0);
+  const fbUniqueConversions = effectiveCampaigns.reduce((s, c) => s + (c.uniqueConversions || 0), 0);
+  const fbUniqueLinkClicks = effectiveCampaigns.reduce((s, c) => s + (c.uniqueLinkClicks || 0), 0);
   // FACEBOOK'S OWN computed metrics, verbatim (single bound campaign =
   // the normal case). Only the ILS->USD conversion is applied. Multi-
   // campaign fallback divides FB totals — same math FB uses to aggregate.
@@ -1135,11 +1139,14 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
             );
           };
           const cpcStatus = !campaignFilterActive || fbLinkClicks === 0 ? "na" : cpc <= 0.15 ? "good" : cpc <= 0.3 ? "mid" : "bad";
-          // Bridge = FB Results ÷ FB link clicks — both numbers straight from
-          // Meta's API. Can exceed 100% (FB counts every AmazonClick event,
-          // incl. double-taps, per link click) — shown as-is, never hidden.
-          const bridgePct = fbBridgeRaw * 100;
-          const bridgeStatus = !campaignFilterActive || fbLinkClicks === 0 || fbConversions === 0 ? "na" : bridgePct >= 50 ? "good" : bridgePct >= 30 ? "mid" : "bad";
+          // Bridge = Facebook's official UNIQUE metrics: PEOPLE who did the
+          // conversion ÷ PEOPLE who clicked the ad link. Person-to-person, so
+          // it doesn't blow past 100% every time someone taps twice. Falls
+          // back to event counts only if unique fields are absent.
+          const brNum = fbUniqueConversions > 0 ? fbUniqueConversions : fbConversions;
+          const brDen = fbUniqueLinkClicks > 0 ? fbUniqueLinkClicks : fbLinkClicks;
+          const bridgePct = brDen > 0 ? (brNum / brDen) * 100 : 0;
+          const bridgeStatus = !campaignFilterActive || brDen === 0 || brNum === 0 ? "na" : bridgePct >= 50 ? "good" : bridgePct >= 30 ? "mid" : "bad";
           const cpaStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beCostPerAmzClick <= epcUsd ? "good" : beCostPerAmzClick <= epcUsd * 1.5 ? "mid" : "bad";
           const netStatus = !campaignFilterActive || beCostPerAmzClick === 0 ? "na" : beNetPerClick >= 0 ? "good" : beNetPerClick >= -0.15 ? "mid" : "bad";
           return (
@@ -1158,13 +1165,15 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 )}
                 {kpiCard(
                   lang === "he" ? "ברידג'" : "Bridge",
-                  lang === "he" ? "העמוד מעביר לאמזון?" : "Does the page bridge to Amazon?",
-                  campaignFilterActive && fbLinkClicks > 0 && fbConversions > 0 ? `${Math.round(bridgePct)}%` : "—",
+                  lang === "he" ? "כמה מהנכנסים לחצו לאמזון?" : "How many visitors clicked to Amazon?",
+                  campaignFilterActive && brDen > 0 && brNum > 0 ? `${Math.round(bridgePct)}%` : "—",
                   bridgeStatus,
-                  lang === "he" ? "יעד: מעל 50% · מעל 100% = כמה אירועים לקליק" : "Target: over 50% · >100% = multiple events per click",
-                  campaignFilterActive && fbLinkClicks > 0 && fbConversions > 0 ? (
+                  lang === "he" ? "יעד: מעל 50% · אנשים חלקי אנשים, לפי פייסבוק" : "Target: over 50% · people over people, per Facebook",
+                  campaignFilterActive && brDen > 0 && brNum > 0 ? (
                     <div dir="ltr" className={`text-xs font-semibold mt-1 ${dm.text}`}>
-                      {`${fbConversions} results ÷ ${fbLinkClicks} link clicks`}
+                      {lang === "he"
+                        ? `${brNum} אנשים לחצו לאמזון ÷ ${brDen} נכנסו מהמודעה`
+                        : `${brNum} people clicked Amazon ÷ ${brDen} clicked the ad`}
                     </div>
                   ) : undefined
                 )}
