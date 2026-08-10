@@ -724,6 +724,15 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
       .filter((c) => campaignMatchesPage(path, c.campaign_name))
       .reduce((s, c) => s + c.conversions, 0);
   };
+  // FB Results in the SELECTED range — powers the tab badges so the badge
+  // always equals the Results shown inside the tab (a today-only badge kept
+  // reading as "stale" next to a yesterday+today view).
+  const fbRangeResultsFor = (path: string): number | null => {
+    if (!PAGE_CAMPAIGN_KEYWORD[path]?.length) return null;
+    return fbCampaigns
+      .filter((c) => campaignMatchesPage(path, c.campaign_name))
+      .reduce((s, c) => s + c.conversions, 0);
+  };
 
   // AUTO-ARCHIVE (decided live from Facebook): a page is archived when it has
   // no ACTIVE campaign matching its keywords (fbCampaigns only contains
@@ -917,8 +926,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               >
                 <span>{p.label}</span>
                 {(() => {
-                  const fbToday = fbTodayResultsFor(p.page);
-                  const badge = fbToday !== null ? fbToday : p.todayClicks;
+                  const fbRange = fbRangeResultsFor(p.page);
+                  const badge = fbRange !== null ? fbRange : 0;
                   return badge > 0 ? (
                     <span className="bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
                       {badge}
