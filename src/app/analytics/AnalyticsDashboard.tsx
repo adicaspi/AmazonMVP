@@ -736,6 +736,9 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     p.archived === true ||
     (!p.pinned && !pageHasActiveCampaign(p.page) && p.views === 0 && p.totalClicks === 0);
 
+  // OWNER'S RULE: the dashboard shows FACEBOOK data ONLY. First-party
+  // sections are disabled everywhere (flip to true to resurrect for debug).
+  const SHOW_FIRST_PARTY = false;
   const campaignKeyword = PAGE_CAMPAIGN_KEYWORD[selectedPage];
   const matchedCampaigns = campaignKeyword
     ? fbCampaigns.filter((c) => campaignMatchesPage(selectedPage, c.campaign_name))
@@ -1307,11 +1310,9 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                 const cardFbUniq = fbAct.reduce((sum, c) => sum + (c.uniqueLinkClicks || 0), 0);
                 const cardFbConv = fbAct.reduce((sum, c) => sum + c.conversions, 0);
                 const cardDen = cardFbUniq > 0 ? cardFbUniq : cardFbLink;
-                const pf = p.funnel ?? { people: p.views, rawViews: p.views, clickers: p.uniqueClickers, orphanClickers: 0, totalClicks: p.totalClicks, noIdClicks: 0 };
-                const cr = fbBound
-                  ? (cardDen > 0 ? Math.min((cardFbConv / cardDen) * 100, 100).toFixed(1) : "0")
-                  : (pf.people > 0 ? ((pf.clickers / pf.people) * 100).toFixed(1) : "0");
+                const cr = cardDen > 0 ? Math.min((cardFbConv / cardDen) * 100, 100).toFixed(1) : "0";
                 const fbToday = fbTodayResultsFor(p.page);
+                void fbBound;
                 return (
                   <button
                     key={p.page}
@@ -1333,29 +1334,21 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
                     </div>
                     <div className="grid grid-cols-4 gap-3">
                       <div>
-                        <div className={`text-2xl font-bold ${dm.text}`}>{fbBound ? cardDen : pf.people}</div>
-                        <div className={`text-xs ${dm.textMuted}`}>{fbBound ? (lang === "he" ? "קליקים במודעה" : "Ad clicks") : (lang === "he" ? "אנשים" : "People")}</div>
+                        <div className={`text-2xl font-bold ${dm.text}`}>{cardDen}</div>
+                        <div className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "קליקים במודעה" : "Ad clicks"}</div>
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-emerald-500">{fbBound ? cardFbConv : pf.clickers}</div>
-                        <div className={`text-xs ${dm.textMuted}`}>{fbBound ? (lang === "he" ? "המרות (FB)" : "Results (FB)") : (lang === "he" ? "לחצו לאמזון" : "Clicked")}</div>
+                        <div className="text-2xl font-bold text-emerald-500">{cardFbConv}</div>
+                        <div className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "המרות (FB)" : "Results (FB)"}</div>
                       </div>
                       <div>
                         <div className={`text-2xl font-bold ${parseFloat(cr) >= 20 ? "text-emerald-500" : dm.text}`}>{cr}%</div>
                         <div className={`text-xs ${dm.textMuted}`}>{t.conversion}</div>
                       </div>
                       <div>
-                        {fbBound ? (
-                          <div className="flex items-baseline gap-1">
-                            <span className="text-2xl font-bold text-blue-500">{fbToday ?? 0}</span>
-                          </div>
-                        ) : (
-                          <div className="flex items-baseline gap-1">
-                            <span className="text-2xl font-bold text-blue-500">{p.todayViews}</span>
-                            <span className={`text-xs ${dm.textMuted}`}>/</span>
-                            <span className="text-lg font-bold text-green-500">{p.todayClicks}</span>
-                          </div>
-                        )}
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-2xl font-bold text-blue-500">{fbToday ?? 0}</span>
+                        </div>
                         <div className={`text-xs ${dm.textMuted}`}>{t.today}</div>
                       </div>
                     </div>
@@ -1369,7 +1362,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         {/* Conversion Funnel — ONE methodology: people, full-range queries,
             a clicker counts only if they also visited in range (rate can
             never exceed 100%). Event totals shown separately for honesty. */}
-        {!campaignFilterActive && (() => {
+        {SHOW_FIRST_PARTY && !campaignFilterActive && (() => {
           const f = data.funnel ?? { people: data.views, rawViews: data.views, clickers: data.uniqueClickers, orphanClickers: 0, totalClicks: data.totalClicks, noIdClicks: 0 };
           const rate = f.people > 0 ? (f.clickers / f.people) * 100 : 0;
           const rateStr = rate.toFixed(1);
@@ -1453,7 +1446,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         })()}
 
         {/* Quick Stats */}
-        {!campaignFilterActive && (
+        {SHOW_FIRST_PARTY && !campaignFilterActive && (
         <section>
           <h2 className={`text-lg font-semibold ${dm.text} mb-3 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-rose-500 rounded-full"></span>
@@ -1732,7 +1725,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         )}
 
         {/* Traffic Sources + Button Performance — first-party, hidden on campaign tabs */}
-        {!campaignFilterActive && (
+        {SHOW_FIRST_PARTY && !campaignFilterActive && (
         <div className="grid md:grid-cols-2 gap-6">
           {/* Traffic Sources */}
           <section>
@@ -1990,7 +1983,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         )}
 
         {/* Device Breakdown */}
-        {!campaignFilterActive && (Object.keys(data.viewDeviceCounts || {}).length > 0 || Object.keys(data.byDevice || {}).length > 0) && (
+        {SHOW_FIRST_PARTY && !campaignFilterActive && (Object.keys(data.viewDeviceCounts || {}).length > 0 || Object.keys(data.byDevice || {}).length > 0) && (
           <section>
             <h2 className={`text-lg font-semibold ${dm.text} mb-2 flex items-center gap-2`}>
               <span className="w-2 h-2 bg-cyan-500 rounded-full"></span>
@@ -2063,7 +2056,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
         )}
 
         {/* Detailed Click Log + Daily Breakdown — first-party, hidden on campaign tabs */}
-        {!campaignFilterActive && (
+        {SHOW_FIRST_PARTY && !campaignFilterActive && (
         <div className="grid md:grid-cols-2 gap-6">
           {/* Detailed Click Log */}
           <section>
