@@ -89,48 +89,50 @@ export async function POST(request: NextRequest) {
 
   const directIds: string[] = [];
   const nonDirectVisitors = new Set<string>();
+  const removableVisitors = new Set<string>();
   for (const v of views) {
     if (isRemovable(v)) {
       directIds.push(v.id);
+      if (v.visitor_id) removableVisitors.add(v.visitor_id);
     } else if (v.visitor_id) {
       nonDirectVisitors.add(v.visitor_id);
     }
   }
+  // A visitor is only "removable" if ALL their views are — one real
+  // ad-attributed view keeps every click of theirs.
+  nonDirectVisitors.forEach((id) => removableVisitors.delete(id));
 
-  // Clicks to remove: any click on this page whose visitor has NO surviving
-  // (ad-attributed) view. This covers direct/test visitors AND "orphan"
-  // clicks whose views were already wiped by a previous cleanup. Clicks from
-  // visitors with at least one real ad-attributed view are kept.
+  // Clicks to remove — CONSERVATIVE (a previous version deleted real ad
+  // clicks: whole "burst" visitors and anyone without a matching view):
+  // 1. Clicks of visitors whose ENTIRE view history here is direct/test/bot.
+  // 2. Duplicate taps: a click within 1.5s of the SAME visitor's previous
+  //    click deletes only the duplicate, never the visitor's other clicks.
+  // Clicks with no visitor id or no view rows at all are KEPT — they may be
+  // real traffic whose view simply wasn't recorded.
   const { data: clickRows, error: clickErr } = await supabase
     .from("amazon_clicks")
     .select("id, visitor_id, timestamp")
     .eq("page", page);
   if (clickErr) return NextResponse.json({ error: clickErr.message }, { status: 500 });
 
-  // Burst fingerprint: two clicks from the same visitor under 1.5s apart is
-  // physically impossible for a human — Meta's review bots click every
-  // button within milliseconds. All clicks of such visitors are bot clicks.
-  const clicksByVisitor = new Map<string, number[]>();
+  const clickIdsToDelete: string[] = [];
+  const byVisitor = new Map<string, { id: string; t: number }[]>();
   for (const c of clickRows || []) {
+    if (c.visitor_id && removableVisitors.has(c.visitor_id)) {
+      clickIdsToDelete.push(c.id);
+      continue;
+    }
     if (!c.visitor_id) continue;
-    const arr = clicksByVisitor.get(c.visitor_id) || [];
-    arr.push(new Date(c.timestamp).getTime());
-    clicksByVisitor.set(c.visitor_id, arr);
+    const arr = byVisitor.get(c.visitor_id) || [];
+    arr.push({ id: c.id, t: new Date(c.timestamp).getTime() });
+    byVisitor.set(c.visitor_id, arr);
   }
-  const burstBots = new Set<string>();
-  for (const [visitor, times] of clicksByVisitor) {
-    times.sort((a, b) => a - b);
-    for (let i = 1; i < times.length; i++) {
-      if (times[i] - times[i - 1] < 1500) {
-        burstBots.add(visitor);
-        break;
-      }
+  for (const [, arr] of byVisitor) {
+    arr.sort((a, b) => a.t - b.t);
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i].t - arr[i - 1].t < 1500) clickIdsToDelete.push(arr[i].id);
     }
   }
-
-  const clickIdsToDelete = (clickRows || [])
-    .filter((c) => !c.visitor_id || !nonDirectVisitors.has(c.visitor_id) || burstBots.has(c.visitor_id))
-    .map((c) => c.id);
 
   // .select("id") makes the delete return the actually-deleted rows, so a
   // silent RLS block (success with 0 rows) is detectable instead of invisible
