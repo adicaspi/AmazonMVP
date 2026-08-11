@@ -75,8 +75,12 @@ export function MetaPixelInit() {
   // static page source and needs to see fbq('init', ...) there — the old
   // effect-only init was invisible to it ("A pixel wasn't detected").
   // Bonus: PageView now fires before hydration, earlier and more reliably.
+  // ?notrack=0 re-enables tracking IMMEDIATELY (clears the cookie and
+  // fires on this very load) — so Events Manager testing works right away.
   const inlineInit =
-    `try{if(document.cookie.indexOf('aip_notrack=1')===-1&&location.search.indexOf('notrack=1')===-1){` +
+    `try{var q=location.search;var off=q.indexOf('notrack=0')>-1;` +
+    `if(off){document.cookie='aip_notrack=; max-age=0; path=/';}` +
+    `if(off||(document.cookie.indexOf('aip_notrack=1')===-1&&q.indexOf('notrack=1')===-1)){` +
     `fbq('init','${match.pixelId}');fbq('trackSingle','${match.pixelId}','PageView');` +
     `window.__aipPixelFiredPath=location.pathname;}}catch(e){}`;
   return <script dangerouslySetInnerHTML={{ __html: inlineInit }} />;
