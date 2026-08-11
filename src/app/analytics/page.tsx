@@ -275,7 +275,7 @@ function parseFbInsights(rows: any[]): FacebookCampaign[] {
     const resultValue = resultEntry?.values?.[0]?.value;
     if (resultValue !== undefined && resultValue !== null) {
       conversions = parseInt(resultValue) || 0;
-      conversionType = String(resultEntry.indicator || "results").replace("actions:", "");
+      conversionType = String(resultEntry.indicator || "results").replace("actions:", "").replace("conversions:", "");
     } else {
       const conversionAction = actions.find(
         (a: any) => typeof a.action_type === "string" && a.action_type.startsWith("offsite_conversion")
