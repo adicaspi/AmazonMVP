@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { getVisitorId } from "@/lib/visitor-id";
-import { isNotrackEnabled } from "@/lib/notrack";
 
 // Opt-in Amazon-app link for iOS Safari/Chrome, where the automatic scheme
 // attempt is banned (an unhandled scheme pops Apple's unsuppressible
@@ -25,7 +24,7 @@ export function OpenInAppLink({ href, productName }: { href: string; productName
     // the app takes over and again on return, so Safari can't re-issue it.
     document.addEventListener("visibilitychange", cancelPending, { once: true });
     window.addEventListener("pageshow", cancelPending);
-    if (!isNotrackEnabled()) {
+    {
       fetch("/api/amazon-click", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

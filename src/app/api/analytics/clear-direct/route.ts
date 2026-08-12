@@ -50,12 +50,8 @@ function chunk<T>(arr: T[], size: number): T[][] {
 }
 
 export async function POST(request: NextRequest) {
-  // Only the site owner's browser (which carries the aip_notrack=1 cookie set
-  // via ?notrack=1) may trigger deletion.
-  if (request.cookies.get("aip_notrack")?.value !== "1") {
-    return NextResponse.json({ error: "Not authorized" }, { status: 403 });
-  }
-
+  // Ungated by owner request (notrack retired) — deletes only direct/test
+  // rows, and the dashboard button asks for confirmation first.
   let page: string;
   try {
     const body = await request.json();

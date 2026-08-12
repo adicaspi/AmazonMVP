@@ -3,7 +3,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { generateEventId } from "@/lib/fb-conversions";
 import { getVisitorId } from "@/lib/visitor-id";
-import { isNotrackEnabled } from "@/lib/notrack";
 
 declare global {
   interface Window {
@@ -211,8 +210,6 @@ export function AmazonButton({ href, children, className, productName, position,
     }
     // Regular browsers (mobile + desktop) keep default navigation
 
-    // Skip counting the site owner's own clicks (?notrack=1); link still navigates
-    if (isNotrackEnabled()) return;
 
     const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
     const pageUrl = typeof window !== "undefined" ? window.location.href : "";

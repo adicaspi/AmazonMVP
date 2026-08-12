@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { resolveNotrack } from "@/lib/notrack";
 
 const GRANDELASH_PIXEL_ID = "876318711699041";
 const SHARK_PIXEL_ID = "1554568722933870";
@@ -32,8 +31,6 @@ export function MetaPixelInit() {
   const match = PIXEL_BY_PATH.find((p) => pathname.startsWith(p.prefix));
 
   useEffect(() => {
-    // Skip the site owner's own visits (?notrack=1)
-    if (resolveNotrack()) return;
     if (!match) return;
     // The inline script below already fired for this page load — this
     // effect only covers client-side navigations between pages.
@@ -75,14 +72,11 @@ export function MetaPixelInit() {
   // static page source and needs to see fbq('init', ...) there — the old
   // effect-only init was invisible to it ("A pixel wasn't detected").
   // Bonus: PageView now fires before hydration, earlier and more reliably.
-  // ?notrack=0 re-enables tracking IMMEDIATELY (clears the cookie and
-  // fires on this very load) — so Events Manager testing works right away.
+  // notrack was retired (owner request): the pixel fires for everyone;
+  // owner visits are cleaned with the clear-direct button instead.
   const inlineInit =
-    `try{var q=location.search;var off=q.indexOf('notrack=0')>-1;` +
-    `if(off){document.cookie='aip_notrack=; max-age=0; path=/';}` +
-    `if(off||(document.cookie.indexOf('aip_notrack=1')===-1&&q.indexOf('notrack=1')===-1)){` +
-    `fbq('init','${match.pixelId}');fbq('trackSingle','${match.pixelId}','PageView');` +
-    `window.__aipPixelFiredPath=location.pathname;}}catch(e){}`;
+    `try{fbq('init','${match.pixelId}');fbq('trackSingle','${match.pixelId}','PageView');` +
+    `window.__aipPixelFiredPath=location.pathname;}catch(e){}`;
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: inlineInit }} />

@@ -521,7 +521,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
   const setBeUsdRate = (v: number) => setBeUsdRateState(v);
 
 
-  // Clear Direct-only traffic for the selected page (owner-only; needs the aip_notrack cookie)
+  // Clear Direct-only traffic for the selected page (confirm-guarded;
+  // deletes ONLY direct/test/bot rows — real ad traffic is never touched)
   const [clearingDirect, setClearingDirect] = useState(false);
   const clearDirectTraffic = async () => {
     if (selectedPage === "all" || clearingDirect) return;
@@ -539,9 +540,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok) {
-        window.alert(res.status === 403
-          ? (lang === "he" ? "אין הרשאה — פתח פעם אחת עמוד באתר עם ?notrack=1 בדפדפן הזה ונסה שוב." : "Not authorized — open any site page with ?notrack=1 once in this browser, then retry.")
-          : json.error || "Failed");
+        window.alert(json.error || "Failed");
       } else if (json.deletedViews > 0 || json.deletedClicks > 0) {
         window.alert(lang === "he"
           ? `נמחקו ${json.deletedViews} כניסות ישירות/טסטים ו-${json.deletedClicks} קליקים.`
@@ -968,10 +967,7 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
               return (
                 <a
                   key={p.page}
-                  // notrack: visits from the dashboard are the owner's — the
-                  // param sets the aip_notrack cookie so they're never
-                  // counted, and clear-direct authorization works
-                  href={`${p.page}?notrack=1`}
+                  href={p.page}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${darkMode ? palette.dark : palette.light}`}
