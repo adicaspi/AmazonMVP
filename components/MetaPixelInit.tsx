@@ -83,5 +83,21 @@ export function MetaPixelInit() {
     `if(off||(document.cookie.indexOf('aip_notrack=1')===-1&&q.indexOf('notrack=1')===-1)){` +
     `fbq('init','${match.pixelId}');fbq('trackSingle','${match.pixelId}','PageView');` +
     `window.__aipPixelFiredPath=location.pathname;}}catch(e){}`;
-  return <script dangerouslySetInnerHTML={{ __html: inlineInit }} />;
+  return (
+    <>
+      <script dangerouslySetInnerHTML={{ __html: inlineInit }} />
+      {/* Meta's canonical noscript fallback — JS-disabled browsers still
+          register a PageView via the tracking image */}
+      <noscript>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          height="1"
+          width="1"
+          style={{ display: "none" }}
+          alt=""
+          src={`https://www.facebook.com/tr?id=${match.pixelId}&ev=PageView&noscript=1`}
+        />
+      </noscript>
+    </>
+  );
 }
