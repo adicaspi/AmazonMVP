@@ -35,15 +35,21 @@ const FALLBACK_IMAGES = [
 ];
 const FALLBACK_PRICE_ANCHOR = "Around $100.00";
 
-// Brand assets carried over from the original /grandelash page
-const BEFORE_IMAGE = { src: "/images/grandelash/before.png", alt: "Lashes before using GrandeLASH-MD" };
-const AFTER_IMAGE = { src: "/images/grandelash/after.png", alt: "Fuller-looking lashes after using GrandeLASH-MD" };
-const STORY_IMAGE = { src: "/images/grandelash/promo-solution.jpeg", alt: "GrandeLASH-MD Lash Enhancing Serum" };
+// Campaign creative supplied by the owner (2026-08) — stylized BRAND
+// visuals. Per the truthful-marketing invariant they are captioned as
+// brand imagery, never as real-customer photos; the "Real women" video
+// section keeps real customer media only.
+const BEFORE_AFTER_IMAGE = { src: "/images/grandelash/before-after-lashes.jpg", alt: "Sparse lashes compared with fuller-looking lashes — GrandeLASH-MD brand visual" };
+const STORY_IMAGE = { src: "/images/grandelash/mirror-routine.jpg", alt: "Applying GrandeLASH-MD along the upper lash line in the nightly routine" };
 const LIFESTYLE_IMAGES = [
   { src: "/images/grandelash/grand1.jpeg", alt: "GrandeLASH-MD serum" },
   { src: "/images/grandelash/grand2.jpeg", alt: "Applying GrandeLASH-MD like eyeliner" },
   { src: "/images/grandelash/grand3.jpeg", alt: "GrandeLASH-MD results" },
   { src: "/images/grandelash/real-lash-growth.jpg", alt: "Fuller-looking lashes with GrandeLASH-MD" },
+  { src: "/images/grandelash/promo-solution.jpeg", alt: "GrandeLASH-MD Lash Enhancing Serum" },
+  { src: "/images/grandelash/selfie-serum.jpg", alt: "Holding the GrandeLASH-MD serum tube" },
+  { src: "/images/grandelash/eye-closeup-poster.jpg", alt: "GrandeLASH-MD brand visual with a lash close-up" },
+  { src: "/images/grandelash/half-face-compare.jpg", alt: "Half-face lash comparison — GrandeLASH-MD brand visual" },
 ];
 
 function roundedCount(n: number): string {
@@ -243,20 +249,15 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
             Brand results with consistent nightly use. Individual results vary — that&apos;s
             what free returns are for.
           </p>
-          <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-2xl mx-auto">
-            <div className="text-center">
-              <div className="rounded-2xl overflow-hidden shadow-lg ring-1 ring-black/5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={BEFORE_IMAGE.src} alt={BEFORE_IMAGE.alt} loading="lazy" decoding="async" className="w-full h-auto" />
-              </div>
-              <div className="mt-2 text-sm font-bold text-gray-500">Before</div>
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="rounded-2xl overflow-hidden shadow-lg ring-2 ring-rose-300">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={BEFORE_AFTER_IMAGE.src} alt={BEFORE_AFTER_IMAGE.alt} loading="lazy" decoding="async" className="w-full h-auto" />
             </div>
-            <div className="text-center">
-              <div className="rounded-2xl overflow-hidden shadow-lg ring-2 ring-rose-300">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={AFTER_IMAGE.src} alt={AFTER_IMAGE.alt} loading="lazy" decoding="async" className="w-full h-auto" />
-              </div>
-              <div className="mt-2 text-sm font-black text-rose-600">After</div>
+            <div className="mt-2 text-sm">
+              <span className="font-bold text-gray-500">Before (top)</span>
+              <span className="text-gray-400"> · </span>
+              <span className="font-black text-rose-600">After (bottom)</span>
             </div>
           </div>
           <CtaBlock
