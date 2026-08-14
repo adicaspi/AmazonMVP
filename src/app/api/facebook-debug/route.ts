@@ -120,7 +120,7 @@ export async function GET(request: NextRequest) {
   const pagesToCheck = [
     { path: "/", name: "Homepage", nameHe: "דף הבית", expectedPixel: null, pixelName: "" },
     { path: "/auraglow", name: "AuraGlow page", nameHe: "עמוד AuraGlow", expectedPixel: AURAGLOW_PIXEL_ID, pixelName: "AuraGlow" },
-    { path: "/grandelash", name: "GrandeLash page", nameHe: "עמוד GrandeLash", expectedPixel: GRANDELASH_PIXEL_ID, pixelName: "GrandeLash" },
+    { path: "/GrandeLashMD", name: "GrandeLash page", nameHe: "עמוד GrandeLash", expectedPixel: GRANDELASH_PIXEL_ID, pixelName: "GrandeLash" },
     { path: "/shark-flexstyle", name: "Shark FlexStyle page", nameHe: "עמוד Shark FlexStyle", expectedPixel: SHARK_PIXEL_ID, pixelName: "Shark FlexStyle" },
   ];
 
@@ -161,7 +161,7 @@ export async function GET(request: NextRequest) {
         // Pixels are initialized client-side via useEffect, so check for component references too
         const hasComponent = page.pixelName === "AuraGlow"
           ? html.includes("AuraGlowPixel") || html.includes("auraglow")
-          : html.includes("MetaPixelInit") || html.includes("grandelash");
+          : html.includes("MetaPixelInit") || html.includes("GrandeLash");
         results.push({
           name: `${page.name} — ${page.pixelName} Pixel ID`,
           nameHe: `${page.nameHe} — מזהה פיקסל ${page.pixelName}`,

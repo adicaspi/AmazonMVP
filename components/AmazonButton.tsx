@@ -23,10 +23,7 @@ interface AmazonButtonProps {
 // Map page paths to their dedicated Facebook Pixel IDs
 const PAGE_PIXEL_MAP: Record<string, string> = {
   "/auraglow": "2679443682454721",
-  "/grandelash": "876318711699041",
   "/GrandeLashMD": "876318711699041",
-  "/GrandeLashInstagram": "876318711699041",
-  "/GrandeLash65": "876318711699041",
   "/shark-flexstyle": "1554568722933870",
   "/sharkflex": "1554568722933870",
   "/BirkenstockArizona": "1025959486467199",
@@ -41,7 +38,6 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
 // Product info per page for accurate CAPI event data
 const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id: string }> = {
   "/auraglow": { name: "AuraGlow Teeth Whitening Kit", value: 48, content_id: "auraglow-kit" },
-  "/grandelash": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 36, content_id: "grandelash-serum" },
   "/shark-flexstyle": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
   "/sharkflex": { name: "Shark FlexStyle Air Styling & Drying System", value: 279, content_id: "shark-flexstyle" },
   "/BirkenstockArizona": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
@@ -51,8 +47,6 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/BirkenstockAudience": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
   "/UggScuffette": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
   "/GrandeLashMD": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 100, content_id: "grandelash-serum" },
-  "/GrandeLashInstagram": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 100, content_id: "grandelash-serum" },
-  "/GrandeLash65": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 100, content_id: "grandelash-serum" },
   "/NewBalance928": { name: "New Balance Women's 928v3 Walking Shoe", value: 158, content_id: "newbalance-928v3" },
 };
 
@@ -75,8 +69,6 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   // Custom AmazonClick only — campaign optimizes on it via custom conversion
   "/NewBalance928": [],
   "/GrandeLashMD": [],
-  "/GrandeLashInstagram": [],
-  "/GrandeLash65": [],
 };
 
 // In-app browsers of Meta apps (and similar) — the ad-click traffic. Only

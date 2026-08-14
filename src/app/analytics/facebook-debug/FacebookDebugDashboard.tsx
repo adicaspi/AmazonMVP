@@ -523,7 +523,7 @@ export default function FacebookDebugDashboard() {
             <div className={`p-3 rounded-lg ${darkMode ? "bg-neutral-800" : "bg-gray-50"}`}>
               <div className={`text-xs ${dm.textMuted} mb-1`}>AIPicksGrandLash</div>
               <div className={`text-sm font-mono font-bold ${dm.text}`}>876318711699041</div>
-              <div className={`text-xs ${dm.textLight} mt-1`}>/grandelash only</div>
+              <div className={`text-xs ${dm.textLight} mt-1`}>/GrandeLashMD only</div>
             </div>
             <div className={`p-3 rounded-lg ${darkMode ? "bg-neutral-800" : "bg-gray-50"}`}>
               <div className={`text-xs ${dm.textMuted} mb-1`}>AuraglowTeethWhiteningKit</div>
