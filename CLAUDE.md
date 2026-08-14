@@ -1,5 +1,11 @@
 # AmazonMVP — project notes
 
+## OWNER'S RULE #0 — always work on main
+Commit and push directly to `main`, always. The live site deploys from
+`main` (Vercel); work left on a side branch never reaches production and
+the owner sees a stale site. No side branches, no PRs, unless the owner
+explicitly asks for one in the current conversation.
+
 ## CRITICAL INVARIANTS — do not break these
 
 ### 1. Amazon app deep-linking (conversion-critical!)
