@@ -50,6 +50,8 @@ const LIFESTYLE_IMAGES = [
   { src: "/images/grandelash/selfie-serum.jpg", alt: "Holding the GrandeLASH-MD serum tube" },
   { src: "/images/grandelash/eye-closeup-poster.jpg", alt: "GrandeLASH-MD brand visual with a lash close-up" },
   { src: "/images/grandelash/half-face-compare.jpg", alt: "Half-face lash comparison — GrandeLASH-MD brand visual" },
+  { src: "/images/grandelash/selfie-duo.jpg", alt: "Two-panel brand visual with the GrandeLASH-MD serum tube" },
+  { src: "/images/grandelash/mirror-selfie.jpg", alt: "Mirror selfie brand visual holding GrandeLASH-MD" },
 ];
 
 function roundedCount(n: number): string {
@@ -360,7 +362,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
       {/* 6. LIFESTYLE STRIP — carried over from the original page */}
       <section className="py-10 md:py-14 bg-white">
         <div className="max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4">
             {LIFESTYLE_IMAGES.map((img, i) => (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className="w-full aspect-square object-cover rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5" />
