@@ -480,8 +480,9 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/BirkenstockSales": 4.8,
     "/BirkenstockInstagram": 4.8,
     "/BirkenstockAudience": 4.8,
-    // Owner-set: GrandeLASH-MD ~$100 at the beauty commission rate
-    "/GrandeLashMD": 10,
+    // GrandeLASH-MD 2mL is ~$68 — same beauty commission rate as the
+    // owner-set $10 default for the old $100 listing, scaled to the price
+    "/GrandeLashMD": 6.8,
   };
   const [beCommission, setBeCommissionState] = useState(4.7); // USD
   const [beAmazonConv, setBeAmazonConvState] = useState(7);

@@ -12,11 +12,11 @@ import type { AmazonProductData } from "@/lib/amazon-creators-api";
 // Claims follow the listing's own wording ("longer, thicker,
 // fuller-LOOKING lashes") — no medical/growth claims.
 // ── Product constants ─────────────────────────────────────────────
-// Facebook-channel SiteStripe link (tag=grand-lash-fb-20) — DIRECT
-// amazon.com URL only (NEVER amzn.to: breaks app handoff). The IG route
-// overrides with its own grand-lash-ig-20 link via the amazonLink prop.
-const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B07QNQJ5FK?th=1&linkCode=ll2&tag=grand-lash-fb-20&linkId=affd6e90c46144f081b7000833c2e1ee&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl";
-const PRICE_VALUE = 100;
+// Owner's SiteStripe link for the 2mL listing (ASIN B00325D0WK,
+// tag=aipicks20-20) — DIRECT amazon.com URL only (NEVER amzn.to: breaks
+// the app handoff).
+const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B00325D0WK?th=1&gaOptInStatus=true&linkCode=ll2&tag=aipicks20-20&linkId=f11f661ad5589b651536169a1d06f16a&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl";
+const PRICE_VALUE = 68;
 
 // Verified on the live listing 2026-08-06 (user screenshot): 4.2★, 59,511
 // ratings, #1 Best Seller in Eyelash Primers. No invented numbers, ever.
@@ -26,14 +26,14 @@ const REVIEW_COUNT: number | null = 59511;
 // Official Amazon CDN images (stable URLs via the Creators API) — the
 // guaranteed fallback when a live API fetch fails.
 const FALLBACK_IMAGES = [
-  "https://m.media-amazon.com/images/I/412OmkHewvL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/41Rx7r18xFL._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/518A6SDWd9L._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/41Ob8oijywL._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/51VaIjFAJDL._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/51c2l+ps63L._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/41GGmw92bxL._SL1000_.jpg",
 ];
-const FALLBACK_PRICE_ANCHOR = "Around $100.00";
+const FALLBACK_PRICE_ANCHOR = "Around $68.00";
 
 // Campaign creative supplied by the owner (2026-08) — stylized BRAND
 // visuals. Per the truthful-marketing invariant they are captioned as
@@ -107,21 +107,10 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
     .map((img) => img?.large?.url)
     .filter((u): u is string => !!u)
     .map((u) => ({ url: u.replace("._SL500_.", "._SL1000_."), alt }));
-  // Gallery = the SAME official listing images, but at 1500px — the hi-res
-  // IDs came from the user's saved copies of the listing gallery (the
-  // Creators API only serves 500px renditions of these). Clean white
-  // canvases, sharp under the hover zoom. API/fallback lists are unused
-  // for display but kept above as documentation of the 500px originals.
-  void liveImages;
-  const HIRES_IMAGES = [
-    "https://m.media-amazon.com/images/I/71FFdWG73aL._SL1500_.jpg",
-    "https://m.media-amazon.com/images/I/717u2paAZ2L._SL1500_.jpg",
-    "https://m.media-amazon.com/images/I/81E22aBL+8L._SL1500_.jpg",
-    "https://m.media-amazon.com/images/I/71czW2Nmv4L._SL1500_.jpg",
-    "https://m.media-amazon.com/images/I/81XWfU5FMvL._SL1500_.jpg",
-    "https://m.media-amazon.com/images/I/81LFSfUnpVL._SL1500_.jpg",
-  ];
-  const apiImages = HIRES_IMAGES.map((url) => ({ url, alt }));
+  // The old hand-saved 1500px set showed the 4mL Jumbo box; the 2mL
+  // listing (B00325D0WK) is displayed from the live API images (500px)
+  // with the static list above as the guaranteed fallback.
+  const apiImages = liveImages.length > 0 ? liveImages : FALLBACK_IMAGES.map((url) => ({ url, alt }));
 
   return (
     <div className="min-h-screen bg-white">
@@ -171,7 +160,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
                   <p className="text-center md:text-left text-base text-gray-800 mb-1">
                     <span className="font-bold">{priceAnchor}</span>
                     <span className="text-gray-400">*</span>
-                    <span className="text-sm text-gray-600"> — a 6-month supply</span>
+                    <span className="text-sm text-gray-600"> — a 3-month supply</span>
                   </p>
                 )}
                 <p className="text-center md:text-left text-xs text-gray-600 mb-3">✓ Prime Shipping&ensp;✓ Free Returns&ensp;✓ Ophthalmologist Tested&ensp;✓ Cruelty-Free</p>
@@ -322,8 +311,8 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
               you sleep — no falsies, no extensions appointment, no glue.
             </p>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              One 4mL bottle is a <strong>6-month supply</strong> — about the cost of a
-              single lash-extension refill, lasting half a year.
+              One 2mL bottle is a <strong>3-month supply</strong> — about the cost of a
+              single lash-extension refill, lasting a whole season.
             </p>
           </div>
         </div>
@@ -377,7 +366,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
           <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-2">
             Serum vs. the alternatives
           </h2>
-          <p className="text-center text-gray-600 mb-8">Six months of serum costs less than one month of extensions.</p>
+          <p className="text-center text-gray-600 mb-8">Three months of serum costs less than one month of extensions.</p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm md:text-base">
               <thead>
@@ -389,7 +378,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
               </thead>
               <tbody>
                 {[
-                  ["Cost over 6 months", "One bottle", "Refills every 2–3 weeks"],
+                  ["Cost over 3 months", "One bottle", "Refills every 2–3 weeks"],
                   ["Daily effort", "One swipe at night", "Glue, removal, touch-ups"],
                   ["Your real lashes", "Enhanced look", "Often damaged underneath"],
                   ["Sleep, swim, shower", "No restrictions", "Careful… always"],
@@ -431,8 +420,8 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
                 a: "The formula is ophthalmologist tested and cruelty-free. As with any eye-area product, check the ingredient list if you have sensitivities, and stop if irritation occurs.",
               },
               {
-                q: "Is it worth $100?",
-                a: "The 4mL bottle is a 6-month supply — around 55 cents a day, less than a single set of lash extensions that lasts three weeks. And Amazon coupons frequently knock the price down further.",
+                q: "Is it worth $68?",
+                a: "The 2mL bottle is a 3-month supply — around 75 cents a day, less than a single set of lash extensions that lasts three weeks. And Amazon coupons frequently knock the price down further.",
               },
               {
                 q: "What if it doesn't work for me?",
@@ -459,7 +448,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
       <section className="py-12 md:py-16 bg-gradient-to-r from-rose-600 to-rose-700">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
-            Six months from now, you&apos;ll wish you started tonight.
+            Three months from now, you&apos;ll wish you started tonight.
           </h2>
           <p className="text-rose-100 mb-6">
             {starRating}★ from {reviewCount} Amazon customers. Check today&apos;s price and any active coupon.
