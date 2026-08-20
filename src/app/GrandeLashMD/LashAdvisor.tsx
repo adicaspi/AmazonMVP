@@ -140,7 +140,9 @@ export function LashAdvisor({
 
           {/* Bottom sheet on mobile, centered card on desktop */}
           <div className="absolute inset-x-0 bottom-0 md:inset-0 md:flex md:items-center md:justify-center md:p-6">
-            <div className="la-sheet relative bg-white rounded-t-3xl md:rounded-3xl shadow-2xl w-full md:max-w-lg max-h-[92dvh] md:max-h-[85vh] overflow-y-auto overscroll-contain">
+            {/* text-left: the entry button lives inside the hero's
+                text-center column and the sheet must not inherit it */}
+            <div className="la-sheet relative text-left bg-white rounded-t-3xl md:rounded-3xl shadow-2xl w-full md:max-w-lg max-h-[92dvh] md:max-h-[85vh] overflow-y-auto overscroll-contain">
               {/* Header */}
               <div className="sticky top-0 bg-white/95 backdrop-blur border-b border-rose-100 px-5 py-3 flex items-center justify-between rounded-t-3xl">
                 <div className="flex items-center gap-2">
