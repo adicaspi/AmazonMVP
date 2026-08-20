@@ -4,6 +4,7 @@ import { PageViewTracker } from "@/components/PageViewTracker";
 import { OpenInAppLink } from "@/components/OpenInAppLink";
 import { HeroFade } from "../UggScuffette/HeroFade";
 import { VideoCard } from "@/components/VideoCard";
+import { LashAdvisor } from "./LashAdvisor";
 import type { AmazonProductData } from "@/lib/amazon-creators-api";
 
 // CRO bridge page for GrandeLASH-MD (/GrandeLash) — emotion-first funnel:
@@ -181,6 +182,14 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
                   <p className="text-center md:text-left text-[10px] text-gray-400 mt-0.5">*Price varies by size on Amazon</p>
                 )}
                 <OpenInAppLink href={AMAZON_LINK} productName="GrandeLASH-MD Serum" />
+                {/* Personal shopping assistant — entry for the hesitant
+                    visitor; opens as an overlay, never navigates away */}
+                <LashAdvisor
+                  amazonLink={AMAZON_LINK}
+                  priceValue={priceValue}
+                  productImage={apiImages[0].url}
+                  productAlt={alt}
+                />
               </div>
             </div>
 
