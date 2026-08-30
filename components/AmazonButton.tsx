@@ -31,7 +31,7 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/BirkenstockSales": "1025959486467199",
   "/BirkenstockInstagram": "1025959486467199",
   "/BirkenstockAudience": "1025959486467199",
-  // [USER ASSET] /UggScuffette: add its dedicated pixel ID here when created
+  "/UggScuffette": "1789342285401622",
   "/NewBalance928": "1011147045043568",
 };
 
