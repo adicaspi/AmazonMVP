@@ -4,19 +4,19 @@ import { getProductsByASIN, AmazonProductData } from "@/lib/amazon-creators-api"
 import { unstable_cache } from "next/cache";
 
 export const metadata: Metadata = {
-  title: "UGG Scuffette II Slipper | The Cozy Classic",
+  title: "The UGG Slippers We Keep Coming Back To | AiPicks",
   description:
-    "The iconic UGG Scuffette II — genuine suede with a plush wool lining that keeps feet warm without overheating. With free Prime shipping and returns.",
+    "UGG's Scuffette II combines the plush sheepskin comfort the brand is known for with an easy slip-on design made for everyday wear. Our editorial take.",
   openGraph: {
-    title: "UGG Scuffette II — The Slippers You'll Live In",
+    title: "The UGG Slippers We Keep Coming Back To",
     description:
-      "Genuine suede, plush wool lining, and a real outsole for indoors and out.",
+      "UGG's Scuffette II: plush sheepskin comfort, easy slip-on design, that classic chestnut look. An AiPicks recommendation.",
     images: [
       {
-        url: "https://m.media-amazon.com/images/I/31KstO2FSiL._SL1000_.jpg",
-        width: 1000,
-        height: 1000,
-        alt: "UGG Scuffette II Slippers",
+        url: "https://www.aipicks.co/images/ugg/hero-studio.jpg",
+        width: 1122,
+        height: 1402,
+        alt: "UGG Scuffette II Slippers in chestnut",
       },
     ],
     type: "website",
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "UGG Scuffette II — The Slippers You'll Live In",
-    description: "Genuine suede, plush wool lining, cozy from the first slip-in.",
-    images: ["https://m.media-amazon.com/images/I/31KstO2FSiL._SL1000_.jpg"],
+    title: "The UGG Slippers We Keep Coming Back To",
+    description: "Plush sheepskin comfort, easy slip-on design — an AiPicks recommendation.",
+    images: ["https://www.aipicks.co/images/ugg/hero-studio.jpg"],
   },
 };
 
