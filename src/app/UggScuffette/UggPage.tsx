@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AmazonButton } from "@/components/AmazonButton";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { OpenInAppLink } from "@/components/OpenInAppLink";
-import { SizeFinder } from "./SizeFinder";
+import { SizeFinder, SizeProvider, HeroSizeCta } from "./SizeFinder";
 import type { AmazonProductData } from "@/lib/amazon-creators-api";
 
 // UGG Scuffette II bridge page — editorial redesign (2026-08, owner brief):
@@ -76,6 +76,7 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
   const productShot = liveImages[0] ?? FALLBACK_IMAGES[0];
 
   return (
+    <SizeProvider>
     <div className="min-h-screen bg-[#FBF9F6] text-stone-900">
       <PageViewTracker page={trackingPage} />
 
@@ -120,17 +121,9 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
             {priceAnchor !== null && (
               <p className="text-sm text-stone-500 mb-5">{priceAnchor} — price varies by color &amp; size on Amazon.</p>
             )}
-            <AmazonButton
-              href={AMAZON_LINK}
-              productName="UGG Scuffette II"
-              priceValue={priceValue}
-              position="hero-main"
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-10 py-4 bg-stone-900 hover:bg-stone-700 text-white font-semibold text-lg transition-colors"
-            >
-              <span>Check Price on Amazon</span>
-              <Arrow />
-            </AmazonButton>
-            <p className="text-sm text-stone-500 mt-3">View current price, available sizes &amp; colors on Amazon.</p>
+            {/* Size pills + size-aware CTA — shares state with the
+                mid-page Find-your-size section via SizeProvider */}
+            <HeroSizeCta amazonLink={AMAZON_LINK} priceValue={priceValue} />
             <OpenInAppLink href={AMAZON_LINK} productName="UGG Scuffette II" />
           </div>
         </div>
@@ -386,5 +379,6 @@ export function UggPage({ trackingPage, amazonLink, product }: { trackingPage: s
       </div>
       <div className="h-14 md:h-0"></div>
     </div>
+    </SizeProvider>
   );
 }
