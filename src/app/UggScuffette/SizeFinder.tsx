@@ -22,6 +22,9 @@ export function SizeProvider({ children }: { children: ReactNode }) {
 
   const pick = (s: string) => {
     setSize(s);
+    // Qualifies this visit: AmazonButton only sends AmazonClick on gated
+    // pages once a size has been chosen (owner rule — qualified clicks only)
+    try { window.__aipUggSize = s; } catch { /* noop */ }
     try {
       if (typeof window !== "undefined" && typeof window.fbq === "function") {
         window.fbq("trackCustom", "ugg_size_selected", { size: s, page_path: window.location.pathname });

@@ -8,6 +8,9 @@ declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     fbq: (...args: any[]) => void;
+    // Set by the UGG SizeProvider when the visitor picks a size — gates
+    // the AmazonClick conversion on /UggScuffette (qualified clicks only)
+    __aipUggSize?: string;
   }
 }
 
@@ -69,6 +72,14 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   // Custom AmazonClick only — campaign optimizes on it via custom conversion
   "/NewBalance928": [],
   "/GrandeLashMD": [],
+};
+
+// Owner rule (2026-08-30): on these pages the Meta events for a CTA click
+// (AmazonClick + any standard events, browser AND CAPI) fire only for a
+// QUALIFIED click — the visitor picked a size first. Unqualified clicks
+// still navigate to Amazon and still count in first-party analytics.
+const PAGE_QUALIFIED_GATE: Record<string, () => boolean> = {
+  "/UggScuffette": () => typeof window !== "undefined" && !!window.__aipUggSize,
 };
 
 // In-app browsers of Meta apps (and similar) — the ad-click traffic. Only
@@ -207,6 +218,12 @@ export function AmazonButton({ href, children, className, productName, position,
     const pageUrl = typeof window !== "undefined" ? window.location.href : "";
     const now = Math.floor(Date.now() / 1000);
 
+    // Qualified-click gate: on gated pages, an un-qualified click sends NO
+    // Meta events at all (navigation and first-party tracking unaffected)
+    const gate = longestPrefixMatch(PAGE_QUALIFIED_GATE, pagePath);
+    const qualified = gate ? gate() : true;
+    const chosenSize = typeof window !== "undefined" ? window.__aipUggSize : undefined;
+
     // Look up product info for this page
     const productInfo = longestPrefixMatch(PAGE_PRODUCT_MAP, pagePath);
     const name = productName || productInfo?.name || "Amazon Product";
@@ -241,7 +258,7 @@ export function AmazonButton({ href, children, className, productName, position,
     const clickEventId = generateEventId();
 
     // ── Browser Pixel ──────────────────────────────────
-    if (typeof window !== "undefined" && window.fbq) {
+    if (qualified && typeof window !== "undefined" && window.fbq) {
       for (const e of standardEvents) {
         window.fbq("track", e.eventName, customDataFor(e.eventName), { eventID: e.eventId });
       }
@@ -254,6 +271,7 @@ export function AmazonButton({ href, children, className, productName, position,
         page_path: pagePath,
         value: value,
         currency: "USD",
+        ...(chosenSize ? { size: chosenSize } : {}),
       }, { eventID: clickEventId });
     }
 
@@ -293,12 +311,13 @@ export function AmazonButton({ href, children, className, productName, position,
           page_path: pagePath,
           value: value,
           currency: "USD",
+          ...(chosenSize ? { size: chosenSize } : {}),
         },
       },
     ];
 
     const pixelId = getPixelIdForPage(pagePath);
-    if (pixelId) {
+    if (qualified && pixelId) {
       sendCAPI(capiEvents, pixelId);
     }
 
