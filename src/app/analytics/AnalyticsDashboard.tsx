@@ -690,8 +690,10 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/BirkenstockSales": ["arizona sales", "birkenstock sales"],
     "/BirkenstockInstagram": ["- ig", "arizona instagram", "birkenstock instagram"],
     "/BirkenstockAudience": ["audience", "retargeting"],
-    // Future UGG campaign binds by name automatically
+    // Two UGG pages: a campaign named with "classic" binds to /UggClassic,
+    // any other UGG-named campaign binds to /UggScuffette (editorial page)
     "/UggScuffette": ["ugg", "scuffette"],
+    "/UggClassic": ["classic"],
     "/NewBalance928": ["new balance", "928", "balance"],
     // The single live GrandeLash campaign — any lash-named campaign binds here
     "/GrandeLashMD": ["grandelash", "grande", "lash"],
@@ -703,6 +705,8 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
     "/BirkenstockSales": ["- ig", "instagram", "audience", "retargeting"],
     "/BirkenstockTraffic": ["- ig", "instagram", "audience", "retargeting"],
     "/BirkenstockInstagram": ["audience", "retargeting"],
+    // A "classic"-named UGG campaign belongs to /UggClassic, not the editorial tab
+    "/UggScuffette": ["classic"],
   };
   const campaignMatchesPage = (path: string, name: string) => {
     const kws = PAGE_CAMPAIGN_KEYWORD[path];

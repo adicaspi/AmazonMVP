@@ -61,8 +61,20 @@ function SizePills({ compact }: { compact?: boolean }) {
   );
 }
 
-// Hero-block size row + primary CTA: the CTA label carries the chosen size
-export function HeroSizeCta({ amazonLink, priceValue }: { amazonLink: string; priceValue: number }) {
+// Hero-block size row + primary CTA: the CTA label carries the chosen size.
+// buttonClassName/idleLabel let the classic (non-editorial) page reuse this
+// with its own amber button style and copy.
+export function HeroSizeCta({
+  amazonLink,
+  priceValue,
+  buttonClassName,
+  idleLabel,
+}: {
+  amazonLink: string;
+  priceValue: number;
+  buttonClassName?: string;
+  idleLabel?: string;
+}) {
   const { size } = useContext(SizeContext);
   return (
     <div>
@@ -75,9 +87,9 @@ export function HeroSizeCta({ amazonLink, priceValue }: { amazonLink: string; pr
         productName="UGG Scuffette II"
         priceValue={priceValue}
         position="hero-main"
-        className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-10 py-4 bg-stone-900 hover:bg-stone-700 text-white font-semibold text-lg transition-colors"
+        className={buttonClassName ?? "inline-flex items-center justify-center gap-2 w-full sm:w-auto px-10 py-4 bg-stone-900 hover:bg-stone-700 text-white font-semibold text-lg transition-colors"}
       >
-        <span>{size ? `Check Scuffette II — Size ${size} on Amazon` : "Check Price on Amazon"}</span>
+        <span>{size ? `Check Scuffette II — Size ${size} on Amazon` : (idleLabel ?? "Check Price on Amazon")}</span>
         <span aria-hidden>→</span>
       </AmazonButton>
       <p className="text-sm text-stone-500 mt-3">
@@ -90,7 +102,15 @@ export function HeroSizeCta({ amazonLink, priceValue }: { amazonLink: string; pr
 }
 
 // Full "Find your size" section (mid-page) — same shared size state
-export function SizeFinder({ amazonLink, priceValue }: { amazonLink: string; priceValue: number }) {
+export function SizeFinder({
+  amazonLink,
+  priceValue,
+  buttonClassName,
+}: {
+  amazonLink: string;
+  priceValue: number;
+  buttonClassName?: string;
+}) {
   const { size } = useContext(SizeContext);
   return (
     <div>
@@ -106,7 +126,7 @@ export function SizeFinder({ amazonLink, priceValue }: { amazonLink: string; pri
             productName="UGG Scuffette II"
             priceValue={priceValue}
             position="size-finder"
-            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 bg-stone-900 hover:bg-stone-700 text-white font-semibold transition-colors"
+            className={buttonClassName ?? "inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 bg-stone-900 hover:bg-stone-700 text-white font-semibold transition-colors"}
           >
             <span>Check UGG Scuffette II — Size {size} on Amazon</span>
             <span aria-hidden>→</span>

@@ -17,6 +17,7 @@ const PAGE_PIXEL_MAP: Record<string, string> = {
   "/BirkenstockInstagram": "1025959486467199",
   "/BirkenstockAudience": "1025959486467199",
   "/UggScuffette": "1789342285401622",
+  "/UggClassic": "1789342285401622",
   "/NewBalance928": "1011147045043568",
 };
 
@@ -31,6 +32,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/BirkenstockInstagram": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
   "/BirkenstockAudience": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
   "/UggScuffette": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
+  "/UggClassic": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
   "/NewBalance928": { name: "New Balance Women's 928v3 Walking Shoe", value: 158, content_id: "newbalance-928v3" },
   "/GrandeLashMD": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 68, content_id: "grandelash-serum" },
 };

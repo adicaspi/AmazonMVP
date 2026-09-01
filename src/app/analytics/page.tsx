@@ -87,6 +87,7 @@ const TRACKED_PAGES: { path: string; label: string; color: string; archived?: bo
   { path: "/BirkenstockInstagram", label: "Birkenstock (Instagram)", color: "amber", archived: true },
   { path: "/BirkenstockAudience", label: "Birkenstock (Audience)", color: "amber", archived: true },
   { path: "/UggScuffette", label: "UGG Scuffette", color: "amber", pinned: true },
+  { path: "/UggClassic", label: "UGG Classic", color: "amber", pinned: true },
   { path: "/NewBalance928", label: "New Balance 928", color: "blue", pinned: true },
   { path: "/GrandeLashMD", label: "GrandeLash", color: "rose", pinned: true },
 ];

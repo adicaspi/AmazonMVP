@@ -20,6 +20,7 @@ const PIXEL_BY_PATH: { prefix: string; pixelId: string }[] = [
   { prefix: "/BirkenstockInstagram", pixelId: BIRKENSTOCK_PIXEL_ID },
   { prefix: "/BirkenstockAudience", pixelId: BIRKENSTOCK_PIXEL_ID },
   { prefix: "/UggScuffette", pixelId: "1789342285401622" },
+  { prefix: "/UggClassic", pixelId: "1789342285401622" },
   { prefix: "/NewBalance928", pixelId: NEWBALANCE_PIXEL_ID },
 ];
 
