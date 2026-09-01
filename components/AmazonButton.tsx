@@ -325,14 +325,20 @@ export function AmazonButton({ href, children, className, productName, position,
       sendCAPI(capiEvents, pixelId);
     }
 
-    // Also track on our server for the analytics dashboard
+    // Also track on our server for the analytics dashboard. On gated pages
+    // the position carries a size marker ("|size:8" / "|direct") so the
+    // dashboard can show the direct-vs-sized split — FIRST-PARTY ONLY:
+    // direct clicks send nothing to Meta, this is the only place they count.
+    const fpPosition = gate
+      ? `${position || "unknown"}${qualified ? `|size:${chosenSize}` : "|direct"}`
+      : position || "unknown";
     fetch("/api/amazon-click", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       keepalive: true,
       body: JSON.stringify({
         productName: productName || "Amazon Product",
-        buttonPosition: position || "unknown",
+        buttonPosition: fpPosition,
         page: pagePath,
         visitorId: getVisitorId(),
       }),

@@ -1369,6 +1369,67 @@ export default function AnalyticsDashboard({ allData, pagesData, facebookAdsData
           </section>
         )}
 
+        {/* UGG size-path split — FIRST-PARTY ONLY (owner rule): direct
+            Amazon clicks send NOTHING to Meta; this panel is the only place
+            they are counted. Sized clicks are the ones Meta sees. */}
+        {selectedPage.startsWith("/Ugg") && (() => {
+          const bp = data.byPosition || {};
+          let direct = 0;
+          let sized = 0;
+          const bySize: Record<string, number> = {};
+          Object.entries(bp).forEach(([k, v]) => {
+            if (k.includes("|direct")) direct += v;
+            else if (k.includes("|size:")) {
+              sized += v;
+              const sz = k.split("|size:")[1];
+              bySize[sz] = (bySize[sz] || 0) + v;
+            }
+          });
+          const total = direct + sized;
+          if (total === 0) return null;
+          const sizedPct = ((sized / total) * 100).toFixed(0);
+          return (
+            <section>
+              <h2 className={`text-lg font-semibold ${dm.text} mb-3 flex items-center gap-2`}>
+                <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+                {lang === "he" ? "מסלול המידה — נתון פנימי בלבד" : "Size path — internal data only"}
+              </h2>
+              <div className={`${dm.cardBg} rounded-xl border p-5`}>
+                <div className="grid grid-cols-3 gap-4 mb-3">
+                  <div>
+                    <div className="text-3xl font-bold text-emerald-500">{sized}</div>
+                    <div className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "בחרו מידה ולחצו (נשלח לפייסבוק)" : "Picked size, then clicked (sent to Meta)"}</div>
+                  </div>
+                  <div>
+                    <div className={`text-3xl font-bold ${dm.text}`}>{direct}</div>
+                    <div className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "לחצו ישירות בלי מידה (לא נשלח לפייסבוק)" : "Clicked directly, no size (NOT sent to Meta)"}</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold text-blue-500">{sizedPct}%</div>
+                    <div className={`text-xs ${dm.textMuted}`}>{lang === "he" ? "אחוז שעברו דרך בחירת מידה" : "Went through size selection"}</div>
+                  </div>
+                </div>
+                {Object.keys(bySize).length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {Object.entries(bySize)
+                      .sort(([a], [b]) => parseFloat(a) - parseFloat(b))
+                      .map(([sz, n]) => (
+                        <span key={sz} className={`px-2.5 py-1 rounded-full text-xs border ${dm.textMuted}`}>
+                          {lang === "he" ? `מידה ${sz}: ${n}` : `Size ${sz}: ${n}`}
+                        </span>
+                      ))}
+                  </div>
+                )}
+                <p className={`text-[11px] ${dm.textMuted} mt-3`}>
+                  {lang === "he"
+                    ? "הנתון הזה נאסף רק אצלנו — שום אירוע על לחיצות ישירות לא נשלח לפייסבוק."
+                    : "Collected first-party only — no event for direct clicks ever reaches Meta."}
+                </p>
+              </div>
+            </section>
+          );
+        })()}
+
         {/* Conversion Funnel — ONE methodology: people, full-range queries,
             a clicker counts only if they also visited in range (rate can
             never exceed 100%). Event totals shown separately for honesty. */}
