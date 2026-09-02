@@ -69,13 +69,20 @@ const PAGE_CLICK_EVENTS: Record<string, string[]> = {
   "/BirkenstockSales": [],
   "/BirkenstockInstagram": [],
   "/BirkenstockAudience": [],
-  // Custom AmazonClick only until a UGG pixel + campaign exist
-  "/UggScuffette": [],
+  // Owner request (2026-09): the editorial UGG page converts on the standard
+  // InitiateCheckout event (immediately selectable in ad sets — no custom-
+  // event indexing delay). Still behind the size gate. /UggClassic keeps
+  // the custom AmazonClick.
+  "/UggScuffette": ["InitiateCheckout"],
   "/UggClassic": [],
   // Custom AmazonClick only — campaign optimizes on it via custom conversion
   "/NewBalance928": [],
   "/GrandeLashMD": [],
 };
+
+// Pages where the custom AmazonClick is NOT sent — the page's standard
+// click event (PAGE_CLICK_EVENTS) is its conversion signal instead.
+const PAGE_NO_CUSTOM_CLICK = ["/UggScuffette"];
 
 // Owner rule (2026-08-30): on these pages the Meta events for a CTA click
 // (AmazonClick + any standard events, browser AND CAPI) fire only for a
@@ -227,6 +234,7 @@ export function AmazonButton({ href, children, className, productName, position,
     const gate = longestPrefixMatch(PAGE_QUALIFIED_GATE, pagePath);
     const qualified = gate ? gate() : true;
     const chosenSize = typeof window !== "undefined" ? window.__aipUggSize : undefined;
+    const sendCustom = !PAGE_NO_CUSTOM_CLICK.some((prefix) => pagePath.startsWith(prefix));
 
     // Look up product info for this page
     const productInfo = longestPrefixMatch(PAGE_PRODUCT_MAP, pagePath);
@@ -247,6 +255,7 @@ export function AmazonButton({ href, children, className, productName, position,
       };
       if (eventName === "Lead") data.content_category = "Affiliate Link Click";
       if (eventName === "InitiateCheckout") data.num_items = 1;
+      if (chosenSize) data.size = chosenSize;
       return data;
     };
 
@@ -267,7 +276,7 @@ export function AmazonButton({ href, children, className, productName, position,
         window.fbq("track", e.eventName, customDataFor(e.eventName), { eventID: e.eventId });
       }
 
-      window.fbq("trackCustom", customEventName, {
+      if (sendCustom) window.fbq("trackCustom", customEventName, {
         content_name: name,
         content_ids: [contentId],
         content_type: "product",
@@ -300,7 +309,7 @@ export function AmazonButton({ href, children, className, productName, position,
         user_data: userData,
         custom_data: customDataFor(e.eventName),
       })),
-      {
+      ...(sendCustom ? [{
         event_name: customEventName,
         event_time: now,
         event_id: clickEventId,
@@ -317,11 +326,11 @@ export function AmazonButton({ href, children, className, productName, position,
           currency: "USD",
           ...(chosenSize ? { size: chosenSize } : {}),
         },
-      },
+      }] : []),
     ];
 
     const pixelId = getPixelIdForPage(pagePath);
-    if (qualified && pixelId) {
+    if (qualified && pixelId && capiEvents.length > 0) {
       sendCAPI(capiEvents, pixelId);
     }
 
