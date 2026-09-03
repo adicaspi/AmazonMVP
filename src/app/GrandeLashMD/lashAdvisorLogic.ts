@@ -128,7 +128,7 @@ const PRIORITY_REASON: Record<string, string> = {
   natural: "You said natural-looking results matter — it enhances your own lashes, no falsies or extensions",
   easy: "You wanted an easy routine — it’s one swipe on the upper lash line, once a day",
   gentle: "You asked for a gentle formula — it’s ophthalmologist tested (though any eye-area product can irritate; stop if it does)",
-  cost: "One bottle is about a 3-month supply, so the cost spreads out over a season",
+  cost: "The 1mL bottle is the lowest-cost way in — a 6-week supply that covers the window when first results typically appear",
 };
 
 export interface AdvisorResult {
@@ -212,7 +212,7 @@ export function buildResult(a: Answers): AdvisorResult {
       note:
         a.routine === "unsure"
           ? `${baseNote} It only makes sense if you’ll realistically apply it most nights.`
-          : `${baseNote} One bottle is an upfront spend — it works out as a ~3-month supply, but only if you use it consistently.`,
+          : `${baseNote} The 1mL bottle is a 6-week supply — a lower-cost way to try it, but it only makes sense if you use it consistently.`,
       showCta: true,
     };
   }

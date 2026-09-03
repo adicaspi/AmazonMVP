@@ -13,11 +13,12 @@ import type { AmazonProductData } from "@/lib/amazon-creators-api";
 // Claims follow the listing's own wording ("longer, thicker,
 // fuller-LOOKING lashes") — no medical/growth claims.
 // ── Product constants ─────────────────────────────────────────────
-// Owner's SiteStripe link for the 2mL listing (ASIN B00325D0WK,
-// tag=aipicks20-20) — DIRECT amazon.com URL only (NEVER amzn.to: breaks
-// the app handoff).
-const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B00325D0WK?th=1&gaOptInStatus=true&linkCode=ll2&tag=aipicks20-20&linkId=f11f661ad5589b651536169a1d06f16a&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl";
-const PRICE_VALUE = 68;
+// Owner's SiteStripe link for the 1mL 6-week listing (ASIN B082WZTJV5,
+// 2026-09-03). NOTE: the link carries tag=ugg-fb-20 exactly as the owner
+// supplied it. DIRECT amazon.com URL only (NEVER amzn.to: breaks the app
+// handoff).
+const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B082WZTJV5?_encoding=UTF8&th=1&linkCode=ll2&tag=ugg-fb-20&linkId=729e10fd8e95276980667f049680449e&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl";
+const PRICE_VALUE = 36;
 
 // Verified on the live listing 2026-08-06 (user screenshot): 4.2★, 59,511
 // ratings, #1 Best Seller in Eyelash Primers. No invented numbers, ever.
@@ -27,14 +28,15 @@ const REVIEW_COUNT: number | null = 59511;
 // Official Amazon CDN images (stable URLs via the Creators API) — the
 // guaranteed fallback when a live API fetch fails.
 const FALLBACK_IMAGES = [
-  "https://m.media-amazon.com/images/I/41Rx7r18xFL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/41y2Yw6zsML._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/518A6SDWd9L._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/41Ob8oijywL._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/51VaIjFAJDL._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/51c2l+ps63L._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/41GGmw92bxL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/41GfGG7AuuL._SL1000_.jpg",
 ];
-const FALLBACK_PRICE_ANCHOR = "Around $68.00";
+const FALLBACK_PRICE_ANCHOR = "Around $36.00";
 
 // Campaign creative supplied by the owner (2026-08) — stylized BRAND
 // visuals. Per the truthful-marketing invariant they are captioned as
@@ -108,8 +110,8 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
     .map((img) => img?.large?.url)
     .filter((u): u is string => !!u)
     .map((u) => ({ url: u.replace("._SL500_.", "._SL1000_."), alt }));
-  // The old hand-saved 1500px set showed the 4mL Jumbo box; the 2mL
-  // listing (B00325D0WK) is displayed from the live API images (500px)
+  // The old hand-saved 1500px set showed the 4mL Jumbo box; the 1mL
+  // listing (B082WZTJV5) is displayed from the live API images (500px)
   // with the static list above as the guaranteed fallback.
   const apiImages = liveImages.length > 0 ? liveImages : FALLBACK_IMAGES.map((url) => ({ url, alt }));
 
@@ -161,7 +163,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
                   <p className="text-center md:text-left text-base text-gray-800 mb-1">
                     <span className="font-bold">{priceAnchor}</span>
                     <span className="text-gray-400">*</span>
-                    <span className="text-sm text-gray-600"> — a 3-month supply</span>
+                    <span className="text-sm text-gray-600"> — a 6-week supply</span>
                   </p>
                 )}
                 <p className="text-center md:text-left text-xs text-gray-600 mb-3">✓ Prime Shipping&ensp;✓ Free Returns&ensp;✓ Ophthalmologist Tested&ensp;✓ Cruelty-Free</p>
@@ -320,8 +322,9 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
               you sleep — no falsies, no extensions appointment, no glue.
             </p>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              One 2mL bottle is a <strong>3-month supply</strong> — about the cost of a
-              single lash-extension refill, lasting a whole season.
+              One 1mL bottle is a <strong>6-week supply</strong> — the lowest-cost way
+              to see what the serum can do, right through the window when first
+              results typically appear.
             </p>
           </div>
         </div>
@@ -375,7 +378,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
           <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-2">
             Serum vs. the alternatives
           </h2>
-          <p className="text-center text-gray-600 mb-8">Three months of serum costs less than one month of extensions.</p>
+          <p className="text-center text-gray-600 mb-8">Six weeks of serum costs less than a single set of extensions.</p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm md:text-base">
               <thead>
@@ -387,7 +390,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
               </thead>
               <tbody>
                 {[
-                  ["Cost over 3 months", "One bottle", "Refills every 2–3 weeks"],
+                  ["Cost over 6 weeks", "One bottle", "Refills every 2–3 weeks"],
                   ["Daily effort", "One swipe at night", "Glue, removal, touch-ups"],
                   ["Your real lashes", "Enhanced look", "Often damaged underneath"],
                   ["Sleep, swim, shower", "No restrictions", "Careful… always"],
@@ -429,8 +432,8 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
                 a: "The formula is ophthalmologist tested and cruelty-free. As with any eye-area product, check the ingredient list if you have sensitivities, and stop if irritation occurs.",
               },
               {
-                q: "Is it worth $68?",
-                a: "The 2mL bottle is a 3-month supply — around 75 cents a day, less than a single set of lash extensions that lasts three weeks. And Amazon coupons frequently knock the price down further.",
+                q: "Is it worth $36?",
+                a: "The 1mL bottle is a 6-week supply — under a dollar a day, less than a single set of lash extensions that lasts three weeks. And 6 weeks is exactly when Grande Cosmetics says first results typically appear.",
               },
               {
                 q: "What if it doesn't work for me?",
@@ -457,7 +460,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
       <section className="py-12 md:py-16 bg-gradient-to-r from-rose-600 to-rose-700">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
-            Three months from now, you&apos;ll wish you started tonight.
+            Six weeks from now, you&apos;ll wish you started tonight.
           </h2>
           <p className="text-rose-100 mb-6">
             {starRating}★ from {reviewCount} Amazon customers. Check today&apos;s price and any active coupon.

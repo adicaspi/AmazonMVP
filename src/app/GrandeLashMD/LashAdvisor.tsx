@@ -262,7 +262,7 @@ export function LashAdvisor({
                           <img src={productImage} alt={productAlt} className="w-16 h-16 object-contain rounded-xl bg-white ring-1 ring-rose-100 flex-shrink-0" />
                           <div>
                             <p className="font-bold text-gray-900 leading-tight">GrandeLASH-MD Lash Enhancing Serum</p>
-                            <p className="text-xs text-gray-500 mt-0.5">2mL — about a 3-month supply</p>
+                            <p className="text-xs text-gray-500 mt-0.5">1mL — a 6-week supply</p>
                           </div>
                         </div>
                         <AmazonButton

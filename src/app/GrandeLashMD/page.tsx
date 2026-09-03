@@ -13,7 +13,7 @@ export const metadata: Metadata = {
       "Amazon's #1 Best Seller. One swipe a night for longer, thicker, fuller-looking lashes.",
     images: [
       {
-        url: "https://m.media-amazon.com/images/I/41Rx7r18xFL._SL1000_.jpg",
+        url: "https://m.media-amazon.com/images/I/41y2Yw6zsML._SL1000_.jpg",
         width: 1000,
         height: 1000,
         alt: "GrandeLASH-MD Lash Enhancing Serum",
@@ -26,11 +26,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "GrandeLASH-MD — The Lash Look Mascara Can't Give You",
     description: "Amazon's #1 Best Seller in Eyelash Primers. 4.2★ from 59,000+ customers.",
-    images: ["https://m.media-amazon.com/images/I/41Rx7r18xFL._SL1000_.jpg"],
+    images: ["https://m.media-amazon.com/images/I/41y2Yw6zsML._SL1000_.jpg"],
   },
 };
 
-const ASIN = "B00325D0WK";
+const ASIN = "B082WZTJV5";
 
 const getCachedProduct = unstable_cache(
   // Throws on API failure so unstable_cache does NOT store the miss
