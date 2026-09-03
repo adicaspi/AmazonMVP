@@ -13,11 +13,11 @@ import type { AmazonProductData } from "@/lib/amazon-creators-api";
 // Claims follow the listing's own wording ("longer, thicker,
 // fuller-LOOKING lashes") — no medical/growth claims.
 // ── Product constants ─────────────────────────────────────────────
-// Owner's SiteStripe link for the 1mL 6-week listing (ASIN B082WZTJV5,
-// 2026-09-03). NOTE: the link carries tag=ugg-fb-20 exactly as the owner
-// supplied it. DIRECT amazon.com URL only (NEVER amzn.to: breaks the app
-// handoff).
-const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B082WZTJV5?_encoding=UTF8&th=1&linkCode=ll2&tag=ugg-fb-20&linkId=729e10fd8e95276980667f049680449e&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl";
+// 1mL 6-week listing (ASIN B082WZTJV5) with the dedicated GrandeLash-FB
+// Associates tag (the owner's SiteStripe link accidentally carried the UGG
+// tag; fixed 2026-09-03). DIRECT amazon.com URL only (NEVER amzn.to:
+// breaks the app handoff).
+const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B082WZTJV5?_encoding=UTF8&th=1&linkCode=ll2&tag=grand-lash-fb-20&language=en_US&ref_=as_li_ss_tl";
 const PRICE_VALUE = 36;
 
 // Verified on the live listing 2026-08-06 (user screenshot): 4.2★, 59,511
