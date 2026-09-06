@@ -304,6 +304,19 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
         </div>
       </section>
 
+      {/* 3.7 CREATIVE CARDS — rebuilt in-house from the official listing
+          image + verified numbers only (the owner's AI drafts carried fake
+          review counts, an invented testimonial and a non-existent product,
+          so they were reconstructed truthfully instead) */}
+      <section className="py-10 md:py-14 bg-white">
+        <div className="max-w-4xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/grandelash/card-rating.jpg" alt="GrandeLASH-MD — 4.2 out of 5 from 59,000+ Amazon ratings, #1 Best Seller in Eyelash Primers" loading="lazy" decoding="async" className="w-full rounded-2xl shadow-md ring-1 ring-black/5" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/grandelash/card-extensions.jpg" alt="Stop paying for extensions — one swipe a night, 6-week supply, ophthalmologist tested" loading="lazy" decoding="async" className="w-full rounded-2xl shadow-md ring-1 ring-black/5" />
+        </div>
+      </section>
+
       {/* 4. THE ROUTINE — sell the simplicity */}
       <section className="py-10 md:py-14 bg-white">
         <div className="max-w-5xl mx-auto px-4 md:grid md:grid-cols-2 md:gap-12 md:items-center">
