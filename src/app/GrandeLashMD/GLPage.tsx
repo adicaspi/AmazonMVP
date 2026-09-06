@@ -5,6 +5,7 @@ import { OpenInAppLink } from "@/components/OpenInAppLink";
 import { HeroFade } from "../UggScuffette/HeroFade";
 import { VideoCard } from "@/components/VideoCard";
 import { LashAdvisor } from "./LashAdvisor";
+import { LifestyleGrid } from "./LifestyleGrid";
 import type { AmazonProductData } from "@/lib/amazon-creators-api";
 
 // CRO bridge page for GrandeLASH-MD (/GrandeLash) — emotion-first funnel:
@@ -375,12 +376,8 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
       {/* 6. LIFESTYLE STRIP — carried over from the original page */}
       <section className="py-10 md:py-14 bg-white">
         <div className="max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4">
-            {LIFESTYLE_IMAGES.map((img, i) => (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img key={i} src={img.src} alt={img.alt} loading="lazy" decoding="async" className="w-full aspect-square object-cover rounded-xl md:rounded-2xl shadow-md ring-1 ring-black/5" />
-            ))}
-          </div>
+          {/* Tap-to-enlarge lightbox (owner request: images must be clickable) */}
+          <LifestyleGrid images={LIFESTYLE_IMAGES} />
         </div>
       </section>
 
@@ -444,7 +441,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
                 a: "The formula is ophthalmologist tested and cruelty-free. As with any eye-area product, check the ingredient list if you have sensitivities, and stop if irritation occurs.",
               },
               {
-                q: "Is it worth $36?",
+                q: `Is it worth $${priceValue}?`,
                 a: "The 1mL bottle is a 6-week supply — under a dollar a day, less than a single set of lash extensions that lasts three weeks. And 6 weeks is exactly when Grande Cosmetics says first results typically appear.",
               },
               {
