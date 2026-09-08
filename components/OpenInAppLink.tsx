@@ -40,12 +40,17 @@ export function OpenInAppLink({ href, productName }: { href: string; productName
     window.location.href = href.replace(/^https:\/\/(www\.)?/, "com.amazon.mobile.shopping.web://");
   };
 
+  // Prominent secondary button (owner request): "locked" Safari users —
+  // whose universal-link handoff iOS suppresses — must see the explicit
+  // app path immediately. Neutral styling fits every product page theme.
   return (
     <button
       onClick={handleClick}
-      className="mt-2 w-full text-center text-sm text-blue-700 underline underline-offset-2"
+      className="mt-2.5 w-full flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white font-bold text-sm rounded-2xl transition-all shadow-md active:scale-[0.99]"
     >
-      Have the Amazon app? Open in the app →
+      <span aria-hidden>📱</span>
+      <span>Open in the Amazon App</span>
+      <span aria-hidden>→</span>
     </button>
   );
 }
