@@ -133,12 +133,11 @@ export function LashAdvisor({
         <button
           type="button"
           onClick={openAdvisor}
-          className="mt-3 w-full text-center md:text-left text-sm text-gray-600 hover:text-gray-800 transition-colors"
+          className="mt-3 w-full flex items-center justify-center gap-2 px-6 py-3 bg-white border-2 border-rose-300 hover:border-rose-500 hover:bg-rose-50 text-rose-700 font-bold rounded-2xl transition-all shadow-sm active:scale-[0.99]"
         >
-          ✨ Not sure if GrandeLASH is right for you?{" "}
-          <span className="font-bold text-rose-700 underline decoration-rose-300 underline-offset-2">
-            Ask our Lash Advisor →
-          </span>
+          <span aria-hidden>✨</span>
+          <span>Not sure? Ask our Lash Advisor</span>
+          <span aria-hidden>→</span>
         </button>
       )}
 
