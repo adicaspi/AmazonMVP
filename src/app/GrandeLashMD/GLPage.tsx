@@ -388,7 +388,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
             position="final-cta"
             className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white hover:bg-rose-50 text-rose-700 font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
           >
-            {isDeal ? `Get it for $${livePrice} on Amazon` : "Get it on Amazon"}
+            {isDeal ? `Get the $${livePrice} Deal on Amazon` : "See Today's Price on Amazon"}
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -424,7 +424,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
             position="sticky-mobile"
             className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm rounded-lg shadow-sm active:scale-[0.98] transition-transform whitespace-nowrap"
           >
-            <span>{isDeal ? `Get it — $${livePrice}` : "Get it on Amazon"}</span>
+            <span>{isDeal ? `Get the $${livePrice} Deal on Amazon` : "See Today's Price on Amazon"}</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
