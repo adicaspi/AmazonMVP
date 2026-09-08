@@ -43,11 +43,15 @@ export function LashAdvisor({
   priceValue,
   productImage,
   productAlt,
+  variant = "link",
 }: {
   amazonLink: string;
   priceValue: number;
   productImage: string;
   productAlt: string;
+  // "link" = quiet text entry under the hero CTA; "button" = prominent
+  // rounded button for the mid-page invitation card
+  variant?: "link" | "button";
 }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>("intro");
@@ -114,17 +118,29 @@ export function LashAdvisor({
 
   return (
     <>
-      {/* Entry point — under the hero CTA, aimed at the hesitant visitor */}
-      <button
-        type="button"
-        onClick={openAdvisor}
-        className="mt-3 w-full text-center md:text-left text-sm text-gray-600 hover:text-gray-800 transition-colors"
-      >
-        ✨ Not sure if GrandeLASH is right for you?{" "}
-        <span className="font-bold text-rose-700 underline decoration-rose-300 underline-offset-2">
-          Ask our Lash Advisor →
-        </span>
-      </button>
+      {/* Entry point — quiet link under the hero CTA, or a prominent
+          button inside the mid-page invitation card */}
+      {variant === "button" ? (
+        <button
+          type="button"
+          onClick={openAdvisor}
+          className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-full transition-all shadow-lg active:scale-[0.98]"
+        >
+          Ask our Lash Advisor
+          <span aria-hidden>→</span>
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={openAdvisor}
+          className="mt-3 w-full text-center md:text-left text-sm text-gray-600 hover:text-gray-800 transition-colors"
+        >
+          ✨ Not sure if GrandeLASH is right for you?{" "}
+          <span className="font-bold text-rose-700 underline decoration-rose-300 underline-offset-2">
+            Ask our Lash Advisor →
+          </span>
+        </button>
+      )}
 
       {open && (
         <div className="fixed inset-0 z-[10000]" role="dialog" aria-modal="true" aria-label="Lash Advisor">

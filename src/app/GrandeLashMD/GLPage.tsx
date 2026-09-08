@@ -45,17 +45,18 @@ const FALLBACK_PRICE_ANCHOR = "Around $36.00";
 const BEFORE_AFTER_IMAGE = { src: "/images/grandelash/before-after-lashes.jpg", alt: "Sparse lashes compared with fuller-looking lashes — GrandeLASH-MD brand visual" };
 const STORY_IMAGE = { src: "/images/grandelash/mirror-routine.jpg", alt: "Applying GrandeLASH-MD along the upper lash line in the nightly routine" };
 const LIFESTYLE_IMAGES = [
-  { src: "/images/grandelash/grand1.jpeg", alt: "GrandeLASH-MD serum" },
-  { src: "/images/grandelash/grand2.jpeg", alt: "Applying GrandeLASH-MD like eyeliner" },
-  { src: "/images/grandelash/grand3.jpeg", alt: "GrandeLASH-MD results" },
-  { src: "/images/grandelash/real-lash-growth.jpg", alt: "Fuller-looking lashes with GrandeLASH-MD" },
-  { src: "/images/grandelash/promo-solution.jpeg", alt: "GrandeLASH-MD Lash Enhancing Serum" },
+  { src: "/images/grandelash/card-rating.jpg", alt: "GrandeLASH-MD — 4.2 out of 5 from 59,000+ Amazon ratings, #1 Best Seller in Eyelash Primers" },
+  { src: "/images/grandelash/card-extensions.jpg", alt: "Stop paying for extensions — one swipe a night, 6-week supply, ophthalmologist tested" },
+  { src: "/images/grandelash/grand1.jpeg", alt: "Lash comparison — GrandeLASH-MD brand visual" },
   { src: "/images/grandelash/selfie-serum.jpg", alt: "Holding the GrandeLASH-MD serum tube" },
   { src: "/images/grandelash/eye-closeup-poster.jpg", alt: "GrandeLASH-MD brand visual with a lash close-up" },
   { src: "/images/grandelash/half-face-compare.jpg", alt: "Half-face lash comparison — GrandeLASH-MD brand visual" },
   { src: "/images/grandelash/selfie-duo.jpg", alt: "Two-panel brand visual with the GrandeLASH-MD serum tube" },
   { src: "/images/grandelash/mirror-selfie.jpg", alt: "Mirror selfie brand visual holding GrandeLASH-MD" },
 ];
+// Removed from the set (false claims baked into the art): grand2 (invented
+// customer review + fake 4.8 rating), grand3 + real-lash-growth ("Real
+// Lash Growth"), promo-solution ("Grow Your Own…", fake limited-time offer).
 
 function roundedCount(n: number): string {
   if (n >= 10000) return `${(Math.floor(n / 1000) * 1000).toLocaleString("en-US")}+`;
@@ -105,6 +106,14 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
   const hasRating = starRating !== null && reviewCount !== null;
   const priceValue = product?.price?.amount || PRICE_VALUE;
   const priceAnchor = product?.price?.displayAmount ? `Around ${product.price.displayAmount}` : FALLBACK_PRICE_ANCHOR;
+  // Honest urgency: the listing's standard price is $36 (verified at the
+  // ASIN switch). When the LIVE Amazon price is lower we surface the real
+  // discount; when the deal ends this disappears on its own. Never shown
+  // without a live price.
+  const REGULAR_PRICE = 36;
+  const livePrice = product?.price?.amount;
+  const isDeal = typeof livePrice === "number" && livePrice > 0 && livePrice < REGULAR_PRICE;
+  const dealPct = isDeal ? Math.round((1 - (livePrice as number) / REGULAR_PRICE) * 100) : 0;
   const alt = product?.title || "GrandeLASH-MD Lash Enhancing Serum";
   const liveImages = [product?.primaryImage, ...(product?.variantImages || [])]
     .map((img) => img?.large?.url)
@@ -159,7 +168,16 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
               )}
 
               <div className="max-w-md mx-auto md:mx-0 md:mt-auto">
-                {priceAnchor && (
+                {isDeal ? (
+                  <div className="text-center md:text-left mb-1">
+                    <span className="inline-block bg-rose-600 text-white text-xs font-black px-2.5 py-1 rounded-full mb-1.5">{dealPct}% off on Amazon right now</span>
+                    <p className="text-base text-gray-800">
+                      <span className="font-black text-lg">Today: ${livePrice}</span>{" "}
+                      <span className="text-gray-400 line-through">usually ${REGULAR_PRICE}</span>
+                      <span className="text-sm text-gray-600"> — a 6-week supply</span>
+                    </p>
+                  </div>
+                ) : priceAnchor && (
                   <p className="text-center md:text-left text-base text-gray-800 mb-1">
                     <span className="font-bold">{priceAnchor}</span>
                     <span className="text-gray-400">*</span>
@@ -174,7 +192,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
                   position="hero-main"
                   className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-700 hover:to-rose-800 text-white font-bold text-lg rounded-2xl transition-all duration-200 shadow-2xl shadow-rose-900/30 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
                 >
-                  <span>Check Today&apos;s Amazon Price</span>
+                  <span>{isDeal ? `Get the 6-Week Starter — $${livePrice}` : "Get the 6-Week Starter on Amazon"}</span>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -211,47 +229,18 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
         </div>
       </section>
 
-      {/* 2. SOCIAL PROOF */}
-      <section className="py-10 md:py-14 bg-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-6">
-            {reviewCount} lash routines can&apos;t all be wrong
-          </h2>
-          <div className="grid grid-cols-3 gap-3 md:gap-5 max-w-2xl mx-auto">
-            <div className="bg-rose-50 border border-rose-200 rounded-2xl p-4">
-              <div className="text-2xl md:text-3xl font-black text-rose-700">{starRating}★</div>
-              <div className="text-xs md:text-sm text-gray-600 mt-1">Average rating</div>
-            </div>
-            <div className="bg-rose-50 border border-rose-200 rounded-2xl p-4">
-              <div className="text-2xl md:text-3xl font-black text-rose-700">{reviewCount}</div>
-              <div className="text-xs md:text-sm text-gray-600 mt-1">Amazon ratings</div>
-            </div>
-            <div className="bg-rose-50 border border-rose-200 rounded-2xl p-4">
-              <div className="text-2xl md:text-3xl font-black text-rose-700">#1</div>
-              <div className="text-xs md:text-sm text-gray-600 mt-1">Best Seller — Eyelash Primers</div>
-            </div>
-          </div>
-          <CtaBlock
-            href={AMAZON_LINK}
-            position="social-proof"
-            priceValue={priceValue}
-            lead="See what tens of thousands of verified buyers are saying."
-            label="Read the Amazon Reviews"
-          />
-        </div>
-      </section>
-
-      {/* 3. BEFORE / AFTER — the proof section */}
+      {/* 2. PROOF BLOCK — before/after + real-customer videos, right after
+          the hero (the two highest-clicking below-fold elements, merged) */}
       <section className="py-10 md:py-14 bg-rose-50/50">
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-3">
             See the difference for yourself
           </h2>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
-            Brand results with consistent nightly use. Individual results vary — that&apos;s
-            what free returns are for.
+            Brand results with consistent nightly use, and 20-second clips from real
+            customers. Individual results vary — that&apos;s what free returns are for.
           </p>
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="max-w-2xl mx-auto text-center mb-8">
             <div className="rounded-2xl overflow-hidden shadow-lg ring-2 ring-rose-300">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={BEFORE_AFTER_IMAGE.src} alt={BEFORE_AFTER_IMAGE.alt} loading="lazy" decoding="async" className="w-full h-auto" />
@@ -262,25 +251,6 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
               <span className="font-black text-rose-600">After (bottom)</span>
             </div>
           </div>
-          <CtaBlock
-            href={AMAZON_LINK}
-            position="before-after"
-            priceValue={priceValue}
-            lead="Your before photo starts tonight."
-            label="View Current Availability"
-          />
-        </div>
-      </section>
-
-      {/* 3.5 VIDEO REVIEWS — carried over from the original page */}
-      <section className="py-10 md:py-14 bg-white">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-3">
-            Real women. Real results. No filters.
-          </h2>
-          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
-            Watch 20-second transformations from real customers.
-          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-sm md:max-w-2xl mx-auto">
             <VideoCard
               src="https://res.cloudinary.com/dzkgopplv/video/upload/v1770125538/WhatsApp_Video_2026-02-03_at_09.47.39_y4luwi.mp4"
@@ -297,28 +267,38 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
           </div>
           <CtaBlock
             href={AMAZON_LINK}
-            position="video-reviews"
+            position="before-after"
             priceValue={priceValue}
-            lead="Ready to start your own transformation?"
-            label="Check Today's Amazon Price"
+            lead="Your before photo starts tonight."
+            label={isDeal ? `Get Yours — $${livePrice} on Amazon` : "Get Yours on Amazon"}
           />
         </div>
       </section>
 
-      {/* 3.7 CREATIVE CARDS — rebuilt in-house from the official listing
-          image + verified numbers only (the owner's AI drafts carried fake
-          review counts, an invented testimonial and a non-existent product,
-          so they were reconstructed truthfully instead) */}
+      {/* 3. LASH ADVISOR invitation — commitment before the click */}
       <section className="py-10 md:py-14 bg-white">
-        <div className="max-w-4xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/grandelash/card-rating.jpg" alt="GrandeLASH-MD — 4.2 out of 5 from 59,000+ Amazon ratings, #1 Best Seller in Eyelash Primers" loading="lazy" decoding="async" className="w-full rounded-2xl shadow-md ring-1 ring-black/5" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/grandelash/card-extensions.jpg" alt="Stop paying for extensions — one swipe a night, 6-week supply, ophthalmologist tested" loading="lazy" decoding="async" className="w-full rounded-2xl shadow-md ring-1 ring-black/5" />
+        <div className="max-w-2xl mx-auto px-4">
+          <div className="bg-rose-50 border border-rose-200 rounded-3xl p-6 md:p-10 text-center">
+            <div className="text-4xl mb-3">✨</div>
+            <h2 className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 mb-2">
+              Not sure it&apos;s right for you?
+            </h2>
+            <p className="text-gray-600 mb-5">
+              Answer 5 quick questions — 30 seconds and you&apos;ll know. Honest answer,
+              even if it&apos;s &quot;this isn&apos;t for you.&quot;
+            </p>
+            <LashAdvisor
+              amazonLink={AMAZON_LINK}
+              priceValue={priceValue}
+              productImage={apiImages[0].url}
+              productAlt={alt}
+              variant="button"
+            />
+          </div>
         </div>
       </section>
 
-      {/* 4. THE ROUTINE — sell the simplicity */}
+      {/* 4. HOW IT WORKS — routine + trust facts, merged */}
       <section className="py-10 md:py-14 bg-white">
         <div className="max-w-5xl mx-auto px-4 md:grid md:grid-cols-2 md:gap-12 md:items-center">
           <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 mb-6 md:mb-0 max-w-md mx-auto md:max-w-none">
@@ -334,98 +314,36 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
               <strong> peptide &amp; vitamin-infused formula</strong> does the rest while
               you sleep — no falsies, no extensions appointment, no glue.
             </p>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              One 1mL bottle is a <strong>6-week supply</strong> — the lowest-cost way
-              to see what the serum can do, right through the window when first
-              results typically appear.
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-5">
+              One 1mL bottle is a <strong>6-week supply</strong> — right through the
+              window when first results typically appear.
             </p>
+            <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-2">
+              {["👁️ Ophthalmologist Tested", "🐰 Cruelty-Free", "⏱️ Seconds a day"].map((t, i) => (
+                <span key={i} className="bg-rose-50 border border-rose-200 text-gray-800 text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full">{t}</span>
+              ))}
+            </div>
+            <CtaBlock
+              href={AMAZON_LINK}
+              position="benefits"
+              priceValue={priceValue}
+              lead="Ready to retire the falsies?"
+              label={isDeal ? `Start Tonight — $${livePrice}` : "Start Tonight on Amazon"}
+            />
           </div>
         </div>
       </section>
 
-      {/* 5. WHY CUSTOMERS LOVE IT */}
+      {/* 5. GALLERY — cleaned set (claim-bearing AI tiles removed) + the
+          truthful creative cards, all tap-to-enlarge */}
       <section className="py-10 md:py-14 bg-rose-50/50">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-8">
-            Why it has a cult following
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
-            {[
-              { icon: "👁️", title: "Ophthalmologist Tested", text: "Formulated and tested for use near the eyes" },
-              { icon: "🐰", title: "Cruelty-Free", text: "Never tested on animals" },
-              { icon: "⏱️", title: "Seconds a Day", text: "One swipe at night — easier than removing mascara" },
-              { icon: "💄", title: "Your Own Lashes", text: "The fuller look without falsies or extensions" },
-            ].map((c, i) => (
-              <div key={i} className="bg-white border border-rose-100 rounded-2xl p-4 text-center shadow-sm">
-                <div className="text-3xl mb-2">{c.icon}</div>
-                <div className="text-sm md:text-base font-bold text-gray-900 mb-1">{c.title}</div>
-                <div className="text-xs md:text-sm text-gray-600 leading-snug">{c.text}</div>
-              </div>
-            ))}
-          </div>
-          <CtaBlock
-            href={AMAZON_LINK}
-            position="benefits"
-            priceValue={priceValue}
-            lead="Ready to retire the falsies?"
-            label="Check Today's Amazon Price"
-          />
-        </div>
-      </section>
-
-      {/* 6. LIFESTYLE STRIP — carried over from the original page */}
-      <section className="py-10 md:py-14 bg-white">
-        <div className="max-w-5xl mx-auto px-4">
-          {/* Tap-to-enlarge lightbox (owner request: images must be clickable) */}
           <LifestyleGrid images={LIFESTYLE_IMAGES} />
         </div>
       </section>
 
-      {/* 7. COMPARISON — justify the price */}
+      {/* 6. FAQ — three objections, right before the final CTA */}
       <section className="py-10 md:py-14 bg-white">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-2">
-            Serum vs. the alternatives
-          </h2>
-          <p className="text-center text-gray-600 mb-8">Six weeks of serum costs less than a single set of extensions.</p>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm md:text-base">
-              <thead>
-                <tr className="border-b border-rose-100">
-                  <th className="text-left py-3 text-gray-500 font-semibold"></th>
-                  <th className="py-3 px-2 text-rose-700 font-black">GrandeLASH-MD</th>
-                  <th className="py-3 px-2 text-gray-500 font-semibold">Extensions / falsies</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ["Cost over 6 weeks", "One bottle", "Refills every 2–3 weeks"],
-                  ["Daily effort", "One swipe at night", "Glue, removal, touch-ups"],
-                  ["Your real lashes", "Enhanced look", "Often damaged underneath"],
-                  ["Sleep, swim, shower", "No restrictions", "Careful… always"],
-                  ["Rating", `${starRating}★ · ${reviewCount} ratings`, "—"],
-                ].map(([row, gl, alt2], i) => (
-                  <tr key={i} className="border-b border-rose-50">
-                    <td className="py-3 font-semibold text-gray-900">{row}</td>
-                    <td className="py-3 px-2 text-center text-gray-800 bg-rose-50/60">{gl}</td>
-                    <td className="py-3 px-2 text-center text-gray-500">{alt2}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <CtaBlock
-            href={AMAZON_LINK}
-            position="comparison"
-            priceValue={priceValue}
-            lead="Do the math your lashes deserve."
-            label="See the Listing on Amazon"
-          />
-        </div>
-      </section>
-
-      {/* 8. FAQ — remove objections */}
-      <section className="py-10 md:py-14 bg-rose-50/50">
         <div className="max-w-2xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 text-center mb-8">
             Still on the fence?
@@ -433,16 +351,12 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
           <div className="space-y-4">
             {[
               {
-                q: "How do I use it?",
-                a: "Once a night, swipe the applicator along your upper lash line like liquid eyeliner — on clean, dry skin. That's it. Consistency is what makes the difference.",
+                q: `Is it worth $${priceValue}?`,
+                a: "The 1mL bottle is a 6-week supply — under a dollar a day, less than a single set of lash extensions that lasts three weeks. And 6 weeks is exactly when Grande Cosmetics says first results typically appear.",
               },
               {
                 q: "Is it safe for my eyes?",
                 a: "The formula is ophthalmologist tested and cruelty-free. As with any eye-area product, check the ingredient list if you have sensitivities, and stop if irritation occurs.",
-              },
-              {
-                q: `Is it worth $${priceValue}?`,
-                a: "The 1mL bottle is a 6-week supply — under a dollar a day, less than a single set of lash extensions that lasts three weeks. And 6 weeks is exactly when Grande Cosmetics says first results typically appear.",
               },
               {
                 q: "What if it doesn't work for me?",
@@ -455,13 +369,6 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
               </div>
             ))}
           </div>
-          <CtaBlock
-            href={AMAZON_LINK}
-            position="faq"
-            priceValue={priceValue}
-            lead="Every remaining question is answered in the reviews."
-            label="Read Thousands of Amazon Reviews"
-          />
         </div>
       </section>
 
@@ -481,7 +388,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
             position="final-cta"
             className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white hover:bg-rose-50 text-rose-700 font-bold text-lg rounded-full transition-all shadow-lg hover:shadow-xl"
           >
-            Check Today&apos;s Amazon Price
+            {isDeal ? `Get it for $${livePrice} on Amazon` : "Get it on Amazon"}
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -517,7 +424,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
             position="sticky-mobile"
             className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm rounded-lg shadow-sm active:scale-[0.98] transition-transform whitespace-nowrap"
           >
-            <span>Check Today&apos;s Price</span>
+            <span>{isDeal ? `Get it — $${livePrice}` : "Get it on Amazon"}</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

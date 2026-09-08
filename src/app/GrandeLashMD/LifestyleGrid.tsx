@@ -32,7 +32,7 @@ export function LifestyleGrid({ images }: { images: { src: string; alt: string }
 
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
         {images.map((img, i) => (
           <button
             key={i}
