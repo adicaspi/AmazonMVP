@@ -51,6 +51,7 @@ async function sendCAPIPageView(
   fbp: string | null,
   clientIp: string | null,
   clientUa: string | null,
+  sharedEventId: string | null,
 ) {
   const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
   if (!accessToken) return;
@@ -69,7 +70,9 @@ async function sendCAPIPageView(
   const event: Record<string, unknown> = {
     event_name: "PageView",
     event_time: Math.floor(Date.now() / 1000),
-    event_id: generateEventId(),
+    // Browser-shared id → Meta dedups this against the pixel's PageView;
+    // fresh id only when the browser didn't supply one (noscript etc.)
+    event_id: sharedEventId ?? generateEventId(),
     event_source_url: eventSourceUrl,
     action_source: "website",
     user_data: userData,
@@ -104,7 +107,9 @@ async function sendCAPIPageView(
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { page, full_url, visitor_id, utm_source, utm_medium, utm_campaign, utm_content, referrer } = body;
+    const { page, full_url, visitor_id, utm_source, utm_medium, utm_campaign, utm_content, referrer, pv_event_id } = body;
+    const sharedEventId =
+      typeof pv_event_id === "string" && /^[\w.-]{8,64}$/.test(pv_event_id) ? pv_event_id : null;
 
     if (!page) {
       return NextResponse.json(
@@ -158,7 +163,7 @@ export async function POST(request: NextRequest) {
     if (pixelId) {
       const { fbc, fbp } = getFbCookies(request.headers.get("cookie"));
       const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || null;
-      sendCAPIPageView(pixelId, full_url || `https://aipicks.co${page}`, fbc, fbp, clientIp, ua);
+      sendCAPIPageView(pixelId, full_url || `https://aipicks.co${page}`, fbc, fbp, clientIp, ua, sharedEventId);
     }
 
     return NextResponse.json({ success: true, viewId: view.id });

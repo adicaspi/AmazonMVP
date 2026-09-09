@@ -42,7 +42,12 @@ export function MetaPixelInit() {
 
       // trackSingle targets only this page's pixel so it never double-fires another
       fbq("init", match!.pixelId);
-      fbq("trackSingle", match!.pixelId, "PageView");
+      // Shared event id: the CAPI PageView (api/page-view) reuses it via
+      // PageViewTracker, so Meta deduplicates browser+server into ONE event
+      const pvId = `pv-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).__aipPvId = pvId;
+      fbq("trackSingle", match!.pixelId, "PageView", {}, { eventID: pvId });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).__aipPixelFiredPath = pathname;
       return true;
@@ -72,8 +77,14 @@ export function MetaPixelInit() {
   // Bonus: PageView now fires before hydration, earlier and more reliably.
   // notrack was retired (owner request): the pixel fires for everyone;
   // owner visits are cleaned with the clear-direct button instead.
+  // The PageView event id is generated in-browser and shared with the CAPI
+  // PageView (via PageViewTracker → api/page-view), so Meta deduplicates the
+  // browser and server copies into one event instead of counting both.
   const inlineInit =
-    `try{fbq('init','${match.pixelId}');fbq('trackSingle','${match.pixelId}','PageView');` +
+    `try{var __pv='pv-'+Date.now()+'-'+Math.random().toString(36).slice(2,10);` +
+    `window.__aipPvId=__pv;` +
+    `fbq('init','${match.pixelId}');` +
+    `fbq('trackSingle','${match.pixelId}','PageView',{},{eventID:__pv});` +
     `window.__aipPixelFiredPath=location.pathname;}catch(e){}`;
   return (
     <>

@@ -23,6 +23,10 @@ export function PageViewTracker({ page }: PageViewTrackerProps) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         page,
+        // Shared PageView event id from MetaPixelInit — lets the CAPI
+        // PageView deduplicate against the browser pixel's PageView
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        pv_event_id: (window as any).__aipPvId || null,
         full_url: window.location.href,
         referrer: document.referrer || null,
         visitor_id: getVisitorId(),
