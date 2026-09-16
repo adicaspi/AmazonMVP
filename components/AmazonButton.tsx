@@ -51,7 +51,7 @@ const PAGE_PRODUCT_MAP: Record<string, { name: string; value: number; content_id
   "/BirkenstockAudience": { name: "Birkenstock Arizona Soft Footbed Sandals", value: 120, content_id: "birkenstock-arizona" },
   "/UggScuffette": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
   "/UggClassic": { name: "UGG Scuffette II Slipper", value: 90, content_id: "ugg-scuffette" },
-  "/GrandeLashMD": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 36, content_id: "grandelash-serum" },
+  "/GrandeLashMD": { name: "GrandeLASH-MD Lash Enhancing Serum", value: 125, content_id: "grandelash-serum" },
   "/NewBalance928": { name: "New Balance Women's 928v3 Walking Shoe", value: 158, content_id: "newbalance-928v3" },
 };
 

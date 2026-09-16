@@ -14,11 +14,12 @@ import type { AmazonProductData } from "@/lib/amazon-creators-api";
 // Claims follow the listing's own wording ("longer, thicker,
 // fuller-LOOKING lashes") — no medical/growth claims.
 // ── Product constants ─────────────────────────────────────────────
-// Owner's corrected SiteStripe link for the 1mL 6-week listing (ASIN
-// B082WZTJV5, tag=grand-lash-ig-20, 2026-09-03). DIRECT amazon.com URL
-// only (NEVER amzn.to: breaks the app handoff).
-const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B082WZTJV5?_encoding=UTF8&th=1&linkCode=ll2&tag=grand-lash-ig-20&linkId=bfe34b7ad3a4574413607d6a897804c9&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl";
-const PRICE_VALUE = 36;
+// Owner's SiteStripe link for the 4mL 6-month listing (B07QNQJ5FK,
+// tag=grand-lash-fb-20, 2026-09-16), normalized from /gp/product/ to /dp/
+// with identical params — ONLY /dp/ paths open the Amazon app on iOS
+// (AASA match). DIRECT amazon.com URL only (NEVER amzn.to).
+const DEFAULT_AMAZON_LINK = "https://www.amazon.com/dp/B07QNQJ5FK?th=1&linkCode=ll2&tag=grand-lash-fb-20&linkId=48d2a7726b8c4e64e7dce831eef58fa1&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl";
+const PRICE_VALUE = 125;
 
 // Verified on the live listing 2026-08-06 (user screenshot): 4.2★, 59,511
 // ratings, #1 Best Seller in Eyelash Primers. No invented numbers, ever.
@@ -28,15 +29,15 @@ const REVIEW_COUNT: number | null = 59511;
 // Official Amazon CDN images (stable URLs via the Creators API) — the
 // guaranteed fallback when a live API fetch fails.
 const FALLBACK_IMAGES = [
-  "https://m.media-amazon.com/images/I/41y2Yw6zsML._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/412OmkHewvL._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/518A6SDWd9L._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/41Ob8oijywL._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/51VaIjFAJDL._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/51c2l+ps63L._SL1000_.jpg",
   "https://m.media-amazon.com/images/I/41GGmw92bxL._SL1000_.jpg",
-  "https://m.media-amazon.com/images/I/41GfGG7AuuL._SL1000_.jpg",
+  "https://m.media-amazon.com/images/I/41iolbiCLKL._SL1000_.jpg",
 ];
-const FALLBACK_PRICE_ANCHOR = "Around $36.00";
+const FALLBACK_PRICE_ANCHOR = "Around $125.00";
 
 // Campaign creative supplied by the owner (2026-08) — stylized BRAND
 // visuals. Per the truthful-marketing invariant they are captioned as
@@ -46,7 +47,7 @@ const BEFORE_AFTER_IMAGE = { src: "/images/grandelash/before-after-lashes.jpg", 
 const STORY_IMAGE = { src: "/images/grandelash/mirror-routine.jpg", alt: "Applying GrandeLASH-MD along the upper lash line in the nightly routine" };
 const LIFESTYLE_IMAGES = [
   { src: "/images/grandelash/card-rating.jpg", alt: "GrandeLASH-MD — 4.2 out of 5 from 59,000+ Amazon ratings, #1 Best Seller in Eyelash Primers" },
-  { src: "/images/grandelash/card-extensions.jpg", alt: "Stop paying for extensions — one swipe a night, 6-week supply, ophthalmologist tested" },
+  { src: "/images/grandelash/card-extensions.jpg", alt: "Stop paying for extensions — one swipe a night, 6-month supply, ophthalmologist tested" },
   { src: "/images/grandelash/grand1.jpeg", alt: "Lash comparison — GrandeLASH-MD brand visual" },
   { src: "/images/grandelash/selfie-serum.jpg", alt: "Holding the GrandeLASH-MD serum tube" },
   { src: "/images/grandelash/eye-closeup-poster.jpg", alt: "GrandeLASH-MD brand visual with a lash close-up" },
@@ -106,11 +107,11 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
   const hasRating = starRating !== null && reviewCount !== null;
   const priceValue = product?.price?.amount || PRICE_VALUE;
   const priceAnchor = product?.price?.displayAmount ? `Around ${product.price.displayAmount}` : FALLBACK_PRICE_ANCHOR;
-  // Honest urgency: the listing's standard price is $36 (verified at the
-  // ASIN switch). When the LIVE Amazon price is lower we surface the real
-  // discount; when the deal ends this disappears on its own. Never shown
-  // without a live price.
-  const REGULAR_PRICE = 36;
+  // Honest urgency: the listing's verified price at the ASIN switch
+  // (2026-09-16) is $125. When the LIVE Amazon price is lower we surface
+  // the real discount; when the deal ends this disappears on its own.
+  // Never shown without a live price.
+  const REGULAR_PRICE = 125;
   const livePrice = product?.price?.amount;
   const isDeal = typeof livePrice === "number" && livePrice > 0 && livePrice < REGULAR_PRICE;
   const dealPct = isDeal ? Math.round((1 - (livePrice as number) / REGULAR_PRICE) * 100) : 0;
@@ -119,8 +120,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
     .map((img) => img?.large?.url)
     .filter((u): u is string => !!u)
     .map((u) => ({ url: u.replace("._SL500_.", "._SL1000_."), alt }));
-  // The old hand-saved 1500px set showed the 4mL Jumbo box; the 1mL
-  // listing (B082WZTJV5) is displayed from the live API images (500px)
+  // The 4mL listing (B07QNQJ5FK) is displayed from the live API images
   // with the static list above as the guaranteed fallback.
   const apiImages = liveImages.length > 0 ? liveImages : FALLBACK_IMAGES.map((url) => ({ url, alt }));
 
@@ -174,14 +174,14 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
                     <p className="text-base text-gray-800">
                       <span className="font-black text-lg">Today: ${livePrice}</span>{" "}
                       <span className="text-gray-400 line-through">usually ${REGULAR_PRICE}</span>
-                      <span className="text-sm text-gray-600"> — a 6-week supply</span>
+                      <span className="text-sm text-gray-600"> — a 6-month supply</span>
                     </p>
                   </div>
                 ) : priceAnchor && (
                   <p className="text-center md:text-left text-base text-gray-800 mb-1">
                     <span className="font-bold">{priceAnchor}</span>
                     <span className="text-gray-400">*</span>
-                    <span className="text-sm text-gray-600"> — a 6-week supply</span>
+                    <span className="text-sm text-gray-600"> — a 6-month supply</span>
                   </p>
                 )}
                 <p className="text-center md:text-left text-xs text-gray-600 mb-3">✓ Prime Shipping&ensp;✓ Free Returns&ensp;✓ Ophthalmologist Tested&ensp;✓ Cruelty-Free</p>
@@ -192,7 +192,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
                   position="hero-main"
                   className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-700 hover:to-rose-800 text-white font-bold text-lg rounded-2xl transition-all duration-200 shadow-2xl shadow-rose-900/30 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
                 >
-                  <span>{isDeal ? `Get the 6-Week Starter — $${livePrice}` : "Get the 6-Week Starter on Amazon"}</span>
+                  <span>{isDeal ? `Get the 6-Month Supply — $${livePrice}` : "Get the 6-Month Supply on Amazon"}</span>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -315,8 +315,8 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
               you sleep — no falsies, no extensions appointment, no glue.
             </p>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-5">
-              One 1mL bottle is a <strong>6-week supply</strong> — right through the
-              window when first results typically appear.
+              One 4mL bottle is a <strong>6-month supply</strong> — about the cost of
+              a single lash-extension refill, lasting half a year.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-2">
               {["👁️ Ophthalmologist Tested", "🐰 Cruelty-Free", "⏱️ Seconds a day"].map((t, i) => (
@@ -352,7 +352,7 @@ export function GLPage({ trackingPage, amazonLink, product }: { trackingPage: st
             {[
               {
                 q: `Is it worth $${priceValue}?`,
-                a: "The 1mL bottle is a 6-week supply — under a dollar a day, less than a single set of lash extensions that lasts three weeks. And 6 weeks is exactly when Grande Cosmetics says first results typically appear.",
+                a: "The 4mL bottle is a 6-month supply — around 70 cents a day, less than a single set of lash extensions that lasts three weeks. And Grande Cosmetics says first results typically appear within the first 4–6 weeks.",
               },
               {
                 q: "Is it safe for my eyes?",
